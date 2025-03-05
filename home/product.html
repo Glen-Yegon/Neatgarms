@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Brand</title>
+  <link rel="stylesheet" href="product.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-left">
+      <button id="back-button" class="back-btn"> Back</button>
+      </div>
+      <div class="nav-center">
+        <img src="mains/logo.jpg" alt="Company Logo" class="logo" data-aos="fade-up" data-aos-delay="400">
+      </div>
+      <div class="nav-right">
+        <a href="cart.html" class="icon-btn cart-btn">&#128722;</a>
+      </div>
+    </header>
+  
+    <!-- Main Content -->
+    <main class="product-page">
+      <div class="product-container" data-aos="fade-up" data-aos-delay="400">
+        <!-- Images -->
+        <div class="product-images">
+          <div class="image-slider">
+            <img id="main-image" src="" alt="Product Image">
+            <div class="image-nav">
+              <button id="prev-image" >&lt;</button>
+              <button id="next-image" >&gt;</button>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Product Details -->
+        <div class="product-details">
+          <h1 id="product-brand" data-aos="fade-up" data-aos-delay="400">Neat</h1>
+          <h2 id="product-name" data-aos="fade-up" data-aos-delay="400"></h2>
+          <p id="product-prices">
+            <p>Price in Kshs.</p>
+            <span class="old-price" ></span>
+            <span class="new-price" ></span>
+          </p>
+          <p id="product-status" ></p>
+              <!-- Size Selection -->
+    <div class="size-selection"></div> <br>
+
+
+    <!--color selection-->
+    <div class="color-selection"></div>
+
+
+    
+          <p data-aos="fade-up" data-aos-delay="400">Quantity</p>
+  
+          <!-- Quantity Selector -->
+          <div class="quantity-selector" data-aos="fade-up" data-aos-delay="400">
+            <button id="decrease-quantity" >-</button>
+            <input id="quantity" type="number" value="1" readonly>
+            <button id="increase-quantity">+</button>
+          </div>
+
+<a href="shipping.html" data-aos="fade-up" data-aos-delay="400">
+          <div class="loader" data-aos="fade-up" data-aos-delay="400">
+            <div class="truckWrapper">
+              <div class="truckBody">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 198 93"
+                  class="trucksvg"
+                >
+                  <path
+                    stroke-width="3"
+                    stroke="#282828"
+                    fill="#F83D3D"
+                    d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z"
+                  ></path>
+                  <path
+                    stroke-width="3"
+                    stroke="#282828"
+                    fill="#7D7C7C"
+                    d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"
+                  ></path>
+                  <path
+                    stroke-width="2"
+                    stroke="#282828"
+                    fill="#282828"
+                    d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"
+                  ></path>
+                  <rect
+                    stroke-width="2"
+                    stroke="#282828"
+                    fill="#FFFCAB"
+                    rx="1"
+                    height="7"
+                    width="5"
+                    y="63"
+                    x="187"
+                  ></rect>
+                  <rect
+                    stroke-width="2"
+                    stroke="#282828"
+                    fill="#282828"
+                    rx="1"
+                    height="11"
+                    width="4"
+                    y="81"
+                    x="193"
+                  ></rect>
+                  <rect
+                    stroke-width="3"
+                    stroke="#282828"
+                    fill="#DFDFDF"
+                    rx="2.5"
+                    height="90"
+                    width="121"
+                    y="1.5"
+                    x="6.5"
+                  ></rect>
+                  <rect
+                    stroke-width="2"
+                    stroke="#282828"
+                    fill="#DFDFDF"
+                    rx="2"
+                    height="4"
+                    width="6"
+                    y="84"
+                    x="1"
+                  ></rect>
+                </svg>
+              </div>
+              <div class="truckTires">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  class="tiresvg"
+                >
+                  <circle
+                    stroke-width="3"
+                    stroke="#282828"
+                    fill="#282828"
+                    r="13.5"
+                    cy="15"
+                    cx="15"
+                  ></circle>
+                  <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 30 30"
+                  class="tiresvg"
+                >
+                  <circle
+                    stroke-width="3"
+                    stroke="#282828"
+                    fill="#282828"
+                    r="13.5"
+                    cy="15"
+                    cx="15"
+                  ></circle>
+                  <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+                </svg>
+              </div>
+              <div class="road"></div>
+          
+              <svg
+                xml:space="preserve"
+                viewBox="0 0 453.459 453.459"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns="http://www.w3.org/2000/svg"
+                id="Capa_1"
+                version="1.1"
+                fill="#000000"
+                class="lampPost"
+              >
+                <path
+                  d="M252.882,0c-37.781,0-68.686,29.953-70.245,67.358h-6.917v8.954c-26.109,2.163-45.463,10.011-45.463,19.366h9.993
+          c-1.65,5.146-2.507,10.54-2.507,16.017c0,28.956,23.558,52.514,52.514,52.514c28.956,0,52.514-23.558,52.514-52.514
+          c0-5.478-0.856-10.872-2.506-16.017h9.992c0-9.354-19.352-17.204-45.463-19.366v-8.954h-6.149C200.189,38.779,223.924,16,252.882,16
+          c29.952,0,54.32,24.368,54.32,54.32c0,28.774-11.078,37.009-25.105,47.437c-17.444,12.968-37.216,27.667-37.216,78.884v113.914
+          h-0.797c-5.068,0-9.174,4.108-9.174,9.177c0,2.844,1.293,5.383,3.321,7.066c-3.432,27.933-26.851,95.744-8.226,115.459v11.202h45.75
+          v-11.202c18.625-19.715-4.794-87.527-8.227-115.459c2.029-1.683,3.322-4.223,3.322-7.066c0-5.068-4.107-9.177-9.176-9.177h-0.795
+          V196.641c0-43.174,14.942-54.283,30.762-66.043c14.793-10.997,31.559-23.461,31.559-60.277C323.202,31.545,291.656,0,252.882,0z
+          M232.77,111.694c0,23.442-19.071,42.514-42.514,42.514c-23.442,0-42.514-19.072-42.514-42.514c0-5.531,1.078-10.957,3.141-16.017
+          h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+         <p style="color: black;">shipping policy-calculated at checkout</p>
+        </a>
+          
+                <!--add to cart and buy-->
+      <div class="button-group">
+        <button class="btn-53" id="add-to-cart">
+          <div class="original" >ADD TO CART</div>
+          <div class="letters">
+            
+            <span>N</span>
+            <span>E</span>
+            <span>A</span>
+            <span>T</span>
+
+            <span>G</span>
+            <span>A</span>
+            <span>R</span>
+            <span>M</span>
+            <span>S</span>
+          </div>
+          </div>
+        </button>
+
+        <button class="btn-53" id="buy-now">
+          <div class="original">BUY NOW</div>
+          <div class="letters">
+            
+            <span>W</span>
+            <span>I</span>
+            <span>S</span>
+            <span>E</span>
+            <span>-</span>
+            <span>C</span>
+            <span>H</span>
+            <span>O</span>
+            <span>I</span>
+            <span>C</span>
+            <span>E</span>
+          </div>
+          </div>
+        </button>   
+
+
+        
+<!-- Share Button -->
+<button class="share" data-aos="fade-up" data-aos-delay="400" id="share-btn">
+  <div class="svg-wrapper-1">
+    <div class="svg-wrapper">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path fill="none" d="M0 0h24v24H0z"></path>
+        <path
+          fill="currentColor"
+          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+        ></path>
+      </svg>
+    </div>
+  </div>
+  <i><span>Share</span></i>
+</button> 
+
+      </div>
+
+
+<!-- Featured Section -->
+<div class="featured-section">
+  <div class="featured-cards-wrapper">
+    <!-- Featured Card 1 -->
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main2.html#n-tee" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/n7.heic" alt="Product Image">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">N7584JGD</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 1,400</span>
+        </p>
+      </a>
+    </div>
+
+    <!-- Featured Card 2 -->
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main.html#travis-tee" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/travis.jpg" alt="Travis Scott Tee">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">Travis Scott Tee</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 1,400</span>
+        </p>
+      </a>
+    </div>
+    <!-- Repeat more featured cards as needed -->
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main.html#t-tee" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/playboy.jpg" alt="Travis Scott Tee">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">Playboy Carti Tee</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 1,400</span>
+        </p>
+      </a>
+    </div>
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main.html#fid" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/green  00.1.jpg" alt="Travis Scott Tee">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">6FJGM0</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 1,400</span>
+        </p>
+      </a>
+    </div>
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main.html#acid" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/acid (2).jpg" alt="Travis Scott Tee">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">Acid Wash Tee</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 1,800</span>
+        </p>
+      </a>
+    </div>
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main.html#black" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/black plain.jpg" alt="Travis Scott Tee">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">Black Plain</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 800</span>
+        </p>
+      </a>
+    </div>
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main2.html#every-glass" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/miwani.jpg" alt="Travis Scott Tee">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">Everyday Frames</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 1,250</span>
+        </p>
+      </a>
+    </div>
+
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main2.html#crop" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/crop 01.jpg" alt="Travis Scott Tee">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">Neat Crop Top</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 850</span>
+        </p>
+      </a>
+    </div>
+
+    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
+      <a href="main3.html#week" class="featured-link">
+        <div class="image-wrapper">
+          <img src="mains/weekend.jpg" alt="Travis Scott Tee">
+          <span class="status sale">Sale</span>
+        </div>
+        <h3 class="featured-name">The Weekend</h3>
+        <p class="product-price">
+          <span class="new-price">KSh 2,000</span>
+        </p>
+      </a>
+    </div>
+
+
+  </div>
+</div>
+
+
+
+
+    </main>
+
+
+
+    <section id="review-section" style="padding: 20px;" data-aos="fade-up" data-aos-delay="600">
+      <h2 data-aos="fade-up" data-aos-delay="400">Customer Reviews</h2>
+    
+      <!-- Star Rating -->
+      <div class="rating">
+        <input type="radio" id="star5" name="rating" value="5" />
+        <label for="star5"></label>
+        <input type="radio" id="star4" name="rating" value="4" />
+        <label for="star4"></label>
+        <input type="radio" id="star3" name="rating" value="3" />
+        <label for="star3"></label>
+        <input type="radio" id="star2" name="rating" value="2" />
+        <label for="star2"></label>
+        <input type="radio" id="star1" name="rating" value="1" />
+        <label for="star1"></label>
+      </div>
+      
+
+
+      <p data-aos="fade-up" data-aos-delay="400">Be the First to Write a Review</p>
+    
+      <!-- Review Button -->
+       <div class="reviews">
+      <button class="review-btn" id="review-btn">
+        Review
+      </button>
+    </div>
+      <div class="review-form-container" id="review-form-container" style="display: none;">
+        <form id="review-form" enctype="multipart/form-data" method="POST" action="/submit-review">
+          <input type="hidden" name="access_key" value="9d0d7b57-d26f-4c56-9e0d-7a94137b28c7">
+          <h2>Write a Review</h2>
+          
+          <!-- Review Title -->
+          <label for="review-title">Review Title</label>
+          <input type="text" id="review-title" name="review-title" required placeholder="Enter the title of your review">
+          
+          <!-- Review Content -->
+          <label for="review-content">Your Review</label>
+          <textarea id="review-content" name="review-content" rows="4" required placeholder="Write your review here"></textarea>
+          
+          <!-- Upload Picture or Video -->
+          <label for="review-media">Attach a Picture/Video (Optional)</label>
+          <input type="file" id="review-media" name="review-media" accept="image/*,video/*">
+          
+          <!-- Name of Reviewer -->
+          <label for="reviewer-name">Your Name (Publicly Visible)</label>
+          <input type="text" id="reviewer-name" name="reviewer-name" required placeholder="Enter your name">
+          
+          <!-- Email -->
+          <label for="reviewer-email">Your Email (Required for Verification)</label>
+          <input type="email" id="reviewer-email" name="reviewer-email" required placeholder="Enter your email">
+          
+<!-- Star Rating -->
+<div class="rating" id="review-stars">
+  <input type="radio" id="star5" name="rating" value="5" />
+  <label for="star5" title="5 stars"></label>
+  <input type="radio" id="star4" name="rating" value="4" />
+  <label for="star4" title="4 stars"></label>
+  <input type="radio" id="star3" name="rating" value="3" />
+  <label for="star3" title="3 stars"></label>
+  <input type="radio" id="star2" name="rating" value="2" />
+  <label for="star2" title="2 stars"></label>
+  <input type="radio" id="star1" name="rating" value="1" />
+  <label for="star1" title="1 star"></label>
+</div>
+<p id="selected-rating">Selected Rating: 0 Stars</p>
+
+          
+          <!-- Data Usage Disclaimer -->
+          <p class="data-usage">
+            How we use your data: We’ll only contact you about the review you left, and only if necessary. By submitting your review, you agree to Judge.me’s <a href="terms-and-conditions.html">terms</a>, <a href="privacy-policy.html">privacy</a> and <a href="https://judge.me/content-policy">content</a> policies.
+          </p>
+          
+          <!-- Buttons -->
+          <button type="button" id="cancel-btn" class="back-btn">Cancel</button>
+          <button type="submit" id="submit-btn" class="back-btn">Submit Review</button>
+        </form>
+      </div>
+      
+
+
+    </section>
+    
+
+
+    
+    
+  
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <!-- Quick Links -->
+        <div class="footer-links">
+          <h3 data-aos="fade-up" data-aos-delay="400">Quick Links</h3>
+          <ul>
+            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="main.html">Main Page</a></li>
+          </ul>
+        </div>
+    
+        <!-- Mission and Vision -->
+        <div class="footer-mission">
+          <h3 data-aos="fade-up" data-aos-delay="400">Mission</h3>
+          <p data-aos="fade-up" data-aos-delay="400">To inspire confidence and individuality through fashion while promoting ethical and sustainable practices.</p>
+          <h3 data-aos="fade-up" data-aos-delay="400">Vision</h3>
+          <p data-aos="fade-up" data-aos-delay="400">To become a leading vogue fashion brand, known for its high-quality and eco-friendly clothing.</p>
+        </div>
+    
+        <!-- Email Subscription -->
+        <div class="footer-subscribe">
+          <h3>Be the first in line for new drops and updates</h3>
+          <div class="input-field">
+            <input required="" name="text" type="text" />
+            <label>Enter your email</label>
+          </div>
+          
+        </div>
+    
+        <!-- Social Media -->
+        <div class="footer-social">
+          <h3 style="text-decoration: underline;">Follow Us</h3>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@neatgarms?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://x.com/neatgarms" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://pin.it/1GhE1V3J0" target="_blank"><i class="fab fa-pinterest"></i></a>
+            <a href="https://wa.me/254758647031" target="_blank"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+    
+        <!-- Payment Methods -->
+        <div class="footer-payment">
+          <h3 style="text-decoration: underline;">Accepted Payment Methods</h3>
+          <div class="payment-icons">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+            <i class="fab fa-cc-mpesa"></i>
+            <div class="payment-icons">
+              <img src="mains/Mpesa Withdrawal Charges 2022 Latest Update.jpeg" alt="M-Pesa">
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="footer-bottom">
+        <p>&copy; 2024 NeatGarms. All rights reserved.</p>
+      </div>
+    </footer>
+    
+      
+
+  <script src="product.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200, // Animation duration
+      once: false,    // Animation will run every time you scroll
+    });
+
+    //product cards
+document.querySelectorAll('.product-card').forEach((card) => {
+  const images = card.querySelectorAll('.image-wrapper img');
+  images.forEach((img, index) => {
+    img.style.display = index === 0 ? 'block' : 'none'; // Only the first image is displayed by default
+  });
+});
+
+  </script>
+
+  <script>
+    const reviewForm = document.getElementById("review-form");
+  
+    reviewForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+  
+      const formData = new FormData(reviewForm);
+  
+      try {
+        const response = await fetch("http://localhost:5000/submit-review", {
+          method: "POST",
+          body: formData,
+        });
+  
+        const result = await response.json();
+  
+        if (result.success) {
+          alert("Review submitted successfully!");
+          reviewForm.reset();
+        } else {
+          alert("Failed to submit review: " + result.message);
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while submitting the review.");
+      }
+    });
+  </script>
+  
+
+
+</body>

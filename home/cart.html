@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="cart.css"> <!-- Make sure to link your CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Cart Modal or Section -->
+  <div id="cart-modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-btn">Continue Shopping?</span>
+      <h2>Your Cart </h2>
+      <div id="cart-items"></div> <!-- Product cards will be loaded here -->
+      <!--combined price section-->
+      <div id="combined-price-container">
+        <h3>Estimated Total: KSh<span id="combined-price">0.00</span></h3>
+      </div>      
+      <button id="buy-now-btn">BUY NOW</button>
+    </div>
+  </div>
+
+  <script src="cart.js"></script> <!-- Link to your cart JavaScript -->
+</body>
+</html>

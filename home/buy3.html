@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buy Now</title>
+  <link rel="stylesheet" href="buy3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    /* Custom alert styling */
+    .custom-alert {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #8a9381;
+      color: whitesmoke;
+      padding: 15px 25px;
+      border: 1px solid #f5c6cb;
+      border-radius: 10px;
+      z-index: 1000;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <!-- Left: Home Button -->
+    <div class="nav-left">
+      <button class="home-btn" id="back" onclick="goBack()" >Back</button>
+    </div>
+  
+    <!-- Center: Logo -->
+    <div class="nav-center">
+      <img src="mains/logo2.png" alt="Company Logo" class="logo">
+    </div>
+  
+    <!-- Right: Cart Icon -->
+    <div class="nav-right">
+      <a href="cart.html" class="cart-btn">
+        <i class="fas fa-shopping-cart cart-icon"></i> 
+<!-- Add the cart badge with an empty span initially -->
+<span class="cart-badge" id="cart-badge">0</span> <!-- Cart badge to show the item count -->
+
+      </a>
+    </div>
+  </nav>
+  
+
+  <div class="order-summary-container">
+    <h2>Order Summary</h2>
+  
+    <!-- Section to display images -->
+    <div id="item-section" class="item-container"></div>
+  
+    <!-- Section to display item name and price -->
+    <div class="item-details">
+      <h3 id="display-name"></h3>
+      <p id="display-price"></p>
+    </div>
+          <!-- Discount Code Section -->
+          <div class="discount-section">
+            <label for="discount-code">Discount Code:</label>
+            <input type="text" id="discount-code" placeholder="Enter code">
+            <button id="apply-discount-btn">Apply</button>
+          </div>
+
+                <!-- Shipping Section -->
+      <div class="shipping-section">
+        <h4>Shipping: <span id="shipping-cost">Free</span></h4>
+      </div>
+
+  </div>
+  
+
+  <!-- Choose Your Design Section -->
+<div class="form-section" style="margin-left: 7px; margin-right: 7px;">
+    <h3 data-aos="fade-up" data-aos-delay="400">Choose Your Design</h3>
+    <div id="design-options"></div>
+  </div>
+  
+  
+  
+
+  <!-- Multi-Section Form -->
+<div class="multi-section-form">
+
+  <div class="form-section">
+    <h3 data-aos="fade-up" data-aos-delay="400">Size / Color</h3>
+  
+    <!-- Input for number of items -->
+     <p class="pp" data-aos="fade-up" data-aos-delay="400">Click the checkbox to choose between Color / Size if any is available.  <br> Kindly, if you have more that one cloth, write the name of the cloth before the design/size/color. <br>  Happy shopping 😊! <br> </p>
+    <label for="item-count" data-aos="fade-up" data-aos-delay="400" data-aos="fade-up" data-aos-delay="400">Number of Items</label>
+    <input type="number" id="item-count" placeholder="Enter number of items" min="1" max="10" data-aos="fade-up" data-aos-delay="400">
+  
+    <!-- Radio buttons for selection -->
+
+  
+    <div class="radio-container">
+      <input type="checkbox" id="size-radio" class="radio-input">
+      <label for="size-radio" class="radio-label" data-aos="fade-up" data-aos-delay="500">Size</label>
+    </div>
+  
+    <div class="radio-container">
+      <input type="checkbox" id="color-radio" class="radio-input">
+      <label for="color-radio" class="radio-label" data-aos="fade-up" data-aos-delay="500">Color</label>
+    </div>
+  
+    <!-- Dropdown sections -->
+    <div id="size-dropdown"></div>
+    <div id="color-dropdown"></div>
+  </div>
+
+  
+    <!-- Contact Section -->
+    <div class="form-section" data-aos="fade-up" data-aos-delay="400">
+      <h3 data-aos="fade-up" data-aos-delay="400">Contact Information</h3>
+      <label for="email" data-aos="fade-up" data-aos-delay="400">Email</label>
+      <input type="email" id="email" placeholder="Enter your email">
+      <label for="phone-number" data-aos="fade-up" data-aos-delay="400">Phone Number</label>
+      <input type="tel" id="phone-number" placeholder="Enter your phone number">
+      <div class="checkbox-container">
+        <input type="checkbox" id="news-offers">
+        <label for="news-offers" data-aos="fade-up" data-aos-delay="400">Email me with news and offers</label>
+      </div>
+    </div>
+  
+<!-- Delivery Section -->
+<div class="form-section" data-aos="fade-up" data-aos-delay="400">
+    <h3 data-aos="fade-up" data-aos-delay="400">Delivery Information</h3>
+    
+    <!-- Country/Region -->
+    <label for="country-region" data-aos="fade-up" data-aos-delay="400">Country/Region</label>
+    <select id="country-region">
+      <option value="">Select your country/region</option>
+      <option value="kenya">Kenya</option>
+      <option value="usa">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="india">India</option>
+      <option value="canada">Canada</option>
+      <!-- Add more countries as needed -->
+    </select>
+  
+    <!-- First Name -->
+    <label for="first-name" data-aos="fade-up" data-aos-delay="400">First Name</label>
+    <input type="text" id="first-name" placeholder="Enter your first name">
+    
+    <!-- Last Name -->
+    <label for="last-name" data-aos="fade-up" data-aos-delay="400">Last Name</label>
+    <input type="text" id="last-name" placeholder="Enter your last name">
+    
+    <!-- Address -->
+    <label for="address" data-aos="fade-up" data-aos-delay="400">Address</label>
+    <input type="text" id="address" placeholder="Enter your address">
+    
+    <!-- Apartment/Suite (Optional) -->
+    <label for="apartment-suite" data-aos="fade-up" data-aos-delay="400">Apartment, Suite, etc (Optional)</label>
+    <input type="text" id="apartment-suite" placeholder="Enter apartment or suite details">
+    
+    <!-- City -->
+    <label for="delivery-city" data-aos="fade-up" data-aos-delay="400">City</label>
+    <input type="text" id="delivery-city" placeholder="Enter your city">
+    
+    <!-- Postal Code (Optional) -->
+    <label for="postal-code" data-aos="fade-up" data-aos-delay="400">Postal Code (Optional)</label>
+    <input type="text" id="postal-code" placeholder="Enter your postal code">
+    
+    <!-- Phone (Optional) -->
+    <label for="phone" data-aos="fade-up" data-aos-delay="400">Phone (Optional)</label>
+    <input type="tel" id="phone" placeholder="Enter your phone number">
+  </div>
+  
+  
+    <!-- Shipping Method -->
+    <div class="form-section" data-aos="fade-up" data-aos-delay="400">
+      <h3 data-aos="fade-up" data-aos-delay="400">Shipping Method</h3>
+      <div class="radio-container">
+        <input type="radio" id="standard-shipping" name="shipping-method" checked>
+        <label for="standard-shipping" data-aos="fade-up" data-aos-delay="400">Standard Shipping (Free)</label>
+        <input type="radio" id="express-shipping" name="shipping-method">
+        <label for="express-shipping" data-aos="fade-up" data-aos-delay="400">Express Shipping (KSh 500)</label>
+      </div>
+    </div>
+  
+    <!-- Payment Section -->
+    <div class="form-section" data-aos="fade-up" data-aos-delay="400">
+        <h3 data-aos="fade-up" data-aos-delay="400">Payment</h3>
+        <p class="p" data-aos="fade-up" data-aos-delay="400">Choose a payment method below</p>
+  <div class="payment-methods" data-aos="fade-up" data-aos-delay="400">
+    <label class="payment-method" data-method="mpesa">
+      <img src="mains/Mpesa Withdrawal Charges 2022 Latest Update.jpeg" alt="Mpesa" class="payment-img">
+      <span>Mpesa</span>
+    </label>
+    <label class="payment-method" data-method="credit-card">
+      <img src="mains/Ruby Red.jpeg" alt="Credit Card" class="payment-img">
+      <span>Credit Card</span>
+    </label>
+    <label class="payment-method" data-method="paypal">
+      <img src="mains/Graphic Designer Replaces Wordmarks In Famous Logos With The Fonts They Use.jpeg" alt="PayPal" class="payment-img">
+      <span>PayPal</span>
+    </label>
+    <label class="payment-method" data-method="paypal">
+        <img src="mains/Mastercard Logo Redesign.jpeg" alt="PayPal" class="payment-img">
+        <span>Master Card</span>
+      </label>
+    <label class="payment-method" data-method="other">
+      <img src="mains/Free Payment Method & Credit Card Icon Set.jpeg" alt="Other" class="payment-img">
+      <span>Other</span>
+    </label>
+  </div>
+
+    <!-- Disclaimer -->
+    <div class="payment-disclaimer">
+        <p data-aos="fade-up" data-aos-delay="400">After clicking <strong>"Pay Now"</strong>, you will be redirected to Paystack to complete your purchase securely.</p>
+      </div>
+    </div>
+  
+<!-- Billing Address -->
+<div class="form-section" data-aos="fade-up" data-aos-delay="400">
+    <h3 data-aos="fade-up" data-aos-delay="400">Billing Address</h3>
+    
+    <!-- Billing Address Options -->
+    <div class="billing-address-options">
+      <input type="radio" id="same-as-shipping" name="billing-option" value="same" checked>
+      <label for="same-as-shipping" data-aos="fade-up" data-aos-delay="400">Use same as shipping address</label>
+  
+      <input type="radio" id="different-billing" name="billing-option" value="different">
+      <label for="different-billing">Use different billing address</label>
+    </div>
+  
+    <!-- Form for Same Address (hidden by default) -->
+    <div id="same-address-container">
+      <p>Your billing address will be the same as your shipping address.</p>
+    </div>
+  
+    <!-- Form for Different Billing Address (hidden by default) -->
+    <div id="different-address-container" style="display: none;">
+      <label for="billing-country">Country/Region</label>
+      <select id="billing-country">
+        <option value="">Select your country/region</option>
+        <option value="kenya">Kenya</option>
+        <option value="usa">United States</option>
+        <option value="uk">United Kingdom</option>
+        <option value="india">India</option>
+        <option value="canada">Canada</option>
+        <!-- Add more countries as needed -->
+      </select>
+    
+  
+      <label for="billing-first-name">First Name</label>
+      <input type="text" id="billing-first-name" placeholder="Enter your first name">
+  
+      <label for="billing-last-name">Last Name</label>
+      <input type="text" id="billing-last-name" placeholder="Enter your last name">
+  
+      <label for="billing-address">Address</label>
+      <input type="text" id="billing-address" placeholder="Enter your billing address">
+  
+      <label for="billing-apartment">Apartment, Suite, etc. (optional)</label>
+      <input type="text" id="billing-apartment" placeholder="Enter apartment, suite, etc.">
+  
+      <label for="billing-postal">Postal Code (optional)</label>
+      <input type="text" id="billing-postal" placeholder="Enter your postal code">
+  
+      <label for="billing-phone">Phone (optional)</label>
+      <input type="text" id="billing-phone" placeholder="Enter your phone number">
+    </div>
+  </div>
+
+
+  
+  <!-- Payment Details Modal (hidden by default) -->
+<div id="payment-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h2>Enter Payment Details</h2>
+    <label for="phone">Phone Number (e.g., 2547XXXXXXXX):</label>
+    <input type="text" id="phoneNo" name="phone" placeholder="2547XXXXXXXX">
+    <br>
+    <label for="amount">Amount:</label>
+    <input type="number" id="amount" name="amount" placeholder="Amount">
+    <br>
+    <button id="submit-payment">Submit Payment</button>
+    <button id="cancel-payment">Cancel</button>
+
+    <p>*After Submitting your Payment Details, You will Receive a prompt on your device to complete</p>
+  </div>
+</div>
+
+
+<p class="ppp">Kindly Pay First Before Submitting Your Details</p>
+
+<!--Mpesa Button-->
+<div class="pay-now-container">
+  <button class="pay-now-btn" id="mpesa-btn">Pay Via Mpesa ?</button>
+</div>
+
+
+<div class="pay-now-container">
+  <button class="pay-now-btn" id="googlepay-btn">Pay Via Credit / Debit Card ?</button>
+</div>
+
+
+  <!-- Pay Now Button -->
+<div class="pay-now-container">
+    <button class="pay-now-btn" id="pay-now-btn" type="button">Send Request ?</button>
+  </div>
+  
+  
+
+  <script src="buy3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200, // Animation duration
+      once: false,    // Animation will run every time you scroll
+    });
+  </script>
+
+  <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+
+  <script>
+    document.getElementById("pay-now-btn").addEventListener("click", async () => {
+
+                 // Create a custom alert element
+     const customAlert = document.createElement('div');
+     customAlert.className = 'custom-alert';
+     customAlert.innerText = 'Please Wait While We Retrieve Your Information';
+ 
+     // Append the alert to the body
+     document.body.appendChild(customAlert);
+ 
+     // Remove the alert after 5 seconds (5000 milliseconds)
+     setTimeout(() => {
+       customAlert.remove();
+     }, 5000);
+
+      // Validate item count
+      const itemCount = document.getElementById("item-count").value;
+      if (!itemCount || itemCount < 1) {
+        alert("Please enter a valid number of items.");
+        return;
+      }
+    
+      // Collect Contact Info
+      const userEmail = document.getElementById("email").value;
+      const userPhone = document.getElementById("phone-number").value;
+      const newsOffers = document.getElementById("news-offers").checked ? "Yes" : "No";
+      if (!userEmail || !userPhone) {
+        alert("Please fill in your email and phone number.");
+        return;
+      }
+    
+      // Collect Delivery Info
+      const deliveryInfo = {
+        country: document.getElementById("country-region").value || "N/A",
+        firstName: document.getElementById("first-name").value || "N/A",
+        lastName: document.getElementById("last-name").value || "N/A",
+        address: document.getElementById("address").value || "N/A",
+        apartment: document.getElementById("apartment-suite").value || "N/A",
+        city: document.getElementById("delivery-city").value || "N/A",
+        postalCode: document.getElementById("postal-code").value || "N/A",
+        phone: document.getElementById("phone").value || "N/A",
+        shippingMethod: document.getElementById("express-shipping").checked
+          ? "Express Shipping (KSh 500)"
+          : "Standard Shipping (Free)"
+      };
+    
+      // Collect Billing Info
+      let billingInfo = {};
+      const sameAsShipping = document.getElementById("same-as-shipping").checked;
+      if (sameAsShipping) {
+        billingInfo = { ...deliveryInfo, note: "Same as shipping address" };
+      } else {
+        billingInfo = {
+          country: document.getElementById("billing-country").value || "N/A",
+          firstName: document.getElementById("billing-first-name").value || "N/A",
+          lastName: document.getElementById("billing-last-name").value || "N/A",
+          address: document.getElementById("billing-address").value || "N/A",
+          apartment: document.getElementById("billing-apartment").value || "N/A",
+          postalCode: document.getElementById("billing-postal").value || "N/A",
+          phone: document.getElementById("billing-phone").value || "N/A",
+        };
+      }
+    
+      // Get selected payment method
+      const selectedPayment = document.querySelector('.payment-method.selected');
+      if (!selectedPayment) {
+        alert("Please select a payment method.");
+        return;
+      }
+      const paymentMethod = selectedPayment.querySelector('span').innerText;
+    
+      // Prepare data object
+      const data = {
+        itemCount,
+        design: "", // Single design applied to all items
+        sizes: [],
+        colors: [],
+        contact: { email: userEmail, phone: userPhone, newsOffers },
+        delivery: deliveryInfo,
+        billing: billingInfo,
+        paymentMethod
+      };
+    
+      // Collect Selected Design (radio input)
+      const selectedDesign = document.querySelector('input[name="design"]:checked');
+      if (selectedDesign) {
+        data.design = selectedDesign.value;
+      } else {
+        alert("Please select a design before proceeding.");
+        return;
+      }
+    
+      // Collect Size Inputs if selected
+      if (document.getElementById("size-radio").checked) {
+        document.querySelectorAll("#size-dropdown input").forEach((input) => {
+          data.sizes.push(input.value || "N/A");
+        });
+      }
+    
+      // Collect Color Inputs if selected
+      if (document.getElementById("color-radio").checked) {
+        document.querySelectorAll("#color-dropdown input").forEach((input) => {
+          data.colors.push(input.value || "N/A");
+        });
+      }
+    
+      // --- Collect Order Summary Dropdown Information ---
+      // Here, we assume that checkoutImages is an array of Base64 image strings.
+      const checkoutImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
+      const itemName = localStorage.getItem("nameID") || "Unknown Item";
+      const displayPrice = document.getElementById("display-price").innerText || "0";
+      const discountCode = document.getElementById("discount-code").value || "";
+      const shippingCost = document.getElementById("shipping-cost").innerText || "Free";
+    
+      data.orderSummary = {
+        images: checkoutImages, // Base64 strings
+        itemName,
+        itemPrice: displayPrice, // Use the actual displayed price
+        discountCode,
+        shippingCost
+      };
+    
+      // Send data to /pay3-now endpoint
+      try {
+        const response = await fetch("http://localhost:5000/pay3-now", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert("Pay Now form submitted successfully!");
+        } else {
+          alert("Error submitting the Pay Now form.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while submitting the form.");
+      }
+    });
+    </script>
+    
+    
+    
+  
+</body>
+</html>

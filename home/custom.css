@@ -1,0 +1,1028 @@
+/* General Styling */
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    margin: 0;
+    font-family: 'Cinzel', Times, serif; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+  }
+  h1{
+    font-style: oblique;
+    font-family: 'Dancing Script', Times, serif;
+  }
+
+  /* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Cinzel', Times, serif; 
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 60px;
+  padding: 0 20px;
+  background: linear-gradient(to bottom, #ae866a, #8a9381); /* Unique gradient */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+/* Unique Background Effect (Diagonal Stripes) */
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Company Name (Centered & Tilted) */
+.company-name h1 {
+  font-size: 34px;
+  color: #333;
+  font-weight: bold;
+  transform: rotate(-5deg);
+  text-align: center;
+  flex-grow: 1;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Back Button */
+.back-button {
+  background-color: transparent;
+  color: #333;
+  border-style: groove;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  transform: skew(20deg);
+  background-color:#8a9381;
+  cursor: crosshair;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    height: 50px;
+    padding: 0 10px;
+  }
+
+  .company-name h1 {
+    font-size: 20px;
+  }
+
+  .back-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    height: 45px;
+    padding: 0 8px;
+  }
+
+  .company-name h1 {
+    font-size: 18px;
+    transform: rotate(-3deg); /* Slightly less tilt for smaller screens */
+  }
+
+  .back-button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+/* Scrolling Text Section */
+.scrolling-text-container {
+  font-family: 'Cinzel', Times, serif; 
+  font-weight: bold;
+  font-style: italic;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #ddd, #8a9381);
+  height: 60px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.scrolling-text {
+  display: flex;
+  white-space: nowrap;
+  animation: scrollText 7s linear infinite;
+}
+
+.scrolling-text span {
+  font-size: 2rem;
+  color: black;
+  padding: 0 20px;
+  white-space: nowrap;
+}
+
+/* Animation */
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .scrolling-text span {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scrolling-text span {
+    font-size: 1.5rem;
+  }
+}
+
+/* Menu Styling */
+#graphicMenu {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Hidden initially */
+  width: 300px;
+  height: 100%;
+  background: linear-gradient(to bottom, #8a9381,#ae866a);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  font-family: 'Cinzel', Times, serif; 
+  padding: 20px;
+  transition: left 0.3s ease; /* Smooth slide effect */
+  overflow-y: auto;
+}
+
+/* Menu Header */
+#graphicMenu h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: black;
+}
+
+/* Menu Items */
+#graphicMenu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* From Uiverse.io by niat786 */ 
+.men {
+  border-radius: .25rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  margin: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: #fff;
+  -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  height: 40px;
+  font-size: 0.7rem;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  transition: .2s .1s;
+  background-image: linear-gradient(90deg,#1c1c1c,#6220fb);
+  border: 0 solid;
+  overflow: hidden;
+}
+
+.men:hover {
+  cursor: pointer;
+  transition: all .3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+/* From Uiverse.io by vinodjangid07 */ 
+.Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(0, 0, 0);
+}
+
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 17px;
+}
+
+.sign svg path {
+  fill: white;
+}
+/* text */
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.Btn:active {
+  transform: translate(2px ,2px);
+}
+
+.upload-icon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  fill: #000; /* Set the color of the icon */
+  transition: fill 0.3s ease;
+}
+
+.upload-icon:hover {
+  fill: #007bff; /* Change color on hover */
+}
+
+
+.left-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background: linear-gradient(to bottom, #6220fb, #1c1c1c);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  color: white;
+  z-index: 1000;
+  padding: 20px;
+  font-family: 'Cinzel', Times, serif; 
+}
+
+.hidden-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  z-index: 1100;
+  padding: 20px;
+  display: none;
+}
+
+.hidden-menu h3 {
+  margin-top: 0;
+  text-decoration: underline;
+
+}
+
+.graphic-item {
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+}
+
+.graphic-item img {
+  display: flex;
+  max-width: 100%;
+  width: 100px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.graphic-item p{
+  align-items: baseline;
+  justify-content: baseline;
+
+}
+
+button {
+  margin-top: 10px;
+}
+
+.div2{
+  height: 50px;
+  display: flex;
+}
+
+
+
+  
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 500px;
+}
+
+.canvas-container {
+  display: flex;
+  overflow: hidden;
+  width: 750px;
+  justify-content: center;
+  margin-bottom: 0px;
+  border-style: solid;
+  border-radius: 10px;
+
+}
+
+/* Ensure that canvas is square */
+canvas {
+  width: 100%;
+  height: auto;
+  max-width: 1000px;
+  max-height: 1000px;
+  display: block;
+  margin: 0 auto; /* Centers the canvas on the page */
+}
+
+.div1{
+  display: flex;
+  flex-direction: row;
+  font-family: 'Cinzel', Times, serif; 
+  gap: 20px;
+}
+/* From Uiverse.io by Navarog21 */ 
+.next-btn {
+  margin-top: 40px;
+  width: 10em;
+  position: relative;
+  height: 3.5em;
+  border: 3px ridge #ae866a;
+  outline: none;
+  background-color: transparent;
+  color: #333;
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.next-btn::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: white;
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.next-btn::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: white;
+  transition: 0.5s;
+}
+
+.next-btn:hover::before, button:hover::after {
+  transform: scale(0)
+}
+
+.next-btn:hover {
+  box-shadow: inset 0px 0px 25px #ae866a;
+}
+
+/* From Uiverse.io by Navarog21 */ 
+.prev-btn {
+  margin-top: 40px;
+  width: 10em;
+  position: relative;
+  height: 3.5em;
+  border: 3px ridge #8a9381;
+  outline: none;
+  background-color: transparent;
+  color: #333;
+  transition: 1s;
+  border-radius: 0.3em;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.prev-btn:after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: white;
+  transition: 0.5s;
+  transform-origin: center;
+}
+
+.prev-btn::before {
+  content: "";
+  transform-origin: center;
+  position: absolute;
+  top: 80%;
+  left: 3%;
+  width: 95%;
+  height: 40%;
+  background-color: white;
+  transition: 0.5s;
+}
+
+.prev-btn:hover::before, button:hover::after {
+  transform: scale(0)
+}
+
+.prev-btn:hover {
+  box-shadow: inset 0px 0px 25px #8a9381
+}
+
+@media (max-width: 768px) {
+  .canvas {
+    width: 100%;
+      align-items:center;
+      justify-content: center;
+      height: auto;
+  }
+}
+
+#menu {
+  font-family: 'Cinzel', Times, serif; 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 50px;
+  padding: 20px;
+  background-color: #8a9381;
+  max-width: 600px;
+  border-radius: 20px;
+  border-style: solid;
+  border-right: 2px solid #ddd;
+  margin-top: 10px;
+  min-width: 80px;
+}
+
+#menu i {
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+#menu i:hover {
+  color: #ddd;
+  transform: scale(1.2);
+}
+
+    /* Responsive Menu for Smaller Screens */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      #menu {
+        flex-direction: row;
+        justify-content: center;
+        border-right: none;
+        border-top: 2px solid #ddd;
+        min-width: 100%;
+      }
+
+      #menu i {
+        font-size: 20px;
+        margin: 0 10px;
+      }
+    }
+
+    .text-form-container {
+      display: none;
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      background: transparent;
+      border-radius: 20px;
+      border: 1px solid #333;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+    }
+    
+    .text-form-container input {
+      width: 200px;
+      padding: 5px;
+      margin-right: 10px;
+      border-radius: 20px;
+      font-family: 'Cinzel', Times, serif; 
+    }
+    
+    .text-form-container button {
+      padding: 5px 10px;
+      border-radius: 20px;
+      background-color: #ae866a;
+      color: black;
+      border: none;
+      font-family: 'Cinzel', Times, serif; 
+      cursor: pointer;
+    }
+    
+    .text-form-container button:hover {
+      background-color: #8a9381;
+    }
+
+    #textMenu{
+      border-radius: 10px;
+      border-bottom: black;
+      border-bottom: 5px;
+      color: black;
+      background-color: #ae866a;
+      border-style: groove;
+    }
+    #fontSizeInput{
+      border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+      background-color: #8a9381;
+    }
+    #fontWeightInput{
+      border-radius: 10px;
+      background-color: #8a9381;
+    }
+    #deleteText{
+      border-radius: 10px;
+      padding: 3px;
+      background-color: #8a9381;
+    }
+
+    #colorPicker{
+      border-radius: 10px;
+      margin-bottom: 0;
+      justify-content: center;
+      align-items: center;
+    }
+    #fontFamilyInput{
+      border-radius: 10px;
+      background-color: #8a9381;
+      color: black;
+    }
+
+
+/* Menu Styling */
+#graphicMenu {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Hidden initially */
+  width: 300px;
+  height: 100%;
+  background: linear-gradient(to bottom, #8a9381,#ae866a);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  font-family: 'Cinzel', Times, serif; 
+  padding: 20px;
+  transition: left 0.3s ease; /* Smooth slide effect */
+  overflow-y: auto;
+}
+
+/* Menu Header */
+#graphicMenu h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: black;
+}
+
+/* Menu Items */
+#graphicMenu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+/* From Uiverse.io by niat786 */ 
+.men {
+  border-radius: .25rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  margin: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: #fff;
+  -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  height: 40px;
+  font-size: 0.7rem;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  transition: .2s .1s;
+  background-image: linear-gradient(90deg,#1c1c1c,#6220fb);
+  border: 0 solid;
+  overflow: hidden;
+}
+
+.men:hover {
+  cursor: pointer;
+  transition: all .3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+/* From Uiverse.io by vinodjangid07 */ 
+.Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(0, 0, 0);
+}
+
+/* plus sign */
+.sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign svg {
+  width: 17px;
+}
+
+.sign svg path {
+  fill: white;
+}
+/* text */
+.text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+/* button click effect*/
+.Btn:active {
+  transform: translate(2px ,2px);
+}
+
+
+
+.left-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background: linear-gradient(to bottom, #6220fb, #1c1c1c);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  color: white;
+  z-index: 1000;
+  padding: 20px;
+  font-family: 'Cinzel', Times, serif; 
+}
+
+.hidden-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 350px;
+  height: 100%;
+  background-color: #ffffff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  z-index: 1100;
+  padding: 20px;
+  display: none;
+}
+
+.hidden-menu h3 {
+  margin-top: 0;
+
+}
+
+.graphic-item {
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+}
+
+.graphic-item img {
+  display: flex;
+  max-width: 100%;
+  width: 100px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.graphic-item p{
+  align-items: baseline;
+  justify-content: baseline;
+
+}
+
+button {
+  margin-top: 10px;
+}
+
+.div2{
+  height: 50px;
+  display: flex;
+}
+    
+    
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  font-family: 'Cinzel', Times, serif; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: linear-gradient(to right, #8a9381, slategray, #8a9381);
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 600px;
+  margin: auto;
+}
+
+#canvasPreview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#canvasPreview img {
+  margin: 10px;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#closeModalBtn {
+  border-radius: 10px;
+  border: 1px, solid, black;
+  background: linear-gradient(to right, slategray, rgba(0, 0, 0, 0.878));
+  padding: 10px 20px;
+  color: white;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+#downloadImageBtn{
+  border-radius: 10px;
+  border: 1px, solid, black;
+  padding: 10px 20px;
+  background: linear-gradient(to left, slategray, rgba(0, 0, 0, 0.842));
+  margin: 10px;
+  color: white;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+#closeModalBtn:hover{
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+#downloadImageBtn:hover{
+  background: linear-gradient(120deg,slategray, rgba(0, 0, 0, 0.868)); /* Reversed gradient */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#saveDesign {
+  border-radius: 10px;
+  border: 1px, solid, black;
+  background: linear-gradient(to right, slategray, rgba(0, 0, 0, 0.878));
+  padding: 10px 20px;
+  color: white;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  margin: 10px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+#saveDesign:hover{
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Modal Styles */
+.modal2 {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal2-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+}
+
+.close-btn {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.design-item {
+  display: inline-block;
+  width: 150px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.design-thumbnail {
+  width: 100%;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ccc;
+}
+
+.design-name {
+  text-align: center;
+  padding: 5px;
+  font-size: 14px;
+}
+
+
+
+#shapeMenu button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#outlineColorPicker{
+  border-radius: 10px;
+  margin-top: 8px;
+}
+#shadowColorPicker{
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+#outlineColor{
+  border-radius: 10px;
+  margin-top: 5px;
+}
+#graphicFillColor{
+  border-radius: 10px;
+  margin-top: 5px;
+
+}
+
+.menu-actions i{
+  margin-left: 3px;
+}
+
+.ld{
+  border: 1px, solid, black;
+  background: linear-gradient(to right, slategray, rgba(0, 0, 0, 0.878));
+  padding: 10px 20px;
+  color: white;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  font-family: 'Cinzel', Times, serif; 
+}
+.ld:hover{
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
