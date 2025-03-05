@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customize Your Item</title>
+  <link rel="stylesheet" href="guide.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="nav-left">
+          <button id="menu-btn" class="icon-btn">&#9776;</button>
+        </div>
+        <div class="nav-center">
+          <img src="mains/logo2.png" alt="Company Logo" class="logo">
+        </div>
+        <div class="nav-right">
+          <a href="cart.html" class="icon-btn cart-btn">&#128722;</a>
+        </div>
+    
+    
+    
+    <!-- Menu (Initially hidden) -->
+    <nav id="menu" class="menu">
+      <button id="close-btn" class="close-btn">X</button> <!-- Close button -->
+      <ul>
+        <li><a href="home.html">Home Page</a></li>
+        <li><a href="item.html">Customize Page</a></li>
+        <li><a href="main.html">Main Shop</a></li>
+        <li><a href="cart.html">Cart Page</a></li>
+      </ul>
+    </nav>
+      </header>
+
+
+      <section class="alternating-section">
+    
+        <div class="content-item" >
+            <div class="image">
+                <img src="cloth/first design.jpg" alt="Image 1" data-aos="fade-up" data-aos-delay="400">
+            </div>
+            <div class="text">
+                <h1 data-aos="fade-up" data-aos-delay="400">Content Overview</h1>
+                <p data-aos="fade-up" data-aos-delay="400"><i id="addText" class="fas fa-font" title="Add Text"></i> : Add Text To the Design</p>
+                <p data-aos="fade-up" data-aos-delay="400"><i id="addGraphic" class="fas fa-image" title="Add Graphic"></i> : Add / Upload a Graphic to your design</p>
+                <p data-aos="fade-up" data-aos-delay="400"><i id="clearCanvasBtn" class="fas fa-trash" title="Clear Canvas"></i> : Delete Everything (Clear) on your Design</p>
+                <p data-aos="fade-up" data-aos-delay="400"><i id="saveButton" class="fas fa-save" title="Save Design"></i> : Save your design and proceed to checkout</p>
+                <p data-aos="fade-up" data-aos-delay="400"><i id="undoButton" class="fas fa-undo" title="Undo"></i> : Undo an action</p>
+                <p data-aos="fade-up" data-aos-delay="400"><i id="redoButton" class="fas fa-redo" title="Redo"></i> : Undo an action</p>
+                <p  data-aos="fade-up" data-aos-delay="400">Load Designs : Load Saved Designs to continue editing </p>
+            </div>
+        </div>
+    
+        <div class="content-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="text" data-aos="fade-up" data-aos-delay="400">
+                <h1 data-aos="fade-up" data-aos-delay="400">Adding Text</h1>
+                <p>1 : Click the button labelled 1 to type yout text</p>
+                <p>A box will appear for adding text (2)</p>
+                <p> 2 : Type the text you want to add to your design</p>
+                <p>Click "Add Text" To add the text to your Design</p>
+            </div>
+            <div class="image" >
+                <img src="cloth/second.png" alt="Image 2" data-aos="fade-up" data-aos-delay="400">
+            </div>
+        </div>
+
+    </section>
+
+    <h1>Text Editing</h1>
+
+    <section class="video-section">
+      <div class="video-container">
+          <video class="video-player centered-video" autoplay loop muted playsinline data-aos="fade-up" data-aos-delay="400">
+              <source src="cloth/0302(1).mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          <input type="range" class="progress-bar" value="0" step="0.1">
+      </div>
+    </section>
+
+    
+    <section class="alternating-section">
+        <div class="content-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="image">
+                <img src="cloth/third.png" alt="Image 1" data-aos="fade-up" data-aos-delay="400">
+            </div>
+            <div class="text" data-aos="fade-up" data-aos-delay="400">
+                <h1 data-aos="fade-up" data-aos-delay="400">Text Edits</h1>
+                <p> 1 : Use the first arrow to rotate your text</p>
+                <p>2 : Use the small boxes to resize your text</p>
+                <p>The Clip above demonstrates this action</p>
+
+            </div>
+        </div>
+    
+        <div class="content-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="text" data-aos="fade-up" data-aos-delay="400">
+                <h1 data-aos="fade-up" data-aos-delay="400">Text Edits</h1>
+                <p>Font Size : Makes the text larger or smaller using numbers</p>
+                <p>Font Weight : Make the text bolder or lighter</p>
+                <p>Text Color : Change the color of your text</p>
+                <p>Outline Color : Change the Outline Color of the text</p>
+                <p>Font Family : Style in which your text appears as</p>
+                <p>Shadow Color : Apply a shadow to the text and the color of the shadow</p>
+                <p>Shadow X : Shifting the shadow left or right</p>
+                <p>Shadow Y : Shifting the shadow up or down</p>
+                <p>Blur : Makes the shadow sharper or softer</p>
+                <p>Underline : Line under text</p>
+                <p>Linethrough : A line passing at the middle of the text</p>
+                <p>Overline : Line over the text</p>
+                <p> <i class="fas fa-copy" id="duplicateText" title="Duplicate" style="font-size: 20px; color: black; border:transparent; margin-left: 5px; margin-right:5px;"></i> : Duplicate your Text</p>
+                <p> <button  class="fas fa-trash">Delete</button> : Delete Text</p>
+            </div>
+            <div class="image">
+                <img src="cloth/0208(1).jpg" alt="Image 2" data-aos="fade-up" data-aos-delay="400">
+            </div>
+        </div>
+    </section>
+    
+    <h1 data-aos="fade-up" data-aos-delay="400">Graphic Editing</h1>
+
+    <section class="video-section">
+      <div class="video-container">
+          <video class="video-player centered-video" autoplay loop muted playsinline data-aos="fade-up" data-aos-delay="400">
+              <source src="cloth/0302.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          <input type="range" class="progress-bar" value="0" step="0.1">
+      </div>
+    </section>
+
+    <section class="alternating-section">
+        <div class="content-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="image" >
+                <img src="cloth/Untitled design (76).png" alt="Image 1" data-aos="fade-up" data-aos-delay="400">
+            </div>
+            <div class="text" data-aos="fade-up" data-aos-delay="400">
+                <h1 data-aos="fade-up" data-aos-delay="400">Graphic Menu</h1>
+                <p> 1 : Click to open the Graphics Menu</p>
+                <p>2 : Click to close the graphics menu</p>
+                <p> 3 : Choose between the different graphic options to use on your design</p>
+                <p>You can also upload photos to add to your design using the Upload Button</p>
+
+            </div>
+        </div>
+    
+        <div class="content-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="text" data-aos="fade-up" data-aos-delay="400">
+                <h1 data-aos="fade-up" data-aos-delay="400">Graphic Edits</h1>
+                <p>1 : Used to rotate and resize the element</p>
+                <p>2 : Graphics Edits:</p>
+                <p><i class="fas fa-copy" id="duplicateBtn" title="Duplicate"></i> : Duplicate the item ( Make a copy )</p>
+                <p> <i class="fas fa-trash-alt" id="deleteBtn" title="Delete"></i> : Delete the item </p>
+                <p> <i class="fas fa-border-all" id="outlineBtn" title="Add Outline"></i> : Click it in order to change the color of the outline</p>
+                <p>Fill Color : Change the color of the graphic</p>
+                <p>Corner Radius : Make the edges of the graphic smoother or sharper</p>
+                <p style="font-weight: bold;">NB : In order to change the color of the outline or apply Corner radius, you must first click the outline box ( <i class="fas fa-border-all" id="outlineBtn" title="Add Outline"></i> ) so as to create the outline.</p>
+            </div>
+            <div class="image">
+                <img src="cloth/Untitled design (79).png" alt="Image 2" data-aos="fade-up" data-aos-delay="400">
+            </div>
+        </div>
+    </section>
+
+    <h1 data-aos="fade-up" data-aos-delay="400">Saving Design</h1>
+
+
+    <section class="video-section">
+      <div class="video-container">
+          <video class="video-player centered-video" autoplay loop muted playsinline data-aos="fade-up" data-aos-delay="400">
+              <source src="cloth/0208(3).mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+          <input type="range" class="progress-bar" value="0" step="0.1">
+      </div>
+    </section>
+  
+
+    
+    <section class="alternating-section" >
+        <div class="content-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="image" >
+                <img src="cloth/bandicam 2025-03-02 02-48-46-295.jpg" alt="Image 1" data-aos="fade-up" data-aos-delay="400">
+            </div>
+            <div class="text" data-aos="fade-up" data-aos-delay="400">
+                <h1 data-aos="fade-up" data-aos-delay="400">Last Stage</h1>
+                <p> Save Progress : Save your progress to continue editing later</p>
+                <p> Proceed To Checkout : Download your design and proceed to checkout ( Buying Stage )</p>
+                <p> Close : Go back to editing</p>
+
+            </div>
+        </div>
+    
+    </section>
+
+    <!-- Footer -->
+<footer>
+    <div class="footer-container">
+      <!-- Quick Links -->
+      <div class="footer-links">
+        <h3 data-aos="fade-up" data-aos-delay="400">Quick Links</h3>
+        <ul>
+          <li><a href="our-story.html">Our Story</a></li>
+          <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="home.html">Home Page</a></li>
+          <li><a href="item.html">Customization Page</a></li>
+        </ul>
+      </div>
+  
+      <!-- Mission and Vision -->
+      <div class="footer-mission">
+        <h3 >Mission</h3>
+        <p >To inspire confidence and individuality through fashion while promoting ethical and sustainable practices.</p>
+        <h3 >Vision</h3>
+        <p >To become a leading vogue fashion brand, known for its high-quality and eco-friendly clothing.</p>
+      </div>
+  
+      <!-- Email Subscription -->
+      <div class="footer-subscribe">
+        <h3>Be the first in line for new drops and updates</h3>
+        <div class="input-container">
+          <input type="text" id="input" required="">
+          <label for="input" class="label">Enter Your Email</label>
+          <div class="underline"></div>
+        </div>
+        
+        
+      </div>
+  
+      <!-- Social Media -->
+      <div class="footer-social">
+        <h3 style="text-decoration: underline;">Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@neatgarms?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+          <a href="https://x.com/neatgarms" target="_blank"><i class="fab fa-twitter"></i></a>
+          <a href="https://pin.it/1GhE1V3J0" target="_blank"><i class="fab fa-pinterest"></i></a>
+          <a href="https://wa.me/254758647031" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+  
+      <!-- Payment Methods -->
+      <div class="footer-payment">
+        <h3 style="text-decoration: underline;">Accepted Payment Methods</h3>
+        <div class="payment-icons">
+          <i class="fab fa-cc-visa"></i>
+          <i class="fab fa-cc-mastercard"></i>
+          <i class="fab fa-cc-amex"></i>
+          <i class="fab fa-cc-paypal"></i>
+          <i class="fas fa-money-bill-alt"></i>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>&copy; 2024 NeatGarms. All rights reserved.</p>
+    </div>
+  </footer>
+  
+
+
+
+
+
+
+
+    
+
+    <script src="guide.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+      <script>
+        AOS.init({
+          duration: 1200, // Animation duration
+          once: false,    // Animation will run every time you scroll
+        });
+      </script>
+
+
+<!-- JavaScript to sync each video with its progress bar -->
+<script>
+  document.querySelectorAll(".video-container").forEach(container => {
+      const video = container.querySelector(".video-player");
+      const progressBar = container.querySelector(".progress-bar");
+
+      // Update progress bar as video plays
+      video.addEventListener("timeupdate", () => {
+          progressBar.value = (video.currentTime / video.duration) * 100;
+      });
+
+      // Seek when user interacts with progress bar
+      progressBar.addEventListener("input", () => {
+          video.currentTime = (progressBar.value / 100) * video.duration;
+      });
+  });
+</script>
+
+
+
+  
+</body>
+</html>
