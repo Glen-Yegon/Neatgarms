@@ -19,6 +19,19 @@
         "link-name": "off"
       }
     ],
-    "axe/forms": "off"
+    "axe/forms": "off",
+    "button-type": "off",
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-active": "off"
+      }
+    ],
+    "axe/structure": [
+      "default",
+      {
+        "list": "off"
+      }
+    ]
   }
 }

@@ -4,6 +4,9 @@
     font-family: 'Cinzel', Times, serif; 
     box-sizing: border-box;
   }
+  body, html{
+    overflow-x: hidden;
+  }
 
 
 /* Navbar */
@@ -305,27 +308,35 @@ h1{
     border-top: 1px solid #555;
   }
   
-  /* Responsive */
-  @media (max-width: 768px) {
+   /* Responsive */
+   @media (max-width: 768px) {
     .footer-container {
       justify-content: center;
       align-items: center;
     }
-  
-    .footer-subscribe form {
-      justify-content: center;
-      align-items: center;
-      width: 90px;
-    }
-  
-    .footer-subscribe input,
-    .footer-subscribe button {
-      width: 100%;
-    }
     .footer-subscribe h3{
-      font-size: 17px;
+      font-size: 15px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .footer-mission h3{
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .footer-payment{
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
   }
+  @media (max-width: 468px){
+    .footer-subscribe h3{
+      font-size: 12px;
+    }
+  }
+  
   
 /* From Uiverse.io by Satwinder04 */ 
 .input-container {
@@ -377,6 +388,6 @@ h1{
 }
 @media (max-width: 768px){
   .input-container{
-    max-width: 65%;
+    max-width: 45%;
   }
 }

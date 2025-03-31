@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Brand</title>
+  <link rel="stylesheet" href="main.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+    <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-left">
+      <button id="menu-btn" class="icon-btn">&#9776;</button>
+    </div>
+    <div class="nav-center">
+      <img src="mains/logo.jpg" alt="Company Logo" class="logo" data-aos="fade-up" data-aos-delay="400">
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn search-btn">&#128269;</button>
+      <a href="cart.html" class="icon-btn cart-btn">&#128722;</a>
+    </div>
+
+
+
+<!-- Menu (Initially hidden) -->
+<!-- Menu (Initially hidden) -->
+<nav id="menu" class="menu">
+  <button id="close-btn" class="close-btn">X</button> <!-- Close button -->
+  <ul>
+    <li><a href="main.html">Main Page</a></li>
+    <li><a href="pants.html">Pants</a></li>
+    <li><a href="capes.html">Capes</a></li>
+    <li><a href="tops.html">Tops</a></li>
+    <li><a href="flee.html">Flees</a></li>
+    <li><a href="glasses.html">Glasses</a></li>
+
+  </ul>
+</nav>
+
+  </header>
+
+  <!-- Hidden Search Bar -->
+  <div class="ui-input-container hidden" id="ui-input-container">
+    <input
+      required=""
+      placeholder="Type something..."
+      class="ui-input"
+      type="text"
+      id="ui-input"
+    />
+
+
+    <div class="ui-input-underline"></div>
+    <div class="ui-input-highlight"></div>
+    <div class="ui-input-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <path
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          stroke-width="2"
+          stroke="currentColor"
+          d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+        ></path>
+
+      </svg>
+
+    </div>
+    <button id="close-search" class="close-search-btn">Close Search</button>
+  </div>
+
+
+  <!-- Filter and Sort Section -->
+  <section class="filter-sort">
+    <button id="filter-btn" class="icon-btn" data-aos="fade-up" data-aos-delay="400">&#128197; Filter</button>
+  </section>
+
+  <!-- Filter Menu -->
+  <div id="filter-menu" class="filter-menu">
+    <button id="close-menu" class="close-btn">✖</button>
+    <h3>Filter Options</h3>
+    <div class="filter-section">
+      <h4>Filter by Availability</h4>
+      <a href="filter-Sale.html"><button class="prev-btn" data-filter="sale">Sale</button></a>
+      <a href="filter-sold"><button class="prev-btn" data-filter="sold-out">Sold Out</button></a>
+    </div>
+    <div class="filter-section">
+      <h4>Filter by Price</h4>
+      <a href="firstprice.html"><button class="prev-btn">0-1,500</button></a>
+      <a href="second.html"></a><button class="prev-btn">1,500-2,500</button></a>
+      <a href="third.html"><button class="prev-btn">2,500+</button></a>
+    </div>
+  </div>
+
+
+  <!-- Overlay for background dim effect -->
+  <div id="menu-overlay" class="menu-overlay hidden"></div>
+
+  <section id="moving-text-2">
+    <div class="moving-text-content-2">
+      <h2 style="font-size: 3rem;" data-aos="fade-up" data-aos-delay="200">THE LEADING CLOTHING BRAND IN KENYA! JOIN THE NEAT TEAM TODAY</h2>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <main class="product-grid" data-aos="fade-up" data-aos-delay="400">
+    <!-- Example Product Card -->
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee">
+      <div class="image-wrapper">
+        <img src="mains/playboy.jpg" alt="Product Image">
+        <img src="mains/playboy2.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/playboy3.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/playboy4.jpg" alt="Product Image 3" class="hidden-image">
+        <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sale</span>
+      </div>
+      <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Playboi Carti Tee</h3>
+      <p class="product-price"> Price in Kshs. <br>
+        <span class="old-price" data-aos="fade-up" data-aos-delay="400">2000</span>
+        <span class="new-price" data-aos="fade-up" data-aos-delay="400">1400</span>
+      </p>
+
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
+
+      </div>
+
+    </div>
+    <!-- Add more products here -->
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="travis-tee">
+      <div class="image-wrapper">
+        <img src="mains/travis.jpg" alt="Product Image">
+        <img src="mains/travis2.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/travis3.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/travis 4.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/travis5.jpg" alt="Product Image 3" class="hidden-image">
+        <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sale</span>
+      </div>
+      <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Travis Scott Tee</h3>
+      <p class="product-price">  Price in Kshs. <br>
+        <span class="old-price" data-aos="fade-up" data-aos-delay="400">2000</span>
+        <span class="new-price" data-aos="fade-up" data-aos-delay="400">1400</span>
+      </p>
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
+
+      </div>
+    </div>
+
+
+
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="acid">
+      <div class="image-wrapper">
+        <img src="mains/acid wash2.jpg" alt="Product Image">
+        <img src="mains/acid wash.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/acid wash 4.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/acid wassh.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/acid.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/acid wash 3.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/acid4.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/acid3.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/acid5.jpg" alt="Product Image 2" class="hidden-image">
+        <span class="status sale">Sale</span>
+      </div>
+      <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Acid Wash Tees</h3>
+      <p class="product-price">  Price in Kshs. <br>
+        <span class="old-price" data-aos="fade-up" data-aos-delay="400">2500</span>
+        <span class="new-price" data-aos="fade-up" data-aos-delay="400">1800</span>
+      </p>
+
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="XL (US Size)">XL (US Size)</button> <br>
+        <button class="size-btn" data-size="XXL (US Size)">XXL (US Size)</button>
+      </div>
+
+      <div class="hidden-buttons color-buttons">
+        <button class="color-btn" data-color="Purple">Purple</button>
+      </div>
+
+    </div>
+
+
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+      <div class="image-wrapper">
+        <img src="mains//acid.jpg" alt="Product Image">
+        <img src="mains/acid3.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/acid4.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/acid5.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/acid (2).jpg" alt="Product Image 3" class="hidden-image">
+        <span class="status sale">Sold Out</span>
+      </div>
+      <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Acid Tees</h3>
+      <p class="product-price">  Price in Kshs. <br>
+        <span class="old-price" data-aos="fade-up" data-aos-delay="400"> 0</span>
+        <span class="new-price" data-aos="fade-up" data-aos-delay="400"> 0</span>
+      </p>
+    </div>
+
+
+
+
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+      <div class="image-wrapper">
+        <img src="mains/brent.jpg" alt="Product Image">
+        <span class="status sold-out">Sold Out</span>
+      </div>
+      <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Brent Faiyaz Tee</h3>
+      <p class="product-price">  Price in Kshs. <br>
+        <span class="new-price" data-aos="fade-up" data-aos-delay="400">1500</span>
+      </p>
+    </div>
+
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+      <div class="image-wrapper">
+        <img src="mains/beyonce.jpg" alt="Product Image">
+        <span class="status sold-out">Sold Out</span>
+      </div>
+      <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Beyonce Tee</h3>
+      <p class="product-price"> Price in Kshs. <br>
+        <span class="old-price" data-aos="fade-up" data-aos-delay="400">1800</span>
+        <span class="new-price" data-aos="fade-up" data-aos-delay="400">1500</span>
+      </p>
+    </div>
+
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+      <div class="image-wrapper">
+        <img src="mains/nicky.jpg" alt="Product Image">
+        <span class="status sale">Sold Out</span>
+      </div>
+      <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Nicky Minaj Tee</h3>
+      <p class="product-price">  Price in Kshs. <br>
+        <span class="old-price" data-aos="fade-up" data-aos-delay="400">1700</span>
+        <span class="new-price" data-aos="fade-up" data-aos-delay="400">1600</span>
+      </p>
+    </div>
+
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="image-wrapper">
+          <img src="mains/dogs.jpg" alt="Product Image">
+          <img src="mains/dogs 1.jpg" alt="Product Image 2" class="hidden-image">
+          <img src="mains/dogs (2).jpg" alt="Product Image 3" class="hidden-image">
+          <img src="mains/dogs 3.jpg" alt="Product Image 2" class="hidden-image">
+          <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sold Out</span>
+        </div>
+        <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Drake For All The Dogs</h3>
+        <p class="product-price">  Price in Kshs. <br>
+          <span class="old-price" data-aos="fade-up" data-aos-delay="400">1700</span>
+          <span class="new-price" data-aos="fade-up" data-aos-delay="400">1700</span>
+        </p>
+
+        <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+          <button class="size-btn" data-size="Large " style="text-decoration: line-through;">Large (US Size)</button>
+          <button class="size-btn" data-size="XL ">XL (US Size)</button> <br>
+          <button class="size-btn" data-size="XXL ">XXL (US Size)</button>
+        </div>
+      </div>
+  
+      <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="image-wrapper">
+          <img src="mains/drizzy.jpg" alt="Product Image">
+          <span class="status sale">Sold Out</span>
+        </div>
+        <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">DREEZY Tee</h3>
+        <p class="product-price">  Price in Kshs. <br>
+          <span class="old-price" data-aos="fade-up" data-aos-delay="400">1500</span>
+          <span class="new-price" data-aos="fade-up" data-aos-delay="400">1100</span>
+        </p>
+      </div>
+
+        <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="image-wrapper">
+              <img src="mains/future.jpg" alt="Product Image">
+              <img src="mains/future 2.jpg" alt="Product Image 2" class="hidden-image">
+              <span class="status sale">Sold Out</span>
+            </div>
+            <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Future Tee</h3>
+            <p class="product-price"> Price in Kshs. <br>
+              <span class="old-price" data-aos="fade-up" data-aos-delay="400">1800</span>
+              <span class="new-price" data-aos="fade-up" data-aos-delay="400">1500</span>
+            </p>
+          </div>
+
+
+          <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="image-wrapper">
+              <img src="mains/gunna1.jpg" alt="Product Image">
+              <img src="mains/gunna2.jpg" alt="Product Image 2" class="hidden-image">
+              <img src="mains/gunna3.jpg" alt="Product Image 3" class="hidden-image">
+              <img src="mains/gunna4.jpg" alt="Product Image 3" class="hidden-image">
+              <img src="mains/gunna5.jpg" alt="Product Image 3" class="hidden-image">
+              <img src="mains/gunna6.jpg" alt="Product Image 3" class="hidden-image">
+              <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sold Out</span>
+            </div>
+            <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">GUNNA WUNNA</h3>
+            <p class="product-price"> Price in Kshs. <br>
+              <span class="old-price" data-aos="fade-up" data-aos-delay="400">1600</span>
+              <span class="new-price" data-aos="fade-up" data-aos-delay="400">1600</span>
+            </p>
+      
+            <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+              <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+              <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
+              <button class="size-btn" data-size="L" style="border-radius: 10px;">L</button>
+              <button class="size-btn" data-size="XL" style="border-radius: 10px;">XL</button>
+              <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+            </div>
+            <div class="hidden-buttons color-buttons">
+              <button class="color-btn" data-color="Purple">Purple</button> 
+              <button class="color-btn" data-color="Pink">Pink</button>
+              <button class="color-btn" data-color="Yellow">Yellow</button>
+            </div>
+      
+          </div>
+          <!-- Add more products here -->
+          <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+              <div class="image-wrapper">
+                <img src="mains/kanye1.jpg" alt="Product Image">
+                <img src="mains/kanye2.jpg" alt="Product Image 2" class="hidden-image">
+                <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sold Out</span>
+              </div>
+              <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Kanye</h3>
+              <p class="product-price">  Price in Kshs. <br>
+                <span class="old-price" data-aos="fade-up" data-aos-delay="400">2000</span>
+                <span class="new-price" data-aos="fade-up" data-aos-delay="400">2000</span>
+              </p>
+              <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+                <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
+                <button class="size-btn" data-size="L" style="border-radius: 10px;">L</button>
+                <button class="size-btn" data-size="XL" style="border-radius: 10px;">XL</button>
+                <button class="size-btn" data-size="XXL" style="border-radius: 10px;">XXL</button>
+              </div>
+              <div class="hidden-buttons color-buttons">
+                <button class="color-btn" data-color="White">White</button> 
+              </div>
+            </div>
+
+            
+      <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="image-wrapper">
+          <img src="mains/LH.jpg" alt="Product Image">
+          <span class="status sale">Sold Out</span>
+        </div>
+        <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">LH Tee</h3>
+        <p class="product-price"> Price in Kshs. <br>
+          <span class="old-price" data-aos="fade-up" data-aos-delay="400">0.00</span>
+          <span class="new-price" data-aos="fade-up" data-aos-delay="400">0.00</span>
+        </p>
+      </div>
+
+      <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="week">
+        <div class="image-wrapper">
+          <img src="mains/weeekkekeeend.jpg" alt="Product Image">
+          <img src="mains/week2.jpg" alt="Product Image 2" class="hidden-image">
+          <img src="mains/weekend.jpg" alt="Product Image 3" class="hidden-image">
+          <img src="mains/weekend 4.jpg" alt="Product Image 2" class="hidden-image">
+          <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sold Out</span>
+        </div>
+        <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">The Weekend</h3>
+        <p class="product-price">  Price in Kshs. <br>
+          <span class="old-price" data-aos="fade-up" data-aos-delay="400">2000</span>
+          <span class="new-price" data-aos="fade-up" data-aos-delay="400">2000</span>
+        </p>
+      </div>
+
+      <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="image-wrapper">
+          <img src="mains/package deal.jpg" alt="Product Image">
+          <img src="mains/package deal 2.jpg" alt="Product Image 2" class="hidden-image">
+          <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sold Out</span>
+        </div>
+        <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Package Deal</h3>
+        <p class="product-price">  Price in Kshs. <br>
+          <span class="old-price" data-aos="fade-up" data-aos-delay="400">3,500</span>
+          <span class="new-price" data-aos="fade-up" data-aos-delay="400">3,500</span>
+        </p>
+      </div>
+
+      <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="image-wrapper">
+          <img src="mains/lil baby2.jpg" alt="Product Image">
+          <img src="mains/lil baby.jpg" alt="Product Image 2" class="hidden-image">
+          <img src="mains/lil baby1.jpg" alt="Product Image 3" class="hidden-image">
+          <img src="mains/lil baby3.jpg" alt="Product Image 2" class="hidden-image">
+          <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sold Out</span>
+        </div>
+        <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Lil Baby Tee</h3>
+        <p class="product-price">  Price in Kshs. <br>
+          <span class="old-price" data-aos="fade-up" data-aos-delay="400">1500</span>
+          <span class="new-price" data-aos="fade-up" data-aos-delay="400">1500</span>
+        </p>
+      </div>
+
+
+      
+
+
+      <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="image-wrapper">
+          <img src="mains/sza teeee.jpg" alt="Product Image">
+          <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sold Out</span>
+        </div>
+        <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">SZA Tee</h3>
+        <p class="product-price">  Price in Kshs. <br>
+          <span class="old-price" data-aos="fade-up" data-aos-delay="400">1500</span>
+          <span class="new-price" data-aos="fade-up" data-aos-delay="400">1100</span>
+        </p>
+      </div>
+
+      <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="image-wrapper">
+          <img src="mains/nobody.jpg" alt="Product Image">
+          <img src="mains/nobody gets.jpg" alt="Product Image 2" class="hidden-image">
+          <img src="mains/nobody 2.jpg" alt="Product Image 3" class="hidden-image">
+          <img src="mains/nobody 3.jpg" alt="Product Image 2" class="hidden-image">
+          <img src="mains/nobody 4.jpg" alt="Product Image 3" class="hidden-image">
+          <span class="status sale" data-aos="fade-up" data-aos-delay="400">Sold Out</span>
+        </div>
+        <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">SZA Nobody Gets Me</h3>
+        <p class="product-price">  Price in Kshs. <br>
+          <span class="old-price" data-aos="fade-up" data-aos-delay="400">1700</span>
+          <span class="new-price" data-aos="fade-up" data-aos-delay="400">1700</span>
+        </p>
+      </div>
+
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400">
+      <div class="image-wrapper">
+        <img src="mains/vintage1.jpg" alt="Product Image">
+        <img src="mains/vintage 2.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/vintage 4.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/vintage 5.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/vintage 3.jpg" alt="Product Image 3" class="hidden-image">
+        <span class="status sale">Sold Out</span>
+      </div>
+      <h3 class="product-name" data-aos="fade-up" data-aos-delay="400">Vintage Wash Tee</h3>
+      <p class="product-price">  Price in Kshs. <br>
+        <span class="old-price" data-aos="fade-up" data-aos-delay="400">3000</span>
+        <span class="new-price" data-aos="fade-up" data-aos-delay="400">2500</span>
+      </p>
+    </div>
+
+
+  </main>
+
+  <!-- Pagination -->
+  <nav class="pagination">
+
+
+    <a href="main.html">
+      <button class="next-btn">
+         Main Page 
+    </button>
+    </a>
+  </nav>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-container">
+    <!-- Quick Links -->
+    <div class="footer-links">
+      <h3 data-aos="fade-up" data-aos-delay="400">Quick Links</h3>
+      <ul>
+        <li><a href="our-story.html">Our Story</a></li>
+        <li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="home.html">Home Page</a></li>
+        <li><a href="item.html">Customization Page</a></li>
+      </ul>
+    </div>
+
+    <!-- Mission and Vision -->
+    <div class="footer-mission">
+      <h3 data-aos="fade-up" data-aos-delay="400">Mission</h3>
+      <p data-aos="fade-up" data-aos-delay="400">To inspire confidence and individuality through fashion while promoting ethical and sustainable practices.</p>
+      <h3 data-aos="fade-up" data-aos-delay="400">Vision</h3>
+      <p data-aos="fade-up" data-aos-delay="400">To become a leading vogue fashion brand, known for its high-quality and eco-friendly clothing.</p>
+    </div>
+
+    <!-- Email Subscription -->
+    <div class="footer-subscribe">
+      <h3>Be the first in line for new drops and updates</h3>
+      <div class="input-container">
+        <input type="text" id="input" required="">
+        <label for="input" class="label">Enter Your Email</label>
+        <div class="underline"></div>
+      </div>
+      
+      
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-social">
+      <h3 style="text-decoration: underline;">Follow Us</h3>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@neatgarms?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://x.com/neatgarms" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://pin.it/1GhE1V3J0" target="_blank"><i class="fab fa-pinterest"></i></a>
+        <a href="https://wa.me/254758647031" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <!-- Payment Methods -->
+    <div class="footer-payment">
+      <h3 style="text-decoration: underline;">Accepted Payment Methods</h3>
+      <div class="payment-icons">
+        <i class="fab fa-cc-visa"></i>
+        <i class="fab fa-cc-mastercard"></i>
+        <i class="fab fa-cc-amex"></i>
+        <i class="fab fa-cc-paypal"></i>
+        <i class="fas fa-money-bill-alt"></i>
+      </div>
+    </div>
+  </div>
+
+    <!-- Country / Region Section -->
+    <div class="footer-country">
+      <h3><i class="fas fa-map-marker-alt"></i> Country/Region</h3>
+      <p>Kenya</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2024 NeatGarms. All rights reserved.</p>
+  </div>
+
+  <!-- Large Dynamic NeatGarms Logo -->
+  <div class="footer-logo">
+    <h1>NeatGarms</h1>
+  </div>
+
+</footer>
+
+
+
+
+    <script src="main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200, // Animation duration
+      once: false,    // Animation will run every time you scroll
+    });
+  </script>
+
+
+
+
+</body>

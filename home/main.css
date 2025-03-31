@@ -6,9 +6,13 @@
     font-family: 'Cinzel', Times, serif; 
   }
   
-  body {
-    line-height: 1.5;
-  }
+body, html{
+  line-height: 1.5;
+  width: 100%; 
+  box-sizing: border-box;
+  overflow-x: hidden;
+  margin-right: 0px;
+}
 
 /* Preloader Styles */
 #preloader {
@@ -89,6 +93,7 @@
     align-items: center;
     background: linear-gradient(to bottom, #333, #8a9381);
     color: #ae866a;
+    text-decoration: none;
     padding: 10px 20px;
   }
   
@@ -201,7 +206,7 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent background */
-  width: 40%;
+  width: 50%;
   height: 100%;
   z-index: 1000;
   flex-direction: column;
@@ -238,14 +243,15 @@
 
 .menu ul li a {
   color: white;
-  text-decoration: underline;
-  font-size: 18px;
+  text-decoration: none;
+  font-size: 20px;
   display: block;
 }
 
 .menu ul li a:hover {
   background-color: #ae866a;
-  border-radius: 20px;
+  border-radius: 10px;
+  width: 150px;
 
 
 }
@@ -374,7 +380,6 @@
   /* Product Grid */
   .product-grid {
     display: grid; 
-    background-image: url("mains/logo2.png");
     background-position: center;
     background-repeat: no-repeat;
     gap: 20px;
@@ -549,7 +554,12 @@
       font-size: 17px;
     }
   }
-  
+
+   @media (max-width: 468px){
+    .footer-subscribe h3{
+      font-size: 13px;
+    }
+    }
 
 /* From Uiverse.io by Navarog21 */ 
 .prev-btn {
@@ -719,6 +729,11 @@
     max-width: 65%;
   }
 }
+@media (max-width: 468px){
+  .input-container{
+    max-width: 45%;
+  }
+}
 
 .hidden-buttons {
   display: none; /* Hidden by default */
@@ -767,7 +782,7 @@
 
 .moving-text-content-2 {
   white-space: nowrap; /* Prevents text from wrapping */
-  font-size: 5rem;
+  font-size: 4rem;
   font-family: 'Cinzel', Times, serif;
   color: #383f45;
   font-weight: bold;
@@ -786,8 +801,8 @@
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   /* Decrease font size for tablets and mobile devices */
-  .moving-text-content {
-    font-size: 3rem; /* Adjust font size for medium screens */
+  .moving-text-content-2 {
+    font-size: 2rem; /* Adjust font size for medium screens */
   }
 }
 
@@ -803,3 +818,87 @@
   }
 }
 
+
+
+/* Country/Region Section */
+.footer-country {
+  color: rgb(0, 0, 0);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.5rem;
+  animation: fadeIn 1.2s ease-in-out;
+  text-align: left;
+}
+
+.footer-country h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.footer-country p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+
+}
+
+.footer-logo h1 {
+  font-size: 10rem; /* Increased size for better visibility */
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  letter-spacing: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-logo h1 {
+    font-size: 5rem; /* Slightly smaller on tablets */
+    letter-spacing: 10px;
+  }
+
+  .footer-logo {
+    font-size: 5rem;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-logo h1 {
+    font-size: 2.5rem; /* Adjusted for mobile screens */
+    letter-spacing: 4px;
+    gap: 3px;
+    text-align: center;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .footer-country {
+    font-size: 1rem;
+  }
+}

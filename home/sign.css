@@ -7,6 +7,7 @@
 body{
     background-color: #c9d6ff;
     background:linear-gradient(to right,#e2e2e2,#8a9381e3);
+    overflow-x: hidden;
 }
 .container{
     background:linear-gradient(to right,#e2e2e2,#8a9381);
@@ -35,6 +36,7 @@ input{
     border-bottom:1px solid #757575;
     padding-left:1.5rem;
     font-size:15px;
+    font-family: 'Times New Roman', Times, serif;
 }
 .input-group{
     padding:1% 0;
@@ -151,11 +153,20 @@ button:hover{
 }
 .aa{
     padding: 10px;
-    margin: 10px;
-    border: 1px solid black ;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: block;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bolder;
+    align-items: center;
+    text-align: center;
+    border: 2px solid black ;
     border-radius: 10px;
     color: #000000;
     margin-top: 20px;
+    max-width: 200px;
 }
 @media (max-width: 768px){
     .container{

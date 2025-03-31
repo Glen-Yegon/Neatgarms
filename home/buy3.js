@@ -111,12 +111,18 @@ const validDiscountCodes = {
 
   // Define available designs for each item
 const designs = {
-    "Dull T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Bright T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Crop Top": ["Sleeveless", "Long Sleeve", "Off-Shoulder", "Hooded"],
-    "Dull Hoodie": ["Zipper Hoodie", "Pullover Hoodie", "Oversized", "Cropped Hoodie"],
-    "Crop Top": ["Sleeveless", "Long Sleeve", "Off-Shoulder", "Hooded"],
-    "Bright Hoodie": ["Zipper Hoodie", "Pullover Hoodie", "Oversized", "Cropped Hoodie"],
+    "Black T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "White T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Aqua Blue T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Navy Blue T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Dark brown T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Jungle Green  T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Pink T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Purple T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Red T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Maroon T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    " T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
+    "Black T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
   };
   
   // Function to generate design options

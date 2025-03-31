@@ -2,18 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Clothing Brand</title>
   <link rel="stylesheet" href="styles.css">
+  
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
 </head>
 <body >
+
 
   
 <!-- Navbar -->
@@ -21,16 +24,10 @@
   <div class="logo">
     <img src="mains/logo2.png" alt="Company Logo" />
   </div>
+
+
+
   <div class="navbar-links">
-    <!-- Navigation Dropdown -->
-    <div class="dropdown">
-      <button class="dropbtn">Navigation</button>
-      <div class="dropdown-content">
-        <a href="item.html">Customization</a>
-        <a href="main.html">Shop</a>
-        <a href="request.html">Request Design</a>
-      </div>
-    </div>
     <!-- Login/Sign Up Dropdown -->
     <div class="dropdown">
       <button class="dropbtn">Login / Sign Up</button>
@@ -42,43 +39,109 @@
   </div>
 </nav>
 
+
+
+
+<div class="looping-text-section">
+  <div class="text-container">
+      <span class="text-number">1</span>
+      <a href="#" class="looping-text">Shop the Latest Collection</a>
+      <button class="pause-btn">⏸</button>
+  </div>
+</div>
+
+
+
+
   <!--Hero section--> 
   <section id="hero">
     <div class="hero-content">
       <h1 class="animated-text" >NEATGARMS</h1>
-      <p class="animated-text" >WEAR YOUR STYLE</p>
+      <p class="animated-text">KEEP IT NEAT</p>
       <div class="buttons" data-aos="fade-up" data-aos-delay="400">
         <a href="main.html" class="btn btn-primary">Main Shop</a>
         <a href="item.html" class="btn btn-secondary">Customize?</a>
       </div>
     </div>
-    <video autoplay loop muted playsinline class="hero-video">
-      <source src="assets/homevid1.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <div class="photo-gallery left" data-aos="fade-left" style="margin-bottom: 400px;">
-      <div class="photo" data-aos="fade-up" data-aos-delay="400"><img src="assets/home1.jpg" alt="Photo 1"></div>
-      <div class="photo" data-aos="fade-up" data-aos-delay="100"><img src="assets/home 2.jpg" alt="Photo 2"></div>
-    </div>
-    <div class="photo-gallery left" data-aos="fade-left">
+
+    <div class="hero-container">
+      <div class="video-wrapper">
+          <video autoplay loop muted playsinline class="hero-video">
+              <source src="assets/0324(2).mp4" type="video/mp4">
+              Your browser does not support the video tag.
+          </video>
+      </div>
+  </div>
+  
+  
 
 
-
-    </div>
-    <div class="photo-gallery right" data-aos="fade-right" style="margin-top: 400px;">
-      <div class="photo" data-aos="fade-up" data-aos-delay="400"><img src="assets/home5.jpg" alt="Photo 4"></div>
-      <div class="photo" data-aos="fade-up" data-aos-delay="100"><img src="assets/home6.jpg" alt="Photo 5"></div>
-    </div>
-    <div class="photo-gallery right" data-aos="fade-right">
-    </div>
   </section>
   
 <!--Moving text-->
   <section id="moving-text">
     <div class="moving-text-content">
-      <h2 style="font-size: 5rem; font-weight: lighter; margin-bottom: 0px;" data-aos="fade-up" data-aos-delay="200">KEEP IT NEAT! KEEP IT UNIQUE! 😎 ONLY WITH NEATGARMS</h2>
+      <h2 style="font-size: 4rem; font-weight: lighter; margin-bottom: 0px;" data-aos="fade-up" data-aos-delay="200">LOYAL TO THE VISION !</h2>
     </div>
   </section>
+
+
+  <!--Image Slider For Latest Products-->
+
+  <h2 class="best-selling-title">Latest In The Market</h2>
+
+
+  <div class="slider-container">
+    <button class="arrow left" id="prevBtn" data-aos="fade-up" data-aos-delay="600">&#10094;</button>
+    <div class="slider" id="slider" data-aos="fade-up" data-aos-delay="400">
+      <!-- Slide 1 -->
+      <div class="slide active">
+        <a href="main.html#travis-tee" class="featured-link">
+        <div class="img-container">
+          <img src="mains/travis.jpg" alt="Item 1" />
+        </div>
+        <div class="card-info">
+          <h3>Travis Scott Tee</h3>
+          <p>Kshs. 2000</p>
+        </div>
+      </div>
+      </a>
+      <!-- Slide 2 -->
+      <div class="slide next">
+        <a href="main.html#t-tee" class="featured-link">
+        <div class="img-container">
+          <img src="mains/playboy.jpg" alt="Item 2" />
+        </div>
+        <div class="card-info">
+          <h3>Playboy Carti Tee</h3>
+          <p>Kshs. 1800</p>
+        </div>
+      </div>
+    </a>
+      <!-- Slide 3 -->
+      <div class="slide">
+        <div class="img-container">
+          <img src="mains/weeekkekeeend.jpg" alt="Item 3" />
+        </div>
+        <div class="card-info">
+          <h3>Classic Jeans</h3>
+          <p>$39.99</p>
+        </div>
+      </div>
+      <!-- Slide 4 -->
+      <div class="slide prev">
+        <div class="img-container">
+          <img src="https://via.placeholder.com/400x300?text=Item+4" alt="Item 4" />
+        </div>
+        <div class="card-info">
+          <h3>Elegant Jacket</h3>
+          <p>$59.99</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="arrow right" id="nextBtn" data-aos="fade-up" data-aos-delay="600">&#10095;</button>
+  </div>
 
 <!-- Featured Products -->
 <section id="featured">
@@ -180,7 +243,7 @@
 
 <section id="moving-text-2">
   <div class="moving-text-content-2">
-    <h2 style="font-size: 5rem;" data-aos="fade-up" data-aos-delay="200">THE LEADING CLOTHING BRAND IN KENYA! JOIN THE NEAT TEAM TODAY</h2>
+    <h2 style="font-size: 3rem;"  data-aos="fade-up" data-aos-delay="200">FROM KENYA TO THE WORLD. BE A PART OF THE STORY</h2>
   </div>
 </section>
 
@@ -233,6 +296,7 @@
 
     <!-- Email Subscription -->
     <div class="footer-subscribe">
+      <h3>JOIN THE COMMUNITY</h3>
       <h3>Be the first in line for new drops and updates</h3>
       <div class="input-container">
         <input type="text" id="input" required="">
@@ -268,8 +332,20 @@
     </div>
   </div>
 
+    <!-- Country / Region Section -->
+    <div class="footer-country">
+      <h3><i class="fas fa-map-marker-alt"></i> Country/Region</h3>
+      <p>Kenya</p>
+    </div>
+  </div>
+
   <div class="footer-bottom">
     <p>&copy; 2024 NeatGarms. All rights reserved.</p>
+  </div>
+
+  <!-- Large Dynamic NeatGarms Logo -->
+  <div class="footer-logo">
+    <h1>NeatGarms</h1>
   </div>
 </footer>
 
@@ -277,8 +353,7 @@
 
 
 
-
-  <script src="script.js" defer></script>
+  <script src="scripts.js" ></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script>
     window.addEventListener("scroll", function() {
@@ -299,6 +374,59 @@
             pElement.classList.remove('scroll-right');
         }
     });
+
+    const texts = [
+    { text: "Shop the Latest Collection", link: "https://yourshop.com/latest" },
+    { text: "Discover Exclusive Discounts", link: "https://yourshop.com/discounts" },
+    { text: "Get Free Shipping on Orders", link: "https://yourshop.com/freeshipping" }
+];
+
+let index = 0;
+let isPaused = false;
+const textElement = document.querySelector(".looping-text");
+const numberElement = document.querySelector(".text-number");
+const pauseButton = document.querySelector(".pause-btn");
+
+// Function to Change Text with Animation
+function changeText() {
+    if (!isPaused) {
+        gsap.to(textElement, {
+            opacity: 0,
+            y: -20,
+            duration: 0.8,
+            ease: "power2.out",
+            onComplete: () => {
+                index = (index + 1) % texts.length;
+                textElement.textContent = texts[index].text;
+                textElement.href = texts[index].link;
+                numberElement.textContent = index + 1;
+
+                gsap.fromTo(textElement, 
+                    { opacity: 0, y: 20 }, 
+                    { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }
+                );
+            }
+        });
+    }
+}
+
+// Auto Change Every 3 Seconds
+let textInterval = setInterval(changeText, 3000);
+
+// Pause & Resume Functionality
+pauseButton.addEventListener("click", () => {
+    isPaused = !isPaused;
+    pauseButton.textContent = isPaused ? "▶" : "⏸";
+
+    if (!isPaused) {
+        textInterval = setInterval(changeText, 3000);
+    } else {
+        clearInterval(textInterval);
+    }
+});
+
+
+  
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -309,13 +437,58 @@
   });
 </script>
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
     integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script>
+      // JavaScript for slider functionality
+      const slides = document.querySelectorAll('.slide');
+      const totalSlides = slides.length;
+      let currentIndex = 0;
+  
+      function updateSlides() {
+        slides.forEach((slide) => {
+          slide.classList.remove('active', 'prev', 'next');
+        });
+        const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        const nextIndex = (currentIndex + 1) % totalSlides;
+  
+        slides[currentIndex].classList.add('active');
+        slides[prevIndex].classList.add('prev');
+        slides[nextIndex].classList.add('next');
+      }
+  
+      // Navigation arrow event listeners
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlides();
+      });
+      document.getElementById('prevBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlides();
+      });
+  
+      // Horizontal scroll functionality:
+      // When scrolling right (deltaX > 0) we simulate a previous button click.
+      // When scrolling left (deltaX < 0) we simulate a next button click.
+      const sliderContainer = document.getElementById('sliderContainer');
+      sliderContainer.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        if (event.deltaX > 0) {
+          // Scroll right: simulate previous button
+          currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+          updateSlides();
+        } else if (event.deltaX < 0) {
+          // Scroll left: simulate next button
+          currentIndex = (currentIndex + 1) % totalSlides;
+          updateSlides();
+        }
+      });
+    </script>
 
 
 </body>

@@ -7,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
     color: #000;
+    overflow-x: hidden;
   }
 
 
@@ -192,3 +193,85 @@ body {
 
 
 
+/* Country/Region Section */
+.footer-country {
+  color: rgb(0, 0, 0);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.5rem;
+  animation: fadeIn 1.2s ease-in-out;
+  text-align: left;
+}
+
+.footer-country h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.footer-country p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+
+}
+
+.footer-logo h1 {
+  font-size: 10rem; /* Increased size for better visibility */
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  letter-spacing: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-logo h1 {
+    font-size: 5rem; /* Slightly smaller on tablets */
+    letter-spacing: 10px;
+  }
+
+  .footer-logo {
+    font-size: 5rem;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-logo h1 {
+    font-size: 2.5rem; /* Adjusted for mobile screens */
+    letter-spacing: 4px;
+    gap: 3px;
+    text-align: center;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .footer-country {
+    font-size: 1rem;
+  }
+}

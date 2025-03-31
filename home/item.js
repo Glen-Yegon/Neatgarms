@@ -1,30 +1,4 @@
-// Wait for the page to fully load
-window.addEventListener("load", function () {
-  const preloader = document.getElementById("preloader");
-  const mainContent = document.getElementById("main-content");
 
-  // Set timeout to hide the preloader and display main content
-  setTimeout(() => {
-    preloader.style.opacity = "0"; // Fade out effect
-    setTimeout(() => {
-      preloader.style.display = "none"; // Remove preloader from view
-      mainContent.style.display = "block"; // Show main content
-    }, 500); // Wait for fade-out to complete
-  }, 3000); // 4 seconds delay
-});
-
-
-
-const navbar = document.getElementById("navbar");
-
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    navbar.style.backgroundColor = "#b0bea4"; // Change color on scroll
-  } else {
-    navbar.style.backgroundColor = "#ae866a"; // Reset color when scrolled up
-  }
-});
 
 const cards = document.querySelectorAll('.card');
 
@@ -42,9 +16,8 @@ function openModal(itemSlides) {
   currentSlideIndex = 0;
   modal.style.display = 'flex'; // Show modal
   updateModalSlide(); // Set first slide
-
-
 }
+
 
 // Function to update modal slide
 function updateModalSlide() {
@@ -53,7 +26,9 @@ function updateModalSlide() {
 
 // Add event listeners to items
 document.querySelectorAll('.item').forEach((item) => {
+
   const slides = item.querySelectorAll('.slideshow .slide');
+
   item.addEventListener('click', () => {
     const itemName = item.querySelector("#name").textContent; // Get text content
 const itemPrice = item.querySelector("#price").textContent; // Get text content
@@ -86,6 +61,7 @@ modal.addEventListener('click', (e) => {
     modal.style.display = 'none';
   }
 });
+
 
 // Keyboard navigation for slideshow
 document.addEventListener('keydown', (e) => {
@@ -196,3 +172,4 @@ document.addEventListener("DOMContentLoaded", () => {
     items.forEach((item) => (item.style.display = "block")); // Show all items again
   });
 });
+

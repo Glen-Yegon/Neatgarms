@@ -29,6 +29,6 @@ window.addEventListener('load', function () {
     setTimeout(function() {
       // Redirect to home.html after 5 seconds
       window.location.href = 'home.html';
-    }, 6000); // 6000ms = 6 seconds
+    }, 7000); // 6000ms = 6 seconds
   });
   
