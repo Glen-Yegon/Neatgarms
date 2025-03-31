@@ -67,69 +67,133 @@ document.getElementById("downloadImageBtn").addEventListener("click", function (
   let storedImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
   let newImages = [];
 
+
   canvases.forEach((canvas, index) => {
     const imgUrl = canvas.toDataURL("image/png"); // Convert canvas to image URL
     newImages.push(imgUrl);
-
-    // Trigger download
-    const link = document.createElement("a");
-    link.href = imgUrl;
-    link.download = `canvas-${index + 1}.png`;
-    link.click();
   });
+
 
   // Store new images in localStorage
   localStorage.setItem("checkoutImages", JSON.stringify(newImages));
 
   // Ask user if they want to proceed to checkout
-  if (confirm("Download complete! Proceed to checkout?")) {
     window.location.href = "buy3.html"; // Redirect to checkout page
+  
+});
+
+
+let activeCanvas = null;
+let isButtonAdded = false; // Prevent multiple button additions
+
+// Function to show the save modal
+function showSaveModal() {
+  console.log("Showing save modal...");
+  document.getElementById('saveModal').style.display = 'flex';
+
+  document.getElementById('canvasPreview').innerHTML = ''; // Clear previous previews
+  const designId = 'design_' + Date.now();
+  const designData = {};
+
+  canvases.forEach((canvas, index) => {
+    try {
+      const imgUrl = canvas.toDataURL('png');
+      const imgElement = document.createElement('img');
+      imgElement.src = imgUrl;
+      document.getElementById('canvasPreview').appendChild(imgElement);
+      designData[`canvas${index + 1}`] = canvas.toJSON();
+    } catch (error) {
+      console.error(`Error processing canvas ${index}:`, error);
+    }
+  });
+
+  // Save design to localStorage
+  try {
+    localStorage.setItem(designId, JSON.stringify(designData));
+    localStorage.setItem('lastSavedDesignId', designId);
+  } catch (error) {
+    console.error("Error saving design to localStorage:", error);
+  }
+}
+
+// Event listener for save button
+document.getElementById('saveButton').addEventListener('click', showSaveModal);
+
+// Event listener to close the modal
+document.getElementById('closeModalBtn').addEventListener('click', function () {
+  document.getElementById('saveModal').style.display = 'none';
+});
+
+// Detect when a canvas becomes active
+canvases.forEach((canvas, index) => {
+  if (index === 2 && !isButtonAdded) { // Only for Canvas 3
+    isButtonAdded = true;
+
+    const canvasWidth = canvases[2].width; // Get Canvas 3 width
+
+    // Create a large sage green button
+    let button = new fabric.Rect({
+      left: canvasWidth / 2 - 125, // Centered horizontally
+      top: 20, // Positioned at the top
+      fill: '#8a9381', // Sage green background
+      width: 400,
+      height: 80,
+      rx: 20, // Rounded corners
+      ry: 20,
+      stroke: 'white',
+      strokeWidth: 1,
+      selectable: false, // Prevent dragging
+      hoverCursor: 'pointer'
+    });
+
+    // Add text on the button
+    let buttonText = new fabric.Text('Proceed To Checkout ?', {
+      left: canvasWidth / 2 - 80, // Adjusted for centering
+      top: 45,
+      fontSize: 30, // Bigger text
+      fill: 'white',
+      fontWeight: 'bold',
+      selectable: false
+    });
+
+    // Group button and text together
+    let buttonGroup = new fabric.Group([button, buttonText], {
+      selectable: false,
+      evented: true // Allow click events
+    });
+
+    // Add button to Canvas 3
+    canvases[2].add(buttonGroup);
+    canvases[2].renderAll();
+
+    // Make the button open the modal on click
+    canvases[2].on('mouse:down', function (event) {
+      if (event.target === buttonGroup) {
+        showSaveModal();
+      }
+    });
   }
 });
 
 
 
-// Handle save button click to open the modal
-document.getElementById('saveButton').addEventListener('click', function() {
-  document.getElementById('saveModal').style.display = 'flex';
-  
-  // Clear the previous previews (if any)
-  document.getElementById('canvasPreview').innerHTML = '';
 
-  // Generate a unique ID for the design (could use timestamp or a custom ID)
-  const designId = 'design_' + Date.now(); // Unique ID based on the current timestamp
+// Event listener for save button
+document.getElementById('saveButton').addEventListener('click', showSaveModal);
 
-  // Initialize an object to hold the canvas data
-  const designData = {};
+// Event listener to close the modal
+document.getElementById('closeModalBtn').addEventListener('click', function () {
+  document.getElementById('saveModal').style.display = 'none';
+});
+// Event listener for save button
+document.getElementById('saveButton').addEventListener('click', showSaveModal);
 
-  canvases.forEach((canvas, index) => {
-    // Get the data URL for each canvas (image format: PNG)
-    const imgUrl = canvas.toDataURL({ format: 'png' });
-
-    // Create an image element to preview the canvas
-    const imgElement = document.createElement('img');
-    imgElement.src = imgUrl;
-
-    // Append the preview image to the preview section in the modal
-    document.getElementById('canvasPreview').appendChild(imgElement);
-
-    // Save each canvas data to the designData object (use canvas.toJSON to save the canvas data)
-    designData[`canvas${index + 1}`] = canvas.toJSON(); // Save canvas data as JSON
-  });
-
-  // Save the design data to localStorage with a specific design ID
-  localStorage.setItem(designId, JSON.stringify(designData));
-
-
-  // (Optional) You could also save the design ID to allow the user to easily retrieve it later
-  localStorage.setItem('lastSavedDesignId', designId);
+// Event listener to close the modal
+document.getElementById('closeModalBtn').addEventListener('click', function () {
+  document.getElementById('saveModal').style.display = 'none';
 });
 
-  
-  // Handle closing the modal
-  document.getElementById('closeModalBtn').addEventListener('click', function() {
-    document.getElementById('saveModal').style.display = 'none';
-  });
+
 
 
 // Function to resize the image to fit the canvas while maintaining its aspect ratio
@@ -270,6 +334,7 @@ canvases.forEach((canvas) => {
   });
 });
 
+
 // Function to show the options menu below the selected image
 function showOptionsMenu(img, canvas) {
   // Only show menu if the object is selected
@@ -278,9 +343,17 @@ function showOptionsMenu(img, canvas) {
   menu.style.display = "flex"; // Make it visible
   menu.style.position = "absolute"; // Absolutely position within the canvas wrapper
   menu.classList.add("graphicOptionsMenu"); // Add a class for styling
+  // Append the menu to the canvas wrapper
+  // ✅ Fix: Get the actual canvas wrapper
+  const wrapper = canvas.getElement().parentNode; // Get wrapper of the canvas
+  if (!wrapper) {
+    console.error("Error: Canvas wrapper not found!");
+    return;
+  }
 
   // Append the menu to the canvas wrapper
-  canvas.wrapperEl.appendChild(menu);
+  wrapper.appendChild(menu);
+
 
   // This function updates the menu's position based on the image's bounding rectangle,
   // and ensures that the menu does not touch the canvas edges by applying a margin.
@@ -317,6 +390,7 @@ function showOptionsMenu(img, canvas) {
     menu.style.left = `${left}px`;
     menu.style.top = `${top}px`;
   }
+
 
   // Set the initial position of the menu
   updateMenuPosition();
@@ -487,8 +561,6 @@ function changeFillColor(img, color) {
 
 
 
-
-
 // Function to set the image as the background of the canvas
 function loadImageToCanvas(canvas, imageUrl) {
   fabric.Image.fromURL(imageUrl, function (img) {
@@ -508,6 +580,8 @@ function loadImageToCanvas(canvas, imageUrl) {
         originY: 'top'
       }
     );
+
+    
   });
 }
 
@@ -978,7 +1052,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
 // Trigger the file input click event when the upload icon is clicked
 function triggerImageUpload() {
   document.getElementById('imageUpload').click();
@@ -1014,4 +1087,67 @@ function handleImageUpload(event) {
         }   
 
 
+      
 
+
+// Function to get active canvas and object
+function getActiveObject() {
+  for (const canvas of canvases) {
+      const activeObject = canvas.getActiveObject();
+      if (activeObject) return { activeCanvas: canvas, activeObject };
+  }
+  return { activeCanvas: null, activeObject: null };
+}
+
+document.getElementById("removeBg").addEventListener("click", async () => {
+  const activeCanvas = canvases.find(canvas => canvas.getActiveObject());
+  if (!activeCanvas) {
+      alert("Please select an image first!");
+      return;
+  }
+
+  const activeObject = activeCanvas.getActiveObject();
+
+  if (!activeObject || activeObject.type !== "image") {
+      alert("Selected object is not an image!");
+      return;
+  }
+
+  // Convert the image to Base64
+  const imageBase64 = activeObject.toDataURL("image/png").split(",")[1];
+
+  // Send the image to the backend
+  try {
+      const response = await fetch("http://localhost:5000/remove-bg", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ image: imageBase64 })
+      });
+
+      const data = await response.json();
+
+      if (data.processedImage) {
+          // Create a new fabric image from the processed Base64
+          fabric.Image.fromURL("data:image/png;base64," + data.processedImage, (img) => {
+              img.set({
+                  left: activeObject.left,
+                  top: activeObject.top,
+                  scaleX: activeObject.scaleX,
+                  scaleY: activeObject.scaleY
+              });
+
+              // Remove the old image and add the new one
+              activeCanvas.remove(activeObject);
+              activeCanvas.add(img);
+              activeCanvas.renderAll();
+          });
+      } else {
+          alert("Background removal failed!");
+      }
+  } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while processing the image.");
+  }
+});

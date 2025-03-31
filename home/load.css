@@ -6,8 +6,9 @@
 }
 
 body {
-  font-family: "Michroma", sans-serif;
+  font-family: 'Cinzel Decorative', serif;
   height: 100vh;
+
 }
 
 .container {
@@ -16,6 +17,7 @@ body {
   height: 100%;
   width: 100%;
   font-size: 3rem;
+  font-weight: 900;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,8 +28,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  background: linear-gradient(to right, #383f45, #ae866a, #383f45);
-
+  background: white;
   height: 100%;
   width: 100%;
   display: flex;
@@ -58,7 +59,7 @@ body {
 }
 
 .name-container {
-  height: 30px;
+  height: 60px;
   overflow: hidden;
 }
 
@@ -71,10 +72,39 @@ body {
   font-weight: bolder;
 }
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    .container p{
-      font-size: 2rem;
-    }
+
+  
+
+  #intro-video {
+    height: 550px;
+    border: white;
+    width: 550px;
+    object-fit: cover; /* Keeps proportions */
+    background: none; /* Ensures transparency */
   }
   
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container p{
+        font-size: 3rem;
+        font-weight: 900;
+      }
+      .logo-name{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+    }
+    @media (max-width: 468px){
+      #intro-video{
+        height: 300px;
+        width: 300px;
+        border: white;
+
+      }
+      .container p{
+        font-size: 2rem;
+      }
+    }

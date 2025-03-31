@@ -1,13 +1,26 @@
 /* General Styles */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding-left: 10px;
-  padding-top: 10px;
   padding-right: 10px;
   font-family: 'Cinzel', Times, serif;
   background: linear-gradient(to bottom, #383f45, #8A9381);
-  box-sizing: border-box;
+  border-radius: 10px;
 }
+
+@media (max-width: 468px){
+  body, html{
+    overflow-x: hidden;
+  }
+  }
+
 
   h1, h2 {
     margin: 0;
@@ -34,13 +47,13 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0px;
-  background: linear-gradient(to right, #383f45, #AE866A );
+  background: linear-gradient(to right, #383f45, #AE866A);
   position: relative;
   top: 0;
   width: 100%;
   transition: background-color 0.3s ease; /* Smooth transition */
   z-index: 1000;
-  border-radius: 10px;
+  border-radius: 0px 10px;
 }
 
 /* Logo Styling */
@@ -115,6 +128,16 @@ body {
   background-color: rgba(255, 255, 255, 0); /* Fully transparent when scrolling */
 }
 
+@media (max-width: 468px){
+  /* Logo Styling */
+  .navbar .logo img {
+    height: 40px;
+  }
+  .navbar-links{
+    gap: 0px;
+  }
+  
+  }
 
 
 
@@ -124,7 +147,6 @@ body {
     position: relative;
     font-family: 'Cinzel', Times, serif;
     font-style: italic;
-
     height: 100vh;
     display: flex;
     align-items: center;
@@ -143,8 +165,11 @@ body {
   }
 
   .hero-content h1 {
-    font-size: 4rem;
+    font-size: 9rem;
     margin: 0;
+    font-style: normal;
+    font-family: 'Playfair Display', serif;
+
   }
 
   .hero-content p {
@@ -176,6 +201,7 @@ body {
     margin: 0 1rem;
     font-size: 1.2rem;
     text-decoration: none;
+    font-style: normal;
     text-transform: uppercase;
     font-weight: bold;
     border-radius: 30px;
@@ -214,17 +240,37 @@ body {
   }
   
   
-  .hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    filter: brightness(0.7);
-    border-radius: 10px;
-  }
+/* Hero Section */
+.hero-container {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Wrapper for both video halves */
+.video-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+
+/* Video Styling */
+.hero-video {
+  width: 100%;
+  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease-in-out;
+  filter: brightness(1.1) contrast(1.2); /* Enhances colors */
+}
+
+
+
 
 
   
@@ -268,7 +314,7 @@ body {
     /* Mobile responsiveness */
     @media (max-width: 768px) {
       .hero-content h1{
-        font-size: 2.5rem;
+        font-size: 6rem;
       }
       .hero-content p{
         font-size: 3rem;
@@ -276,6 +322,14 @@ body {
       .photo{
         height: 150px;
         width: 150px;
+      }
+    }
+    @media (max-width: 468px){
+      .hero-content h1{
+        font-size: 3rem;
+      }
+      .hero-content p{
+        font-size: 2rem;
       }
     }
   
@@ -322,8 +376,9 @@ body {
   
   .moving-text-content {
     white-space: nowrap; /* Prevents text from wrapping */
-    font-size: 5rem;
+    font-size: 7rem;
     font-family: 'Cinzel', Times, serif;
+    word-spacing: 100%;
     color: #000000;
     animation: moveText 10s linear infinite; /* Move text over 10 seconds */
   }
@@ -363,7 +418,6 @@ body {
   position: relative;
   padding: 50px 0;
   font-family: 'Cinzel', Times, serif;
-  background: url('mains/logo2.png'); /* Linear gradient background */
   color: #000000;
 
 }
@@ -460,7 +514,7 @@ body {
 /* Hover Effect on Product Title and Price */
 .product-card:hover.product-info h3,
 .product-card:hover .product-info p {
-  color: #AE866A;
+  color: #8A9381;
   transform: translateY(-5px);
 }
 
@@ -505,7 +559,10 @@ body {
 
 @media (max-width: 480px) {
   .products {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
+  }
+  .product-card{
+    height: 250px;
   }
 }
 
@@ -523,11 +580,12 @@ body {
 
 .moving-text-content-2 {
   white-space: nowrap; /* Prevents text from wrapping */
-  font-size: 5rem;
+  font-size: 1rem;
   font-family: 'Cinzel', Times, serif;
   color: #383f45;
   font-weight: bold;
-  animation: moveText 10s linear infinite; /* Move text over 10 seconds */
+  animation: moveText 15s linear infinite; /* Move text over 10 seconds */
+
 }
 
 @keyframes moveText {
@@ -544,13 +602,14 @@ body {
   /* Decrease font size for tablets and mobile devices */
   .moving-text-content {
     font-size: 3rem; /* Adjust font size for medium screens */
+    
   }
 }
 
 @media (max-width: 480px) {
   /* Decrease font size for very small screens */
   .moving-text-content-2 {
-    font-size: 2rem; /* Adjust font size for small screens */
+    font-size: 0.3rem; /* Adjust font size for small screens */
   }
 
   /* Optional: Reduce the height of the section on small screens */
@@ -812,6 +871,11 @@ body {
       text-align: center;
     }
   }
+  @media (max-width: 468px){
+    .footer-subscribe h3{
+      font-size: 12px;
+    }
+  }
   
 
   
@@ -865,6 +929,338 @@ body {
 }
 @media (max-width: 768px){
   .input-container{
-    max-width: 65%;
+    max-width: 45%;
+  }
+}
+
+
+
+
+/* Country/Region Section */
+.footer-country {
+  color: rgb(0, 0, 0);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.5rem;
+  animation: fadeIn 1.2s ease-in-out;
+  text-align: left;
+}
+
+.footer-country h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.footer-country p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+
+}
+
+.footer-logo h1 {
+  font-size: 11rem; /* Increased size for better visibility */
+  color: rgb(0, 0, 0);
+  font-weight: 900;
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-logo h1 {
+    font-size: 5.5rem; /* Slightly smaller on tablets */
+    letter-spacing: 10px;
+  }
+
+  .footer-logo {
+    font-size: 5rem;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-logo h1 {
+    font-size: 3rem; /* Adjusted for mobile screens */
+    letter-spacing: 4px;
+    gap: 3px;
+    text-align: center;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .footer-country {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+  /* Slider Container */
+  .slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 1250px;
+    height: 500px;
+    overflow: hidden;
+    margin: 0 auto;
+    font-family: 'Cinzel', Times, serif;
+  }
+  /* Slider Wrapper */
+  .slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  /* Slide Card Styles */
+  .slide {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    max-width: 400px;
+    background: transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+  /* Image Container */
+  .img-container {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+  }
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .img-container img:hover{
+    height: 100%;
+  }
+  .img-container:hover{
+    transform: scale(1.1); /* Slight zoom effect */
+  }
+  /* Card Info Overlay with Dim Background */
+  .card-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: #e6e6e6;
+    padding: 10px;
+    text-align: center;
+  }
+  .card-info h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  .card-info p {
+    margin: 5px 0 0;
+    font-size: 1.2rem;
+  }
+  /* Active, Previous, and Next Slide States */
+  .slide.active {
+    opacity: 1;
+    z-index: 3;
+    transform: translate(-50%, -50%) scale(1);
+    filter: none;
+  }
+  .slide.prev {
+    opacity: 0.5;
+    z-index: 2;
+    transform: translate(-150%, -50%) scale(0.8);
+    filter: blur(3px);
+  }
+  .slide.next {
+    opacity: 0.5;
+    z-index: 2;
+    transform: translate(50%, -50%) scale(0.8);
+    filter: blur(3px);
+  }
+  /* Navigation Arrows */
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ae866a;
+    border: none;
+    font-size: 2rem;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 4;
+  }
+  .arrow.left {
+    left: 10px;
+  }
+  .arrow.right {
+    right: 10px;
+  }
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .slider-container {
+      height: 500px;
+    }
+    .slide {
+      width: 80%;
+    }
+    .arrow {
+      font-size: 1.5rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .slider-container {
+      height: 475px;
+    }
+    .slide {
+      width: 60%;
+    }
+    .card-info h3 {
+      font-size: 1.2rem;
+    }
+    .card-info p {
+      font-size: 1rem;
+    }
+  }
+
+
+  .best-selling-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #000000;
+    margin: 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Cinzel', Times, serif;
+  }
+  /* Tablet */
+  @media (max-width: 768px) {
+    .best-selling-title {
+      font-size: 2rem;
+      letter-spacing: 1.5px;
+      margin: 15px 0;
+    }
+  }
+
+      /* Mobile */
+      @media (max-width: 480px) {
+        .best-selling-title {
+          font-size: 1.5rem;
+          letter-spacing: 1px;
+          margin: 10px 0;
+        }
+      }
+
+
+
+/* Looping Text Section */
+.looping-text-section {
+  width: 100%;
+  background-color: transparent;
+  font-family: 'Playfair Display', serif;
+  font-weight: lighter;
+  padding: 0px 0;
+  height: 25px;
+  font-size: 12px;
+  border-radius: 10px 0px 0px 0px;
+  justify-content: center;
+  display: flex;
+}
+
+/* Text Container */
+.text-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: center;
+  padding: 8px 15px;
+  border-radius: 5px;
+}
+
+/* Number Tag */
+.text-number {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+
+/* Looping Text */
+.looping-text {
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  transition: color 0.3s ease;
+}
+
+.looping-text:hover {
+  color: #ae866a;
+}
+
+/* Pause Button */
+.pause-btn {
+  background: none;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.pause-btn:hover {
+  color: #ae866a;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) { /* Phones */
+  .text-container {
+      width: 1000%;
+      font-size: 1em;
+  }
+  .looping-text {
+      font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 1024px) { /* Tablets */
+  .text-container {
+      width: 100%;
+      font-size: 1.1em;
   }
 }

@@ -37,12 +37,16 @@
   <!-- Undo and Redo Icons -->
   <i id="undoButton" class="fas fa-undo" title="Undo"></i>
   <i id="redoButton" class="fas fa-redo" title="Redo"></i> 
-  <!-- New Background Color Picker -->
 
 </div>
 
 
-<button id="loadDesignButton" class="ld">Load Saved Designs ?</button>
+<section class="button-container">
+  <button id="loadDesignButton" class="ld">Load Saved Designs</button>
+
+  <button id="removeBg" class="ldd"  type="button">Remove Background</button>
+  
+</section>
 
 
 
@@ -120,6 +124,8 @@
     onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.3)';"
     onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.2)';"
   >
+
+  
     <!-- Icon and Label -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1373,6 +1379,15 @@
 </div>
 
 
+<!-- Load Design Modal -->
+<div id="loadDesignModal" class="load-design-modal">
+  <div class="load-design-modal-content">
+    <span class="load-design-close-modal">&times;</span>
+    <h2>Select a Design to Load</h2>
+    <div id="designListContainer" class="load-design-list"></div>
+  </div>
+</div>
+
 
   <script src="custom.js"></script>
   <script src="saveDes.js" type="module"></script>
@@ -1380,8 +1395,86 @@
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
 
+<script>
+  document.getElementById("loadDesignButton").addEventListener("click", async (e) =>{
+    alert("Please Wait While We retrieve Your Saved Designs");
+  })
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/@gradio/tfjs-u2net"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+
 
   
-  
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const loadDesignModal = document.getElementById("loadDesignModal");
+    const closeLoadDesignModal = document.querySelector(".load-design-close-modal");
+    const designListContainer = document.getElementById("designListContainer");
+
+    // Fake Data (Replace with Firestore data)
+    const savedDesigns = [
+        { name: "Design 1", imageUrl: "https://via.placeholder.com/150" },
+        { name: "Design 2", imageUrl: "https://via.placeholder.com/150" },
+        { name: "Design 3", imageUrl: "https://via.placeholder.com/150" }
+    ];
+
+    // Open modal and load saved designs
+    function openLoadDesignModal() {
+        loadDesignModal.style.display = "flex";
+        loadSavedDesigns();
+    }
+
+    // Close modal
+    closeLoadDesignModal.addEventListener("click", () => {
+        loadDesignModal.style.display = "none";
+    });
+
+    // Close modal if user clicks outside of content area
+    window.addEventListener("click", (event) => {
+        if (event.target === loadDesignModal) {
+            loadDesignModal.style.display = "none";
+        }
+    });
+
+    // Function to load saved designs into modal
+    function loadSavedDesigns() {
+        designListContainer.innerHTML = ""; // Clear previous content
+
+        if (savedDesigns.length === 0) {
+            designListContainer.innerHTML = "<p>No saved designs available.</p>";
+            return;
+        }
+
+        savedDesigns.forEach((design) => {
+            const designItem = document.createElement("div");
+            designItem.classList.add("design-item");
+            designItem.innerHTML = `
+                <img src="${design.imageUrl}" alt="${design.name}" class="design-preview">
+                <p>${design.name}</p>
+            `;
+
+            // Load design on click
+            designItem.addEventListener("click", () => {
+                alert(`Loading ${design.name}...`);
+                loadDesignModal.style.display = "none";
+            });
+
+            designListContainer.appendChild(designItem);
+        });
+    }
+
+    // Attach the function to open the modal
+    document.getElementById("openLoadDesignModal").addEventListener("click", openLoadDesignModal);
+});
+
+</script>
+
+
 </body>
 </html>

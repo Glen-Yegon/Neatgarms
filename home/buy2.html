@@ -45,7 +45,7 @@
       <a href="cart.html" class="cart-btn">
         <i class="fas fa-shopping-cart cart-icon"></i> 
 <!-- Add the cart badge with an empty span initially -->
-<span class="cart-badge" id="cart-badge">0</span> <!-- Cart badge to show the item count -->
+
 
       </a>
     </div>
@@ -217,9 +217,12 @@
 
     <!-- Disclaimer -->
     <div class="payment-disclaimer">
-        <p>After clicking <strong>"Pay Now"</strong>, you will be redirected to Paystack to complete your purchase securely.</p>
-      </div>
+      <p> <strong>Kindly Pay First using any of the means above before Submitting Your Request. </strong> <br>
+        Thank you For Choosing the Neat Team - Happy Shopping!
+      </p>
     </div>
+  </div>
+
   
 <!-- Billing Address -->
 <div class="form-section">
@@ -306,13 +309,42 @@
 
 
 <div class="pay-now-container">
-    <button class="pay-now-btn" id="pay-now-btn">Submit Details</button>
+    <button class="pay-now-btnn" id="pay-now-btn" type="button">Submit Details</button>
   </div>
 
 
+  
+
   <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
   <script>
+
+
+
+
     document.getElementById("pay-now-btn").addEventListener("click", async () => {
+      const serverUrl = "http://localhost:5000"; // Update with actual server URL
+      const phoneNumber = "254712345678"; // Replace with dynamic user input if needed
+      try {
+        const response = await fetch(`${serverUrl}/check-payment/${phoneNumber}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const paymentInfo = await response.json();
+
+        if (!paymentInfo.paid) {
+            alert("No payment confirmation found! Please complete payment first.");
+            return;
+        }
+
+        alert("Payment confirmed! Proceeding...");
+        // Continue with your function
+    } catch (error) {
+        console.error("Error checking payment:", error);
+        alert("An error occurred. Please try again.");
+    }
+
 
            // Create a custom alert element
      const customAlert = document.createElement('div');

@@ -42,27 +42,28 @@
       <form action="http://localhost:5000/submit-form" method="POST" enctype="multipart/form-data">
         <input type="text" name="name" id="name" placeholder="Your Name" required /> <br>
         <input type="email" name="email" id="email" placeholder="Your Email" required /> <br>
-      
+        <input type="tel" name="phone" id="phone" placeholder="Your Phone Number" required /> <br>
+    
         <label for="frontView">Front View</label>
         <input type="file" id="frontView" name="frontView" accept="image/*" onchange="previewImage(event, 'frontPreview')" />
         <img id="frontPreview" width="100" style="display:none;" />
-      
+    
         <label for="backView">Back View</label>
         <input type="file" id="backView" name="backView" accept="image/*" onchange="previewImage(event, 'backPreview')" />
         <img id="backPreview" width="100" style="display:none;" />
-      
+    
         <label for="rightSideView">Right Side View</label>
         <input type="file" id="rightSideView" name="rightSideView" accept="image/*" onchange="previewImage(event, 'rightPreview')" />
         <img id="rightPreview" width="100" style="display:none;" />
-      
+    
         <label for="leftSideView">Left Side View</label>
         <input type="file" id="leftSideView" name="leftSideView" accept="image/*" onchange="previewImage(event, 'leftPreview')" />
         <img id="leftPreview" width="100" style="display:none;" /> <br>
-      
+    
         <button type="submit" id="submit">Submit Request</button>
       </form>
-    
     </div>
+    
     <button id="goBackButton" onclick="goBack()" >Go Back</button>
 
 
@@ -93,9 +94,28 @@
       reader.readAsDataURL(file);
     }
   }
+
+  document.getElementById("submit").addEventListener("click", async (e) => {
+
+    // Create a custom alert element
+    const customAlert = document.createElement('div');
+    customAlert.className = 'custom-alert';
+    customAlert.innerText = 'Please Wait While We Retrieve Your Information';
+
+    // Append the alert to the body
+    document.body.appendChild(customAlert);
+
+    // Remove the alert after 5 seconds (5000 milliseconds)
+    setTimeout(() => {
+      customAlert.remove();
+    }, 5000);
+    
+});
 </script>
 
 <script>
+
+
   const form = document.getElementById("myForm");
 
   form.addEventListener("submit", async (e) => {
@@ -105,6 +125,8 @@
 
     // Show loading alert
     alert("Submitting... Please wait!");
+
+
 
     // Create FormData to send files and text
     const formData = new FormData(form);
@@ -128,6 +150,8 @@
       console.error("Error:", error);
     }
   });
+
+
 </script>
 
 </body>

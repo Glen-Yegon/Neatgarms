@@ -186,7 +186,6 @@ if (product && discountValue !== undefined) {
     }
   }
 
-
   document.getElementById("pay-now-btn").innerText = "Processing...";
 // After form submission
 document.getElementById("pay-now-btn").innerText = "Pay Now";
@@ -195,6 +194,7 @@ document.getElementById("pay-now-btn").innerText = "Pay Now";
 function goBack() {
   history.back();
 }
+
 
 
 // When the user clicks the "Pay Now" button, display the modal.
@@ -211,25 +211,7 @@ document.getElementById('submit-payment').addEventListener('click', async () => 
   const phone = document.getElementById('phoneNo').value.trim();
   const amount = document.getElementById('amount').value.trim();
   
-  // Get the estimated total from the order summary container.
-  // Adjust the selector if needed.
-  const estimatedTotalElem = document.querySelector('.estimated-total');
-  const estimatedTotalText = estimatedTotalElem ? estimatedTotalElem.innerText.trim() : "";
-  
-  // Remove any non-numeric characters (like currency symbols) and convert to a float
-  const numericAmount = parseFloat(amount);
-  const numericEstimatedTotal = parseFloat(estimatedTotalText.replace(/[^\d.]/g, ''));
-  
-  if (!phone || !amount) {
-    alert("Please enter your phone number and ensure the amount is available.");
-    return;
-  }
-  
-  // Check if the entered amount matches the displayed estimated total.
-  if (numericAmount !== numericEstimatedTotal) {
-    alert("The amount entered does not match the estimated total. Please check the amount.");
-    return;
-  }
+
   
   try {
     // Send a POST request to your backend endpoint
@@ -255,6 +237,7 @@ document.getElementById('submit-payment').addEventListener('click', async () => 
   // Hide the modal after submission
   document.getElementById('payment-modal').style.display = 'none';
 });
+
 
 
 
@@ -346,3 +329,8 @@ function onGooglePayButtonClicked() {
       console.error('Error loading payment data:', err);
     });
 }
+
+
+
+
+document.getElementById("pay-now-btn").innerText = "Submit Details";

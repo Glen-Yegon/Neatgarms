@@ -1,13 +1,35 @@
-require("dotenv").config();
-const express = require("express");
-const multer = require("multer");
-const nodemailer = require("nodemailer");
-const cors = require("cors");
-const fetch = require("node-fetch");
-const app = express();
+
+
+// Import required modules
+import express from "express";
+import multer from "multer";
+import nodemailer from "nodemailer";
+import cors from "cors";
+import bodyParser from "body-parser";
+import PDFDocument from "pdfkit";
+import fs from "fs";
+import dotenv from "dotenv";
+import path from "path";
+import fetch from "node-fetch";
+import { fileURLToPath } from "url"; // Required for `__dirname`
+import { spawn } from "child_process"; 
+import axios from "axios";
+
+
+
+
+dotenv.config();
+// Define your file path
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+
+
+const app = express(); // ✅ Define app before using it
 const PORT = 5000;
-const axios = require('axios');
-const bodyParser = require('body-parser');
 
 // Enable CORS
 app.use(cors());
@@ -17,7 +39,7 @@ app.use(bodyParser.json());
 
 // Configure Multer for File Uploads (memory storage)
 const storage = multer.memoryStorage();
-const upload = multer({ storage });
+const upload = multer({ storage  });
 
 // Nodemailer Configuration for Zoho
 const transporter = nodemailer.createTransport({
@@ -25,15 +47,14 @@ const transporter = nodemailer.createTransport({
   port: 465, // SSL port
   secure: true,
   auth: {
-    user: "yegonglen@zohomail.com", // Your Zoho email
-    pass: "zBKxBYQRjAYu", // Your Zoho app password
+    user: "neatgarmsltd@zohomail.com", // Your Zoho email
+    pass: "N0wdHVPctWEa", // Your Zoho app password
   },
   tls: {
     rejectUnauthorized: false, // Ignore self-signed certificate errors
   },
 });
 
-// Handle Form Submission
 app.post(
   "/submit-form",
   upload.fields([
@@ -44,27 +65,38 @@ app.post(
   ]),
   async (req, res) => {
     try {
-      const { name, email } = req.body;
+      const { name, email, phone } = req.body;
 
-      // Extract uploaded files and prepare attachments
-      const attachments = [];
+      // Generate PDF file
+      const pdfFilePath = path.join(__dirname, "uploaded_images.pdf");
+      const doc = new PDFDocument();
+      const writeStream = fs.createWriteStream(pdfFilePath);
+      doc.pipe(writeStream);
+
+      doc.fontSize(16).text(`Form Submission Details`, { align: "center" });
+      doc.moveDown();
+      doc.fontSize(12).text(`Name: ${name}`);
+      doc.text(`Email: ${email}`);
+      doc.text(`Phone: ${phone}`);
+      doc.moveDown();
+
+      // Add uploaded images to PDF
       ["frontView", "backView", "rightSideView", "leftSideView"].forEach((field) => {
         if (req.files[field]) {
-          attachments.push({
-            filename: req.files[field][0].originalname,
-            content: req.files[field][0].buffer,
-            contentType: req.files[field][0].mimetype, // Ensures proper MIME type
-          });
+          doc.addPage().image(req.files[field][0].buffer, { fit: [500, 500] });
         }
       });
 
+      doc.end();
+      await new Promise((resolve) => writeStream.on("finish", resolve));
+
       // Email Configuration to Your Inbox
       const mailOptions = {
-        from: "yegonglen@zohomail.com",
-        to: "yegonglen@zohomail.com", // ✅ Send to your own email
-        subject: "New Form Submission with Attachments",
-        text: `You have received a new form submission.\n\nName: ${name}\nEmail: ${email}\n\nImages are attached as downloadable files.`,
-        attachments, // Attach uploaded images
+        from: "neatgarmsltd@zohomail.com",
+        to: "neatgarmsltd@zohomail.com",
+        subject: "New Form Submission with PDF",
+        text: `You have received a new form submission.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nImages are attached as a PDF.`,
+        attachments: [{ filename: "uploaded_images.pdf", path: pdfFilePath }],
       };
 
       // Send Email to Yourself
@@ -73,8 +105,8 @@ app.post(
 
       // Autoresponder Email to the Sender
       const autoResponseOptions = {
-        from: "yegonglen@zohomail.com",
-        to: email, // Send to the sender's email
+        from: "neatgarmsltd@zohomail.com",
+        to: email,
         subject: "Thank You for Your Submission!",
         text: `Thank you for choosing Neatgarms, ${name}!\n\nWe will get back to you soon.\n\nHappy shopping 🛍️`,
       };
@@ -83,9 +115,11 @@ app.post(
       const autoInfo = await transporter.sendMail(autoResponseOptions);
       console.log("Autoresponse sent to user:", autoInfo.response);
 
+      // Delete PDF after sending email
+      fs.unlinkSync(pdfFilePath);
+
       // Send Success Response
-          // Respond to client
-    res.json({ success: true, message: "Pay Now form submitted successfully!" });
+      res.json({ success: true, message: "Form submitted successfully!" });
     } catch (error) {
       console.error("Error sending email:", error);
       res.status(500).json({ success: false, message: "Error sending email" });
@@ -182,8 +216,8 @@ app.post("/pay-now", async (req, res) => {
   
     // Email to Admin
     const adminMailOptions = {
-      from: "yegonglen@zohomail.com",
-      to: "yegonglen@zohomail.com",
+      from: "neatgarmsltd@zohomail.com",
+      to: "neatgarmsltd@zohomail.com",
       subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
       text: emailContent,
     };
@@ -202,7 +236,7 @@ app.post("/pay-now", async (req, res) => {
     }
   
     const userMailOptions = {
-      from: "yegonglen@zohomail.com",
+      from: "neatgarmsltd@zohomail.com",
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       text: `Hi ${delivery.firstName},
@@ -323,8 +357,8 @@ app.post("/pay2-now", async (req, res) => {
 
     // Email to Admin
     const adminMailOptions = {
-      from: "yegonglen@zohomail.com",
-      to: "yegonglen@zohomail.com",
+      from: "neatgarmsltd@zohomail.com",
+      to: "neatgarmsltd@zohomail.com",
       subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
       text: emailContent,
     };
@@ -343,7 +377,7 @@ app.post("/pay2-now", async (req, res) => {
     }
 
     const userMailOptions = {
-      from: "yegonglen@zohomail.com",
+      from: "neatgarmsltd@zohomail.com",
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       text: `Hi ${delivery.firstName},
@@ -383,7 +417,6 @@ www.neatgarms.com`,
     res.status(500).json({ success: false, message: "Error sending Pay Now email" });
   }
 });
-
 
 
 app.post("/pay3-now", async (req, res) => {
@@ -461,36 +494,43 @@ app.post("/pay3-now", async (req, res) => {
     }
     emailContent += orderSummaryContent;
 
-    // --- Prepare Attachments from Base64 images ---
-    // Here we assume each image in orderSummary.images is a Base64 string.
-    // If the string includes a data prefix (e.g., "data:image/jpeg;base64,"), remove it.
-    const attachments = (orderSummary && orderSummary.images && orderSummary.images.length > 0)
-      ? orderSummary.images.map((img, index) => {
-          const base64Data = img.includes("base64,") ? img.split("base64,")[1] : img;
-          return {
-            filename: `image${index + 1}.jpg`,
-            content: Buffer.from(base64Data, "base64"),
-            encoding: "base64"
-          };
-        })
-      : [];
+    // --- Prepare the PDF with images ---
+    const pdfFilePath = path.join(__dirname, "order_summary_images.pdf");
+    const doc = new PDFDocument();
+    const writeStream = fs.createWriteStream(pdfFilePath);
+    doc.pipe(writeStream);
 
-    // Email to Admin (plain text, with attachments if desired)
+    // Add images to PDF
+    if (orderSummary && orderSummary.images && orderSummary.images.length > 0) {
+      orderSummary.images.forEach((img, index) => {
+        const base64Data = img.includes("base64,") ? img.split("base64,")[1] : img;
+        doc.addPage().image(Buffer.from(base64Data, "base64"), { fit: [500, 500] });
+      });
+    }
+
+    doc.end();
+    await new Promise((resolve) => writeStream.on("finish", resolve));
+
+    // --- Email to Admin (plain text, with PDF attachment) ---
     const adminMailOptions = {
-      from: "yegonglen@zohomail.com",
-      to: "yegonglen@zohomail.com",
+      from: "neatgarmsltd@zohomail.com",
+      to: "neatgarmsltd@zohomail.com",
       subject: "New Pay Now Submission with Order Summary, Contact, Delivery & Payment Info",
       text: emailContent,
-      attachments // Attach images to admin email (optional)
+      attachments: [
+        {
+          filename: "order_summary_images.pdf",
+          path: pdfFilePath,
+        }
+      ]
     };
 
     const adminInfo = await transporter.sendMail(adminMailOptions);
     console.log("Pay Now Email sent to Admin:", adminInfo.response);
 
     // --- Build the Autoresponse Email to the User (HTML Email) ---
-    // In this case, we attach the images as downloadable attachments.
     const autoResponse = {
-      from: "yegonglen@zohomail.com",
+      from: "neatgarmsltd@zohomail.com",
       to: contact.email,
       subject: "Order Confirmation - Thank You for Your Purchase!",
       html: `
@@ -516,16 +556,24 @@ app.post("/pay3-now", async (req, res) => {
           Discount Code: ${orderSummary.discountCode || "None"}<br/>
           Shipping Cost: ${orderSummary.shippingCost}
         </p>
-        <p>Please find the images attached for download.</p>
+        <p>Please find the attached PDF with your images for download.</p>
         <p>We will notify you once your order has been shipped. If you have any questions, please contact us at neatgarms@zohomail.com.</p>
         <p>Thank you for choosing us!</p>
         <p>Best regards,<br/>Neatgarms</p>
       `,
-      attachments // Attach the same images in the user email
+      attachments: [
+        {
+          filename: "order_summary_images.pdf",
+          path: pdfFilePath,
+        }
+      ]
     };
 
     const userInfo = await transporter.sendMail(autoResponse);
     console.log("Autoresponse sent to User:", userInfo.response);
+
+    // Delete the PDF after sending
+    fs.unlinkSync(pdfFilePath);
 
     res.json({ success: true, message: "Pay Now form submitted successfully!" });
   } catch (error) {
@@ -533,8 +581,6 @@ app.post("/pay3-now", async (req, res) => {
     res.status(500).json({ success: false, message: "Error sending Pay Now email" });
   }
 });
-
-
 
 
 
@@ -566,8 +612,8 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
 
     // Email to Your Inbox
     const mailOptions = {
-      from: "yegonglen@zohomail.com",
-      to: "yegonglen@zohomail.com", // Your inbox
+      from: "neatgarmsltd@zohomail.com",
+      to: "neatgarmsltd@zohomail.com", // Your inbox
       subject: `New Review Submission - ${reviewTitle}`,
       text: `You have received a new review:\n\nTitle: ${reviewTitle}\nContent: ${reviewContent}\nName: ${reviewerName}\nEmail: ${reviewerEmail}\nRating: ${ratingValue}`,
       attachments, // Include uploaded file if any
@@ -579,7 +625,7 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
 
     // Autoresponder to Reviewer
     const autoResponseOptions = {
-      from: "yegonglen@zohomail.com",
+      from: "neatgarmsltd@zohomail.com",
       to: reviewerEmail,
       subject: "Thank You for Your Review!",
       text: `Hi ${reviewerName},\n\nThank you for your review titled "${reviewTitle}". We appreciate your feedback!\n\nBest regards,\nYour Team`,
@@ -589,11 +635,6 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
     const autoInfo = await transporter.sendMail(autoResponseOptions);
     console.log("Autoresponse sent:", autoInfo.response);
 
-    // Send Success Response
-    res.json({
-      success: true,
-      message: "Review submitted successfully! Autoresponse sent.",
-    });
   } catch (error) {
     console.error("Error sending review email:", error);
     res.status(500).json({ success: false, message: "Error sending review email" });
@@ -683,17 +724,76 @@ app.post("/paynow4", async (req, res) => {
   }
 });
 
-// Endpoint to handle MPesa callback
-app.post("/mpesa-callback", (req, res) => {
-  console.log("MPesa Callback:", req.body);
-  // Process callback data here (e.g., update order status)
-  res.sendStatus(200);
+
+const paymentStatus = {}; // Store payment confirmation status
+
+// MPesa Callback Endpoint
+app.post("/mpesa-callback", async (req, res) => {
+  console.log("MPesa Callback Received:", req.body);
+  const callbackData = req.body;
+
+  if (!callbackData.Body.stkCallback) {
+      return res.status(400).json({ error: "Invalid callback data" });
+  }
+
+  const stkCallback = callbackData.Body.stkCallback;
+
+  // Check if the transaction was successful
+  if (stkCallback.ResultCode === 0) {
+      const phone = stkCallback.CallbackMetadata.Item.find(item => item.Name === "PhoneNumber").Value;
+      const mpesaReceipt = stkCallback.CallbackMetadata.Item.find(item => item.Name === "MpesaReceiptNumber").Value;
+      
+      // Store the successful payment
+      paymentStatus[phone] = { paid: true, receipt: mpesaReceipt };
+
+      console.log(`✅ Payment confirmed for phone ${phone} with receipt ${mpesaReceipt}`);
+      return res.status(200).json({ message: "Payment confirmed" });
+  } else {
+      console.log("❌ Payment failed:", stkCallback.ResultDesc);
+      return res.status(400).json({ error: "Payment failed", reason: stkCallback.ResultDesc });
+  }
+});
+
+
+app.get("/check-payment/:phone", (req, res) => {
+  const phone = req.params.phone;
+
+  // Check if test mode is enabled
+  if (process.env.TEST_MODE === "true") {
+      return res.json({ paid: false });  // Default to unpaid in test mode
+  }
+
+  // Check if the user has actually paid
+  if (paymentStatus[phone] && paymentStatus[phone].paid) {
+      return res.json({ paid: true, receipt: paymentStatus[phone].receipt });
+  } else {
+      return res.json({ paid: false });
+  }
 });
 
 
 
 
 
+// API Route to Remove Background
+app.post("/remove-bg", async (req, res) => {
+  const { image } = req.body;
+
+  if (!image) {
+      return res.status(400).json({ error: "No image provided" });
+  }
+
+  try {
+      // Send the request to the Python API
+      const response = await axios.post("http://127.0.0.1:5001/remove-bg", { image });
+
+      // Return the processed image from Python
+      res.json({ processedImage: response.data.processedImage });
+  } catch (error) {
+      console.error("Error removing background:", error);
+      res.status(500).json({ error: "Background removal failed" });
+  }
+});
 
 
 

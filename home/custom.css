@@ -4,13 +4,13 @@
     margin: 0;
     padding: 0;
 }
-body {
+body{
     margin: 0;
     font-family: 'Cinzel', Times, serif; 
-    display: flex;
-    flex-direction: column;
     align-items: center;
     background-color: white;
+    display: flex;
+    flex-direction: column;
   }
   h1{
     font-style: oblique;
@@ -49,7 +49,6 @@ body {
   font-size: 34px;
   color: #333;
   font-weight: bold;
-  transform: rotate(-5deg);
   text-align: center;
   flex-grow: 1;
   margin-left: auto;
@@ -99,7 +98,6 @@ body {
 
   .company-name h1 {
     font-size: 18px;
-    transform: rotate(-3deg); /* Slightly less tilt for smaller screens */
   }
 
   .back-button {
@@ -115,7 +113,7 @@ body {
   font-style: italic;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, #ddd, #8a9381);
+  background: linear-gradient(to top, #ddd, #8a9381);
   height: 60px;
   display: flex;
   width: 100%;
@@ -397,6 +395,17 @@ canvas {
   display: block;
   margin: 0 auto; /* Centers the canvas on the page */
 }
+@media(max-width: 468px){
+  .canvas-container{
+    max-width: 500px;
+    max-height: 500px;
+  }
+  .canvas{
+    max-width: 500px;
+    max-height: 500px;
+  }
+}
+
 
 .div1{
   display: flex;
@@ -504,10 +513,18 @@ canvas {
 
 @media (max-width: 768px) {
   .canvas {
-    width: 100%;
+    width: auto;
       align-items:center;
       justify-content: center;
       height: auto;
+  }
+  .prev-btn{
+    width: 120px;
+    height: 75px;
+  }
+  .next-btn{
+    width: 120px;
+    height: 75px;
   }
 }
 
@@ -541,21 +558,23 @@ canvas {
 
     /* Responsive Menu for Smaller Screens */
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
 
       #menu {
         flex-direction: row;
         justify-content: center;
         border-right: none;
         border-top: 2px solid #ddd;
-        min-width: 100%;
+        gap: 35px;
       }
 
       #menu i {
         font-size: 20px;
         margin: 0 10px;
+      }
+    }
+    @media(max-width: 468px){
+      #menu{
+        gap: 20px;
       }
     }
 
@@ -848,6 +867,8 @@ button {
   text-align: center;
   max-width: 600px;
   margin: auto;
+  justify-content: center;
+  align-items: center;
 }
 
 #canvasPreview {
@@ -910,6 +931,7 @@ button {
   margin: 10px;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  width: 70%;
 }
 
 #saveDesign:hover{
@@ -917,7 +939,16 @@ button {
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
+@media(max-width: 768px){
+  .modal-content{
+    justify-content: center;
+    align-items: center;
+    
+  }
+  #saveDesign{
+    width: 70%;
+  }
+}
 
 /* Modal Styles */
 .modal2 {
@@ -1011,11 +1042,10 @@ button {
 
 .ld{
   border: 1px, solid, black;
-  background: linear-gradient(to right, slategray, rgba(0, 0, 0, 0.878));
+  background: linear-gradient(to bottom, slategray, rgba(0, 0, 0, 0.878));
   padding: 10px 20px;
   color: white;
   transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-  margin-top: 10px;
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
   border-radius: 8px;
@@ -1025,4 +1055,150 @@ button {
   background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ldd{
+  border: 1px, solid, black;
+  background: linear-gradient(to top, slategray, rgba(0, 0, 0, 0.878));
+  padding: 10px 20px;
+  color: white;
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
+  font-family: 'Cinzel', Times, serif; 
+}
+.ldd:hover{
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  gap: 0px; /* Space between buttons */
+  flex-wrap: wrap; /* Ensures responsiveness on small screens */
+  gap: 5px;
+  padding: 10px;
+  margin-top: 0px;
+}
+
+/* Ensuring buttons align properly on mobile */
+@media screen and (max-width: 600px) {
+  .button-container {
+      flex-direction: column; /* Stack buttons on small screens */
+      align-items: center; /* Center buttons */
+      gap: 10px;
+  }
+  
+  .ld {
+      width: 90%; /* Make buttons take up most of the screen */
+      text-align: center;
+      height: 30%;
+  }
+  .ldd{
+    width: 90%; /* Make buttons take up most of the screen */
+    text-align: center;
+    height: 30%;
+  }
+}
+
+
+
+.load-design-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  font-family: 'Cinzel', Times, serif; 
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.load-design-modal-content {
+  background-color: #8a9381;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  max-width: 500px;
+}
+
+.load-design-close-modal {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.load-design-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.design-preview {
+  width: 100px; /* Adjust to fit */
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
+}
+.load-design-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px;
+  transition: background 0.2s ease-in-out;
+}
+.load-design-item:hover {
+  background-color: #ae866a;
+  border-radius: 10px;
+}
+
+
+.delete-design-btn {
+  background: #ae866a;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 5px 8px;
+  margin-left: auto;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: background 0.2s ease-in-out;
+}
+
+.delete-design-btn:hover {
+  background: darkred;
+}
+
+.load-design-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px;
+  transition: background 0.2s ease-in-out;
+}
+
+.load-design-item:hover {
+  background: #f5f5f5;
+}
+
+.design-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-right: 10px;
 }
