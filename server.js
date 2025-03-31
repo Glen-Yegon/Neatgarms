@@ -31,11 +31,26 @@ const __dirname = path.dirname(__filename);
 const app = express(); // ✅ Define app before using it
 const PORT = 5000;
 
+
+app.use((req, next) => {
+  console.log('CORS Middleware:', req.method, req.url);  // Logs CORS requests
+  next();
+});
+
 // Enable CORS
-app.use(cors());
+// Allow only specific origin
+app.use(cors({
+  origin: 'http://127.0.0.1:5501', // Your frontend URL (replace this with your actual frontend URL in production)
+  methods: ['GET', 'POST', 'OPTIONS'],  // Allow specific methods
+  allowedHeaders: ['Content-Type'], // Allow specific headers
+}));
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
+// Handle preflight requests for all routes
+app.options('*', cors());
+
 
 // Configure Multer for File Uploads (memory storage)
 const storage = multer.memoryStorage();
