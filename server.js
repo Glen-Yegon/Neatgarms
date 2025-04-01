@@ -32,6 +32,7 @@ const app = express(); // ✅ Define app before using it
 const PORT = 5000;
 
 
+
 // Enable CORS
 // Allow only specific origin
 app.use(cors({
