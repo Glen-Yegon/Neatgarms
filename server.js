@@ -32,11 +32,6 @@ const app = express(); // ✅ Define app before using it
 const PORT = 5000;
 
 
-app.use((req, next) => {
-  console.log('CORS Middleware:', req.method, req.url);  // Logs CORS requests
-  next();
-});
-
 // Enable CORS
 // Allow only specific origin
 app.use(cors({
