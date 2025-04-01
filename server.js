@@ -32,15 +32,23 @@ const app = express(); // ✅ Define app before using it
 const PORT = 5000;
 
 
+const allowedOrigins = [
+  "https://neatgarms-six.vercel.app", // ✅ Your production frontend on Vercel
+  "http://127.0.0.1:5501"             // ✅ Your local frontend for testing
+];
 
-// Enable CORS
-// Allow only specific origin
 app.use(cors({
-  origin: 'http://127.0.0.1:5501', // Your frontend URL (replace this with your actual frontend URL in production)
-  methods: ['GET', 'POST', 'OPTIONS'],  // Allow specific methods
-  allowedHeaders: ['Content-Type'], // Allow specific headers
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "OPTIONS"],  
+  allowedHeaders: ["Content-Type"],
+  credentials: true  // ✅ Important for authentication and cookies
 }));
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
