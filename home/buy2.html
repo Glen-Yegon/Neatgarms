@@ -322,7 +322,7 @@
 
 
     document.getElementById("pay-now-btn").addEventListener("click", async () => {
-      const serverUrl = "http://localhost:5000"; // Update with actual server URL
+      const serverUrl = "https://neatgarms.onrender.com"; // Update with actual server URL
       const phoneNumber = "254712345678"; // Replace with dynamic user input if needed
       try {
         const response = await fetch(`${serverUrl}/check-payment/${phoneNumber}`);
@@ -482,7 +482,7 @@ const displayedEstimatedTotal = estimatedTotalElement ? estimatedTotalElement.in
     
       // Send data to /pay2-now
       try {
-        const response = await fetch("http://localhost:5000/pay2-now", {
+        const response = await fetch("https://neatgarms.onrender.com/pay2-now", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
