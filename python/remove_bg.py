@@ -1,6 +1,7 @@
 import base64
 import cv2
 import numpy as np
+import os
 from io import BytesIO
 from flask import Flask, request, jsonify
 from rembg import remove
@@ -54,4 +55,5 @@ def process_image():
 
 # Run Flask app
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001)
+    port = int(os.environ.get("PORT", 5001))  # Use Render's assigned PORT or default to 5001
+    app.run(host="0.0.0.0", port=port)
