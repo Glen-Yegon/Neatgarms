@@ -55,5 +55,5 @@ def process_image():
 
 # Run Flask app
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5001))  # Use Render's assigned PORT or default to 5001
+    port = int(os.environ.get("PORT", 10000))  # Default to 10000 if Render doesn't provide one
     app.run(host="0.0.0.0", port=port)
