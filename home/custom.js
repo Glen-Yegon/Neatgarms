@@ -1020,36 +1020,41 @@ canvas.on("selection:updated", function () {
   }
 
 
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  const addGraphicIcon = document.getElementById("addGraphic");
-  const graphicMenu = document.getElementById("graphicMenu");
-  const closeGraphicMenus = document.getElementById("closeGraphicMenus");
-
-
-  // Function to open the menu
-  function openGraphicMenu() {
-    graphicMenu.style.left = "0"; // Slide the menu in
-  }
-
-  // Function to close the menu
-  function closeMenu() {
-    graphicMenu.style.left = "-300px"; // Slide the menu out
-  }
-
-  // Event listeners
-  addGraphicIcon.addEventListener("click", openGraphicMenu);
-
-  closeGraphicMenus.addEventListener("click", closeMenu);
-    // Optional: Close menu when clicking outsid
+  document.addEventListener("DOMContentLoaded", () => {
+    const addGraphicIcon = document.getElementById("addGraphic");
+    const graphicMenu = document.getElementById("graphicMenu");
+    const closeGraphicMenus = document.getElementById("closeGraphicMenus");
+  
+    // Function to open the menu
+    function openGraphicMenu() {
+      graphicMenu.style.left = "0"; // Slide the menu in
+    }
+  
+    // Function to close the menu
+    function closeMenu() {
+      graphicMenu.style.left = "-300px"; // Slide the menu out
+    }
+  
+    // Event listeners
+    addGraphicIcon.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent the click from reaching the document
+      openGraphicMenu();
+    });
+  
+    closeGraphicMenus.addEventListener("click", (e) => {
+      e.stopPropagation(); // Prevent event bubbling
+      closeMenu();
+    });
+  
+    // Close menu when clicking outside of it
     document.addEventListener("click", (e) => {
       if (!graphicMenu.contains(e.target) && e.target !== addGraphicIcon) {
-        closeGraphicsMenu();
+        closeMenu(); // Corrected function call
       }
     });
-});
+  });
+  
+
 
 
 // Trigger the file input click event when the upload icon is clicked
@@ -1075,16 +1080,27 @@ function handleImageUpload(event) {
 }
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const graphicMenu = document.getElementById("graphicMenu");
+
+  // Function to close the current submenu and return to the main menu
+  function closeGraphicsMenu() {
+    // Hide all submenus
+    const menus = document.querySelectorAll(".hidden-menu");
+    menus.forEach(menu => (menu.style.display = "none"));
+
+    // Show the main graphic menu
+    graphicMenu.style.display = "block";
+  }
+
+  // Function to close everything when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!graphicMenu.contains(e.target)) {
+      closeGraphicsMenu();
+    }
+  });
+});
   
-         // Function to close the current menu and return to the main menu
-        function closeGraphicsMenu() {
-          // Hide all menus
-          const menus = document.querySelectorAll('.hidden-menu');
-          menus.forEach(menu => (menu.style.display = 'none'));
-        
-          // Show the main graphic menu
-          document.getElementById('graphicMenu').style.display = 'block';
-        }   
 
 
       
