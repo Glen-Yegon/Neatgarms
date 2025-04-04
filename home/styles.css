@@ -262,7 +262,6 @@ body {
 /* Video Styling */
 .hero-video {
   width: 100%;
-  border-radius: 10px;
   height: 100%;
   object-fit: cover;
   transition: transform 1s ease-in-out;
