@@ -1239,6 +1239,7 @@ body {
   border: none;
   color: rgb(255, 255, 255);
   font-size: 1.2em;
+  background-color: transparent;
   cursor: pointer;
   transition: color 0.3s ease;
 }
