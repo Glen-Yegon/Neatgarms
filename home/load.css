@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Cinzel Decorative', serif;
+  font-family: 'Cinzel', Times, serif;
   height: 100vh;
 
 }
@@ -28,7 +28,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  background: white;
+  background: linear-gradient(to right, #AE866A, #383f45, #AE866A);
   height: 100%;
   width: 100%;
   display: flex;
@@ -75,13 +75,6 @@ body {
 
   
 
-  #intro-video {
-    height: 550px;
-    border: white;
-    width: 550px;
-    object-fit: cover; /* Keeps proportions */
-    background: none; /* Ensures transparency */
-  }
   
     /* Responsive */
     @media (max-width: 768px) {

@@ -47,7 +47,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0px;
-  background: linear-gradient(to right, #383f45, #AE866A);
+  background: transparent;
   position: relative;
   top: 0;
   width: 100%;
@@ -166,10 +166,10 @@ body {
 
   .hero-content h1 {
     font-size: 9rem;
+    color: #ae866a;
     margin: 0;
     font-style: normal;
     font-family: 'Playfair Display', serif;
-
   }
 
   .hero-content p {
