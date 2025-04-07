@@ -679,7 +679,7 @@ select {
   text-align: center;
   font-weight: bold;
   font-size: large;
-  color: red;
+  color: rgb(0, 0, 0);
 
 }
 
