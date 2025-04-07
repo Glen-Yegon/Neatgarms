@@ -29,5 +29,5 @@ window.addEventListener("load", function () {
         window.location.href = "home.html";
       }
     });
-  }, 4000);
+  }, 3000);
 });

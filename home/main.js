@@ -1,19 +1,3 @@
-// Wait for the page to fully load
-window.addEventListener("load", function () {
-  const preloader = document.getElementById("preloader");
-  const mainContent = document.getElementById("main-content");
-
-  // Set timeout to hide the preloader and display main content
-  setTimeout(() => {
-    preloader.style.opacity = "0"; // Fade out effect
-    setTimeout(() => {
-      preloader.style.display = "none"; // Remove preloader from view
-      mainContent.style.display = "block"; // Show main content
-    }, 500); // Wait for fade-out to complete
-  }, 3000); // 4 seconds delay
-});
-
-
 
 // Filter and sort
 const filterBtn = document.getElementById('filter-btn');

@@ -661,10 +661,10 @@ font-size: 16px;
 
   
   footer {
-    background: linear-gradient(to bottom, #8a9381, #ae866a);
+    background: linear-gradient(to top, #8a9381, #ae866a);
     color: #000;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    font-family: 'Cinzel', Times, serif;
   }
   
   .footer-container {
@@ -691,6 +691,7 @@ font-size: 16px;
   
   .footer-mission h3, .footer-subscribe h3, .footer-social h3, .footer-payment h3 {
     margin-top: 0;
+    margin-left: 0px;
   }
 
   
@@ -707,38 +708,41 @@ font-size: 16px;
     border-top: 1px solid #555;
   }
   
-  /* Responsive */
-  @media (max-width: 768px) {
+   /* Responsive */
+   @media (max-width: 768px) {
     .footer-container {
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .footer-subscribe form {
-      justify-content: center;
-      align-items: center;
-      width: 90px;
-    }
-  
-    .footer-subscribe input,
-    .footer-subscribe button {
-      width: 100%;
+      justify-content: left;
+      align-items: left;
     }
     .footer-subscribe h3{
-      font-size: 17px;
+      font-size: 15px;
+      align-items: left;
+      justify-content:  left;
+      text-align: left;
+    }
+    .footer-payment{
+      align-items: left;
+      justify-content: left;
+      text-align: left;
     }
   }
-
-   @media (max-width: 468px){
+  @media (max-width: 468px){
     .footer-subscribe h3{
-      font-size: 13px;
+      font-size: 12px;
+      margin-left: 0px;
     }
-    }
+      
+  .footer-links ul {
+    padding: 0;
+    justify-content: left;
+    align-items: left;
+  }
+  }
   
+
 /* From Uiverse.io by Satwinder04 */ 
 .input-container {
   position: relative;
-  margin: 50px auto;
   width: 600px;
 }
 
