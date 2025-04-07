@@ -11,6 +11,12 @@ body {
   font-family: 'Cinzel', Times, serif;
   background: linear-gradient(to bottom, #383f45, #8A9381);
   border-radius: 10px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+body.loaded {
+  opacity: 1;
 }
 
 @media (max-width: 468px){

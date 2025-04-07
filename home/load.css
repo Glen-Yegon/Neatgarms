@@ -11,18 +11,7 @@ body {
 
 }
 
-.container {
-  background: linear-gradient(to right, #8a9381, #ddd, #8a9381);
-  color: black;
-  height: 100%;
-  width: 100%;
-  font-size: 3rem;
-  font-weight: 900;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
+
 
 .loading-page {
   position: absolute;
@@ -65,7 +54,7 @@ body {
 
 .logo-name {
   color: black;
-  font-size: 15px;
+  font-size: 35px;
   letter-spacing: 12px;
   text-transform: uppercase;
   margin-left: 20px;
@@ -74,6 +63,17 @@ body {
 
 
   
+.fade-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: black;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+}
 
   
     /* Responsive */
@@ -86,18 +86,8 @@ body {
         justify-content: center;
         align-items: center;
         text-align: center;
+        font-size: 25px;
         margin-bottom: 50px;
       }
 
-    }
-    @media (max-width: 468px){
-      #intro-video{
-        height: 300px;
-        width: 300px;
-        border: white;
-
-      }
-      .container p{
-        font-size: 2rem;
-      }
     }
