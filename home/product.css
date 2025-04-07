@@ -843,10 +843,10 @@ body, html {
   }
 
   footer {
-    background: linear-gradient(to bottom, #8a9381, #ae866a);
+    background: linear-gradient(to top, #8a9381, #ae866a);
     color: #000;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    padding: 7px;
+    font-family: 'Cinzel', Times, serif;
   }
   
   .footer-container {
@@ -873,6 +873,7 @@ body, html {
   
   .footer-mission h3, .footer-subscribe h3, .footer-social h3, .footer-payment h3 {
     margin-top: 0;
+    margin-left: 0px;
   }
 
   
@@ -882,11 +883,6 @@ body, html {
     margin-right: 10px;
     color: #000;
   }
-  .payment-icons img {
-    width: 24px;
-    height: auto;
-  }
-  
   
   .footer-bottom {
     text-align: center;
@@ -894,58 +890,97 @@ body, html {
     border-top: 1px solid #555;
   }
   
-  /* Responsive */
-  @media (max-width: 768px) {
+   /* Responsive */
+   @media (max-width: 768px) {
     .footer-container {
-      flex-direction: column;
-      font-size: 14px;
+      justify-content: left;
+      align-items: left;
     }
-  
-    .footer-subscribe form {
-      flex-direction: column;
+    .footer-subscribe h3{
+      font-size: 15px;
+      align-items: left;
+      justify-content:  left;
+      text-align: left;
     }
-  
-    .footer-subscribe input,
-    .footer-subscribe button {
-      width: 100%;
+    .footer-payment{
+      align-items: left;
+      justify-content: left;
+      text-align: left;
     }
   }
+  @media (max-width: 468px){
+    .footer-subscribe h3{
+      font-size: 12px;
+      margin-left: 0px;
+    }
+      
+  .footer-links ul {
+    padding: 0;
+    justify-content: left;
+    align-items: left;
+  }
+  }
+  
   
 
-  /* From Uiverse.io by elijahgummer */ 
-.input-field {
-    position: relative;
-    border-bottom: 2px solid #f0f0f0;
-    margin: 15px 0;
+ /* From Uiverse.io by Satwinder04 */ 
+.input-container {
+  position: relative;
+  width: 600px;
+}
+
+.input-container input[type="text"] {
+  font-size: 20px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container .label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ccc;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-container input[type="text"]:focus ~ .label,
+.input-container input[type="text"]:valid ~ .label {
+  top: -20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-container .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #333;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.input-container input[type="text"]:focus ~ .underline,
+.input-container input[type="text"]:valid ~ .underline {
+  transform: scaleX(1);
+}
+@media (max-width: 768px){
+  .input-container{
+    max-width: 65%;
   }
-  
-  .input-field label {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 16px;
-    pointer-events: none;
-    transition: 0.15s ease;
+}
+@media (max-width: 468px){
+  .input-container{
+    max-width: 45%;
   }
-  
-  .input-field input {
-    width: 100%;
-    height: 40px;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 16px;
-    color: #fff;
-  }
-  
-  .input-field input:focus ~ label,
-  .input-field input:valid ~ label {
-    font-size: 0.8rem;
-    top: 10px;
-    transform: translateY(-120%);
-  }
+}
+
 
   .hidden-buttons {
     display: none; /* Hidden by default */
@@ -1161,7 +1196,7 @@ body, html {
 /* Country/Region Section */
 .footer-country {
   color: rgb(0, 0, 0);
-  padding: 15px;
+  margin-top: 15px;
   border-radius: 10px;
   text-align: center;
   font-size: 0.5rem;
