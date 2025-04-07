@@ -14,78 +14,8 @@ body, html{
   margin-right: 0px;
 }
 
-/* Preloader Styles */
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('items/background\ 2.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
 
-#rotating-ball {
-  width: 60px;
-  height: 60px;
-  border: 6px solid #880000;
-  border-top: 6px solid rgb(0, 0, 0); /* Color for the rotating edge */
-  border-radius: 50%;
-  animation: rotate 1s linear infinite;
-}
 
-#loader-text {
-  font-size: 4rem;
-  color: #880000;
-  margin-top: 20px;
-  opacity: 0;
-  font-weight: bold;
-  font-style: italic;
-  transform: scale(0.5);
-  animation: textAppear 1.2s ease-in-out forwards;
-  animation-delay: 1.5s;
-}
-
-/* Ball Rotation Animation */
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Text Appearance Animation */
-@keyframes textAppear {
-  0% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  #loader-text {
-    font-size: 3rem;
-  }
-  #rotating-ball {
-    width: 30px;
-    height: 30px;
-  }
-}
-  
   /* Navbar */
   .navbar {
     display: flex;
@@ -182,6 +112,8 @@ body, html{
   width: 20px;
   height: 20px;
 }
+
+
 
 .close-search-btn {
   background: none;

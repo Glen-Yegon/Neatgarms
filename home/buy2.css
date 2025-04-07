@@ -264,7 +264,7 @@
   
 
   .multi-section-form {
-    background: linear-gradient(to bottom right, #f5ece3, #d9c4af);
+    background-color: white;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
