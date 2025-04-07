@@ -1328,3 +1328,22 @@ body.loaded {
   opacity: 1;
   visibility: visible;
 }
+
+
+@media(max-width: 480px){
+  .side-menu {
+    position: fixed;
+    top: 0;
+    right: -200px;
+    height: 100vh;
+    width: 180px;
+  }
+  .close-btn {
+    font-size: 28px;
+    cursor: pointer;
+    color: #fff;
+    text-align: right;
+    margin-bottom: 0px;
+    margin-top: 30px;
+  }
+}
