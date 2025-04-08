@@ -889,7 +889,7 @@ body, html{
 .footer-payment .payment-icons {
   display: flex;
   gap: 1rem; /* Adds space between logos */
-  justify-content: center; /* Centers the logos */
+  justify-content: left; /* Centers the logos */
 }
 
 .footer-payment .payment-icons img {
