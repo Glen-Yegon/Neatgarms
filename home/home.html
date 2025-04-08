@@ -81,6 +81,8 @@
       </div>
     </div>
 
+
+    
     <div class="hero-container">
       <div class="video-wrapper">
           <video autoplay loop muted playsinline class="hero-video" preload="auto">
@@ -365,30 +367,27 @@
 
 
   <script src="scripts.js" ></script>
+  <script>
+    // Get the navbar element
+// Get the navbar element
+const navbar = document.getElementById('navbar');
+
+// Listen for scroll events
+window.onscroll = function() {
+  // Check if page has been scrolled past a certain point
+  if (window.pageYOffset > 50) {
+    navbar.classList.add('scrolled'); // Add 'scrolled' class to navbar
+  } else {
+    navbar.classList.remove('scrolled'); // Remove 'scrolled' class when at top
+  }
+};
+
+
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script>
 
-    // JavaScript for scroll effects
-window.addEventListener('scroll', function() {
-  const heroTitle = document.getElementById('movingTitle');
-  const navbar = document.getElementById('navbar');
-  const heroSection = document.getElementById('hero');
-  const heroRect = heroSection.getBoundingClientRect();
-  
-  // Check if the hero section is out of view (scroll down)
-  if (heroRect.bottom < 0) {
-    heroTitle.classList.add('shrink');
-    navbar.classList.add('scrolled');
-  } else {
-    heroTitle.classList.remove('shrink');
-    navbar.classList.remove('scrolled');
-  }
-});
-
-    
-    
-    
 
     const texts = [
     { text: "Shop the Latest Collection", link: "https://yourshop.com/latest" },
@@ -428,17 +427,7 @@ function changeText() {
 // Auto Change Every 3 Seconds
 let textInterval = setInterval(changeText, 3000);
 
-// Pause & Resume Functionality
-pauseButton.addEventListener("click", () => {
-    isPaused = !isPaused;
-    pauseButton.textContent = isPaused ? "▶" : "⏸";
 
-    if (!isPaused) {
-        textInterval = setInterval(changeText, 3000);
-    } else {
-        clearInterval(textInterval);
-    }
-});
 </script>
 
 
@@ -493,8 +482,8 @@ pauseButton.addEventListener("click", () => {
   });
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
     integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="

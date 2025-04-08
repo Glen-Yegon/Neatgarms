@@ -8,11 +8,13 @@
 
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Cinzel', Times, serif;
   background: linear-gradient(to bottom, #383f45, #8A9381);
   border-radius: 10px;
   opacity: 0;
   transition: opacity 1s ease;
+
 }
 
 body.loaded {
@@ -22,6 +24,8 @@ body.loaded {
 @media (max-width: 468px){
   body, html{
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
   }
   }
 
@@ -50,15 +54,27 @@ body.loaded {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;  /* Adjust padding as needed */
-  background: #383f45;
+  padding: 20px 30px;
+  background: #383f45;  /* Default background color */
   position: fixed;  /* Keeps the navbar fixed at the top */
   top: 0;
-  left: 0;  /* Ensure navbar stays at the top-left corner */
+  left: 0;
   width: 100%;
-  z-index: 1001;  /* Keeps navbar on top of other elements */
+  z-index: 1;
   border-radius: 0px 10px;
+  transition: background-color 0.3s ease;  /* Smooth transition for background color change */
 }
+
+/* Sticky class when the navbar sticks to the top */
+.sticky {
+  background-color: #111; /* New background color when scrolling */
+}
+
+.navbar.scrolled {
+  background-color: #3c3c3c; /* Solid background when scrolling */
+  opacity: 1;  /* Ensure it's fully opaque */
+}
+
 
 /* Logo Styling */
 .navbar .logo img {
@@ -100,12 +116,6 @@ body.loaded {
 }
 
 
-/* Scroll Effect - Make navbar transparent on scroll */
-.navbar.scrolled {
-  background-color: #3c3c3c;
-  opacity: 1;
-   /* Fully transparent when scrolling */
-}
 
 
 
@@ -238,6 +248,8 @@ body.loaded {
   transition: transform 1s ease-in-out;
   filter: brightness(1.1) contrast(1.2); /* Enhances colors */
 }
+
+
 
 
 
