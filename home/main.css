@@ -30,7 +30,7 @@ body, html{
   .navbar .icon-btn {
     background: none;
     border: none;
-    color: #ae866a;
+    color: rgb(0, 0, 0);
     font-size: 1.5rem;
     cursor: pointer;
   }
@@ -40,6 +40,36 @@ body, html{
     border-radius: 20px;
     border-color: #ae866a;
     border-style: double;
+  }
+
+  .search-btn:hover{
+    color: #ae866a;
+  }
+
+  .cart-btn {
+    background: none;
+    margin-left: 10px;
+    border: none;
+    font-size: 1.5rem; /* Adjust size */
+    cursor: pointer;
+    color: #333; /* Adjust color */
+    padding: 0.5rem;
+    margin-right: 5px;
+  }
+  
+  .cart-btn:hover {
+    color: #ae866a; /* Change color on hover */
+  }
+  .cart-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    padding: 4px;
+    border-radius: 5px;
+  }
+  .search-btn:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
   }
 
 /* From Uiverse.io by LeonKohli */ 

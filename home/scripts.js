@@ -1,33 +1,7 @@
   
-// Interactive Navbar Hamburger
-document.querySelector(".hamburger").addEventListener("click", () => {
-    document.querySelector(".nav-links").classList.toggle("show");
-  });
-  
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-        }
-    });
-}, { threshold: 0.2 });
+
 
 document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
-
-
-
-
-// Script for Hamburger Menu
-const hamburger = document.querySelector('.hamburger');
-const navbarLinks = document.querySelector('.navbar nav ul');
-const mobileDropdown = document.querySelector('.mobile-dropdown');
-
-hamburger.addEventListener('click', () => {
-    navbarLinks.classList.toggle('active');
-    mobileDropdown.classList.toggle('active'); // Toggle mobile dropdown visibility
-});
-
-
 
 
 // Testimonials
