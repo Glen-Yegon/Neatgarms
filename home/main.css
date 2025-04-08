@@ -866,3 +866,46 @@ body, html{
     font-size: 1rem;
   }
 }
+
+
+.footer-social .social-icons {
+  display: flex;
+  gap: 1rem; /* Adds space between icons */
+}
+
+.footer-social .social-icons img {
+  width: 30px; /* Adjust the size of the logos */
+  height: 30px;
+  object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-social .social-icons a:hover img {
+  transform: scale(1.1); /* Slightly enlarges the image on hover */
+  opacity: 0.8; /* Adds a little fade effect on hover */
+}
+
+
+.footer-payment .payment-icons {
+  display: flex;
+  gap: 1rem; /* Adds space between logos */
+  justify-content: center; /* Centers the logos */
+}
+
+.footer-payment .payment-icons img {
+  width: 40px; /* Adjust logo size */
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-payment .payment-icons a:hover img {
+  transform: scale(1.1); /* Slight scaling effect on hover */
+  opacity: 0.8; /* Adds a little fade effect on hover */
+}
+
+.kenya-flag img {
+  width: 20px;  /* Adjust the size of the flag as needed */
+  margin-right: 3px; /* Space between the flag and text */
+  vertical-align: middle; /* Align the flag with the text */
+}
