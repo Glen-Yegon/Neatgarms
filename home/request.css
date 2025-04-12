@@ -7,7 +7,7 @@
       }
   
       body {
-        background: linear-gradient(120deg, rgba(162, 185, 137, 0.8), rgba(38, 38, 38, 0.8)),
+        background: linear-gradient(120deg, rgba(162, 185, 137, 0.6), rgba(38, 38, 38, 0.8)),
                     url('items/background.jpg') no-repeat center center / cover;
         color: white;
         min-height: 100vh;
@@ -23,11 +23,13 @@
         text-align: center;
         margin-bottom: 10px;
         font-size: 2.5rem;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
         animation: fadeIn 2s ease-in-out;
       }
   
       p {
+        color: black;
+        font-weight: bold;
         text-align: center;
         margin-bottom: 20px;
         font-size: 1.2rem;
@@ -118,21 +120,25 @@
       }
   
       #submit {
-        padding: 10px 02px;
-        background: #ae866a79;
-        border: solid 1px rgb(0, 0, 0);
-        border-radius: 10px;
-        color: rgb(0, 0, 0);
+        padding: 12px 24px;
+        background: #ae9381; /* Sage green */
+        border: none;
+        border-radius: 12px;
+        color: #4e3629; /* Hazel brown (text) */
         font-size: 1rem;
+        font-weight: bold;
         cursor: pointer;
-        transition: transform 0.2s, background 0.2s;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
       }
-  
+      
       #submit:hover {
-        background: #8a9381;
-        transform: scale(1.05);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        background: #8a9381; /* Hazel brown */
+        color: #f4f7f5; /* Light text on hover */
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
       }
+      
   
       /* Responsive Design */
       @media (max-width: 768px) {
@@ -160,11 +166,10 @@
 
 #goBackButton{
   padding: 7px 20px;
-  background: #ae866a79;
+  background: #ae9381;
   margin-top: 10px;
-  border: solid 1px rgb(0, 0, 0);
   border-radius: 10px;
-  color: rgb(0, 0, 0);
+  color: #000000; /* Hazel brown (text) */
   font-size: 1rem;
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
@@ -172,7 +177,8 @@
 
 
 #goBackButton:hover {
-  background: #8a9381;
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  background: #8a9381; /* Hazel brown */
+  color: #f4f7f5; /* Light text on hover */
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }

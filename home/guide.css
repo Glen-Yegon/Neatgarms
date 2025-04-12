@@ -84,16 +84,14 @@
   
   .menu ul li a {
   color: white;
-  
-  text-decoration: underline;
+  text-decoration: none;
   font-size: 18px;
   display: block;
   }
   
   .menu ul li a:hover {
-  background-color: #ae866a;
-  border-radius: 20px;
-  
+    transform: translateX(10px);
+    color: #8A9381;
   }
   
   
@@ -262,10 +260,10 @@ h1{
 
   
   footer {
-    background: linear-gradient(to bottom, #8a9381, #ae866a);
+    background: linear-gradient(to top, #8a9381, #ae866a);
     color: #000;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+    padding: 7px;
+    font-family: 'Cinzel', Times, serif;
   }
   
   .footer-container {
@@ -292,6 +290,7 @@ h1{
   
   .footer-mission h3, .footer-subscribe h3, .footer-social h3, .footer-payment h3 {
     margin-top: 0;
+    margin-left: 0px;
   }
 
   
@@ -311,37 +310,166 @@ h1{
    /* Responsive */
    @media (max-width: 768px) {
     .footer-container {
-      justify-content: center;
-      align-items: center;
+      justify-content: left;
+      align-items: left;
     }
     .footer-subscribe h3{
       font-size: 15px;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    .footer-mission h3{
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      align-items: left;
+      justify-content:  left;
+      text-align: left;
     }
     .footer-payment{
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      align-items: left;
+      justify-content: left;
+      text-align: left;
     }
   }
   @media (max-width: 468px){
     .footer-subscribe h3{
       font-size: 12px;
+      margin-left: 0px;
     }
+      
+  .footer-links ul {
+    padding: 0;
+    justify-content: left;
+    align-items: left;
   }
+  }
+
+
+
+  /* Country/Region Section */
+.footer-country {
+  color: rgb(0, 0, 0);
+  margin-top: 15px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.5rem;
+  animation: fadeIn 1.2s ease-in-out;
+  text-align: left;
+}
+
+.footer-country h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.footer-country p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+
+}
+
+.footer-logo h1 {
+  font-size: 10rem; /* Increased size for better visibility */
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  letter-spacing: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-logo h1 {
+    font-size: 5rem; /* Slightly smaller on tablets */
+    letter-spacing: 10px;
+  }
+
+  .footer-logo {
+    font-size: 5rem;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-logo h1 {
+    font-size: 2.5rem; /* Adjusted for mobile screens */
+    letter-spacing: 4px;
+    gap: 3px;
+    text-align: center;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .footer-country {
+    font-size: 1rem;
+  }
+}
+
+
+.footer-social .social-icons {
+  display: flex;
+  gap: 1rem; /* Adds space between icons */
+}
+
+.footer-social .social-icons img {
+  width: 30px; /* Adjust the size of the logos */
+  height: 30px;
+  object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-social .social-icons a:hover img {
+  transform: scale(1.1); /* Slightly enlarges the image on hover */
+  opacity: 0.8; /* Adds a little fade effect on hover */
+}
+
+
+.footer-payment .payment-icons {
+  display: flex;
+  gap: 1rem; /* Adds space between logos */
+  justify-content: left; /* Centers the logos */
+}
+
+.footer-payment .payment-icons img {
+  width: 40px; /* Adjust logo size */
+  height: 40px;
+  object-fit: contain;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-payment .payment-icons a:hover img {
+  transform: scale(1.1); /* Slight scaling effect on hover */
+  opacity: 0.8; /* Adds a little fade effect on hover */
+}
+
+.kenya-flag img {
+  width: 20px;  /* Adjust the size of the flag as needed */
+  margin-right: 3px; /* Space between the flag and text */
+  vertical-align: middle; /* Align the flag with the text */
+}
   
   
 /* From Uiverse.io by Satwinder04 */ 
 .input-container {
   position: relative;
-  margin: 50px auto;
   width: 600px;
 }
 
@@ -390,4 +518,27 @@ h1{
   .input-container{
     max-width: 45%;
   }
+}
+
+
+
+.cart-btn {
+  background: none;
+  margin-left: 10px;
+  border: none;
+  font-size: 1.5rem; /* Adjust size */
+  cursor: pointer;
+  color: #333; /* Adjust color */
+  padding: 0.5rem;
+  margin-right: 5px;
+}
+
+.cart-btn:hover {
+  color: #8a9381; /* Change color on hover */
+}
+.cart-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  padding: 4px;
+  border-radius: 5px;
 }
