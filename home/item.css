@@ -37,11 +37,13 @@ body, html{
 /* Navbar */
 .navbar {
   display: flex;
+  position: fixed;
   justify-content: space-between;
   align-items: center;
   background: linear-gradient(to bottom, #333, #ae866a);
   color: #ae866a;
   padding: 10px 20px;
+  z-index: 1000;
 }
 
 .navbar .icon-btn {
