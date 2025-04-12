@@ -232,27 +232,6 @@ canvases.forEach((canvas) => {
   }
 });
 
-// Add resize event listener to handle window resizing
-window.addEventListener('resize', () => {
-  const newScreenWidth = window.innerWidth;
-  const newScreenHeight = window.innerHeight;
-
-  // Calculate the new canvas width and height based on screen size
-  const newCanvasWidth = newScreenWidth < initialWidth ? newScreenWidth : initialWidth;
-  const newCanvasHeight = newScreenWidth < initialWidth ? (newScreenWidth * initialHeight) / initialWidth : initialHeight;
-
-  // Update canvas size
-  canvases.forEach((canvas) => {
-    canvas.setWidth(newCanvasWidth);
-    canvas.setHeight(newCanvasHeight);
-
-    // Resize the image to fit the new canvas size
-    const image = canvas.getObjects().find((obj) => obj.type === 'image');
-    if (image) {
-      resizeImageToCanvas(canvas, image);
-    }
-  });
-});
 
 
   let currentSlide = 0;

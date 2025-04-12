@@ -102,7 +102,7 @@
     alert("Design saved successfully to Firestore!");
   } catch (error) {
     console.error("Error saving design to Firestore: ", error);
-    alert("There was an error saving your design.");
+    alert("Kindly Try Logging in Again.");
   }
 });
 
