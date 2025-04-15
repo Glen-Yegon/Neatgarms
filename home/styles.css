@@ -1243,11 +1243,14 @@ body.loaded {
   border-radius: 5px;
 }
 
-/* Number Tag */
-.text-number {
+.countdown-timer {
   font-size: 1.2em;
   font-weight: bold;
-  color: rgb(255, 255, 255);
+  color: white;
+  background: transparent;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-right: 10px;
 }
 
 /* Looping Text */
