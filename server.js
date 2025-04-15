@@ -592,13 +592,13 @@ app.post("/pay3-now", async (req, res) => {
           <tr>
             <td align="center">
               <a href="https://neatgarms.com/product/urban-tee" target="_blank">
-                <img src="https://yourcdn.com/images/urban-tee.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
+                <img src="mains/travis.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
                 <p style="margin: 8px 0;">Urban Tee</p>
               </a>
             </td>
             <td align="center">
               <a href="https://neatgarms.com/product/classic-hoodie" target="_blank">
-                <img src="https://yourcdn.com/images/classic-hoodie.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
+                <img src="mains/travis.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
                 <p style="margin: 8px 0;">Classic Hoodie</p>
               </a>
             </td>
