@@ -551,34 +551,85 @@ app.post("/pay3-now", async (req, res) => {
     const autoResponse = {
       from: "neatgarmsltd@zohomail.com",
       to: contact.email,
-      subject: "Order Confirmation - Thank You for Your Purchase!",
+      subject: "🧾 Your Order is Confirmed! | Neatgarms Ltd",
       html: `
-        <p>Hello ${delivery.firstName},</p>
-        <p>Thank you for your order! We have received your submission and are processing it. Here are your order details:</p>
-        <ul>
-          <li>Number of Items: ${itemCount}</li>
-          <li>Selected Design: ${design}</li>
-          <li>Payment Method: ${paymentMethod}</li>
+      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+        <h2 style="color: #333;">👕 Hello ${delivery.firstName},</h2>
+        <p style="font-size: 16px;">Thank you for shopping with <strong>Neatgarms Ltd</strong>! We’re thrilled to have you on board. Your order is now being processed and will be shipped soon.</p>
+    
+        <div style="margin: 20px 0;">
+          <a href="#" style="background: #111; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 6px; display: inline-block;" onclick="document.getElementById('orderDetails').style.display='block'; this.style.display='none'; return false;">📦 View Order Details</a>
+          <div id="orderDetails" style="display: none; margin-top: 20px; background: #fff; border-radius: 10px; padding: 16px;">
+            <h3 style="margin-bottom: 10px;">🛒 Order Details</h3>
+            <ul style="line-height: 1.6;">
+              <li><strong>Number of Items:</strong> ${itemCount}</li>
+              <li><strong>Selected Design:</strong> ${design}</li>
+              <li><strong>Payment Method:</strong> ${paymentMethod}</li>
+            </ul>
+            <h3 style="margin-top: 20px;">🚚 Delivery Address</h3>
+            <p>
+              ${delivery.firstName} ${delivery.lastName}<br/>
+              ${delivery.address}${delivery.apartment ? ', ' + delivery.apartment : ''}<br/>
+              ${delivery.city}, ${delivery.postalCode}<br/>
+              ${delivery.country}<br/>
+              <strong>Phone:</strong> ${delivery.phone}
+            </p>
+            <h3 style="margin-top: 20px;">💳 Order Summary</h3>
+            <p>
+              <strong>Item Name:</strong> ${orderSummary.itemName}<br/>
+              <strong>Price:</strong> KShs. ${orderSummary.itemPrice}<br/>
+              <strong>Discount Code:</strong> ${orderSummary.discountCode || "None"}<br/>
+              <strong>Shipping Cost:</strong> ${orderSummary.shippingCost}
+            </p>
+            <p><em>Attached below is a PDF with your order images.</em></p>
+          </div>
+        </div>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333;">🔥 Best-Selling Picks This Week</h3>
+        <table style="width: 100%; border-spacing: 16px 10px;">
+          <tr>
+            <td align="center">
+              <a href="https://neatgarms.com/product/urban-tee" target="_blank">
+                <img src="https://yourcdn.com/images/urban-tee.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Urban Tee</p>
+              </a>
+            </td>
+            <td align="center">
+              <a href="https://neatgarms.com/product/classic-hoodie" target="_blank">
+                <img src="https://yourcdn.com/images/classic-hoodie.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Classic Hoodie</p>
+              </a>
+            </td>
+            <td align="center">
+              <a href="https://neatgarms.com/product/street-joggers" target="_blank">
+                <img src="https://yourcdn.com/images/street-joggers.jpg" alt="Street Joggers" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Street Joggers</p>
+              </a>
+            </td>
+          </tr>
+        </table>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333;">💸 Special Offer Just for You</h3>
+        <p>Use code <strong style="color: #e63946;">WELCOME10</strong> to get 10% off your next purchase. Valid for the next 3 days only!</p>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333;">📞 Need Help?</h3>
+        <p>Reach us any time:</p>
+        <ul style="line-height: 1.8;">
+          <li><strong>Email:</strong> <a href="mailto:neatgarms@zohomail.com">neatgarms@zohomail.com</a></li>
+          <li><strong>Phone:</strong> +254 700 000 000</li>
+          <li><strong>Instagram:</strong> <a href="https://instagram.com/neatgarms" target="_blank">@neatgarms</a></li>
         </ul>
-        <h3>Delivery Address</h3>
-        <p>
-          ${delivery.firstName} ${delivery.lastName}<br/>
-          ${delivery.address}${delivery.apartment ? ', ' + delivery.apartment : ''}<br/>
-          ${delivery.city}, ${delivery.postalCode}<br/>
-          ${delivery.country}<br/>
-          Phone: ${delivery.phone}
-        </p>
-        <h3>Order Summary</h3>
-        <p>
-          Item Name: ${orderSummary.itemName}<br/>
-          Price: KShs. ${orderSummary.itemPrice}<br/>
-          Discount Code: ${orderSummary.discountCode || "None"}<br/>
-          Shipping Cost: ${orderSummary.shippingCost}
-        </p>
-        <p>Please find the attached PDF with your images for download.</p>
-        <p>We will notify you once your order has been shipped. If you have any questions, please contact us at neatgarms@zohomail.com.</p>
-        <p>Thank you for choosing us!</p>
-        <p>Best regards,<br/>Neatgarms</p>
+    
+        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for trusting Neatgarms. We can’t wait to see you rock your new fit! 😎</p>
+    
+        <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+      </div>
       `,
       attachments: [
         {
@@ -587,6 +638,7 @@ app.post("/pay3-now", async (req, res) => {
         }
       ]
     };
+    
 
     const userInfo = await transporter.sendMail(autoResponse);
     console.log("Autoresponse sent to User:", userInfo.response);
