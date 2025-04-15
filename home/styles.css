@@ -1248,9 +1248,10 @@ body.loaded {
   font-weight: bold;
   color: white;
   background: transparent;
-  padding: 2px 8px;
+  padding: 2px 0px;
   border-radius: 6px;
   margin-right: 10px;
+  margin-left: 0px;
 }
 
 /* Looping Text */
@@ -1260,26 +1261,13 @@ body.loaded {
   font-weight: bold;
   color: rgb(255, 255, 255);
   transition: color 0.3s ease;
+  margin-right: 20px;
 }
 
 .looping-text:hover {
   color: #ae866a;
 }
 
-/* Pause Button */
-.pause-btn {
-  background: none;
-  border: none;
-  color: rgb(255, 255, 255);
-  font-size: 1.2em;
-  background-color: transparent;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.pause-btn:hover {
-  color: #ae866a;
-}
 
 /* Responsive Design */
 @media screen and (max-width: 768px) { /* Phones */
@@ -1288,7 +1276,10 @@ body.loaded {
       font-size: 1em;
   }
   .looping-text {
-      font-size: 1em;
+      font-size: 0.9em;
+  }
+  .countdown-timer{
+    font-size: 1em;
   }
 }
 
