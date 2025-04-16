@@ -18,5 +18,8 @@
     "pdfkit": "^0.16.0",
     "qs": "^6.14.0",
     "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

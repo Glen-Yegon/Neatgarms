@@ -1,0 +1,9 @@
+[
+    {
+      "origin": ["http://localhost:5501", "https://neatgarms-six.vercel.app"],
+      "responseHeader": ["Content-Type"],
+      "method": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      "maxAgeSeconds": 3600
+    }
+  ]
+  
