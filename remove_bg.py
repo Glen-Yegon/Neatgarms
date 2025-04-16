@@ -1,5 +1,5 @@
 import base64
-import os
+import cv2
 import numpy as np
 from io import BytesIO
 from flask import Flask, request, jsonify
@@ -7,19 +7,22 @@ from rembg import remove
 from PIL import Image
 from rembg.session_factory import new_session
 
+# Set constant port
+PORT = 10000
+
 # Initialize Flask app
 app = Flask(__name__)
 
-# Load only the default u2net model
-session = new_session("u2net")
+# Load only the human segmentation model
+human_session = new_session("u2net_human_seg")
 
-# Function to remove background
+# Function to remove background using human model only
 def remove_background(base64_string):
     input_data = base64.b64decode(base64_string)
     input_image = Image.open(BytesIO(input_data))
 
-    # Apply background removal using u2net
-    output_image = remove(input_image, session=session)
+    # Apply background removal using human model
+    output_image = remove(input_image, session=human_session)
 
     # Convert output image to Base64
     buffered = BytesIO()
@@ -41,5 +44,4 @@ def process_image():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 10000))  # Render uses the $PORT env var
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=PORT)
