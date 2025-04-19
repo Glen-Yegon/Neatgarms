@@ -398,47 +398,67 @@ app.post("/pay2-now", async (req, res) => {
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
-      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #fdfdfd;">
-        
-        <h1 style="text-align: center; color: #111; font-size: 28px;">🧢 Neatgarms</h1>
-        
-        <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
-        <p style="font-size: 16px;">
-          Thank you for shopping with <strong>Neatgarms</strong>! 🎉<br/>
-          We’ve successfully received your order. Our team is now processing it and will notify you once it ships.
+      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 650px; margin: auto; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px; background: #fdfdfd;">
+    
+        <h1 style="font-family: 'Cinzel', serif; text-align: center; font-size: 30px; color: #000;">Neatgarms</h1>
+    
+        <h2 style="color: #333; font-size: 20px;">👋 Hi ${delivery.firstName},</h2>
+        <p style="font-size: 15px; margin-top: -8px;">
+          Thanks for your order! We've received it and will notify you once it ships.
         </p>
     
-        <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
-        <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${userOrderDetails}</pre>
+        <h3 style="margin-top: 20px;">🛍 Order Summary</h3>
+        <pre style="background: #fff; padding: 12px; border-radius: 8px; font-size: 14px; border: 1px solid #ddd; white-space: pre-wrap;">${userOrderDetails}</pre>
     
-        <h3 style="margin-top: 24px; color: #222;">💳 Payment Method</h3>
-        <p style="background: #fff; padding: 10px 16px; border-radius: 10px; font-size: 15px; border: 1px solid #ddd;">
-          ${paymentMethod}
-        </p>
+        <h3 style="margin-top: 20px;">💳 Payment</h3>
+        <p style="background: #fff; padding: 10px; border-radius: 8px; font-size: 14px; border: 1px solid #ddd;">${paymentMethod}</p>
     
-        <h3 style="margin-top: 24px; color: #222;">🚚 Delivery Address</h3>
-        <p style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.6; border: 1px solid #ddd;">
+        <h3 style="margin-top: 20px;">🚚 Shipping To</h3>
+        <p style="background: #fff; padding: 10px; border-radius: 8px; font-size: 14px; border: 1px solid #ddd;">
           ${delivery.firstName} ${delivery.lastName}<br/>
           ${delivery.address}, ${delivery.city}, ${delivery.country}<br/>
           ${delivery.postalCode}<br/>
           <strong>Phone:</strong> ${delivery.phone}
         </p>
     
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;" />
     
-        <h3 style="color: #333;">📞 Need Help?</h3>
-        <p>Feel free to contact us anytime:</p>
-        <ul style="line-height: 1.8;">
+        <!-- Best Selling Picks -->
+        <h3 style="color: #222;">🔥 Best Selling Picks</h3>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px;">
+          <img src="https://neatgarms-six.vercel.app/mains/playboy.jpg" width="130" style="border-radius: 6px;" />
+          <img src="https://neatgarms-six.vercel.app/mains/travis.jpg" width="130" style="border-radius: 6px;" />
+          <img src="https://neatgarms-six.vercel.app/home/mains/travis.jpg" width="130" style="border-radius: 6px;" />
+          <img src="https://neatgarms-six.vercel.app/home/mains/choke.jpg" width="130" style="border-radius: 6px;" />
+        </div>
+    
+        <!-- Special Offers -->
+        <div style="margin-top: 30px; background: #fff5f5; padding: 16px; border-radius: 8px; border: 1px solid #f1d2d2;">
+          <h3 style="color: #c20000;">🎁 Special Offers Just for You</h3>
+          <p style="font-size: 14px; margin: 8px 0;">
+            Enjoy exclusive access to new drops, limited deals, and secret discounts.
+          </p>
+          <a href="https://neatgarms-six.vercel.app/offers" target="_blank" style="display: inline-block; margin-top: 8px; background: #000; color: #fff; padding: 8px 14px; border-radius: 6px; font-size: 14px; text-decoration: none;">Check Offers</a>
+        </div>
+    
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;" />
+    
+        <!-- Contact -->
+        <h3 style="color: #222;">📞 Need Help?</h3>
+        <p style="font-size: 14px;">Reach out anytime:</p>
+        <ul style="font-size: 14px; line-height: 1.7;">
           <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
           <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
         </ul>
     
-        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thanks again for choosing Neatgarms! We can't wait for you to rock your new look! 😎✨</p>
-    
-        <p style="font-size: 13px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+        <p style="margin-top: 25px; font-size: 13px; color: #666;">
+          Thanks again for choosing Neatgarms! Stay fresh & fly! 😎
+        </p>
+        <p style="font-size: 12px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
       `
     };
+    
     
 
 
