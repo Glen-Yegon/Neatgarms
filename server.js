@@ -249,7 +249,7 @@ app.post("/pay-now", async (req, res) => {
         </p>
     
         <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
-        <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${userOrderDetails}</pre>
+        <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${orderSummary.itemName}</pre>
     
         <h3 style="margin-top: 24px; color: #222;">💳 Payment Method</h3>
         <p style="background: #fff; padding: 10px 16px; border-radius: 10px; font-size: 15px; border: 1px solid #ddd;">
