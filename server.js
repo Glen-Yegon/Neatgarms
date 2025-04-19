@@ -557,32 +557,29 @@ app.post("/pay3-now", async (req, res) => {
         <h2 style="color: #333;">👕 Hello ${delivery.firstName},</h2>
         <p style="font-size: 16px;">Thank you for shopping with <strong>Neatgarms Ltd</strong>! We’re thrilled to have you on board. Your order is now being processed and will be shipped soon.</p>
     
-        <div style="margin: 20px 0;">
-          <a href="#" style="background: #111; color: #fff; padding: 12px 20px; text-decoration: none; border-radius: 6px; display: inline-block;" onclick="document.getElementById('orderDetails').style.display='block'; this.style.display='none'; return false;">📦 View Order Details</a>
-          <div id="orderDetails" style="display: none; margin-top: 20px; background: #fff; border-radius: 10px; padding: 16px;">
-            <h3 style="margin-bottom: 10px;">🛒 Order Details</h3>
-            <ul style="line-height: 1.6;">
-              <li><strong>Number of Items:</strong> ${itemCount}</li>
-              <li><strong>Selected Design:</strong> ${design}</li>
-              <li><strong>Payment Method:</strong> ${paymentMethod}</li>
-            </ul>
-            <h3 style="margin-top: 20px;">🚚 Delivery Address</h3>
-            <p>
-              ${delivery.firstName} ${delivery.lastName}<br/>
-              ${delivery.address}${delivery.apartment ? ', ' + delivery.apartment : ''}<br/>
-              ${delivery.city}, ${delivery.postalCode}<br/>
-              ${delivery.country}<br/>
-              <strong>Phone:</strong> ${delivery.phone}
-            </p>
-            <h3 style="margin-top: 20px;">💳 Order Summary</h3>
-            <p>
-              <strong>Item Name:</strong> ${orderSummary.itemName}<br/>
-              <strong>Price:</strong> KShs. ${orderSummary.itemPrice}<br/>
-              <strong>Discount Code:</strong> ${orderSummary.discountCode || "None"}<br/>
-              <strong>Shipping Cost:</strong> ${orderSummary.shippingCost}
-            </p>
-            <p><em>Attached below is a PDF with your order images.</em></p>
-          </div>
+        <div style="margin: 20px 0; background: #fff; border-radius: 10px; padding: 16px;">
+          <h3 style="margin-bottom: 10px;">🛒 Order Details</h3>
+          <ul style="line-height: 1.6;">
+            <li><strong>Number of Items:</strong> ${itemCount}</li>
+            <li><strong>Selected Design:</strong> ${design}</li>
+            <li><strong>Payment Method:</strong> ${paymentMethod}</li>
+          </ul>
+          <h3 style="margin-top: 20px;">🚚 Delivery Address</h3>
+          <p>
+            ${delivery.firstName} ${delivery.lastName}<br/>
+            ${delivery.address}${delivery.apartment ? ', ' + delivery.apartment : ''}<br/>
+            ${delivery.city}, ${delivery.postalCode}<br/>
+            ${delivery.country}<br/>
+            <strong>Phone:</strong> ${delivery.phone}
+          </p>
+          <h3 style="margin-top: 20px;">💳 Order Summary</h3>
+          <p>
+            <strong>Item Name:</strong> ${orderSummary.itemName}<br/>
+            <strong>Price:</strong> KShs. ${orderSummary.itemPrice}<br/>
+            <strong>Discount Code:</strong> ${orderSummary.discountCode || "None"}<br/>
+            <strong>Shipping Cost:</strong> ${orderSummary.shippingCost}
+          </p>
+          <p><em>Attached below is a PDF with your order images.</em></p>
         </div>
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
@@ -592,13 +589,13 @@ app.post("/pay3-now", async (req, res) => {
           <tr>
             <td align="center">
               <a href="https://neatgarms.com/product/urban-tee" target="_blank">
-                <img src="mains/travis.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
+                <img src="home/mains/playboy.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
                 <p style="margin: 8px 0;">Urban Tee</p>
               </a>
             </td>
             <td align="center">
               <a href="https://neatgarms.com/product/classic-hoodie" target="_blank">
-                <img src="mains/travis.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
+                <img src="home/mains/travis.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
                 <p style="margin: 8px 0;">Classic Hoodie</p>
               </a>
             </td>
@@ -638,6 +635,7 @@ app.post("/pay3-now", async (req, res) => {
         }
       ]
     };
+    
     
 
     const userInfo = await transporter.sendMail(autoResponse);
