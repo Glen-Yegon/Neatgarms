@@ -233,56 +233,53 @@ app.post("/pay-now", async (req, res) => {
     emailContent += `Payment Method:\n`;
     emailContent += `${paymentMethod}\n`;
   
-    // Email to Admin
-    const adminMailOptions = {
-      from: "neatgarmsltd@zohomail.com",
-      to: "neatgarmsltd@zohomail.com",
-      subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
-      text: emailContent,
-    };
-  
-    // Send Email to Admin
-    const info = await transporter.sendMail(adminMailOptions);
-    console.log("Pay Now Email sent to admin:", info.response);
-  
-    // --- Autoresponse Email to User ---
-    let userOrderDetails = '';
-    for (let i = 0; i < itemCount; i++) {
-      userOrderDetails += `Item ${i + 1}:\n`;
-      userOrderDetails += `- Design: ${designs[i] || "N/A"}\n`;
-      userOrderDetails += `- Size: ${sizes[i] || "N/A"}\n`;
-      userOrderDetails += `- Color: ${colors[i] || "N/A"}\n\n`;
-    }
-  
     const userMailOptions = {
       from: "neatgarmsltd@zohomail.com",
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
-      text: `Hi ${delivery.firstName},
-
-Thank you for shopping with **Neatgarms**! 🎉
-
-We’ve successfully received your order. Our team is now processing it and will notify you once it ships.
-
-🛍 **Order Details:**
-${userOrderDetails}
-
-💳 **Payment Method:** ${paymentMethod}
-
-🚚 **Delivery Address:**
-${delivery.firstName} ${delivery.lastName}
-${delivery.address}, ${delivery.city}, ${delivery.country}
-${delivery.postalCode}
-Phone: ${delivery.phone}
-
-If you have any questions or need assistance, feel free to contact us at **support@neatgarms.com**.
-
-Thank you for choosing Neatgarms! We can't wait for you to rock your new look! 😎✨
-
-Warm regards,  
-**The Neatgarms Team**  
-www.neatgarms.com`,
+      html: `
+      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #fdfdfd;">
+        
+        <h1 style="text-align: center; color: #111; font-size: 28px;">🧢 Neatgarms</h1>
+        
+        <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
+        <p style="font-size: 16px;">
+          Thank you for shopping with <strong>Neatgarms</strong>! 🎉<br/>
+          We’ve successfully received your order. Our team is now processing it and will notify you once it ships.
+        </p>
+    
+        <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
+        <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${userOrderDetails}</pre>
+    
+        <h3 style="margin-top: 24px; color: #222;">💳 Payment Method</h3>
+        <p style="background: #fff; padding: 10px 16px; border-radius: 10px; font-size: 15px; border: 1px solid #ddd;">
+          ${paymentMethod}
+        </p>
+    
+        <h3 style="margin-top: 24px; color: #222;">🚚 Delivery Address</h3>
+        <p style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.6; border: 1px solid #ddd;">
+          ${delivery.firstName} ${delivery.lastName}<br/>
+          ${delivery.address}, ${delivery.city}, ${delivery.country}<br/>
+          ${delivery.postalCode}<br/>
+          <strong>Phone:</strong> ${delivery.phone}
+        </p>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333;">📞 Need Help?</h3>
+        <p>Feel free to contact us anytime:</p>
+        <ul style="line-height: 1.8;">
+          <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
+          <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
+        </ul>
+    
+        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thanks again for choosing Neatgarms! We can't wait for you to rock your new look! 😎✨</p>
+    
+        <p style="font-size: 13px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+      </div>
+      `
     };
+    
   
     // Send Autoresponse Email
     await transporter.sendMail(userMailOptions);
@@ -374,57 +371,53 @@ app.post("/pay2-now", async (req, res) => {
     emailContent += `Payment Method:\n`;
     emailContent += `${paymentMethod}\n`;
 
-    // Email to Admin
-    const adminMailOptions = {
-      from: "neatgarmsltd@zohomail.com",
-      to: "neatgarmsltd@zohomail.com",
-      subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
-      text: emailContent,
-    };
-
-    // Send Email to Admin
-    const info = await transporter.sendMail(adminMailOptions);
-    console.log("Pay Now Email sent to admin:", info.response);
-
-    // --- Autoresponse Email to User ---
-    let userOrderDetails = '';
-    for (let i = 0; i < itemCount; i++) {
-      userOrderDetails += `Item ${i + 1}:\n`;
-      userOrderDetails += `- Design: ${designs[i] || "N/A"}\n`;
-      userOrderDetails += `- Size: ${sizes[i] || "N/A"}\n`;
-      userOrderDetails += `- Color: ${colors[i] || "N/A"}\n\n`;
-    }
-
     const userMailOptions = {
       from: "neatgarmsltd@zohomail.com",
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
-      text: `Hi ${delivery.firstName},
-
-Thank you for shopping with **Neatgarms**! 🎉
-
-We’ve successfully received your order of **${itemCount}** item(s). Our team is now processing it and will notify you once it ships.
-
-🛍 **Order Details:**
-${userOrderDetails}
-
-💳 **Payment Method:** ${paymentMethod}
-
-🚚 **Delivery Address:**
-${delivery.firstName} ${delivery.lastName}
-${delivery.address}, ${delivery.city}, ${delivery.country}
-${delivery.postalCode}
-Phone: ${delivery.phone}
-
-If you have any questions or need assistance, feel free to contact us at **support@neatgarms.com**.
-
-Thank you for choosing Neatgarms! We can't wait for you to rock your new look! 😎✨
-
-Warm regards,  
-**The Neatgarms Team**  
-www.neatgarms.com`,
+      html: `
+      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+        
+        <h1 style="text-align: center; color: #111; font-size: 28px;">🧢 Neatgarms</h1>
+        
+        <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
+        <p style="font-size: 16px;">
+          Thank you for shopping with <strong>Neatgarms</strong>! 🎉<br/>
+          We’ve successfully received your order of <strong>${itemCount}</strong> item(s). Our team is now processing it and will notify you once it ships.
+        </p>
+    
+        <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
+        <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${userOrderDetails}</pre>
+    
+        <h3 style="margin-top: 24px; color: #222;">💳 Payment Method</h3>
+        <p style="background: #fff; padding: 10px 16px; border-radius: 10px; font-size: 15px; border: 1px solid #ddd;">
+          ${paymentMethod}
+        </p>
+    
+        <h3 style="margin-top: 24px; color: #222;">🚚 Delivery Address</h3>
+        <p style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.6; border: 1px solid #ddd;">
+          ${delivery.firstName} ${delivery.lastName}<br/>
+          ${delivery.address}, ${delivery.city}, ${delivery.country}<br/>
+          ${delivery.postalCode}<br/>
+          <strong>Phone:</strong> ${delivery.phone}
+        </p>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333;">📞 Need Help?</h3>
+        <p>Reach us any time:</p>
+        <ul style="line-height: 1.8;">
+          <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
+          <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
+        </ul>
+    
+        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
+    
+        <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+      </div>
+      `
     };
-
+    
     // Send Autoresponse Email
     await transporter.sendMail(userMailOptions);
     console.log("Autoresponse email sent to user.");
