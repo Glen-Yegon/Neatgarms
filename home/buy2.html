@@ -322,28 +322,7 @@
 
 
     document.getElementById("pay-now-btn").addEventListener("click", async () => {
-      const serverUrl = "https://neatgarms.onrender.com"; // Update with actual server URL
-      const phoneNumber = "254712345678"; // Replace with dynamic user input if needed
-      try {
-        const response = await fetch(`${serverUrl}/check-payment/${phoneNumber}`);
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const paymentInfo = await response.json();
-
-        if (!paymentInfo.paid) {
-            alert("No payment confirmation found! Please complete payment first.");
-            return;
-        }
-
-        alert("Payment confirmed! Proceeding...");
-        // Continue with your function
-    } catch (error) {
-        console.error("Error checking payment:", error);
-        alert("An error occurred. Please try again.");
-    }
 
 
            // Create a custom alert element
