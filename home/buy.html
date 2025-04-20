@@ -86,15 +86,20 @@
   <!-- Multi-Section Form -->
 <div class="multi-section-form">
 
+
   <div class="form-section">
     <h3>Design / Size / Color</h3>
   
-    <!-- Input for number of items -->
-     <p class="pp">Click the checkbox to choose between design/color/size if any is available.  <br> Kindly, if you have more that one cloth, write the name of the cloth before the design/size/color. Happy shopping 😊! <br> </p>
+    <p class="pp">
+      Click the checkbox to choose between design/color/size if any is available. <br>
+      Kindly, if you have more than one cloth, write the name of the cloth before the design/size/color. 
+      Happy shopping 😊! <br>
+    </p>
+  
     <label for="item-count">Number of Items</label>
     <input type="number" id="item-count" placeholder="Enter number of items" min="1" max="10">
   
-    <!-- Radio buttons for selection -->
+    <!-- Checkboxes for selection -->
     <div class="radio-container">
       <input type="checkbox" id="design-radio" class="radio-input">
       <label for="design-radio" class="radio-label">Design</label>
@@ -110,11 +115,14 @@
       <label for="color-radio" class="radio-label">Color</label>
     </div>
   
-    <!-- Dropdown sections -->
-    <div id="design-dropdown"></div>
-    <div id="size-dropdown"></div>
-    <div id="color-dropdown"></div>
+    <!-- Grouped dynamic input fields -->
+    <div id="grouped-fields"></div>
   </div>
+  
+  
+  
+
+  
 
     <!-- Contact Section -->
     <div class="form-section">
@@ -408,22 +416,31 @@
         paymentMethod: paymentMethod,
       };
     
-      // Collect additional design, size, and color inputs if selected
-      if (document.getElementById("design-radio").checked) {
-        document.querySelectorAll("#design-dropdown input").forEach((input) => {
-          data.designs.push(input.value || "N/A");
-        });
-      }
-      if (document.getElementById("size-radio").checked) {
-        document.querySelectorAll("#size-dropdown input").forEach((input) => {
-          data.sizes.push(input.value || "N/A");
-        });
-      }
-      if (document.getElementById("color-radio").checked) {
-        document.querySelectorAll("#color-dropdown input").forEach((input) => {
-          data.colors.push(input.value || "N/A");
-        });
-      }
+// Collect Design / Size / Color per item
+data.items = [];
+
+const itemCountInt = parseInt(itemCount);
+for (let i = 1; i <= itemCountInt; i++) {
+  const itemData = {};
+
+  if (document.getElementById("design-radio").checked) {
+    const designInput = document.querySelector(`#group-${i} .design-input`);
+    itemData.design = designInput ? designInput.value || "N/A" : "N/A";
+  }
+
+  if (document.getElementById("size-radio").checked) {
+    const sizeInput = document.querySelector(`#group-${i} .size-input`);
+    itemData.size = sizeInput ? sizeInput.value || "N/A" : "N/A";
+  }
+
+  if (document.getElementById("color-radio").checked) {
+    const colorInput = document.querySelector(`#group-${i} .color-input`);
+    itemData.color = colorInput ? colorInput.value || "N/A" : "N/A";
+  }
+
+  data.items.push(itemData);
+}
+
     
       // Retrieve Order Summary Details from Cart
       const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -462,6 +479,7 @@
     });
     
   </script>
+
 
 
   

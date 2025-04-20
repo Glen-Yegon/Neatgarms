@@ -148,151 +148,160 @@ app.post(
 
 app.post("/pay-now", async (req, res) => {
   try {
-    const { itemCount, designs, sizes, colors, contact, delivery, billing, paymentMethod, orderSummary } = req.body;
-  
-    // Format the details for the admin email
-    let emailContent = `New Pay Now Submission:\n\n`;
-    emailContent += `Number of Items (for custom options): ${itemCount}\n\n`;
-  
-    // Order Details for each item (if any custom options were provided)
+    const {
+      itemCount = 0,
+      designs = [],
+      sizes = [],
+      colors = [],
+      contact = {},
+      delivery = {},
+      billing = {},
+      paymentMethod = "N/A",
+      orderSummary = {}
+    } = req.body;
+
+    // Admin Email Format
+    let emailContent = `🧾 New Pay Now Submission:\n\n`;
+    emailContent += `🛒 Number of Custom Items: ${itemCount}\n\n`;
+
     for (let i = 0; i < itemCount; i++) {
       emailContent += `Item ${i + 1}:\n`;
-      emailContent += `Design: ${designs[i] || "N/A"}\n`;
-      emailContent += `Size: ${sizes[i] || "N/A"}\n`;
-      emailContent += `Color: ${colors[i] || "N/A"}\n\n`;
+      emailContent += `- Design: ${designs[i] || "N/A"}\n`;
+      emailContent += `- Size: ${sizes[i] || "N/A"}\n`;
+      emailContent += `- Color: ${colors[i] || "N/A"}\n\n`;
     }
-  
-    // --- New: Order Summary Section from Cart ---
+
     if (orderSummary) {
-      emailContent += `Order Summary (Cart Details):\n`;
-  
-      // Loop through each cart item and list its details
-      if (orderSummary.cartItems && orderSummary.cartItems.length > 0) {
+      emailContent += `🧺 Order Summary (Cart):\n`;
+
+      if (orderSummary.cartItems?.length > 0) {
         orderSummary.cartItems.forEach((item, index) => {
-          // Clean the price if necessary
-          const cleanedPrice = (item.newPrice || '0').replace(/KSh|,/g, '').trim();
+          const cleanedPrice = (item.newPrice || "0").replace(/KSh|,/g, '').trim();
           const price = parseFloat(cleanedPrice) || 0;
           const quantity = parseInt(item.quantity) || 1;
           const totalPrice = price * quantity;
-  
-          emailContent += `Item ${index + 1}:\n`;
+
+          emailContent += `Cart Item ${index + 1}:\n`;
           emailContent += `- Name: ${item.name}\n`;
           emailContent += `- Brand: ${item.brand}\n`;
           emailContent += `- Price: KSh${price.toFixed(2)}\n`;
           emailContent += `- Quantity: ${quantity}\n`;
-          if (item.size) {
-            emailContent += `- Size: ${item.size}\n`;
-          }
-          if (item.color) {
-            emailContent += `- Color: ${item.color}\n`;
-          }
-          emailContent += `- Total Price: KSh${totalPrice.toFixed(2)}\n\n`;
+          if (item.size) emailContent += `- Size: ${item.size}\n`;
+          if (item.color) emailContent += `- Color: ${item.color}\n`;
+          emailContent += `- Total: KSh${totalPrice.toFixed(2)}\n\n`;
         });
       } else {
-        emailContent += `No items found in cart.\n\n`;
+        emailContent += `No cart items provided.\n\n`;
       }
-  
-      // Include the overall estimated total (from the page)
-      emailContent += `Estimated Total (as displayed): KSh${orderSummary.estimatedTotal}\n\n`;
+
+      emailContent += `🧮 Estimated Total: KSh${orderSummary.estimatedTotal || "N/A"}\n\n`;
     }
-  
-    // Contact Information
-    emailContent += `Contact Information:\n`;
-    emailContent += `Email: ${contact.email}\n`;
-    emailContent += `Phone Number: ${contact.phone}\n`;
-    emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
-  
-    // Delivery Information
-    emailContent += `Delivery Information:\n`;
-    emailContent += `Country/Region: ${delivery.country}\n`;
-    emailContent += `First Name: ${delivery.firstName}\n`;
-    emailContent += `Last Name: ${delivery.lastName}\n`;
-    emailContent += `Address: ${delivery.address}\n`;
-    emailContent += `Apartment/Suite: ${delivery.apartment}\n`;
-    emailContent += `City: ${delivery.city}\n`;
-    emailContent += `Postal Code: ${delivery.postalCode}\n`;
-    emailContent += `Phone: ${delivery.phone}\n`;
-    emailContent += `Shipping Method: ${delivery.shippingMethod}\n\n`;
-  
-    // Billing Information
-    emailContent += `Billing Information:\n`;
+
+    emailContent += `📞 Contact Info:\n`;
+    emailContent += `- Email: ${contact.email || "N/A"}\n`;
+    emailContent += `- Phone: ${contact.phone || "N/A"}\n`;
+    emailContent += `- Subscribed to Offers: ${contact.newsOffers ? "Yes" : "No"}\n\n`;
+
+    emailContent += `🚚 Delivery Info:\n`;
+    emailContent += `- Name: ${delivery.firstName || ""} ${delivery.lastName || ""}\n`;
+    emailContent += `- Address: ${delivery.address || ""} ${delivery.apartment || ""}, ${delivery.city || ""}, ${delivery.country || ""}\n`;
+    emailContent += `- Postal Code: ${delivery.postalCode || "N/A"}\n`;
+    emailContent += `- Phone: ${delivery.phone || "N/A"}\n`;
+    emailContent += `- Shipping Method: ${delivery.shippingMethod || "Standard"}\n\n`;
+
+    emailContent += `🏠 Billing Info:\n`;
     if (billing.note) {
-      emailContent += `${billing.note}\n`; // e.g., "Same as shipping address"
+      emailContent += `Note: ${billing.note}\n`;
     } else {
-      emailContent += `Country/Region: ${billing.country}\n`;
-      emailContent += `First Name: ${billing.firstName}\n`;
-      emailContent += `Last Name: ${billing.lastName}\n`;
-      emailContent += `Address: ${billing.address}\n`;
-      emailContent += `Apartment/Suite: ${billing.apartment}\n`;
-      emailContent += `Postal Code: ${billing.postalCode}\n`;
-      emailContent += `Phone: ${billing.phone}\n`;
+      emailContent += `- Name: ${billing.firstName || ""} ${billing.lastName || ""}\n`;
+      emailContent += `- Address: ${billing.address || ""}, ${billing.apartment || ""}, ${billing.country || ""}\n`;
+      emailContent += `- Postal Code: ${billing.postalCode || "N/A"}\n`;
+      emailContent += `- Phone: ${billing.phone || "N/A"}\n`;
     }
-    emailContent += `\n`;
-  
-    // Payment Method
-    emailContent += `Payment Method:\n`;
-    emailContent += `${paymentMethod}\n`;
-  
+
+    emailContent += `\n💳 Payment Method: ${paymentMethod}\n`;
+
+
+
+         // Email to Admin
+         const adminMailOptions = {
+          from: "neatgarmsltd@zohomail.com",
+          to: "neatgarmsltd@zohomail.com",
+          subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
+          text: emailContent,
+        };
+    
+        // Send Email to Admin
+        const info = await transporter.sendMail(adminMailOptions);
+        console.log("Pay Now Email sent to admin:", info.response);
+
+
+        
+    // --- Autoresponse Email to User ---
+    let userOrderDetails = '';
+    for (let i = 0; i < itemCount; i++) {
+      userOrderDetails += `Item ${i + 1}:\n`;
+      userOrderDetails += `- Design: ${designs[i] || "N/A"}\n`;
+      userOrderDetails += `- Size: ${sizes[i] || "N/A"}\n`;
+      userOrderDetails += `- Color: ${colors[i] || "N/A"}\n\n`;
+    }
+
+    // Autoresponse Email to Buyer
     const userMailOptions = {
       from: "neatgarmsltd@zohomail.com",
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
-      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
-        
-        <h1 style="text-align: center; color: #111; font-size: 28px;">👕 Neatgarms</h1>
-        
-        <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
-        <p style="font-size: 16px;">
-          Thank you for shopping with <strong>Neatgarms</strong>! 🎉<br/>
-          We’ve successfully received your order of <strong>${itemCount}</strong> item(s). Our team is now processing it and will notify you once it ships.
-        </p>
-    
-        <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
-        <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${orderSummary.itemName}</pre>
-    
-        <h3 style="margin-top: 24px; color: #222;">💳 Payment Method</h3>
-        <p style="background: #fff; padding: 10px 16px; border-radius: 10px; font-size: 15px; border: 1px solid #ddd;">
-          ${paymentMethod}
-        </p>
-    
-        <h3 style="margin-top: 24px; color: #222;">🚚 Delivery Address</h3>
-        <p style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.6; border: 1px solid #ddd;">
-          ${delivery.firstName} ${delivery.lastName}<br/>
-          ${delivery.address}, ${delivery.city}, ${delivery.country}<br/>
-          ${delivery.postalCode}<br/>
-          <strong>Phone:</strong> ${delivery.phone}
-        </p>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: #333;">📞 Need Help?</h3>
-        <p>Reach us any time:</p>
-        <ul style="line-height: 1.8;">
-          <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
-          <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
-        </ul>
-    
-        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
-    
-        <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
-      </div>
+        <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+          <h1 style="text-align: center; color: #111;">👕 Neatgarms</h1>
+          <h2 style="color: #333;">👋 Hi ${delivery.firstName || "Customer"},</h2>
+          <p style="font-size: 16px;">
+            Thanks for your purchase at <strong>Neatgarms</strong>! 🎉<br/>
+            We’ve received your order of <strong>${itemCount}</strong> item(s). We’ll notify you once it’s on its way.
+          </p>
+
+          <h3>🛍 Order Summary</h3>
+        <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 14px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${userOrderDetails}</pre>
+
+          <h3>💳 Payment Method</h3>
+          <p style="background: #fff; padding: 10px; border-radius: 10px; font-size: 15px; border: 1px solid #ddd;">
+            ${paymentMethod}
+          </p>
+
+          <h3>🚚 Delivery Address</h3>
+          <p style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.6; border: 1px solid #ddd;">
+            ${delivery.firstName || ""} ${delivery.lastName || ""}<br/>
+            ${delivery.address || ""}, ${delivery.city || ""}, ${delivery.country || ""}<br/>
+            ${delivery.postalCode || ""}<br/>
+            <strong>Phone:</strong> ${delivery.phone || ""}
+          </p>
+
+          <hr style="margin: 30px 0;" />
+
+          <h3>📞 Need Help?</h3>
+          <ul>
+            <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
+            <li><strong>Website:</strong> <a href="https://www.neatgarms.com">www.neatgarms.com</a></li>
+          </ul>
+
+          <p style="font-size: 14px; color: #666;">Thanks again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
+          <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+        </div>
       `
     };
-    
-    
-  
-    // Send Autoresponse Email
+
+    // Send Email
     await transporter.sendMail(userMailOptions);
-    console.log("Autoresponse email sent to user.");
-  
-    // Respond to client
+    console.log("✅ Autoresponse email sent.");
+
+    // Response to Frontend
     res.json({ success: true, message: "Pay Now form submitted successfully!" });
   } catch (error) {
-    console.error("Error sending Pay Now email:", error);
-    res.status(500).json({ success: false, message: "Error sending Pay Now email" });
+    console.error("❌ Error sending Pay Now email:", error);
+    res.status(500).json({ success: false, message: "Error sending Pay Now email." });
   }
 });
+
 
 
 

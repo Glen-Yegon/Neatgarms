@@ -152,50 +152,66 @@ if (sameAsShippingRadio.checked) {
 }
 
 
-document.getElementById('item-count').addEventListener('input', updateDropdowns);
 
+document.getElementById('item-count').addEventListener('input', updateGroupedFields);
 document.querySelectorAll('.radio-input').forEach(radio => {
-  radio.addEventListener('change', updateDropdowns);
+  radio.addEventListener('change', updateGroupedFields);
 });
 
-function updateDropdowns() {
+function updateGroupedFields() {
   const count = parseInt(document.getElementById('item-count').value);
+  const container = document.getElementById('grouped-fields');
+  container.innerHTML = ''; // Clear all previous groups
+
   if (isNaN(count) || count < 1) return;
 
-  if (document.getElementById('design-radio').checked) {
-    generateFields('design-dropdown', count, 'Design');
-  } else {
-    document.getElementById('design-dropdown').innerHTML = '';
-  }
+  const includeDesign = document.getElementById('design-radio').checked;
+  const includeSize = document.getElementById('size-radio').checked;
+  const includeColor = document.getElementById('color-radio').checked;
 
-  if (document.getElementById('size-radio').checked) {
-    generateFields('size-dropdown', count, 'Size');
-  } else {
-    document.getElementById('size-dropdown').innerHTML = '';
-  }
+  for (let i = 1; i <= count; i++) {
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'input-group'; // for styling
+    groupDiv.style.marginBottom = '20px';
 
-  if (document.getElementById('color-radio').checked) {
-    generateFields('color-dropdown', count, 'Color');
-  } else {
-    document.getElementById('color-dropdown').innerHTML = '';
+    const heading = document.createElement('h4');
+    heading.textContent = `Item ${i}`;
+    groupDiv.appendChild(heading);
+
+    if (includeDesign) {
+      const designInput = createInput(`Design ${i}`);
+      groupDiv.appendChild(designInput);
+    }
+
+    if (includeSize) {
+      const sizeInput = createInput(`Size ${i}`);
+      groupDiv.appendChild(sizeInput);
+    }
+
+    if (includeColor) {
+      const colorInput = createInput(`Color ${i}`);
+      groupDiv.appendChild(colorInput);
+    }
+
+    container.appendChild(groupDiv);
   }
 }
 
-function generateFields(containerId, count, placeholder) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = ''; // Clear previous fields
-
-  for (let i = 1; i <= count; i++) {
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.placeholder = `${placeholder} ${i}`;
-    container.appendChild(input);
-  }
+function createInput(placeholderText) {
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = placeholderText;
+  input.className = 'dynamic-input';
+  input.style.display = 'block';
+  input.style.marginBottom = '8px';
+  return input;
 }
 
 function goBack() {
   history.back();
 }
+
+
 
 
 
