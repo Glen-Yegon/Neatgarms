@@ -400,22 +400,22 @@
       }
       const paymentMethod = selectedPayment.querySelector('span').innerText;
     
-      // Prepare data object
-      const data = {
-        itemCount,
-        designs: [],
-        sizes: [],
-        colors: [],
-        contact: {
-          email: userEmail,
-          phone: userPhone,
-          newsOffers: newsOffers,
-        },
-        delivery: deliveryInfo,
-        billing: billingInfo,
-        paymentMethod: paymentMethod,
-      };
-    
+// Prepare data object
+const data = {
+  itemCount,
+  designs: [],
+  sizes: [],
+  colors: [],
+  contact: {
+    email: userEmail,
+    phone: userPhone,
+    newsOffers: newsOffers,
+  },
+  delivery: deliveryInfo,
+  billing: billingInfo,
+  paymentMethod: paymentMethod,
+};
+
 // Collect Design / Size / Color per item
 data.items = [];
 
@@ -423,23 +423,36 @@ const itemCountInt = parseInt(itemCount);
 for (let i = 1; i <= itemCountInt; i++) {
   const itemData = {};
 
-  if (document.getElementById("design-radio").checked) {
-    const designInput = document.querySelector(`#group-${i} .design-input`);
-    itemData.design = designInput ? designInput.value || "N/A" : "N/A";
+  // Check Design input for each item
+  const designInput = document.querySelector(`#group-${i} .design-input`);
+  if (designInput) {
+    itemData.design = designInput.value || "N/A";
+  } else {
+    itemData.design = "N/A";
   }
 
-  if (document.getElementById("size-radio").checked) {
-    const sizeInput = document.querySelector(`#group-${i} .size-input`);
-    itemData.size = sizeInput ? sizeInput.value || "N/A" : "N/A";
+  // Check Size input for each item
+  const sizeInput = document.querySelector(`#group-${i} .size-input`);
+  if (sizeInput) {
+    itemData.size = sizeInput.value || "N/A";
+  } else {
+    itemData.size = "N/A";
   }
 
-  if (document.getElementById("color-radio").checked) {
-    const colorInput = document.querySelector(`#group-${i} .color-input`);
-    itemData.color = colorInput ? colorInput.value || "N/A" : "N/A";
+  // Check Color input for each item
+  const colorInput = document.querySelector(`#group-${i} .color-input`);
+  if (colorInput) {
+    itemData.color = colorInput.value || "N/A";
+  } else {
+    itemData.color = "N/A";
   }
 
+  // Push the itemData to the items array
   data.items.push(itemData);
 }
+
+// Log the data object for debugging
+console.log('Collected data:', data);
 
     
       // Retrieve Order Summary Details from Cart
