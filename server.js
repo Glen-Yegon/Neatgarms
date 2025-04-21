@@ -263,7 +263,8 @@ app.post("/pay-now", async (req, res) => {
         </p>
     
         <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
-        <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${orderSummary.itemName}</pre>
+<pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${emailContent}</pre>
+
     
         <h3 style="margin-top: 24px; color: #222;">💳 Payment Method</h3>
         <p style="background: #fff; padding: 10px 16px; border-radius: 10px; font-size: 15px; border: 1px solid #ddd;">
@@ -277,6 +278,37 @@ app.post("/pay-now", async (req, res) => {
           ${delivery.postalCode}<br/>
           <strong>Phone:</strong> ${delivery.phone}
         </p>
+
+           <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333;">🔥 Best-Selling Picks This Week</h3>
+        <table style="width: 100%; border-spacing: 16px 10px;">
+          <tr>
+            <td align="center">
+              <a href="https://neatgarms.com/product/urban-tee" target="_blank">
+                <img src="https://neatgarms-six.vercel.app/mains/playboy.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Urban Tee</p>
+              </a>
+            </td>
+            <td align="center">
+              <a href="https://neatgarms.com/product/classic-hoodie" target="_blank">
+                <img src="https://neatgarms-six.vercel.app/mains/travis.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Classic Hoodie</p>
+              </a>
+            </td>
+            <td align="center">
+              <a href="https://neatgarms.com/product/street-joggers" target="_blank">
+                <img src="https://yourcdn.com/images/street-joggers.jpg" alt="Street Joggers" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Street Joggers</p>
+              </a>
+            </td>
+          </tr>
+        </table>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333;">💸 Special Offer Just for You</h3>
+        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next order. Offer valid for the next <strong>3 days</strong> only!</p>
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     

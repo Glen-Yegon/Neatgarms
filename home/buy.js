@@ -184,19 +184,36 @@ function updateDropdowns() {
 }
 
 function generateInterleavedFields(fields) {
-  // Clear the fields container first
-  document.getElementById('fields-container').innerHTML = '';
+  const container = document.getElementById('fields-container');
+  container.innerHTML = ''; // Clear the container
 
-  // Generate the fields in interleaved order
-  fields.forEach(field => {
+  let currentItem = 0;
+  let itemGroup;
+
+  fields.forEach((field, index) => {
+    // If it's a new item, create a new section
+    if (field.index !== currentItem) {
+      currentItem = field.index;
+
+      // Create and append a heading label for the item
+      const itemLabel = document.createElement('h4');
+      itemLabel.textContent = `Item ${currentItem}`;
+      itemLabel.style.marginTop = '15px';
+      itemLabel.style.color = '#222';
+      container.appendChild(itemLabel);
+    }
+
+    // Create the input field
     const input = document.createElement('input');
     input.type = 'text';
     input.placeholder = `${capitalizeFirstLetter(field.type)} ${field.index}`;
+    input.name = `${field.type}-${field.index}`; // Optional: useful if you're submitting this in a form
 
-    // Append the input field to the container
-    document.getElementById('fields-container').appendChild(input);
+    // Append input field below the item label
+    container.appendChild(input);
   });
 }
+
 
 // Utility function to capitalize the first letter of a string
 function capitalizeFirstLetter(string) {

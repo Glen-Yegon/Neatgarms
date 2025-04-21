@@ -91,7 +91,7 @@
     <h3>Design / Size / Color</h3>
   
     <!-- Input for number of items -->
-     <p class="pp">Click the checkbox to choose between design/color/size if any is available.  <br> Kindly, if you have more that one cloth, write the name of the cloth before the design/size/color. Happy shopping 😊! <br> </p>
+    <p class="pp">Click the checkbox to choose between design/color/size if any is available. <br> Kindly, if you have more than one cloth, write the name of the cloth before the design/size/color. Happy shopping 😊! <br> </p>
     <label for="item-count">Number of Items</label>
     <input type="number" id="item-count" placeholder="Enter number of items" min="1" max="10">
   
@@ -111,12 +111,10 @@
       <label for="color-radio" class="radio-label">Color</label>
     </div>
   
-    <!-- Dropdown sections -->
-    <div id="design-dropdown"></div>
-    <div id="size-dropdown"></div>
-    <div id="color-dropdown"></div>
+    <!-- Interleaved fields container -->
+    <div id="fields-container"></div>
   </div>
-
+  
   
     <!-- Contact Section -->
     <div class="form-section">
@@ -408,31 +406,24 @@
           newsOffers: newsOffers,
         },
         delivery: deliveryInfo,
-        billing: billingInfo, // ✅ Include billing info
+        billing: billingInfo,
         paymentMethod: paymentMethod,
       };
-    
-      // Collect Design Inputs if selected
-      if (document.getElementById("design-radio").checked) {
-        document.querySelectorAll("#design-dropdown input").forEach((input) => {
+      
+      // Collect additional design, size, and color inputs if selected
+      document.querySelectorAll("#fields-container input").forEach((input) => {
+        const placeholder = input.placeholder.toLowerCase();
+      
+        if (placeholder.includes("design")) {
           data.designs.push(input.value || "N/A");
-        });
-      }
-    
-      // Collect Size Inputs if selected
-      if (document.getElementById("size-radio").checked) {
-        document.querySelectorAll("#size-dropdown input").forEach((input) => {
+        } else if (placeholder.includes("size")) {
           data.sizes.push(input.value || "N/A");
-        });
-      }
-    
-      // Collect Color Inputs if selected
-      if (document.getElementById("color-radio").checked) {
-        document.querySelectorAll("#color-dropdown input").forEach((input) => {
+        } else if (placeholder.includes("color")) {
           data.colors.push(input.value || "N/A");
-        });
-      }
-
+        }
+      });
+      
+      // Now, 'data' will contain the necessary inputs from the form
       // Retrieve order summary details from localStorage (if available)
 const storedProduct = localStorage.getItem('buyNowProduct');
 if (storedProduct) {
