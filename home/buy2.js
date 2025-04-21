@@ -242,7 +242,7 @@ document.getElementById('submit-payment').addEventListener('click', async () => 
   
   try {
     // Send a POST request to your backend endpoint
-    const response = await fetch('http://localhost:5000/paynow4', {
+    const response = await fetch('https://neatgarms-risi.onrender.com/paynow4', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ phone, amount })

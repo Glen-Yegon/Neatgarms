@@ -240,17 +240,17 @@ app.post("/pay-now", async (req, res) => {
 
 
 
-         // Email to Admin
-         const adminMailOptions = {
-          from: "neatgarmsltd@zohomail.com",
-          to: "neatgarmsltd@zohomail.com",
-          subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
-          text: emailContent,
-        };
-    
-        // Send Email to Admin
-        const info = await transporter.sendMail(adminMailOptions);
-        console.log("Pay Now Email sent to admin:", info.response);
+    // Email to Admin
+    const adminMailOptions = {
+      from: "neatgarmsltd@zohomail.com",
+      to: "neatgarmsltd@zohomail.com",
+      subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
+      text: emailContent,
+    };
+
+    // Send Email to Admin
+    const info = await transporter.sendMail(adminMailOptions);
+    console.log("Pay Now Email sent to admin:", info.response);
   
     const userMailOptions = {
       from: "neatgarmsltd@zohomail.com",
