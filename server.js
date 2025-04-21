@@ -146,6 +146,8 @@ app.post(
   }
 );
 
+
+
 app.post("/pay-now", async (req, res) => {
   try {
     const { itemCount, designs, sizes, colors, contact, delivery, billing, paymentMethod, orderSummary } = req.body;
@@ -197,7 +199,7 @@ app.post("/pay-now", async (req, res) => {
     }
 
 
-    emailContent = `📞 CONTACT INFORMATION:\n\n`;
+    emailContent += `📞 CONTACT INFORMATION:\n\n`;
   
     // Contact Information
     emailContent += `Email: ${contact.email}\n`;
@@ -205,7 +207,7 @@ app.post("/pay-now", async (req, res) => {
     emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
 
 
-    emailContent = `🚚 DELIVERY INFORMATION\n\n`;
+    emailContent += `🚚 DELIVERY INFORMATION\n\n`;
   
     // Delivery Information
     emailContent += `Country/Region: ${delivery.country}\n`;
