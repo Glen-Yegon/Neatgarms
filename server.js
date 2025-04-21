@@ -152,7 +152,7 @@ app.post("/pay-now", async (req, res) => {
   
     // Format the details for the admin email
     let emailContent = `New Pay Now Submission:\n\n`;
-    emailContent += `Number of Items (for custom options): ${itemCount}\n\n`;
+    emailContent += `Number of Items: ${itemCount}\n\n`;
   
     // Order Details for each item (if any custom options were provided)
     for (let i = 0; i < itemCount; i++) {
@@ -193,14 +193,20 @@ app.post("/pay-now", async (req, res) => {
       }
   
       // Include the overall estimated total (from the page)
-      emailContent += `Estimated Total (as displayed): KSh${orderSummary.estimatedTotal}\n\n`;
+      emailContent += `Estimated Total: KSh${orderSummary.estimatedTotal}\n\n`;
     }
+
+
+    emailContent = `📞 Contact Info\n\n`;
   
     // Contact Information
     emailContent += `Contact Information:\n`;
     emailContent += `Email: ${contact.email}\n`;
     emailContent += `Phone Number: ${contact.phone}\n`;
     emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
+
+
+    emailContent = `🚚 Delivery Info\n\n`;
   
     // Delivery Information
     emailContent += `Delivery Information:\n`;
@@ -215,7 +221,8 @@ app.post("/pay-now", async (req, res) => {
     emailContent += `Shipping Method: ${delivery.shippingMethod}\n\n`;
   
     // Billing Information
-    emailContent += `Billing Information:\n`;
+    emailContent += `<strong>💳 Billing Information:</strong><br>`;
+
     if (billing.note) {
       emailContent += `${billing.note}\n`; // e.g., "Same as shipping address"
     } else {
