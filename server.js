@@ -151,7 +151,7 @@ app.post("/pay-now", async (req, res) => {
     const { itemCount, designs, sizes, colors, contact, delivery, billing, paymentMethod, orderSummary } = req.body;
   
     // Format the details for the admin email
-    let emailContent = `New Pay Now Submission:\n\n`;
+    let emailContent = `✅ Successful Form Submission:\n\n`;
     emailContent += `Number of Items: ${itemCount}\n\n`;
   
     // Order Details for each item (if any custom options were provided)
@@ -164,7 +164,7 @@ app.post("/pay-now", async (req, res) => {
   
     // --- New: Order Summary Section from Cart ---
     if (orderSummary) {
-      emailContent += `Order Summary (Cart Details):\n`;
+      emailContent += `🛒 ORDER SUMMARY:\n\n`;
   
       // Loop through each cart item and list its details
       if (orderSummary.cartItems && orderSummary.cartItems.length > 0) {
@@ -197,19 +197,17 @@ app.post("/pay-now", async (req, res) => {
     }
 
 
-    emailContent = `📞 Contact Info\n\n`;
+    emailContent = `📞 CONTACT INFORMATION:\n\n`;
   
     // Contact Information
-    emailContent += `Contact Information:\n`;
     emailContent += `Email: ${contact.email}\n`;
     emailContent += `Phone Number: ${contact.phone}\n`;
     emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
 
 
-    emailContent = `🚚 Delivery Info\n\n`;
+    emailContent = `🚚 DELIVERY INFORMATION\n\n`;
   
     // Delivery Information
-    emailContent += `Delivery Information:\n`;
     emailContent += `Country/Region: ${delivery.country}\n`;
     emailContent += `First Name: ${delivery.firstName}\n`;
     emailContent += `Last Name: ${delivery.lastName}\n`;
@@ -221,7 +219,7 @@ app.post("/pay-now", async (req, res) => {
     emailContent += `Shipping Method: ${delivery.shippingMethod}\n\n`;
   
     // Billing Information
-    emailContent += `<strong>💳 Billing Information:</strong><br>`;
+    emailContent += `💳 BILLING INFORMATION\n\n `;
 
     if (billing.note) {
       emailContent += `${billing.note}\n`; // e.g., "Same as shipping address"
@@ -237,7 +235,7 @@ app.post("/pay-now", async (req, res) => {
     emailContent += `\n`;
   
     // Payment Method
-    emailContent += `Payment Method:\n`;
+    emailContent += `💸PAYMENT METHOD:\n\n`;
     emailContent += `${paymentMethod}\n`;
 
 
@@ -272,23 +270,10 @@ app.post("/pay-now", async (req, res) => {
         <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
 <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${emailContent}</pre>
 
-    
-        <h3 style="margin-top: 24px; color: #222;">💳 Payment Method</h3>
-        <p style="background: #fff; padding: 10px 16px; border-radius: 10px; font-size: 15px; border: 1px solid #ddd;">
-          ${paymentMethod}
-        </p>
-    
-        <h3 style="margin-top: 24px; color: #222;">🚚 Delivery Address</h3>
-        <p style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.6; border: 1px solid #ddd;">
-          ${delivery.firstName} ${delivery.lastName}<br/>
-          ${delivery.address}, ${delivery.city}, ${delivery.country}<br/>
-          ${delivery.postalCode}<br/>
-          <strong>Phone:</strong> ${delivery.phone}
-        </p>
 
            <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: #333;">🔥 Best-Selling Picks This Week</h3>
+        <h3 style="color: #333;">🔥 Top Neat Picks for This Week</h3>
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
@@ -319,7 +304,7 @@ app.post("/pay-now", async (req, res) => {
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: #333;">📞 Need Help?</h3>
+        <h3 style="color: black;">📞 Need Help?</h3>
         <p>Reach us any time:</p>
         <ul style="line-height: 1.8;">
           <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
