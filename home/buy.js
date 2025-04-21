@@ -153,63 +153,63 @@ if (sameAsShippingRadio.checked) {
 
 
 
-document.getElementById('item-count').addEventListener('input', updateGroupedFields);
+
+document.getElementById('item-count').addEventListener('input', updateDropdowns);
+
 document.querySelectorAll('.radio-input').forEach(radio => {
-  radio.addEventListener('change', updateGroupedFields);
+  radio.addEventListener('change', updateDropdowns);
 });
 
-function updateGroupedFields() {
+function updateDropdowns() {
   const count = parseInt(document.getElementById('item-count').value);
-  const container = document.getElementById('grouped-fields');
-  container.innerHTML = ''; // Clear all previous groups
-
   if (isNaN(count) || count < 1) return;
 
-  const includeDesign = document.getElementById('design-radio').checked;
-  const includeSize = document.getElementById('size-radio').checked;
-  const includeColor = document.getElementById('color-radio').checked;
+  const designChecked = document.getElementById('design-radio').checked;
+  const sizeChecked = document.getElementById('size-radio').checked;
+  const colorChecked = document.getElementById('color-radio').checked;
 
-  for (let i = 1; i <= count; i++) {
-    const groupDiv = document.createElement('div');
-    groupDiv.className = 'input-group'; // for styling
-    groupDiv.style.marginBottom = '20px';
+  if (designChecked || sizeChecked || colorChecked) {
+    const interleavedFields = [];
 
-    const heading = document.createElement('h4');
-    heading.textContent = `Item ${i}`;
-    groupDiv.appendChild(heading);
-
-    if (includeDesign) {
-      const designInput = createInput(`Design ${i}`);
-      groupDiv.appendChild(designInput);
+    // Loop to create interleaved fields
+    for (let i = 1; i <= count; i++) {
+      if (designChecked) interleavedFields.push({ type: 'design', index: i });
+      if (sizeChecked) interleavedFields.push({ type: 'size', index: i });
+      if (colorChecked) interleavedFields.push({ type: 'color', index: i });
     }
 
-    if (includeSize) {
-      const sizeInput = createInput(`Size ${i}`);
-      groupDiv.appendChild(sizeInput);
-    }
-
-    if (includeColor) {
-      const colorInput = createInput(`Color ${i}`);
-      groupDiv.appendChild(colorInput);
-    }
-
-    container.appendChild(groupDiv);
+    // Now generate the interleaved fields in the #fields-container
+    generateInterleavedFields(interleavedFields);
   }
 }
 
-function createInput(placeholderText) {
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.placeholder = placeholderText;
-  input.className = 'dynamic-input';
-  input.style.display = 'block';
-  input.style.marginBottom = '8px';
-  return input;
+function generateInterleavedFields(fields) {
+  // Clear the fields container first
+  document.getElementById('fields-container').innerHTML = '';
+
+  // Generate the fields in interleaved order
+  fields.forEach(field => {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.placeholder = `${capitalizeFirstLetter(field.type)} ${field.index}`;
+
+    // Append the input field to the container
+    document.getElementById('fields-container').appendChild(input);
+  });
 }
+
+// Utility function to capitalize the first letter of a string
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+
 
 function goBack() {
   history.back();
 }
+
 
 
 

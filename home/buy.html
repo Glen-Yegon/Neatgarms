@@ -86,20 +86,15 @@
   <!-- Multi-Section Form -->
 <div class="multi-section-form">
 
-
   <div class="form-section">
     <h3>Design / Size / Color</h3>
   
-    <p class="pp">
-      Click the checkbox to choose between design/color/size if any is available. <br>
-      Kindly, if you have more than one cloth, write the name of the cloth before the design/size/color. 
-      Happy shopping 😊! <br>
-    </p>
-  
+    <!-- Input for number of items -->
+    <p class="pp">Click the checkbox to choose between design/color/size if any is available. <br> Kindly, if you have more than one cloth, write the name of the cloth before the design/size/color. Happy shopping 😊! <br> </p>
     <label for="item-count">Number of Items</label>
     <input type="number" id="item-count" placeholder="Enter number of items" min="1" max="10">
   
-    <!-- Checkboxes for selection -->
+    <!-- Radio buttons for selection -->
     <div class="radio-container">
       <input type="checkbox" id="design-radio" class="radio-input">
       <label for="design-radio" class="radio-label">Design</label>
@@ -115,14 +110,12 @@
       <label for="color-radio" class="radio-label">Color</label>
     </div>
   
-    <!-- Grouped dynamic input fields -->
-    <div id="grouped-fields"></div>
+    <!-- Interleaved fields container -->
+    <div id="fields-container"></div>
   </div>
   
-  
-  
+ 
 
-  
 
     <!-- Contact Section -->
     <div class="form-section">
@@ -156,7 +149,7 @@
     <!-- First Name -->
     <label for="first-name">First Name</label>
     <input type="text" id="first-name" placeholder="Enter your first name">
-    
+
     <!-- Last Name -->
     <label for="last-name">Last Name</label>
     <input type="text" id="last-name" placeholder="Enter your last name">
@@ -416,43 +409,20 @@ const data = {
   paymentMethod: paymentMethod,
 };
 
-// Collect Design / Size / Color per item
-data.items = [];
+// Collect additional design, size, and color inputs if selected
+document.querySelectorAll("#fields-container input").forEach((input) => {
+  const placeholder = input.placeholder.toLowerCase();
 
-const itemCountInt = parseInt(itemCount);
-for (let i = 1; i <= itemCountInt; i++) {
-  const itemData = {};
-
-  // Check Design input for each item
-  const designInput = document.querySelector(`#group-${i} .design-input`);
-  if (designInput) {
-    itemData.design = designInput.value || "N/A";
-  } else {
-    itemData.design = "N/A";
+  if (placeholder.includes("design")) {
+    data.designs.push(input.value || "N/A");
+  } else if (placeholder.includes("size")) {
+    data.sizes.push(input.value || "N/A");
+  } else if (placeholder.includes("color")) {
+    data.colors.push(input.value || "N/A");
   }
+});
 
-  // Check Size input for each item
-  const sizeInput = document.querySelector(`#group-${i} .size-input`);
-  if (sizeInput) {
-    itemData.size = sizeInput.value || "N/A";
-  } else {
-    itemData.size = "N/A";
-  }
-
-  // Check Color input for each item
-  const colorInput = document.querySelector(`#group-${i} .color-input`);
-  if (colorInput) {
-    itemData.color = colorInput.value || "N/A";
-  } else {
-    itemData.color = "N/A";
-  }
-
-  // Push the itemData to the items array
-  data.items.push(itemData);
-}
-
-// Log the data object for debugging
-console.log('Collected data:', data);
+// Now, 'data' will contain the necessary inputs from the form
 
     
       // Retrieve Order Summary Details from Cart
@@ -492,6 +462,7 @@ console.log('Collected data:', data);
     });
     
   </script>
+
 
 
 
