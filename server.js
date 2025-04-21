@@ -349,12 +349,12 @@ app.post("/pay2-now", async (req, res) => {
     } = req.body;
 
     // Format the details for the admin email
-    let emailContent = `New Pay Now Submission:\n\n`;
+    let emailContent = `✅ Successful Form Submission:\n\n`;
     emailContent += `Number of Items: ${itemCount}\n\n`;
 
     // --- Order Summary Section ---
     if (orderSummary) {
-      emailContent += `Order Summary:\n`;
+      emailContent += `🛒 ORDER SUMMARY:\n`;
       emailContent += `Product Name: ${orderSummary.name}\n`;
       emailContent += `Brand: ${orderSummary.brand}\n`;
       emailContent += `Image URL: ${orderSummary.image}\n`;
@@ -374,13 +374,13 @@ app.post("/pay2-now", async (req, res) => {
     }
 
     // --- Contact Information ---
-    emailContent += `Contact Information:\n`;
+    emailContent += `📞 CONTACT INFORMATION:\n`;
     emailContent += `Email: ${contact.email}\n`;
     emailContent += `Phone Number: ${contact.phone}\n`;
     emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
 
     // --- Delivery Information ---
-    emailContent += `Delivery Information:\n`;
+    emailContent += `🚚 DELIVERY INFORMATION:\n`;
     emailContent += `Country/Region: ${delivery.country}\n`;
     emailContent += `First Name: ${delivery.firstName}\n`;
     emailContent += `Last Name: ${delivery.lastName}\n`;
@@ -392,7 +392,7 @@ app.post("/pay2-now", async (req, res) => {
     emailContent += `Shipping Method: ${delivery.shippingMethod}\n\n`;
 
     // --- Billing Information ---
-    emailContent += `Billing Information:\n`;
+    emailContent += `💳 BILLING INFORMATION:\n`;
     if (billing.note) {
       emailContent += `${billing.note}\n`; // e.g., "Same as shipping address"
     } else {
@@ -407,7 +407,7 @@ app.post("/pay2-now", async (req, res) => {
     emailContent += `\n`;
 
     // --- Payment Method ---
-    emailContent += `Payment Method:\n`;
+    emailContent += `💸 PAYMENT METHOD:\n`;
     emailContent += `${paymentMethod}\n`;
 
      // Email to Admin
@@ -464,7 +464,7 @@ app.post("/pay2-now", async (req, res) => {
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: #333;">🔥 Best-Selling Picks This Week</h3>
+        <h3 style="color: #333;">🔥 Top Neat Picks for This Week</h3>
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
@@ -495,7 +495,7 @@ app.post("/pay2-now", async (req, res) => {
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: #333;">📞 Need Help?</h3>
+        <h3 style="color: black;">📞 Need Help?</h3>
         <p style="font-size: 14px;">Contact us anytime:</p>
         <ul style="line-height: 1.8; font-size: 14px;">
           <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
