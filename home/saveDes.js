@@ -73,20 +73,11 @@ saveButton.addEventListener('click', async function () {
      previewImage = tempCanvas.toDataURL("image/jpeg", 0.6); // Convert to JPEG & compress
    }
 
-   // Store large images separately in Firebase Storage
-   let previewImageUrl = null;
-   if (previewImage) {
-     const storageRef = ref(storage, `design_previews/${userId}_${Date.now()}.jpg`);
-     const response = await fetch(previewImage);
-     const blob = await response.blob();
-     await uploadBytes(storageRef, blob);
-     previewImageUrl = await getDownloadURL(storageRef);
-   }
+
 
    // Format design data for Firestore (remove extra properties if needed)
    const firestoreDesignData = {
      name: designName,
-     previewImage: previewImageUrl, // Store compressed image URL
      canvas1Objects: designData.canvas1 || null,
      canvas2Objects: designData.canvas2 || null,
      canvas3Objects: designData.canvas3 || null,
@@ -163,7 +154,7 @@ async function loadDesignFromFirestore() {
        const designItem = document.createElement("div");
        designItem.classList.add("load-design-item");
 
-       // Debug preview image URL
+      // Debug preview image URL
        console.log(`Design ${index + 1} preview image:`, design.previewImage);
 
        // Thumbnail image
@@ -176,6 +167,8 @@ async function loadDesignFromFirestore() {
        img.onerror = function () {
          this.src = "default-preview.png";
        };
+
+
 
        // Design name
        const name = document.createElement("span");
