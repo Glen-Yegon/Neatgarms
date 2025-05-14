@@ -66,8 +66,8 @@ const transporter = nodemailer.createTransport({
   port: 465, // SSL port
   secure: true,
   auth: {
-    user: "neatgarmsltd@zohomail.com", // Your Zoho email
-    pass: "N0wdHVPctWEa", // Your Zoho app password
+    user: "info@neatgarms.com", // Your Zoho email
+    pass: "nE3hNVPdhsK6", // Your Zoho app password
   },
   tls: {
     rejectUnauthorized: false, // Ignore self-signed certificate errors
@@ -111,8 +111,8 @@ app.post(
 
       // Email Configuration to Your Inbox
       const mailOptions = {
-        from: "neatgarmsltd@zohomail.com",
-        to: "neatgarmsltd@zohomail.com",
+        from: "info@neatgarms.com",
+        to: "info@neatgarms.com",
         subject: "New Form Submission with PDF",
         text: `You have received a new form submission.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nImages are attached as a PDF.`,
         attachments: [{ filename: "uploaded_images.pdf", path: pdfFilePath }],
@@ -124,7 +124,7 @@ app.post(
 
       // Autoresponder Email to the Sender
       const autoResponseOptions = {
-        from: "neatgarmsltd@zohomail.com",
+        from: "info@neatgarms.com",
         to: email,
         subject: "Thank You for Your Submission!",
         text: `Thank you for choosing Neatgarms, ${name}!\n\nWe will get back to you soon.\n\nHappy shopping 🛍️`,
@@ -244,8 +244,8 @@ app.post("/pay-now", async (req, res) => {
 
     // Email to Admin
     const adminMailOptions = {
-      from: "neatgarmsltd@zohomail.com",
-      to: "neatgarmsltd@zohomail.com",
+      from: "info@neatgarms.com",
+      to: "info@neatgarms.com",
       subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
       text: emailContent,
     };
@@ -255,7 +255,7 @@ app.post("/pay-now", async (req, res) => {
     console.log("Pay Now Email sent to admin:", info.response);
   
     const userMailOptions = {
-      from: "neatgarmsltd@zohomail.com",
+      from: "info@neatgarms.com",
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
@@ -414,8 +414,8 @@ app.post("/pay2-now", async (req, res) => {
 
      // Email to Admin
      const adminMailOptions = {
-      from: "neatgarmsltd@zohomail.com",
-      to: "neatgarmsltd@zohomail.com",
+      from: "info@neatgarms.com",
+      to: "info@neatgarms.com",
       subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
       text: emailContent,
     };
@@ -434,7 +434,7 @@ app.post("/pay2-now", async (req, res) => {
     }
 
     const userMailOptions = {
-      from: "neatgarmsltd@zohomail.com",
+      from: "info@neatgarms.com",
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
@@ -623,8 +623,8 @@ app.post("/pay3-now", async (req, res) => {
 
     // --- Email to Admin (plain text, with PDF attachment) ---
     const adminMailOptions = {
-      from: "neatgarmsltd@zohomail.com",
-      to: "neatgarmsltd@zohomail.com",
+      from: "info@neatgarms.com",
+      to: "info@neatgarms.com",
       subject: "New Pay Now Submission with Order Summary, Contact, Delivery & Payment Info",
       text: emailContent,
       attachments: [
@@ -640,7 +640,7 @@ app.post("/pay3-now", async (req, res) => {
 
     // --- Build the Autoresponse Email to the User (HTML Email) ---
     const autoResponse = {
-      from: "neatgarmsltd@zohomail.com",
+      from: "info@neatgarms.com",
       to: contact.email,
       subject: "🧾 Your Order is Confirmed! | Neatgarms Ltd",
       html: `
@@ -773,8 +773,8 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
 
     // Email to Your Inbox
     const mailOptions = {
-      from: "neatgarmsltd@zohomail.com",
-      to: "neatgarmsltd@zohomail.com", // Your inbox
+      from: "info@neatgarms.com",
+      to: "info@neatgarms.com", // Your inbox
       subject: `New Review Submission - ${reviewTitle}`,
       text: `You have received a new review:\n\nTitle: ${reviewTitle}\nContent: ${reviewContent}\nName: ${reviewerName}\nEmail: ${reviewerEmail}\nRating: ${ratingValue}`,
       attachments, // Include uploaded file if any
@@ -786,7 +786,7 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
 
     // Autoresponder to Reviewer
     const autoResponseOptions = {
-      from: "neatgarmsltd@zohomail.com",
+      from: "info@neatgarms.com",
       to: reviewerEmail,
       subject: "Thank You for Your Review!",
       text: `Hi ${reviewerName},\n\nThank you for your review titled "${reviewTitle}". We appreciate your feedback!\n\nBest regards,\nYour Team`,
