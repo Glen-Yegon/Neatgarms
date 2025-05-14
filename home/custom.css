@@ -50,6 +50,8 @@ body{
   color: #333;
   font-weight: bold;
   text-align: center;
+  font-style: normal;
+  margin-left: 10px;
   flex-grow: 1;
   margin-left: auto;
   margin-right: auto;
@@ -110,11 +112,10 @@ body{
 .scrolling-text-container {
   font-family: 'Cinzel', Times, serif; 
   font-weight: bold;
-  font-style: italic;
   position: relative;
   overflow: hidden;
   background: linear-gradient(to top, #ddd, #8a9381);
-  height: 60px;
+  height: 80;
   display: flex;
   width: 100%;
   align-items: center;
@@ -123,7 +124,7 @@ body{
 .scrolling-text {
   display: flex;
   white-space: nowrap;
-  animation: scrollText 7s linear infinite;
+  animation: scrollText 17s linear infinite;
 }
 
 .scrolling-text span {
@@ -693,7 +694,7 @@ canvas {
   margin: 10px;
   padding-left: 25px;
   padding-right: 25px;
-  color: #fff;
+  color: #000000;
   -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
   clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
   height: 40px;
@@ -701,7 +702,7 @@ canvas {
   line-height: 14px;
   letter-spacing: 1.2px;
   transition: .2s .1s;
-  background-image: linear-gradient(90deg,#1c1c1c,#6220fb);
+  background-image: linear-gradient(90deg, slategray, rgb(145, 145, 145));
   border: 0 solid;
   overflow: hidden;
 }
@@ -789,7 +790,7 @@ canvas {
   left: 0;
   width: 400px;
   height: 100%;
-  background: linear-gradient(to bottom, #6220fb, #1c1c1c);
+  background: linear-gradient(to bottom, rgb(145, 145, 145), slategray);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   color: white;

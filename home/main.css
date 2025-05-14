@@ -750,7 +750,7 @@ body, html{
   font-family: 'Cinzel', Times, serif;
   color: #383f45;
   font-weight: bold;
-  animation: moveText 10s linear infinite; /* Move text over 10 seconds */
+  animation: moveText 15s linear infinite; /* Move text over 10 seconds */
 }
 
 @keyframes moveText {

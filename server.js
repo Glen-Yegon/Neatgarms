@@ -946,7 +946,7 @@ app.post("/remove-bg", async (req, res) => {
 
   try {
       // Send the request to the Python API
-      const response = await axios.post("http://127.0.0.1:5001/remove-bg", { image });
+      const response = await axios.post("http://127.0.0.1:10000/remove-bg", { image });
 
       // Return the processed image from Python
       res.json({ processedImage: response.data.processedImage });

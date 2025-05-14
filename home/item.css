@@ -247,12 +247,12 @@ color: #000000;
 
 .text-wrapper {
 display: flex;
-animation: scroll-right 7s linear infinite;
+animation: scroll-right 17s linear infinite;
 }
 
 .marquee-text {
 font-size: 5rem;
-font-style: italic; /* Space between repeating texts */
+font-style: normal; /* Space between repeating texts */
 }
 
 /* Animation for scrolling text */
@@ -377,7 +377,7 @@ background: linear-gradient(to top, #8A9381, #ae866a);
 display: flex;
 align-items: center;
 position: relative;
-animation: parallax-scroll 10s linear infinite;
+animation: parallax-scroll 17s linear infinite;
 margin-bottom: 20px;
 gap: 10px;
 }
@@ -386,7 +386,7 @@ gap: 10px;
 height: 250px;
 margin: 0 10px;
 border-radius: 20px;
-transition: transform 0.3s ease-in-out;
+transition: transform 0.5s ease-in-out;
 border: 1px solid #000000;
 }
 
