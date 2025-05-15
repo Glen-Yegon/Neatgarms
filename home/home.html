@@ -42,8 +42,6 @@
 
 <div class="looping-text-section">
   <div class="text-container">
-    <span class="countdown-timer" id="deal-timer">00:00:00</span>
-    <a href="#" class="looping-text">Shop the Latest Collection</a>
     <div class="menu-icon" id="menuToggle">
       <span></span>
       <span></span>
@@ -374,6 +372,33 @@
 
 
 
+<!-- Subscription Popup -->
+<div class="overlay" id="subscriptionPopup">
+  <div class="popup-card">
+    <button class="close-btn" id="closePopup">&times;</button>
+    <h2>Join The Neat Community</h2>
+    <p>Subscribe for exclusive drops, discounts & updates!</p>
+    <form id="subscribeForm">
+      <div class="input-group">
+        <input type="email" id="email" name="email" required placeholder=" " />
+        <label for="email">Your Email</label>
+      </div>
+      <button type="submit" class="subscribe-btn">Subscribe</button>
+    </form>
+  </div>
+  <div class="thank-you-message" id="thankYouMsg">
+    <h2>✨ Thank You!</h2>
+    <p>You’re officially part of the Neat Family!</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
 
   <script src="scripts.js" ></script>
   <script>
@@ -575,6 +600,75 @@ window.onscroll = function() {
           });
         }
       });
+    </script>
+
+    <script>
+
+
+window.addEventListener('DOMContentLoaded', () => {
+  const popup = document.getElementById('subscriptionPopup');
+  const closeBtn = document.getElementById('closePopup');
+  const form = document.getElementById('subscribeForm');
+  const thankYou = document.getElementById('thankYouMsg');
+  const popupCard = document.querySelector('.popup-card');
+
+  // Check sessionStorage first: if handled, keep popup hidden
+  if (sessionStorage.getItem('popupHandled')) {
+    popup.style.display = 'none';
+    return; // exit early so no timer runs
+  }
+
+  // Show popup after 2 seconds
+  setTimeout(() => {
+    popup.style.display = 'flex';
+    popupCard.style.display = 'block';
+    thankYou.style.display = 'none';
+  }, 2000);
+
+  closeBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+    sessionStorage.setItem('popupHandled', 'true');
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+
+    if (!email) {
+      alert('Please enter a valid email.');
+      return;
+    }
+
+    try {
+      const response = await fetch('https://neatgarms-risi.onrender.com/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        popupCard.style.display = 'none';
+        thankYou.style.display = 'block';
+        sessionStorage.setItem('popupHandled', 'true');
+
+        setTimeout(() => {
+          popup.style.display = 'none';
+          thankYou.style.display = 'none';
+          form.reset();
+          popupCard.style.display = 'block';
+        }, 4000);
+      } else {
+        alert('Oops! Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Subscription error:', error);
+      alert('Network error. Please check your connection.');
+    }
+  });
+});
+
+
+
     </script>
     
 

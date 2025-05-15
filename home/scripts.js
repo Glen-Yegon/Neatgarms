@@ -14,7 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
       slider.appendChild(clone);
     });
   });
+
+
+
   
+
+
+
 
 
 

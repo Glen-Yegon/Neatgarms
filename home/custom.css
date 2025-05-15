@@ -702,7 +702,7 @@ canvas {
   line-height: 14px;
   letter-spacing: 1.2px;
   transition: .2s .1s;
-  background-image: linear-gradient(90deg, slategray, rgb(145, 145, 145));
+  background-image: linear-gradient(90deg, #ae866a, rgb(145, 145, 145));
   border: 0 solid;
   overflow: hidden;
 }
@@ -790,7 +790,7 @@ canvas {
   left: 0;
   width: 400px;
   height: 100%;
-  background: linear-gradient(to bottom, rgb(145, 145, 145), slategray);
+  background: linear-gradient(to bottom, #ae866a, slategray);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
   color: white;

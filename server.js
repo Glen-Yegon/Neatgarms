@@ -886,6 +886,43 @@ app.post("/paynow4", async (req, res) => {
 });
 
 
+
+// Handle subscription form
+app.post('/subscribe', async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required.' });
+  }
+
+  // Email to yourself
+  const notifyAdmin = {
+    from: 'info@neatgarms.com',
+    to: 'info@neatgarms.com',
+    subject: 'New Email Subscriber',
+    text: `You have a new subscriber: ${email}`,
+  };
+
+  // Auto-response to subscriber
+  const autoReply = {
+    from: 'info@neatgarms.com',
+    to: email,
+    subject: 'Thanks for subscribing to Neat Garms!',
+    text: `Hi there,\n\nThank you for subscribing to Neat Garms! 🎉\n\nYou'll be the first to hear about our latest collections, exclusive offers, and style updates.\n\nStay tuned!\n\nBest,\nThe Neat Garms Team`,
+  };
+
+  try {
+    await transporter.sendMail(notifyAdmin);
+    await transporter.sendMail(autoReply);
+    res.status(200).json({ message: 'Subscription email sent successfully.' });
+  } catch (error) {
+    console.error('Error sending emails:', error);
+    res.status(500).json({ message: 'Failed to send emails.' });
+  }
+});
+
+
+
 const paymentStatus = {}; // Store payment confirmation status
 
 // MPesa Callback Endpoint
