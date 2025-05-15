@@ -29,7 +29,7 @@ body{
   padding: 0 20px;
   background: linear-gradient(to bottom, #ae866a, #8a9381); /* Unique gradient */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-  z-index: 1000;
+  z-index: 0;
 }
 
 /* Unique Background Effect (Diagonal Stripes) */
@@ -658,7 +658,7 @@ canvas {
   left: -300px; /* Hidden initially */
   width: 300px;
   height: 100%;
-  background: linear-gradient(to bottom, #8a9381,#ae866a);
+  background: linear-gradient(to bottom, #8a9381, #8a9381);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
   z-index: 999;
   font-family: 'Cinzel', Times, serif; 
@@ -694,7 +694,7 @@ canvas {
   margin: 10px;
   padding-left: 25px;
   padding-right: 25px;
-  color: #000000;
+  color: #ffffff;
   -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
   clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
   height: 40px;
@@ -702,16 +702,16 @@ canvas {
   line-height: 14px;
   letter-spacing: 1.2px;
   transition: .2s .1s;
-  background-image: linear-gradient(90deg, #ae866a, rgb(145, 145, 145));
+  background-image: linear-gradient(45deg, black, slategray);
   border: 0 solid;
   overflow: hidden;
 }
-
 .men:hover {
   cursor: pointer;
   transition: all .3s ease-in;
   padding-right: 30px;
   padding-left: 30px;
+ transform: scale(1.07); /* slightly bigger */
 }
 
 /* From Uiverse.io by vinodjangid07 */ 
