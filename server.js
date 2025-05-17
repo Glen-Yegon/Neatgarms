@@ -124,7 +124,7 @@ app.post(
 
       // Autoresponder Email to the Sender
       const autoResponseOptions = {
-        from: "info@neatgarms.com",
+        from: '"Neatgarms" <info@neatgarms.com>', 
         to: email,
         subject: "Thank You for Your Submission!",
         text: `Thank you for choosing Neatgarms, ${name}!\n\nWe will get back to you soon.\n\nHappy shopping 🛍️`,
@@ -255,7 +255,7 @@ app.post("/pay-now", async (req, res) => {
     console.log("Pay Now Email sent to admin:", info.response);
   
     const userMailOptions = {
-      from: "info@neatgarms.com",
+      from: '"Neatgarms" <info@neatgarms.com>', 
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
@@ -434,7 +434,7 @@ app.post("/pay2-now", async (req, res) => {
     }
 
     const userMailOptions = {
-      from: "info@neatgarms.com",
+      from: '"Neatgarms" <info@neatgarms.com>', 
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
@@ -640,7 +640,7 @@ app.post("/pay3-now", async (req, res) => {
 
     // --- Build the Autoresponse Email to the User (HTML Email) ---
     const autoResponse = {
-      from: "info@neatgarms.com",
+      from: '"Neatgarms" <info@neatgarms.com>', 
       to: contact.email,
       subject: "🧾 Your Order is Confirmed! | Neatgarms Ltd",
       html: `
@@ -786,7 +786,7 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
 
     // Autoresponder to Reviewer
     const autoResponseOptions = {
-      from: "info@neatgarms.com",
+      from: '"Neatgarms" <info@neatgarms.com>', 
       to: reviewerEmail,
       subject: "Thank You for Your Review!",
       text: `Hi ${reviewerName},\n\nThank you for your review titled "${reviewTitle}". We appreciate your feedback!\n\nBest regards,\nYour Team`,
@@ -905,7 +905,7 @@ app.post('/subscribe', async (req, res) => {
 
   // Auto-response to subscriber
   const autoReply = {
-    from: 'info@neatgarms.com',
+    from: '"Neatgarms" <info@neatgarms.com>', 
     to: email,
     subject: 'Thanks for subscribing to Neat Garms!',
     text: `Hi there,\n\nThank you for subscribing to Neat Garms! 🎉\n\nYou'll be the first to hear about our latest collections, exclusive offers, and style updates.\n\nStay tuned!\n\nBest,\nThe Neat Garms Team`,
