@@ -392,10 +392,7 @@
   </div>
 </div>
 
-
-
-
-
+<div class="custom-alert" id="customAlert">Please wait, saving your details...</div>
 
 
 
@@ -606,6 +603,8 @@ window.onscroll = function() {
 
 
 window.addEventListener('DOMContentLoaded', () => {
+
+
   const popup = document.getElementById('subscriptionPopup');
   const closeBtn = document.getElementById('closePopup');
   const form = document.getElementById('subscribeForm');
@@ -671,6 +670,21 @@ window.addEventListener('DOMContentLoaded', () => {
 
     </script>
     
+    <script>
+      const btn = document.querySelector('.subscribe-btn');
+const alertBox = document.getElementById('customAlert');
+
+btn.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent form submission if any
+
+  alertBox.classList.add('show');
+
+  setTimeout(() => {
+    alertBox.classList.remove('show');
+  }, 4000);
+});
+
+    </script>
 
 
 </body>

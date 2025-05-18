@@ -1527,3 +1527,29 @@ body.loaded {
   transform: scale(1.2);
   color: #8a9381;
 }
+
+
+.custom-alert {
+    font-family: 'Cinzel', Times, serif;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  background: linear-gradient(135deg, #ae866a, white);
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(227, 227, 227, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.5s ease;
+  z-index: 9999;
+}
+
+.custom-alert.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
