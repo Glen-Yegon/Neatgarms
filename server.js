@@ -318,7 +318,7 @@ app.post("/pay-now", async (req, res) => {
         <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
 
-      <table style="font-family: 'Cinzel', Times, serif; color: #333; border-top: 2px solid #ae866a; padding-top: 12px; max-width: 600px;">
+      <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
       <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
@@ -540,6 +540,38 @@ app.post("/pay2-now", async (req, res) => {
         <p style="margin-top: 30px; font-size: 13px; color: #666;">Thanks again for choosing Neatgarms! We can't wait for you to rock your new look! 😎✨</p>
         <p style="font-size: 13px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
+
+             <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
+  <tr>
+    <td style="vertical-align: top; padding-right: 15px;">
+      <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
+    </td>
+    <td style="vertical-align: top;">
+      <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
+      <div style="font-size: 14px; margin-top: 3px;">
+        <a href="mailto:info@neatgarms.com" style="color: #000000; text-decoration: none;">info@neatgarms.com</a>
+      </div>
+      <div style="font-size: 14px;">
+        <a href="https://neatgarms.com" style="color: #000000; text-decoration: none;">www.neatgarms.com</a>
+      </div>
+      <div style="margin-top: 10px;">
+        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
+          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20">
+        </a>
+        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 8px;">
+          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" width="20">
+        </a>
+        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 8px;">
+          <img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="X" width="20">
+        </a>
+        <a href="https://pin.it/1GhE1V3J0" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/24/145/145808.png" alt="Pinterest" width="20">
+        </a>
+      </div>
+
+    </td>
+  </tr>
+  </table>
       `
     };
     
@@ -973,7 +1005,7 @@ app.post('/subscribe', async (req, res) => {
     from: '"Neatgarms" <info@neatgarms.com>', 
     to: email,
     subject: 'Thanks for subscribing to Neat Garms!',
-    text: `Hi there,\n\nThank you for subscribing to Neat Garms! 🎉\n\nYou'll be the first to hear about our latest collections, exclusive offers, and style updates.\n\nStay tuned!\n\nBest,\nThe Neat Garms Team
+    html: `Hi there,\n\nThank you for subscribing to Neat Garms! 🎉\n\nYou'll be the first to hear about our latest collections, exclusive offers, and style updates.\n\nStay tuned!\n\nBest,\nThe Neat Garms Team
     
        <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
