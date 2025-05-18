@@ -631,6 +631,18 @@ window.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+          const btn = document.querySelector('.subscribe-btn');
+const alertBox = document.getElementById('customAlert');
+
+btn.addEventListener('click', (e) => {
+  e.preventDefault(); // Prevent form submission if any
+
+  alertBox.classList.add('show');
+
+  setTimeout(() => {
+    alertBox.classList.remove('show');
+  }, 4000);
+});
     const email = document.getElementById('email').value.trim();
 
     if (!email) {
@@ -670,22 +682,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     </script>
     
-    <script>
-      const btn = document.querySelector('.subscribe-btn');
-const alertBox = document.getElementById('customAlert');
-
-btn.addEventListener('click', (e) => {
-  e.preventDefault(); // Prevent form submission if any
-
-  alertBox.classList.add('show');
-
-  setTimeout(() => {
-    alertBox.classList.remove('show');
-  }, 4000);
-});
-
-    </script>
-
 
 </body>
 </html>
