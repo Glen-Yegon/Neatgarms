@@ -1179,7 +1179,7 @@ button {
 }
 
 .delete-design-btn:hover {
-  background: darkred;
+  background: #ae866a;
 }
 
 .load-design-item {
@@ -1192,7 +1192,7 @@ button {
 }
 
 .load-design-item:hover {
-  background: #f5f5f5;
+  background: #ae866a;
 }
 
 .design-preview {

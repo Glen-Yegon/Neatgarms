@@ -133,14 +133,14 @@ canvases.forEach((canvas, index) => {
 
     // Create a large sage green button
     let button = new fabric.Rect({
-      left: canvasWidth / 2 - 125, // Centered horizontally
-      top: 20, // Positioned at the top
-      fill: '#8a9381', // Sage green background
-      width: 400,
+      left: canvasWidth / 2 - -55, // Centered horizontally
+      top: 130, // Positioned at the top
+      fill: '#ae866a', // Sage green background
+      width: 330,
       height: 80,
-      rx: 20, // Rounded corners
-      ry: 20,
-      stroke: 'white',
+      rx: 5, // Rounded corners
+      ry: 5,
+      stroke: 'black',
       strokeWidth: 1,
       selectable: false, // Prevent dragging
       hoverCursor: 'pointer'
@@ -148,11 +148,11 @@ canvases.forEach((canvas, index) => {
 
     // Add text on the button
     let buttonText = new fabric.Text('Proceed To Checkout ?', {
-      left: canvasWidth / 2 - 80, // Adjusted for centering
-      top: 45,
+      left: canvasWidth / 2 - -80, // Adjusted for centering
+      top: 150,
       fontSize: 30, // Bigger text
-      fill: 'white',
-      fontWeight: 'bold',
+      fill: 'black',
+      fontWeight: 'normal',
       selectable: false
     });
 
