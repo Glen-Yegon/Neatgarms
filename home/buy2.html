@@ -302,7 +302,7 @@
 </div>
 
 <div class="pay-now-container">
-  <button class="pay-now-btn" id="googlepay-btn">Pay Via Credit / Debit Card ?</button>
+  <button class="pay-now-btn" id="paystack-btn">Pay Via Credit / Debit Card ?</button>
 </div>
 
 
@@ -311,7 +311,7 @@
   </div>
 
 
-  
+    <script src="https://js.paystack.co/v1/inline.js"></script>
 
   <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
   <script>
@@ -475,6 +475,45 @@ const displayedEstimatedTotal = estimatedTotalElement ? estimatedTotalElement.in
     
   </script>
   
+       <script>
+
+document.getElementById('paystack-btn').addEventListener('click', function () {
+  const combinedPriceElement = document.getElementById('combined-price');
+  if (!combinedPriceElement) {
+    alert('Estimated total not found.');
+    return;
+  }
+
+  const amountString = combinedPriceElement.textContent.trim();  // e.g. "1234.56"
+  const amount = parseFloat(amountString);
+
+  if (!amount || amount <= 0) {
+    alert('Invalid estimated total amount');
+    return;
+  }
+
+  const amountInKobo = Math.round(amount * 100); // convert to kobo (smallest currency unit)
+
+  let handler = PaystackPop.setup({
+    key: 'pk_test_9a29ec4d0e7944ac94fe2ad542aa1427d7469bbf', // Replace with your Paystack public key
+    email: 'customer@example.com', // Or dynamically fill this
+    amount: amountInKobo,
+    currency: 'KES',
+    ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+    callback: function(response) {
+      alert('Payment complete! Reference: ' + response.reference);
+      // Handle post-payment logic here (e.g., verify payment on backend)
+    },
+    onClose: function() {
+      alert('Payment cancelled');
+    }
+  });
+  handler.openIframe();
+});
+
+    
+  </script>
+    
   
 
   <script src="buy2.min.js" defer></script>

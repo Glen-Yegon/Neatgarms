@@ -304,7 +304,7 @@
 
 
 <div class="pay-now-container">
-  <button class="pay-now-btn" id="googlepay-btn">Pay Via Credit / Debit Card ?</button>
+  <button class="pay-now-btn" id="paystack-btn">Pay Via Credit / Debit Card ?</button>
 </div>
 
 
@@ -315,7 +315,10 @@
   
   
 
-  <script src="buy3.min.js" defer></script>
+  <script src="buy3.js" defer></script>
+  
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
     AOS.init({
@@ -324,7 +327,11 @@
     });
   </script>
 
-  <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script>
+<script async
+  src="https://pay.google.com/gp/p/js/pay.js"
+  onload="onGooglePayLoaded()">
+</script>
+
 
   <script>
     document.getElementById("pay-now-btn").addEventListener("click", async () => {
@@ -468,7 +475,43 @@
     });
     </script>
     
+     <script>
+
+  document.getElementById('paystack-btn').addEventListener('click', function () {
+  const displayPrice = document.getElementById('display-price').textContent; 
+  // displayPrice = "Price: Kshs. 1500"
+
+  // Extract the numeric amount from the string
+  const amountString = displayPrice.replace('Price: Kshs. ', '').trim();
+
+  const amount = parseFloat(amountString);
+
+  if (!amount || amount <= 0) {
+    alert('Invalid amount to pay');
+    return;
+  }
+
+  const amountInKobo = amount * 100;
+
+  let handler = PaystackPop.setup({
+    key: 'pk_test_9a29ec4d0e7944ac94fe2ad542aa1427d7469bbf', // Replace with your public key
+    email: 'customer@example.com', // Or dynamically fill
+    amount: amountInKobo,
+    currency: 'KES',
+    ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+    callback: function(response) {
+      alert('Payment complete! Reference: ' + response.reference);
+      // You can do backend verification here if needed
+    },
+    onClose: function() {
+      alert('Payment cancelled');
+    }
+  });
+  handler.openIframe();
+});
+
     
+  </script>
     
   
 </body>
