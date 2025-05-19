@@ -209,16 +209,22 @@ app.post("/pay-now", async (req, res) => {
 
     emailContent += `🚚 DELIVERY INFORMATION\n\n`;
   
-    // Delivery Information
-    emailContent += `Country/Region: ${delivery.country}\n`;
-    emailContent += `First Name: ${delivery.firstName}\n`;
-    emailContent += `Last Name: ${delivery.lastName}\n`;
-    emailContent += `Address: ${delivery.address}\n`;
-    emailContent += `Apartment/Suite: ${delivery.apartment}\n`;
-    emailContent += `City: ${delivery.city}\n`;
-    emailContent += `Postal Code: ${delivery.postalCode}\n`;
-    emailContent += `Phone: ${delivery.phone}\n`;
-    emailContent += `Shipping Method: ${delivery.shippingMethod}\n\n`;
+// Delivery Information
+emailContent += `Country/Region: ${delivery.country}\n`;
+emailContent += `First Name: ${delivery.firstName}\n`;
+emailContent += `Last Name: ${delivery.lastName}\n`;
+emailContent += `Address: ${delivery.address}\n`;
+emailContent += `Apartment/Suite: ${delivery.apartment}\n`;
+emailContent += `City: ${delivery.city}\n`;
+
+if (delivery.city.toLowerCase() === "nairobi") {
+  emailContent += `Area (Nairobi): ${delivery.area}\n`;
+}
+
+emailContent += `Postal Code: ${delivery.postalCode}\n`;
+emailContent += `Phone: ${delivery.phone}\n`;
+emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
+
   
     // Billing Information
     emailContent += `💳 BILLING INFORMATION\n\n `;
@@ -1037,7 +1043,7 @@ app.post('/subscribe', async (req, res) => {
     from: '"Neatgarms" <info@neatgarms.com>', 
     to: email,
     subject: 'Thanks for subscribing to Neat Garms!',
-    html: `Hi there,\n\nThank you for subscribing to Neat Garms! 🎉\n\nYou'll be the first to hear about our latest collections, exclusive offers, and style updates.\n\nStay tuned!\n\nBest,\nThe Neat Garms Team
+    html: `Hi there,\n\nThank you for subscribing to Neatgarms! 🎉\n\nYou'll be the first to hear about our latest collections, exclusive offers, and style updates.\n\nStay tuned!\n\nBest Regards,\nThe Neatgarms Team
     
        <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
@@ -1047,10 +1053,10 @@ app.post('/subscribe', async (req, res) => {
     <td style="vertical-align: top;">
       <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
       <div style="font-size: 14px; margin-top: 3px;">
-        <a href="mailto:info@neatgarms.com" style="color: #000000; text-decoration: none;">info@neatgarms.com</a>
+        <a href="mailto:info@neatgarms.com" style="color:blue; text-decoration: underline;">info@neatgarms.com</a>
       </div>
       <div style="font-size: 14px;">
-        <a href="https://neatgarms.com" style="color: #000000; text-decoration: none;">www.neatgarms.com</a>
+        <a href="https://neatgarms.com" style="color: blue; text-decoration: underline;">www.neatgarms.com</a>
       </div>
       <div style="margin-top: 10px;">
         <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
@@ -1155,6 +1161,30 @@ app.post("/remove-bg", async (req, res) => {
   }
 });
 
+
+
+// ✅ Verify transaction
+app.post('/api/paystack/verify', async (req, res) => {
+  const { reference } = req.body;
+
+  try {
+    const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
+      headers: {
+        Authorization: 'Bearer sk_test_1bbb765b1d6f4a65ee92843f06c3a9dd5baa78b5' // 🔁 Replace with your test secret key
+      }
+    });
+
+    if (response.data.data.status === 'success') {
+      res.json({ status: true, message: 'Payment verified successfully.' });
+    } else {
+      res.json({ status: false, message: 'Payment verification failed.' });
+    }
+
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({ status: false, message: 'Error verifying payment.' });
+  }
+});
 
 
 // Start Server

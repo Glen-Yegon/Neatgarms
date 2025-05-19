@@ -11,70 +11,146 @@ toggleDropdown.addEventListener('click', () => {
 
 
 
-// Function to render cart from localStorage
 const renderCartFromLocalStorage = () => {
-    const cartItemsContainer = document.getElementById('cart-items-container');
-    const combinedPriceElement = document.getElementById("combined-price");
-  
-    // Retrieve cart items from localStorage
-    const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
-  
-    if (cart.length === 0) {
-      cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
-      combinedPriceElement.textContent = "0.00"; // Reset combined price
-    } else {
-      cartItemsContainer.innerHTML = ''; // Clear previous content
-      let combinedPrice = 0; // Initialize combined price
-  
-      cart.forEach((item) => {
-        const productCard = document.createElement('div');
-        productCard.classList.add('cart-item');
-  
-        // Clean and parse the newPrice
-        const cleanedPrice = (item.newPrice || '0').replace(/KSh|,/g, '').trim(); 
-        const newPrice = parseFloat(cleanedPrice) || 0; // Convert to a valid number
-        const quantity = parseInt(item.quantity) || 1;  // Ensure quantity is an integer
-  
-        // Calculate total price for this item
-        const totalPrice = newPrice * quantity;
-  
-        // Add to combined price
-        combinedPrice += totalPrice;
-  
-        // Create the product card
-        productCard.innerHTML = `
-          <div style="display: grid;">
-            <!-- Product Image -->
-            <img src="${item.image}" alt="${item.name}" style="width:70px; height:auto;">
-            
-            <!-- Product Details -->
-            <h4>${item.name}</h4>
-            <p>Brand: ${item.brand}</p>
-            <p>Price: KSh${newPrice.toFixed(2)}</p>
-            <p>Qty: ${quantity}</p>
-            
-            <!-- Display Size if available -->
-            ${item.size ? `<p>Size: ${item.size}</p>` : ''}
-  
-            <!-- Display Color if available -->
-            ${item.color ? `
-              <p>Color: 
-                <span style="background-color:${item.color}; padding:5px; border-radius:50%;">&nbsp;</span>
-              </p>` : ''}
-  
-            <p>Total Price: KSh${totalPrice.toFixed(2)}</p>
-          </div>
-        `;
-  
-        // Append the product card to the container
-        cartItemsContainer.appendChild(productCard);
-      });
-  
-      // Update the combined price in the HTML
-      combinedPriceElement.textContent = combinedPrice.toFixed(2);
-    }
+  const cartItemsContainer = document.getElementById('cart-items-container');
+  const combinedPriceElement = document.getElementById("combined-price");
+
+  // Retrieve cart items from localStorage
+  const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+  if (cart.length === 0) {
+    cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+    combinedPriceElement.textContent = "0.00"; // Reset combined price
+  } else {
+    cartItemsContainer.innerHTML = ''; // Clear previous content
+    let combinedPrice = 0; // Initialize combined price
+
+    cart.forEach((item) => {
+      const productCard = document.createElement('div');
+      productCard.classList.add('cart-item');
+
+      // Clean and parse the newPrice
+      const cleanedPrice = (item.newPrice || '0').replace(/KSh|,/g, '').trim();
+      const newPrice = parseFloat(cleanedPrice) || 0; // Convert to a valid number
+      const quantity = parseInt(item.quantity) || 1;  // Ensure quantity is an integer
+
+      // Calculate total price for this item 
+      const totalPrice = newPrice * quantity;
+
+      // Add to combined price (items only)
+      combinedPrice += totalPrice;
+
+      // Create the product card
+      productCard.innerHTML = `
+        <div style="display: grid;">
+          <!-- Product Image -->
+          <img src="${item.image}" alt="${item.name}" style="width:70px; height:auto;">
+          
+          <!-- Product Details -->
+          <h4>${item.name}</h4>
+          <p>Brand: ${item.brand}</p>
+          <p>Price: KSh${newPrice.toFixed(2)}</p>
+          <p>Qty: ${quantity}</p>
+          
+          <!-- Display Size if available -->
+          ${item.size ? `<p>Size: ${item.size}</p>` : ''}
+
+          <!-- Display Color if available -->
+          ${item.color ? `
+            <p>Color: 
+              <span style="background-color:${item.color}; padding:5px; border-radius:50%;">&nbsp;</span>
+            </p>` : ''}
+
+          <p>Total Price: KSh${totalPrice.toFixed(2)}</p>
+        </div>
+      `;
+
+      // Append the product card to the container
+      cartItemsContainer.appendChild(productCard);
+    });
+
+
+
+const shippingFeeText = document.getElementById("shipping-fee").textContent || "KSh 0";
+const shippingFee = parseInt(shippingFeeText.replace(/KSh|,/g, '').trim()) || 0;
+
+const finalPrice = combinedPrice + shippingFee;
+
+// Show the total including shipping fee in combinedPriceElement
+combinedPriceElement.textContent = finalPrice.toFixed(2);
+
+
+
+  }
+};
+
+// Start observing shipping fee changes
+const shippingFeeElement = document.getElementById("shipping-fee");
+
+const observer = new MutationObserver(() => {
+  renderCartFromLocalStorage(); // 👈 Re-run this every time shipping fee updates
+});
+
+// Observe changes in the shippingFee element
+observer.observe(shippingFeeElement, {
+  childList: true,
+  characterData: true,
+  subtree: true,
+});
+
+
+
+
+
+
+ const cityInput = document.getElementById('delivery-city');
+  const nairobiAreasDiv = document.getElementById('nairobi-areas');
+  const nairobiSubareaSelect = document.getElementById('nairobi-subarea');
+  const shippingFeeDisplay = document.getElementById('shipping-fee');
+
+  const cityFees = {
+    Nakuru: 500,
+    Kisumu: 750,
+    Mombasa: 800
   };
+
+  const nairobiFees = {
+    "Lang'ata": 150,
+    "Karen": 200,
+    "Westlands": 180,
+    "Kilimani": 160
+    // Add more areas and their fees here
+  };
+
+  function updateShippingFee(fee) {
+    shippingFeeDisplay.textContent = ` ${fee}`;
+  }
+
+  cityInput.addEventListener('input', function () {
+    const city = cityInput.value.trim().toLowerCase();
+
+    if (city === 'nairobi') {
+      nairobiAreasDiv.style.display = 'block';
+      updateShippingFee(0);
+    } else {
+      nairobiAreasDiv.style.display = 'none';
+      const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
+      const fee = cityFees[formattedCity] || 0;
+      updateShippingFee(fee);
+    }
+  });
+
+  nairobiSubareaSelect.addEventListener('change', function () {
+    const selectedArea = nairobiSubareaSelect.value;
+    const fee = nairobiFees[selectedArea] || 0;
+    updateShippingFee(fee);
+
+window.addEventListener('DOMContentLoaded', renderCartFromLocalStorage);
+
+  });
   
+
+
   // Call renderCartFromLocalStorage on page load to render the items from localStorage
   window.onload = renderCartFromLocalStorage;
   
