@@ -360,11 +360,11 @@
         return;
       }
 
-      // Collect Delivery Info
 const selectedCity = document.getElementById("delivery-city").value.trim();
 const selectedArea = document.getElementById("nairobi-subarea").value;
+
 const feeText = document.getElementById("shipping-fee").textContent;
-    
+
 const deliveryInfo = {
   country: document.getElementById("country-region").value || "N/A",
   firstName: document.getElementById("first-name").value || "N/A",
@@ -372,11 +372,12 @@ const deliveryInfo = {
   address: document.getElementById("address").value || "N/A",
   apartment: document.getElementById("apartment-suite").value || "N/A",
   city: selectedCity || "N/A",
-  area: selectedCity.toLowerCase() === "nairobi" ? selectedArea || "N/A" : "N/A",
+  area: selectedCity.toLowerCase() === "nairobi" ? selectedArea || "N/A" : "",  // << added this
   postalCode: document.getElementById("postal-code").value || "N/A",
   phone: document.getElementById("phone").value || "N/A",
   shippingFee: feeText || "KSh 0"
 };
+
     
       // Collect Billing Info
       let billingInfo = {};
@@ -522,6 +523,6 @@ document.getElementById('paystack-btn').addEventListener('click', function () {
  
 </script>
   
-  <script src="buy.js" defer></script>
+  <script src="buy.min.js" defer></script>
 </body>
 </html>

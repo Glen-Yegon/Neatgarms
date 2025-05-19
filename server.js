@@ -655,6 +655,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
   emailContent += `Area (Nairobi): ${delivery.area}\n`;
 }
 
+
     // Billing Information
     emailContent += `Billing Information:\n`;
     if (billing.note) {
