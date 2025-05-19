@@ -1,33 +1,56 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const itemSection = document.getElementById("item-section");
-    const displayName = document.getElementById("display-name");
-    const displayPrice = document.getElementById("display-price");
-  
-    // Retrieve images from localStorage
-    let storedImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
-  
-    // Display images
-    if (storedImages.length === 0) {
-      itemSection.innerHTML = "<p>No items added yet.</p>";
-    } else {
-      itemSection.innerHTML = ""; // Clear previous content
-      storedImages.forEach((imgUrl) => {
-        const imgElement = document.createElement("img");
-        imgElement.src = imgUrl;
-        imgElement.classList.add("order-image");
-        imgElement.style.width = "150px";
-        imgElement.style.margin = "10px";
-        itemSection.appendChild(imgElement);
-      });
-    }
-  
-    // Retrieve and display name & price
-    const itemName = localStorage.getItem("nameID") || "Unknown Item";
-    const itemPrice = localStorage.getItem("priceID") || "0";
-  
-    displayName.textContent = `Item: ${itemName}`;
-    displayPrice.textContent = `Price: Kshs. ${itemPrice}`;
+  const itemSection = document.getElementById("item-section");
+  const displayName = document.getElementById("display-name");
+  const displayPrice = document.getElementById("display-price");
+
+  // Retrieve images from localStorage
+  let storedImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
+
+  // Display images
+  if (storedImages.length === 0) {
+    itemSection.innerHTML = "<p>No items added yet.</p>";
+  } else {
+    itemSection.innerHTML = ""; // Clear previous content
+    storedImages.forEach((imgUrl) => {
+      const imgElement = document.createElement("img");
+      imgElement.src = imgUrl;
+      imgElement.classList.add("order-image");
+      imgElement.style.width = "150px";
+      imgElement.style.margin = "10px";
+      itemSection.appendChild(imgElement);
+    });
+  }
+
+  // Retrieve and display name
+  const itemName = localStorage.getItem("nameID") || "Unknown Item";
+  const itemPriceRaw = localStorage.getItem("priceID") || "0";
+
+  // Convert item price to number (remove Kshs. or commas if needed)
+  const itemPrice = parseFloat(itemPriceRaw.replace(/Kshs\.?|,/g, "").trim()) || 0;
+
+  // Get shipping fee from element
+  const shippingFeeText = document.getElementById("shipping-fee")?.textContent || "KSh 0";
+  const shippingFee = parseFloat(shippingFeeText.replace(/KSh|,/g, '').trim()) || 0;
+
+  const finalTotal = itemPrice + shippingFee;
+
+  displayName.textContent = `Item: ${itemName}`;
+  displayPrice.textContent = `Price: Kshs. ${finalTotal.toFixed(2)}`;
+});
+
+// Place this after the DOMContentLoaded logic
+const shippingElement = document.getElementById("shipping-fee");
+if (shippingElement) {
+  const observer = new MutationObserver(() => {
+    // Recalculate and update final price
+    const updatedShipping = parseFloat(shippingElement.textContent.replace(/KSh|,/g, '').trim()) || 0;
+    const itemPrice = parseFloat(localStorage.getItem("priceID").replace(/Kshs\.?|,/g, "").trim()) || 0;
+    const finalTotal = itemPrice + updatedShipping;
+    document.getElementById("display-price").textContent = `Price: Kshs. ${finalTotal.toFixed(2)}`;
   });
+
+  observer.observe(shippingElement, { childList: true, characterData: true, subtree: true });
+}
 
 
   document.getElementById('item-count').addEventListener('input', updateDropdowns);
@@ -302,3 +325,48 @@ document.getElementById('submit-payment').addEventListener('click', async () => 
 
 
 
+
+const cityInput = document.getElementById('delivery-city');
+  const nairobiAreasDiv = document.getElementById('nairobi-areas');
+  const nairobiSubareaSelect = document.getElementById('nairobi-subarea');
+  const shippingFeeDisplay = document.getElementById('shipping-fee');
+
+  const cityFees = {
+    Nakuru: 500,
+    Kisumu: 750,
+    Mombasa: 800
+  };
+
+  const nairobiFees = {
+    "Lang'ata": 150,
+    "Karen": 200,
+    "Westlands": 180,
+    "Kilimani": 160
+    // Add more areas and their fees here
+  };
+
+  function updateShippingFee(fee) {
+    shippingFeeDisplay.textContent = ` ${fee}`;
+  }
+
+  cityInput.addEventListener('input', function () {
+    const city = cityInput.value.trim().toLowerCase();
+
+    if (city === 'nairobi') {
+      nairobiAreasDiv.style.display = 'block';
+      updateShippingFee(0);
+    } else {
+      nairobiAreasDiv.style.display = 'none';
+      const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
+      const fee = cityFees[formattedCity] || 0;
+      updateShippingFee(fee);
+    }
+  });
+
+  nairobiSubareaSelect.addEventListener('change', function () {
+    const selectedArea = nairobiSubareaSelect.value;
+    const fee = nairobiFees[selectedArea] || 0;
+    updateShippingFee(fee);
+
+  });
+  

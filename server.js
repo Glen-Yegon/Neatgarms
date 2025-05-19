@@ -648,7 +648,12 @@ app.post("/pay3-now", async (req, res) => {
     emailContent += `  City: ${delivery.city}\n`;
     emailContent += `  Postal Code: ${delivery.postalCode}\n`;
     emailContent += `  Phone: ${delivery.phone}\n`;
-    emailContent += `  Shipping Method: ${delivery.shippingMethod}\n\n`;
+  emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
+
+
+if (delivery.city.toLowerCase() === "nairobi") {
+  emailContent += `Area (Nairobi): ${delivery.area}\n`;
+}
 
     // Billing Information
     emailContent += `Billing Information:\n`;
