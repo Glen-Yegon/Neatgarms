@@ -69,11 +69,6 @@
         <button id="apply-discount-btn">Apply</button>
       </div>
   
-      <!-- Shipping Section -->
-      <div class="shipping-section">
-        <h4>Shipping: <span id="shipping-cost">Free</span></h4>
-      </div>
-  
   <!-- Estimated Total -->
 <div class="estimated-total">
   
@@ -175,16 +170,25 @@
   </div>
   
   
-    <!-- Shipping Method -->
-    <div class="form-section">
-      <h3>Shipping Method</h3>
-      <div class="radio-container">
-        <input type="radio" id="standard-shipping" name="shipping-method" checked>
-        <label for="standard-shipping">Standard Shipping (Free)</label>
-        <input type="radio" id="express-shipping" name="shipping-method">
-        <label for="express-shipping">Express Shipping (KSh 500)</label>
-      </div>
-    </div>
+<!-- Nairobi Sub-areas (hidden by default) -->
+<div id="nairobi-areas" style="display: none; margin-top: 10px;">
+  <label for="nairobi-subarea">Select Area in Nairobi:</label>
+  <select id="nairobi-subarea">
+    <option value="">-- Select Area --</option>
+    <option value="Lang'ata">Lang'ata (KSh 150)</option>
+    <option value="Karen">Karen (KSh 200)</option>
+    <option value="Westlands">Westlands (KSh 180)</option>
+    <option value="Kilimani">Kilimani (KSh 160)</option>
+    <!-- Add more as needed -->
+  </select>
+</div>
+
+<!-- Shipping Fee Display -->
+<div class="form-section">
+<div style="margin-top: 15px;">
+  <strong>Shipping Fee:</strong> <span id="shipping-fee">KSh 0</span>
+</div>
+</div>
   
     <!-- Payment Section -->
     <div class="form-section">
@@ -354,6 +358,10 @@
       }
     
       // Collect Delivery Info
+            // Collect Delivery Info
+      const selectedCity = document.getElementById("delivery-city").value.trim();
+      const selectedArea = document.getElementById("nairobi-subarea").value;
+      const feeText = document.getElementById("shipping-fee").textContent;
       const deliveryInfo = {
         country: document.getElementById("country-region").value || "N/A",
         firstName: document.getElementById("first-name").value || "N/A",
@@ -363,9 +371,7 @@
         city: document.getElementById("delivery-city").value || "N/A",
         postalCode: document.getElementById("postal-code").value || "N/A",
         phone: document.getElementById("phone").value || "N/A",
-        shippingMethod: document.getElementById("express-shipping").checked
-          ? "Express Shipping (KSh 500)"
-          : "Standard Shipping (Free)",
+        shippingFee: feeText || "KSh 0"
       };
     
       // Collect Billing Info
@@ -516,6 +522,6 @@ document.getElementById('paystack-btn').addEventListener('click', function () {
     
   
 
-  <script src="buy2.min.js" defer></script>
+  <script src="buy2.js" defer></script>
 </body>
 </html>

@@ -7,19 +7,24 @@ toggleDropdown.addEventListener('click', () => {
     orderSummaryDropdown.style.display === 'block' ? 'none' : 'block';
 });
 
-
-document.addEventListener('DOMContentLoaded', function () {
+function renderProductWithShipping() {
   const productCardSection = document.getElementById('product-card-section');
-
-  // Retrieve the product details from localStorage
   const product = JSON.parse(localStorage.getItem('buyNowProduct'));
 
-  // Check if product data exists
   if (product) {
-    // Parse the new price as a number and calculate the total
-    const newPrice = parseFloat(product.newPrice.replace(/KSh|,/g, '')) || 0; // Remove "KSh" or commas for accurate calculations
-    const quantity = product.quantity || 1; // Default to 1 if no quantity is specified
-    const total = newPrice * quantity; // Calculate the total
+    const newPrice = parseFloat(product.newPrice.replace(/KSh|,/g, '')) || 0;
+    const quantity = product.quantity || 1;
+    const productTotal = newPrice * quantity;
+
+    // Get shipping fee text from the element with ID 'shipping-fee'
+    const shippingFeeText = document.getElementById("shipping-fee")?.textContent || "KSh 0";
+    const shippingFee = parseInt(shippingFeeText.replace(/KSh|,/g, '').trim()) || 0;
+
+    // Calculate final total including shipping fee
+    const finalTotal = productTotal + shippingFee;
+
+    // Clear previous content before appending
+    productCardSection.innerHTML = '';
 
     // Create the product card
     const productCard = document.createElement('div');
@@ -27,39 +32,49 @@ document.addEventListener('DOMContentLoaded', function () {
 
     productCard.innerHTML = `
       <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-        <!-- Product Image -->
         <img src="${product.image}" alt="${product.name}" style="width: 80px; height: auto; border-radius: 5px;">
-        
-        <!-- Product Details -->
         <div>
           <h4>${product.name}</h4>
           <p>Brand: ${product.brand}</p>
           <p><del>KSh${product.oldPrice || 'N/A'}</del> <strong>KSh${product.newPrice}</strong></p>
           <p><strong>Quantity:</strong> ${quantity}</p>
-          <p><strong>Total:</strong> KSh${total.toFixed(2)}</p>
+          <p><strong>Total (without shipping):</strong> KSh${productTotal.toFixed(2)}</p>
         </div>
       </div>
     `;
 
-    // Append the product card to the designated section
     productCardSection.appendChild(productCard);
 
-    // Display the total in the Estimated Total section
+    // Update Estimated Total section to include shipping fee
     const estimatedTotalSection = document.querySelector('.estimated-total');
     if (estimatedTotalSection) {
       estimatedTotalSection.innerHTML = `
-        <h3>Estimated Total: KSh<span id="combined-price">${total.toFixed(2)}</span></h3>
+        <h3>Estimated Total: KSh<span id="combined-price">${finalTotal.toFixed(2)}</span></h3>
       `;
     }
   } else {
-    // If no product data is found, display a message
     productCardSection.innerHTML = '<p>No product found. Please go back and select a product.</p>';
   }
+}
+
+// Run once when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  renderProductWithShipping();
+
+  // Set up MutationObserver to watch shipping fee changes
+  const shippingFeeElement = document.getElementById('shipping-fee');
+  if (shippingFeeElement) {
+    const observer = new MutationObserver(() => {
+      renderProductWithShipping();
+    });
+
+    observer.observe(shippingFeeElement, {
+      characterData: true,
+      childList: true,
+      subtree: true
+    });
+  }
 });
-
-
-
-
 
 
 
@@ -269,3 +284,66 @@ document.getElementById('submit-payment').addEventListener('click', async () => 
 
 
 
+// Start observing shipping fee changes
+const shippingFeeElement = document.getElementById("shipping-fee");
+
+const observer = new MutationObserver(() => {
+  renderCartFromLocalStorage(); // 👈 Re-run this every time shipping fee updates
+});
+
+// Observe changes in the shippingFee element
+observer.observe(shippingFeeElement, {
+  childList: true,
+  characterData: true,
+  subtree: true,
+});
+
+
+
+
+
+
+ const cityInput = document.getElementById('delivery-city');
+  const nairobiAreasDiv = document.getElementById('nairobi-areas');
+  const nairobiSubareaSelect = document.getElementById('nairobi-subarea');
+  const shippingFeeDisplay = document.getElementById('shipping-fee');
+
+  const cityFees = {
+    Nakuru: 500,
+    Kisumu: 750,
+    Mombasa: 800
+  };
+
+  const nairobiFees = {
+    "Lang'ata": 150,
+    "Karen": 200,
+    "Westlands": 180,
+    "Kilimani": 160
+    // Add more areas and their fees here
+  };
+
+  function updateShippingFee(fee) {
+    shippingFeeDisplay.textContent = ` ${fee}`;
+  }
+
+  cityInput.addEventListener('input', function () {
+    const city = cityInput.value.trim().toLowerCase();
+
+    if (city === 'nairobi') {
+      nairobiAreasDiv.style.display = 'block';
+      updateShippingFee(0);
+    } else {
+      nairobiAreasDiv.style.display = 'none';
+      const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
+      const fee = cityFees[formattedCity] || 0;
+      updateShippingFee(fee);
+    }
+  });
+
+  nairobiSubareaSelect.addEventListener('change', function () {
+    const selectedArea = nairobiSubareaSelect.value;
+    const fee = nairobiFees[selectedArea] || 0;
+    updateShippingFee(fee);
+
+  });
+  
