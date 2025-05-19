@@ -230,7 +230,7 @@ function capitalizeFirstLetter(string) {
 
   document.getElementById("pay-now-btn").innerText = "Processing...";
 // After form submission
-document.getElementById("pay-now-btn").innerText = "Pay Now";
+document.getElementById("pay-now-btn").innerText = "Submit Details";
 
 
 function goBack() {
