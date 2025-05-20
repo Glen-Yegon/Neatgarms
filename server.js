@@ -1091,7 +1091,22 @@ app.post('/subscribe', async (req, res) => {
     from: '"Neatgarms" <info@neatgarms.com>', 
     to: email,
     subject: 'Thanks for subscribing to Neat Garms!',
-    html: `Hi there,\n\nThank you for subscribing to Neatgarms! 🎉\n\nYou'll be the first to hear about our latest collections, exclusive offers, and style updates.\n\nStay tuned!\n\nBest Regards,\nThe Neatgarms Team
+    html: `
+    <div style="font-family: 'Cinzel', 'Times New Roman', serif; text-align: center; padding: 20px;">
+  <div style="text-align: center;">
+    <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+  </div>
+  <p style="font-size: 16px; margin: 0 0 15px;">Hi there,</p>
+  <p style="font-size: 16px; margin: 0 0 15px;">
+    Thank you for subscribing to <strong>Neatgarms</strong>! 🎉
+  </p>
+  <p style="font-size: 16px; margin: 0 0 15px;">
+    You'll be the first to hear about our latest collections, exclusive offers, and style updates.
+  </p>
+  <p style="font-size: 16px; margin: 0 0 15px;">Stay tuned!</p>
+  <p style="font-size: 16px; margin-top: 30px;">Best Regards,<br/>The Neatgarms Team</p>
+</div>
+
     
        <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
