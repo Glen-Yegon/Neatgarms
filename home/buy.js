@@ -109,9 +109,13 @@ observer.observe(shippingFeeElement, {
   const shippingFeeDisplay = document.getElementById('shipping-fee');
 
   const cityFees = {
-    Nakuru: 500,
+    Nakuru: 600,
     Kisumu: 750,
-    Mombasa: 800
+    Mombasa: 800,
+    Eldoret: 600,
+    Nyahururu: 600,
+    Kiambu: 600,
+    
   };
 
   const nairobiFees = {
@@ -119,7 +123,8 @@ observer.observe(shippingFeeElement, {
     "Karen": 200,
     "Westlands": 180,
     "Kilimani": 160
-    // Add more areas and their fees here
+
+
   };
 
   function updateShippingFee(fee) {

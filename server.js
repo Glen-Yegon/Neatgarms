@@ -217,9 +217,11 @@ emailContent += `Address: ${delivery.address}\n`;
 emailContent += `Apartment/Suite: ${delivery.apartment}\n`;
 emailContent += `City: ${delivery.city}\n`;
 
+
 if (delivery.city.toLowerCase() === "nairobi") {
   emailContent += `Area (Nairobi): ${delivery.area}\n`;
 }
+
 
 emailContent += `Postal Code: ${delivery.postalCode}\n`;
 emailContent += `Phone: ${delivery.phone}\n`;
@@ -265,10 +267,12 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
-      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
-        
-        <h1 style="text-align: center; color: #111; font-size: 28px;">👕 Neatgarms</h1>
-        
+<div style="font-family: 'Cinzel', Times, serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+
+  <div style="text-align: center;">
+    <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+  </div>
+  
         <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
         <p style="font-size: 16px;">
           Thank you for shopping with <strong>Neatgarms</strong>! 🎉<br/>
@@ -277,6 +281,15 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
     
         <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
 <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${emailContent}</pre>
+
+  <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
+    <h3 style="color: black;">🪄 A Special Thank You</h3>
+    <p style="font-size: 15px; line-height: 1.6;">
+      Thank you for your purchase! Your merch has been gently taken from our Neat shelves by gloved hands and lovingly packed by our Omashu packing specialist under candlelight. After a glorious celebration, the town of Nairobi cheered as your package departed aboard our private baby jet. You’re now officially our “Customer of the Year,” with your photo proudly on our wall. We had a magical time packing your order—and we can’t wait for your next visit. <strong>KEEPITNEAT!</strong>
+    </p>
+  </div>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
 
 
            <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
@@ -436,6 +449,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
   emailContent += `Area (Nairobi): ${delivery.area}\n`;
 }
 
+
     // --- Billing Information ---
     emailContent += `💳 BILLING INFORMATION:\n`;
     if (billing.note) {
@@ -481,9 +495,11 @@ if (delivery.city.toLowerCase() === "nairobi") {
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
-      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #fdfdfd;">
-        
-              <h1 style="text-align: center; color: #111; font-size: 28px;">👕 Neatgarms</h1>
+<div style="font-family: 'Cinzel', Times, serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+
+  <div style="text-align: center;">
+    <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+  </div>
     
         <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
         <p style="font-size: 15px;">
@@ -506,6 +522,16 @@ if (delivery.city.toLowerCase() === "nairobi") {
           ${delivery.postalCode}<br/>
           <strong>Phone:</strong> ${delivery.phone}
         </p>
+
+          <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
+    <h3 style="color: black;">🪄 A Special Thank You</h3>
+    <p style="font-size: 15px; line-height: 1.6;">
+      Thank you for your purchase! Your merch has been gently taken from our Neat shelves by gloved hands and lovingly packed by our Omashu packing specialist under candlelight. After a glorious celebration, the town of Nairobi cheered as your package departed aboard our private baby jet. You’re now officially our “Customer of the Year,” with your photo proudly on our wall. We had a magical time packing your order—and we can’t wait for your next visit. <strong>KEEPITNEAT!</strong>
+    </p>
+  </div>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
@@ -725,81 +751,92 @@ if (delivery.city.toLowerCase() === "nairobi") {
       to: contact.email,
       subject: "🧾 Your Order is Confirmed! | Neatgarms Ltd",
       html: `
-      <div style="font-family: 'Segoe UI', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
-              <h1 style="text-align: center; color: #111; font-size: 28px;">👕 Neatgarms</h1>
-        <h2 style="color: #333;"> Hello ${delivery.firstName},</h2>
-        <p style="font-size: 16px;">Thank you for shopping with <strong>Neatgarms Ltd</strong>! We’re thrilled to have you on board. Your order is now being processed and will be shipped soon.</p>
-    
-        <div style="margin: 20px 0; background: #fff; border-radius: 10px; padding: 16px;">
-          <h3 style="margin-bottom: 10px;">🛒 Order Details</h3>
-          <ul style="line-height: 1.6;">
-            <li><strong>Number of Items:</strong> ${itemCount}</li>
-            <li><strong>Selected Design:</strong> ${design}</li>
-            <li><strong>Payment Method:</strong> ${paymentMethod}</li>
-          </ul>
-          <h3 style="margin-top: 20px;">🚚 Delivery Address</h3>
-          <p>
-            ${delivery.firstName} ${delivery.lastName}<br/>
-            ${delivery.address}${delivery.apartment ? ', ' + delivery.apartment : ''}<br/>
-            ${delivery.city}, ${delivery.postalCode}<br/>
-            ${delivery.country}<br/>
-            <strong>Phone:</strong> ${delivery.phone}
-          </p>
-          <h3 style="margin-top: 20px;">💳 Order Summary</h3>
-          <p>
-            <strong>Item Name:</strong> ${orderSummary.itemName}<br/>
-            <strong>Price:</strong> KShs. ${orderSummary.itemPrice}<br/>
-            <strong>Discount Code:</strong> ${orderSummary.discountCode || "None"}<br/>
-            <strong>Shipping Cost:</strong> ${orderSummary.shippingCost}
-          </p>
-          <p><em>Attached below is a PDF with your order images.</em></p>
-        </div>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: #333;">🔥 Best-Selling Picks This Week</h3>
-        <table style="width: 100%; border-spacing: 16px 10px;">
-          <tr>
-            <td align="center">
-              <a href="https://neatgarms.com/product/urban-tee" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/mains/playboy.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Urban Tee</p>
-              </a>
-            </td>
-            <td align="center">
-              <a href="https://neatgarms.com/product/classic-hoodie" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/mains/travis.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Classic Hoodie</p>
-              </a>
-            </td>
-            <td align="center">
-              <a href="https://neatgarms.com/product/street-joggers" target="_blank">
-                <img src="https://yourcdn.com/images/street-joggers.jpg" alt="Street Joggers" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Street Joggers</p>
-              </a>
-            </td>
-          </tr>
-        </table>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: #333;">💸 Special Offer Just for You</h3>
-        <p>Use code <strong style="color: #e63946;">WELCOME10</strong> to get 10% off your next purchase. Valid for the next 3 days only!</p>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: #333;">📞 Need Help?</h3>
-        <p>Reach us any time:</p>
-        <ul style="line-height: 1.8;">
-          <li><strong>Email:</strong> <a href="mailto:neatgarms@zohomail.com">neatgarms@zohomail.com</a></li>
-          <li><strong>Phone:</strong> +254 700 000 000</li>
-          <li><strong>Instagram:</strong> <a href="https://instagram.com/neatgarms" target="_blank">@neatgarms</a></li>
-        </ul>
-    
-        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for trusting Neatgarms. We can’t wait to see you rock your new fit! 😎</p>
-    
-        <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
-      </div>
+<div style="font-family: 'Cinzel', Times, serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+
+  <div style="text-align: center;">
+    <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+  </div>
+
+  <h2 style="color: #333;">Hello ${delivery.firstName},</h2>
+  <p style="font-size: 16px;">Thank you for your order with <strong>Neatgarms Ltd</strong>! We’re excited to get your merch to you. Your order is being processed and will be shipped soon.</p>
+
+  <div style="margin: 20px 0; background: #fff; border-radius: 10px; padding: 16px;">
+    <h3 style="margin-bottom: 10px;">🛒 Order Details</h3>
+    <ul style="line-height: 1.6;">
+      <li><strong>Number of Items:</strong> ${itemCount}</li>
+      <li><strong>Selected Design:</strong> ${design}</li>
+      <li><strong>Payment Method:</strong> ${paymentMethod}</li>
+    </ul>
+
+    <h3 style="margin-top: 20px;">🚚 Delivery Address</h3>
+    <p>
+      ${delivery.firstName} ${delivery.lastName}<br/>
+      ${delivery.address}${delivery.apartment ? ', ' + delivery.apartment : ''}<br/>
+      ${delivery.city}, ${delivery.postalCode}<br/>
+      ${delivery.country}<br/>
+      <strong>Phone:</strong> ${delivery.phone}
+    </p>
+
+    <h3 style="margin-top: 20px;">💳 Order Summary</h3>
+    <p>
+      <strong>Item Name:</strong> ${orderSummary.itemName}<br/>
+      <strong>Price:</strong> KShs. ${orderSummary.itemPrice}<br/>
+    </p>
+    <p><em>Attached below is a PDF with your order images.</em></p>
+  </div>
+
+  <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
+    <h3 style="color: black;">🪄 A Special Thank You</h3>
+    <p style="font-size: 15px; line-height: 1.6;">
+      Thank you for your purchase! Your merch has been gently taken from our Neat shelves by gloved hands and lovingly packed by our Omashu packing specialist under candlelight. After a glorious celebration, the town of Nairobi cheered as your package departed aboard our private baby jet. You’re now officially our “Customer of the Year,” with your photo proudly on our wall. We had a magical time packing your order—and we can’t wait for your next visit. <strong>KEEPITNEAT!</strong>
+    </p>
+  </div>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+
+  <h3 style="color: #333;">🔥 This Week's Top Picks</h3>
+  <table style="width: 100%; border-spacing: 16px 10px;">
+    <tr>
+      <td align="center">
+        <a href="https://neatgarms.com/product/urban-tee" target="_blank">
+          <img src="https://neatgarms-six.vercel.app/mains/playboy.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
+          <p style="margin: 8px 0;">Urban Tee</p>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://neatgarms.com/product/classic-hoodie" target="_blank">
+          <img src="https://neatgarms-six.vercel.app/mains/travis.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
+          <p style="margin: 8px 0;">Classic Hoodie</p>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://neatgarms.com/product/street-joggers" target="_blank">
+          <img src="https://yourcdn.com/images/street-joggers.jpg" alt="Street Joggers" width="140" style="border-radius: 8px;" />
+          <p style="margin: 8px 0;">Street Joggers</p>
+        </a>
+      </td>
+    </tr>
+  </table>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+
+  <h3 style="color: #333;">💸 Special Offer Just for You</h3>
+  <p>Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next purchase. Valid for 3 days only!</p>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+
+  <h3 style="color: #333;">📞 Need Help?</h3>
+  <p>We're here for you:</p>
+  <ul style="line-height: 1.8;">
+    <li><strong>Email:</strong> <a href="mailto:neatgarms@zohomail.com">neatgarms@zohomail.com</a></li>
+    <li><strong>Phone:</strong> +254 700 000 000</li>
+    <li><strong>Instagram:</strong> <a href="https://instagram.com/neatgarms" target="_blank">@neatgarms</a></li>
+  </ul>
+
+  <p style="margin-top: 30px; font-size: 14px; color: #666;">We can’t wait to see you rock your new fit! 😎</p>
+  <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+</div>
+
 
    <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>

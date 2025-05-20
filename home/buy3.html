@@ -159,20 +159,20 @@
     <input type="text" id="address" placeholder="Enter your address">
     
     <!-- Apartment/Suite (Optional) -->
-    <label for="apartment-suite" data-aos="fade-up" data-aos-delay="400">Apartment, Suite, etc (Optional)</label>
-    <input type="text" id="apartment-suite" placeholder="Enter apartment or suite details">
+    <label for="apartment-suite" data-aos="fade-up" data-aos-delay="400">Apartment, Suite, Building etc</label>
+    <input type="text" id="apartment-suite" placeholder="Enter apartment or suite details" required>
     
     <!-- City -->
     <label for="delivery-city" data-aos="fade-up" data-aos-delay="400">City</label>
-    <input type="text" id="delivery-city" placeholder="Enter your city">
+    <input type="text" id="delivery-city" placeholder="Enter your city" required>
     
     <!-- Postal Code (Optional) -->
     <label for="postal-code" data-aos="fade-up" data-aos-delay="400">Postal Code (Optional)</label>
     <input type="text" id="postal-code" placeholder="Enter your postal code">
     
     <!-- Phone (Optional) -->
-    <label for="phone" data-aos="fade-up" data-aos-delay="400">Phone (Optional)</label>
-    <input type="tel" id="phone" placeholder="Enter your phone number">
+    <label for="phone" data-aos="fade-up" data-aos-delay="400">Phone </label>
+    <input type="tel" id="phone" placeholder="Enter your phone number" required>
   </div>
   
   
@@ -472,7 +472,7 @@ const deliveryInfo = {
     
       // Send data to /pay3-now endpoint
       try {
-        const response = await fetch("http://localhost:5000/pay3-now", {
+        const response = await fetch("https://neatgarms-risi.onrender.com/pay3-now", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data)
