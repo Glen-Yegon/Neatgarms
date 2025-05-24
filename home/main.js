@@ -65,47 +65,68 @@ document.addEventListener('click', (event) => {
 });
 
 
-//product cards
 document.querySelectorAll('.product-card').forEach((card) => {
   const images = card.querySelectorAll('.image-wrapper img');
+
+  // Show only the first image by default
   images.forEach((img, index) => {
-    img.style.display = index === 0 ? 'block' : 'none'; // Only the first image is displayed by default
+    img.style.opacity = index === 0 ? '1' : '0';
+    img.style.zIndex = index === 0 ? '1' : '0';
+  });
+
+  card.addEventListener('mouseenter', () => {
+    if (images.length > 1) {
+      images[0].style.opacity = '0';
+      images[1].style.opacity = '1';
+      images[0].style.zIndex = '0';
+      images[1].style.zIndex = '1';
+    }
+  });
+
+  card.addEventListener('mouseleave', () => {
+    if (images.length > 1) {
+      images[0].style.opacity = '1';
+      images[1].style.opacity = '0';
+      images[0].style.zIndex = '1';
+      images[1].style.zIndex = '0';
+    }
   });
 });
 
+
+
 document.querySelectorAll('.product-card').forEach((card) => {
   card.addEventListener('click', () => {
-    // Gather information about the clicked product
     const images = Array.from(card.querySelectorAll('.image-wrapper img')).map(img => img.src);
     const status = card.querySelector('.status') ? card.querySelector('.status').innerText : null;
     const name = card.querySelector('.product-name').innerText;
     const oldPrice = card.querySelector('.old-price') ? card.querySelector('.old-price').innerText : null;
     const newPrice = card.querySelector('.new-price') ? card.querySelector('.new-price').innerText : null;
-        // Gather size button data (hidden buttons)
-        const sizes = Array.from(card.querySelectorAll('.size-buttons .size-btn')).map(button => button.dataset.size);
+    const sizes = Array.from(card.querySelectorAll('.size-buttons .size-btn')).map(button => button.dataset.size);
+    const colors = Array.from(card.querySelectorAll('.color-buttons .color-btn')).map(button => button.dataset.color);
 
-            // Gather color button data (hidden buttons)
-            const colors = Array.from(card.querySelectorAll('.color-buttons .color-btn')).map(button => button.dataset.color);
+    // NEW: Add extra descriptive info
+    const description = card.dataset.description || "";
+    const features = card.dataset.features ? JSON.parse(card.dataset.features) : [];
+    const sizeFit = card.dataset.sizefit || "";
 
- 
-    // Create an object to store the product data
     const productData = {
-      images: images,
-      status: status,
-      name: name,
-      oldPrice: oldPrice,
-      newPrice: newPrice,
-      sizes: sizes, // Include the size buttons
-      colors: colors, // Include the color buttons
+      images,
+      name,
+      oldPrice,
+      newPrice,
+      sizes,
+      colors,
+      description,  // new
+      features,     // new
+      sizeFit       // new
     };
 
-    // Save product data to localStorage
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
-
-    // Navigate to the product page
     window.location.href = 'product.html';
   });
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
   // Get the URL fragment (e.g., #product-1)

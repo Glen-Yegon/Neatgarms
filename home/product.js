@@ -57,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('product-name').innerText = productData.name;
       document.querySelector('.old-price').innerText = productData.oldPrice;
       document.querySelector('.new-price').innerText = productData.newPrice;
-      document.getElementById('product-status').innerText = productData.status;
 
 
 
@@ -72,8 +71,34 @@ if (productData.sizes && productData.sizes.length > 0) {
 }
 
 
+
 document.getElementById('back-button').addEventListener('click', () => {
   window.history.back();
+});
+
+
+      // Inject content from productData
+document.getElementById('product-description').innerText = productData.description;
+document.getElementById('size-fit').innerText = productData.sizeFit;
+
+// Inject features as a list
+const featuresList = document.querySelector('#key-features ul');
+if (Array.isArray(productData.features)) {
+  productData.features.forEach(feature => {
+    const li = document.createElement('li');
+    li.textContent = feature;
+    featuresList.appendChild(li);
+  });
+}
+
+
+// Toggle functionality for dropdowns
+document.querySelectorAll('.toggle-btn').forEach(button => {
+  button.addEventListener('click', () => {
+    const content = button.nextElementSibling;
+    button.classList.toggle('active');
+    content.style.display = content.style.display === 'block' ? 'none' : 'block';
+  });
 });
 
 
@@ -100,10 +125,8 @@ if (productData.colors && productData.colors.length > 0) {
       });
 
 
-      
 
 
-  
   // Handle Add to Cart Button
 document.getElementById('add-to-cart').addEventListener('click', () => {
   // Retrieve product details
@@ -112,7 +135,6 @@ document.getElementById('add-to-cart').addEventListener('click', () => {
   const productName = document.getElementById('product-name').innerText; // Product Name
   const oldPrice = document.querySelector('.old-price').innerText || null; // Old Price
   const newPrice = document.querySelector('.new-price').innerText || null; // New Price
-  const status = document.getElementById('product-status').innerText || null; // Product Status
   
   // Retrieve size (if available)
   const sizeSelection = document.querySelector('.size-selection input:checked');
@@ -220,7 +242,6 @@ document.getElementById('share-btn').addEventListener('click', async () => {
         text: shareText,
         url: shareUrl,
       });
-      alert('Thanks for sharing!');
     } catch (error) {
       console.error('Sharing failed', error);
     }
@@ -325,9 +346,100 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-  
+
+document.querySelectorAll('.product-card').forEach((card) => {
+  card.addEventListener('click', () => {
+    const images = Array.from(card.querySelectorAll('.image-wrapper img')).map(img => img.src);
+    const status = card.querySelector('.status') ? card.querySelector('.status').innerText : null;
+    const name = card.querySelector('.product-name').innerText;
+    const oldPrice = card.querySelector('.old-price') ? card.querySelector('.old-price').innerText : null;
+    const newPrice = card.querySelector('.new-price') ? card.querySelector('.new-price').innerText : null;
+    const sizes = Array.from(card.querySelectorAll('.size-buttons .size-btn')).map(button => button.dataset.size);
+    const colors = Array.from(card.querySelectorAll('.color-buttons .color-btn')).map(button => button.dataset.color);
+
+    // NEW: Add extra descriptive info
+    const description = card.dataset.description || "";
+    const features = card.dataset.features ? JSON.parse(card.dataset.features) : [];
+    const sizeFit = card.dataset.sizefit || "";
+
+    const productData = {
+      images,
+      name,
+      oldPrice,
+      newPrice,
+      sizes,
+      colors,
+      description,  // new
+      features,     // new
+      sizeFit       // new
+    };
+
+    localStorage.setItem('selectedProduct', JSON.stringify(productData));
+    window.location.href = 'product.html';
+  });
+});
 
 
 
 
+// Close the menu if the user clicks anywhere outside of it
+document.addEventListener('click', (event) => {
+  if (!menu.contains(event.target) && event.target !== menuBtn) {
+    menu.style.display = 'none'; // Hide the menu if click is outside
+  }
+});
 
+
+
+ const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+  const mainImage = document.getElementById('main-image');
+  const thumbnailList = document.getElementById('thumbnail-list');
+  const prevButton = document.getElementById('prev-image');
+  const nextButton = document.getElementById('next-image');
+
+  let currentImageIndex = 0;
+  let thumbnails = [];
+
+  function updateMainImage(index) {
+    if (!productData.images || !productData.images[index]) return;
+    mainImage.src = productData.images[index];
+    thumbnails.forEach(img => img.classList.remove('active'));
+    if (thumbnails[index]) {
+      thumbnails[index].classList.add('active');
+    }
+  }
+
+  if (productData && productData.images.length > 0) {
+    thumbnails = productData.images.map((src, index) => {
+      const thumb = document.createElement('img');
+      thumb.src = src;
+      thumb.addEventListener('click', () => {
+        currentImageIndex = index;
+        updateMainImage(index);
+      });
+      thumbnailList.appendChild(thumb);
+      return thumb;
+    });
+
+    updateMainImage(0);
+
+    prevButton.addEventListener('click', () => {
+      currentImageIndex = (currentImageIndex - 1 + productData.images.length) % productData.images.length;
+      updateMainImage(currentImageIndex);
+    });
+
+    nextButton.addEventListener('click', () => {
+      currentImageIndex = (currentImageIndex + 1) % productData.images.length;
+      updateMainImage(currentImageIndex);
+    });
+
+    const observer = new MutationObserver(() => {
+      const newIndex = productData.images.indexOf(mainImage.src);
+      if (newIndex !== -1 && newIndex !== currentImageIndex) {
+        currentImageIndex = newIndex;
+        updateMainImage(currentImageIndex);
+      }
+    });
+
+    observer.observe(mainImage, { attributes: true, attributeFilter: ['src'] });
+  }

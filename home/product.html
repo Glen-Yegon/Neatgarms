@@ -31,10 +31,11 @@
     <main class="product-page">
       <div class="product-container" data-aos="fade-up" data-aos-delay="400">
         <!-- Images -->
+         <div class="thumbnail-list" id="thumbnail-list"></div>
         <div class="product-images">
           <div class="image-slider">
             <img id="main-image" src="" alt="Product Image">
-            <div class="image-nav">
+             <div class="image-nav">
               <button id="prev-image" >&lt;</button>
               <button id="next-image" >&gt;</button>
             </div>
@@ -43,14 +44,13 @@
   
         <!-- Product Details -->
         <div class="product-details">
-          <h1 id="product-brand" data-aos="fade-up" data-aos-delay="400">Neat</h1>
-          <h2 id="product-name" data-aos="fade-up" data-aos-delay="400"></h2>
+          <h1 id="product-brand"  style="  font-family: 'Dream Avenue', sans-serif; font-weight:bold;">Neat</h1>
+          <h2 id="product-name" ></h2>
           <p id="product-prices">
             <p>Price in Kshs.</p>
             <span class="old-price" ></span>
             <span class="new-price" ></span>
           </p>
-          <p id="product-status" ></p>
               <!-- Size Selection -->
     <div class="size-selection"></div> <br>
 
@@ -69,6 +69,32 @@
             <button id="increase-quantity">+</button>
           </div>
 
+
+
+          <!-- Product Info Dropdown Sections -->
+<div class="product-info-sections" data-aos="fade-up" data-aos-delay="400">
+
+  <div class="info-section">
+    <button class="toggle-btn">Product Description</button>
+    <div class="info-content" id="product-description"></div>
+  </div>
+
+  <div class="info-section">
+    <button class="toggle-btn">Key Features</button>
+    <div class="info-content" id="key-features">
+      <ul></ul>
+    </div>
+  </div>
+
+  <div class="info-section">
+    <button class="toggle-btn">Size & Fit</button>
+    <div class="info-content" id="size-fit"></div>
+  </div>
+
+</div>
+
+
+
 <a href="shipping.html" data-aos="fade-up" data-aos-delay="400">
           <div class="loader" data-aos="fade-up" data-aos-delay="400">
             <div class="truckWrapper">
@@ -82,7 +108,7 @@
                   <path
                     stroke-width="3"
                     stroke="#282828"
-                    fill="#F83D3D"
+                    fill="#ae866a"
                     d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z"
                   ></path>
                   <path
@@ -199,11 +225,37 @@
               </svg>
             </div>
           </div>
-         <p style="color: black;">shipping policy-calculated at checkout</p>
+         <p style="color: black; text-decoration: none;">shipping policy-calculated at checkout</p>
         </a>
+
+
+        <!-- Share Button -->
+ <div class="share-btns">
+<button class="share" data-aos="fade-up" data-aos-delay="400" id="share-btn">
+  <div class="svg-wrapper-1">
+    <div class="svg-wrapper">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+      >
+        <path fill="none" d="M0 0h24v24H0z"></path>
+        <path
+          fill="currentColor"
+          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+        ></path>
+      </svg>
+    </div>
+  </div>
+  <i><span>Share</span></i>
+</button>
+
+</div>
           
-                <!--add to cart and buy-->
+                <!--add to cart, buy and share-->
       <div class="button-group">
+
         <button class="btn-53" id="add-to-cart">
           <div class="original" >ADD TO CART</div>
           <div class="letters">
@@ -242,155 +294,117 @@
         </button>   
 
 
-        
-<!-- Share Button -->
-<button class="share" data-aos="fade-up" data-aos-delay="400" id="share-btn">
-  <div class="svg-wrapper-1">
-    <div class="svg-wrapper">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-      >
-        <path fill="none" d="M0 0h24v24H0z"></path>
-        <path
-          fill="currentColor"
-          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-        ></path>
-      </svg>
-    </div>
-  </div>
-  <i><span>Share</span></i>
-</button> 
-
-      </div>
-
+</div>
 
 <!-- Featured Section -->
 <div class="featured-section">
+    <h2 class="section-title">New in the Market</h2>
   <div class="featured-cards-wrapper">
     <!-- Featured Card 1 -->
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main2.html#n-tee" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/n7.heic" alt="Product Image">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">N7584JGD</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 1,400</span>
-        </p>
-      </a>
-    </div>
+    <!-- Example Product Card -->
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee"      data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size.">
 
-    <!-- Featured Card 2 -->
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main.html#travis-tee" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/travis.jpg" alt="Travis Scott Tee">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">Travis Scott Tee</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 1,400</span>
-        </p>
-      </a>
-    </div>
-    <!-- Repeat more featured cards as needed -->
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main.html#t-tee" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/playboy.jpg" alt="Travis Scott Tee">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">Playboy Carti Tee</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 1,400</span>
-        </p>
-      </a>
-    </div>
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main.html#fid" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/green  00.1.jpg" alt="Travis Scott Tee">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">6FJGM0</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 1,400</span>
-        </p>
-      </a>
-    </div>
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main.html#acid" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/acid (2).jpg" alt="Travis Scott Tee">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">Acid Wash Tee</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 1,800</span>
-        </p>
-      </a>
-    </div>
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main.html#black" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/black plain.jpg" alt="Travis Scott Tee">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">Black Plain</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 800</span>
-        </p>
-      </a>
-    </div>
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main2.html#every-glass" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/miwani.jpg" alt="Travis Scott Tee">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">Everyday Frames</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 1,250</span>
-        </p>
-      </a>
-    </div>
+      <div class="image-wrapper">
+        <img src="mains/playboy2.jpg" alt="Product Image">
+        <img src="mains/playboy.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/playboy3.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/playboy4.jpg" alt="Product Image 3" class="hidden-image">
+      </div>
+      <h3 class="product-name" >Playboi Carti Tee</h3>
+      <p class="product-price"> Price in Kshs. <br>
+        <span class="old-price">2000</span>
+        <span class="new-price">1400</span>
+      </p>
 
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main2.html#crop" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/crop 01.jpg" alt="Travis Scott Tee">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">Neat Crop Top</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 850</span>
-        </p>
-      </a>
-    </div>
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
 
-    <div class="featured-card" data-aos="fade-up" data-aos-delay="400">
-      <a href="main3.html#week" class="featured-link">
-        <div class="image-wrapper">
-          <img src="mains/weekend.jpg" alt="Travis Scott Tee">
-          <span class="status sale">Sale</span>
-        </div>
-        <h3 class="featured-name">The Weekend</h3>
-        <p class="product-price">
-          <span class="new-price">KSh 2,000</span>
-        </p>
-      </a>
+      </div>
+
     </div>
 
 
-  </div>
-</div>
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="fid"
+         data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+    >
+      <div class="image-wrapper">
+        <img src="mains/NEAT.jpg" alt="Product Image">
+        <img src="mains/green  00.1.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/green3.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green 10.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/green 12.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green11.jpg" alt="Product Image 3" class="hidden-image">
+      </div>
+      <h3 class="product-name">6FJGM0</h3>
+      <p class="product-price">  Price in Kshs. <br>
+        <span class="new-price" >1400</span>
+      </p>
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="M">M</button>
+      </div>
+
+    </div>
 
 
+        <div class="product-card" data-aos="fade-up" data-aos-delay="400"
+             data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+        >
+        <div class="image-wrapper">
+          <img src="mains/flee1.jpg" alt="Product Image">
+          <img src="mains/flee.jpg" alt="Product Image 2" class="hidden-image">
+          <img src="mains/flee 3.jpg" alt="Product Image 3" class="hidden-image">
+          <img src="mains/fleeeeee.jpg" alt="Product Image 2" class="hidden-image">
+        </div>
+        <h3 class="product-name">Fleece</h3>
+        <p class="product-price"> Price in Kshs. <br>
+          <span class="old-price">3500</span>
+          <span class="new-price">2800</span>
+        </p>
 
+        
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+      </div>
+      <div class="hidden-buttons color-buttons">
+        <button class="color-btn" data-color="Grey">Grey</button>
+      </div>
+      </div>
+
+
+          <div class="product-card" data-aos="fade-up" data-aos-delay="400"
+               data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+          >
+      <div class="image-wrapper">
+        <img src="mains/purple.jpg" alt="Product Image">
+        <img src="mains/purple 0.1.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/purple1.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/purple0.22.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/purple2.jpg" alt="Product Image 2" class="hidden-image">
+      </div>
+      <h3 class="product-name">PURPLE PANTS</h3>
+      <p class="product-price">  Price in Kshs. <br>
+        <span class="old-price">2700</span>
+        <span class="new-price">1700</span>
+      </p>
+    </div>
+    
+
+      </div>
+</section>
 
     </main>
 
@@ -616,6 +630,7 @@ document.querySelectorAll('.product-card').forEach((card) => {
     });
   </script>
   
+
 
 
 </body>

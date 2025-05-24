@@ -1,4 +1,13 @@
-/* General Styles */
+@font-face {
+  font-family: 'Dream Avenue';
+  src: url('fonts/DreamAvenue.woff') format('woff2'),
+       url('fonts/DreamAvenue.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 
 * {
   padding: 0;
@@ -10,7 +19,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Cinzel', Times, serif;
-  background: linear-gradient(to bottom, #383f45, #8A9381);
+  background:linear-gradient(to bottom, #383f45, #8A9381);
   border-radius: 10px;
   opacity: 0;
   transition: opacity 1s ease;
@@ -55,7 +64,7 @@ body.loaded {
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
-  background: #383f45;  /* Default background color */
+  background: transparent;  /* Default background color */
   position: fixed;  /* Keeps the navbar fixed at the top */
   top: 0;
   left: 0;
