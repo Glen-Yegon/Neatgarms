@@ -239,7 +239,7 @@ function goBack() {
 
 
 
-// When the user clicks the "Pay Now" button, display the modal.
+/*
 document.getElementById('mpesa-btn').addEventListener('click', () => {
   document.getElementById('payment-modal').style.display = 'block';
 });
@@ -280,6 +280,7 @@ document.getElementById('submit-payment').addEventListener('click', async () => 
   document.getElementById('payment-modal').style.display = 'none';
 });
 
+*/
 
 
 

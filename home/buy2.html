@@ -300,13 +300,14 @@
 <p class="ppp">Kindly Pay First Before Submitting Your Details</p>
 
 
-<!--Mpesa Button-->
+<!--Mpesa Button
 <div class="pay-now-container">
   <button class="pay-now-btn" id="mpesa-btn">Pay Via Mpesa ?</button>
 </div>
+-->
 
 <div class="pay-now-container">
-  <button class="pay-now-btn" id="paystack-btn">Pay Via Credit / Debit Card ?</button>
+  <button class="pay-now-btn" id="paystack-btn">Pay</button>
 </div>
 
 
@@ -322,9 +323,6 @@
 
 
     document.getElementById("pay-now-btn").addEventListener("click", async () => {
-
-
-
            // Create a custom alert element
      const customAlert = document.createElement('div');
      customAlert.className = 'custom-alert';
@@ -482,8 +480,7 @@ const displayedEstimatedTotal = estimatedTotalElement ? estimatedTotalElement.in
     
   </script>
   
-       <script>
-
+<script>
 document.getElementById('paystack-btn').addEventListener('click', function () {
   const combinedPriceElement = document.getElementById('combined-price');
   if (!combinedPriceElement) {
@@ -491,7 +488,7 @@ document.getElementById('paystack-btn').addEventListener('click', function () {
     return;
   }
 
-  const amountString = combinedPriceElement.textContent.trim();  // e.g. "1234.56"
+  const amountString = combinedPriceElement.textContent.trim(); // e.g., "1500.00"
   const amount = parseFloat(amountString);
 
   if (!amount || amount <= 0) {
@@ -499,27 +496,45 @@ document.getElementById('paystack-btn').addEventListener('click', function () {
     return;
   }
 
-  const amountInKobo = Math.round(amount * 100); // convert to kobo (smallest currency unit)
+  const amountInKobo = Math.round(amount * 100); // Convert to kobo (smallest currency unit)
 
   let handler = PaystackPop.setup({
-    key: 'pk_test_9a29ec4d0e7944ac94fe2ad542aa1427d7469bbf', // Replace with your Paystack public key
-    email: 'customer@example.com', // Or dynamically fill this
+    key: 'pk_live_ebc463d4a263695caa52983243908de4c27ab205', // ✅ Your live public key
+    email: 'customer@example.com', // Replace with real customer email
     amount: amountInKobo,
     currency: 'KES',
     ref: '' + Math.floor(Math.random() * 1000000000 + 1),
     callback: function(response) {
-      alert('Payment complete! Reference: ' + response.reference);
-      // Handle post-payment logic here (e.g., verify payment on backend)
+      // ✅ Send reference to backend to verify transaction
+      fetch('https://neatgarms-risi.onrender.com/api/paystack/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ reference: response.reference })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status) {
+          alert('✅ Payment verified successfully!');
+        } else {
+          alert('❌ Payment verification failed: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Verification error:', error);
+        alert('🚫 Error verifying payment. See console.');
+      });
     },
     onClose: function() {
       alert('Payment cancelled');
     }
   });
+
   handler.openIframe();
 });
+</script>
 
-    
-  </script>
     
   
 

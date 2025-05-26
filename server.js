@@ -1153,7 +1153,7 @@ app.post('/subscribe', async (req, res) => {
 });
 
 
-
+/*
 const paymentStatus = {}; // Store payment confirmation status
 
 // MPesa Callback Endpoint
@@ -1182,8 +1182,10 @@ app.post("/mpesa-callback", async (req, res) => {
       return res.status(400).json({ error: "Payment failed", reason: stkCallback.ResultDesc });
   }
 });
+*/
 
 
+/*
 app.get("/check-payment/:phone", (req, res) => {
   const phone = req.params.phone;
 
@@ -1200,6 +1202,7 @@ app.get("/check-payment/:phone", (req, res) => {
   }
 });
 
+*/
 
 
 
