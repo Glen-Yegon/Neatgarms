@@ -489,43 +489,59 @@ const deliveryInfo = {
     });
     </script>
     
-     <script>
-
+<script>
   document.getElementById('paystack-btn').addEventListener('click', function () {
-  const displayPrice = document.getElementById('display-price').textContent; 
-  // displayPrice = "Price: Kshs. 1500"
+    const displayPrice = document.getElementById('display-price').textContent;
+    const amountString = displayPrice.replace('Price: Kshs. ', '').trim();
+    const amount = parseFloat(amountString);
 
-  // Extract the numeric amount from the string
-  const amountString = displayPrice.replace('Price: Kshs. ', '').trim();
-
-  const amount = parseFloat(amountString);
-
-  if (!amount || amount <= 0) {
-    alert('Invalid amount to pay');
-    return;
-  }
-
-  const amountInKobo = amount * 100;
-
-  let handler = PaystackPop.setup({
-    key: 'pk_test_9a29ec4d0e7944ac94fe2ad542aa1427d7469bbf', // Replace with your public key
-    email: 'customer@example.com', // Or dynamically fill
-    amount: amountInKobo,
-    currency: 'KES',
-    ref: '' + Math.floor(Math.random() * 1000000000 + 1),
-    callback: function(response) {
-      alert('Payment complete! Reference: ' + response.reference);
-      // You can do backend verification here if needed
-    },
-    onClose: function() {
-      alert('Payment cancelled');
+    if (!amount || amount <= 0) {
+      alert('Invalid amount to pay');
+      return;
     }
-  });
-  handler.openIframe();
-});
 
-    
-  </script>
+    const amountInKobo = amount * 100;
+
+    let handler = PaystackPop.setup({
+      key: 'pk_live_ebc463d4a263695caa52983243908de4c27ab205',
+      email: 'customer@example.com',
+      amount: amountInKobo,
+      currency: 'KES',
+      ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+      callback: function(response) {
+        alert('Payment complete! Reference: ' + response.reference);
+
+        // ✅ Backend verification
+        fetch('https://neatgarms-risi.onrender.com/api/paystack/verify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ reference: response.reference })
+        })
+        .then(res => res.json())
+        .then(data => {
+          if (data.status) {
+            alert(data.message);
+            // Redirect or show success UI
+          } else {
+            alert("Payment verification failed.");
+          }
+        })
+        .catch(err => {
+          console.error("Error verifying payment:", err);
+          alert("Error verifying payment.");
+        });
+      },
+      onClose: function() {
+        alert('Payment cancelled');
+      }
+    });
+
+    handler.openIframe();
+  });
+</script>
+
     
   
 </body>

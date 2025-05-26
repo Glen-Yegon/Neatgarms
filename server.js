@@ -1233,7 +1233,7 @@ app.post('/api/paystack/verify', async (req, res) => {
   try {
     const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
       headers: {
-        Authorization: 'Bearer sk_test_1bbb765b1d6f4a65ee92843f06c3a9dd5baa78b5' // 🔁 Replace with your test secret key
+        Authorization: 'Bearer REMOVED_SECRET' 
       }
     });
 
