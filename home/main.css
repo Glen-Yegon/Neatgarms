@@ -766,7 +766,7 @@ body, html{
 .footer-logo h1 {
   font-family: 'Dream Avenue', sans-serif;
   font-size: calc(100vw / 6.5); /* Adjust '8' based on character count */
-  font-weight: bold;
+  font-weight: 20;
   color: black;
   text-transform: uppercase;
   letter-spacing: 0.5vw;

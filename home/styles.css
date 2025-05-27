@@ -69,7 +69,7 @@ body.loaded {
   width: 100%;
   height: 100%;
   z-index: -1;
-  filter: brightness(0.7);
+  filter: brightness(0.5);
 }
 
 
@@ -556,393 +556,397 @@ body.loaded {
   }
 }
 
-  
-  /* Featured */
-/* Background Styling for the Section */
-#featured {
-  position: relative;
-  padding: 50px 0;
-  font-family: 'Cinzel', Times, serif;
-  color: #000000;
+
+ /* Product Grid */
+  .product-grid {
+    display: grid; 
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 10px;
+  }
+  @media (max-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+.product-card {
+  border: transparent;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
 }
 
-/* V-Shaped Background */
-#featured::before {
-  content: '';
+/* Make all image containers the same size */
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 550px; /* set desired consistent height */
+  overflow: hidden;
+}
+
+.product-card:hover{
+  cursor: pointer;
+}
+
+.image-wrapper img {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 50%;
-}
-
-/* Title Styling */
-#featured .section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 40px;
-  color: black;
-}
-
-/* Product Cards Layout */
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
-  padding: 0 20px;
-  transition: transform 0.3s ease;
-}
-
-/* Product Card Styling */
-.product-card {
-  position: relative;
-  background-color: transparent;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.264);
-  overflow: hidden;
-  cursor: pointer;
-  height: 500px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Product Image Styling */
-.product-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-/* Hover Effect on Image */
-.product-card:hover .product-img {
-  transform: scale(1.1);
-}
-
-/* Product Info Styling */
-.product-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  color: #AE866A;
-  padding: 15px;
-}
-
-/* Slide-up Effect for Info */
-.product-card:hover .product-info {
-  transform: translateY(0);
-}
-
-/* Product Title Styling */
-.product-info h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
-
-/* Product Price Styling */
-.product-info p {
-  font-size: 1.2rem;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-/* Hover Effect on Product Title and Price */
-.product-card:hover.product-info h3,
-.product-card:hover .product-info p {
-  color: #8A9381;
-  transform: translateY(-5px);
-}
-
-/* Fade-In Effect for Cards */
-.product-card {
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.5s ease forwards;
+  transition: opacity 0.2s ease-in-out; /* Smooth fade */
 }
 
-@keyframes fadeInUp {
-  to {
-      opacity: 1;
-      transform: translateY(0);
+/* First image visible initially */
+.image-wrapper img:first-of-type {
+  opacity: 1;
+  z-index: 1;
+}
+
+
+/* Tablets and medium devices */
+@media (max-width: 991px) {
+  .image-wrapper {
+    height: 520px; /* smaller height on tablets */
   }
 }
 
-/* Large Product Card */
-.product-card.large {
-  grid-column: span 2;
-}
-
-/* Medium Product Card */
-.product-card.medium {
-  grid-column: span 1.5;
-}
-
-/* Small Product Card */
-.product-card.small {
-  grid-column: span 1;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .products {
-      grid-template-columns: 1fr 1fr;
-  }
-  .product-card{
-    height: 350px;
-  }
-}
-
+/* Mobile phones */
 @media (max-width: 480px) {
-  .products {
-      grid-template-columns: 1fr 1fr;
+  .image-wrapper {
+    height: 320px; /* even smaller height on phones */
   }
-  .product-card{
-    height: 250px;
+}
+  
+  .product-name {
+    margin-top: 5px;
+    font-size: 1rem;
+    color: black;
   }
+  
+  .product-price {
+    font-size: 0.9rem;
+    color: black;
+  }
+  
+  .product-price .old-price {
+    text-decoration: line-through;
+    color: gray;
+    margin-right: 5px;
+  }
+
+
+  .hidden-buttons {
+  display: none; /* Hidden by default */
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.hidden-buttons button {
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+  border: 10px solid #ccc;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s;
+}
+
+.hidden-buttons button:hover {
+  background-color: #ddd;
 }
 
 
-/*Moving Text*/
+.color-buttons{
+  padding: 10px;
+  gap: 5px;
+  border-radius: 10px;
+}
+.color-btn{
+  padding: 10px;
+  margin: 10px;
+  border-radius: 10px;
+
+}
+
+
+/* Keep It Neat */
 #moving-text-2 {
   width: 100%;
-  height: 100px; /* Adjust height as needed */
+  font-family: 'Dream Avenue', sans-serif;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  background: linear-gradient(to bottom, transparent, #AE866A);/* Background color to match the theme */
+  padding: 5px 5px;
+  background-color: transparent;
+  text-align: center;
 }
 
 .moving-text-content-2 {
-  white-space: nowrap; /* Prevents text from wrapping */
-  font-size: 1rem;
-  font-family: 'Cinzel', Times, serif;
-  color: #383f45;
-  font-weight: bold;
-  animation: moveText 15s linear infinite; /* Move text over 10 seconds */
-
+  font-family: 'Dream Avenue', sans-serif;
+  color: black;
+  font-weight: 100;
 }
 
-@keyframes moveText {
-  0% {
-    transform: translateX(100%); /* Start off-screen to the right */
-  }
-  100% {
-    transform: translateX(-100%); /* Move off-screen to the left */
-  }
+.moving-text-content-2 h2 {
+  font-size: 6rem;
+  margin: 0;
 }
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-  /* Decrease font size for tablets and mobile devices */
-  .moving-text-content {
-    font-size: 3rem; /* Adjust font size for medium screens */
-    
+  .moving-text-content-2 h2 {
+    font-size: 4rem;
   }
 }
 
 @media (max-width: 480px) {
-  /* Decrease font size for very small screens */
-  .moving-text-content-2 {
-    font-size: 0.3rem; /* Adjust font size for small screens */
+  .moving-text-content-2 h2 {
+    font-size: 2.5rem;
   }
 
-  /* Optional: Reduce the height of the section on small screens */
   #moving-text-2 {
-    height: 70px; /* Adjust height for mobile screens */
+    padding: 0px 5px;
   }
 }
-
-
-/*suggestion box styling*/
-.suggestion-box-container {
-  width: 90%;
-  background-color: transparent;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  position: relative;
-  overflow: hidden;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 50px;
-  margin-right: 50px;
-  display: flex;
-  border: #000 1px solid;
-  border-radius: 10px;
-  font-family: 'Cinzel', Times, serif;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 1.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.suggestion-box-container::before {
-  content: '';
-  position: relative;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
-  animation: rotate 10s linear infinite;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.suggestion-box-container h2 {
-  text-align: center;
-  margin: 0 0 20px;
-  font-family: 'Cinzel', Times, serif;
-  color: #000000;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.suggestion-box-container form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.form-field {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.o,
-.i,
-.t {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  outline: none;
-  background-color: #8a9381d3;
-  font-size: 1rem;
-  color: #3c3c3c;
-  margin-top: 5px;
-}
-
-.t {
-  height: 100px;
-  resize: none;
-}
-
-.o::placeholder,
-.i::placeholder,
-.t::placeholder {
-  color: #aaa;
-}
-
-.submit-button {
-  background: #000;
-  border: none;
-  border: rgb(0, 0, 0) 1px solid;
-  padding: 10px 20px;
-  color: white;
-  margin-top: 5px;
-  font-size: 1rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.submit-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.5);
-}
-
-
-/* Floating stars animation */
-.floating-star {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: white;
-  border-radius: 50%;
-  animation: float 5s infinite ease-in-out;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-50px);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.floating-star:nth-child(1) {
-  top: 10%;
-  left: 15%;
-  animation-duration: 4s;
-  animation-delay: 0s;
-}
-
-.floating-star:nth-child(2) {
-  top: 30%;
-  left: 75%;
-  animation-duration: 6s;
-  animation-delay: 1s;
-}
-
-.floating-star:nth-child(3) {
-  top: 70%;
-  left: 50%;
-  animation-duration: 5s;
-  animation-delay: 2s;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .suggestion-box-container {
-    width: 100%;
-    border-radius: 10px;
-    padding: 15px;
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-
-  .submit-button {
-    font-size: 0.9rem;
-  }
-}
-
   
+/* NEAT Promo Section */
+#neat-promo {
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+  background: url('mains/utility.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  padding: 60px 10%;
+  color: black;
+  overflow: hidden;
+}
+
+/* Dark Overlay */
+.promo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust darkness here (0.55 = 55% dark) */
+  z-index: 1;
+}
+
+.promo-content {
+  max-width: 600px;
+  z-index: 1000;
+}
+
+.promo-content h1 {
+  font-size: 6rem;
+  font-family: 'Dream Avenue', sans-serif;
+  margin-bottom: 20px;
+  color: #ae866a;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.promo-content p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  color: white;
+}
+
+.shop-btn {
+  padding: 15px 30px;
+  background-color: transparent;
+  color: white;
+  border-bottom: 2px solid white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+
+
+}
+
+.shop-btn:hover {
+  background-color: transparent;
+  font-size: 1.5rem;
+  transform: scale(1.08);
+}
+
+/* Animation */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #neat-promo {
+    padding: 40px 5%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .promo-content {
+    max-width: 100%;
+    animation: none;
+  }
+
+  .promo-content h1 {
+    font-size: 8rem;
+  }
+
+  .promo-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-content h1 {
+    font-size: 5rem;
+  }
+
+  .promo-content p {
+    font-size: 0.95rem;
+  }
+
+  .shop-btn {
+    font-size: 0.9rem;
+    padding: 12px 24px;
+  }
+}
+
+
+/* NEAT Promo Section */
+#neat-promo2 {
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+  background: url('mains/gunna2.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  padding: 60px 10%;
+  color: black;
+  overflow: hidden;
+  justify-content: center; /* Push content to the right */
+  text-align: center;
+}
+
+/* Dark Overlay */
+.promo-overlay2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust darkness here (0.55 = 55% dark) */
+  z-index: 1;
+}
+
+.promo-content2 {
+  max-width: 600px;
+  z-index: 1000;
+    text-align: center;
+}
+
+.promo-content2 h1 {
+  font-size: 6rem;
+  font-family: 'Dream Avenue', sans-serif;
+  margin-bottom: 20px;
+  color: #8a9381;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.promo-content2 p {
+  font-size: 1.5rem;
+  margin-bottom: 30px;
+  line-height: 1.6;
+  color: white;
+}
+
+.shop-btn2 {
+  padding: 15px 30px;
+  background-color: transparent;
+  color: white;
+  border-bottom: 2px solid white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+
+
+}
+
+.shop-btn2:hover {
+  background-color: transparent;
+  font-size: 1.5rem;
+  transform: scale(1.08);
+}
+
+/* Animation */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  #neat-promo2 {
+    padding: 40px 5%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .promo-content2 {
+    max-width: 100%;
+    animation: none;
+  }
+
+  .promo-content2 h1 {
+    font-size: 8rem;
+  }
+
+  .promo-content2 p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-content2 h1 {
+    font-size: 5rem;
+  }
+
+  .promo-content2 p {
+    font-size: 0.95rem;
+  }
+
+  .shop-btn2 {
+    font-size: 0.9rem;
+    padding: 12px 24px;
+  }
+}
+
+
 
   
   footer {
@@ -1160,26 +1164,25 @@ body.loaded {
 }
 
 .footer-logo h1 {
-  font-size: 11rem; /* Increased size for better visibility */
-  color: rgb(0, 0, 0);
-  font-weight: 900;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Dream Avenue', sans-serif;
+  font-size: calc(100vw / 6.5); /* Adjust '8' based on character count */
+  font-weight: 100;
+  color: black;
   text-transform: uppercase;
-  letter-spacing: 15px;
-  width: 100%;
+  letter-spacing: 0.5vw;
+  width: 100vw;
   text-align: center;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
 }
+
 
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .footer-container {
     grid-template-columns: 1fr;
-  }
-
-  .footer-logo h1 {
-    font-size: 5.5rem; /* Slightly smaller on tablets */
-    letter-spacing: 10px;
   }
 
   .footer-logo {
@@ -1193,12 +1196,6 @@ body.loaded {
 }
 
 @media (max-width: 480px) {
-  .footer-logo h1 {
-    font-size: 3rem; /* Adjusted for mobile screens */
-    letter-spacing: 4px;
-    gap: 3px;
-    text-align: center;
-  }
   .footer-logo{
     text-align: center;
     justify-content: center;
@@ -1210,172 +1207,6 @@ body.loaded {
     font-size: 1rem;
   }
 }
-
-
-
-
-  /* Slider Container */
-  .slider-container {
-    position: relative;
-    width: 100%;
-    max-width: 1250px;
-    height: 500px;
-    overflow: hidden;
-    margin: 0 auto;
-    font-family: 'Cinzel', Times, serif;
-  }
-  /* Slider Wrapper */
-  .slider {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  /* Slide Card Styles */
-  .slide {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 60%;
-    max-width: 400px;
-    background: transparent;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-  }
-  /* Image Container */
-  .img-container {
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.3s ease-in-out;
-  }
-  .img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .img-container img:hover{
-    height: 100%;
-  }
-  .img-container:hover{
-    transform: scale(1.1); /* Slight zoom effect */
-  }
-  /* Card Info Overlay with Dim Background */
-  .card-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    color: #e6e6e6;
-    padding: 10px;
-    text-align: center;
-  }
-  .card-info h3 {
-    margin: 0;
-    font-size: 1.5rem;
-  }
-  .card-info p {
-    margin: 5px 0 0;
-    font-size: 1.2rem;
-  }
-  /* Active, Previous, and Next Slide States */
-  .slide.active {
-    opacity: 1;
-    z-index: 3;
-    transform: translate(-50%, -50%) scale(1);
-    filter: none;
-  }
-  .slide.prev {
-    opacity: 0.5;
-    z-index: 2;
-    transform: translate(-150%, -50%) scale(0.8);
-    filter: blur(3px);
-  }
-  .slide.next {
-    opacity: 0.5;
-    z-index: 2;
-    transform: translate(50%, -50%) scale(0.8);
-    filter: blur(3px);
-  }
-  /* Navigation Arrows */
-  .arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #ae866a;
-    border: none;
-    font-size: 2rem;
-    padding: 10px;
-    border-radius: 20%;
-    cursor: pointer;
-    z-index: 4;
-  }
-  .arrow.left {
-    left: 10px;
-  }
-  .arrow.right {
-    right: 10px;
-  }
-  /* Mobile Responsiveness */
-  @media (max-width: 768px) {
-    .slider-container {
-      height: 500px;
-    }
-    .slide {
-      width: 80%;
-    }
-    .arrow {
-      font-size: 1.5rem;
-    }
-  }
-  @media (max-width: 480px) {
-    .slider-container {
-      height: 475px;
-    }
-    .slide {
-      width: 60%;
-    }
-    .card-info h3 {
-      font-size: 1.2rem;
-    }
-    .card-info p {
-      font-size: 1rem;
-    }
-  }
-
-
-  .best-selling-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #000000;
-    margin: 10px 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: 'Cinzel', Times, serif;
-  }
-  /* Tablet */
-  @media (max-width: 768px) {
-    .best-selling-title {
-      font-size: 2rem;
-      letter-spacing: 1.5px;
-      margin: 15px 0;
-    }
-  }
-
-      /* Mobile */
-      @media (max-width: 480px) {
-        .best-selling-title {
-          font-size: 1.5rem;
-          letter-spacing: 1px;
-          margin: 10px 0;
-        }
-      }
 
 
 

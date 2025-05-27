@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keep It Neat</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
@@ -30,7 +31,7 @@
 
   <nav class="navbar" id="navbar">
     <div class="logo">
-      <img src="mains/logo2.png" alt="Company Logo" />
+     <a href="#neat-promo"> <img src="mains/logo2.png" alt="Company Logo" /></a>
     </div>
 
 <div class="navbar-links" style="font-family: 'Poppins', sans-serif;">
@@ -46,7 +47,7 @@
       <div class="dropdown-card">
         <img src="mains/playboy.jpg" alt="Top 1">
         <p>PLAYBOY CARTI TEE</p>
-        <button>Shop Now →</button>
+       <button>Shop Now →</button>
       </div>
       <div class="dropdown-card">
         <img src="mains/green  00.1.jpg" alt="Top 2">
@@ -154,7 +155,6 @@
   <div class="hero-text">NEAT</div>
 </section>
 
-  
 <!-- Static Hero Text Section -->
 <section id="hero-text">
   <div class="hero-text-content">
@@ -163,190 +163,251 @@
 </section>
 
 
+<!--Product sect 1-->
 
-  <!--Image Slider For Latest Products-->
+ <main class="product-grid" data-aos="fade-up" data-aos-delay="400">
 
-  <h2 class="best-selling-title">Latest In The Market</h2>
+    <!-- Example Product Card -->
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee"      data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size.">
 
+      <div class="image-wrapper">
+        <img src="mains/playboy2.jpg" alt="Product Image">
+        <img src="mains/playboy.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/playboy3.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/playboy4.jpg" alt="Product Image 3" class="hidden-image">
+      </div>
+      <h3 class="product-name" >PLAYBOY CARTI TEE</h3>
+      <p class="product-price"> PRICE IN KSHS. <br>
+        <span class="old-price">2000</span>
+        <span class="new-price">1400</span>
+      </p>
 
-  <div class="slider-container">
-    <button class="arrow left" id="prevBtn" data-aos="fade-up" data-aos-delay="600">&#10094;</button>
-    <div class="slider" id="slider" data-aos="fade-up" data-aos-delay="400">
-      <!-- Slide 1 -->
-      <div class="slide active">
-        <a href="main.html#travis-tee" class="featured-link" >
-        <div class="img-container">
-          <img src="mains/travis.jpg" loading="lazy"  alt="Item 1" />
-        </div>
-        <div class="card-info">
-          <h3>Travis Scott Tee</h3>
-          <p>Kshs. 2000</p>
-        </div>
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
+
       </div>
-      </a>
-      <!-- Slide 2 -->
-      <div class="slide next">
-        <a href="main.html#t-tee" class="featured-link">
-        <div class="img-container">
-          <img src="mains/playboy.jpg" loading="lazy"  alt="Item 2" />
-        </div>
-        <div class="card-info">
-          <h3>Playboy Carti Tee</h3>
-          <p>Kshs. 1800</p>
-        </div>
-      </div>
-    </a>
-      <!-- Slide 3 -->
-      <div class="slide">
-        <div class="img-container">
-          <img src="mains/weeekkekeeend.jpg" loading="lazy"  alt="Item 3" />
-        </div>
-        <div class="card-info">
-          <h3>Classic Jeans</h3>
-          <p>$39.99</p>
-        </div>
-      </div>
-      <!-- Slide 4 -->
-      <div class="slide prev">
-        <div class="img-container">
-          <img src="https://via.placeholder.com/400x300?text=Item+4" loading="lazy"  alt="Item 4" />
-        </div>
-        <div class="card-info">
-          <h3>Elegant Jacket</h3>
-          <p>$59.99</p>
-        </div>
-      </div>
+
     </div>
 
-    <button class="arrow right" id="nextBtn" data-aos="fade-up" data-aos-delay="600">&#10095;</button>
-  </div>
 
-<!-- Featured Products -->
-<section id="featured">
-  <h2 class="section-title" data-aos="fade-up" data-aos-delay="200">Featured Products</h2>
-  <div class="products">
-      <!-- Product 1 -->
-      <div class="product-card large" data-aos="fade-up" data-aos-delay="200">
-        <a href="main.html#travis-tee" class="featured-link">
-              <img src="mains/travis.jpg" loading="lazy" alt="Product 1" class="product-img">
-              <div class="product-info">
-                  <h3>Travis Scott Tee</h3>
-                  <p>Kshs 2,000</p>
-              </div>
-          </a>
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="fid"
+         data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+    >
+      <div class="image-wrapper">
+        <img src="mains/NEAT.jpg" alt="Product Image">
+        <img src="mains/green  00.1.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/green3.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green 10.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/green 12.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green11.jpg" alt="Product Image 3" class="hidden-image">
       </div>
-      <!-- Product 2 -->
-      <div class="product-card small" data-aos="fade-up" data-aos-delay="200">
-        <a href="main.html#t-tee" class="featured-link">
-              <img src="mains/playboy.jpg" loading="lazy" alt="Product 2" class="product-img" loading="lazy" >
-              <div class="product-info">
-                  <h3>Playboy Carti Tee</h3>
-                  <p>Kshs 1,800</p>
-              </div>
-          </a>
+      <h3 class="product-name">6FJGM0</h3>
+      <p class="product-price">  PRICE IN KSHS. <br>
+        <span class="new-price" >1400</span>
+      </p>
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="M">M</button>
       </div>
-      <div class="product-card small">
-        <a href="main.html#fid" class="featured-link">
-            <img src="mains/green  00.1.jpg" loading="lazy" alt="Product 2" class="product-img" loading="lazy" >
-            <div class="product-info">
-                <h3>6FJGM0</h3>
-                <p>Kshs 1,400</p>
-            </div>
-        </a>
-    </div>
-      <!-- Add more products as needed -->
-    <!-- Product 2 -->
-    <div class="product-card large">
-      <a href="main.html#acid" class="featured-link">
-            <img src="mains/acid wash2.jpg" loading="lazy" alt="Product 2" class="product-img" loading="lazy" >
-            <div class="product-info">
-                <h3>Acid Wash Tees</h3>
-                <p>Kshs 1,800</p>
-            </div>
-        </a>
+
     </div>
 
-    <div class="product-card small">
-      <a href="main2.html#n-tee" class="featured-link">
-          <img src="mains/n7 (1).jpg" loading="lazy" alt="Product 1" class="product-img" loading="lazy" >
-          <div class="product-info">
-              <h3>N7584JGD</h3>
-              <p>Kshs 1,400</p>
-          </div>
-      </a>
-  </div>
 
-  <div class="product-card small">
-    <a href="main.html#black" class="featured-link">
-        <img src="mains/black plain.jpg" loading="lazy" alt="Product 2" class="product-img" loading="lazy" >
-        <div class="product-info">
-            <h3>Black Plain</h3>
-            <p>Kshs 800</p>
+        <div class="product-card" data-aos="fade-up" data-aos-delay="400"
+             data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+        >
+        <div class="image-wrapper">
+          <img src="mains/flee1.jpg" alt="Product Image">
+          <img src="mains/flee.jpg" alt="Product Image 2" class="hidden-image">
+          <img src="mains/flee 3.jpg" alt="Product Image 3" class="hidden-image">
+          <img src="mains/fleeeeee.jpg" alt="Product Image 2" class="hidden-image">
         </div>
-    </a>
-</div>
-     <!-- Product 1 -->
-     <div class="product-card large">
-      <a href="main2.html#every-glass" class="featured-link">
-          <img src="mains/miwani.jpg" loading="lazy" alt="Product 1" class="product-img" loading="lazy" >
-          <div class="product-info">
-              <h3>Everyday Frames</h3>
-              <p>Kshs 1,250</p>
-          </div>
-      </a>
-  </div>
-  <div class="product-card small">
-    <a href="main2.html#crop" class="featured-link">
-        <img src="mains/crop2.jpg" loading="lazy" alt="Product 2" class="product-img" loading="lazy" >
-        <div class="product-info">
-            <h3>Neat Crop Top</h3>
-            <p>Kshs 850</p>
-        </div>
-    </a>
-</div>
-<div class="product-card small">
-  <a href="main3.html#week" class="featured-link">
-      <img src="mains/weekend.jpg" loading="lazy" alt="Product 2" class="product-img" loading="lazy" >
-      <div class="product-info">
-          <h3>The Weekend</h3>
-          <p>Kshs 2,000</p>
+        <h3 class="product-name">FLEECE</h3>
+        <p class="product-price">  PRICE IN KSHS. <br>
+          <span class="old-price">3500</span>
+          <span class="new-price">2800</span>
+        </p>
+
+        
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
       </div>
-  </a>
-</div>
+      <div class="hidden-buttons color-buttons">
+        <button class="color-btn" data-color="Grey">Grey</button>
+      </div>
+      </div>
+
+
+          <div class="product-card" data-aos="fade-up" data-aos-delay="400"
+               data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+          >
+      <div class="image-wrapper">
+        <img src="mains/purple.jpg" alt="Product Image">
+        <img src="mains/purple 0.1.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/purple1.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/purple0.22.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/purple2.jpg" alt="Product Image 2" class="hidden-image">
+      </div>
+      <h3 class="product-name">PURPLE PANTS</h3>
+      <p class="product-price">   PRICE IN KSHS. <br>
+        <span class="old-price">2700</span>
+        <span class="new-price">1700</span>
+      </p>
+    </div>
+
+  </main>
+
+
+
+
+  <!-- Neat large photo 1 -->
+  <section id="neat-promo">
+      <div class="promo-overlay"></div>
+  <div class="promo-content" data-aos="fade-down" data-aos-delay="400">
+    <h1>NEAT</h1>
+    <p>The Latest Addition to Neat Wardrobe.</p>
+    <a href="main.html" class="shop-btn">Shop Now →</a>
   </div>
 </section>
 
-
-<!--Moving Word-->
-
+<!--Keep It Neat Word-->
 <section id="moving-text-2">
   <div class="moving-text-content-2">
-    <h2 style="font-size: 3rem;"  data-aos="fade-up" data-aos-delay="200">FROM KENYA TO THE WORLD. BE A PART OF THE STORY</h2>
+    <h2 data-aos="fade-up" data-aos-delay="200" style="  font-family: 'Dream Avenue', sans-serif;">KEEP IT NEAT</h2>
   </div>
 </section>
 
-<!--STATS SECTION-->
 
-<!--Suggestion Box-->
+<!--Product sect 2-->
 
-<div class="suggestion-box-container">
-  <div class="floating-star"></div>
-  <div class="floating-star"></div>
-  <div class="floating-star"></div>
-  <h2>How Can We Improve Our Services To You?</h2>
+ <main class="product-grid" data-aos="fade-up" data-aos-delay="400">
 
-  <form action="https://api.web3forms.com/submit" method="POST">
-    <!-- Replace with your Access Key -->
-    <input type="hidden" name="access_key" value="9d0d7b57-d26f-4c56-9e0d-7a94137b28c7">
+    <!-- Example Product Card -->
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee"      data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size.">
 
-    <input class="o" type="text" name="name" placeholder="Your Name" required>
-    <input class="i" type="email" name="email" placeholder="Your Email" required>
-    <textarea class="t" name="suggestions" placeholder="Your Suggestions" required></textarea>
-    <button type="submit" class="submit-button">Send</button>
-</form>
+      <div class="image-wrapper">
+        <img src="mains/playboy2.jpg" alt="Product Image">
+        <img src="mains/playboy.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/playboy3.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/playboy4.jpg" alt="Product Image 3" class="hidden-image">
+      </div>
+      <h3 class="product-name" >PLAYBOY CARTI TEE</h3>
+      <p class="product-price"> PRICE IN KSHS. <br>
+        <span class="old-price">2000</span>
+        <span class="new-price">1400</span>
+      </p>
 
-</div>
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="L">L</button>
+        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
 
+      </div>
+
+    </div>
+
+
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="fid"
+         data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+    >
+      <div class="image-wrapper">
+        <img src="mains/NEAT.jpg" alt="Product Image">
+        <img src="mains/green  00.1.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/green3.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green 10.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/green 12.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/green11.jpg" alt="Product Image 3" class="hidden-image">
+      </div>
+      <h3 class="product-name">6FJGM0</h3>
+      <p class="product-price">  PRICE IN KSHS. <br>
+        <span class="new-price" >1400</span>
+      </p>
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="M">M</button>
+      </div>
+
+    </div>
+
+
+        <div class="product-card" data-aos="fade-up" data-aos-delay="400"
+             data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+        >
+        <div class="image-wrapper">
+          <img src="mains/flee1.jpg" alt="Product Image">
+          <img src="mains/flee.jpg" alt="Product Image 2" class="hidden-image">
+          <img src="mains/flee 3.jpg" alt="Product Image 3" class="hidden-image">
+          <img src="mains/fleeeeee.jpg" alt="Product Image 2" class="hidden-image">
+        </div>
+        <h3 class="product-name">FLEECE</h3>
+        <p class="product-price">  PRICE IN KSHS. <br>
+          <span class="old-price">3500</span>
+          <span class="new-price">2800</span>
+        </p>
+
+        
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+      </div>
+      <div class="hidden-buttons color-buttons">
+        <button class="color-btn" data-color="Grey">Grey</button>
+      </div>
+      </div>
+
+
+          <div class="product-card" data-aos="fade-up" data-aos-delay="400"
+               data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+     data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
+     data-sizefit="Relaxed fit with structured drape. Fits true to size."
+          >
+      <div class="image-wrapper">
+        <img src="mains/purple.jpg" alt="Product Image">
+        <img src="mains/purple 0.1.jpg" alt="Product Image 2" class="hidden-image">
+        <img src="mains/purple1.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/purple0.22.jpg" alt="Product Image 3" class="hidden-image">
+        <img src="mains/purple2.jpg" alt="Product Image 2" class="hidden-image">
+      </div>
+      <h3 class="product-name">PURPLE PANTS</h3>
+      <p class="product-price">   PRICE IN KSHS. <br>
+        <span class="old-price">2700</span>
+        <span class="new-price">1700</span>
+      </p>
+    </div>
+
+  </main>
+
+
+  <!-- Neat large photo 1 -->
+  <section id="neat-promo2">
+      <div class="promo-overlay2"></div>
+  <div class="promo-content2" data-aos="fade-down" data-aos-delay="400">
+    <h1>t-shirts</h1>
+    <p>Our Signature Tees are back</p>
+    <a href="/shop" class="shop-btn2">Shop Now →</a>
+  </div>
+</section>
 
 
 <!-- Footer -->
@@ -457,9 +518,8 @@
 
 
 
-  <script src="scripts.min.js" defer></script>
-
-
+  <script src="scripts.js" defer></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
@@ -727,7 +787,86 @@ links.forEach(link => {
 
 
 
+<script>
+  document.querySelectorAll('.product-card').forEach((card) => {
+  const images = card.querySelectorAll('.image-wrapper img');
 
+  // Show only the first image by default
+  images.forEach((img, index) => {
+    img.style.opacity = index === 0 ? '1' : '0';
+    img.style.zIndex = index === 0 ? '1' : '0';
+  });
+
+  card.addEventListener('mouseenter', () => {
+    if (images.length > 1) {
+      images[0].style.opacity = '0';
+      images[1].style.opacity = '1';
+      images[0].style.zIndex = '0';
+      images[1].style.zIndex = '1';
+    }
+  });
+
+  card.addEventListener('mouseleave', () => {
+    if (images.length > 1) {
+      images[0].style.opacity = '1';
+      images[1].style.opacity = '0';
+      images[0].style.zIndex = '1';
+      images[1].style.zIndex = '0';
+    }
+  });
+});
+
+
+
+document.querySelectorAll('.product-card').forEach((card) => {
+  card.addEventListener('click', () => {
+    const images = Array.from(card.querySelectorAll('.image-wrapper img')).map(img => img.src);
+    const status = card.querySelector('.status') ? card.querySelector('.status').innerText : null;
+    const name = card.querySelector('.product-name').innerText;
+    const oldPrice = card.querySelector('.old-price') ? card.querySelector('.old-price').innerText : null;
+    const newPrice = card.querySelector('.new-price') ? card.querySelector('.new-price').innerText : null;
+    const sizes = Array.from(card.querySelectorAll('.size-buttons .size-btn')).map(button => button.dataset.size);
+    const colors = Array.from(card.querySelectorAll('.color-buttons .color-btn')).map(button => button.dataset.color);
+
+    // NEW: Add extra descriptive info
+    const description = card.dataset.description || "";
+    const features = card.dataset.features ? JSON.parse(card.dataset.features) : [];
+    const sizeFit = card.dataset.sizefit || "";
+
+    const productData = {
+      images,
+      name,
+      oldPrice,
+      newPrice,
+      sizes,
+      colors,
+      description,  // new
+      features,     // new
+      sizeFit       // new
+    };
+
+    localStorage.setItem('selectedProduct', JSON.stringify(productData));
+    window.location.href = 'product.html';
+  });
+});
+
+
+
+// Function to filter product cards by name
+function filterProducts(query) {
+  productCards.forEach((card) => {
+    const productName = card.querySelector('.product-name').textContent.toLowerCase();
+
+    // If the product name includes the query, show it; otherwise, hide it
+    if (productName.includes(query)) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+}
+
+</script>
 
 
 </body>
