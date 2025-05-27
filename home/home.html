@@ -14,95 +14,154 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="preload" as="video" href="assets/0404.webm" type="video/mp4">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
 
 </head>
 <body >
 
 
-  
-<!-- Navbar -->
-<nav class="navbar" id="navbar">
-  <div class="logo">
-    <img src="mains/logo2.png" alt="Company Logo" />
-  </div>
-  <div class="navbar-links">
-    <!-- Login/Sign Up Dropdown -->
-    <div class="dropdown">
-     <a href="sign.html"> <button class="dropbtn">Login / Signup</button></a>
+
+<section class="hero">
+  <video autoplay muted loop playsinline>
+    <source src="assets/0404.webm" type="video/mp4" />
+    Your browser does not support HTML5 video.
+  </video>
+
+  <nav class="navbar" id="navbar">
+    <div class="logo">
+      <img src="mains/logo2.png" alt="Company Logo" />
+    </div>
+
+<div class="navbar-links" style="font-family: 'Poppins', sans-serif;">
+  <!-- TOPS -->
+  <div class="nav-item">
+<!-- Example for TOPS -->
+<a href="tops.html" class="nav-link" data-menu="tops-menu">TOPS</a>
+
+    <div class="side-menu" id="tops-menu">
+      <button class="close-btn">&times;</button>
+      <h2 class="menu-title">TOPS</h2>
+      <p class="menu-desc">Explore our wide variety of stylish tops, from tees to hoodies crafted for comfort and fashion.</p>
+      <div class="dropdown-card">
+        <img src="mains/playboy.jpg" alt="Top 1">
+        <p>PLAYBOY CARTI TEE</p>
+        <button>Shop Now →</button>
+      </div>
+      <div class="dropdown-card">
+        <img src="mains/green  00.1.jpg" alt="Top 2">
+        <p>GREEN TOP</p>
+        <button>Shop Now →</button>
+      </div>
+      <div class="dropdown-card">
+        <img src="mains/black claws.jpg" alt="Top 3">
+        <p>BLACK CLAWS</p>
+        <button>Shop Now →</button>
+      </div>
     </div>
   </div>
-</nav>
 
+  <!-- BOTTOMS -->
+  <div class="nav-item">
+<a href="#bottoms" class="nav-link" data-menu="bottoms-menu">BOTTOMS</a>
+    <div class="side-menu" id="bottoms-menu">
+      <button class="close-btn">&times;</button>
+      <h2 class="menu-title">BOTTOMS</h2>
+      <p class="menu-desc">Choose from our comfy joggers, cargo pants, and stylish skirts to complete your outfit.</p>
+      <!-- Add cards here -->
+    </div>
+  </div>
 
+  <!-- NEW -->
+  <div class="nav-item">
+  <a href="#new" class="nav-link" data-menu="new-menu">NEW</a>
+    <div class="side-menu" id="new-menu">
+      <button class="close-btn">&times;</button>
+      <h2 class="menu-title">NEW</h2>
+      <p class="menu-desc">Check out the latest arrivals fresh off the line. Stay ahead of trends with our new collection.</p>
+      <!-- Add cards here -->
+    </div>
+  </div>
 
+  <!-- BEST SELLERS -->
+  <div class="nav-item">
+<a href="#bestsellers" class="nav-link" data-menu="bestsellers-menu">BEST SELLERS</a>
+    <div class="side-menu" id="bestsellers-menu">
+      <button class="close-btn">&times;</button>
+      <h2 class="menu-title">BEST SELLERS</h2>
+      <p class="menu-desc">These are the most loved pieces by our customers. Grab them while stocks last!</p>
+      <!-- Add cards here -->
+    </div>
+  </div>
 
+  <!-- KOOLHEADS -->
+  <div class="nav-item">
+<a href="#koolheads" class="nav-link" data-menu="koolheads-menu">KOOLHEADS</a>
+    <div class="side-menu" id="koolheads-menu">
+      <button class="close-btn">&times;</button>
+      <h2 class="menu-title">KOOLHEADS</h2>
+      <p class="menu-desc">Funky, bold, and confident — the Koolheads collection is made to stand out.</p>
+      <!-- Add cards here -->
+    </div>
+  </div>
 
-
-
-<div class="looping-text-section">
-  <div class="text-container">
-    <div class="menu-icon" id="menuToggle">
-      <span></span>
-      <span></span>
-      <span></span>
+  <!-- GIFTS -->
+  <div class="nav-item">
+<a href="#gifts" class="nav-link" data-menu="gifts-menu">GIFTS</a>
+    <div class="side-menu" id="gifts-menu">
+      <button class="close-btn">&times;</button>
+      <h2 class="menu-title">GIFTS</h2>
+      <p class="menu-desc">Surprise someone special with something stylish from our curated gift section.</p>
+      <!-- Add cards here -->
     </div>
   </div>
 </div>
 
 
-<!-- Overlay -->
-<div id="overlay" class="menu-overlay"></div>
 
-<!-- Side Navigation Menu -->
-<div class="side-menu" id="sideMenu">
-  <div class="close-btn" id="closeMenu">&times;</div>
-  <nav class="nav-links">
-    <a href="tees.html">Tees</a>
-    <a href="pants.html">Pants</a>
-    <a href="flee.html">Fleece</a>
-    <a href="tops.html">Tops</a>
-    <a href="glasses.html">Accessories</a>
-    <a href="capes.html">Koolheads</a>
+    <div class="auth-menu">
+      <a href="sign.html"><button class="dropbtn">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user" viewBox="0 0 24 24">
+  <path d="M20 21v-2a4 4 0 0 0-3-3.87" />
+  <path d="M4 21v-2a4 4 0 0 1 3-3.87" />
+  <circle cx="12" cy="7" r="4" />
+</svg>
+
+
+
+      </button></a>
+
+      <!-- Hamburger Menu Button for Mobile -->
+      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menu-toggle">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <button class="mobile-menu-close" id="mobile-menu-close">&times;</button>
+      <a href="tops.html" class="mobile-nav-link">Tops</a>
+      <a href="pants.html" class="mobile-nav-link">Bottoms</a>
+      <a href="#" class="mobile-nav-link">New</a>
+      <a href="#" class="mobile-nav-link">Best sellers</a>
+      <a href="#" class="mobile-nav-link">Koolheads</a>
+      <a href="#" class="mobile-nav-link">Gifts</a>
+    </div>
   </nav>
-</div>
 
+  <div class="hero-text">NEAT</div>
+</section>
 
-
-
-
-  <!--Hero section--> 
-  <section id="hero" id="heroSection">
-    <div class="hero-content">
-      <h1 class="animated-text" id="movingTitle" >NEATGARMS</h1>
-      <div class="buttons" data-aos="fade-up" data-aos-delay="400">
-        <a href="main.html" class="btn btn-primary">Main Shop</a>
-        <a href="item.html" class="btn btn-secondary">Customize?</a>
-      </div>
-    </div>
-
-
-    
-    <div class="hero-container">
-      <div class="video-wrapper">
-          <video autoplay loop muted playsinline class="hero-video" preload="auto">
-              <source src="assets/0404.webm" type="video/webm">
-              Your browser does not support the video tag.
-          </video>
-      </div>
+  
+<!-- Static Hero Text Section -->
+<section id="hero-text">
+  <div class="hero-text-content">
+    <h2>LOYAL TO THE VISION !</h2>
   </div>
-  
-  
+</section>
 
-
-  </section>
-  
-<!--Moving text-->
-  <section id="moving-text">
-    <div class="moving-text-content">
-      <h2 style="font-size: 4rem; font-weight: lighter; margin-bottom: 0px;" data-aos="fade-up" data-aos-delay="200">LOYAL TO THE VISION !</h2>
-    </div>
-  </section>
 
 
   <!--Image Slider For Latest Products-->
@@ -398,68 +457,7 @@
 
 
 
-  <script src="scripts.js" defer></script>
-  <script>
-    // Get the navbar element
-// Get the navbar element
-const navbar = document.getElementById('navbar');
-
-// Listen for scroll events
-window.onscroll = function() {
-  // Check if page has been scrolled past a certain point
-  if (window.pageYOffset > 50) {
-    navbar.classList.add('scrolled'); // Add 'scrolled' class to navbar
-  } else {
-    navbar.classList.remove('scrolled'); // Remove 'scrolled' class when at top
-  }
-};
-
-
-  </script>
-
-
-    
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const menuToggle = document.getElementById('menuToggle');
-    const sideMenu = document.getElementById('sideMenu');
-    const closeMenu = document.getElementById('closeMenu');
-    const overlay = document.getElementById('overlay');
-
-    const openMenu = () => {
-      sideMenu.classList.add('active');
-      overlay.classList.add('active');
-    };
-
-    const closeSideMenu = () => {
-      sideMenu.classList.remove('active');
-      overlay.classList.remove('active');
-    };
-
-    menuToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openMenu();
-    });
-
-    closeMenu.addEventListener('click', closeSideMenu);
-    overlay.addEventListener('click', closeSideMenu);
-
-    // Close menu if clicked anywhere outside the menu and toggle
-    document.addEventListener('click', (event) => {
-      const isClickInsideMenu = sideMenu.contains(event.target);
-      const isClickOnToggle = menuToggle.contains(event.target);
-
-      if (!isClickInsideMenu && !isClickOnToggle) {
-        closeSideMenu();
-      }
-    });
-
-    // Prevent menu click from bubbling up to document
-    sideMenu.addEventListener('click', (e) => e.stopPropagation());
-  });
-</script>
+  <script src="scripts.min.js" defer></script>
 
 
 
@@ -617,10 +615,120 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+ </script>
+
+ <script>
+ const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  // Toggle mobile menu
+  menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent event bubbling
+    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
+    menuToggle.setAttribute('aria-expanded', !expanded);
+    mobileMenu.classList.toggle('active');
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
+      mobileMenu.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', false);
+    }
+  });
+
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  const halfScreen = window.innerHeight / 10;
+
+  if (window.scrollY > halfScreen) {
+    navbar.classList.add('sticky');
+  } else {
+    navbar.classList.remove('sticky');
+  }
+});
 
 
-    </script>
+</script>
     
+<script>
+const links = document.querySelectorAll('.nav-link');
+
+links.forEach(link => {
+  const menuId = link.dataset.menu;
+  const menu = document.getElementById(menuId);
+  if (!menu) return;
+
+  link.addEventListener('click', (e) => {
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
+      // On mobile, let the link behave normally (navigate)
+      return;
+    }
+
+    // On desktop, prevent navigation and open side menu
+    e.preventDefault();
+    document.querySelectorAll('.side-menu').forEach(m => m.classList.remove('show'));
+    menu.classList.add('show');
+  });
+
+  // Close when clicking outside
+  window.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !link.contains(e.target)) {
+      menu.classList.remove('show');
+    }
+  });
+
+  // Close button inside menu
+  const closeBtn = menu.querySelector('.close-btn');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      menu.classList.remove('show');
+    });
+  }
+});
+
+</script>
+
+<script>
+  const closeBtn = document.getElementById('mobile-menu-close');
+
+  menuToggle.addEventListener('click', () => {
+    mobileMenu.style.display = 'flex';
+  });
+
+  closeBtn.addEventListener('click', () => {
+    mobileMenu.style.display = 'none';
+  });
+</script>
+
+
+<script>
+  window.addEventListener("scroll", () => {
+    const heroText = document.querySelector(".hero-text");
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
+
+    // Only apply shrink on small devices (less than 1024px width)
+    if (screenWidth < 1024) {
+      if (scrollY >= viewportHeight / 10) {
+        heroText.classList.add("shrink");
+      } else {
+        heroText.classList.remove("shrink");
+      }
+    } else {
+      // On large screens, always remove shrink class
+      heroText.classList.remove("shrink");
+    }
+  });
+</script>
+
+
+
+
+
 
 </body>
 </html>

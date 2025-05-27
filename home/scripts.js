@@ -1,7 +1,6 @@
 
 document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 
-
 // Testimonials
 // JavaScript is used to duplicate the cards for seamless looping
 document.addEventListener("DOMContentLoaded", () => {
@@ -16,14 +15,3 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-
-  
-
-
-
-
-
-
-
-
-  

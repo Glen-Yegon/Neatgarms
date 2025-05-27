@@ -13,14 +13,14 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Cinzel', Times, serif;
-  background:linear-gradient(to bottom, #383f45, #8A9381);
-  border-radius: 10px;
+  font-family: 'poppins', sans-serif;
+  background-color: white;
   opacity: 0;
   transition: opacity 1s ease;
 
@@ -53,35 +53,40 @@ body.loaded {
     text-decoration: none;
     color: inherit;
   }
-  
 
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
 
-
-/* Navbar Styling */
-.navbar {
-  font-family: 'Cinzel', Times, serif;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 30px;
-  background: transparent;  /* Default background color */
-  position: fixed;  /* Keeps the navbar fixed at the top */
+.hero video {
+  position: absolute;
   top: 0;
   left: 0;
+  object-fit: cover;
   width: 100%;
-  z-index: 1;
-  border-radius: 0px 10px;
-  transition: background-color 0.3s ease;  /* Smooth transition for background color change */
+  height: 100%;
+  z-index: -1;
+  filter: brightness(0.7);
 }
 
-/* Sticky class when the navbar sticks to the top */
-.sticky {
-  background-color: #111; /* New background color when scrolling */
+
+#navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  font-family: 'Poppins', sans-serif;
+  width: 100% !important;
+  background-color: transparent !important; /* start transparent */
+  z-index: 9999 !important;
+  transition: background-color 0.6s ease, box-shadow 0.6s ease;
 }
 
-.navbar.scrolled {
-  background-color: #3c3c3c; /* Solid background when scrolling */
-  opacity: 1;  /* Ensure it's fully opaque */
+#navbar.sticky {
+  background-color: white !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -93,11 +98,35 @@ body.loaded {
   width: auto;
 }
 
+.navbar-links {
+  display: flex;
+  gap: 45px;
+  font-weight: 20;
+}
 
+.navbar-links .nav-link {
+  color: #fff;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
 
-/* Dropdown Button Styling */
-.dropdown {
-  position: relative;
+.navbar.sticky .navbar-links .nav-link {
+  color: black;
+}
+
+.navbar-links .nav-link:hover {
+  color: white;
+  transform: translateY(-1px);
+  border-bottom: 2px solid black;
+}
+
+.auth-menu {
+  display: flex;
+  align-items: center;
 }
 
 .dropbtn {
@@ -106,165 +135,303 @@ body.loaded {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 20;
   padding:10px 7px;
   text-align: center;
   transition: background-color 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+}
+
+.navbar.sticky .dropbtn {
+  color: black;
 }
 
 .dropbtn:hover {
-  transform: translateX(-10px);
-  font-size: 18px;
-  color: #8a9381;
+  color: white;          /* A calm olive green tone */
+  transform: translateY(-2px);  /* Slight upward movement */
+  font-size: 17.5px;       /* Slightly increase font size */
+  cursor: pointer;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 15px;
+  z-index: 1000;
 }
 
 
-.dropdown:hover .dropdown-content {
-  display: block;
-  border-radius: 10px;
+.menu-toggle:focus {
+  outline: none;
+}
+
+.hamburger {
+  width: 20px;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: all 0.3s linear;
+}
+
+.navbar.sticky .hamburger {
+  background-color: black;
+}
+
+/* Mobile menu - fullscreen with blur background */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 260px; /* or 80vw if you want wider */
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+  flex-direction: column;
+  padding: 60px 20px 20px 20px;
+  z-index: 1050;
+  border-radius: 0 0 0 10px;
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+  transform: translateX(100%);
+}
+
+.mobile-menu-close {
+  background: none;
+  border: none;
+  font-size: 40px;
+  margin-bottom: 15px;
+  color: #ae866a;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 999;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-menu-close:hover {
+  color: black; /* Soft red or any highlight color */
+  transform: rotate(180deg);
+}
+
+/* Show menu */
+.mobile-menu.active {
+  display: flex;
+  transform: translateX(0);
+}
+
+.mobile-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 15px 0px;
+   font-family: 'poppins', sans-serif;
+  font-weight: 20;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+  color: #f1f1f1;
+  border-bottom: 2px solid white;
 }
 
 
 
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
 
-
+  .menu-toggle {
+    display: flex;
+  }
+  .mobile-menu {
+    width: 175px;
+  }
+}
 
 @media (max-width: 468px){
-  /* Logo Styling */
   .navbar .logo img {
     height: 40px;
   }
   .navbar-links{
     gap: 0px;
   }
-  
+  .dropbtn {
+    font-size: 14px;
   }
-
-
-
-
-/* Hero Section */
-#hero {
-    position: relative;
-    font-family: 'Cinzel', Times, serif;
-    font-style: italic;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    color: #3E414A;
+  .menu-toggle {
+    height: 17px;
   }
-  
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 50px;
-    text-align: center;
-    color: #8A9381;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
-  }
-
-/* Hero H1 Styling */
-.hero-content h1 {
-  font-size: 9rem;
-  color: #ae866a;
-  margin: 0;
-  font-style: normal;
-  font-family: 'Playfair Display', serif;
 }
 
-/* For animation and position */
-.animated-text {
-  opacity: 1;
-  transition: transform 1s ease, opacity 1s ease;
-  position: relative;
+.hero-text {
+  font-family: 'Dream Avenue', sans-serif;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: clamp(5rem, 20vw, 300px);
+  font-weight: 400;
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+  text-align: center;
+  padding: 0 1rem;
+  z-index: 999;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+/* Shrinks and centers inside the navbar */
+.hero-text.shrink {
+  font-size: 2rem;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  background-color: transparent;
+  padding: 0.3rem 1rem;
+  border-radius: 8px;
+  text-shadow: none;
+  z-index: 10000;
+  pointer-events: auto;
+}
+
+/* Large devices: make shrink relative and push content */
+@media (min-width: 1024px) {
+  .hero-text {
+    position: relative; /* key: change from fixed to relative */
+    top: 50%;
+    left: auto;
+    transform: none;
+    margin: 0 auto 1rem auto; /* center with margin bottom for spacing */
+    max-width: 800px; /* optional max width */
+    pointer-events: auto;
+  }
+}
+
+/* Optional: Small screens keep fixed */
+@media (max-width: 468px) {
+  .hero-text.shrink {
+    position: fixed;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+    .hero-text {
+    font-size: clamp(7rem, 30vw, 350px);
+    top: 70%;
+  }
+}
+@media (max-width: 768px) {
+      .hero-text {
+    font-size: clamp(7rem, 30vw, 350px);
+  }
 }
 
 
 
-
- /* Hero Section */
-.hero-content .buttons a {
-    padding: 1rem 3rem;
-    margin: 0 1rem;
-    font-size: 1.2rem;
-    text-decoration: none;
-    font-style: normal;
-    text-transform: uppercase;
-    font-weight: bold;
-    border-radius: 30px;
-    transition: transform 0.1s ease, background-color 0.1s ease, color 0.1s ease;
-    display: inline-block;
-  }
-  
-  .hero-content .buttons a.btn-primary {
-    background-color: transparent;
-    color: #fff;
-    border: 2px dotted #8A9381;
-    margin-bottom: 10px;
-  }
-  
-  .hero-content .buttons a.btn-primary:hover {
-    background-color: #ae866a;
-    color: #fff;
-    transform: translateY(-5px) scale(1.1);
-    border-color: #8A9381 ;
-    border-style: dotted;
-  }
-  
-  .hero-content .buttons a.btn-secondary {
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #AE866A;
-  }
-  
-  .hero-content .buttons a.btn-secondary:hover {
-    background-color: #8a9381;
-    color: #000000;
-    transform: translateY(-5px) scale(1.1);
-    border-style: dotted;
-    border-color: #AE866A;
-  }
-  
-  
-
-/* Hero Section */
-.hero-container {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/* Wrapper for both video halves */
-.video-wrapper {
-  position: absolute;
+.side-menu {
+  position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  left: -100%;
+  width: 200px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 20px;
+  transition: left 0.4s ease;
+  z-index: 9999;
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+
+  /* Hide scrollbar for Chrome, Safari, and Edge */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+.side-menu::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 
-/* Video Styling */
-.hero-video {
+.side-menu.show {
+  left: 0;
+}
+
+.menu-title {
+  font-size: 30px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 5px;
+    font-family: 'Dream Avenue', sans-serif;
+}
+
+.menu-desc {
+  font-size: 14px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-bottom: 10px;
+}
+
+.close-btn:hover{
+    transform: rotate(180deg);
+}
+.dropdown-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.dropdown-card img {
   width: 100%;
-  height: 100%;
-  border-radius: 2px;
-  object-fit: cover;
-  transition: transform 1s ease-in-out;
-  filter: brightness(1.1) contrast(1.2); /* Enhances colors */
+  margin-bottom: 8px;
+}
+
+.dropdown-card p {
+  margin-bottom: 0px;
+}
+
+.dropdown-card button {
+  padding: 6px 12px;
+  color: white;
+  border: none;
+  background-color: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-card button:hover {
+  border-bottom: 2px solid white;
 }
 
 
-
-
-
-
-
-  
   /* Photo Galleries */
   .photo-gallery {
     position: absolute;
@@ -353,56 +520,42 @@ body.loaded {
       transform: translateX(-50vw);
     }
   }
+/* Static Hero Text Section */
+#hero-text {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 10px;
+  background-color: transparent; /* Adjust if needed */
+  text-align: center;
+}
 
-/* Moving Text Section */
-#moving-text {
-    width: 100%;
-    display: flex;
-    margin: 10px;
-    margin-bottom: 0px;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background-color: transparent; /* Background color to match the theme */
+.hero-text-content h2 {
+  font-size: 5rem;
+  font-family: 'Dream Avenue', sans-serif;
+  font-weight: 400;
+  color: black; /* Adjust color as needed */
+  margin: 0;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .hero-text-content h2 {
+    font-size: 3.5rem;
   }
-  
-  .moving-text-content {
-    white-space: nowrap; /* Prevents text from wrapping */
-    font-size: 7rem;
-    font-family: 'Cinzel', Times, serif;
-    word-spacing: 100%;
-    color: #000000;
-    animation: moveText 10s linear infinite; /* Move text over 10 seconds */
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .hero-text-content h2 {
+    font-size: 2rem;
   }
-  
-  @keyframes moveText {
-    0% {
-      transform: translateX(100%); /* Start off-screen to the right */
-    }
-    100% {
-      transform: translateX(-100%); /* Move off-screen to the left */
-    }
+  #hero-text{
+      padding: 15px 5px;
   }
-  
-  /* Mobile responsiveness */
-  @media (max-width: 768px) {
-    /* Decrease font size for tablets and mobile devices */
-    .moving-text-content {
-      font-size: 5rem;/* Adjust font size for medium screens */
-    }
-  }
-  
-  @media (max-width: 480px) {
-    /* Decrease font size for very small screens */
-    .moving-text-content {
-      font-size: 5rem; /* Adjust font size for small screens */
-    }
-  
-    /* Optional: Reduce the height of the section on small screens */
-    #moving-text {
-      height: 70px; /* Adjust height for mobile screens */
-    }
-  }
+}
+
   
   /* Featured */
 /* Background Styling for the Section */
