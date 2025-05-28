@@ -1,4 +1,16 @@
-/* General Styling */
+@font-face {
+  font-family: 'Dream Avenue';
+  src: url('fonts/DreamAvenue.woff') format('woff2'),
+       url('fonts/DreamAvenue.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -20,15 +32,15 @@ body{
   /* Navbar Styles */
 .navbar {
   display: flex;
-  justify-content: space-between;
-  font-family: 'Cinzel', Times, serif; 
+  justify-content: center;
+  font-family: 'Dream Avenue', sans-serif; 
   align-items: center;
+  text-align: center;
   position: relative;
   width: 100%;
   height: 60px;
   padding: 0 20px;
-  background: linear-gradient(to bottom, #ae866a, #8a9381); /* Unique gradient */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  background: linear-gradient(to bottom, #8a9381, white);
   z-index: 0;
 }
 
@@ -46,31 +58,30 @@ body{
 
 /* Company Name (Centered & Tilted) */
 .company-name h1 {
-  font-size: 34px;
-  color: #333;
-  font-weight: bold;
+  font-size: 45px;
+  color: black;
+  font-weight: 100;
   text-align: center;
   font-style: normal;
+  font-family: 'Dream Avenue', sans-serif;
   margin-left: 10px;
   flex-grow: 1;
-  margin-left: auto;
+  margin-left: 10px;
   margin-right: auto;
 }
 
 /* Back Button */
 .back-button {
   background-color: transparent;
-  color: #333;
-  border-style: groove;
-  border-radius: 4px;
+  color: black;
   padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
+  text-decoration: none;
   transition: background-color 0.3s ease;
 }
 
 .back-button:hover {
-  transform: skew(20deg);
   background-color:#8a9381;
   cursor: crosshair;
 }
