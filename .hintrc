@@ -4,12 +4,7 @@
   ],
   "hints": {
     "no-inline-styles": "off",
-    "axe/forms": [
-      "default",
-      {
-        "label": "off"
-      }
-    ],
+    "axe/forms": "off",
     "disown-opener": "off",
     "axe/name-role-value": [
       "default",

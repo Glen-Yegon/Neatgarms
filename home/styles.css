@@ -69,8 +69,10 @@ body.loaded {
   width: 100%;
   height: 100%;
   z-index: -1;
-  filter: brightness(0.5);
+  filter: brightness(0.7);
+  transition: transform 1s ease;
 }
+
 
 
 #navbar {
@@ -284,7 +286,7 @@ body.loaded {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: #ae866a;
   font-size: clamp(5rem, 20vw, 300px);
   font-weight: 400;
   text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
@@ -377,7 +379,7 @@ body.loaded {
 .menu-title {
   font-size: 30px;
   font-weight: 400;
-  color: #fff;
+  color: white;
   margin-bottom: 5px;
     font-family: 'Dream Avenue', sans-serif;
 }
@@ -721,13 +723,30 @@ body.loaded {
   position: relative;
   width: 100%;
   min-height: 90vh;
-  background: url('mains/utility.jpg') no-repeat center center/cover;
   display: flex;
   align-items: center;
   padding: 60px 10%;
   color: black;
   overflow: hidden;
 }
+
+/* Background Animation Layer */
+.promo-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('mains/utility.jpg') no-repeat center center/cover;
+  transform: scale(1.2);
+  transition: transform 1.2s ease;
+  z-index: 0;
+}
+
+.promo-bg.in-view {
+  transform: scale(1);
+}
+
 
 /* Dark Overlay */
 .promo-overlay {
@@ -736,13 +755,15 @@ body.loaded {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Adjust darkness here (0.55 = 55% dark) */
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
+/* Promo Content */
 .promo-content {
   max-width: 600px;
-  z-index: 1000;
+  z-index: 2;
+  position: relative;
 }
 
 .promo-content h1 {
@@ -768,28 +789,13 @@ body.loaded {
   font-size: 1rem;
   font-weight: bold;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-
-
+  transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
 }
 
 .shop-btn:hover {
   background-color: transparent;
   font-size: 1.5rem;
   transform: scale(1.08);
-}
-
-/* Animation */
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 /* Responsive Design */
@@ -802,7 +808,6 @@ transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
 
   .promo-content {
     max-width: 100%;
-    animation: none;
   }
 
   .promo-content h1 {
@@ -830,36 +835,53 @@ transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
 }
 
 
-/* NEAT Promo Section */
+
 #neat-promo2 {
   position: relative;
   width: 100%;
   min-height: 90vh;
-  background: url('mains/gunna2.jpg') no-repeat center center/cover;
   display: flex;
   align-items: center;
   padding: 60px 10%;
   color: black;
   overflow: hidden;
-  justify-content: center; /* Push content to the right */
+  justify-content: center;
   text-align: center;
 }
 
-/* Dark Overlay */
+/* Background Image with Zoom Effect */
+.promo-bg2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('mains/gunna2.jpg') no-repeat center center/cover;
+  transform: scale(1.2);
+  transition: transform 1.2s ease;
+  z-index: 0;
+}
+
+.promo-bg2.in-view {
+  transform: scale(1);
+}
+
+/* Overlay */
 .promo-overlay2 {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Adjust darkness here (0.55 = 55% dark) */
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
 
+/* Content */
 .promo-content2 {
   max-width: 600px;
   z-index: 1000;
-    text-align: center;
+  text-align: center;
 }
 
 .promo-content2 h1 {
@@ -885,10 +907,7 @@ transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
   font-size: 1rem;
   font-weight: bold;
   text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-
-
+  transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
 }
 
 .shop-btn2:hover {
@@ -897,29 +916,15 @@ transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
   transform: scale(1.08);
 }
 
-/* Animation */
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   #neat-promo2 {
     padding: 40px 5%;
-    text-align: center;
     justify-content: center;
   }
 
   .promo-content2 {
     max-width: 100%;
-    animation: none;
   }
 
   .promo-content2 h1 {
@@ -945,6 +950,7 @@ transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
     padding: 12px 24px;
   }
 }
+
 
 
 
