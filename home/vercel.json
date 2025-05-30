@@ -1,12 +1,39 @@
 {
   "headers": [
     {
-      "source": "/(mains|shoot|items|graphics|cloth|assets)/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)$",
+      "source": "/mains/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)$",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/shoot/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/items/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/graphics/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/cloth/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/assets/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)$",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
   ]
