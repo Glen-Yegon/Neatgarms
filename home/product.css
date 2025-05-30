@@ -1289,14 +1289,19 @@ body, html {
 
 .footer-logo h1 {
   font-family: 'Dream Avenue', sans-serif;
-  font-size: 10rem; /* Increased size for better visibility */
-  font-weight: bold;
-  color: rgb(0, 0, 0);
+  font-size: calc(100vw / 6.5); /* Adjust '8' based on character count */
+  font-weight: 100;
+  color: black;
   text-transform: uppercase;
-  letter-spacing: 15px;
-  width: 100%;
+  letter-spacing: 0.5vw;
+  width: 100vw;
   text-align: center;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
 }
+
+
 
 
 /* Responsive Design */
@@ -1305,10 +1310,6 @@ body, html {
     grid-template-columns: 1fr;
   }
 
-  .footer-logo h1 {
-    font-size: 5rem; /* Slightly smaller on tablets */
-    letter-spacing: 10px;
-  }
 
   .footer-logo {
     font-size: 5rem;
@@ -1321,12 +1322,6 @@ body, html {
 }
 
 @media (max-width: 480px) {
-  .footer-logo h1 {
-    font-size: 2.5rem; /* Adjusted for mobile screens */
-    letter-spacing: 4px;
-    gap: 3px;
-    text-align: center;
-  }
   .footer-logo{
     text-align: center;
     justify-content: center;

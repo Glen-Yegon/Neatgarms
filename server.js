@@ -127,7 +127,113 @@ app.post(
         from: '"Neatgarms" <info@neatgarms.com>', 
         to: email,
         subject: "Thank You for Your Submission!",
-        text: `Thank you for choosing Neatgarms, ${name}!\n\nWe will get back to you soon.\n\nHappy shopping 🛍️`,
+        html: 
+         `
+<div style="  font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+
+  <div style="text-align: center;">
+    <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+  </div>
+
+  <div  background-color: #f9f9f9; padding: 30px; border-radius: 10px; text-align: center; color: #333;">
+  <h2 style="color:rgb(0, 0, 0);"> Hi ${name}. </h2>
+  <p style="font-size: 16px; line-height: 1.6;">
+    We're thrilled to have you as part of the Neatgarms family.  
+    <br><br>
+    One of our team members will personally reach out to you via your phone number to ensure everything fits just right!
+    <br><br>
+    <strong>Stay stylish. Stay confident.</strong>
+  </p>
+  <p style="margin-top: 20px; font-size: 18px; color:rgb(3, 0, 0);"><em>Happy Shopping! 🛍️</em></p>
+</div>
+
+
+  <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
+    <h3 style="color: black;">🪄 A Special Thank You</h3>
+    <p style="font-size: 15px; line-height: 1.6;">
+      Thank you for your purchase! Your merch has been gently taken from our Neat shelves by gloved hands and lovingly packed by our Omashu packing specialist under candlelight. After a glorious celebration, the town of Nairobi cheered as your package departed aboard our private baby jet. You’re now officially our “Customer of the Year,” with your photo proudly on our wall. We had a magical time packing your order—and we can’t wait for your next visit. <strong>KEEPITNEAT!</strong>
+    </p>
+  </div>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+
+    
+        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">🔥 Top Neat Picks for This Week</h3>
+        <table style="width: 100%; border-spacing: 16px 10px;">
+          <tr>
+            <td align="center">
+              <a href="https://neatgarms.com/product/urban-tee" target="_blank">
+                <img src="https://neatgarms-six.vercel.app/mains/playboy.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Urban Tee</p>
+              </a>
+            </td>
+            <td align="center">
+              <a href="https://neatgarms.com/product/classic-hoodie" target="_blank">
+                <img src="https://neatgarms-six.vercel.app/mains/travis.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Classic Hoodie</p>
+              </a>
+            </td>
+            <td align="center">
+              <a href="https://neatgarms.com/product/street-joggers" target="_blank">
+                <img src="https://yourcdn.com/images/street-joggers.jpg" alt="Street Joggers" width="140" style="border-radius: 8px;" />
+                <p style="margin: 8px 0;">Street Joggers</p>
+              </a>
+            </td>
+          </tr>
+        </table>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">💸 Special Offer Just for You</h3>
+        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next order. Offer valid for the next <strong>3 days</strong> only!</p>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: black;   font-family: 'Dream Avenue', sans-serif;">📞 Need Help?</h3>
+        <p>Reach us any time:</p>
+        <ul style="line-height: 1.8;">
+          <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
+          <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
+        </ul>
+    
+        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
+    
+        <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+      </div>
+
+      <table style="color: #333; padding-top: 12px; max-width: 600px;">
+  <tr>
+    <td style="vertical-align: top; padding-right: 15px;">
+      <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
+    </td>
+    <td style="vertical-align: top;">
+      <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
+      <div style="font-size: 14px; margin-top: 3px;">
+        <a href="mailto:info@neatgarms.com" style="color: #000000; text-decoration: none;">info@neatgarms.com</a>
+      </div>
+      <div style="font-size: 14px;">
+        <a href="https://neatgarms.com" style="color: #000000; text-decoration: none;">www.neatgarms.com</a>
+      </div>
+      <div style="margin-top: 10px;">
+        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
+          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20">
+        </a>
+        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 8px;">
+          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" width="20">
+        </a>
+        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 8px;">
+          <img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="X" width="20">
+        </a>
+        <a href="https://pin.it/1GhE1V3J0" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/24/145/145808.png" alt="Pinterest" width="20">
+        </a>
+      </div>
+
+    </td>
+  </tr>
+</table>
+      `
+        ,
       };
 
       // Send Autoresponse

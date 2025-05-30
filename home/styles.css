@@ -11,7 +11,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -735,7 +735,7 @@ body.loaded {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('mains/utility.jpg') no-repeat center center/cover;
+  background: url('shoot/lp2.webp') no-repeat center center/cover;
   transform: scale(1.2);
   transition: transform 1.2s ease;
   z-index: 0;
@@ -796,6 +796,13 @@ body.loaded {
   transform: scale(1.08);
 }
 
+  /* 📱 Mobile Version: Override background image */
+@media (max-width: 767px) {
+  .promo-bg {
+    background: url('shoot/lp14m.webp') no-repeat center center/cover;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   #neat-promo {
@@ -854,7 +861,7 @@ body.loaded {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('mains/gunna2.jpg') no-repeat center center/cover;
+  background: url('shoot/lp8.webp') no-repeat center center/cover;
   transform: scale(1.2);
   transition: transform 1.2s ease;
   z-index: 0;

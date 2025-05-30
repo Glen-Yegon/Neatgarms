@@ -1,13 +1,21 @@
-    /* General Reset */
-    * {
+@font-face {
+  font-family: 'Dream Avenue';
+  src: url('fonts/DreamAvenue.woff') format('woff2'),
+       url('fonts/DreamAvenue.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: 'Cinzel', Times, serif;
+     font-family: 'Poppins', sans-serif;
       }
   
       body {
-        background: linear-gradient(120deg, rgba(162, 185, 137, 0.6), rgba(38, 38, 38, 0.8)),
+        background: linear-gradient(120deg, rgba(53, 53, 53, 0.4), rgba(38, 38, 38, 0.8)),
                     url('items/background.jpg') no-repeat center center / cover;
         color: white;
         min-height: 100vh;
@@ -22,13 +30,13 @@
       h1 {
         text-align: center;
         margin-bottom: 10px;
+        color: white;
         font-size: 2.5rem;
-        text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.5);
-        animation: fadeIn 2s ease-in-out;
+        font-family: 'Dream Avenue', sans-serif;
       }
   
       p {
-        color: black;
+        color: white;
         font-weight: bold;
         text-align: center;
         margin-bottom: 20px;
@@ -113,18 +121,19 @@
   
       img {
         max-width: 30%;
-        border-radius: 10px;
         margin-top: 10px;
         max-height: 30%;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
       }
   
       #submit {
-        padding: 12px 24px;
-        background: #ae9381; /* Sage green */
+        padding: 12px 24px; 
         border: none;
         border-radius: 12px;
-        color: #4e3629; /* Hazel brown (text) */
+        background-color: transparent;
+        border-bottom: 3px solid rgb(0, 0, 0);
+        margin: 0px 200px;
+        color: rgb(0, 0, 0);
         font-size: 1rem;
         font-weight: bold;
         cursor: pointer;
@@ -139,6 +148,16 @@
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
       }
       
+      /* Mobile responsiveness */
+@media (max-width: 600px) {
+  #submit {
+    margin: 0 20px; /* smaller horizontal margins */
+    padding: 12px 16px; /* slightly smaller padding */
+    font-size: 0.9rem; /* smaller font */
+    width: calc(100% - 40px); /* full width minus margin */
+    box-sizing: border-box; /* to include padding & border in width */
+  }
+}
   
       /* Responsive Design */
       @media (max-width: 768px) {
@@ -154,9 +173,6 @@
           padding: 15px;
         }
   
-        #submit {
-          font-size: 0.9rem;
-        }
       }
   
       @keyframes fadeIn {
@@ -166,10 +182,11 @@
 
 #goBackButton{
   padding: 7px 20px;
-  background: #ae9381;
+  background-color: transparent;
   margin-top: 10px;
   border-radius: 10px;
-  color: #000000; /* Hazel brown (text) */
+  border-bottom: 2px solid white;
+  color: #ffffff; /* Hazel brown (text) */
   font-size: 1rem;
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;

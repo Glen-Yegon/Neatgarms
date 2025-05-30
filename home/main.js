@@ -21,25 +21,39 @@ function closeFilterMenu() {
 closeMenu.addEventListener('click', closeFilterMenu);
 menuOverlay.addEventListener('click', closeFilterMenu);
 
-// Filter Products
-filterOptions.forEach((option) => {
-  option.addEventListener('click', (e) => {
-    const filter = e.target.getAttribute('data-filter'); // Get filter value
+  const highToLowBtn = document.querySelectorAll('.prev-btn')[0];
+  const lowToHighBtn = document.querySelectorAll('.prev-btn')[1];
+  const productContainer = document.querySelector('.product-grid') || document.querySelector('#products'); // replace with your actual container
 
-    productCards.forEach((card) => {
-      const statusElement = card.querySelector('.status'); // Get the status span
-      const status = statusElement ? statusElement.textContent.trim() : ''; // Extract the status text
-      
-      if (filter === "all" || status.toLowerCase() === filter.toLowerCase()) {
-        card.classList.remove('hidden'); // Show matching cards
-      } else {
-        card.classList.add('hidden'); // Hide non-matching cards
-      }
+  // Convert NodeList to Array
+  const getSortedCards = (descending = false) => {
+    const cardsArray = Array.from(document.querySelectorAll('.product-card'));
+
+    return cardsArray.sort((a, b) => {
+      const priceA = parseInt(a.querySelector('.new-price').textContent.trim());
+      const priceB = parseInt(b.querySelector('.new-price').textContent.trim());
+
+      return descending ? priceB - priceA : priceA - priceB;
     });
+  };
 
-    closeFilterMenu(); // Close the menu after filtering
+  // Function to reorder DOM elements
+  const reorderCards = (sortedCards) => {
+    sortedCards.forEach(card => productContainer.appendChild(card));
+  };
+
+  // Event listeners for buttons
+  highToLowBtn.addEventListener('click', () => {
+    const sorted = getSortedCards(true); // Descending
+    reorderCards(sorted);
+    closeFilterMenu();
   });
-});
+
+  lowToHighBtn.addEventListener('click', () => {
+    const sorted = getSortedCards(false); // Ascending
+    reorderCards(sorted);
+    closeFilterMenu();
+  });
 
 // Get the menu button, menu, and close button
 const menuBtn = document.getElementById('menu-btn');
