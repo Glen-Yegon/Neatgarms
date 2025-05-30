@@ -1288,6 +1288,7 @@ body, html {
 }
 
 .footer-logo h1 {
+  font-family: 'Dream Avenue', sans-serif;
   font-size: 10rem; /* Increased size for better visibility */
   font-weight: bold;
   color: rgb(0, 0, 0);
@@ -1573,3 +1574,8 @@ body, html {
 }
 }
 
+button.selected {
+  border: 5px solid #ae866a;
+  outline: none;
+  transform: scale(1.05);
+}

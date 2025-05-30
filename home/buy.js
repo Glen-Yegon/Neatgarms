@@ -235,67 +235,6 @@ if (sameAsShippingRadio.checked) {
 
 
 
-document.getElementById('item-count').addEventListener('input', updateDropdowns);
-
-document.querySelectorAll('.radio-input').forEach(radio => {
-  radio.addEventListener('change', updateDropdowns);
-});
-
-function updateDropdowns() {
-  const count = parseInt(document.getElementById('item-count').value);
-  if (isNaN(count) || count < 1) return;
-
-  const designChecked = document.getElementById('design-radio').checked;
-  const sizeChecked = document.getElementById('size-radio').checked;
-  const colorChecked = document.getElementById('color-radio').checked;
-
-  if (designChecked || sizeChecked || colorChecked) {
-    const interleavedFields = [];
-
-    // Loop to create interleaved fields
-    for (let i = 1; i <= count; i++) {
-      if (designChecked) interleavedFields.push({ type: 'design', index: i });
-      if (sizeChecked) interleavedFields.push({ type: 'size', index: i });
-      if (colorChecked) interleavedFields.push({ type: 'color', index: i });
-    }
-
-    // Now generate the interleaved fields in the #fields-container
-    generateInterleavedFields(interleavedFields);
-  }
-}
-
-function generateInterleavedFields(fields) {
-  const container = document.getElementById('fields-container');
-  container.innerHTML = ''; // Clear the container
-
-  let currentItem = 0;
-  let itemGroup;
-
-  fields.forEach((field, index) => {
-    // If it's a new item, create a new section
-    if (field.index !== currentItem) {
-      currentItem = field.index;
-
-      // Create and append a heading label for the item
-      const itemLabel = document.createElement('h4');
-      itemLabel.textContent = `Item ${currentItem}`;
-      itemLabel.style.marginTop = '15px';
-      itemLabel.style.color = '#222';
-      container.appendChild(itemLabel);
-    }
-
-    // Create the input field
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.placeholder = `${capitalizeFirstLetter(field.type)} ${field.index}`;
-    input.name = `${field.type}-${field.index}`; // Optional: useful if you're submitting this in a form
-
-    // Append input field below the item label
-    container.appendChild(input);
-  });
-}
-
-
 // Utility function to capitalize the first letter of a string
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);

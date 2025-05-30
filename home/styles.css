@@ -954,7 +954,7 @@ body.loaded {
 
   
   footer {
-    background: linear-gradient(to top, #8a9381, #ae866a);
+    background: linear-gradient(to bottom, #ae866a, #8A9381);
     color: #000;
     padding: 20px;
     font-family: 'Cinzel', Times, serif;

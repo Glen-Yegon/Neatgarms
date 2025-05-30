@@ -1,8 +1,19 @@
+@font-face {
+  font-family: 'Dream Avenue';
+  src: url('fonts/DreamAvenue.woff') format('woff2'),
+       url('fonts/DreamAvenue.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Cinzel', Times, serif;
+    font-family: 'Poppins', sans-serif;
 }
 body{
     background-color: #c9d6ff;
@@ -23,10 +34,11 @@ form{
 }
 .form-title{
     font-size:1.5rem;
-    font-weight:bold;
-    text-align:center;
-    padding:1.3rem;
-    margin-bottom:0.4rem;
+    font-family: 'Dream Avenue', sans-serif;
+    font-weight: 100;
+    text-align: center;
+    padding: 1.3rem;
+    margin-bottom: 0.4rem;
 }
 input{
     color:inherit;
@@ -151,7 +163,7 @@ button:hover{
     animation:fadeOut 7s forwards;
 
 }
-.aa{
+.aa {
     padding: 10px;
     margin-bottom: 0px;
     margin-left: 10px;
@@ -162,12 +174,20 @@ button:hover{
     font-weight: bolder;
     align-items: center;
     text-align: center;
-    border: 2px solid black ;
+    border-bottom: 2px solid black;
     border-radius: 10px;
     color: #000000;
     margin-top: 20px;
     max-width: 200px;
+    transition: all 0.3s ease;
 }
+
+.aa:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
 @media (max-width: 768px){
     .container{
         max-width: 370px;

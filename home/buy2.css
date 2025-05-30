@@ -1,9 +1,18 @@
-/* General styles */
+ @font-face {
+  font-family: 'Dream Avenue';
+  src: url('fonts/DreamAvenue.woff') format('woff2'),
+       url('fonts/DreamAvenue.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Cinzel', Times, serif; 
+    box-sizing: border-box; 
+    font-family: 'Poppins', sans-serif;
+
   }
   body{
     background: linear-gradient(to left, #ddd, #8a9381);
@@ -283,6 +292,8 @@
   .form-section h3 {
     margin-bottom: 15px;
     font-size: 18px;
+     font-family: 'Dream Avenue', sans-serif;
+     letter-spacing: 2px;
     color: #6b4e31;
     text-transform: uppercase;
     border-bottom: 2px solid #e0d3c5;
@@ -455,12 +466,9 @@ select {
   }
   
   .payment-disclaimer strong {
-    color: #333;
+    color: black;
   }
-  .p{
-    text-decoration: underline;
-    font-style: italic;
-  }
+  
 
   /* Billing Address Section Styling */
 .billing-address-options {
@@ -489,7 +497,7 @@ select {
   
   #same-address-container {
     font-style: italic;
-    color: #777;
+    color:black;
     padding: 10px;
   }
   
@@ -515,7 +523,7 @@ select {
   
   /* Hover effect for interactivity */
   .pay-now-btn:hover {
-    background-color: #4b3832; /* Darker green when hovered */
+    background-color: #ae866a; /* Darker green when hovered */
     transform: scale(1.05); /* Slightly enlarge the button */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
   }
@@ -659,7 +667,7 @@ select {
   text-align: center;
   font-weight: bold;
   font-size: large;
-  color: red;
+  color: black;
 
 }
 

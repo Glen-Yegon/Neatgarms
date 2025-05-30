@@ -1,15 +1,35 @@
-/* General styles */
+ @font-face {
+  font-family: 'Dream Avenue';
+  src: url('fonts/DreamAvenue.woff') format('woff2'),
+       url('fonts/DreamAvenue.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Cinzel', Times, serif; 
+  font-family: 'Poppins', sans-serif;
   }
   body{
     background: linear-gradient(to left, #ddd, #8a9381);
     overflow-x: hidden;
   }
   
+  /* Hide the scrollbar for a clean look */
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Optional: For Firefox */
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
   /* Navbar styling */
   .navbar {
     display: flex;
@@ -185,7 +205,7 @@
     align-items: center;
     margin-left: 50px;
     justify-content: center;
-    border-radius: 5px;
+
   }
   
   .cart-item h4 {
@@ -225,7 +245,7 @@
   
   .discount-section label {
     font-size: 14px;
-    color: #333;
+    color: black;
     margin-bottom: 5px;
   }
   
@@ -254,19 +274,7 @@
   .discount-section button:hover {
     background-color: #ae866a;
   }
-  
-  /* Shipping Section Styling */
-  .shipping-section {
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-    text-align: left;
-  }
-  
-  .shipping-section span {
-    color: black;
-  }
+
   
   /* Adjust Estimated Total Position */
   .estimated-total {
@@ -274,7 +282,7 @@
     font-size: 18px;
     font-weight: bold;
     text-align: right;
-    color: #333;
+    color: black;
   }
   
 
@@ -283,7 +291,7 @@
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
   }
   
   .form-section {
@@ -297,8 +305,10 @@
   
   .form-section h3 {
     margin-bottom: 15px;
+ font-family: 'Dream Avenue', sans-serif;
     font-size: 18px;
     color: #6b4e31;
+    letter-spacing: 2px;
     text-transform: uppercase;
     border-bottom: 2px solid #e0d3c5;
     padding-bottom: 5px;
@@ -467,15 +477,11 @@ select {
     padding: 15px;
     border-left: 4px solid #ae866a;
     font-size: 14px;
-    color: #555;
+    color: black;
   }
   
   .payment-disclaimer strong {
-    color: #333;
-  }
-  .p{
-    text-decoration: underline;
-    font-style: italic;
+    color: black;
   }
 
   /* Billing Address Section Styling */
@@ -531,7 +537,7 @@ select {
   
   /* Hover effect for interactivity */
   .pay-now-btn:hover {
-    background-color: #4b3832; /* Darker green when hovered */
+    background-color: #ae866a; /* Darker green when hovered */
     transform: scale(1.05); /* Slightly enlarge the button */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow for depth */
   }
@@ -544,7 +550,7 @@ select {
   
   /* Disabled state for the button */
   .pay-now-btn:disabled {
-    background-color: #6c757d;
+    background-color: #ae866a;
     cursor: not-allowed;
     transform: none;
     box-shadow: none;

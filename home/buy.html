@@ -71,11 +71,7 @@
         <input type="text" id="discount-code" placeholder="Enter code">
         <button id="apply-discount-btn">Apply</button>
       </div>
-  
-      <!-- Shipping Section -->
-      <div class="shipping-section">
-        <h4>Shipping: <span id="shipping-cost">Free</span></h4>
-      </div>
+
       <!-- Estimated Total -->
       <div class="estimated-total">
         <h3>Estimated Total: KSh<span id="combined-price">0.00</span></h3>
@@ -85,37 +81,6 @@
 
   <!-- Multi-Section Form -->
 <div class="multi-section-form">
-
-  <div class="form-section">
-    <h3>Design / Size / Color</h3>
-  
-    <!-- Input for number of items -->
-    <p class="pp">Click the checkbox to choose between design/color/size if any is available. <br> Kindly, if you have more than one cloth, write the name of the cloth before the design/size/color. Happy shopping 😊! <br> </p>
-    <label for="item-count">Number of Items</label>
-    <input type="number" id="item-count" placeholder="Enter number of items" min="1" max="10">
-  
-    <!-- Radio buttons for selection -->
-    <div class="radio-container">
-      <input type="checkbox" id="design-radio" class="radio-input">
-      <label for="design-radio" class="radio-label">Design</label>
-    </div>
-  
-    <div class="radio-container">
-      <input type="checkbox" id="size-radio" class="radio-input">
-      <label for="size-radio" class="radio-label">Size</label>
-    </div>
-  
-    <div class="radio-container">
-      <input type="checkbox" id="color-radio" class="radio-input">
-      <label for="color-radio" class="radio-label">Color</label>
-    </div>
-  
-    <!-- Interleaved fields container -->
-    <div id="fields-container"></div>
-  </div>
-  
- 
-
 
     <!-- Contact Section -->
     <div class="form-section">
@@ -185,7 +150,7 @@
     <option value="Karen">Karen (KSh 200)</option>
     <option value="Westlands">Westlands (KSh 180)</option>
     <option value="Kilimani">Kilimani (KSh 160)</option>
-    <!-- Add more as needed -->
+
   </select>
 </div>
 
@@ -195,10 +160,12 @@
   <strong>Shipping Fee:</strong> <span id="shipping-fee">KSh 0</span>
 </div>
 </div>
+
+
     <!-- Payment Section -->
     <div class="form-section">
         <h3>Payment</h3>
-        <p class="p">Choose a payment method below</p>
+        <p class="p">Available Payment Options</p>
   <div class="payment-methods">
     <label class="payment-method" data-method="mpesa">
       <img src="mains/Mpesa Withdrawal Charges 2022 Latest Update.jpeg" alt="Mpesa" class="payment-img">
@@ -224,7 +191,7 @@
 
     <!-- Disclaimer -->
     <div class="payment-disclaimer">
-        <p> <strong>Kindly Pay First using any of the means above before Submitting Your Request. </strong> <br>
+        <p> <strong>Kindly Submit First Before Paying. </strong> <br>
           Thank you For Choosing the Neat Team - Happy Shopping!
         </p>
       </div>
@@ -300,7 +267,7 @@
   </div>
 </div>
 
-<p class="ppp">Kindly Pay First Before Submitting Your Details</p>
+<p class="ppp">Kindly Submit First Before Paying.</p>
 
 <!--Mpesa Button
 <div class="pay-now-container">
@@ -309,12 +276,14 @@
 -->
 
 <div class="pay-now-container">
-  <button class="pay-now-btn" id="paystack-btn">Pay</button>
-</div>
+    <button class="pay-now-btnn" id="pay-now-btn" type="button">SUBMIT DETAILS</button>
+  </div>
 
 <div class="pay-now-container">
-    <button class="pay-now-btnn" id="pay-now-btn" type="button">submit Details</button>
-  </div>
+  <button class="pay-now-btn" id="paystack-btn">PAY</button>
+</div>
+
+
 
   <div id="loading-message" style="display: none; text-align: center; margin: 20px 0;">
     Processing your order, please wait...
@@ -344,13 +313,6 @@
       const loadingMessage = document.getElementById("loading-message");
       loadingMessage.style.display = "block";
     
-      const itemCount = document.getElementById("item-count").value;
-    
-      if (!itemCount || itemCount < 1) {
-        alert("Please enter a valid number of items.");
-        loadingMessage.style.display = "none"; // Hide the loading message if error occurs
-        return;
-      }
     
       // Collect Contact Info
       const userEmail = document.getElementById("email").value;
@@ -365,6 +327,19 @@
 
 const selectedCity = document.getElementById("delivery-city").value.trim();
 const selectedArea = document.getElementById("nairobi-subarea").value;
+
+if (!selectedCity) {
+  alert("Enter the city you live in");
+  loadingMessage.style.display = "none";
+  return;
+}
+
+if (selectedCity.toLowerCase() === "nairobi" && !selectedArea) {
+  alert("Please select your area in Nairobi");
+  loadingMessage.style.display = "none";
+  return;
+}
+
 
 const feeText = document.getElementById("shipping-fee").textContent;
 
@@ -400,21 +375,9 @@ const deliveryInfo = {
         };
       }
     
-      // Get selected payment method
-      const selectedPayment = document.querySelector('.payment-method.selected');
-      if (!selectedPayment) {
-        alert("Please select a payment method.");
-        loadingMessage.style.display = "none";
-        return;
-      }
-      const paymentMethod = selectedPayment.querySelector('span').innerText;
     
 // Prepare data object
 const data = {
-  itemCount,
-  designs: [],
-  sizes: [],
-  colors: [],
   contact: {
     email: userEmail,
     phone: userPhone,
@@ -422,7 +385,7 @@ const data = {
   },
   delivery: deliveryInfo,
   billing: billingInfo,
-  paymentMethod: paymentMethod,
+
 };
 
 // Collect additional design, size, and color inputs if selected

@@ -69,12 +69,7 @@ if (shippingElement) {
     } else {
       document.getElementById('size-dropdown').innerHTML = '';
     }
-  
-    if (document.getElementById('color-radio').checked) {
-      generateFields('color-dropdown', count, 'Color');
-    } else {
-      document.getElementById('color-dropdown').innerHTML = '';
-    }
+
   }
   
   function generateFields(containerId, count, placeholder) {

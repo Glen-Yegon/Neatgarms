@@ -26,6 +26,10 @@ function renderProductWithShipping() {
     // Clear previous content before appending
     productCardSection.innerHTML = '';
 
+    // Create the size and color lines only if available
+    const sizeLine = product.size ? `<p><strong>Size:</strong> ${product.size}</p>` : '';
+    const colorLine = product.color ? `<p><strong>Color:</strong> ${product.color}</p>` : '';
+
     // Create the product card
     const productCard = document.createElement('div');
     productCard.classList.add('product-card');
@@ -38,6 +42,8 @@ function renderProductWithShipping() {
           <p>Brand: ${product.brand}</p>
           <p><del>KSh${product.oldPrice || 'N/A'}</del> <strong>KSh${product.newPrice}</strong></p>
           <p><strong>Quantity:</strong> ${quantity}</p>
+          ${sizeLine}
+          ${colorLine}
           <p><strong>Total (without shipping):</strong> KSh${productTotal.toFixed(2)}</p>
         </div>
       </div>
@@ -56,6 +62,7 @@ function renderProductWithShipping() {
     productCardSection.innerHTML = '<p>No product found. Please go back and select a product.</p>';
   }
 }
+
 
 // Run once when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -158,37 +165,6 @@ if (product && discountValue !== undefined) {
     differentAddressContainer.style.display = 'none';
   }
 
-
-
- 
-document.getElementById('item-count').addEventListener('input', updateDropdowns);
-
-document.querySelectorAll('.radio-input').forEach(radio => {
-  radio.addEventListener('change', updateDropdowns);
-});
-
-function updateDropdowns() {
-  const count = parseInt(document.getElementById('item-count').value);
-  if (isNaN(count) || count < 1) return;
-
-  const designChecked = document.getElementById('design-radio').checked;
-  const sizeChecked = document.getElementById('size-radio').checked;
-  const colorChecked = document.getElementById('color-radio').checked;
-
-  if (designChecked || sizeChecked || colorChecked) {
-    const interleavedFields = [];
-
-    // Loop to create interleaved fields
-    for (let i = 1; i <= count; i++) {
-      if (designChecked) interleavedFields.push({ type: 'design', index: i });
-      if (sizeChecked) interleavedFields.push({ type: 'size', index: i });
-      if (colorChecked) interleavedFields.push({ type: 'color', index: i });
-    }
-
-    // Now generate the interleaved fields in the #fields-container
-    generateInterleavedFields(interleavedFields);
-  }
-}
 
 function generateInterleavedFields(fields) {
   const container = document.getElementById('fields-container');

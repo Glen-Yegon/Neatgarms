@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keep It Neat</title>
-  <link rel="stylesheet" href="buy2.min.css">
+  <link rel="stylesheet" href="buy2.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,34 +82,6 @@
   <!-- Multi-Section Form -->
 <div class="multi-section-form">
 
-  <div class="form-section">
-    <h3>Design / Size / Color</h3>
-  
-    <!-- Input for number of items -->
-    <p class="pp">Click the checkbox to choose between design/color/size if any is available. <br> Kindly, if you have more than one cloth, write the name of the cloth before the design/size/color. Happy shopping 😊! <br> </p>
-    <label for="item-count">Number of Items</label>
-    <input type="number" id="item-count" placeholder="Enter number of items" min="1" max="10">
-  
-    <!-- Radio buttons for selection -->
-    <div class="radio-container">
-      <input type="checkbox" id="design-radio" class="radio-input">
-      <label for="design-radio" class="radio-label">Design</label>
-    </div>
-  
-    <div class="radio-container">
-      <input type="checkbox" id="size-radio" class="radio-input">
-      <label for="size-radio" class="radio-label">Size</label>
-    </div>
-  
-    <div class="radio-container">
-      <input type="checkbox" id="color-radio" class="radio-input">
-      <label for="color-radio" class="radio-label">Color</label>
-    </div>
-  
-    <!-- Interleaved fields container -->
-    <div id="fields-container"></div>
-  </div>
-  
   
     <!-- Contact Section -->
     <div class="form-section">
@@ -193,7 +165,7 @@
     <!-- Payment Section -->
     <div class="form-section">
         <h3>Payment</h3>
-        <p class="p">Choose a payment method below</p>
+        <p class="p">Available Payment Methods.</p>
   <div class="payment-methods">
     <label class="payment-method" data-method="mpesa">
       <img src="mains/Mpesa Withdrawal Charges 2022 Latest Update.jpeg" alt="Mpesa" class="payment-img">
@@ -219,7 +191,7 @@
 
     <!-- Disclaimer -->
     <div class="payment-disclaimer">
-      <p> <strong>Kindly Pay First using any of the means above before Submitting Your Request. </strong> <br>
+      <p> <strong>Kindly Submit First Before Paying.</strong> <br>
         Thank you For Choosing the Neat Team - Happy Shopping!
       </p>
     </div>
@@ -297,7 +269,7 @@
 </div>
 
 
-<p class="ppp">Kindly Pay First Before Submitting Your Details</p>
+<p class="ppp">Kindly Submit First Before Paying.</p>
 
 
 <!--Mpesa Button
@@ -306,14 +278,16 @@
 </div>
 -->
 
-<div class="pay-now-container">
-  <button class="pay-now-btn" id="paystack-btn">Pay</button>
-</div>
-
 
 <div class="pay-now-container">
     <button class="pay-now-btnn" id="pay-now-btn" type="button">Submit Details</button>
   </div>
+
+
+
+<div class="pay-now-container">
+  <button class="pay-now-btn" id="paystack-btn">Pay</button>
+</div>
 
 
     <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -335,13 +309,6 @@
      setTimeout(() => {
        customAlert.remove();
      }, 5000);
-
-      const itemCount = document.getElementById("item-count").value;
-    
-      if (!itemCount || itemCount < 1) {
-        alert("Please enter a valid number of items.");
-        return;
-      }
     
       // Collect Contact Info
       const userEmail = document.getElementById("email").value;
@@ -356,6 +323,21 @@
       //Collect Delivery info
 const selectedCity = document.getElementById("delivery-city").value.trim();
 const selectedArea = document.getElementById("nairobi-subarea").value;
+
+if (!selectedCity) {
+  alert("Enter the city you live in");
+  loadingMessage.style.display = "none";
+  return;
+}
+
+if (selectedCity.toLowerCase() === "nairobi" && !selectedArea) {
+  alert("Please select your area in Nairobi");
+  loadingMessage.style.display = "none";
+  return;
+}
+
+
+
 
 const feeText = document.getElementById("shipping-fee").textContent;
 
@@ -393,18 +375,10 @@ const deliveryInfo = {
     
       // Get selected payment method
       const selectedPayment = document.querySelector('.payment-method.selected');
-      if (!selectedPayment) {
-        alert("Please select a payment method.");
-        return;
-      }
-      const paymentMethod = selectedPayment.querySelector('span').innerText;
-    
+
+
       // Prepare data object
       const data = {
-        itemCount,
-        designs: [],
-        sizes: [],
-        colors: [],
         contact: {
           email: userEmail,
           phone: userPhone,
@@ -412,47 +386,39 @@ const deliveryInfo = {
         },
         delivery: deliveryInfo,
         billing: billingInfo,
-        paymentMethod: paymentMethod,
       };
       
-      // Collect additional design, size, and color inputs if selected
-      document.querySelectorAll("#fields-container input").forEach((input) => {
-        const placeholder = input.placeholder.toLowerCase();
       
-        if (placeholder.includes("design")) {
-          data.designs.push(input.value || "N/A");
-        } else if (placeholder.includes("size")) {
-          data.sizes.push(input.value || "N/A");
-        } else if (placeholder.includes("color")) {
-          data.colors.push(input.value || "N/A");
-        }
-      });
-      
-      // Now, 'data' will contain the necessary inputs from the form
-      // Retrieve order summary details from localStorage (if available)
+// Retrieve order summary details from localStorage (if available)
 const storedProduct = localStorage.getItem('buyNowProduct');
 if (storedProduct) {
   const product = JSON.parse(storedProduct);
-  // Calculate total (and estimated total, if they are the same)
+  
+  // Calculate total
   const newPriceNumber = parseFloat(product.newPrice.replace(/KSh|,/g, '')) || 0;
   const quantity = product.quantity || 1;
   const total = newPriceNumber * quantity;
+  
   // Retrieve the displayed estimated total from the DOM
-const estimatedTotalElement = document.getElementById('combined-price');
-const displayedEstimatedTotal = estimatedTotalElement ? estimatedTotalElement.innerText : "N/A";
+  const estimatedTotalElement = document.getElementById('combined-price');
+  const displayedEstimatedTotal = estimatedTotalElement ? estimatedTotalElement.innerText : "N/A";
 
   // Append order summary details to the data object
   data.orderSummary = {
-    image: product.image, // URL to product image
+    image: product.image,
     name: product.name,
     brand: product.brand,
     oldPrice: product.oldPrice || 'N/A',
     newPrice: product.newPrice || 'N/A',
     quantity: quantity,
     total: total.toFixed(2),
-    estimatedTotal: displayedEstimatedTotal  // Current displayed estimated total
+    estimatedTotal: displayedEstimatedTotal,
+    // Include size and color if available
+    ...(product.size && { size: product.size }),
+    ...(product.color && { color: product.color }),
   };
 }
+
 
     
       // Send data to /pay2-now
@@ -538,6 +504,6 @@ document.getElementById('paystack-btn').addEventListener('click', function () {
     
   
 
-  <script src="buy2.min.js" defer></script>
+  <script src="buy2.js" defer></script>
 </body>
 </html>

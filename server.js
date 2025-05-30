@@ -34,7 +34,7 @@ const PORT = 5000;
 
 const allowedOrigins = [
   "https://neatgarms-six.vercel.app", // ✅ Your production frontend on Vercel
-  "http://127.0.0.1:5501"             // ✅ Your local frontend for testing
+  "http://127.0.0.1:5505"             // ✅ Your local frontend for testing
 ];
 
 app.use(cors({
@@ -154,16 +154,6 @@ app.post("/pay-now", async (req, res) => {
   
     // Format the details for the admin email
     let emailContent = `✅ Successful Form Submission:\n\n`;
-    emailContent += `Number of Items: ${itemCount}\n\n`;
-  
-    // Order Details for each item (if any custom options were provided)
-    for (let i = 0; i < itemCount; i++) {
-      emailContent += `Item ${i + 1}:\n`;
-      emailContent += `Design: ${designs && designs[i] ? designs[i] : "N/A"}\n`;
-      emailContent += `Size: ${sizes && sizes[i] ? sizes[i] : "N/A"}\n`;
-      emailContent += `Color: ${colors && colors[i] ? colors[i] : "N/A"}\n\n`;
-    }
-  
     // --- New: Order Summary Section from Cart ---
     if (orderSummary) {
       emailContent += `🛒 ORDER SUMMARY:\n\n`;
@@ -246,7 +236,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
   
     // Payment Method
     emailContent += `💸PAYMENT METHOD:\n\n`;
-    emailContent += `${paymentMethod}\n`;
+
 
 
 
@@ -267,7 +257,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
-<div style="font-family: 'Cinzel', Times, serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+<div style="  font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
 
   <div style="text-align: center;">
     <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
@@ -276,7 +266,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
         <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
         <p style="font-size: 16px;">
           Thank you for shopping with <strong>Neatgarms</strong>! 🎉<br/>
-          We’ve successfully received your order of <strong>${itemCount}</strong> item(s). Our team is now processing it and will notify you once it ships.
+          We’ve successfully received your order. Our team is now processing it and will notify you once it ships.
         </p>
     
         <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
@@ -291,10 +281,8 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
 
   <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
 
-
-           <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: #333;">🔥 Top Neat Picks for This Week</h3>
+        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">🔥 Top Neat Picks for This Week</h3>
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
@@ -320,12 +308,12 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: #333;">💸 Special Offer Just for You</h3>
+        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">💸 Special Offer Just for You</h3>
         <p style="font-size: 14px;">Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next order. Offer valid for the next <strong>3 days</strong> only!</p>
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: black;">📞 Need Help?</h3>
+        <h3 style="color: black;   font-family: 'Dream Avenue', sans-serif;">📞 Need Help?</h3>
         <p>Reach us any time:</p>
         <ul style="line-height: 1.8;">
           <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
@@ -337,7 +325,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
         <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
 
-      <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
+      <table style="color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
       <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
@@ -405,26 +393,29 @@ app.post("/pay2-now", async (req, res) => {
     let emailContent = `✅ Successful Form Submission:\n\n`;
     emailContent += `Number of Items: ${itemCount}\n\n`;
 
-    // --- Order Summary Section ---
-    if (orderSummary) {
-      emailContent += `🛒 ORDER SUMMARY:\n`;
-      emailContent += `Product Name: ${orderSummary.name}\n`;
-      emailContent += `Brand: ${orderSummary.brand}\n`;
-      emailContent += `Image URL: ${orderSummary.image}\n`;
-      emailContent += `Old Price: ${orderSummary.oldPrice}\n`;
-      emailContent += `New Price: ${orderSummary.newPrice}\n`;
-      emailContent += `Quantity: ${orderSummary.quantity}\n`;
-      emailContent += `Total: KSh${orderSummary.total}\n`;
-      emailContent += `Estimated Total: KSh${orderSummary.estimatedTotal}\n\n`;
-    }
+if (orderSummary) {
+  emailContent += `🛒 ORDER SUMMARY:\n`;
+  emailContent += `Product Name: ${orderSummary.name}\n`;
+  emailContent += `Brand: ${orderSummary.brand}\n`;
+  emailContent += `Image URL: ${orderSummary.image}\n`;
+  emailContent += `Old Price: ${orderSummary.oldPrice}\n`;
+  emailContent += `New Price: ${orderSummary.newPrice}\n`;
+  emailContent += `Quantity: ${orderSummary.quantity}\n`;
 
-    // --- Order Details for each item ---
-    for (let i = 0; i < itemCount; i++) {
-      emailContent += `Item ${i + 1}:\n`;
-      emailContent += `Design: ${designs[i] || "N/A"}\n`;
-      emailContent += `Size: ${sizes[i] || "N/A"}\n`;
-      emailContent += `Color: ${colors[i] || "N/A"}\n\n`;
-    }
+  // Add size if available
+  if (orderSummary.size) {
+    emailContent += `Size: ${orderSummary.size}\n`;
+  }
+
+  // Add color if available
+  if (orderSummary.color) {
+    emailContent += `Color: ${orderSummary.color}\n`;
+  }
+
+  emailContent += `Total: KSh${orderSummary.total}\n`;
+  emailContent += `Estimated Total: KSh${orderSummary.estimatedTotal}\n\n`;
+}
+
 
     // --- Contact Information ---
     emailContent += `📞 CONTACT INFORMATION:\n`;
@@ -465,9 +456,30 @@ if (delivery.city.toLowerCase() === "nairobi") {
     }
     emailContent += `\n`;
 
-    // --- Payment Method ---
-    emailContent += `💸 PAYMENT METHOD:\n`;
-    emailContent += `${paymentMethod}\n`;
+    let userOrderDetails = '';
+
+if (orderSummary) {
+  userOrderDetails += `🛒 ORDER SUMMARY:\n`;
+  userOrderDetails += `Product Name: ${orderSummary.name}\n`;
+  userOrderDetails += `Brand: ${orderSummary.brand}\n`;
+  userOrderDetails += `Image URL: ${orderSummary.image}\n`;
+  userOrderDetails += `Old Price: ${orderSummary.oldPrice}\n`;
+  userOrderDetails += `New Price: ${orderSummary.newPrice}\n`;
+  userOrderDetails += `Quantity: ${orderSummary.quantity}\n`;
+
+  if (orderSummary.size) {
+    userOrderDetails += `Size: ${orderSummary.size}\n`;
+  }
+
+  if (orderSummary.color) {
+    userOrderDetails += `Color: ${orderSummary.color}\n`;
+  }
+
+  userOrderDetails += `Total: KSh${orderSummary.total}\n`;
+  userOrderDetails += `Estimated Total: KSh${orderSummary.estimatedTotal}\n`;
+}
+
+
 
      // Email to Admin
      const adminMailOptions = {
@@ -481,21 +493,13 @@ if (delivery.city.toLowerCase() === "nairobi") {
     const info = await transporter.sendMail(adminMailOptions);
     console.log("Pay Now Email sent to admin:", info.response);
 
-    // --- Autoresponse Email to User ---
-    let userOrderDetails = '';
-    for (let i = 0; i < itemCount; i++) {
-      userOrderDetails += `Item ${i + 1}:\n`;
-      userOrderDetails += `- Design: ${designs[i] || "N/A"}\n`;
-      userOrderDetails += `- Size: ${sizes[i] || "N/A"}\n`;
-      userOrderDetails += `- Color: ${colors[i] || "N/A"}\n\n`;
-    }
 
     const userMailOptions = {
       from: '"Neatgarms" <info@neatgarms.com>', 
       to: contact.email,
       subject: "Thank You for Your Order with Neatgarms! 🎉",
       html: `
-<div style="font-family: 'Cinzel', Times, serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+<div style="  font-family: 'Dream Avenue', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
 
   <div style="text-align: center;">
     <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
@@ -510,10 +514,6 @@ if (delivery.city.toLowerCase() === "nairobi") {
         <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
         <pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 14px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${userOrderDetails}</pre>
     
-        <h3 style="margin-top: 20px; color: #222;">💳 Payment Method</h3>
-        <p style="background: #fff; padding: 10px 16px; border-radius: 10px; font-size: 14px; border: 1px solid #ddd;">
-          ${paymentMethod}
-        </p>
     
         <h3 style="margin-top: 20px; color: #222;">🚚 Delivery Address</h3>
         <p style="background: #fff; padding: 16px; border-radius: 10px; font-size: 14px; line-height: 1.6; border: 1px solid #ddd;">
@@ -578,7 +578,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
         <p style="font-size: 13px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
 
-             <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
+             <table style="font-family: 'poppins', sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
       <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
@@ -648,14 +648,12 @@ app.post("/pay3-now", async (req, res) => {
     let emailContent = `New Pay Now Submission:\n\n`;
     emailContent += `Number of Items: ${itemCount}\n`;
     emailContent += `Selected Design: ${design}\n\n`;
-    emailContent += `Payment Method: ${paymentMethod}\n\n`;
 
     // Order Details (custom options)
     for (let i = 0; i < itemCount; i++) {
       emailContent += `Item ${i + 1}:\n`;
       emailContent += `  Design: ${design}\n`;
       emailContent += `  Size: ${sizes[i] || "N/A"}\n`;
-      emailContent += `  Color: ${colors[i] || "N/A"}\n\n`;
     }
 
     // Contact Information
@@ -751,7 +749,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
       to: contact.email,
       subject: "🧾 Your Order is Confirmed! | Neatgarms Ltd",
       html: `
-<div style="font-family: 'Cinzel', Times, serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+<div style="font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
 
   <div style="text-align: center;">
     <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
@@ -765,7 +763,6 @@ if (delivery.city.toLowerCase() === "nairobi") {
     <ul style="line-height: 1.6;">
       <li><strong>Number of Items:</strong> ${itemCount}</li>
       <li><strong>Selected Design:</strong> ${design}</li>
-      <li><strong>Payment Method:</strong> ${paymentMethod}</li>
     </ul>
 
     <h3 style="margin-top: 20px;">🚚 Delivery Address</h3>
@@ -838,7 +835,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
 </div>
 
 
-   <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
+   <table style="font-family: 'poppins', sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
       <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
@@ -941,7 +938,7 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
       to: reviewerEmail,
       subject: "Thank You for Your Review!",
       html: `Hi ${reviewerName},\n\nThank you for your review titled "${reviewTitle}". We appreciate your feedback!\n\nBest regards,\nYour Team
-             <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
+             <table style="font-family: 'poppins', sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
       <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
@@ -1025,6 +1022,7 @@ async function getAccessToken() {
 }
 
 // Endpoint to initiate STK Push (triggered when customer clicks "Pay Now")
+/*
 app.post("/paynow4", async (req, res) => {
   const { phone, amount } = req.body;
   if (!phone || !amount) {
@@ -1067,7 +1065,7 @@ app.post("/paynow4", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
+*/
 
 
 // Handle subscription form
@@ -1092,7 +1090,7 @@ app.post('/subscribe', async (req, res) => {
     to: email,
     subject: 'Thanks for subscribing to Neat Garms!',
     html: `
-    <div style="font-family: 'Cinzel', 'Times New Roman', serif; text-align: center; padding: 20px;">
+    <div style="font-family: 'poppins', sans-serif; text-align: center; padding: 20px;">
   <div style="text-align: center;">
     <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
@@ -1108,7 +1106,7 @@ app.post('/subscribe', async (req, res) => {
 </div>
 
     
-       <table style="font-family: 'Cinzel', Times, serif; color: #333; padding-top: 12px; max-width: 600px;">
+       <table style="font-family: 'poppins', sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
       <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">

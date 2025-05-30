@@ -70,11 +70,6 @@
             <button id="apply-discount-btn">Apply</button>
           </div>
 
-                <!-- Shipping Section -->
-      <div class="shipping-section">
-        <h4>Shipping: <span id="shipping-cost">Free</span></h4>
-      </div>
-
   </div>
   
 
@@ -91,10 +86,14 @@
 <div class="multi-section-form">
 
   <div class="form-section">
-    <h3 data-aos="fade-up" data-aos-delay="400">Size / Color</h3>
+    <h3 data-aos="fade-up" data-aos-delay="400">Size Selection</h3>
   
     <!-- Input for number of items -->
-     <p class="pp" data-aos="fade-up" data-aos-delay="400">Click the checkbox to choose between Color / Size if any is available.  <br> Kindly, if you have more that one cloth, write the name of the cloth before the design/size/color. <br>  Happy shopping 😊! <br> </p>
+<p class="pp" data-aos="fade-up" data-aos-delay="400">
+  Tick the box to pick your custom clothing sizes.<br>
+  Happy shopping and stay stylish 😊<br>
+</p>
+
     <label for="item-count" data-aos="fade-up" data-aos-delay="400" data-aos="fade-up" data-aos-delay="400">Number of Items</label>
     <input type="number" id="item-count" placeholder="Enter number of items" min="1" max="10" data-aos="fade-up" data-aos-delay="400">
   
@@ -106,14 +105,9 @@
       <label for="size-radio" class="radio-label" data-aos="fade-up" data-aos-delay="500">Size</label>
     </div>
   
-    <div class="radio-container">
-      <input type="checkbox" id="color-radio" class="radio-input">
-      <label for="color-radio" class="radio-label" data-aos="fade-up" data-aos-delay="500">Color</label>
-    </div>
   
     <!-- Dropdown sections -->
     <div id="size-dropdown"></div>
-    <div id="color-dropdown"></div>
   </div>
 
   
@@ -200,7 +194,7 @@
     <!-- Payment Section -->
     <div class="form-section" data-aos="fade-up" data-aos-delay="400">
         <h3 data-aos="fade-up" data-aos-delay="400">Payment</h3>
-        <p class="p" data-aos="fade-up" data-aos-delay="400">Choose a payment method below</p>
+        <p class="p" data-aos="fade-up" data-aos-delay="400">Available Payment Methods.</p>
   <div class="payment-methods" data-aos="fade-up" data-aos-delay="400">
     <label class="payment-method" data-method="mpesa">
       <img src="mains/Mpesa Withdrawal Charges 2022 Latest Update.jpeg" alt="Mpesa" class="payment-img">
@@ -226,7 +220,7 @@
 
     <!-- Disclaimer -->
     <div class="payment-disclaimer">
-      <p> <strong>Kindly Pay First using any of the means above before Submitting Your Request. </strong> <br>
+      <p> <strong>Kindly Submit First Before Paying.</strong> <br>
         Thank you For Choosing the Neat Team - Happy Shopping!
       </p>
     </div>
@@ -305,7 +299,7 @@
 </div>
 
 
-<p class="ppp">Kindly Pay First Before Submitting Your Details</p>
+<p class="ppp">Kindly Submit First Before Paying</p>
 
 <!--Mpesa Button
 <div class="pay-now-container">
@@ -315,14 +309,13 @@
 
 
 <div class="pay-now-container">
+    <button class="pay-now-btnn" id="pay-now-btn" type="button">Send Request ?</button>
+  </div>
+
+<div class="pay-now-container">
   <button class="pay-now-btn" id="paystack-btn">Pay</button>
 </div>
 
-
-  <!-- Pay Now Button -->
-<div class="pay-now-container">
-    <button class="pay-now-btnn" id="pay-now-btn" type="button">Send Request ?</button>
-  </div>
   
   
 
@@ -337,11 +330,6 @@
       once: false,    // Animation will run every time you scroll
     });
   </script>
-
-<script async
-  src="https://pay.google.com/gp/p/js/pay.js"
-  onload="onGooglePayLoaded()">
-</script>
 
 
   <script>
@@ -379,6 +367,20 @@
 const selectedCity = document.getElementById("delivery-city").value.trim();
 const selectedArea = document.getElementById("nairobi-subarea").value;
 
+
+if (!selectedCity) {
+  alert("Enter the city you live in");
+  loadingMessage.style.display = "none";
+  return;
+}
+
+if (selectedCity.toLowerCase() === "nairobi" && !selectedArea) {
+  alert("Please select your area in Nairobi");
+  loadingMessage.style.display = "none";
+  return;
+}
+
+
 const feeText = document.getElementById("shipping-fee").textContent;
 
 const deliveryInfo = {
@@ -411,25 +413,16 @@ const deliveryInfo = {
           phone: document.getElementById("billing-phone").value || "N/A",
         };
       }
-    
-      // Get selected payment method
-      const selectedPayment = document.querySelector('.payment-method.selected');
-      if (!selectedPayment) {
-        alert("Please select a payment method.");
-        return;
-      }
-      const paymentMethod = selectedPayment.querySelector('span').innerText;
+  
     
       // Prepare data object
       const data = {
         itemCount,
         design: "", // Single design applied to all items
         sizes: [],
-        colors: [],
         contact: { email: userEmail, phone: userPhone, newsOffers },
         delivery: deliveryInfo,
         billing: billingInfo,
-        paymentMethod
       };
     
       // Collect Selected Design (radio input)
@@ -448,27 +441,19 @@ const deliveryInfo = {
         });
       }
     
-      // Collect Color Inputs if selected
-      if (document.getElementById("color-radio").checked) {
-        document.querySelectorAll("#color-dropdown input").forEach((input) => {
-          data.colors.push(input.value || "N/A");
-        });
-      }
-    
       // --- Collect Order Summary Dropdown Information ---
       // Here, we assume that checkoutImages is an array of Base64 image strings.
       const checkoutImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
       const itemName = localStorage.getItem("nameID") || "Unknown Item";
       const displayPrice = document.getElementById("display-price").innerText || "0";
       const discountCode = document.getElementById("discount-code").value || "";
-      const shippingCost = document.getElementById("shipping-cost").innerText || "Free";
+
     
       data.orderSummary = {
         images: checkoutImages, // Base64 strings
         itemName,
         itemPrice: displayPrice, // Use the actual displayed price
         discountCode,
-        shippingCost
       };
     
       // Send data to /pay3-now endpoint

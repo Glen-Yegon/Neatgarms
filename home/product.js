@@ -58,16 +58,27 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.old-price').innerText = productData.oldPrice;
       document.querySelector('.new-price').innerText = productData.newPrice;
 
-
+      let selectedSize = null;
+let selectedColor = null;
 
 
 // Dynamically create size buttons (if sizes exist in productData)
 if (productData.sizes && productData.sizes.length > 0) {
   const sizeSelection = document.querySelector('.size-selection');
-  sizeSelection.innerHTML = `<h4>Available Sizes / Designs / Style:</h4>` +
+  sizeSelection.innerHTML = `<h4>Available Sizes / Style:</h4>` +
     productData.sizes.map(size => 
       `<button class="size-btn" data-size="${size}">${size}</button>`
     ).join('');
+
+      // Add click listeners AFTER rendering
+  document.querySelectorAll('.size-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      const selectedSize = this.getAttribute('data-size');
+      console.log('Selected Size:', selectedSize);
+    });
+  });
 }
 
 
@@ -109,8 +120,19 @@ if (productData.colors && productData.colors.length > 0) {
     productData.colors.map(color => 
       `<button class="color-btn" data-color="${color}" style="background-color:${color.toLowerCase()}">${color}</button>`
     ).join('');
+      // Now add the click listeners AFTER rendering the buttons
+  document.querySelectorAll('.color-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      const selectedColor = this.getAttribute('data-color');
+      console.log('Selected Color:', selectedColor);
+    });
+  });
+
 }
-  }});
+
+}});
 
       // Quantity Selector
       const quantityInput = document.getElementById('quantity');
@@ -125,71 +147,78 @@ if (productData.colors && productData.colors.length > 0) {
       });
 
 
+function validateSelections() {
+  const selectedSize = document.querySelector('.size-btn.selected');
+  const selectedColor = document.querySelector('.color-btn.selected');
+
+  const sizeBtn = document.querySelector('.size-btn');
+  const colorBtn = document.querySelector('.color-btn');
+
+  const sizeExists = sizeBtn && sizeBtn.offsetParent !== null;
+  const colorExists = colorBtn && colorBtn.offsetParent !== null;
+
+  if (sizeExists && !selectedSize) {
+    alert("Please select a size before proceeding.");
+    return false;
+  }
+
+  if (colorExists && !selectedColor) {
+    alert("Please select a color before proceeding.");
+    return false;
+  }
+
+  return true;
+}
 
 
-  // Handle Add to Cart Button
+
 document.getElementById('add-to-cart').addEventListener('click', () => {
+if (!validateSelections()) return;
+
   // Retrieve product details
-  const productImage = document.getElementById('main-image').src; // First image
-  const productBrand = document.getElementById('product-brand').innerText; // Product Brand
-  const productName = document.getElementById('product-name').innerText; // Product Name
-  const oldPrice = document.querySelector('.old-price').innerText || null; // Old Price
-  const newPrice = document.querySelector('.new-price').innerText || null; // New Price
-  
-  // Retrieve size (if available)
-  const sizeSelection = document.querySelector('.size-selection input:checked');
-  const selectedSize = sizeSelection ? sizeSelection.value : null;
+  const productImage = document.getElementById('main-image').src;
+  const productBrand = document.getElementById('product-brand').innerText;
+  const productName = document.getElementById('product-name').innerText;
+  const oldPrice = document.querySelector('.old-price')?.innerText || null;
+  const newPrice = document.querySelector('.new-price')?.innerText || null;
 
-  // Retrieve color (if available)
-  const colorSelection = document.querySelector('.color-selection input:checked');
-  const selectedColor = colorSelection ? colorSelection.value : null;
-
-  // Retrieve quantity
+  const selectedSize = document.querySelector('.size-btn.selected')?.dataset.size || null;
+  const selectedColor = document.querySelector('.color-btn.selected')?.dataset.color || null;
   const quantity = parseInt(document.getElementById('quantity').value) || 1;
 
-  // Prepare product data
   const productData = {
     image: productImage,
     brand: productBrand,
     name: productName,
     oldPrice: oldPrice,
     newPrice: newPrice,
-    status: status,
     size: selectedSize,
     color: selectedColor,
     quantity: quantity
   };
 
-  // Save product data to cart (in localStorage)
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   cart.push(productData);
   localStorage.setItem('cart', JSON.stringify(cart));
 
-  // Redirect to cart page
   window.location.href = 'cart.html';
 });
 
+
+
 document.getElementById('buy-now').addEventListener('click', function () {
-  // Retrieve product details from the page
+ if (!validateSelections()) return;
+
   const mainImage = document.getElementById('main-image')?.src || '';
   const productBrand = document.getElementById('product-brand')?.textContent?.trim() || 'Unknown Brand';
   const productName = document.getElementById('product-name')?.textContent?.trim() || 'Unknown Product';
   const oldPrice = document.querySelector('.old-price')?.textContent?.trim() || 'N/A';
   const newPrice = document.querySelector('.new-price')?.textContent?.trim() || 'N/A';
 
-    // Retrieve quantity
-    const quantity = parseInt(document.getElementById('quantity').value) || 1;
+  const selectedSize = document.querySelector('.size-btn.selected')?.dataset.size || null;
+  const selectedColor = document.querySelector('.color-btn.selected')?.dataset.color || null;
+  const quantity = parseInt(document.getElementById('quantity').value) || 1;
 
-  // Debugging: Log retrieved values
-  console.log("Collected Product Details:", {
-    mainImage,
-    productBrand,
-    productName,
-    oldPrice,
-    newPrice,
-  });
-
-  // Construct the product object
   const product = {
     image: mainImage,
     brand: productBrand,
@@ -197,15 +226,14 @@ document.getElementById('buy-now').addEventListener('click', function () {
     quantity: quantity,
     oldPrice,
     newPrice,
+    size: selectedSize,
+    color: selectedColor
   };
 
-  // Save the product object to localStorage
   localStorage.setItem('buyNowProduct', JSON.stringify(product));
-  console.log("Product successfully saved to localStorage");
-
-  // Redirect to the buy2.html page
   window.location.href = 'buy2.html';
 });
+
 
 
 
@@ -377,16 +405,6 @@ document.querySelectorAll('.product-card').forEach((card) => {
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
     window.location.href = 'product.html';
   });
-});
-
-
-
-
-// Close the menu if the user clicks anywhere outside of it
-document.addEventListener('click', (event) => {
-  if (!menu.contains(event.target) && event.target !== menuBtn) {
-    menu.style.display = 'none'; // Hide the menu if click is outside
-  }
 });
 
 
