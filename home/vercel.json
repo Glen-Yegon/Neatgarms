@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/(mains|shoot|items|graphics|cloth|assets)/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)",
+      "source": "/(mains|shoot|items|graphics|cloth|assets)/.*\\.(jpg|jpeg|png|webp|heic|mp4|webm|svg|gif)$",
       "headers": [
         {
           "key": "Cache-Control",
