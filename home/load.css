@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Michroma&display=swap");
+ @font-face {
+  font-family: 'Dream Avenue';
+  src: url('fonts/DreamAvenue.woff') format('woff2'),
+       url('fonts/DreamAvenue.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 * {
   padding: 0;
   margin: 0;
@@ -6,7 +14,7 @@
 }
 
 body {
-  font-family: 'Cinzel', Times, serif;
+    font-family: 'Dream Avenue', sans-serif;
   height: 100vh;
 
 }
@@ -54,11 +62,11 @@ body {
 
 .logo-name {
   color: black;
-  font-size: 35px;
+  font-size: 42px;
   letter-spacing: 12px;
   text-transform: uppercase;
   margin-left: 20px;
-  font-weight: bolder;
+  font-weight: 500;
 }
 
 
@@ -86,7 +94,7 @@ body {
         justify-content: center;
         align-items: center;
         text-align: center;
-        font-size: 25px;
+        font-size: 30px;
         margin-bottom: 50px;
       }
 
