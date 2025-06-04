@@ -861,7 +861,7 @@ body.loaded {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('shoot/lp8.webp') no-repeat center center/cover;
+  background: url('shoot/large\ down\ photo.avif') no-repeat center center/cover;
   transform: scale(1.2);
   transition: transform 1.2s ease;
   z-index: 0;
@@ -898,7 +898,7 @@ body.loaded {
 }
 
 .promo-content2 p {
-  font-size: 1.5rem;
+  font-size: 3rem;
   margin-bottom: 30px;
   line-height: 1.6;
   color: white;
@@ -937,7 +937,7 @@ body.loaded {
   }
 
   .promo-content2 p {
-    font-size: 1rem;
+    font-size: 2.3rem;
   }
 }
 
@@ -947,7 +947,7 @@ body.loaded {
   }
 
   .promo-content2 p {
-    font-size: 0.95rem;
+    font-size: 1.5rem;
   }
 
   .shop-btn2 {
@@ -957,6 +957,11 @@ body.loaded {
 }
 
 
+@media (max-width: 767px) {
+  .promo-bg2 {
+    background: url('shoot/large\ phone1.avif') no-repeat center center/cover;
+  }
+}
 
 
   
