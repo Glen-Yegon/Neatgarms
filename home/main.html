@@ -13,8 +13,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+
 </head>
-<body>
+<body >
+
+
+  <!-- Transition overlay -->
+<div id="page-transition">
+  <div class="logo-wrapper">
+    <img src="mains/logo2.png" alt="Logo">
+  </div>
+</div>
 
 
     <!-- Navbar -->
@@ -543,8 +552,43 @@
 
 
 
+<script>
+  // Fade in effect when page loads
+document.body.style.opacity = 0;
+requestAnimationFrame(() => {
+  document.body.style.opacity = 1;
+});
 
-    <script src="main.js" defer></script>
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll("a");
+    const transition = document.getElementById("page-transition");
+
+    // Fade in current page (from transition)
+    transition.classList.remove("active");
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !href.startsWith("http")) {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          transition.classList.add("active");
+
+          // Delay while animation plays, then navigate
+          setTimeout(() => {
+            window.location.href = href;
+          }, 1500); // Match with CSS animation duration
+        });
+      }
+    });
+  });
+</script>
+
+
+    <script src="main.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
     AOS.init({
@@ -552,7 +596,6 @@
       once: false,    // Animation will run every time you scroll
     });
   </script>
-
 
 
 

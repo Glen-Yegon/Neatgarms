@@ -16,11 +16,25 @@
   <link rel="preload" as="video" href="assets/0404.webm" type="video/mp4">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
+<link rel="prefetch" href="main.html">
+<link rel="prefetch" href="tops.html">
+
+
 <link rel="preload" as="image" href="shoot/lp2.webp" type="image/webp" />
 <link rel="preload" as="image" href="shoot/lp14m.webp" type="image/webp" />
 
 </head>
-<body >
+
+<body>
+
+<!-- Transition overlay -->
+<div id="page-transition">
+  <div class="logo-wrapper">
+    <img src="mains/logo2.png" alt="Logo">
+  </div>
+</div>
+
+
 
 
 
@@ -558,7 +572,9 @@
 
 
 
-  <script src="scripts.minjs" defer></script>
+
+
+  <script src="scripts.min.js" defer></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -933,6 +949,45 @@ function filterProducts(query) {
   setupObserver('#neat-promo', '.promo-bg');
   setupObserver('#neat-promo2', '.promo-bg2');
 </script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll("a");
+    const transition = document.getElementById("page-transition");
+
+    // Fade in current page (from transition)
+    transition.classList.remove("active");
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !href.startsWith("http")) {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          transition.classList.add("active");
+
+          // Delay while animation plays, then navigate
+          setTimeout(() => {
+            window.location.href = href;
+          }, 1500); // Match with CSS animation duration
+        });
+      }
+    });
+  });
+</script>
+
+
+
+<script>
+  // Fade in effect when page loads
+document.body.style.opacity = 0;
+requestAnimationFrame(() => {
+  document.body.style.opacity = 1;
+});
+
+</script>
+
 
 
 </body>
