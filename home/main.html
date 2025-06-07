@@ -567,14 +567,25 @@ requestAnimationFrame(() => {
     const links = document.querySelectorAll("a");
     const transition = document.getElementById("page-transition");
 
-    // Check if page was just navigated to via link click
-    if (sessionStorage.getItem("transitioning") === "true") {
-      sessionStorage.setItem("transitioning", "false");
-      transition.classList.remove("active"); // Fade in after navigation
-    } else {
-      // First load or back navigation — keep it clean
-      transition.classList.remove("active");
-    }
+    // Function to disable transition when user uses back/forward
+    window.addEventListener("pageshow", (event) => {
+      const comingFromHistory =
+        event.persisted ||
+        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+
+      if (comingFromHistory) {
+        transition.classList.remove("active"); // No transition on back/forward
+        sessionStorage.removeItem("transitioning");
+      } else {
+        // Normal link-based navigation
+        if (sessionStorage.getItem("transitioning") === "true") {
+          sessionStorage.setItem("transitioning", "false");
+          transition.classList.remove("active"); // Fade in after animation
+        } else {
+          transition.classList.remove("active"); // Initial page load
+        }
+      }
+    });
 
     links.forEach(link => {
       const href = link.getAttribute("href");
@@ -586,13 +597,11 @@ requestAnimationFrame(() => {
 
           setTimeout(() => {
             window.location.href = href;
-          }, 1500); // Match CSS duration
+          }, 1500); // Match your CSS animation duration
         });
       }
     });
   });
-  console.log("Transition active:", sessionStorage.getItem("transitioning"));
-
 </script>
 
 
