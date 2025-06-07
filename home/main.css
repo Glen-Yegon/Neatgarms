@@ -884,7 +884,7 @@ body.fade-out {
 }
 
 .logo-wrapper img {
-  width: 120px;
+  width: 340px;
   opacity: 0;
   animation: fadeIn 1s ease forwards;
   animation-delay: 0.3s;
