@@ -957,25 +957,32 @@ function filterProducts(query) {
     const links = document.querySelectorAll("a");
     const transition = document.getElementById("page-transition");
 
-    // Fade in current page (from transition)
-    transition.classList.remove("active");
+    // Check if page was just navigated to via link click
+    if (sessionStorage.getItem("transitioning") === "true") {
+      sessionStorage.setItem("transitioning", "false");
+      transition.classList.remove("active"); // Fade in after navigation
+    } else {
+      // First load or back navigation — keep it clean
+      transition.classList.remove("active");
+    }
 
     links.forEach(link => {
       const href = link.getAttribute("href");
       if (href && !href.startsWith("#") && !href.startsWith("http")) {
         link.addEventListener("click", e => {
           e.preventDefault();
+          sessionStorage.setItem("transitioning", "true");
           transition.classList.add("active");
 
-          // Delay while animation plays, then navigate
           setTimeout(() => {
             window.location.href = href;
-          }, 1500); // Match with CSS animation duration
+          }, 1500); // Match CSS duration
         });
       }
     });
   });
 </script>
+
 
 
 
