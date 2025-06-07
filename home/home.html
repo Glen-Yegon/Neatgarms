@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
 <link rel="prefetch" href="main.html">
-<link rel="prefetch" href="tops.html">
+<link rel="prefetch" href="item.html">
 
 
 <link rel="preload" as="image" href="shoot/lp2.webp" type="image/webp" />
@@ -592,51 +592,7 @@
     integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script>
-      // JavaScript for slider functionality
-      const slides = document.querySelectorAll('.slide');
-      const totalSlides = slides.length;
-      let currentIndex = 0;
-  
-      function updateSlides() {
-        slides.forEach((slide) => {
-          slide.classList.remove('active', 'prev', 'next');
-        });
-        const prevIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        const nextIndex = (currentIndex + 1) % totalSlides;
-  
-        slides[currentIndex].classList.add('active');
-        slides[prevIndex].classList.add('prev');
-        slides[nextIndex].classList.add('next');
-      }
-  
-      // Navigation arrow event listeners
-      document.getElementById('nextBtn').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % totalSlides;
-        updateSlides();
-      });
-      document.getElementById('prevBtn').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlides();
-      });
-  
-      // Horizontal scroll functionality:
-      // When scrolling right (deltaX > 0) we simulate a previous button click.
-      // When scrolling left (deltaX < 0) we simulate a next button click.
-      const sliderContainer = document.getElementById('sliderContainer');
-      sliderContainer.addEventListener('wheel', (event) => {
-        event.preventDefault();
-        if (event.deltaX > 0) {
-          // Scroll right: simulate previous button
-          currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-          updateSlides();
-        } else if (event.deltaX < 0) {
-          // Scroll left: simulate next button
-          currentIndex = (currentIndex + 1) % totalSlides;
-          updateSlides();
-        }
-      });
-    </script>
+
 
     <script>
       window.addEventListener('load', function () {
@@ -951,20 +907,30 @@ function filterProducts(query) {
 </script>
 
 
-
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const links = document.querySelectorAll("a");
     const transition = document.getElementById("page-transition");
 
-    // Check if page was just navigated to via link click
-    if (sessionStorage.getItem("transitioning") === "true") {
-      sessionStorage.setItem("transitioning", "false");
-      transition.classList.remove("active"); // Fade in after navigation
-    } else {
-      // First load or back navigation — keep it clean
-      transition.classList.remove("active");
-    }
+    // Function to disable transition when user uses back/forward
+    window.addEventListener("pageshow", (event) => {
+      const comingFromHistory =
+        event.persisted ||
+        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+
+      if (comingFromHistory) {
+        transition.classList.remove("active"); // No transition on back/forward
+        sessionStorage.removeItem("transitioning");
+      } else {
+        // Normal link-based navigation
+        if (sessionStorage.getItem("transitioning") === "true") {
+          sessionStorage.setItem("transitioning", "false");
+          transition.classList.remove("active"); // Fade in after animation
+        } else {
+          transition.classList.remove("active"); // Initial page load
+        }
+      }
+    });
 
     links.forEach(link => {
       const href = link.getAttribute("href");
@@ -976,12 +942,13 @@ function filterProducts(query) {
 
           setTimeout(() => {
             window.location.href = href;
-          }, 1500); // Match CSS duration
+          }, 1500); // Match your CSS animation duration
         });
       }
     });
   });
 </script>
+
 
 
 
