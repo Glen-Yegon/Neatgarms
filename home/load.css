@@ -14,9 +14,9 @@
 }
 
 body {
-    font-family: 'Dream Avenue', sans-serif;
+  font-family: 'Dream Avenue', sans-serif;
   height: 100vh;
-
+  background: linear-gradient(to right, #AE866A, #383f45, #AE866A);
 }
 
 
