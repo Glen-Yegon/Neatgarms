@@ -48,7 +48,6 @@ input{
     border-bottom:1px solid #757575;
     padding-left:1.5rem;
     font-size:15px;
-    font-family: 'Times New Roman', Times, serif;
 }
 .input-group{
     padding:1% 0;
@@ -91,7 +90,7 @@ input:focus~label,input:not(:placeholder-shown)~label{
     color:rgb(0, 0, 0);
 }
 .recover a:hover{
-    color:blue;
+    color: #ae866a;
     text-decoration:underline;
 }
 button{
@@ -141,16 +140,17 @@ button:hover{
     font-weight:bold;
 }
  #signUpButton, #signInButton{
-    color: #aec1ff;
+    color: #ae866a;
     border:none;
     text-decoration: solid;
+    font-family: 'Dream Avenue', sans-serif;
     background-color:transparent;
     font-size:1.5rem;
     font-weight:bold;
 }
 #signUpButton:hover, #signInButton:hover {
     text-decoration:underline;
-    color:blue;
+    color:black;
 } 
 .messageDiv{
     background-color: #000000;
@@ -193,3 +193,52 @@ button:hover{
         max-width: 370px;
     }
   }
+
+
+  #page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Glassmorphism style */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  /* Start off-screen above */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+#page-transition.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#page-transition.fade-up {
+  /* Slide up to hide */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.logo-wrapper img {
+  width: 340px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

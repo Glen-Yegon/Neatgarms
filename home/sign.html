@@ -10,8 +10,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
-    <script type="module" src="sign.js"></script>
+    <script type="module" src="sign.min.js"></script>
 </head>
+<!-- Transition overlay -->
+<div id="page-transition">
+  <div class="logo-wrapper">
+    <img src="mains/logo2.png" alt="Logo">
+  </div>
+</div>
+
+
 <body>
    <a href="javascript:history.back()" class="aa">← Go Back</a>
 
@@ -44,7 +52,7 @@
 
       <div class="links">
         <p>Already Have Account ?</p>
-        <button id="signInButton">SIGN IN</button>
+        <button id="signInButton">Sign In</button>
       </div>
     </div>
 
@@ -75,5 +83,64 @@
         </div>
       </div>
       <script src="sign.min.js" defer></script>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll("a");
+    const transition = document.getElementById("page-transition");
+
+    // Function to disable transition when user uses back/forward
+    window.addEventListener("pageshow", (event) => {
+      const comingFromHistory =
+        event.persisted ||
+        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+
+      if (comingFromHistory) {
+        transition.classList.remove("active"); // No transition on back/forward
+        sessionStorage.removeItem("transitioning");
+      } else {
+        // Normal link-based navigation
+        if (sessionStorage.getItem("transitioning") === "true") {
+          sessionStorage.setItem("transitioning", "false");
+          transition.classList.remove("active"); // Fade in after animation
+        } else {
+          transition.classList.remove("active"); // Initial page load
+        }
+      }
+    });
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !href.startsWith("http")) {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          sessionStorage.setItem("transitioning", "true");
+          transition.classList.add("active");
+
+          setTimeout(() => {
+            window.location.href = href;
+          }, 1500); // Match your CSS animation duration
+        });
+      }
+    });
+  });
+</script>
+
+
+
+
+
+<script>
+  // Fade in effect when page loads
+document.body.style.opacity = 0;
+requestAnimationFrame(() => {
+  document.body.style.opacity = 1;
+});
+
+</script>
+
 </body>
+
 </html>

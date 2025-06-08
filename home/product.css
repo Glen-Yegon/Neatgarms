@@ -829,93 +829,79 @@ body, html {
 
     .reviews{
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: center !important;
+      justify-content: center !important;
       text-align: center;
 
 
     }
     @media (max-width: 768px) {
       .reviews{
-        display: block;
+      display: block;
       }
     }
     @media  (max-width: 468px){
       .reviews{
-        display: block;
+             display: block;
         justify-content: center;
         align-items: center;
         text-align: center;
       }
     }
 
-/* From Uiverse.io by gharsh11032000 */ 
 .review-btn {
-    position: relative;
-    display: flex;
-    width: 120px;
-    height: 40px;
-    background-color: #000;
-    align-items: center;
-    color: #ae866a;
-    flex-direction: column;
-    justify-content: center;
+  background-color: transparent;
+  color: black;
+  border: none;
+  border-bottom: 2px solid black;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 100;
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  width: 50%;
+}
+
+.review-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(0, 0, 0, 0.4), rgba(255, 255, 255, 0));
+  transform: skewX(-20deg);
+  transition: 0.6s ease-in-out;
+  z-index: 0;
+}
+
+.review-btn:hover::before {
+  left: 100%;
+}
+
+.review-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ✅ Mobile Responsiveness */
+@media (max-width: 600px) {
+  .review-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    width: 50%;
     text-align: center;
-    border: none;
-    padding: 12px;
-    gap: 12px;
-    border-radius: 8px;
-    cursor: pointer;
+    font-weight: 400;
   }
-  
-  .review-btn::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    left: -4px;
-    top: -1px;
-    margin: auto;
-    width: 128px;
-    height: 48px;
-    border-radius: 10px;
-    background: linear-gradient(-45deg, #8a9381 0%, #ae866a 100% );
-    z-index: -10;
-    pointer-events: none;
-    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  .review-btn::after {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(-45deg, #8a9381 0%, #ae866a 100% );
-    transform: translate3d(0, 0, 0) scale(0.95);
-    filter: blur(20px);
-  }
-  
-  .review-btn:hover::after {
-    filter: blur(30px);
-  }
-  
-  .review-btn:hover::before {
-    transform: rotate(-180deg);
-  }
-  
-  .review-btn:active::before {
-    scale: 0.7;
-  }
-  
-  @media (max-width: 768px) {
-    .review-btn{
-        margin-left: 170px;
-    }
-  }
-  @media (max-width: 468px) {
-    .review-btn{
-      margin-left: 120px;
-    }
-  }
+}
+
+
 
   footer {
     background: linear-gradient(to top, #8a9381, #ae866a);
@@ -1573,4 +1559,53 @@ button.selected {
   border: 5px solid #ae866a;
   outline: none;
   transform: scale(1.05);
+}
+
+
+#page-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Glassmorphism style */
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  /* Start off-screen above */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+#page-transition.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#page-transition.fade-up {
+  /* Slide up to hide */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.logo-wrapper img {
+  width: 340px;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
