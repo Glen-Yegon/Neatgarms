@@ -658,6 +658,10 @@ body, html {
   transition-delay: 0.5s;
 }
 
+.link{
+  text-decoration: none;
+}
+
 .loader {
     width: fit-content;
     height: fit-content;
@@ -903,10 +907,12 @@ body, html {
 
 
 
+
+
   footer {
-    background: linear-gradient(to top, #8a9381, #ae866a);
+   background: linear-gradient(to top, #8a9381, #ae866a);
     color: #000;
-    padding: 7px;
+   padding: 7px;
     font-family: 'Cinzel', Times, serif;
   }
   
