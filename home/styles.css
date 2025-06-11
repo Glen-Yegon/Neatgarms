@@ -1178,7 +1178,7 @@ body.fade-out {
 
 .footer-logo h1 {
   font-family: 'Dream Avenue', sans-serif;
-  font-size: calc(100vw / 15.5); /* Adjust '8' based on character count */
+  font-size: calc(100vw / 6.5); /* Adjust '8' based on character count */
   font-weight: 100;
   color: black;
   text-transform: uppercase;
