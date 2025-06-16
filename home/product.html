@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keep It Neat</title>
-  <link rel="stylesheet" href="product.min.css">
+  <link rel="stylesheet" href="product.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -549,46 +549,40 @@
     </div>
 
    
-    <div class="footer-social">
-      <h3 style="text-decoration: underline;">Follow Us</h3>
-      <div class="social-icons">
-        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
-          <img src="items/Untitled design (87).png" alt="Instagram" />
-        </a>
-        <a href="https://www.tiktok.com/@neatgarms?is_from_webapp=1&sender_device=pc" target="_blank">
-          <img src="items/Untitled design (86).png" alt="TikTok" />
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank">
-          <img src="items/Untitled design (83).png" alt="Twitter" />
-        </a>
-        <a href="https://pin.it/1GhE1V3J0" target="_blank">
-          <img src="items/Untitled design (85).png" alt="Pinterest" />
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank">
-          <img src="items/Untitled design (84).png" alt="WhatsApp" />
-        </a>
-      </div>
-    </div>
-    
-    <br>
+<div class="footer-social">
+  <div class="social-icons">
+    <a href="https://www.instagram.com/neatgarms" target="_blank">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.tiktok.com/@neatgarms" target="_blank">
+      <i class="fab fa-tiktok"></i>
+    </a>
+<a href="https://x.com/neatgarms" target="_blank">
+  <img src="items/Untitled design (83).png" alt="X" class="social-svg-icon" />
+</a>
 
-    <div class="footer-payment">
-      <h3 style="text-decoration: underline;">Accepted Payment Methods</h3>
-      <div class="payment-icons">
-        <a href="#" target="_blank"><img src="items/Visa Logo PNG.jpeg" alt="Visa" /></a>
-        <a href="#" target="_blank"><img src="items/Mastercard Logo Redesign (1).jpeg" alt="Mastercard" /></a>
-        <a href="#" target="_blank"><img src="items/Download Paypal, Logo, Brand_ Royalty-Free Vector Graphic.jpeg" alt="PayPal" /></a>
-        <a href="#" target="_blank"><img src="mains/Mpesa Withdrawal Charges 2022 Latest Update.jpeg" alt="Mpesa" /></a>
-      </div>
-    </div>
+    <a href="https://pin.it/1GhE1V3J0" target="_blank">
+      <i class="fab fa-pinterest"></i>
+    </a>
+    <a href="https://wa.me/254758647031" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+  </div>
+</div>
+
+
     
     <!-- Country / Region Section -->
+    <div class="country">
+              <!-- Country / Region Section -->
     <div class="footer-country">
       <h3><i class="fas fa-map-marker-alt"></i> Country/Region</h3>
-      <p class="kenya-flag"><img src="items/Untitled design (88).png" alt="Kenyan Flag"> Kenya</p>
+      <p class="kenya-flag"><img src="items/Untitled design (88).png" loading="lazy" alt="Kenyan Flag"> Kenya</p>
 
     </div>
-  </div>
+    </div>
+
+      </div>
 
 
   <div class="footer-bottom">
@@ -706,6 +700,145 @@ requestAnimationFrame(() => {
 });
 
 </script>
+
+
+<script>
+/* ------------------------------------------------------------------
+   SPECIAL‑PURPOSE CODE FOR *THIS* PRODUCT CARD ONLY
+   ------------------------------------------------------------------ */
+document.addEventListener('DOMContentLoaded', () => {
+  /* Grab only this product card so nothing else is affected */
+  const card           = document.querySelector('.product-container');
+  const mainImage      = card.querySelector('#main-image');
+  const nextBtn        = card.querySelector('#next-image');
+  const prevBtn        = card.querySelector('#prev-image');
+  const slider         = card.querySelector('.image-slider');
+  const thumbStrip     = card.querySelector('#thumbnail-list');
+  const sizeSelection  = card.querySelector('.size-selection');
+  const productNameEl  = card.querySelector('#product-name');
+
+  /* Pull the product stored in localStorage */
+  const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+
+  /* 🔐 1️⃣  ‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑ */
+  const TARGET_DESCRIPTION =
+    'KOOL';
+
+  /* Exit early unless the description matches **exactly** */
+  if (!productData || productData.description !== TARGET_DESCRIPTION) return;
+  /* 🔐 1️⃣ ‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑‑ */
+
+  /* ------------------------------------------------------------------
+     2️⃣  Map sizes AND names to each image by index
+     ------------------------------------------------------------------ */
+  const sizeMapping = [
+    ['Pick Your Choice'],                 // img 0
+    ['Free Size'],                        // img 1
+    ['Free Size'],                        // img 2
+    ['7 1/4', '7 1/2', '7 3/4'],          // img 3
+    ['7 1/4', '7 1/2', '7 3/4'],          // img 4
+    ['7 1/4', '7 1/2', '7 3/4'], 
+    ['7 1/4', '7 1/2', '7 3/4'],   
+    ['Pick Your Choice'],         // img 5
+    /* add more if you add more pictures */
+  ];
+
+  const nameMapping = [
+    'Koolheads',                          // img 0
+    'Chicago Bulls',                      // img 1
+    'Golden State Warriors',              // img 2
+    'Yankees',                            // img 3
+    'Celtics',                            // img 4
+    'LA Lakers',
+    'SOX',  
+    'Koolheads',                        // img 5
+    /* keep in sync with images[] length */
+  ];
+
+  /* ------------------------------------------------------------------
+     3️⃣  Helpers
+     ------------------------------------------------------------------ */
+  let currentIndex = 0;
+
+  function renderSizeButtons(sizes = []) {
+    sizeSelection.innerHTML = '';
+    if (!sizes.length) return;
+
+    const h4 = document.createElement('h4');
+    h4.textContent = 'Available Sizes / Style:';
+    sizeSelection.appendChild(h4);
+
+    sizes.forEach(size => {
+      const btn = document.createElement('button');
+      btn.className     = 'size-btn';
+      btn.dataset.size  = size;
+      btn.textContent   = size;
+
+      btn.addEventListener('click', () => {
+        sizeSelection.querySelectorAll('.size-btn')
+                     .forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+      });
+
+      sizeSelection.appendChild(btn);
+    });
+  }
+
+  function showImage(index) {
+    if (index < 0 || index >= productData.images.length) return;
+    currentIndex          = index;
+    mainImage.src         = productData.images[index];
+    renderSizeButtons(sizeMapping[index] || []);
+    productNameEl.textContent = nameMapping[index] || '';
+  }
+
+  /* ------------------------------------------------------------------
+     4️⃣  Build the thumbnail strip
+     ------------------------------------------------------------------ */
+  thumbStrip.innerHTML = '';
+  productData.images.forEach((src, i) => {
+    const thumb = document.createElement('img');
+    thumb.src       = src;
+    thumb.className = 'thumbnail';
+    thumb.addEventListener('click', () => showImage(i));
+    thumbStrip.appendChild(thumb);
+  });
+
+  /* ------------------------------------------------------------------
+     5️⃣  Initialise the view
+     ------------------------------------------------------------------ */
+  showImage(0);
+
+  /* ------------------------------------------------------------------
+     6️⃣  Next / Prev button wiring
+     ------------------------------------------------------------------ */
+  nextBtn.addEventListener('click', () =>
+    showImage((currentIndex + 1) % productData.images.length)
+  );
+  prevBtn.addEventListener('click', () =>
+    showImage((currentIndex - 1 + productData.images.length)
+              % productData.images.length)
+  );
+
+  /* ------------------------------------------------------------------
+     7️⃣  Mobile swipe support
+     ------------------------------------------------------------------ */
+  let touchStartX = 0;
+  slider.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  slider.addEventListener('touchend', e => {
+    const delta  = e.changedTouches[0].screenX - touchStartX;
+    const thresh = 30;
+    if (Math.abs(delta) < thresh) return;
+    if (delta < 0)  showImage((currentIndex + 1) % productData.images.length);
+    else            showImage((currentIndex - 1 + productData.images.length)
+                              % productData.images.length);
+  });
+});
+</script>
+
+
 
 
 </body>

@@ -1023,6 +1023,32 @@ font-size: 16px;
   padding: 0;
 }
 
+  .footer-social .social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social .social-icons a i {
+  font-size: 30px;
+  color: black;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-social .social-icons a:hover i {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+
+.social-svg-icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.social-svg-icon:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -1042,6 +1068,9 @@ font-size: 16px;
     text-align: center;
     justify-content: center;
     align-items: center;
+  }
+    .country{
+    width: 100%;
   }
 }
 

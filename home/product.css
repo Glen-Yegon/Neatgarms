@@ -909,11 +909,11 @@ body, html {
 
 
 
+  
   footer {
-   background: linear-gradient(to top, #8a9381, #ae866a);
+    background: linear-gradient(to bottom, #ae866a, #8A9381);
     color: #000;
-   padding: 7px;
-    font-family: 'Cinzel', Times, serif;
+    padding: 20px;
   }
   
   .footer-container {
@@ -940,7 +940,6 @@ body, html {
   
   .footer-mission h3, .footer-subscribe h3, .footer-social h3, .footer-payment h3 {
     margin-top: 0;
-    margin-left: 0px;
   }
 
   
@@ -965,20 +964,14 @@ body, html {
     }
     .footer-subscribe h3{
       font-size: 15px;
-      align-items: left;
-      justify-content:  left;
-      text-align: left;
-    }
-    .footer-payment{
-      align-items: left;
-      justify-content: left;
+      align-items: center;
+      justify-content: center;
       text-align: left;
     }
   }
   @media (max-width: 468px){
     .footer-subscribe h3{
       font-size: 12px;
-      margin-left: 0px;
     }
       
   .footer-links ul {
@@ -988,9 +981,44 @@ body, html {
   }
   }
   
-  
 
- /* From Uiverse.io by Satwinder04 */ 
+  .footer-social .social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social .social-icons a i {
+  font-size: 30px;
+  color: black;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-social .social-icons a:hover i {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+
+.social-svg-icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.social-svg-icon:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+ 
+  .kenya-flag img {
+    width: 20px;  /* Adjust the size of the flag as needed */
+    margin-right: 3px; /* Space between the flag and text */
+    vertical-align: middle; /* Align the flag with the text */
+}
+
+
+  
+/* From Uiverse.io by Satwinder04 */ 
 .input-container {
   position: relative;
   width: 600px;
@@ -1039,14 +1067,98 @@ body, html {
 }
 @media (max-width: 768px){
   .input-container{
-    max-width: 65%;
-  }
-}
-@media (max-width: 468px){
-  .input-container{
     max-width: 45%;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
   }
 }
+
+
+
+
+/* Country/Region Section */
+.footer-country {
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.5rem;
+  animation: fadeIn 1.2s ease-in-out;
+  text-align: left;
+}
+
+.footer-country h3 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.footer-country p {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+
+.footer-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0;
+
+}
+
+.footer-logo h1 {
+  font-family: 'Dream Avenue', sans-serif;
+  font-size: calc(100vw / 6.5); /* Adjust '8' based on character count */
+  font-weight: 100;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.5vw;
+  width: 100vw;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    justify-content: left;
+    align-items: left;
+  }
+
+  .footer-logo {
+    font-size: 5rem;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+    .country{
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 480px) {
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .footer-country {
+    font-size: 1rem;
+  }
+}
+  
 
 
   .hidden-buttons {

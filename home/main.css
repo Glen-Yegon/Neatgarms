@@ -759,10 +759,177 @@ body.fade-out {
 
 
 
+  
+  footer {
+    background: linear-gradient(to bottom, #ae866a, #8A9381);
+    color: #000;
+    padding: 20px;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links ul li a {
+    color: #555;
+    text-decoration: none;
+  }
+
+  .footer-links ul li a:hover{
+    color: #f0f0f0;
+    text-decoration: underline;
+  }
+  
+  .footer-mission h3, .footer-subscribe h3, .footer-social h3, .footer-payment h3 {
+    margin-top: 0;
+  }
+
+  
+  .social-icons i,
+  .payment-icons i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #000;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #555;
+  }
+  
+   /* Responsive */
+   @media (max-width: 768px) {
+    .footer-container {
+      justify-content: left;
+      align-items: left;
+    }
+    .footer-subscribe h3{
+      font-size: 15px;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+    }
+  }
+  @media (max-width: 468px){
+    .footer-subscribe h3{
+      font-size: 12px;
+    }
+      
+  .footer-links ul {
+    padding: 0;
+    justify-content: left;
+    align-items: left;
+  }
+  }
+  
+
+  .footer-social .social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social .social-icons a i {
+  font-size: 30px;
+  color: black;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.footer-social .social-icons a:hover i {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+
+.social-svg-icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.social-svg-icon:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+}
+
+ 
+  .kenya-flag img {
+    width: 20px;  /* Adjust the size of the flag as needed */
+    margin-right: 3px; /* Space between the flag and text */
+    vertical-align: middle; /* Align the flag with the text */
+}
+
+
+  
+/* From Uiverse.io by Satwinder04 */ 
+.input-container {
+  position: relative;
+  width: 600px;
+}
+
+.input-container input[type="text"] {
+  font-size: 20px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 5px 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.input-container .label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #ccc;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input-container input[type="text"]:focus ~ .label,
+.input-container input[type="text"]:valid ~ .label {
+  top: -20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.input-container .underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #333;
+  transform: scaleX(0);
+  transition: all 0.3s ease;
+}
+
+.input-container input[type="text"]:focus ~ .underline,
+.input-container input[type="text"]:valid ~ .underline {
+  transform: scaleX(1);
+}
+@media (max-width: 768px){
+  .input-container{
+    max-width: 45%;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+  }
+}
+
+
+
+
 /* Country/Region Section */
 .footer-country {
   color: rgb(0, 0, 0);
-  margin-top: 15px;
   border-radius: 10px;
   text-align: center;
   font-size: 0.5rem;
@@ -773,7 +940,6 @@ body.fade-out {
 .footer-country h3 {
   font-size: 1rem;
   font-weight: bold;
-  text-decoration: underline;
 }
 
 .footer-country p {
@@ -781,6 +947,7 @@ body.fade-out {
   font-weight: bold;
   margin-top: 5px;
 }
+
 
 .footer-logo {
   display: flex;
@@ -794,7 +961,7 @@ body.fade-out {
 .footer-logo h1 {
   font-family: 'Dream Avenue', sans-serif;
   font-size: calc(100vw / 6.5); /* Adjust '8' based on character count */
-  font-weight: 20;
+  font-weight: 100;
   color: black;
   text-transform: uppercase;
   letter-spacing: 0.5vw;
@@ -811,56 +978,35 @@ body.fade-out {
 @media (max-width: 768px) {
   .footer-container {
     grid-template-columns: 1fr;
+    justify-content: left;
+    align-items: left;
   }
+
+  .footer-logo {
+    font-size: 5rem;
+  }
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+  .country{
+    width: 100%;
+  }
+
 }
 
 @media (max-width: 480px) {
+  .footer-logo{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0;
+  }
+
   .footer-country {
     font-size: 1rem;
   }
-}
-
-
-.footer-social .social-icons {
-  display: flex;
-  gap: 1rem; /* Adds space between icons */
-}
-
-.footer-social .social-icons img {
-  width: 30px; /* Adjust the size of the logos */
-  height: 30px;
-  object-fit: contain;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.footer-social .social-icons a:hover img {
-  transform: scale(1.1); /* Slightly enlarges the image on hover */
-  opacity: 0.8; /* Adds a little fade effect on hover */
-}
-
-
-.footer-payment .payment-icons {
-  display: flex;
-  gap: 1rem; /* Adds space between logos */
-  justify-content: left; /* Centers the logos */
-}
-
-.footer-payment .payment-icons img {
-  width: 40px; /* Adjust logo size */
-  height: 40px;
-  object-fit: contain;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.footer-payment .payment-icons a:hover img {
-  transform: scale(1.1); /* Slight scaling effect on hover */
-  opacity: 0.8; /* Adds a little fade effect on hover */
-}
-
-.kenya-flag img {
-  width: 20px;  /* Adjust the size of the flag as needed */
-  margin-right: 3px; /* Space between the flag and text */
-  vertical-align: middle; /* Align the flag with the text */
 }
 
 #page-transition {
