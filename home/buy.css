@@ -472,7 +472,7 @@ select {
   
   /* Disclaimer Text */
   .payment-disclaimer {
-    margin-top: 20px;
+    margin-top: 0px;
     background-color: #8a938167;
     padding: 15px;
     border-left: 4px solid #ae866a;
@@ -525,6 +525,7 @@ select {
   .pay-now-btn {
     background-color: #8a9381; /* A fresh green color for the button */
     color: black;
+    margin-bottom: 20px;
     font-size: 18px;
     padding: 12px 30px;
     border-radius: 8px;
@@ -680,15 +681,6 @@ select {
     max-width: 95%;
   }
 }
-
-.ppp{
-  text-align: center;
-  font-weight: bold;
-  font-size: large;
-  color: rgb(0, 0, 0);
-
-}
-
 
   /* Style for Pay Now button */
   .pay-now-btnn {

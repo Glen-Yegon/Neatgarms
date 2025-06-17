@@ -1411,9 +1411,6 @@ body.fade-out {
   }
 }
 
-
-
-
 /* Subscription Popup */
 .overlay {
   position: fixed;
@@ -1427,8 +1424,28 @@ body.fade-out {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Cinzel', Times, serif;
 }
+
+.popup-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+  margin-top: -1rem;
+  animation: fadeInDown 0.5s ease;
+}
+
+/* Optional: subtle animation for logo */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .popup-card {
   background: rgba(255, 255, 255, 0.1);
@@ -1464,6 +1481,7 @@ body.fade-out {
   font-size: 1rem;
   background-color: transparent;
   outline: none;
+  border-radius: 10px;
 }
 
 .input-group label {
@@ -1487,11 +1505,12 @@ body.fade-out {
   background: linear-gradient(to right, #ae866a, white, #ae866a);
   border: none;
   padding: 0.8rem 2rem;
-  border-radius: 50px;
+  border-radius: 10px;
   color: rgb(0, 0, 0);
   font-weight: bold;
   cursor: pointer;
   transition: transform 0.3s ease;
+   font-family: 'Dream Avenue', sans-serif;
 }
 
 .subscribe-btn:hover {

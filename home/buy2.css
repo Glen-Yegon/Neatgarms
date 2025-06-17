@@ -512,6 +512,7 @@ select {
     background-color: #8a9381; /* A fresh green color for the button */
     color: black;
     font-size: 18px;
+    margin-bottom: 20px;
     padding: 12px 30px;
     border-radius: 8px;
     border: 1px solid black;

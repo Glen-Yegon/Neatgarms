@@ -1361,3 +1361,8 @@ app.post('/api/paystack/verify', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+app.get("/keep-alive", (req, res) => {
+  res.send("Server is awake!");
+});
