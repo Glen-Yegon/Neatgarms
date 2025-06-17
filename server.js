@@ -201,34 +201,25 @@ app.post(
         <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
 
-      <table style="color: #333; padding-top: 12px; max-width: 600px;">
+      
+<table style="font-family: Poppins, sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
+      <img src="https://www.neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
     </td>
     <td style="vertical-align: top;">
-      <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
-      <div style="font-size: 14px; margin-top: 3px;">
-        <a href="mailto:info@neatgarms.com" style="color: #000000; text-decoration: none;">info@neatgarms.com</a>
+      <div style="font-size: 16px; color: #ae866a; font-weight: bold;">Neatgarms</div>
+      <div style="font-size: 14px; margin-top: 4px;">
+        <a href="mailto:info@neatgarms.com" style="color: blue; text-decoration: none;">info@neatgarms.com</a>
       </div>
       <div style="font-size: 14px;">
-        <a href="https://neatgarms.com" style="color: #000000; text-decoration: none;">www.neatgarms.com</a>
+        <a href="https://www.neatgarms.com" style="color: blue; text-decoration: none;">www.neatgarms.com</a>
       </div>
-      <div style="margin-top: 10px;">
-        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" width="20">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="X" width="20">
-        </a>
-        <a href="https://pin.it/1GhE1V3J0" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/145/145808.png" alt="Pinterest" width="20">
-        </a>
-      </div>
-
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding-top: 0px;">
+      <div style="font-size: 20px; font-weight: bold; text-align: center; color:  black;">KEEP IT NEAT</div>
     </td>
   </tr>
 </table>
@@ -431,34 +422,24 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
         <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
 
-      <table style="color: #333; padding-top: 12px; max-width: 600px;">
+<table style="font-family: Poppins, sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
+      <img src="https://www.neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
     </td>
     <td style="vertical-align: top;">
-      <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
-      <div style="font-size: 14px; margin-top: 3px;">
-        <a href="mailto:info@neatgarms.com" style="color: #000000; text-decoration: none;">info@neatgarms.com</a>
+      <div style="font-size: 16px; color: #ae866a; font-weight: bold;">Neatgarms</div>
+      <div style="font-size: 14px; margin-top: 4px;">
+        <a href="mailto:info@neatgarms.com" style="color: blue; text-decoration: none;">info@neatgarms.com</a>
       </div>
       <div style="font-size: 14px;">
-        <a href="https://neatgarms.com" style="color: #000000; text-decoration: none;">www.neatgarms.com</a>
+        <a href="https://www.neatgarms.com" style="color: blue; text-decoration: none;">www.neatgarms.com</a>
       </div>
-      <div style="margin-top: 10px;">
-        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" width="20">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="X" width="20">
-        </a>
-        <a href="https://pin.it/1GhE1V3J0" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/145/145808.png" alt="Pinterest" width="20">
-        </a>
-      </div>
-
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="padding-top: 0px;">
+      <div style="font-size: 20px; font-weight: bold; text-align: center; color:  black;">KEEP IT NEAT</div>
     </td>
   </tr>
 </table>
@@ -684,37 +665,27 @@ if (orderSummary) {
         <p style="font-size: 13px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
 
-             <table style="font-family: 'poppins', sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
+<table style="font-family: Poppins, sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
+      <img src="https://www.neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
     </td>
     <td style="vertical-align: top;">
-      <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
-      <div style="font-size: 14px; margin-top: 3px;">
-        <a href="mailto:info@neatgarms.com" style="color: #000000; text-decoration: none;">info@neatgarms.com</a>
+      <div style="font-size: 16px; color: #ae866a; font-weight: bold;">Neatgarms</div>
+      <div style="font-size: 14px; margin-top: 4px;">
+        <a href="mailto:info@neatgarms.com" style="color: blue; text-decoration: none;">info@neatgarms.com</a>
       </div>
       <div style="font-size: 14px;">
-        <a href="https://neatgarms.com" style="color: #000000; text-decoration: none;">www.neatgarms.com</a>
+        <a href="https://www.neatgarms.com" style="color: blue; text-decoration: none;">www.neatgarms.com</a>
       </div>
-      <div style="margin-top: 10px;">
-        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" width="20">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="X" width="20">
-        </a>
-        <a href="https://pin.it/1GhE1V3J0" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/145/145808.png" alt="Pinterest" width="20">
-        </a>
-      </div>
-
     </td>
   </tr>
-  </table>
+  <tr>
+    <td colspan="2" style="padding-top: 0px;">
+      <div style="font-size: 20px; font-weight: bold; text-align: center; color:  black;">KEEP IT NEAT</div>
+    </td>
+  </tr>
+</table>
       `
     };
     
@@ -941,37 +912,27 @@ if (delivery.city.toLowerCase() === "nairobi") {
 </div>
 
 
-   <table style="font-family: 'poppins', sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
+<table style="font-family: Poppins, sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
+      <img src="https://www.neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
     </td>
     <td style="vertical-align: top;">
-      <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
-      <div style="font-size: 14px; margin-top: 3px;">
-        <a href="mailto:info@neatgarms.com" style="color: #000000; text-decoration: none;">info@neatgarms.com</a>
+      <div style="font-size: 16px; color: #ae866a; font-weight: bold;">Neatgarms</div>
+      <div style="font-size: 14px; margin-top: 4px;">
+        <a href="mailto:info@neatgarms.com" style="color: blue; text-decoration: none;">info@neatgarms.com</a>
       </div>
       <div style="font-size: 14px;">
-        <a href="https://neatgarms.com" style="color: #000000; text-decoration: none;">www.neatgarms.com</a>
+        <a href="https://www.neatgarms.com" style="color: blue; text-decoration: none;">www.neatgarms.com</a>
       </div>
-      <div style="margin-top: 10px;">
-        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" width="20">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="X" width="20">
-        </a>
-        <a href="https://pin.it/1GhE1V3J0" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/145/145808.png" alt="Pinterest" width="20">
-        </a>
-      </div>
-
     </td>
   </tr>
-  </table>
+  <tr>
+    <td colspan="2" style="padding-top: 0px;">
+      <div style="font-size: 20px; font-weight: bold; text-align: center; color:  black;">KEEP IT NEAT</div>
+    </td>
+  </tr>
+</table>
 
       `,
       attachments: [
@@ -1043,38 +1004,28 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
       from: '"Neatgarms" <info@neatgarms.com>', 
       to: reviewerEmail,
       subject: "Thank You for Your Review!",
-      html: `Hi ${reviewerName},\n\nThank you for your review titled "${reviewTitle}". We appreciate your feedback!\n\nBest regards,\nYour Team
-             <table style="font-family: 'poppins', sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
+      html: `Hi ${reviewerName},\n\nThank you for your review titled "${reviewTitle}". We appreciate your feedback!\n\nBest regards,\nNeat Team
+      <table style="font-family: Poppins, sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
+      <img src="https://www.neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
     </td>
     <td style="vertical-align: top;">
-      <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
-      <div style="font-size: 14px; margin-top: 3px;">
-        <a href="mailto:info@neatgarms.com" style="color: #000000; text-decoration: none;">info@neatgarms.com</a>
+      <div style="font-size: 16px; color: #ae866a; font-weight: bold;">Neatgarms</div>
+      <div style="font-size: 14px; margin-top: 4px;">
+        <a href="mailto:info@neatgarms.com" style="color: blue; text-decoration: none;">info@neatgarms.com</a>
       </div>
       <div style="font-size: 14px;">
-        <a href="https://neatgarms.com" style="color: #000000; text-decoration: none;">www.neatgarms.com</a>
+        <a href="https://www.neatgarms.com" style="color: blue; text-decoration: none;">www.neatgarms.com</a>
       </div>
-      <div style="margin-top: 10px;">
-        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" width="20">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="X" width="20">
-        </a>
-        <a href="https://pin.it/1GhE1V3J0" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/145/145808.png" alt="Pinterest" width="20">
-        </a>
-      </div>
-
     </td>
   </tr>
-  </table>
+  <tr>
+    <td colspan="2" style="padding-top: 0px;">
+      <div style="font-size: 20px; font-weight: bold; text-align: center; color:  black;">KEEP IT NEAT</div>
+    </td>
+  </tr>
+</table>
   `,
     };
 
@@ -1212,37 +1163,27 @@ app.post('/subscribe', async (req, res) => {
 </div>
 
     
-       <table style="font-family: 'poppins', sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
+<table style="font-family: Poppins, sans-serif; color: #333; padding-top: 12px; max-width: 600px;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
+      <img src="https://www.neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px;">
     </td>
     <td style="vertical-align: top;">
-      <div style="font-size: 18px; color: #ae866a; font-weight: bold;">Neatgarms</div>
-      <div style="font-size: 14px; margin-top: 3px;">
-        <a href="mailto:info@neatgarms.com" style="color:blue; text-decoration: underline;">info@neatgarms.com</a>
+      <div style="font-size: 16px; color: #ae866a; font-weight: bold;">Neatgarms</div>
+      <div style="font-size: 14px; margin-top: 4px;">
+        <a href="mailto:info@neatgarms.com" style="color: blue; text-decoration: none;">info@neatgarms.com</a>
       </div>
       <div style="font-size: 14px;">
-        <a href="https://neatgarms.com" style="color: blue; text-decoration: underline;">www.neatgarms.com</a>
+        <a href="https://www.neatgarms.com" style="color: blue; text-decoration: none;">www.neatgarms.com</a>
       </div>
-      <div style="margin-top: 10px;">
-        <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram" width="20">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp" width="20">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 8px;">
-          <img src="https://cdn-icons-png.flaticon.com/24/5968/5968958.png" alt="X" width="20">
-        </a>
-        <a href="https://pin.it/1GhE1V3J0" target="_blank">
-          <img src="https://cdn-icons-png.flaticon.com/24/145/145808.png" alt="Pinterest" width="20">
-        </a>
-      </div>
-
     </td>
   </tr>
-  </table>
+  <tr>
+    <td colspan="2" style="padding-top: 0px;">
+      <div style="font-size: 20px; font-weight: bold; text-align: center; color:  black;">KEEP IT NEAT</div>
+    </td>
+  </tr>
+</table>
   `,
   };
 
