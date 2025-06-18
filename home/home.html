@@ -581,12 +581,13 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
 
 
 <!-- Subscription Popup -->
-<div class="overlay" id="subscriptionPopup">
+<div class="overlay" id="subscriptionPopup" hidden>
   <div class="popup-card">
     <img data-src="mains/logo2.png"
          alt="NeatGarms Logo"
          class="popup-logo"
          width="120" height="120" />
+
     <button class="close-btn" id="closePopup">&times;</button>
 
    <h2>Snooze you lose</h2>
@@ -611,16 +612,33 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
 
 
 <script>
-  window.addEventListener('load', () => {
-  /* … existing code … */
-  const logoImg = document.querySelector('.popup-logo');
-  if (logoImg && logoImg.dataset.src) {
-    logoImg.src = logoImg.dataset.src;   // ← starts download now
-  }
-  /* then start your 2‑second timer, etc. */
-});
+window.addEventListener('load', () => {
+  const popup     = document.getElementById('subscriptionPopup');
+  const logo      = popup.querySelector('.popup-logo');
+  const closeBtn  = document.getElementById('closePopup'); // optional
 
+  /* 1️⃣  If the popup was already shown this session, bail out */
+  if (sessionStorage.getItem('popupSeen')) return;
+
+  /* 2️⃣  Start downloading the logo AFTER everything else */
+  if (logo && logo.dataset && logo.dataset.src) {
+    logo.src = logo.dataset.src;
+  }
+
+  /* 3️⃣  Show the popup 2 s later */
+  setTimeout(() => {
+    popup.hidden = false;      // remove the hidden attribute
+    popup.style.display = 'flex';
+    sessionStorage.setItem('popupSeen', 'true');   // mark as shown
+  }, 2000);
+
+  /* 4️⃣  Optional: close button just hides the popup */
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => popup.style.display = 'none');
+  }
+});
 </script>
+
 
 <!-- subscribe firebase code -->
 <script type="module">
