@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="video" href="assets/0404.webm" type="video/mp4">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="/mains/logo2.png" imagesrcset="/mains/logo2.png 1x" />
 
 <link rel="prefetch" href="main.html">
 <link rel="prefetch" href="item.html">
@@ -42,7 +43,7 @@
 
   <nav class="navbar" id="navbar">
     <div class="logo">
-     <a href="#neat-promo"> <img src="mains/logo2.png" alt="Company Logo" /></a>
+     <a href="#neat-promo"> <img src="mains/logo2.png" alt="Company Logo" loading="eager" fetchpriority="high" /></a>
     </div>
 
 <div class="navbar-links" style="font-family: 'Poppins', sans-serif;">
@@ -582,7 +583,10 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
 <!-- Subscription Popup -->
 <div class="overlay" id="subscriptionPopup">
   <div class="popup-card">
-     <img src="mains/logo2.png" alt="NeatGarms Logo" class="popup-logo" />
+    <img data-src="mains/logo2.png"
+         alt="NeatGarms Logo"
+         class="popup-logo"
+         width="120" height="120" />
     <button class="close-btn" id="closePopup">&times;</button>
 
    <h2>Snooze you lose</h2>
@@ -606,7 +610,19 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
 <div class="custom-alert" id="customAlert">Please wait, saving your details...</div>
 
 
-<!-- subscribe.js -->
+<script>
+  window.addEventListener('load', () => {
+  /* … existing code … */
+  const logoImg = document.querySelector('.popup-logo');
+  if (logoImg && logoImg.dataset.src) {
+    logoImg.src = logoImg.dataset.src;   // ← starts download now
+  }
+  /* then start your 2‑second timer, etc. */
+});
+
+</script>
+
+<!-- subscribe firebase code -->
 <script type="module">
   import {
     initializeApp
@@ -722,48 +738,54 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
       });
     </script>
 
-    <script>
-
-
+<script>
 window.addEventListener('DOMContentLoaded', () => {
 
+  const popup      = document.getElementById('subscriptionPopup');
+  const closeBtn   = document.getElementById('closePopup');
+  const form       = document.getElementById('subscribeForm');
+  const thankYou   = document.getElementById('thankYouMsg');
+  const popupCard  = document.querySelector('.popup-card');
+  const logoImg    = popup.querySelector('.popup-logo'); // may be null if not present
+  const alertBox   = document.getElementById('customAlert');
 
-  const popup = document.getElementById('subscriptionPopup');
-  const closeBtn = document.getElementById('closePopup');
-  const form = document.getElementById('subscribeForm');
-  const thankYou = document.getElementById('thankYouMsg');
-  const popupCard = document.querySelector('.popup-card');
-
-  // Check sessionStorage first: if handled, keep popup hidden
+  /* 1.  Bail early if user has already handled it this session */
   if (sessionStorage.getItem('popupHandled')) {
     popup.style.display = 'none';
-    return; // exit early so no timer runs
+    return;
   }
 
-  // Show popup after 2 seconds
-  setTimeout(() => {
-    popup.style.display = 'flex';
-    popupCard.style.display = 'block';
-    thankYou.style.display = 'none';
-  }, 2000);
+  /* 2.  Wait until EVERYTHING (images, CSS, fonts) is finished */
+  window.addEventListener('load', () => {
 
+    /* 2a.  (Optional) Start downloading the logo only now */
+    if (logoImg && logoImg.dataset && logoImg.dataset.src) {
+      logoImg.src = logoImg.dataset.src;
+    }
+
+    /* 2b.  Now schedule the popup for 2 s later */
+    setTimeout(() => {
+      popup.style.display  = 'flex';
+      popupCard.style.display = 'block';
+      thankYou.style.display = 'none';
+    }, 2000);
+  });
+
+  /* 3.  Close button logic */
   closeBtn.addEventListener('click', () => {
     popup.style.display = 'none';
     sessionStorage.setItem('popupHandled', 'true');
   });
 
+  /* 4.  Form submission */
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-   const alertBox = document.getElementById('customAlert');
 
-  alertBox.classList.add('show');
-
-  setTimeout(() => {
-    alertBox.classList.remove('show');
-  }, 4000);
+    /* Tiny custom alert animation */
+    alertBox.classList.add('show');
+    setTimeout(() => alertBox.classList.remove('show'), 4000);
 
     const email = document.getElementById('email').value.trim();
-
     if (!email) {
       alert('Please enter a valid email.');
       return;
@@ -771,14 +793,15 @@ window.addEventListener('DOMContentLoaded', () => {
 
     try {
       const response = await fetch('https://neatgarms-risi.onrender.com/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        method : 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body   : JSON.stringify({ email })
       });
 
       if (response.ok) {
+        /* Success state */
         popupCard.style.display = 'none';
-        thankYou.style.display = 'block';
+        thankYou.style.display  = 'block';
         sessionStorage.setItem('popupHandled', 'true');
 
         setTimeout(() => {
@@ -790,14 +813,14 @@ window.addEventListener('DOMContentLoaded', () => {
       } else {
         alert('Oops! Something went wrong. Please try again.');
       }
-    } catch (error) {
-      console.error('Subscription error:', error);
+    } catch (err) {
+      console.error('Subscription error:', err);
       alert('Network error. Please check your connection.');
     }
   });
 });
+</script>
 
- </script>
 
  <script>
  const menuToggle = document.getElementById('menu-toggle');
