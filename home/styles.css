@@ -293,7 +293,7 @@ body.fade-out {
 
 .hero-text {
   font-family: 'Dream Avenue', sans-serif;
-  position: relative;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -351,7 +351,6 @@ body.fade-out {
 }
 @media (max-width: 768px) {
       .hero-text {
-        position: relative;
     font-size: clamp(7rem, 30vw, 350px);
   }
 }
@@ -1665,6 +1664,3 @@ body.fade-out {
     opacity: 1;
   }
 }
-
-
-
