@@ -339,7 +339,7 @@ body.fade-out {
 /* Optional: Small screens keep fixed */
 @media (max-width: 468px) {
   .hero-text.shrink {
-    position: relative;
+    position: fixed;
     top: 2px;
     left: 50%;
     transform: translateX(-50%);
@@ -351,6 +351,7 @@ body.fade-out {
 }
 @media (max-width: 768px) {
       .hero-text {
+        position: relative;
     font-size: clamp(7rem, 30vw, 350px);
   }
 }
