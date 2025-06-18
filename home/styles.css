@@ -303,7 +303,7 @@ body.fade-out {
   text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
   text-align: center;
   padding: 0 1rem;
-  z-index: 999;
+  z-index: 2;
   transition: all 0.5s ease;
   pointer-events: none;
 }
