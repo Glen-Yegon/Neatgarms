@@ -1233,7 +1233,6 @@ body.fade-out {
 .looping-text-section {
   width: 100%;
   background-color: transparent;
-  font-family: 'Playfair Display', serif;
   font-weight: lighter;
   padding: 0px 0;
   height: 25px;
@@ -1308,7 +1307,6 @@ body.fade-out {
 .menu-icon {
   cursor: pointer;
   display: flex;
-  font-family: 'Cinzel', Times, serif;
   flex-direction: column;
   align-items: right;
   justify-content: right;
@@ -1520,6 +1518,7 @@ body.fade-out {
 
 .thank-you-message {
   display: none;
+  font-family: 'Dream Avenue', sans-serif;
   text-align: center;
   color: white;
   animation: fadeIn 0.5s ease forwards;
@@ -1567,7 +1566,6 @@ body.fade-out {
 
 
 .custom-alert {
-    font-family: 'Cinzel', Times, serif;
   position: fixed;
   top: 20px;
   left: 50%;

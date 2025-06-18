@@ -109,22 +109,36 @@ observer.observe(shippingFeeElement, {
   const shippingFeeDisplay = document.getElementById('shipping-fee');
 
   const cityFees = {
-    Nakuru: 600,
-    Kisumu: 750,
+    Nakuru: 500,
+    Kisumu: 800,
+    Machakos: 400,
+    Naivasha: 450,
+    Nyeri: 500,
+    Nanyuki: 500,
+    Embu: 500,
+    Narok: 500,
+    Meru: 600,
+    Kakamega: 800,
+    Kitale: 800,
+    Eldoret: 800,
+    Kericho: 800,
     Mombasa: 800,
-    Eldoret: 600,
-    Nyahururu: 600,
-    Kiambu: 600,
-    
   };
 
   const nairobiFees = {
-    "Lang'ata": 150,
-    "Karen": 200,
-    "Westlands": 180,
-    "Kilimani": 160
-
-
+    "Lang'ata": 250,
+    "Nairobi CBD": 250,
+    "Westlands": 320,
+    "Kilimani": 280,
+    "Kileleshwa": 340,
+    "South B": 250,
+    "South C": 250,
+    "Upper Hill": 250,
+    "Karen": 600,
+    "Rongai Tuskeys": 760,
+    "JKIA": 660,
+    "Syokimau": 720,
+    "Ruaka (reference)": 700,
   };
 
   function updateShippingFee(fee) {

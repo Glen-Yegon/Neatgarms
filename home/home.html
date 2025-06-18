@@ -4,15 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keep It Neat</title>
-  <link rel="stylesheet" href="styles.min.css">
+  <link rel="stylesheet" href="styles.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <link rel="preload" as="video" href="assets/0404.webm" type="video/mp4">
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
@@ -600,20 +598,93 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
     </form>
   </div>
   <div class="thank-you-message" id="thankYouMsg">
-    <h2>✨ Thank You!</h2>
-    <p>You’re officially part of the Neat Family!</p>
+    <h2>Welcome to the Neat Collective </h2>
+    <p>Exciting Things Ahead</p>
   </div>
 </div>
 
 <div class="custom-alert" id="customAlert">Please wait, saving your details...</div>
 
 
+<!-- subscribe.js -->
+<script type="module">
+  import {
+    initializeApp
+  }                             from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+  import {
+    getFirestore,
+    doc, getDoc,          // NEW
+    setDoc,               // NEW  (replaces addDoc)
+    serverTimestamp
+  }                             from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+
+  /* ---------- 1.  Firebase config ---------- */
+  const firebaseConfig = {
+    apiKey:            "AIzaSyCLC4Dz-qxNOPtRFhybiBA5SqCDJgvKqMY",
+    authDomain:        "neat-53fa9.firebaseapp.com",
+    projectId:         "neat-53fa9",
+    storageBucket:     "neat-53fa9.appspot.com",
+    messagingSenderId: "857317417173",
+    appId:             "1:857317417173:web:6b84a45c96ebe56fce425c"
+  };
+
+  /* ---------- 2.  Init Firebase ---------- */
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  /* ---------- 3.  DOM references ---------- */
+  const form       = document.querySelector("#subscribeForm");
+  const emailInput = document.querySelector("#email");
+  const alertBox   = document.querySelector("#customAlert");   // “Please wait …” div
+
+  /* ---------- 4.  Helper: toggle mini alert ---------- */
+  function showAlert(msg, ms = 2500) {
+    if (!alertBox) return;
+    alertBox.textContent = msg;
+    alertBox.classList.add("show");
+    setTimeout(() => alertBox.classList.remove("show"), ms);
+  }
+
+  /* ---------- 5.  Firestore logic ---------- */
+  async function saveEmailIfNew(email) {
+    const docRef  = doc(db, "email", email);   // use email as doc ID
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      // Duplicate – don’t write again
+      return { already: true };
+    }
+
+    await setDoc(docRef, { email, timestamp: serverTimestamp() });
+    return { already: false };
+  }
+
+  /* ---------- 6.  Hook into the existing form ---------- */
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = emailInput.value.trim().toLowerCase();
+    if (!email) { alert("Please enter a valid email address."); return; }
+
+    try {
+      showAlert("Please wait, saving your details…");
+      const { already } = await saveEmailIfNew(email);
+
+      if (already) {
+        showAlert("Confirmed: You're Part of the Vision.", 3500);
+      } else {
+        showAlert("NEAT VIP UNLOCKED", 3500);
+        // here you can fire any additional “new‑subscriber” animations/UI
+      }
+    } catch (err) {
+      console.error("Firestore error →", err);
+      alert("Sorry — couldn’t save your email. Please try again.");
+    }
+  });
+</script>
 
 
-
-<script type="module" src="neatsubscribe.js"></script>
-
-  <script src="scripts.min.js" defer></script>
+  <script src="scripts.js" defer></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
