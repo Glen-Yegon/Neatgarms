@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keep It Neat</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
@@ -615,27 +615,28 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
 window.addEventListener('load', () => {
   const popup     = document.getElementById('subscriptionPopup');
   const logo      = popup.querySelector('.popup-logo');
-  const closeBtn  = document.getElementById('closePopup'); // optional
+  const closeBtn  = document.getElementById('closePopup');
 
-  /* 1️⃣  If the popup was already shown this session, bail out */
   if (sessionStorage.getItem('popupSeen')) return;
 
-  /* 2️⃣  Start downloading the logo AFTER everything else */
-  if (logo && logo.dataset && logo.dataset.src) {
-    logo.src = logo.dataset.src;
-  }
+  /* kick off image download after load */
+  if (logo && logo.dataset.src) logo.src = logo.dataset.src;
 
-  /* 3️⃣  Show the popup 2 s later */
+  /* show popup smoothly 2 s later */
   setTimeout(() => {
-    popup.hidden = false;      // remove the hidden attribute
-    popup.style.display = 'flex';
-    sessionStorage.setItem('popupSeen', 'true');   // mark as shown
+    popup.hidden = false;                 // re‑insert in render tree
+    requestAnimationFrame(() => popup.classList.add('show'));
+    sessionStorage.setItem('popupSeen','true');
   }, 2000);
 
-  /* 4️⃣  Optional: close button just hides the popup */
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => popup.style.display = 'none');
-  }
+  /* hide smoothly when the X is clicked */
+  closeBtn.addEventListener('click', () => {
+    popup.classList.add('hiding');
+    popup.addEventListener('transitionend', () => {
+      popup.hidden = true;                // fully remove from flow
+      popup.classList.remove('show','hiding');
+    }, { once:true });
+  });
 });
 </script>
 
@@ -718,7 +719,7 @@ window.addEventListener('load', () => {
 </script>
 
 
-  <script src="scripts.js" defer></script>
+  <script src="scripts.min.js" defer></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
