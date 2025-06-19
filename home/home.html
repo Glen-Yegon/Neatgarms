@@ -41,7 +41,6 @@
 <section class="hero">
   <video autoplay muted loop playsinline>
     <source src="assets/0404.webm" type="video/mp4" />
-    <source src="assets/1.mp4" type="video.mp4" /> 
     Your browser does not support HTML5 video.
   </video>
 
@@ -902,27 +901,6 @@ links.forEach(link => {
 
   closeBtn.addEventListener('click', () => {
     mobileMenu.style.display = 'none';
-  });
-</script>
-
-<script>
-  window.addEventListener("scroll", () => {
-    const heroText = document.querySelector(".hero-text");
-    const scrollY = window.scrollY;
-    const viewportHeight = window.innerHeight;
-    const screenWidth = window.innerWidth;
-
-    // Only apply shrink on small devices (less than 1024px width)
-    if (screenWidth < 1024) {
-      if (scrollY >= viewportHeight / 10) {
-        heroText.classList.add("shrink");
-      } else {
-        heroText.classList.remove("shrink");
-      }
-    } else {
-      // On large screens, always remove shrink class
-      heroText.classList.remove("shrink");
-    }
   });
 </script>
 

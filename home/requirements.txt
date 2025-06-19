@@ -1,0 +1,20 @@
+<script>
+  window.addEventListener("scroll", () => {
+    const heroText = document.querySelector(".hero-text");
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
+
+    // Only apply shrink on small devices (less than 1024px width)
+    if (screenWidth < 1024) {
+      if (scrollY >= viewportHeight / 10) {
+        heroText.classList.add("shrink");
+      } else {
+        heroText.classList.remove("shrink");
+      }
+    } else {
+      // On large screens, always remove shrink class
+      heroText.classList.remove("shrink");
+    }
+  });
+</script>
