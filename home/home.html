@@ -38,7 +38,13 @@
 
 
 <section class="hero">
-  <video autoplay muted loop playsinline>
+  <video
+    class="hero-video"     
+    muted                   
+    loop                    
+    playsinline             
+    preload="auto"       
+  >
     <source src="assets/0404.mp4" type="video/mp4" />
     Your browser does not support HTML5 video.
   </video>
@@ -52,20 +58,23 @@
   <!-- TOPS -->
   <div class="nav-item">
 <!-- Example for TOPS -->
-<a href="" class="nav-link" data-menu="tops-menu">TOPS</a>
+<a href="" class="nav-link" data-menu="tops-menu">Tees</a>
 
     <div class="side-menu" id="tops-menu">
       <button class="close-btn">&times;</button>
-      <h2 class="menu-title">TOPS</h2>
-      <p class="menu-desc">Explore our wide variety of stylish tops, from tees to hoodies crafted for comfort and fashion.</p>
+      <h2 class="menu-title">Tees</h2>
+<p class="menu-desc">
+Elevate your streetwear game with our latest T-shirt drops — sharp cuts, bold prints, and all-day comfort designed for everyday moves.
+</p>
+
       <div class="dropdown-card">
-        <img src="shoot/c.webp" alt="Top 1" loading="lazy" fetchpriority="low">
-        <p>Collared Shirt</p>
+        <img src="shoot/c.avif" alt="Top 1" loading="lazy" fetchpriority="low">
+        <p>Work Shirt</p>
       <a href="tops.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
       </div>
       <div class="dropdown-card">
-        <img src="shoot/sl.webp" alt="Top 2" loading="lazy" fetchpriority="low">
-        <p>Sleeveless</p>
+        <img src="shoot/sl.avif" alt="Top 2" loading="lazy" fetchpriority="low">
+        <p>Tank Top</p>
         <a href="tops.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
       </div>
     </div>
@@ -77,16 +86,18 @@
     <div class="side-menu" id="bottoms-menu">
       <button class="close-btn">&times;</button>
       <h2 class="menu-title">BOTTOMS</h2>
-      <p class="menu-desc">Choose from our comfy joggers, cargo pants, and stylish skirts to complete your outfit.</p>
+<p class="menu-desc">
+Explore pants crafted for function, form, and flexibility — made to fit your lifestyle and move with purpose.
+</p>
       <!-- Add cards here -->
-             <div class="dropdown-card">
-        <img src="shoot/j4.webp" alt="Top 1" loading="lazy" fetchpriority="low">
-        <p>Jots</p>
+       <div class="dropdown-card">
+        <img src="shoot/j4.avif" alt="Top 1" loading="lazy" fetchpriority="low">
+        <p>Glazed Denim Jots</p>
       <a href="pants.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
       </div>
       <div class="dropdown-card">
-        <img src="shoot/whitep.webp" alt="Top 2" loading="lazy" fetchpriority="low">
-        <p>White Pants</p>
+        <img src="shoot/whitep.avif" alt="Top 2" loading="lazy" fetchpriority="low">
+        <p>Cotton Wide Leg Pants</p>
         <a href="pants.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
       </div>
     </div>
@@ -103,6 +114,24 @@
   </div>
 
 
+  <!-- Gifts for Him/Her -->
+  <div class="nav-item">
+<a href="#glasses" class="nav-link" data-menu="glasses-menu">Gifts</a>
+    <div class="side-menu" id="glasses-menu">
+      <button class="close-btn">&times;</button>
+      <h2 class="menu-title">Gifts</h2>
+<p class="menu-desc">
+Make it memorable with our signature eyewear — bold, stylish frames that turn heads and make the perfect gift.
+</p>
+
+      <!-- Add cards here -->
+             <div class="dropdown-card">
+        <img src="shoot/ef.avif" alt="Top 1" loading="lazy" fetchpriority="low">
+        <p>Everyday Frames</p>
+      <a href="glasses.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
+      </div>
+    </div>
+  </div>
 
 
   <!-- KOOLHEADS -->
@@ -111,10 +140,12 @@
     <div class="side-menu" id="koolheads-menu">
       <button class="close-btn">&times;</button>
       <h2 class="menu-title">KOOLHEADS</h2>
-      <p class="menu-desc">Funky, bold, and confident — the Koolheads collection is made to stand out.</p>
+<p class="menu-desc">
+Crafted for presence. Our clean-cut capes blend simplicity with statement, perfect for layering or standing alone.
+</p>
       <!-- Add cards here -->
       <div class="dropdown-card">
-        <img src="shoot/k3.webp" alt="Top 1"  loading="lazy" fetchpriority="low">
+        <img src="shoot/kool.avif" alt="Top 1"  loading="lazy" fetchpriority="low">
         <p>Koolheads</p>
       <a href="capes.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
       </div>
@@ -160,6 +191,7 @@
       <a href="tops.html" class="mobile-nav-link">Tops</a>
       <a href="pants.html" class="mobile-nav-link">Bottoms</a>
       <a href="#hero-text" class="mobile-nav-link">New</a>
+      <a href="glasses.html" class="mobile-nav-link">Gifts</a>
       <a href="capes.html" class="mobile-nav-link">Koolheads</a>
       <a href="item.html" class="mobile-nav-link">Neat Customs</a>
 
@@ -180,6 +212,7 @@
 <!--Product sect 1-->
 
  <main class="product-grid">
+
 
     <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee"     
      data-description="Crafted from durable cotton fabric with a structured breathable feel. Designed in a clean baby blue finish, it offers a regular fit that balances comfort and style — perfect for everyday utility or layered streetwear looks." 
@@ -211,7 +244,7 @@
     </div>
 
 
- <div class="product-card"  id="t-tee"   data-aos="fade-down" data-aos-delay="200"
+  <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee"     
     data-description="Made from soft, breathable 100% ribbed cotton, the NEAT Black Crop Tee features a lightweight 180 GSM build for all-day comfort. Cut in a boxy cropped silhouette, it’s finished in a classic deep black tone that pairs effortlessly with high-waisted bottoms — a versatile staple for any wardrobe rotation." 
      data-features='["Material: 100% ribbed cotton", "Weight: 180 GSM lightweight fabric", "Color: Deep black", "Fit: Cropped, boxy silhouette", "Neckline: Ribbed crew neck"]' 
      data-sizefit="
@@ -222,20 +255,20 @@ Model Reference: Model is 5'5' (165 cm) wearing size S
      ">
 
       <div class="image-wrapper">
-        <img src="shoot/bcs1.webp" alt="Product Image"  width="800" height="600" loading="eager" fetchpriority="high">
-        <img src="shoot/bci2.webp" alt="Product Image 2"   width="800" height="600" class="hidden-image" loading="eager" fetchpriority="low">
+        <img src="shoot/bcs1.avif" alt="Product Image">
+        <img src="shoot/bci2.avif" alt="Product Image 2" class="hidden-image" loading="lazy">
       </div>
       <h3 class="product-name" >Black Crop Tee</h3>
       <p class="product-price"> Price in Kshs. <br>
-       
+    
         <span class="new-price">2000</span>
       </p>
 
       <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
         <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
-        <button class="size-btn" data-size="L">L</button>
-        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
-        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="L*">L*</button>
+        <button class="size-btn" data-size="2 XL*" style="border-radius: 10px;">2 XL*</button>
+        <button class="size-btn" data-size="XL*">XL*</button>
         <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
 
       </div>
@@ -244,7 +277,7 @@ Model Reference: Model is 5'5' (165 cm) wearing size S
 
 
 
-    <div class="product-card"  id="t-tee"   data-aos="fade-down" data-aos-delay="300"   
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee"     
        data-description="Marble Print Wide-Leg Pants 
        Elevate your wardrobe with these exquisitely designed wide-leg pants, crafted from premium, lightweight satin fabric for a smooth, lustrous finish. The sophisticated silhouette features a high-waisted design with a flowing, wide-leg cut, ensuring a flattering and comfortable fit. Adorned in an intricate marble print in a striking white and black palette, the pants showcase meticulous attention to detail, highlighted by subtle tonal variations and a tailored waistband." 
      data-features='["Material: Heavy Satin", "Feel: Breathable with a smooth touch.", "Color: Marble Print", "Fit: Flowing Wide-leg silhouette ", "Style Use: A statement piece that can be paired with both basics and bolder pieces."]' 
@@ -254,30 +287,29 @@ Unisex sizing: Designed to suit all body types.
 Model Reference: 5’5’ (165cm) Size 30
      ">
 
-      <div class="image-wrapper"  width="800" height="600" loading="eager" fetchpriority="high">
-        <img src="shoot/whitep2.webp" alt="Product Image"  width="800" height="600"  loading="eager" fetchpriority="high">
-        <img src="shoot/whitep.webp" alt="Product Image 2"  width="800" height="600" class="hidden-image" loading="eager" fetchpriority="high">
-        <img src="shoot/whitep4.webp" alt="Product Image 3"  width="800" height="600" class="hidden-image"  loading="lazy" fetchpriority="low">
+      <div class="image-wrapper">
+        <img src="shoot/whitep2.avif" alt="Product Image" loading="eager" fetchpriority="high">
+        <img src="shoot/whitep.avif" alt="Product Image 2" class="hidden-image" loading="eager" fetchpriority="high">
       </div>
       <h3 class="product-name" >Cotton Wide Leg Pants</h3>
       <p class="product-price"> Price in Kshs. <br>
-
+      
         <span class="new-price">3500</span>
       </p>
 
       <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
-        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
-        <button class="size-btn" data-size="L">L</button>
-        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
-        <button class="size-btn" data-size="XL">XL</button>
-        <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
+        <button class="size-btn" data-size="30" style="border-radius: 10px;">30</button>
+        <button class="size-btn" data-size="32">32</button>
+        <button class="size-btn" data-size="34" style="border-radius: 10px;">34</button>
+        <button class="size-btn" data-size="36">36</button>
+        <button class="size-btn" data-size="38" style="border-radius: 10px;">38</button>
 
       </div>
     </div>
 
 
 
-  <div class="product-card"  id="t-tee"   data-aos="fade-down" data-aos-delay="400" 
+   <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee"   
      data-description="Crafted from premium cyan denim, these jorts a glazed finish that gives them a bold, lived-in character. Designed in a cyan washed tone, they offer a baggy fit that delivers both comfort and edge — ideal for styling with oversized tees or cropped outerwear." 
      data-features='["Finish: Glazed texture with a worn-in feel", "Color: Cyan washed", "Fit: Baggy fit with relaxed leg opening", "Style Use: Perfect for casual streetwear or summer layering"]' 
      data-sizefit="Fit: Baggy fit – roomy through the thighs
@@ -287,25 +319,27 @@ Model Reference: 5’5’ (165cm) Size 30
      ">
 
       <div class="image-wrapper">
-        <img src="shoot/j6.webp" alt="Product Image"  width="800" height="600"  loading="eager" fetchpriority="high">
-        <img src="shoot/j3.webp" alt="Product Image 2" width="800" height="600" class="hidden-image" loading="lazy" fetchpriority="low">
-        <img src="shoot/j4.webp" alt="Product Image 3"  width="800" height="600" class="hidden-image" loading="lazy" fetchpriority="low">
+        <img src="shoot/j6.avif" alt="Product Image" loading="eager" fetchpriority="high">
+        <img src="shoot/j3.avif" alt="Product Image 2" class="hidden-image" loading="eager" fetchpriority="high">
+        <img src="shoot/j5.avif" alt="Product Image 3" class="hidden-image" loading="lazy" fetchpriority="low">
+        <img src="shoot/j4.avif" alt="Product Image 3" class="hidden-image" loading="lazy" fetchpriority="low">
       </div>
       <h3 class="product-name" >Glazed Denim Jorts</h3>
       <p class="product-price"> Price in Kshs. <br>
-    
+        
         <span class="new-price">3000</span>
       </p>
 
       <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
-        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
-        <button class="size-btn" data-size="L">L</button>
-        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
-        <button class="size-btn" data-size="XL">XL</button>
-        <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
+        <button class="size-btn" data-size="30" style="border-radius: 10px;">30</button>
+        <button class="size-btn" data-size="32">32</button>
+        <button class="size-btn" data-size="34" style="border-radius: 10px;">34</button>
+        <button class="size-btn" data-size="36">36</button>
+        <button class="size-btn" data-size="38" style="border-radius: 10px;">38</button>
 
       </div>
     </div>
+
 
 
 
@@ -352,19 +386,19 @@ Model Reference: Model is 5’9” (175 cm) wearing size M
      ">
 
       <div class="image-wrapper">
-        <img src="shoot/sl.webp" alt="Product Image"  width="800" height="600"  loading="eager" fetchpriority="high">
-        <img src="shoot/sl1.webp" alt="Product Image 2"  width="800" height="600" class="hidden-image" loading="lazy" fetchpriority="low">
+        <img src="shoot/sl.avif" alt="Product Image">
+        <img src="shoot/sl1.avif" alt="Product Image 2" class="hidden-image" loading="lazy">
       </div>
       <h3 class="product-name" >Tank Top</h3>
       <p class="product-price"> Price in Kshs. <br>
-    
+      
         <span class="new-price">2000</span>
       </p>
 
       <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
-        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="S*" style="border-radius: 10px;">S*</button>
         <button class="size-btn" data-size="L">L</button>
-        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
+        <button class="size-btn" data-size="2 XL*" style="border-radius: 10px;">2 XL*</button>
         <button class="size-btn" data-size="XL">XL</button>
         <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
 
@@ -385,20 +419,20 @@ Model Reference: Model is 5'5' (165 cm) wearing size S
      ">
 
       <div class="image-wrapper">
-        <img src="shoot/wci1.webp" alt="Product Image"  width="800" height="600" loading="eager" fetchpriority="high">
-        <img src="shoot/wci3.webp" alt="Product Image 3"   width="800" height="600" class="hidden-image" loading="lazy" fetchpriority="low">
+        <img src="shoot/wci1.avif" alt="Product Image" loading="eager" fetchpriority="high">
+        <img src="shoot/wci3.avif" alt="Product Image 3" class="hidden-image" loading="lazy" loading="eager" fetchpriority="high">
       </div>
       <h3 class="product-name" >White Crop Tee</h3>
       <p class="product-price"> Price in Kshs. <br>
-    
+
         <span class="new-price">2000</span>
       </p>
 
       <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
         <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
-        <button class="size-btn" data-size="L">L</button>
-        <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
-        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn" data-size="L*">L*</button>
+        <button class="size-btn" data-size="2 XL*" style="border-radius: 10px;">2 XL*</button>
+        <button class="size-btn" data-size="XL*">XL*</button>
         <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
 
       </div>
@@ -406,14 +440,14 @@ Model Reference: Model is 5'5' (165 cm) wearing size S
     </div>
 
     
-        <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="fid22"
+   <a href="capes.html" style="text-decoration: none;"> <div  data-aos="fade-up" data-aos-delay="400" id="fid22"
          data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
      data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
      data-sizefit="Relaxed fit with structured drape. Fits true to size."
     >
       <div class="image-wrapper">
-        <img src="shoot/k43.webp" alt="Product Image" width="800" height="600" loading="eager" fetchpriority="high">
-        <img src="shoot/k1.webp" alt="Product Image 2"  width="800" height="600" class="hidden-image"  loading="lazy" fetchpriority="low">
+        <img src="shoot/k43.avif" alt="Product Image" width="800" height="600" loading="eager" fetchpriority="high">
+        <img src="shoot/kool.avif" alt="Product Image 2"  width="800" height="600" class="hidden-image"  loading="lazy" fetchpriority="low">
       </div>
       <h3 class="product-name">Koolheads</h3>
       <p class="product-price">  Price in Kshs. <br>
@@ -425,7 +459,7 @@ Model Reference: Model is 5'5' (165 cm) wearing size S
       </div>
 
     </div>
-
+</a>  
 
 
     <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee" 
@@ -438,21 +472,22 @@ Unisex Sizing: Designed to flatter all body types
 Model Reference: Model is 5’11” (180 cm) wearing size L
      ">
       <div class="image-wrapper">
-        <img src="shoot/breezy13 (2).webp"  width="800" height="600" alt="Product Image" loading="eager" fetchpriority="high">
-        <img src="shoot/breezy13 (2).webp"  width="800" height="600" alt="Product Image 2" class="hidden-image" loading="lazy" fetchpriority="low">
+        <img src="shoot/breezy10.avif" alt="Product Image"  loading="eager" fetchpriority="high">
+        <img src="shoot/breezy (2).avif" alt="Product Image 2" class="hidden-image"  loading="eager" fetchpriority="high">
+        <img src="shoot/breexy.avif" alt="Product Image 3" class="hidden-image" loading="lazy" fetchpriority="low">
       </div>
       <h3 class="product-name" >Breezy Tee</h3>
       <p class="product-price"> Price in Kshs. <br>
-
+ 
         <span class="new-price">2000</span>
       </p>
 
       <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
-        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+        <button class="size-btn" data-size="S*" style="border-radius: 10px;">S*</button>
         <button class="size-btn" data-size="L">L</button>
         <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
         <button class="size-btn" data-size="XL">XL</button>
-        <button class="size-btn" data-size="M" style="border-radius: 10px;">M</button>
+        <button class="size-btn" data-size="M*" style="border-radius: 10px;">M*</button>
 
       </div>
 
@@ -583,6 +618,19 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
 
 <div class="custom-alert" id="customAlert">Please wait, saving your details...</div>
 
+<script>
+  // Wait until the DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  const vid = document.querySelector('.hero-video');
+
+  // 1) Make sure the first frame is available but keep it paused
+  vid.addEventListener('loadeddata', () => vid.pause());
+
+  // 2) When the CSS animation finishes (exactly 2 s), start playback
+  vid.addEventListener('animationend', () => vid.play());
+});
+
+</script>
 
 
 <script>
@@ -901,6 +949,37 @@ links.forEach(link => {
     mobileMenu.style.display = 'none';
   });
 </script>
+
+<script>
+    document.querySelectorAll('#fid22').forEach((card) => {
+  const images = card.querySelectorAll('.image-wrapper img');
+
+  // Show only the first image by default
+  images.forEach((img, index) => {
+    img.style.opacity = index === 0 ? '1' : '0';
+    img.style.zIndex = index === 0 ? '1' : '0';
+  });
+
+  card.addEventListener('mouseenter', () => {
+    if (images.length > 1) {
+      images[0].style.opacity = '0';
+      images[1].style.opacity = '1';
+      images[0].style.zIndex = '0';
+      images[1].style.zIndex = '1';
+    }
+  });
+
+  card.addEventListener('mouseleave', () => {
+    if (images.length > 1) {
+      images[0].style.opacity = '1';
+      images[1].style.opacity = '0';
+      images[0].style.zIndex = '1';
+      images[1].style.zIndex = '0';
+    }
+  });
+});
+</script>
+
 
 
 <script>

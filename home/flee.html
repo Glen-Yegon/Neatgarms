@@ -133,24 +133,35 @@
   <main class="product-grid" data-aos="fade-up" data-aos-delay="400">
     <!-- Example Product Card -->
 
-          <div class="product-card" data-aos="fade-up" data-aos-delay="400"
-               data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
+
+        <div class="product-card" data-aos="fade-up" data-aos-delay="400"
+             data-description="A heavyweight 340 GSM cotton tee with chain stitch detailing for our monogram and an emblem print. A refined take on our signature silhouette with improved durability and structure." 
      data-features='["340 GSM heavyweight cotton", "Chain stitch monogram", "Emblem print", "Improved structure", "Signature silhouette"]' 
      data-sizefit="Relaxed fit with structured drape. Fits true to size."
-          >
-      <div class="image-wrapper">
-        <img src="mains/purple.jpg" alt="Product Image">
-        <img src="mains/purple 0.1.jpg" alt="Product Image 2" class="hidden-image">
-        <img src="mains/purple1.jpg" alt="Product Image 3" class="hidden-image">
-        <img src="mains/purple0.22.jpg" alt="Product Image 3" class="hidden-image">
-        <img src="mains/purple2.jpg" alt="Product Image 2" class="hidden-image">
+        >
+        <div class="image-wrapper">
+          <img src="mains/flee1.jpg" alt="Product Image"  loading="eager" fetchpriority="high">
+          <img src="mains/flee.jpg" alt="Product Image 2" class="hidden-image"  loading="eager" fetchpriority="high">
+          <img src="mains/flee 3.jpg" alt="Product Image 3" class="hidden-image" loading="lazy" fetchpriority="low">
+          <img src="mains/fleeeeee.jpg" alt="Product Image 2" class="hidden-image" loading="lazy" fetchpriority="low">
+        </div>
+        <h3 class="product-name">Fleece</h3>
+        <p class="product-price"> Price in Kshs. <br>
+         
+          <span class="new-price">2800</span>
+        </p>
+
+        
+  <!-- Sold Out Badge -->
+  <div class="sold-out-badge">Sold Out</div>
+        
+      <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
+        <button class="size-btn" data-size="2 XL*" style="border-radius: 10px;">2 XL*</button>
       </div>
-      <h3 class="product-name">PURPLE PANTS</h3>
-      <p class="product-price">  Price in Kshs. <br>
-        <span class="old-price">2700</span>
-        <span class="new-price">1700</span>
-      </p>
-    </div>
+      <div class="hidden-buttons color-buttons">
+        <button class="color-btn" data-color="Grey">Grey</button>
+      </div>
+  </div>
 
   </main>
 

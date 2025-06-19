@@ -35,12 +35,11 @@ body.fade-out {
   opacity: 0;
 }
 
-
-
   /* Navbar */
   .navbar {
     display: flex;
     justify-content: space-between;
+    text-align: center;
     align-items: center;
     background: linear-gradient(to bottom, #333, #8a9381);
     color: #ae866a;
@@ -92,6 +91,76 @@ body.fade-out {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
   }
+
+  /* ========== Responsive Adjustments ========== */
+
+/* Small screens (phones) */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 8px 12px;
+  }
+
+  .navbar .logo {
+    max-height: 34px;
+    margin-left: 30px;
+    margin-bottom: 0px;
+  }
+
+  .navbar .icon-btn,
+  .cart-btn,
+  .search-btn {
+    font-size: 1.25rem;
+    padding: 6px;
+  }
+
+  .cart-btn {
+    margin: 5px 0;
+  }
+
+  .search-btn {
+    margin: 5px 0;
+  }
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 601px) and (max-width: 900px) {
+  .navbar {
+    padding: 10px 16px;
+  }
+
+  .navbar .logo {
+    max-height: 40px;
+    margin-left: 25px;
+  }
+
+  .navbar .icon-btn,
+  .cart-btn,
+  .search-btn {
+    font-size: 1.4rem;
+    padding: 8px;
+  }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 901px) {
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .navbar .logo {
+    max-height: 50px;
+  }
+
+  .navbar .icon-btn,
+  .cart-btn,
+  .search-btn {
+    font-size: 1.5rem;
+    padding: 10px;
+  }
+}
+
 
 /* From Uiverse.io by LeonKohli */ 
 .ui-input-container {
