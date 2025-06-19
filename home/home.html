@@ -181,8 +181,7 @@
 
  <main class="product-grid">
 
-    <!-- Example Product Card -->
-     <div class="product-card"  id="t-tee" data-aos="fade-down" data-aos-delay="100"
+    <div class="product-card" data-aos="fade-up" data-aos-delay="400" id="t-tee"     
      data-description="Crafted from durable cotton fabric with a structured breathable feel. Designed in a clean baby blue finish, it offers a regular fit that balances comfort and style — perfect for everyday utility or layered streetwear looks." 
      data-features='["Material: Durable cotton fabric", "Feel: Structured yet breathable", "Color: Clean baby blue finish", "Fit: Regular fit for balanced comfort and style", "Style Use: Suitable for everyday utility or layered streetwear looks"]' 
      data-sizefit="Fit: Regular fit – slightly relaxed for ease of movement
@@ -191,18 +190,18 @@
      Model Reference: Model is 5'9' (175 cm) wearing size M">
 
       <div class="image-wrapper">
-        <img src="shoot/c.webp" alt="Product Image"  width="800" height="600" loading="eager" fetchpriority="high">
-        <img src="shoot/c2.webp"  width="800" height="600" alt="Product Image 2" class="hidden-image"  loading="eager" fetchpriority="high">
-        <img src="shoot/c2.webp"  width="800" height="600" alt="Product Image 3" class="hidden-image"  loading="lazy" fetchpriority="low">
+        <img src="shoot/c.avif" alt="Product Image" loading="eager" fetchpriority="high">
+        <img src="shoot/collaarrreeeddd.avif" alt="Product Image 2" class="hidden-image" loading="eager" fetchpriority="high">
+        <img src="shoot/coollaaarrreeddd (1).avif" alt="Product Image 3" class="hidden-image" loading="lazy" fetchpriority="low">
       </div>
       <h3 class="product-name" >Work Shirt</h3>
       <p class="product-price"> Price in Kshs. <br>
-       
-        <span class="new-price">10</span>
+
+        <span class="new-price">2500</span>
       </p>
 
       <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
-        <button class="size-btn" data-size="S" style="border-radius: 10px;">S</button>
+     <button class="size-btn" data-size="S*">S</button>
         <button class="size-btn" data-size="L">L</button>
         <button class="size-btn" data-size="2 XL" style="border-radius: 10px;">2 XL</button>
         <button class="size-btn" data-size="XL">XL</button>
@@ -934,38 +933,52 @@ links.forEach(link => {
 });
 
 
-
-document.querySelectorAll('.product-card').forEach((card) => {
+document.querySelectorAll('.product-card').forEach(card => {
   card.addEventListener('click', () => {
-    const images = Array.from(card.querySelectorAll('.image-wrapper img')).map(img => img.src);
-    const status = card.querySelector('.status') ? card.querySelector('.status').innerText : null;
-    const name = card.querySelector('.product-name').innerText;
-    const oldPrice = card.querySelector('.old-price') ? card.querySelector('.old-price').innerText : null;
-    const newPrice = card.querySelector('.new-price') ? card.querySelector('.new-price').innerText : null;
-    const sizes = Array.from(card.querySelectorAll('.size-buttons .size-btn')).map(button => button.dataset.size);
-    const colors = Array.from(card.querySelectorAll('.color-buttons .color-btn')).map(button => button.dataset.color);
 
-    // NEW: Add extra descriptive info
-    const description = card.dataset.description || "";
-    const features = card.dataset.features ? JSON.parse(card.dataset.features) : [];
-    const sizeFit = card.dataset.sizefit || "";
+    /* ---------- unchanged fields ---------- */
+    const images    = Array.from(card.querySelectorAll('.image-wrapper img')).map(i => i.src);
+    const status    = card.querySelector('.status')?.innerText ?? null;
+    const name      = card.querySelector('.product-name').innerText;
+    const oldPrice  = card.querySelector('.old-price')?.innerText ?? null;
+    const newPrice  = card.querySelector('.new-price')?.innerText ?? null;
+    const colors    = Array.from(card.querySelectorAll('.color-buttons .color-btn'))
+                           .map(btn => btn.dataset.color);
 
+    /* ---------- ⭐ NEW logic for sizes ---------- */
+    const rawSizes   = Array.from(card.querySelectorAll('.size-buttons .size-btn'))
+                            .map(btn => btn.dataset.size);        // e.g. ["S*", "L", "2 XL*"]
+
+    const sizes      = rawSizes.map(s => s.replace('*', '').trim());         // → ["S", "L", "2 XL"]
+    const outOfStock = rawSizes.filter(s => s.includes('*'))
+                               .map(s => s.replace('*', '').trim());         // → ["S", "2 XL"]
+
+    /* ---------- extra descriptive info (unchanged) ---------- */
+    const description = card.dataset.description || '';
+    const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
+    const sizeFit     = card.dataset.sizefit || '';
+
+    /* ---------- package & ship ---------- */
     const productData = {
       images,
       name,
       oldPrice,
       newPrice,
-      sizes,
+      sizes,          // now “clean” sizes
+      outOfStock,     // ✖ sold‑out sizes
       colors,
-      description,  // new
-      features,     // new
-      sizeFit       // new
+      description,
+      features,
+      sizeFit
     };
+
+    console.log('🛈 productData about to store →', productData);
 
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
     window.location.href = 'product.html';
   });
 });
+
 
 
 

@@ -449,6 +449,7 @@ body.fade-out {
   transition: box-shadow 1.5s ease-in-out;
 }
 
+
 .sold-out-badge {
   position: absolute;
   top: 10px;
@@ -1056,3 +1057,4 @@ body.fade-out {
     opacity: 1;
   }
 }
+

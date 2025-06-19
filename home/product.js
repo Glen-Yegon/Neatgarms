@@ -62,24 +62,39 @@ document.addEventListener('DOMContentLoaded', () => {
 let selectedColor = null;
 
 
-// Dynamically create size buttons (if sizes exist in productData)
-if (productData.sizes && productData.sizes.length > 0) {
+/* ---- product.js ---- */
+if (productData.sizes?.length) {
   const sizeSelection = document.querySelector('.size-selection');
-  sizeSelection.innerHTML = `<h4>Available Sizes / Style:</h4>` +
-    productData.sizes.map(size => 
-      `<button class="size-btn" data-size="${size}">${size}</button>`
-    ).join('');
 
-      // Add click listeners AFTER rendering
-  document.querySelectorAll('.size-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
+  sizeSelection.innerHTML =
+    `<h4>Available:</h4>` +
+    productData.sizes.map(size => {
+      const soldOut = productData.outOfStock?.includes(size);
+
+      return `
+        <button class="size-btn${soldOut ? ' unavailable' : ''}"
+                data-size="${size}"
+                ${soldOut ? 'aria-disabled="true" data-soldout="true"' : ''}>
+          ${size}
+        </button>`;
+    }).join('');
+
+  /* live sizes: select */
+  document.querySelectorAll('.size-btn:not(.unavailable)')
+    .forEach(btn => btn.addEventListener('click', function () {
       document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
       this.classList.add('selected');
-      const selectedSize = this.getAttribute('data-size');
-      console.log('Selected Size:', selectedSize);
-    });
-  });
+      console.log('Selected Size:', this.dataset.size);
+    }));
+
+  /* sold‑out sizes: politely alert */
+  document.querySelectorAll('.size-btn.unavailable')
+    .forEach(btn => btn.addEventListener('click', () => {
+      alert('Sorry, that size is currently sold out.');
+      /* If you have a toast system, trigger it here instead of alert() */
+    }));
 }
+
 
 
 
@@ -375,32 +390,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-document.querySelectorAll('.product-card').forEach((card) => {
+
+document.querySelectorAll('.product-card').forEach(card => {
   card.addEventListener('click', () => {
-    const images = Array.from(card.querySelectorAll('.image-wrapper img')).map(img => img.src);
-    const status = card.querySelector('.status') ? card.querySelector('.status').innerText : null;
-    const name = card.querySelector('.product-name').innerText;
-    const oldPrice = card.querySelector('.old-price') ? card.querySelector('.old-price').innerText : null;
-    const newPrice = card.querySelector('.new-price') ? card.querySelector('.new-price').innerText : null;
-    const sizes = Array.from(card.querySelectorAll('.size-buttons .size-btn')).map(button => button.dataset.size);
-    const colors = Array.from(card.querySelectorAll('.color-buttons .color-btn')).map(button => button.dataset.color);
 
-    // NEW: Add extra descriptive info
-    const description = card.dataset.description || "";
-    const features = card.dataset.features ? JSON.parse(card.dataset.features) : [];
-    const sizeFit = card.dataset.sizefit || "";
+    /* ---------- unchanged fields ---------- */
+    const images    = Array.from(card.querySelectorAll('.image-wrapper img')).map(i => i.src);
+    const status    = card.querySelector('.status')?.innerText ?? null;
+    const name      = card.querySelector('.product-name').innerText;
+    const oldPrice  = card.querySelector('.old-price')?.innerText ?? null;
+    const newPrice  = card.querySelector('.new-price')?.innerText ?? null;
+    const colors    = Array.from(card.querySelectorAll('.color-buttons .color-btn'))
+                           .map(btn => btn.dataset.color);
 
+    /* ---------- ⭐ NEW logic for sizes ---------- */
+    const rawSizes   = Array.from(card.querySelectorAll('.size-buttons .size-btn'))
+                            .map(btn => btn.dataset.size);        // e.g. ["S*", "L", "2 XL*"]
+
+    const sizes      = rawSizes.map(s => s.replace('*', '').trim());         // → ["S", "L", "2 XL"]
+    const outOfStock = rawSizes.filter(s => s.includes('*'))
+                               .map(s => s.replace('*', '').trim());         // → ["S", "2 XL"]
+
+    /* ---------- extra descriptive info (unchanged) ---------- */
+    const description = card.dataset.description || '';
+    const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
+    const sizeFit     = card.dataset.sizefit || '';
+
+    /* ---------- package & ship ---------- */
     const productData = {
       images,
       name,
       oldPrice,
       newPrice,
-      sizes,
+      sizes,          // now “clean” sizes
+      outOfStock,     // ✖ sold‑out sizes
       colors,
-      description,  // new
-      features,     // new
-      sizeFit       // new
+      description,
+      features,
+      sizeFit
     };
+
+    console.log('🛈 productData about to store →', productData);
 
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
     window.location.href = 'product.html';
