@@ -36,15 +36,24 @@ body {
 .hero {
   position: relative;
   height: 100vh;
+
+  /* image + initial zoom‑in state */
   background: url('mains/playboy2.jpg') center center/cover no-repeat;
+  background-size: 120%;                       /* start zoomed */
+  animation: heroZoom 4s cubic-bezier(.25,.1,.25,1) forwards;
+
   display: flex;
-  flex-direction: column; /* stack navbar + content vertically */
-  /* Center hero content vertically below navbar */
-  /* We’ll handle spacing with padding */
+  flex-direction: column;
   color: white;
   text-align: center;
 }
 
+@keyframes heroZoom {
+  /* animate down to the normal fit (100 %) */
+  to { background-size: 100%; }
+}
+
+/* dark overlay layer */
 .hero::before {
   content: "";
   position: absolute;
@@ -52,6 +61,7 @@ body {
   background: rgba(0, 0, 0, 0.5);
   z-index: 0;
 }
+
 
 .navbar {
   position: fixed !important;

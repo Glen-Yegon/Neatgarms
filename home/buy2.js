@@ -311,7 +311,7 @@ observer.observe(shippingFeeElement, {
     "South B": 250,
     "South C": 250,
     "Upper Hill": 250,
-    "Karen": 600,
+    "Karen": 1,
     "Rongai Tuskeys": 760,
     "JKIA": 660,
     "Syokimau": 720,
