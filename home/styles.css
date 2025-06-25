@@ -85,7 +85,7 @@ body.fade-out {
 
   /* ⬇️ Start zoomed in */
   transform: scale(1.15);
-  animation: zoomOutSnap 2s ease-out forwards;
+  animation: zoomOutSnap 3s ease-out forwards;
 }
 
 /* 🔁 Keyframes: Hold zoom, then snap to normal */
@@ -311,7 +311,7 @@ body.fade-out {
 
 .hero-text {
   font-family: 'Dream Avenue', sans-serif;
-  position: fixed;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -917,7 +917,7 @@ body.fade-out {
 /* Content */
 .promo-content2 {
   max-width: 600px;
-  z-index: 1000;
+  z-index: 1;
   text-align: center;
 }
 
@@ -926,7 +926,6 @@ body.fade-out {
   font-family: 'Dream Avenue', sans-serif;
   margin-bottom: 20px;
   color: #8a9381;
-  z-index: 1;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
