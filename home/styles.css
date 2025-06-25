@@ -142,7 +142,13 @@ body.fade-out {
 
 
 #navbar.sticky {
-  background-color: transparent !important;
+  /* Glassy background */
+  background-color: rgba(0, 0, 0, 0.4);           /* semi-transparent */
+  backdrop-filter: blur(10px);                   /* blur behind */
+  -webkit-backdrop-filter: blur(10px);           /* Safari support */
+
+  /* Smooth transitions */
+  transition: background-color 0.6s ease, box-shadow 0.6s ease;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
