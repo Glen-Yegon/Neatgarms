@@ -38,18 +38,8 @@
 
 <section class="hero">
 
-  <video
-    class="hero-video"  
-    muted               
-    loop    
-    autoplay               
-    playsinline         
-    preload="auto"         
-  >
-    <source src="assets/0404.mp4" type="video/mp4" />
-    Your browser does not support HTML5 video.
-    <img src="shoot/lp12(main).webp" alt="">
-  </video>
+<img src="shoot/hero sect.avif" alt="Hero Background" class="hero-image">
+
 
   <nav class="navbar" id="navbar">
     <div class="logo">
@@ -619,21 +609,6 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
 </div>
 
 <div class="custom-alert" id="customAlert">Please wait, saving your details...</div>
-
-<script>
-  // Wait until the DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  const vid = document.querySelector('.hero-video');
-
-  // 1) Make sure the first frame is available but keep it paused
-  vid.addEventListener('loadeddata', () => vid.pause());
-
-  // 2) When the CSS animation finishes (exactly 2 s), start playback
-  vid.addEventListener('animationend', () => vid.play());
-});
-
-</script>
-
 
 <script>
 window.addEventListener('load', () => {
