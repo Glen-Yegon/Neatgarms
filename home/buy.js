@@ -99,10 +99,6 @@ observer.observe(shippingFeeElement, {
 });
 
 
-
-
-
-
  const cityInput = document.getElementById('delivery-city');
   const nairobiAreasDiv = document.getElementById('nairobi-areas');
   const nairobiSubareaSelect = document.getElementById('nairobi-subarea');
@@ -110,7 +106,7 @@ observer.observe(shippingFeeElement, {
 
   const cityFees = {
     Nakuru: 500,
-    Kisumu: 800,
+    Kisumu: 600,
     Machakos: 400,
     Naivasha: 450,
     Nyeri: 500,
@@ -118,11 +114,19 @@ observer.observe(shippingFeeElement, {
     Embu: 500,
     Narok: 500,
     Meru: 600,
-    Kakamega: 800,
-    Kitale: 800,
-    Eldoret: 800,
-    Kericho: 800,
-    Mombasa: 800,
+    Kakamega: 600,
+    Kitale: 600,
+    Eldoret: 600,
+    Kericho: 600,
+    Mombasa: 600,
+    Kampala: 1500,
+    Jinja: 1500,
+    Entebe: 1500,
+    Arusha: 2000,
+    DaresSalaam: 2000,
+    Dodoma: 2000,
+    Kigali: 2000,
+    Bujumbura: 2000,
   };
 
   const nairobiFees = {
@@ -135,9 +139,11 @@ observer.observe(shippingFeeElement, {
     "South C": 250,
     "Upper Hill": 250,
     "Karen": 1,
-    "Rongai Tuskeys": 760,
+    "Rongai Tuskeys": 560,
+    "Dagoreti North": 1,
+    "Dagoreti South": 1,
     "JKIA": 660,
-    "Syokimau": 720,
+    "Syokimau": 520,
     "Ruaka (reference)": 700,
   };
 

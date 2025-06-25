@@ -85,15 +85,24 @@ body.fade-out {
 
   /* ⬇️ Start zoomed in */
   transform: scale(1.15);
-  animation: zoomOutSnap 3s ease-out forwards;
+  animation: zoomOutSmooth 3s ease-out forwards;
 }
 
-/* 🔁 Keyframes: Hold zoom, then snap to normal */
-@keyframes zoomOutSnap {
+/* Smooth and slow zoom-out */
+@keyframes zoomOutSmooth {
   0%   { transform: scale(1.15); }
-  85%  { transform: scale(1.15); }  /* Hold zoomed for ~1.7s */
-  100% { transform: scale(1); }     /* Snap back */
+  100% { transform: scale(1); }
 }
+
+/* Show/hide based on screen size */
+.desktop-only { display: block; }
+.mobile-only  { display: none; }
+
+@media (max-width: 768px) {
+  .desktop-only { display: none; }
+  .mobile-only  { display: block; }
+}
+
 
 
 
@@ -108,7 +117,29 @@ body.fade-out {
   background-color: transparent !important; /* start transparent */
   z-index: 1000 !important;
   transition: background-color 0.6s ease, box-shadow 0.6s ease;
+
+  transform: translateY(-100%);
+  opacity: 0;
+  animation: navbarSlideDown 2.5s ease-out forwards;
 }
+
+
+@keyframes navbarSlideDown {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #navbar {
+    animation: none;
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
 
 #navbar.sticky {
   background-color: white !important;
@@ -326,20 +357,6 @@ body.fade-out {
   pointer-events: none;
 }
 
-/* Shrinks and centers inside the navbar */
-.hero-text.shrink {
-  font-size: 2rem;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: black;
-  background-color: transparent;
-  padding: 0.3rem 1rem;
-  border-radius: 8px;
-  text-shadow: none;
-  z-index: 10000;
-  pointer-events: auto;
-}
 
 /* Large devices: make shrink relative and push content */
 @media (min-width: 1024px) {
@@ -356,12 +373,6 @@ body.fade-out {
 
 /* Optional: Small screens keep fixed */
 @media (max-width: 468px) {
-  .hero-text.shrink {
-    position: fixed;
-    top: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
     .hero-text {
     font-size: clamp(7rem, 30vw, 350px);
     top: 70%;
