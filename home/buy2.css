@@ -17,6 +17,10 @@
   body{
     background: linear-gradient(to left, #ddd, #8a9381);
   }
+
+    html{
+    scroll-behavior: auto !important;
+  }
   
   /* Navbar styling */
   .navbar {

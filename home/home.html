@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keep It Neat</title>
-  <link rel="stylesheet" href="styles.min.css">
+  <link rel="stylesheet" href="styles.css">
   <link
   rel="preload"
   href="fonts/DreamAvenue.woff2"
@@ -507,7 +507,7 @@ Model Reference: Model is 5’11” (180 cm) wearing size L
   <div class="promo-content2" data-aos="fade-down" data-aos-delay="400">
     <h1>Collection</h1>
     <p>001 of Nun </p>
-    <a href="/shop" class="shop-btn2">Shop Now →</a>
+    <a href="main.html" class="shop-btn2">Shop Now →</a>
   </div>
 </section>
 
@@ -1181,6 +1181,28 @@ requestAnimationFrame(() => {
   });
 </script>
 
+
+<!-- Include Lenis (CDN or npm) -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+
+ <script>
+const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+const lenis = new Lenis({
+  duration: isTouch ? 2.8 : 1.6, // smoother on phones, faster on desktop
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+  smoothTouch: true
+});
+
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  </script>
 
 </body>
 </html>

@@ -17,6 +17,10 @@
     background: linear-gradient(to left, #ddd, #8a9381);
     overflow-x: hidden;
   }
+
+    html{
+    scroll-behavior: auto !important;
+  }
   
   /* Hide the scrollbar for a clean look */
 body::-webkit-scrollbar {

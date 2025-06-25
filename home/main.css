@@ -7,9 +7,6 @@
   font-display: swap;
 }
 
-
-
-
 * {
     margin: 0;
     padding: 0;
@@ -33,6 +30,9 @@ body {
 /* Fade out class for step 1 */
 body.fade-out {
   opacity: 0;
+}
+html{
+  scroll-behavior: auto !important;
 }
 
   /* Navbar */
@@ -58,6 +58,11 @@ body.fade-out {
   .navbar .logo {
     max-height: 50px;
     border-radius: 20px;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .navbar .logo:hover{
+      transform: rotate(360deg);
   }
 
   .search-btn:hover{

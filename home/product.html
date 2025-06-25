@@ -15,7 +15,7 @@
 <body>
 
   <div id="page-transition">
-  <div class="logo-wrapper">
+   <div class="logo-wrapper">
     <img src="mains/logo2.png" alt="Logo">
   </div>
 </div>
@@ -27,7 +27,7 @@
       <button id="back-button" class="back-btn"> Back</button>
       </div>
       <div class="nav-center">
-        <img src="mains/logo.jpg" alt="Company Logo" class="logo" data-aos="fade-up" data-aos-delay="400">
+      <a href="home.html"><img src="mains/logo.jpg" alt="Company Logo" class="logo" data-aos="fade-up" data-aos-delay="400"></a>
       </div>
       <div class="nav-right">
         <a href="cart.html" class="icon-btn cart-btn"> <i class="fas fa-shopping-cart cart-icon"></i> </a>
@@ -1061,7 +1061,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+<!-- Include Lenis (CDN or npm) -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
 
+ <script>
+const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+const lenis = new Lenis({
+  duration: isTouch ? 2.8 : 1.6, // smoother on phones, faster on desktop
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+  smoothTouch: true
+});
+
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  </script>
 
 </body>
 </html>

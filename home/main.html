@@ -20,7 +20,7 @@
 
   <!-- Transition overlay -->
 <div id="page-transition">
-  <div class="logo-wrapper">
+ <div class="logo-wrapper">
     <img src="mains/logo2.png" alt="Logo">
   </div>
 </div>
@@ -542,8 +542,8 @@ Unisex Sizing: Designed to flatter all body types
 Model Reference: Model is 5’11” (180 cm) wearing size L
      ">
       <div class="image-wrapper">
-        <img src="mains/kendfront.jpg" alt="Product Image">
-        <img src="mains/kendback.jpg" alt="Product Image 2" class="hidden-image" loading="lazy">
+        <img src="shoot/kgreen (2).webp" alt="Product Image">
+        <img src="shoot/kgreen.webp" alt="Product Image 2" class="hidden-image" loading="lazy">
       </div>
       <h3 class="product-name" >KDot</h3>
       <p class="product-price"> Price in Kshs. <br>
@@ -752,6 +752,26 @@ requestAnimationFrame(() => {
     });
   </script>
 
+<!-- Include Lenis (CDN or npm) -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
 
+ <script>
+const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+const lenis = new Lenis({
+  duration: isTouch ? 2.8 : 1.6, // smoother on phones, faster on desktop
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+  smoothTouch: true
+});
+
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  </script>
 
 </body>

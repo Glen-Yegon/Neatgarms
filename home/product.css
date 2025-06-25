@@ -20,6 +20,10 @@ body, html {
     overflow-x: hidden;
   }
 
+  html{
+    scroll-behavior: auto !important;
+  }
+
   /* Menu styling (Initially hidden) */
 .menu {
   display: none;
@@ -115,6 +119,11 @@ body, html {
     max-height: 50px;
     border-radius: 20px;
     border: 1px solid #ae866a;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .navbar .logo:hover{
+      transform: rotate(360deg);
   }
 
   .cart-btn {

@@ -28,7 +28,7 @@
         <button id="menu-btn" class="icon-btn">&#9776;</button>
       </div>
       <div class="nav-center">
-        <img src="mains/logo.jpg" alt="Company Logo" class="logo" data-aos="fade-up" data-aos-delay="400">
+      <a href="home.html"><img src="mains/logo.jpg" alt="Company Logo" class="logo" data-aos="fade-up" data-aos-delay="400"></a>
       </div>
       <div class="nav-right">
         <a href="cart.html" class="icon-btn cart-btn">&#128722;</a>
@@ -186,7 +186,27 @@
 </script>
 
 
+<!-- Include Lenis (CDN or npm) -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
 
+ <script>
+const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+const lenis = new Lenis({
+  duration: isTouch ? 2.8 : 1.6, // smoother on phones, faster on desktop
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+  smoothTouch: true
+});
+
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  </script>
 
 
 <script>

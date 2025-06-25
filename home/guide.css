@@ -41,6 +41,11 @@
     border-radius: 20px;
     border-color: #8A9381;
     border-style: double;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .navbar .logo:hover{
+      transform: rotate(360deg);
   }
   
   /* Responsive Adjustments */
