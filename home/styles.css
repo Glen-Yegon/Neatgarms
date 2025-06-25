@@ -25,7 +25,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: white;
+  background-color: #8a9381;
   opacity: 0;
   transition: opacity 1s ease;
 }
