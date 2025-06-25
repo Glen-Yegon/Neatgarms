@@ -68,116 +68,22 @@ const renderCartFromLocalStorage = () => {
       // Append the product card to the container
       cartItemsContainer.appendChild(productCard);
     });
+  
 
 
+// No longer including shipping fee in final price
+const finalPrice = combinedPrice;
 
-const shippingFeeText = document.getElementById("shipping-fee").textContent || "KSh 0";
-const shippingFee = parseInt(shippingFeeText.replace(/KSh|,/g, '').trim()) || 0;
-
-const finalPrice = combinedPrice + shippingFee;
-
-// Show the total including shipping fee in combinedPriceElement
+// Show the total in combinedPriceElement
 combinedPriceElement.textContent = finalPrice.toFixed(2);
-
-
-
-  }
-};
-
-// Start observing shipping fee changes
-const shippingFeeElement = document.getElementById("shipping-fee");
-
-const observer = new MutationObserver(() => {
-  renderCartFromLocalStorage(); // 👈 Re-run this every time shipping fee updates
-});
-
-// Observe changes in the shippingFee element
-observer.observe(shippingFeeElement, {
-  childList: true,
-  characterData: true,
-  subtree: true,
-});
-
-
- const cityInput = document.getElementById('delivery-city');
-  const nairobiAreasDiv = document.getElementById('nairobi-areas');
-  const nairobiSubareaSelect = document.getElementById('nairobi-subarea');
-  const shippingFeeDisplay = document.getElementById('shipping-fee');
-
-  const cityFees = {
-    Nakuru: 500,
-    Kisumu: 600,
-    Machakos: 400,
-    Naivasha: 450,
-    Nyeri: 500,
-    Nanyuki: 500,
-    Embu: 500,
-    Narok: 500,
-    Meru: 600,
-    Kakamega: 600,
-    Kitale: 600,
-    Eldoret: 600,
-    Kericho: 600,
-    Mombasa: 600,
-    Kampala: 1500,
-    Jinja: 1500,
-    Entebe: 1500,
-    Arusha: 2000,
-    DaresSalaam: 2000,
-    Dodoma: 2000,
-    Kigali: 2000,
-    Bujumbura: 2000,
-  };
-
-  const nairobiFees = {
-    "Lang'ata": 250,
-    "Nairobi CBD": 250,
-    "Westlands": 320,
-    "Kilimani": 280,
-    "Kileleshwa": 340,
-    "South B": 250,
-    "South C": 250,
-    "Upper Hill": 250,
-    "Karen": 1,
-    "Rongai Tuskeys": 560,
-    "Dagoreti North": 1,
-    "Dagoreti South": 1,
-    "JKIA": 660,
-    "Syokimau": 520,
-    "Ruaka (reference)": 700,
-  };
-
-  function updateShippingFee(fee) {
-    shippingFeeDisplay.textContent = ` ${fee}`;
-  }
-
-  cityInput.addEventListener('input', function () {
-    const city = cityInput.value.trim().toLowerCase();
-
-    if (city === 'nairobi') {
-      nairobiAreasDiv.style.display = 'block';
-      updateShippingFee(0);
-    } else {
-      nairobiAreasDiv.style.display = 'none';
-      const formattedCity = city.charAt(0).toUpperCase() + city.slice(1);
-      const fee = cityFees[formattedCity] || 0;
-      updateShippingFee(fee);
-    }
-  });
-
-  nairobiSubareaSelect.addEventListener('change', function () {
-    const selectedArea = nairobiSubareaSelect.value;
-    const fee = nairobiFees[selectedArea] || 0;
-    updateShippingFee(fee);
-
-window.addEventListener('DOMContentLoaded', renderCartFromLocalStorage);
-
-  });
+  }}
   
 
 
   // Call renderCartFromLocalStorage on page load to render the items from localStorage
   window.onload = renderCartFromLocalStorage;
+
+  
   
 // Discount Codes (Example)
 const discountCodes = {
@@ -267,66 +173,3 @@ function goBack() {
   history.back();
 }
 
-
-
-
-
-/*
-document.getElementById('mpesa-btn').addEventListener('click', () => {
-  document.getElementById('payment-modal').style.display = 'block';
-});
-
-// When the user clicks "Cancel", hide the modal.
-document.getElementById('cancel-payment').addEventListener('click', () => {
-  document.getElementById('payment-modal').style.display = 'none';
-});
-
-document.getElementById('submit-payment').addEventListener('click', async () => {
-  const phone = document.getElementById('phoneNo').value.trim();
-  const amount = document.getElementById('amount').value.trim();
-  
-  // Get the estimated total from the order summary container.
-  // Adjust the selector if needed.
-  const estimatedTotalElem = document.querySelector('.estimated-total');
-  const estimatedTotalText = estimatedTotalElem ? estimatedTotalElem.innerText.trim() : "";
-  
-  // Remove any non-numeric characters (like currency symbols) and convert to a float
-  const numericAmount = parseFloat(amount);
-  const numericEstimatedTotal = parseFloat(estimatedTotalText.replace(/[^\d.]/g, ''));
-  
-  if (!phone || !amount) {
-    alert("Please enter your phone number and ensure the amount is available.");
-    return;
-  }
-  
-  // Check if the entered amount matches the displayed estimated total.
-  if (numericAmount !== numericEstimatedTotal) {
-    alert("The amount entered does not match the estimated total. Please check the amount.");
-    return;
-  }
-  
-  try {
-    // Send a POST request to your backend endpoint
-    const response = await fetch('https://neatgarms-risi.onrender.com/paynow4', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone, amount })
-    });
-    
-    const data = await response.json();
-    console.log("Payment Initiated:", data);
-    
-    if (data.ResponseCode === "0") {
-      alert("Please check your phone to complete the payment by entering your MPesa PIN.");
-    } else {
-      alert("Payment initiation failed. Please try again.");
-    }
-  } catch (error) {
-    console.error("Error processing payment:", error);
-    alert("An error occurred while submitting the form.");
-  }
-  
-  // Hide the modal after submission
-  document.getElementById('payment-modal').style.display = 'none';
-});
-*/

@@ -136,9 +136,26 @@
     <label for="apartment-suite">Apartment, Suite, Building etc </label>
     <input type="text" id="apartment-suite" placeholder="Enter apartment or suite details" required>
     
-    <!-- City -->
-    <label for="delivery-city">City</label>
-    <input type="text" id="delivery-city" placeholder="Enter your city" required>
+<!-- City -->
+<label for="delivery-city">City</label>
+<select id="delivery-city" required>
+  <option value="" disabled selected>Select your city</option>
+  <option value="Nairobi">Nairobi</option>
+  <option value="Mombasa">Mombasa</option>
+  <option value="Kisumu">Kisumu</option>
+  <option value="Nakuru">Nakuru</option>
+  <option value="Eldoret">Eldoret</option>
+  <option value="Thika">Thika</option>
+  <option value="Machakos">Machakos</option>
+  <option value="Kitale">Kitale</option>
+  <option value="Meru">Meru</option>
+  <option value="Eldoret">Voi</option>
+  <option value="Voi">Thika</option>
+  <option value="Kericho">Kericho</option>
+  <option value="Kitale">Kitale</option>
+  <option value="Meru">Meru</option>
+</select>
+
     
     <!-- Postal Code (Optional) -->
     <label for="postal-code">Postal Code (Optional)</label>
@@ -150,35 +167,17 @@
   </div>
   
   
-  
-<!-- Nairobi Sub-areas (hidden by default) -->
-<div id="nairobi-areas" style="display: none; margin-top: 10px;">
-  <label for="nairobi-subarea">Select Area in Nairobi:</label>
-  <select id="nairobi-subarea">
-    <option value="">-- Select Area --</option>
-    <option value="Lang'ata">Lang'ata (KSh 250)</option>
-    <option value="Karen">Karen (KSh 600)</option>
-    <option value="Westlands">Westlands (KSh 320)</option>
-    <option value="Kilimani">Kilimani (KSh 280)</option>
-    <option value="Nairobi CBD">Nairobi CBD (KSh 250)</option>
-    <option value="Kileleshwa">Kileleshwa (KSh 340)</option>
-    <option value="South B">South B (KSh 250)</option>
-    <option value="South C">South C (KSh 250)</option>
-    <option value="Upper Hill">Upper Hill (KSh 250)</option>
-    <option value="Rongai Tuskeys">Rongai Tuskeys(KSh 760)</option>
-    <option value="JKIA">JKIA (KSh 660)</option>
-    <option value="Syokimau">Syokimau (KSh 720)</option>
-    <option value="Ruaka (reference)">Ruaka (reference) (KSh 700)</option>
 
-  </select>
-</div>
-
-<!-- Shipping Fee Display -->
+<!-- Shipping Info Message -->
 <div class="form-section">
-<div style="margin-top: 15px;">
-  <strong>Shipping Fee:</strong> <span id="shipping-fee">KSh 0</span>
+  <div style="margin-top: 15px;">
+    <strong>Shipping Notice:</strong>
+    <p style="margin: 5px 0; color: #444;">
+      After placing your order, our team will get in touch to arrange delivery. Please note that delivery fees apply and may vary based on your location.
+    </p>
+  </div>
 </div>
-</div>
+
   
 
 
@@ -342,7 +341,6 @@
     
       //Collect Delivery info
 const selectedCity = document.getElementById("delivery-city").value.trim();
-const selectedArea = document.getElementById("nairobi-subarea").value;
 
 if (!selectedCity) {
   alert("Enter the city you live in");
@@ -350,16 +348,7 @@ if (!selectedCity) {
   return;
 }
 
-if (selectedCity.toLowerCase() === "nairobi" && !selectedArea) {
-  alert("Please select your area in Nairobi");
-  loadingMessage.style.display = "none";
-  return;
-}
 
-
-
-
-const feeText = document.getElementById("shipping-fee").textContent;
 
 const deliveryInfo = {
   country: document.getElementById("country-region").value || "N/A",
@@ -368,10 +357,8 @@ const deliveryInfo = {
   address: document.getElementById("address").value || "N/A",
   apartment: document.getElementById("apartment-suite").value || "N/A",
   city: selectedCity || "N/A",
-  area: selectedCity.toLowerCase() === "nairobi" ? selectedArea || "N/A" : "",  // << added this
   postalCode: document.getElementById("postal-code").value || "N/A",
   phone: document.getElementById("phone").value || "N/A",
-  shippingFee: feeText || "KSh 0"
 };
 
     
@@ -482,7 +469,6 @@ if (storedProduct) {
         ['last-name',     'Last Name'],
         ['address',       'Address'],
         ['delivery-city', 'City'],
-        ['phone',         'Phone']
       ];
 
       for (const [id, label] of required) {
@@ -491,13 +477,6 @@ if (storedProduct) {
           document.getElementById(id).focus();
           return;                               // ⬅️ stop EVERYTHING if missing
         }
-      }
-
-      if (val('delivery-city').toLowerCase() === 'nairobi' &&
-          !val('nairobi-subarea')) {
-        alert('Please select an area in Nairobi.');
-        document.getElementById('nairobi-subarea').focus();
-        return;                                 // ⬅️ stop if Nairobi area not chosen
       }
 
       /* -------------- YOUR ORIGINAL CODE STARTS HERE -------------- */
@@ -636,6 +615,6 @@ requestAnimationFrame(() => {
     
   
 
-  <script src="buy2.min.js" defer></script>
+  <script src="buy2.js" defer></script>
 </body>
 </html>

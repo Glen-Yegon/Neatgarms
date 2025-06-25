@@ -313,10 +313,6 @@ emailContent += `Apartment/Suite: ${delivery.apartment}\n`;
 emailContent += `City: ${delivery.city}\n`;
 
 
-if (delivery.city.toLowerCase() === "nairobi") {
-  emailContent += `Area (Nairobi): ${delivery.area}\n`;
-}
-
 
 emailContent += `Postal Code: ${delivery.postalCode}\n`;
 emailContent += `Phone: ${delivery.phone}\n`;
@@ -531,12 +527,6 @@ if (orderSummary) {
     emailContent += `City: ${delivery.city}\n`;
     emailContent += `Postal Code: ${delivery.postalCode}\n`;
     emailContent += `Phone: ${delivery.phone}\n`;
-emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
-
-
-if (delivery.city.toLowerCase() === "nairobi") {
-  emailContent += `Area (Nairobi): ${delivery.area}\n`;
-}
 
 
     // --- Billing Information ---
