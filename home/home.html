@@ -37,7 +37,13 @@
 
 
 <section class="hero">
-  <video autoplay muted loop playsinline>
+  <video
+    class="hero-video"  
+    muted               
+    loop                  
+    playsinline         
+    preload="auto"         
+  >
     <source src="assets/0404.mp4" type="video/mp4" />
     Your browser does not support HTML5 video.
   </video>
@@ -118,7 +124,7 @@ Make it memorable with our signature eyewear — bold, stylish frames that turn 
 </p>
 
       <!-- Add cards here -->
-             <div class="dropdown-card">
+     <div class="dropdown-card">
         <img src="shoot/ef.avif" alt="Top 1" loading="lazy" fetchpriority="low">
         <p>Everyday Frames</p>
       <a href="glasses.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
@@ -249,7 +255,7 @@ Model Reference: Model is 5'5' (165 cm) wearing size S
 
       <div class="image-wrapper">
         <img src="shoot/bcs1.avif" alt="Product Image">
-        <img src="shoot/bci2.avif" alt="Product Image 2" class="hidden-image" loading="lazy">
+        <img src="shoot/bci2.avif" alt="Product Image 2" class="hidden-image">
       </div>
       <h3 class="product-name" >Black Crop Tee</h3>
       <p class="product-price"> Price in Kshs. <br>
@@ -379,8 +385,8 @@ Model Reference: Model is 5’9” (175 cm) wearing size M
      ">
 
       <div class="image-wrapper">
-        <img src="shoot/sl.avif" alt="Product Image">
-        <img src="shoot/sl1.avif" alt="Product Image 2" class="hidden-image" loading="lazy">
+        <img src="shoot/sl.avif" alt="Product Image" loading="eager">
+        <img src="shoot/sl1.avif" alt="Product Image 2" class="hidden-image">
       </div>
       <h3 class="product-name" >Tank Top</h3>
       <p class="product-price"> Price in Kshs. <br>
