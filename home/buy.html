@@ -517,7 +517,20 @@ document.querySelectorAll("#fields-container input").forEach((input) => {
           });
         },
 
-        onClose() { alert('⛔ Payment cancelled'); }
+onClose() {
+  const email = val('email'); // reuse the val() function to get email
+
+  if (email) {
+    fetch('https://neatgarms-risi.onrender.com/api/payment-cancelled', {
+      method : 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body   : JSON.stringify({ email })
+    });
+  }
+
+  alert('⛔ Payment cancelled');
+}
+
       });
 
       handler.openIframe();

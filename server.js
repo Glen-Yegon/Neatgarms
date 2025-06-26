@@ -1288,6 +1288,76 @@ app.post("/remove-bg", async (req, res) => {
 });
 
 
+app.post('/api/payment-cancelled', async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: 'Email is required.' });
+  }
+
+  // Email to customer to follow up
+  const followUpEmail = {
+    from: '"Neatgarms" <info@neatgarms.com>',
+    to: email,
+    subject: 'We Noticed You Didn’t Complete Your Purchase',
+    html: `
+    <div style="font-family: 'Poppins', sans-serif; padding: 20px; max-width: 600px; margin: auto;">
+      <div style="text-align: center;">
+        <img src="https://neatgarms.com/images/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 15px;" />
+      </div>
+      <p style="font-size: 16px;">Hi there,</p>
+      <p style="font-size: 16px;">
+        We noticed you didn’t complete your purchase. Was there a problem during checkout? 
+        If you encountered any difficulties, we’re here to help.
+      </p>
+      <p style="font-size: 16px;">
+        We'd love to have you back! Your items are still waiting for you — and we might even throw in something special if you return soon. 😉
+      </p>
+      <a href="https://neatgarms.com/cart" style="display: inline-block; margin-top: 20px; padding: 12px 20px; background: #ae866a; color: white; text-decoration: none; border-radius: 6px;">Complete My Order</a>
+      <p style="margin-top: 30px; font-size: 14px;">Need help? Reach out to us at <a href="mailto:info@neatgarms.com">info@neatgarms.com</a></p>
+    </div>
+
+    
+<table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
+  <tr>
+    <td style="vertical-align: top; padding-right: 15px;">
+      <img src="https://neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+    </td>
+    <td style="vertical-align: top;">
+      <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
+      <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
+      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
+      <div style="margin-top: 8px;">
+        <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
+          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+        </a>
+        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
+          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+        </a>
+        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
+          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+        </a>
+        <a href="https://pinterest.com/neatgarms" target="_blank">
+          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+        </a>
+      </div>
+    </td>
+  </tr>
+</table>
+    `
+  };
+
+  try {
+    await transporter.sendMail(followUpEmail);
+    res.status(200).json({ message: 'Cancellation follow-up email sent.' });
+  } catch (error) {
+    console.error('Error sending cancellation email:', error);
+    res.status(500).json({ message: 'Failed to send follow-up email.' });
+  }
+});
+
+
+
 
 // ✅ Verify transaction
 app.post('/api/paystack/verify', async (req, res) => {
