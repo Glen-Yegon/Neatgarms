@@ -12,3 +12,4 @@ document.querySelectorAll('.product-card').forEach(card => {
   observer.observe(card);
 });
 
+
