@@ -35,8 +35,8 @@ const PORT = 5000;
 const allowedOrigins = [
   "https://neatgarms-six.vercel.app", 
   "http://127.0.0.1:5505", 
-  "https://www.neatgarms.com/",
-  "https://neatgarms.com/"          
+  "https://www.neatgarms.com",
+  "https://neatgarms.com"          
 ];
 
 app.use(cors({
