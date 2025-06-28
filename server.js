@@ -28,13 +28,15 @@ const __dirname = path.dirname(__filename);
 
 
 
-const app = express(); // ✅ Define app before using it
+const app = express(); 
 const PORT = 5000;
 
 
 const allowedOrigins = [
-  "https://neatgarms-six.vercel.app", // ✅ Your production frontend on Vercel
-  "http://127.0.0.1:5505"             // ✅ Your local frontend for testing
+  "https://neatgarms-six.vercel.app", 
+  "http://127.0.0.1:5505", 
+  "https://www.neatgarms.com/",
+  "https://neatgarms.com/"          
 ];
 
 app.use(cors({
@@ -132,7 +134,7 @@ app.post(
 <div style="  font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
 
   <div style="text-align: center;">
-    <img src="https://neatgarms.com/images/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
 
   <div  background-color: #f9f9f9; padding: 30px; border-radius: 10px; text-align: center; color: #333;">
@@ -162,21 +164,15 @@ app.post(
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://neatgarms.com/product/urban-tee" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/mains/playboy.jpg" alt="Urban Tee" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Urban Tee</p>
+              <a href="https://neatgarms.com/tops.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Work Shirt</p>
               </a>
             </td>
             <td align="center">
-              <a href="https://neatgarms.com/product/classic-hoodie" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/mains/travis.jpg" alt="Classic Hoodie" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Classic Hoodie</p>
-              </a>
-            </td>
-            <td align="center">
-              <a href="https://neatgarms.com/product/street-joggers" target="_blank">
-                <img src="https://yourcdn.com/images/street-joggers.jpg" alt="Street Joggers" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Street Joggers</p>
+              <a href="https://neatgarms.com/pants.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
               </a>
             </td>
           </tr>
@@ -192,7 +188,7 @@ app.post(
         <h3 style="color: black;   font-family: 'Dream Avenue', sans-serif;">📞 Need Help?</h3>
         <p>Reach us any time:</p>
         <ul style="line-height: 1.8;">
-          <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
+          <li><strong>Email:</strong> <a href="mailto:neatgarmsltd@gmail.com">neatgarmsltd@gmail.com</a></li>
           <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
         </ul>
     
@@ -206,7 +202,7 @@ app.post(
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
@@ -356,17 +352,17 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
     const userMailOptions = {
       from: '"Neatgarms" <info@neatgarms.com>', 
       to: contact.email,
-      subject: "Thank You for Your Order with Neatgarms! 🎉",
+      subject: "Thank You for Your Order with Neatgarms! ",
       html: `
 <div style="  font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
 
   <div style="text-align: center;">
-    <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
   
         <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
         <p style="font-size: 16px;">
-          Thank you for shopping with <strong>Neatgarms</strong>! 🎉<br/>
+          Thank you for shopping with <strong>Neatgarms</strong>!<br/>
           We’ve successfully received your order. Our team is now processing it and will notify you once it ships.
         </p>
     
@@ -387,16 +383,16 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://neatgarms.com/product/urban-tee" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/shoot/whitep.webp" alt="Urban Tee" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Cotton Wide Leg Pants</p>
+              <a href="https://neatgarms.com/tops.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/sl.avif" alt="Urban Tee" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Tank Top</p>
               </a>
             </td>
 
             <td align="center">
-              <a href="https://neatgarms.com/product/street-joggers" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/shoot/c.webp" alt="Street Joggers" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Work Shirt</p>
+              <a href="https://neatgarms.com/pants.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/j6.avif" alt="Street Joggers" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Glazed Denim Jorts</p>
               </a>
             </td>
           </tr>
@@ -412,7 +408,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
         <h3 style="color: black;   font-family: 'Dream Avenue', sans-serif;">📞 Need Help?</h3>
         <p>Reach us any time:</p>
         <ul style="line-height: 1.8;">
-          <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
+          <li><strong>Email:</strong> <a href="mailto:neatgarmsltd@gmail.com">neatgarmsltd@gmail.com</a></li>
           <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
         </ul>
     
@@ -422,10 +418,11 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
       </div>
 
 
+
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
@@ -585,17 +582,17 @@ if (orderSummary) {
     const userMailOptions = {
       from: '"Neatgarms" <info@neatgarms.com>', 
       to: contact.email,
-      subject: "Thank You for Your Order with Neatgarms! 🎉",
+      subject: "Thank You for Your Order with Neatgarms! ",
       html: `
 <div style="  font-family: 'Dream Avenue', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
 
   <div style="text-align: center;">
-    <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
     
         <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
         <p style="font-size: 15px;">
-          Thanks for shopping with <strong>Neatgarms</strong>! 🎉<br/>
+          Thanks for shopping with <strong>Neatgarms</strong>! <br/>
           Your order was received and is being processed. We’ll notify you once it ships.
         </p>
     
@@ -624,19 +621,18 @@ if (orderSummary) {
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
         <h3 style="color: #333;">🔥 Top Neat Picks for This Week</h3>
-               <table style="width: 100%; border-spacing: 16px 10px;">
+        <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://neatgarms.com/product/urban-tee" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/shoot/whitep.webp" alt="Urban Tee" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Cotton Wide Leg Pants</p>
+              <a href="https://neatgarms.com/tops.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Work Shirt</p>
               </a>
             </td>
-
             <td align="center">
-              <a href="https://neatgarms.com/product/street-joggers" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/shoot/c.webp" alt="Street Joggers" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Work Shirt</p>
+              <a href="https://neatgarms.com/pants.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
               </a>
             </td>
           </tr>
@@ -652,19 +648,19 @@ if (orderSummary) {
         <h3 style="color: black;">📞 Need Help?</h3>
         <p style="font-size: 14px;">Contact us anytime:</p>
         <ul style="line-height: 1.8; font-size: 14px;">
-          <li><strong>Email:</strong> <a href="mailto:support@neatgarms.com">support@neatgarms.com</a></li>
+          <li><strong>Email:</strong> <a href="neatgarmsltd@gmail.com">neatgarmsltd@gmail.com</a></li>
           <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
-          <li><strong>Instagram:</strong> <a href="https://instagram.com/neatgarms" target="_blank">@neatgarms</a></li>
         </ul>
     
         <p style="margin-top: 30px; font-size: 13px; color: #666;">Thanks again for choosing Neatgarms! We can't wait for you to rock your new look! 😎✨</p>
         <p style="font-size: 13px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
       </div>
 
+
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
@@ -830,7 +826,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
 <div style="font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
 
   <div style="text-align: center;">
-    <img src="https://neatgarms-six.vercel.app/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
 
   <h2 style="color: #333;">Hello ${delivery.firstName},</h2>
@@ -873,16 +869,15 @@ if (delivery.city.toLowerCase() === "nairobi") {
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://neatgarms.com/product/urban-tee" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/shoot/whitep.webp" alt="Urban Tee" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Cotton Wide Leg Pants</p>
+              <a href="https://neatgarms.com/tops.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Work Shirt</p>
               </a>
             </td>
-
             <td align="center">
-              <a href="https://neatgarms.com/product/street-joggers" target="_blank">
-                <img src="https://neatgarms-six.vercel.app/shoot/c.webp" alt="Street Joggers" width="140" style="border-radius: 8px;" />
-                <p style="margin: 8px 0;">Work Shirt</p>
+              <a href="https://neatgarms.com/pants.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
               </a>
             </td>
           </tr>
@@ -898,7 +893,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
   <h3 style="color: #333;">📞 Need Help?</h3>
   <p>We're here for you:</p>
   <ul style="line-height: 1.8;">
-    <li><strong>Email:</strong> <a href="mailto:neatgarms@zohomail.com">neatgarms@zohomail.com</a></li>
+    <li><strong>Email:</strong> <a href="mailto:neatgarmsltd@gmail.com">neatgarmsltd@gmail.com</a></li>
     <li><strong>Phone:</strong> +254 700 000 000</li>
     <li><strong>Instagram:</strong> <a href="https://instagram.com/neatgarms" target="_blank">@neatgarms</a></li>
   </ul>
@@ -911,7 +906,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
@@ -1006,10 +1001,11 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
       to: reviewerEmail,
       subject: "Thank You for Your Review!",
       html: `Hi ${reviewerName},\n\nThank you for your review titled "${reviewTitle}". We appreciate your feedback!\n\nBest regards,\nNeat Team
+
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
@@ -1155,7 +1151,7 @@ app.post('/subscribe', async (req, res) => {
     html: `
     <div style="font-family: 'poppins', sans-serif; text-align: center; padding: 20px;">
   <div style="text-align: center;">
-    <img src="https://neatgarms.com/images/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+    <img src="https://neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
   <p style="font-size: 16px; margin: 0 0 15px;">Hi there,</p>
   <p style="font-size: 16px; margin: 0 0 15px;">
@@ -1171,10 +1167,11 @@ app.post('/subscribe', async (req, res) => {
     
 
 
+
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
@@ -1303,7 +1300,7 @@ app.post('/api/payment-cancelled', async (req, res) => {
     html: `
     <div style="font-family: 'Poppins', sans-serif; padding: 20px; max-width: 600px; margin: auto;">
       <div style="text-align: center;">
-        <img src="https://neatgarms.com/images/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 15px;" />
+        <img src="https://neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 15px;" />
       </div>
       <p style="font-size: 16px;">Hi there,</p>
       <p style="font-size: 16px;">
@@ -1318,10 +1315,11 @@ app.post('/api/payment-cancelled', async (req, res) => {
     </div>
 
     
+
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/images/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
