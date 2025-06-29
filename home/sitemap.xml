@@ -5,30 +5,32 @@
     <lastmod>2025-06-27</lastmod>
     <priority>1.0</priority>
   </url>
+
+    <url>
+    <loc>https://neatgarms.com/main.html</loc>
+    <lastmod>2025-06-27</lastmod>
+    <priority>0.8</priority>
+  </url>
+
     <url>
     <loc>https://neatgarms.com/item.html</loc>
     <lastmod>2025-06-27</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://neatgarms.com/main.html</loc>
-    <lastmod>2025-06-27</lastmod>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 
     <url>
     <loc>https://neatgarms.com/tops.html</loc>
     <lastmod>2025-06-27</lastmod>
-    <priority>1.0</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://neatgarms.com/pants.html</loc>
     <lastmod>2025-06-27</lastmod>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://neatgarms.com/capes.html</loc>
     <lastmod>2025-06-27</lastmod>
-    <priority>0.8</priority>
+    <priority>0.4</priority>
   </url>
 </urlset>

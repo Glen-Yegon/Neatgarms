@@ -255,15 +255,18 @@ document.getElementById('buy-now').addEventListener('click', function () {
 
 
 
+// Ensure the correct ID is targeted
 document.getElementById('share-btn').addEventListener('click', async () => {
+  // Get product details
   const productBrand = document.getElementById('product-brand')?.textContent || 'Unknown Brand';
   const productName = document.getElementById('product-name')?.textContent || 'Unnamed Product';
   const oldPrice = document.querySelector('.old-price')?.textContent || 'No Old Price';
   const newPrice = document.querySelector('.new-price')?.textContent || 'No New Price';
   const productStatus = document.getElementById('product-status')?.textContent || 'Status not available';
-  const imageUrl = document.getElementById('main-image')?.src || '';
+  const currentImageSrc = document.getElementById('main-image')?.src || 'No Image Available';
   const shareUrl = window.location.href;
 
+  // Create the share text
   const shareText = `
     Check out this product!
     Brand: ${productBrand}
@@ -271,40 +274,30 @@ document.getElementById('share-btn').addEventListener('click', async () => {
     Old Price: ${oldPrice}
     New Price: ${newPrice}
     Status: ${productStatus}
+    Image: ${currentImageSrc}
   `;
 
-  // Try sharing with image file if supported
-  if (navigator.canShare && navigator.canShare({ files: [] })) {
+  // Check if the Web Share API is supported
+  if (navigator.share) {
     try {
-      const response = await fetch(imageUrl);
-      const blob = await response.blob();
-      const file = new File([blob], "product.jpg", { type: blob.type });
-
       await navigator.share({
         title: `${productBrand} - ${productName}`,
         text: shareText,
-        files: [file],
         url: shareUrl,
       });
-    } catch (err) {
-      console.error("Image sharing failed", err);
-      fallbackToClipboard();
+    } catch (error) {
+      console.error('Sharing failed', error);
     }
   } else {
-    fallbackToClipboard();
-  }
-
-  // Fallback: copy to clipboard
-  function fallbackToClipboard() {
-    const clipboardText = `${shareText}\nImage: ${imageUrl}\nProduct URL: ${shareUrl}`;
+    // Fallback: Copy details to clipboard
+    const clipboardText = `${shareText}\nProduct URL: ${shareUrl}`;
     navigator.clipboard.writeText(clipboardText).then(() => {
-      alert("Product details copied to clipboard! (Image shown on supported platforms)");
+      alert('Product details copied to clipboard!');
     }).catch(err => {
-      console.error("Clipboard copy failed", err);
+      console.error('Failed to copy to clipboard', err);
     });
   }
 });
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
