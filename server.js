@@ -39,7 +39,7 @@ const allowedOrigins = [
   "https://neatgarms.com"          
 ];
 
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
@@ -47,15 +47,20 @@ app.use(cors({
       callback(new Error("Not allowed by CORS"));
     }
   },
-  methods: ["GET", "POST", "OPTIONS"],  
-  allowedHeaders: ["Content-Type"],
-  credentials: true  // ✅ Important for authentication and cookies
-}));
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+};
+
+// Apply to all routes
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // ✅ Use same config
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
-// Handle preflight requests for all routes
-app.options('*', cors());
+
+
 
 
 // Configure Multer for File Uploads (memory storage)
