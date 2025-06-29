@@ -4,6 +4,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import { getFirestore, doc, getDoc, updateDoc, setDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
@@ -127,6 +128,32 @@ signIn.addEventListener("click", async (event) => {
       showMessage("Incorrect Email or Password", "signInMessage");
     } else {
       showMessage("Account does not exist", "signInMessage");
+    }
+  }
+});
+
+
+// Handle Password Recovery
+document.querySelector(".recover a").addEventListener("click", async (e) => {
+  e.preventDefault();
+  const email = prompt("Enter your email to recover password:");
+
+  if (!email) {
+    alert("Email is required to reset your password.");
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("Password reset email sent. Check your inbox or spam folder.");
+  } catch (error) {
+    console.error("Error sending reset email:", error);
+    if (error.code === "auth/user-not-found") {
+      alert("No account found with that email.");
+    } else if (error.code === "auth/invalid-email") {
+      alert("Invalid email address.");
+    } else {
+      alert("Something went wrong. Try again later.");
     }
   }
 });
