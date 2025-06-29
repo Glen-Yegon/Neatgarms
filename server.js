@@ -190,11 +190,10 @@ app.post(
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: black;   font-family: 'Dream Avenue', sans-serif;">📞 Need Help?</h3>
+        <h3 style="color: black;">📞 Need Help?</h3>
         <p>Reach us any time:</p>
         <ul style="line-height: 1.8;">
-          <li><strong>Email:</strong> <a href="mailto:neatgarmsltd@gmail.com">neatgarmsltd@gmail.com</a></li>
-          <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
+            <li><strong>Phone:</strong> +254 758 647 031</li>
         </ul>
     
         <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
@@ -413,8 +412,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
         <h3 style="color: black;   font-family: 'Dream Avenue', sans-serif;">📞 Need Help?</h3>
         <p>Reach us any time:</p>
         <ul style="line-height: 1.8;">
-          <li><strong>Email:</strong> <a href="mailto:neatgarmsltd@gmail.com">neatgarmsltd@gmail.com</a></li>
-          <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
+            <li><strong>Phone:</strong> +254 758 647 031</li>
         </ul>
     
         <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
@@ -653,8 +651,7 @@ if (orderSummary) {
         <h3 style="color: black;">📞 Need Help?</h3>
         <p style="font-size: 14px;">Contact us anytime:</p>
         <ul style="line-height: 1.8; font-size: 14px;">
-          <li><strong>Email:</strong> <a href="neatgarmsltd@gmail.com">neatgarmsltd@gmail.com</a></li>
-          <li><strong>Website:</strong> <a href="https://www.neatgarms.com" target="_blank">www.neatgarms.com</a></li>
+            <li><strong>Phone:</strong> +254 758 647 031</li>
         </ul>
     
         <p style="margin-top: 30px; font-size: 13px; color: #666;">Thanks again for choosing Neatgarms! We can't wait for you to rock your new look! 😎✨</p>
@@ -1046,7 +1043,7 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
   }
 });
 
-
+/*
 // Replace these with your actual credentials
 const consumerKey = "4Zun3FJtqJ43ZVD6lFlU1VxEMfcXAiY5C34MAvel9JJt5EVV";
 const consumerSecret = "LBhJDHp5r5i2kBjQ2Zuxhak513akpSPURGJE5gGgEIRToaGTx7Bq4luKUqqqR8MN";
@@ -1084,6 +1081,7 @@ async function getAccessToken() {
   const data = await response.json();
   return data.access_token;
 }
+  */
 
 // Endpoint to initiate STK Push (triggered when customer clicks "Pay Now")
 /*
@@ -1315,7 +1313,7 @@ app.post('/api/payment-cancelled', async (req, res) => {
       <p style="font-size: 16px;">
         We'd love to have you back! Your items are still waiting for you — and we might even throw in something special if you return soon. 😉
       </p>
-      <a href="https://neatgarms.com/cart" style="display: inline-block; margin-top: 20px; padding: 12px 20px; background: #ae866a; color: white; text-decoration: none; border-radius: 6px;">Complete My Order</a>
+      <a href="https://neatgarms.com/cart.html" style="display: inline-block; margin-top: 20px; padding: 12px 20px; background: #ae866a; color: white; text-decoration: none; border-radius: 6px;">Complete My Order</a>
       <p style="margin-top: 30px; font-size: 14px;">Need help? Reach out to us at <a href="mailto:info@neatgarms.com">info@neatgarms.com</a></p>
     </div>
 
@@ -1383,6 +1381,41 @@ app.post('/api/paystack/verify', async (req, res) => {
     console.error(error.response?.data || error.message);
     res.status(500).json({ status: false, message: 'Error verifying payment.' });
   }
+});
+
+
+
+// Paystack Webhook Route
+app.post("/api/paystack/webhook", express.json({ verify: (req, res, buf) => {
+  req.rawBody = buf.toString(); // Save raw body for signature check
+}}), async (req, res) => {
+  const paystackSignature = req.headers['x-paystack-signature'];
+  const crypto = require('crypto');
+
+  const hash = crypto.createHmac('sha512', process.env.PAYSTACK_SECRET_KEY)
+                     .update(req.rawBody)
+                     .digest('hex');
+
+  if (hash !== paystackSignature) {
+    console.log("❌ Webhook signature mismatch");
+    return res.sendStatus(401);
+  }
+
+  const event = req.body;
+
+  if (event.event === 'charge.success') {
+    const paymentData = event.data;
+    console.log("✅ Webhook received:", paymentData);
+
+    // Example: Save the transaction to your DB or update the order
+    const email = paymentData.customer.email;
+    const amount = paymentData.amount / 100;
+    const reference = paymentData.reference;
+
+    // ✅ You can save this payment confirmation to your DB here
+  }
+
+  res.sendStatus(200); // Must respond with 200 or Paystack will retry
 });
 
 
