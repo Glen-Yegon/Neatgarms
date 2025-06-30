@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Paystack Live Test – Mobile Money</title>
+</head>
+<body>
+  <h2>Pay with Paystack (Live Mode)</h2>
+
+  <label>Email: <input type="email" id="email" value="yegonglen@gmail.com"></label><br><br>
+
+  <button onclick="payWithPaystack()">Pay Kshs 2.00</button>
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+  <script>
+    function payWithPaystack() {
+      const email = document.getElementById('email').value.trim();
+
+      if (!email) {
+        alert("Please enter an email");
+        return;
+      }
+
+      const amountInKobo = 200; // Kshs 2.00
+
+      console.log("Launching Paystack with email:", email, "and amount:", amountInKobo);
+
+      PaystackPop.setup({
+        key: 'pk_live_ebc463d4a263695caa52983243908de4c27ab205', // ✅ Your real live key
+        email: email,
+        amount: amountInKobo,
+        currency: 'KES',
+        ref: '' + Math.floor(Math.random() * 1_000_000_000 + 1),
+
+        callback: function (response) {
+          alert('✅ Success! Reference: ' + response.reference);
+        },
+
+        onClose: function () {
+          alert('⛔ Popup closed');
+        }
+      }).openIframe();
+    }
+  </script>
+</body>
+</html>
