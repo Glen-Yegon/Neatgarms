@@ -1213,7 +1213,7 @@ app.post('/subscribe', async (req, res) => {
 });
 
 
-/*
+
 const paymentStatus = {}; // Store payment confirmation status
 
 // MPesa Callback Endpoint
@@ -1242,10 +1242,10 @@ app.post("/mpesa-callback", async (req, res) => {
       return res.status(400).json({ error: "Payment failed", reason: stkCallback.ResultDesc });
   }
 });
-*/
 
 
-/*
+
+
 app.get("/check-payment/:phone", (req, res) => {
   const phone = req.params.phone;
 
@@ -1262,7 +1262,7 @@ app.get("/check-payment/:phone", (req, res) => {
   }
 });
 
-*/
+
 
 
 
@@ -1360,26 +1360,53 @@ app.post('/api/payment-cancelled', async (req, res) => {
 
 
 
-// ✅ Verify transaction
+// ✅ Paystack Secret Key — only use in backend, NEVER frontend
+const PAYSTACK_SECRET_KEY = 'REMOVED_SECRET';
+
+// ✅ Verify transaction route
 app.post('/api/paystack/verify', async (req, res) => {
   const { reference } = req.body;
 
+  // 🛑 Validate input
+  if (!reference) {
+    return res.status(400).json({
+      status: false,
+      message: 'Transaction reference is required.',
+    });
+  }
+
   try {
+    // 🔍 Make request to Paystack to verify payment
     const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
       headers: {
-        Authorization: 'Bearer REMOVED_SECRET' 
-      }
+        Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+      },
     });
 
-    if (response.data.data.status === 'success') {
-      res.json({ status: true, message: 'Payment verified successfully.' });
-    } else {
-      res.json({ status: false, message: 'Payment verification failed.' });
+    const data = response.data;
+
+    // ✅ Payment was successful
+    if (data.status && data.data.status === 'success') {
+      return res.json({
+        status: true,
+        message: '✅ Payment verified successfully.',
+        transaction: data.data,
+      });
     }
 
+    // ❌ Payment not successful
+    return res.status(400).json({
+      status: false,
+      message: '❌ Payment not successful.',
+      transaction: data.data,
+    });
+
   } catch (error) {
-    console.error(error.response?.data || error.message);
-    res.status(500).json({ status: false, message: 'Error verifying payment.' });
+    console.error('🚫 Error verifying payment:', error.response?.data || error.message);
+    return res.status(500).json({
+      status: false,
+      message: '🚫 Server error while verifying payment.',
+    });
   }
 });
 

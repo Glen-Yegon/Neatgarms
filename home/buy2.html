@@ -512,7 +512,7 @@ if (storedProduct) {
       /* ---------- 2.  Launch Paystack popup ---------- */
       const handler = PaystackPop.setup({
         key      : 'pk_live_ebc463d4a263695caa52983243908de4c27ab205',  // PUBLIC key
-        email    : 'customer@example.com',  // swap for the real user’s email
+        email: val('email'),
         amount   : amountInKobo,
         currency : 'KES',
         ref      : '' + (Math.floor(Math.random() * 1_000_000_000) + 1),
