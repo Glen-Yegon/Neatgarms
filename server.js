@@ -1,5 +1,3 @@
-
-
 // Import required modules
 import express from "express";
 import multer from "multer";
@@ -11,11 +9,9 @@ import fs from "fs";
 import dotenv from "dotenv";
 import path from "path";
 import fetch from "node-fetch";
-import { fileURLToPath } from "url"; // Required for `__dirname`
-import { spawn } from "child_process"; 
+import { fileURLToPath } from "url";
+import { spawn } from "child_process";
 import axios from "axios";
-
-
 
 
 dotenv.config();
@@ -32,13 +28,18 @@ const app = express();
 const PORT = 5000;
 
 
+// ✅ Trusted proxy (important if you're on Render or Vercel)
+app.set("trust proxy", true);
+
+// ✅ Allowed domains
 const allowedOrigins = [
-  "https://neatgarms-six.vercel.app", 
-  "http://127.0.0.1:5505", 
+  "https://neatgarms-six.vercel.app",
+  "http://127.0.0.1:5505",
   "https://www.neatgarms.com",
-  "https://neatgarms.com"          
+  "https://neatgarms.com"
 ];
 
+// ✅ CORS configuration
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -52,10 +53,11 @@ const corsOptions = {
   credentials: true
 };
 
-// Apply to all routes
+// ✅ Apply CORS globally
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // ✅ Use same config
+app.options("*", cors(corsOptions)); // Handle preflight for all routes
 
+// ✅ Body parsers
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
