@@ -470,8 +470,7 @@ if (storedProduct) {
     
     
   </script>
-
-  <script>
+<script>
   async function verifyPayment(reference, attempts = 3, delay = 3000) {
     for (let i = 0; i < attempts; i++) {
       try {
@@ -498,7 +497,6 @@ if (storedProduct) {
         console.error(`Attempt ${i + 1} error:`, error);
       }
 
-      // Wait before next attempt
       if (i < attempts - 1) {
         await new Promise(resolve => setTimeout(resolve, delay));
       }
@@ -508,11 +506,10 @@ if (storedProduct) {
   }
 </script>
 
-  
+
 <script>
   document.getElementById('paystack-btn').addEventListener('click', function () {
 
-    // ========== 0.  QUICK VALIDATION BEFORE ANYTHING ELSE ==========
     const val = id => (document.getElementById(id)?.value || '').trim();
 
     const required = [
@@ -533,9 +530,11 @@ if (storedProduct) {
       }
     }
 
-    // ---------- 1.  Read amount from the DOM ----------
     const combinedPriceElement = document.getElementById('combined-price');
-    if (!combinedPriceElement) { alert('Estimated total not found.'); return; }
+    if (!combinedPriceElement) {
+      alert('Estimated total not found.');
+      return;
+    }
 
     const amountString = combinedPriceElement.textContent.trim();
     const amount = parseFloat(amountString);
@@ -546,7 +545,6 @@ if (storedProduct) {
 
     const amountInKobo = Math.round(amount * 100);
 
-    // ---------- 2.  Launch Paystack popup ----------
     const handler = PaystackPop.setup({
       key: 'pk_live_ebc463d4a263695caa52983243908de4c27ab205',
       email: val('email'),
@@ -555,42 +553,7 @@ if (storedProduct) {
       ref: '' + (Math.floor(Math.random() * 1_000_000_000) + 1),
 
       callback({ reference }) {
-        // ---------- 3. Retry-Based Verification ----------
-        async function verifyPayment(reference, attempts = 3, delay = 3000) {
-          for (let i = 0; i < attempts; i++) {
-            try {
-              const res = await fetch('https://neatgarms-risi.onrender.com/api/paystack/verify', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ reference })
-              });
-
-              const data = await res.json();
-
-              if (data.status) {
-                alert('✅ Payment verified');
-
-                const hiddenBtn = document.getElementById('pay-now-btn');
-                if (hiddenBtn) hiddenBtn.click();
-                else console.warn('Hidden “submit” button not found');
-                return; // ✅ Exit after success
-              } else {
-                console.warn(`Attempt ${i + 1} failed: ${data.message}`);
-              }
-
-            } catch (error) {
-              console.error(`Attempt ${i + 1} error:`, error);
-            }
-
-            if (i < attempts - 1) {
-              await new Promise(resolve => setTimeout(resolve, delay));
-            }
-          }
-
-          alert('⚠️ We could not verify your payment yet. Please try again or contact support.');
-        }
-
-        verifyPayment(reference); // 🚀 Trigger retry logic
+        verifyPayment(reference); // ✅ Use global function
       },
 
       onClose() {
@@ -602,7 +565,6 @@ if (storedProduct) {
             body: JSON.stringify({ email })
           });
         }
-
         alert('⛔ Payment cancelled');
       }
     });
@@ -610,6 +572,7 @@ if (storedProduct) {
     handler.openIframe();
   });
 </script>
+
 
 
 
