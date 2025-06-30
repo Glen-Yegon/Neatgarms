@@ -391,14 +391,14 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://neatgarms.com/tops.html" target="_blank">
+              <a href="https://www.neatgarms.com/tops.html" target="_blank">
                 <img src="https://www.neatgarms.com/shoot/sl.avif" alt="Urban Tee" width="140" style="border-radius: 4px;" />
                 <p style="margin: 8px 0;">Tank Top</p>
               </a>
             </td>
 
             <td align="center">
-              <a href="https://neatgarms.com/pants.html" target="_blank">
+              <a href="https://www.neatgarms.com/pants.html" target="_blank">
                 <img src="https://www.neatgarms.com/shoot/j6.avif" alt="Street Joggers" width="140" style="border-radius: 4px;" />
                 <p style="margin: 8px 0;">Glazed Denim Jorts</p>
               </a>
@@ -413,7 +413,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
-        <h3 style="color: black;   font-family: 'Dream Avenue', sans-serif;">📞 Need Help?</h3>
+        <h3 style="color: black;">📞 Need Help?</h3>
         <p>Reach us any time:</p>
         <ul style="line-height: 1.8;">
             <li><strong>Phone:</strong> +254 758 647 031</li>
@@ -429,24 +429,24 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
       <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
+      <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
       <div style="margin-top: 8px;">
         <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
         </a>
         <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
         </a>
         <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
         </a>
         <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
         </a>
       </div>
     </td>
@@ -631,13 +631,13 @@ if (orderSummary) {
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://neatgarms.com/tops.html" target="_blank">
+              <a href="https://www.neatgarms.com/tops.html" target="_blank">
                 <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
                 <p style="margin: 8px 0;">Work Shirt</p>
               </a>
             </td>
             <td align="center">
-              <a href="https://neatgarms.com/pants.html" target="_blank">
+              <a href="https://www.neatgarms.com/pants.html" target="_blank">
                 <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
                 <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
               </a>
@@ -666,29 +666,30 @@ if (orderSummary) {
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
       <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
+      <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
       <div style="margin-top: 8px;">
         <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
         </a>
         <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
         </a>
         <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
         </a>
         <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
         </a>
       </div>
     </td>
   </tr>
 </table>
+
       `
     };
     
@@ -875,13 +876,13 @@ if (delivery.city.toLowerCase() === "nairobi") {
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://neatgarms.com/tops.html" target="_blank">
+              <a href="https://www.neatgarms.com/tops.html" target="_blank">
                 <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
                 <p style="margin: 8px 0;">Work Shirt</p>
               </a>
             </td>
             <td align="center">
-              <a href="https://neatgarms.com/pants.html" target="_blank">
+              <a href="https://www.neatgarms.com/pants.html" target="_blank">
                 <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
                 <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
               </a>
@@ -899,9 +900,7 @@ if (delivery.city.toLowerCase() === "nairobi") {
   <h3 style="color: #333;">📞 Need Help?</h3>
   <p>We're here for you:</p>
   <ul style="line-height: 1.8;">
-    <li><strong>Email:</strong> <a href="mailto:neatgarmsltd@gmail.com">neatgarmsltd@gmail.com</a></li>
-    <li><strong>Phone:</strong> +254 700 000 000</li>
-    <li><strong>Instagram:</strong> <a href="https://instagram.com/neatgarms" target="_blank">@neatgarms</a></li>
+    <li><strong>Phone:</strong> +254 758 647 031</li>
   </ul>
 
   <p style="margin-top: 30px; font-size: 14px; color: #666;">We can’t wait to see you rock your new fit! 😎</p>
@@ -912,29 +911,30 @@ if (delivery.city.toLowerCase() === "nairobi") {
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
       <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
+      <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
       <div style="margin-top: 8px;">
         <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
         </a>
         <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
         </a>
         <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
         </a>
         <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
         </a>
       </div>
     </td>
   </tr>
 </table>
+
 
       `,
       attachments: [
@@ -1011,29 +1011,30 @@ app.post("/submit-review", upload.single("review-media"), async (req, res) => {
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
       <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
+      <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
       <div style="margin-top: 8px;">
         <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
         </a>
         <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
         </a>
         <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
         </a>
         <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
         </a>
       </div>
     </td>
   </tr>
 </table>
+
   `,
     };
 
@@ -1158,7 +1159,7 @@ app.post('/subscribe', async (req, res) => {
     html: `
     <div style="font-family: 'poppins', sans-serif; text-align: center; padding: 20px;">
   <div style="text-align: center;">
-    <img src="https://neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
   <p style="font-size: 16px; margin: 0 0 15px;">Hi there,</p>
   <p style="font-size: 16px; margin: 0 0 15px;">
@@ -1172,35 +1173,33 @@ app.post('/subscribe', async (req, res) => {
 </div>
 
     
-
-
-
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
       <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
+      <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
       <div style="margin-top: 8px;">
         <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
         </a>
         <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
         </a>
         <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
         </a>
         <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
         </a>
       </div>
     </td>
   </tr>
 </table>
+
 
 
   `,
@@ -1307,7 +1306,7 @@ app.post('/api/payment-cancelled', async (req, res) => {
     html: `
     <div style="font-family: 'Poppins', sans-serif; padding: 20px; max-width: 600px; margin: auto;">
       <div style="text-align: center;">
-        <img src="https://neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 15px;" />
+        <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 15px;" />
       </div>
       <p style="font-size: 16px;">Hi there,</p>
       <p style="font-size: 16px;">
@@ -1317,7 +1316,7 @@ app.post('/api/payment-cancelled', async (req, res) => {
       <p style="font-size: 16px;">
         We'd love to have you back! Your items are still waiting for you — and we might even throw in something special if you return soon. 😉
       </p>
-      <a href="https://neatgarms.com/cart.html" style="display: inline-block; margin-top: 20px; padding: 12px 20px; background: #ae866a; color: white; text-decoration: none; border-radius: 6px;">Complete My Order</a>
+      <a href="https://www.neatgarms.com/cart.html" style="display: inline-block; margin-top: 20px; padding: 12px 20px; background: #ae866a; color: white; text-decoration: none; border-radius: 6px;">Complete My Order</a>
       <p style="margin-top: 30px; font-size: 14px;">Need help? Reach out to us at <a href="mailto:info@neatgarms.com">info@neatgarms.com</a></p>
     </div>
 
@@ -1326,29 +1325,30 @@ app.post('/api/payment-cancelled', async (req, res) => {
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
       <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
+      <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
       <div style="margin-top: 8px;">
         <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
         </a>
         <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
         </a>
         <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
         </a>
         <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
         </a>
       </div>
     </td>
   </tr>
 </table>
+
     `
   };
 
