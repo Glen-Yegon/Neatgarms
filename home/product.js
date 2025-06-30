@@ -260,7 +260,9 @@ document.getElementById('share-btn').addEventListener('click', async () => {
   // Get product details
   const productBrand = document.getElementById('product-brand')?.textContent || 'Unknown Brand';
   const productName = document.getElementById('product-name')?.textContent || 'Unnamed Product';
+  const oldPrice = document.querySelector('.old-price')?.textContent || 'No Old Price';
   const newPrice = document.querySelector('.new-price')?.textContent || 'No New Price';
+  const productStatus = document.getElementById('product-status')?.textContent || 'Status not available';
   const shareUrl = window.location.href; // This page should already have <meta property="og:image" ...>
 
   // Create the share text
@@ -268,7 +270,9 @@ document.getElementById('share-btn').addEventListener('click', async () => {
 Check out this product from NeatGarms!
 🧵 Brand: ${productBrand}
 👕 Name: ${productName}
+💰 Old Price: ${oldPrice}
 🔥 New Price: ${newPrice}
+📦 Status: ${productStatus}
 👇 View it here:
 `;
 
