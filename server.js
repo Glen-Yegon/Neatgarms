@@ -11,6 +11,8 @@ import path from "path";
 import fetch from "node-fetch";
 import { fileURLToPath } from "url";
 import { spawn } from "child_process";
+// Webhook route to receive Paystack payment events
+import crypto from 'crypto'; // ✅ If using ES Modules
 import axios from "axios";
 
 
@@ -1362,7 +1364,7 @@ app.post('/api/payment-cancelled', async (req, res) => {
 
 
 
-// ✅ Paystack Secret Key — only use in backend, NEVER frontend
+// ✅ Use only in the backend
 const PAYSTACK_SECRET_KEY = 'REMOVED_SECRET';
 
 // ✅ Verify transaction route
@@ -1373,79 +1375,100 @@ app.post('/api/paystack/verify', async (req, res) => {
   if (!reference) {
     return res.status(400).json({
       status: false,
-      message: 'Transaction reference is required.',
+      message: '❌ Transaction reference is required.',
     });
   }
 
   try {
-    // 🔍 Make request to Paystack to verify payment
+    // 🔍 Request to Paystack
     const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
       headers: {
         Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+        'Content-Type': 'application/json',
       },
     });
 
     const data = response.data;
 
-    // ✅ Payment was successful
+    // ✅ Payment successful
     if (data.status && data.data.status === 'success') {
-      return res.json({
+      return res.status(200).json({
         status: true,
         message: '✅ Payment verified successfully.',
         transaction: data.data,
       });
     }
 
-    // ❌ Payment not successful
+    // ❌ Payment was not successful
     return res.status(400).json({
       status: false,
-      message: '❌ Payment not successful.',
+      message: '❌ Payment not successful or pending.',
       transaction: data.data,
     });
 
   } catch (error) {
-    console.error('🚫 Error verifying payment:', error.response?.data || error.message);
+    const errData = error.response?.data || error.message;
+    console.error('🚫 Error verifying payment:', errData);
+
     return res.status(500).json({
       status: false,
       message: '🚫 Server error while verifying payment.',
+      error: errData,
     });
   }
 });
 
 
 
-// Paystack Webhook Route
-app.post("/api/paystack/webhook", express.json({ verify: (req, res, buf) => {
-  req.rawBody = buf.toString(); // Save raw body for signature check
-}}), async (req, res) => {
-  const paystackSignature = req.headers['x-paystack-signature'];
-  const crypto = require('crypto');
 
-  const hash = crypto.createHmac('sha512', process.env.PAYSTACK_SECRET_KEY)
-                     .update(req.rawBody)
-                     .digest('hex');
 
-  if (hash !== paystackSignature) {
-    console.log("❌ Webhook signature mismatch");
-    return res.sendStatus(401);
+app.post("/api/paystack/webhook",
+  express.json({
+    verify: (req, res, buf) => {
+      req.rawBody = buf.toString(); // Required for signature verification
+    }
+  }),
+  async (req, res) => {
+    const paystackSignature = req.headers['x-paystack-signature'];
+
+    // ✅ Always use the SECRET key (same as in dashboard) — not the PUBLIC one
+    const secret = 'REMOVED_SECRET'; // Ideally use process.env
+
+    const hash = crypto
+      .createHmac('sha512', secret)
+      .update(req.rawBody)
+      .digest('hex');
+
+    if (hash !== paystackSignature) {
+      console.log("❌ Webhook signature mismatch");
+      return res.sendStatus(401);
+    }
+
+    const event = req.body;
+
+    // ✅ Handle only successful charge events
+    if (event.event === 'charge.success') {
+      const paymentData = event.data;
+      const email = paymentData.customer?.email;
+      const amount = paymentData.amount / 100;
+      const reference = paymentData.reference;
+      const channel = paymentData.channel;
+
+      console.log("✅ Webhook verified:", {
+        reference,
+        amount,
+        email,
+        channel
+      });
+
+      // TODO: Save to DB or mark order as paid
+    }
+
+    res.sendStatus(200); // ✅ Must respond 200 or Paystack retries
   }
+);
 
-  const event = req.body;
 
-  if (event.event === 'charge.success') {
-    const paymentData = event.data;
-    console.log("✅ Webhook received:", paymentData);
-
-    // Example: Save the transaction to your DB or update the order
-    const email = paymentData.customer.email;
-    const amount = paymentData.amount / 100;
-    const reference = paymentData.reference;
-
-    // ✅ You can save this payment confirmation to your DB here
-  }
-
-  res.sendStatus(200); // Must respond with 200 or Paystack will retry
-});
 
 app.get("/cors-test", (req, res) => {
   res.json({ message: "CORS is working properly." });
