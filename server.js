@@ -1447,6 +1447,10 @@ app.post("/api/paystack/webhook", express.json({ verify: (req, res, buf) => {
   res.sendStatus(200); // Must respond with 200 or Paystack will retry
 });
 
+app.get("/cors-test", (req, res) => {
+  res.json({ message: "CORS is working properly." });
+});
+
 
 // Start Server
 app.listen(PORT, () => {
