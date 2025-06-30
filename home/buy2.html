@@ -470,100 +470,147 @@ if (storedProduct) {
     
     
   </script>
-  
-<script>
-  document
-    .getElementById('paystack-btn')
-    .addEventListener('click', function () {
 
-      /* ========== 0.  QUICK VALIDATION BEFORE ANYTHING ELSE ========== */
-      const val = id => (document.getElementById(id)?.value || '').trim();
+  <script>
+  async function verifyPayment(reference, attempts = 3, delay = 3000) {
+    for (let i = 0; i < attempts; i++) {
+      try {
+        const res = await fetch('https://neatgarms-risi.onrender.com/api/paystack/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ reference })
+        });
 
-      const required = [
-        ['email',         'Email'],
-        ['phone-number',  'Phone Number'],
-        ['country-region','Country/Region'],
-        ['first-name',    'First Name'],
-        ['last-name',     'Last Name'],
-        ['address',       'Address'],
-        ['delivery-city', 'City'],
-      ];
+        const data = await res.json();
 
-      for (const [id, label] of required) {
-        if (!val(id)) {
-          alert(`Please enter your ${label}.`);
-          document.getElementById(id).focus();
-          return;                               // ⬅️ stop EVERYTHING if missing
+        if (data.status) {
+          alert('✅ Payment verified!');
+
+          const hiddenBtn = document.getElementById('pay-now-btn');
+          if (hiddenBtn) hiddenBtn.click();
+          else console.warn('Hidden submit button not found.');
+          return;
+        } else {
+          console.log(`Attempt ${i + 1} failed:`, data.message);
         }
+
+      } catch (error) {
+        console.error(`Attempt ${i + 1} error:`, error);
       }
 
-      /* -------------- YOUR ORIGINAL CODE STARTS HERE -------------- */
+      // Wait before next attempt
+      if (i < attempts - 1) {
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
 
-      /* ---------- 1.  Read amount from the DOM ---------- */
-      const combinedPriceElement = document.getElementById('combined-price');
-      if (!combinedPriceElement) { alert('Estimated total not found.'); return; }
-
-      const amountString = combinedPriceElement.textContent.trim();  // "1234.56"
-      const amount       = parseFloat(amountString);
-      if (!amount || amount <= 0)      { alert('Invalid estimated total amount'); return; }
-
-      const amountInKobo = Math.round(amount * 100);  // Paystack wants the smallest unit
-
-      /* ---------- 2.  Launch Paystack popup ---------- */
-      const handler = PaystackPop.setup({
-        key      : 'pk_live_ebc463d4a263695caa52983243908de4c27ab205',  // PUBLIC key
-        email: val('email'),
-        amount   : amountInKobo,
-        currency : 'KES',
-        ref      : '' + (Math.floor(Math.random() * 1_000_000_000) + 1),
-
-        callback ({ reference }) {
-          /* ---------- 3.  Verify on your server ---------- */
-          fetch('https://neatgarms-risi.onrender.com/api/paystack/verify', {
-            method : 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body   : JSON.stringify({ reference })
-          })
-          .then(r => r.json())
-          .then(data => {
-            if (data.status) {
-              alert('✅ Payment verified');
-
-              /* ---------- 4a.  Trigger the hidden submit button ---------- */
-              const hiddenBtn = document.getElementById('pay-now-btn');
-              if (hiddenBtn)   hiddenBtn.click();     //  ← key line
-              else             console.warn('Hidden “submit” button not found');
-
-            } else {
-              alert('❌ Payment verification failed');
-            }
-          })
-          .catch(err => {
-            console.error('Error verifying payment:', err);
-            alert('🚫 Error verifying payment');
-          });
-        },
-
-onClose() {
-  const email = val('email'); // reuse the val() function to get email
-
-  if (email) {
-    fetch('https://neatgarms-risi.onrender.com/api/payment-cancelled', {
-      method : 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body   : JSON.stringify({ email })
-    });
+    alert('⚠️ We could not verify your payment yet. Please wait or contact support.');
   }
-
-  alert('⛔ Payment cancelled');
-}
-
-
-      });
-
-      handler.openIframe();
-    });
 </script>
+
+  
+<script>
+  document.getElementById('paystack-btn').addEventListener('click', function () {
+
+    // ========== 0.  QUICK VALIDATION BEFORE ANYTHING ELSE ==========
+    const val = id => (document.getElementById(id)?.value || '').trim();
+
+    const required = [
+      ['email',         'Email'],
+      ['phone-number',  'Phone Number'],
+      ['country-region','Country/Region'],
+      ['first-name',    'First Name'],
+      ['last-name',     'Last Name'],
+      ['address',       'Address'],
+      ['delivery-city', 'City'],
+    ];
+
+    for (const [id, label] of required) {
+      if (!val(id)) {
+        alert(`Please enter your ${label}.`);
+        document.getElementById(id).focus();
+        return;
+      }
+    }
+
+    // ---------- 1.  Read amount from the DOM ----------
+    const combinedPriceElement = document.getElementById('combined-price');
+    if (!combinedPriceElement) { alert('Estimated total not found.'); return; }
+
+    const amountString = combinedPriceElement.textContent.trim();
+    const amount = parseFloat(amountString);
+    if (!amount || amount <= 0) {
+      alert('Invalid estimated total amount');
+      return;
+    }
+
+    const amountInKobo = Math.round(amount * 100);
+
+    // ---------- 2.  Launch Paystack popup ----------
+    const handler = PaystackPop.setup({
+      key: 'pk_live_ebc463d4a263695caa52983243908de4c27ab205',
+      email: val('email'),
+      amount: amountInKobo,
+      currency: 'KES',
+      ref: '' + (Math.floor(Math.random() * 1_000_000_000) + 1),
+
+      callback({ reference }) {
+        // ---------- 3. Retry-Based Verification ----------
+        async function verifyPayment(reference, attempts = 3, delay = 3000) {
+          for (let i = 0; i < attempts; i++) {
+            try {
+              const res = await fetch('https://neatgarms-risi.onrender.com/api/paystack/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ reference })
+              });
+
+              const data = await res.json();
+
+              if (data.status) {
+                alert('✅ Payment verified');
+
+                const hiddenBtn = document.getElementById('pay-now-btn');
+                if (hiddenBtn) hiddenBtn.click();
+                else console.warn('Hidden “submit” button not found');
+                return; // ✅ Exit after success
+              } else {
+                console.warn(`Attempt ${i + 1} failed: ${data.message}`);
+              }
+
+            } catch (error) {
+              console.error(`Attempt ${i + 1} error:`, error);
+            }
+
+            if (i < attempts - 1) {
+              await new Promise(resolve => setTimeout(resolve, delay));
+            }
+          }
+
+          alert('⚠️ We could not verify your payment yet. Please try again or contact support.');
+        }
+
+        verifyPayment(reference); // 🚀 Trigger retry logic
+      },
+
+      onClose() {
+        const email = val('email');
+        if (email) {
+          fetch('https://neatgarms-risi.onrender.com/api/payment-cancelled', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+        }
+
+        alert('⛔ Payment cancelled');
+      }
+    });
+
+    handler.openIframe();
+  });
+</script>
+
 
 
 
