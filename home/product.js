@@ -254,7 +254,6 @@ document.getElementById('buy-now').addEventListener('click', function () {
 
 
 
-
 // Ensure the correct ID is targeted
 document.getElementById('share-btn').addEventListener('click', async () => {
   // Get product details
@@ -263,35 +262,36 @@ document.getElementById('share-btn').addEventListener('click', async () => {
   const oldPrice = document.querySelector('.old-price')?.textContent || 'No Old Price';
   const newPrice = document.querySelector('.new-price')?.textContent || 'No New Price';
   const productStatus = document.getElementById('product-status')?.textContent || 'Status not available';
-  const shareUrl = window.location.href; // This page should already have <meta property="og:image" ...>
+  const currentImageSrc = document.getElementById('main-image')?.src || 'No Image Available';
+  const shareUrl = window.location.href;
 
   // Create the share text
   const shareText = `
-Check out this product from NeatGarms!
-🧵 Brand: ${productBrand}
-👕 Name: ${productName}
-💰 Old Price: ${oldPrice}
-🔥 New Price: ${newPrice}
-📦 Status: ${productStatus}
-👇 View it here:
-`;
+    Check out this product!
+    Brand: ${productBrand}
+    Name: ${productName}
+    Old Price: ${oldPrice}
+    New Price: ${newPrice}
+    Status: ${productStatus}
+    Image: ${currentImageSrc}
+  `;
 
   // Check if the Web Share API is supported
   if (navigator.share) {
     try {
       await navigator.share({
-        title: `${productBrand} - ${productName} | NeatGarms`,
+        title: `${productBrand} - ${productName}`,
         text: shareText,
-        url: shareUrl, // The link shared should contain proper <meta> tags to show thumbnail on platforms
+        url: shareUrl,
       });
     } catch (error) {
       console.error('Sharing failed', error);
     }
   } else {
     // Fallback: Copy details to clipboard
-    const clipboardText = `${shareText}\n${shareUrl}`;
+    const clipboardText = `${shareText}\nProduct URL: ${shareUrl}`;
     navigator.clipboard.writeText(clipboardText).then(() => {
-      alert('Product details copied to clipboard! Share it with friends.');
+      alert('Product details copied to clipboard!');
     }).catch(err => {
       console.error('Failed to copy to clipboard', err);
     });
