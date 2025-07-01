@@ -1005,7 +1005,7 @@ body.fade-out {
 
 @media (max-width: 767px) {
   .promo-bg2 {
-    background: url('shoot/large\ phone1.avif') no-repeat center center/cover;
+    background: url('shoot/large phone1.avif') no-repeat center center/cover;
   }
 }
 
