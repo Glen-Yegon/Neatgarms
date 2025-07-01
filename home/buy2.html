@@ -458,9 +458,10 @@ if (storedProduct) {
     
         const result = await response.json();
         if (result.success) {
-          alert("Pay Now form submitted successfully!");
+         alert("Order confirmed. An email with the details is on its way to your inbox.");
+
         } else {
-          alert("Error submitting the Pay Now form.");
+          alert("We’re sorry, something went wrong. Please try again or reach out to our support team for assistance.");
         }
       } catch (error) {
         console.error("Error:", error);

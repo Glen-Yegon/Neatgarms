@@ -443,9 +443,9 @@ document.querySelectorAll("#fields-container input").forEach((input) => {
         loadingMessage.style.display = "none";
     
         if (result.success) {
-          alert("Pay Now form submitted successfully!");
+         alert("Order confirmed. An email with the details is on its way to your inbox.");
         } else {
-          alert("Error submitting the Pay Now form.");
+          alert("We’re sorry, something went wrong. Please try again or reach out to our support team for assistance.");
         }
       } catch (error) {
         console.error("Error:", error);
