@@ -935,7 +935,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['7 1/4', '7 1/2', '7 3/4'],          // img 3
     ['7 1/4', '7 1/2', '7 3/4'],          // img 4
     ['7 1/4', '7 1/2', '7 3/4'], 
-    ['7 1/4', '7 1/2', '7 3/4'],   
+    ['7 1/4*', '7 1/2*', '7 3/4*'],   
     ['Pick Your Choice'],         // img 5
     /* add more if you add more pictures */
   ];
@@ -957,29 +957,41 @@ document.addEventListener('DOMContentLoaded', () => {
      ------------------------------------------------------------------ */
   let currentIndex = 0;
 
-  function renderSizeButtons(sizes = []) {
-    sizeSelection.innerHTML = '';
-    if (!sizes.length) return;
+function renderSizeButtons(sizes = []) {
+  sizeSelection.innerHTML = '';
+  if (!sizes.length) return;
 
-    const h4 = document.createElement('h4');
-    h4.textContent = 'Available Sizes / Style:';
-    sizeSelection.appendChild(h4);
+  const h4 = document.createElement('h4');
+  h4.textContent = 'Available Sizes / Style:';
+  sizeSelection.appendChild(h4);
 
-    sizes.forEach(size => {
-      const btn = document.createElement('button');
-      btn.className     = 'size-btn';
-      btn.dataset.size  = size;
-      btn.textContent   = size;
+  sizes.forEach(size => {
+    const isSoldOut = size.includes('*');
+    const cleanSize = size.replace('*', '');
 
+    const btn = document.createElement('button');
+    btn.className = 'size-btn';
+    btn.textContent = cleanSize;
+
+    if (isSoldOut) {
+      btn.classList.add('unavailable');
+      btn.disabled = false; // still clickable
+      btn.addEventListener('click', () => {
+        alert('Sorry, this size is currently sold out.');
+      });
+    } else {
+      btn.dataset.size = cleanSize;
       btn.addEventListener('click', () => {
         sizeSelection.querySelectorAll('.size-btn')
                      .forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
       });
+    }
 
-      sizeSelection.appendChild(btn);
-    });
-  }
+    sizeSelection.appendChild(btn);
+  });
+}
+
 
   function showImage(index) {
     if (index < 0 || index >= productData.images.length) return;
