@@ -24,31 +24,35 @@ window.canvases = canvases;
   
 // Function to Clear All Canvases but Keep Background Image
 function clearAllCanvases() {
-  console.log("Clearing all canvases..."); // Debugging log
+  const confirmClear = confirm(    "Are you sure you want to clear your current design?\n\nThis will remove all added elements but keep the background image.\n\nThis action cannot be undone.");
+  
+  if (!confirmClear) {
+    console.log("Canvas clearing canceled by user.");
+    return;
+  }
+
+  console.log("Clearing all canvases...");
 
   canvases.forEach((canvas, index) => {
-      // Get the background image before clearing
-      let bgImage = null;
-      if (canvas.backgroundImage) {
-          bgImage = canvas.backgroundImage;
-      }
+    // Get the background image before clearing
+    let bgImage = canvas.backgroundImage || null;
 
-      // Clear all objects on the canvas
-      canvas.clear();
+    // Clear all objects on the canvas
+    canvas.clear();
 
-      // Restore the background image if it exists
-      if (bgImage) {
-          canvas.setBackgroundImage(bgImage, canvas.renderAll.bind(canvas));
-      }
+    // Restore the background image if it exists
+    if (bgImage) {
+      canvas.setBackgroundImage(bgImage, canvas.renderAll.bind(canvas));
+    }
 
-      // Remove saved data from localStorage
-      localStorage.removeItem(`canvas-${index}`);
+    // Remove saved data from localStorage
+    localStorage.removeItem(`canvas-${index}`);
 
-      console.log(`Canvas-${index} cleared, background image restored!`);
+    console.log(`Canvas-${index} cleared, background image restored!`);
   });
 
   console.log("All canvases successfully cleared while keeping backgrounds!");
-  alert("Canvas Cleared successfully!")
+  alert("Canvas cleared successfully!");
 }
 
 // Attach Click Event to the Button
@@ -623,6 +627,7 @@ const addTextButton = document.getElementById("addTextButton");
 
 // Menu for text editing
 const textMenu = document.getElementById("textMenu");
+const manualCloseBtn = document.querySelector(".manual-close-btn");
 const deleteButton = document.getElementById("deleteText");
 const fontSizeInput = document.getElementById("fontSizeInput");
 const fontWeightInput = document.getElementById("fontWeightInput");
@@ -645,6 +650,10 @@ textInput.addEventListener("keydown", function (e) {
   }
 });
 
+manualCloseBtn.addEventListener("click", closeTextMenuManually);
+function closeTextMenuManually() {
+  textMenu.style.display = "none";
+}
 
 
 
@@ -711,16 +720,17 @@ canvases.forEach((canvas) => {
 function showTextMenu(activeObject, canvas) {
   textMenu.style.display = "block";
 
-  const canvasRect = canvas.wrapperEl.getBoundingClientRect();
-  const objectRect = activeObject.getBoundingRect();
-  textMenu.style.left = `${canvasRect.left + objectRect.left + objectRect.width / 2 - textMenu.offsetWidth / 2}px`;
-  textMenu.style.top = `${canvasRect.top + objectRect.top - 40 - textMenu.offsetHeight}px`;
+  // REMOVE OR COMMENT OUT THIS SECTION:
+  // const canvasRect = canvas.wrapperEl.getBoundingClientRect();
+  // const objectRect = activeObject.getBoundingRect();
+  // textMenu.style.left = `${canvasRect.left + objectRect.left + objectRect.width / 2 - textMenu.offsetWidth / 2}px`;
+  // textMenu.style.top = `${canvasRect.top + objectRect.top - 40 - textMenu.offsetHeight}px`;
 
   // Populate menu options with the object's current properties
   fontSizeInput.value = activeObject.fontSize || 24;
   fontWeightInput.value = activeObject.fontWeight || "normal";
   colorPicker.value = activeObject.fill || "#000000";
-  
+
   // Attach a one-time listener to hide the menu as soon as the object starts moving.
   const handleMoving = function(e) {
     if (e.target === activeObject) {
@@ -740,10 +750,12 @@ function showTextMenu(activeObject, canvas) {
   canvas.on('object:modified', handleModified);
 }
 
+
 // Hide the text menu
 function hideTextMenu() {
   textMenu.style.display = "none";
 }
+
 
 
 
@@ -814,9 +826,6 @@ document.getElementById("redoButton").addEventListener("click", redo);
 
 
 
-
-
-
 // Update font size when the user changes it in the menu
 fontSizeInput.addEventListener("input", function () {
   const canvas = canvases[currentSlide];
@@ -824,7 +833,6 @@ fontSizeInput.addEventListener("input", function () {
   if (activeObject && activeObject.type === "textbox") {
     activeObject.set("fontSize", parseInt(fontSizeInput.value, 10) || 24);
     canvas.renderAll();
-
     
   }
 });
@@ -837,7 +845,6 @@ fontWeightInput.addEventListener("input", function () {
     activeObject.set("fontWeight", fontWeightInput.value || "normal");
     canvas.renderAll();
 
-
   }
 });
 
@@ -848,7 +855,6 @@ colorPicker.addEventListener("input", function () {
   if (activeObject && activeObject.type === "textbox") {
     activeObject.set("fill", colorPicker.value);
     canvas.renderAll();
-
  
   }
 });
@@ -922,6 +928,41 @@ document.getElementById("overlineInput").addEventListener("change", updateTextDe
 
 
 
+// Update Text Align
+document.getElementById("textAlignInput").addEventListener("change", function () {
+  const canvas = canvases[currentSlide];
+  const activeObject = canvas.getActiveObject();
+  if (activeObject && activeObject.isType("textbox")) {
+    activeObject.set({
+      textAlign: this.value
+    });
+    canvas.renderAll();
+  }
+});
+
+// Update Letter Spacing
+document.getElementById("letterSpacingInput").addEventListener("input", function () {
+  const canvas = canvases[currentSlide];
+  const activeObject = canvas.getActiveObject();
+  if (activeObject && activeObject.isType("textbox")) {
+    activeObject.set({
+      charSpacing: parseInt(this.value) * 10 // fabric.js uses charSpacing in 1/10 px units
+    });
+    canvas.renderAll();
+  }
+});
+
+// Update Line Height
+document.getElementById("lineHeightInput").addEventListener("input", function () {
+  const canvas = canvases[currentSlide];
+  const activeObject = canvas.getActiveObject();
+  if (activeObject && activeObject.isType("textbox")) {
+    activeObject.set({
+      lineHeight: parseFloat(this.value)
+    });
+    canvas.renderAll();
+  }
+});
 
 
 
@@ -941,8 +982,27 @@ duplicateButton.addEventListener("click", function () {
   }
 });
 
-// Delete the selected text object
+// Delete selected text object with the Delete Button
 deleteButton.addEventListener("click", function () {
+  deleteSelectedText();
+});
+
+// Delete with Backspace key
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Backspace" || e.key === "Delete") {
+    // Prevent default only when an object is selected and editable
+    const canvas = canvases[currentSlide];
+    const activeObject = canvas.getActiveObject();
+
+    if (activeObject && activeObject.type === "textbox" && !activeObject.isEditing) {
+      e.preventDefault(); // Prevent browser from navigating back
+      deleteSelectedText();
+    }
+  }
+});
+
+// Shared delete function
+function deleteSelectedText() {
   const canvas = canvases[currentSlide];
   const activeObject = canvas.getActiveObject();
   if (activeObject && activeObject.type === "textbox") {
@@ -950,7 +1010,44 @@ deleteButton.addEventListener("click", function () {
     canvas.renderAll();
     hideTextMenu();
   }
+}
+
+document.getElementById("fontStyleInput").addEventListener("change", function () {
+  const canvas = canvases[currentSlide];
+  const activeObject = canvas.getActiveObject();
+  if (activeObject && activeObject.type === "textbox") {
+    activeObject.set("fontStyle", this.value);
+    canvas.renderAll();
+  }
 });
+document.getElementById("listFormatInput").addEventListener("change", function () {
+  const format = this.value;
+  const canvas = canvases[currentSlide];
+  const activeObject = canvas.getActiveObject();
+
+  if (activeObject && activeObject.type === "textbox") {
+    const lines = activeObject.text.split("\n");
+
+    let formattedLines = [];
+
+    if (format === "bullet") {
+      formattedLines = lines.map(line => line.startsWith("• ") ? line : `• ${line}`);
+    } else if (format === "numbered") {
+      formattedLines = lines.map((line, i) => /^\d+\./.test(line) ? line : `${i + 1}. ${line}`);
+    } else {
+      // Remove bullets or numbers
+      formattedLines = lines.map(line => line.replace(/^•\s+|\d+\.\s+/, ""));
+    }
+
+    activeObject.set("text", formattedLines.join("\n"));
+    canvas.renderAll();
+  }
+});
+
+//superscript and subscript
+
+
+
 const fontFamilyInput = document.getElementById("fontFamilyInput");
 
 // Change font family when a new option is selected
@@ -964,15 +1061,18 @@ fontFamilyInput.addEventListener("change", function () {
   }
 });
 
+
+
+
 // Update the dropdown to match the active text object's font family when highlighted
-canvas.on("selection:created", function () {
-  const activeObject = canvas.getActiveObject();
+canvases[currentSlide].on("selection:created", function () {
+  const activeObject = canvases[currentSlide].getActiveObject();
   if (activeObject && activeObject.type === "textbox") {
     fontFamilyInput.value = activeObject.fontFamily || "Arial";
   }
 });
 
-canvas.on("selection:updated", function () {
+canvases[currentSlide].on("selection:updated", function () {
   const activeObject = canvas.getActiveObject();
   if (activeObject && activeObject.type === "textbox") {
     fontFamilyInput.value = activeObject.fontFamily || "Arial";
@@ -1148,6 +1248,104 @@ document.getElementById("removeBg").addEventListener("click", async () => {
       alert("An error occurred while processing the image.");
   }
 });
+
+
+
+//layering of objects from the main menu
+let currentSlide = 0; // Default to the first canvas
+
+const layerOptions = document.getElementById("layerOptions");
+const layerControlBtn = document.getElementById("layerControlBtn");
+
+// Toggle layer options visibility on button click
+layerControlBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // Prevent it from closing immediately
+  layerOptions.classList.toggle("visible");
+});
+
+// Close the menu when clicking anywhere else on the screen
+document.addEventListener("click", function (e) {
+  if (!layerControlBtn.contains(e.target) && !layerOptions.contains(e.target)) {
+    layerOptions.classList.remove("visible");
+  }
+});
+
+// Manual method to hide menu (can be called when changing slides etc.)
+function hideLayerMenu() {
+  layerOptions.classList.remove("visible");
+}
+
+// Show a quick toast message
+function showToast(message) {
+  const toast = document.createElement("div");
+  toast.innerText = message;
+  toast.style.position = "fixed";
+  toast.style.bottom = "20px";
+  toast.style.right = "20px";
+  toast.style.background = "#333";
+  toast.style.color = "#fff";
+  toast.style.padding = "10px 15px";
+  toast.style.borderRadius = "8px";
+  toast.style.zIndex = 9999;
+  toast.style.fontFamily = "Poppins, sans-serif";
+  toast.style.fontSize = "14px";
+  toast.style.boxShadow = "0 4px 10px rgba(0,0,0,0.2)";
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 1500);
+}
+
+// Flash the object with red stroke briefly
+function flashObject(obj, canvas) {
+  obj.set({
+    stroke: 'red',
+    strokeWidth: 2
+  });
+  canvas.renderAll();
+
+  setTimeout(() => {
+    obj.set({ stroke: null, strokeWidth: 0 });
+    canvas.renderAll();
+  }, 500);
+}
+
+// Bring to front
+function bringToFront() {
+  const canvas = canvases[currentSlide];
+  const obj = canvas.getActiveObject();
+  if (obj) {
+    canvas.bringToFront(obj);
+    canvas.renderAll();
+    flashObject(obj, canvas);
+    showToast("Brought to Front");
+  }
+}
+
+// Send to back
+function sendToBack() {
+  const canvas = canvases[currentSlide];
+  const obj = canvas.getActiveObject();
+  if (obj) {
+    canvas.sendToBack(obj);
+    canvas.renderAll();
+    flashObject(obj, canvas);
+    showToast("Sent to Back");
+  }
+}
+
+// Send to middle
+function sendToMiddle() {
+  const canvas = canvases[currentSlide];
+  const obj = canvas.getActiveObject();
+  if (obj) {
+    const objects = canvas.getObjects();
+    const midIndex = Math.floor(objects.length / 2);
+    canvas.remove(obj);
+    canvas.insertAt(obj, midIndex);
+    canvas.renderAll();
+    flashObject(obj, canvas);
+    showToast("Sent to Middle");
+  }
+}
 
 
 

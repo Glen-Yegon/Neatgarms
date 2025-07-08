@@ -11,17 +11,30 @@
 
    <!-- Canonical URL -->
   <link rel="canonical" href="https://neatgarms.com/customization.html" />
-  <link rel="stylesheet" href="custom.min.css">
+  <link rel="stylesheet" href="custom.css">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
-  
+  <!-- Google Font: Poppins -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- Web Manifest -->
   <link rel="manifest" href="/site.webmanifest?v=1" />
+
+  <!-- Group 1 -->
+<link href="https://fonts.googleapis.com/css2?family=Arial+Black&family=Candara&family=Cinzel&family=Cinzel+Decorative&family=Consolas&family=Copperplate&family=Courgette&family=Georgia&family=Helvetica&family=Impact&family=Lucida+Console&display=swap" rel="stylesheet">
+
+<!-- Group 2 -->
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Montserrat&family=Open+Sans&family=Pacifico&family=Poppins&family=Quicksand&family=Raleway&family=Roboto&family=Sacramento&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+<!-- Group 3 -->
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&family=Playfair+Display&family=Anton&family=Fjalla+One&family=Abril+Fatface&family=Amatic+SC&family=Varela+Round&family=Zilla+Slab&family=Merriweather&family=Bree+Serif&display=swap" rel="stylesheet">
+
+<!-- Additional Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Droid+Sans&family=Droid+Serif&display=swap" rel="stylesheet">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
@@ -76,20 +89,41 @@
 
   <header class="navbar">
     <div class="company-name">
-      <h1>NEATGARMS</h1>
+    <a href="index.html" class="heading">  <h1>NEATGARMS</h1> </a>
     </div>
     <a href="item.html" class="back-button">← Back</a>
   </header>
 
 <!-- Menu -->
 <div id="menu">
-  <i id="addText" class="fas fa-font" title="Add Text"></i>
+  <i id="addText" class="fas fa-font" title="Add Text" ></i>
   <i id="addGraphic" class="fas fa-image" title="Add Graphic"></i>
-  <i id="clearCanvasBtn" class="fas fa-trash" title="Clear Canvas"></i>
-  <i id="saveButton" class="fas fa-save" title="Save Design"></i>
+    <!-- Layer Control Button -->
+<div class="layer-control-container">
+  <button id="layerControlBtn" title="Arrange Layers">
+    <i class="fas fa-layer-group"></i>
+  </button>
+
+<div id="layerOptions" class="layer-options">
+  <button onclick="bringToFront()">
+    <i class="fas fa-level-up-alt"></i> Bring to Front
+  </button>
+  <button onclick="sendToBack()">
+    <i class="fas fa-level-down-alt"></i> Send to Back
+  </button>
+  <button onclick="sendToMiddle()">
+    <i class="fas fa-arrows-alt-v"></i> Send to Middle
+  </button>
+</div>
+</div>
   <!-- Undo and Redo Icons -->
   <i id="undoButton" class="fas fa-undo" title="Undo"></i>
   <i id="redoButton" class="fas fa-redo" title="Redo"></i> 
+  <i id="clearCanvasBtn" class="fas fa-trash" title="Clear Canvas"></i>
+  <i id="saveButton" class="fas fa-save" title="Save Design"></i>
+
+
+
 
 </div>
 
@@ -1513,43 +1547,23 @@
 
     <!-- Text Input Form (Initially Hidden) -->
 <div id="textFormContainer" class="text-form-container">
+
   <input type="text" id="textInput" placeholder="Enter your text here" />
   <button id="addTextButton">Add Text</button>
+      <button class="close-text-form-btn" onclick="closeTextForm()">Close</button>
+
+ 
 </div>
 
 <!--text menu options-->
 <div id="textMenu" style="display: none; position: absolute; padding: 10px; z-index: 1000;">
-  <label>
-    Font Size:
-    <input type="number" id="fontSizeInput" style="width: 50px;" />
-  </label>
-  <label>
-    Font Weight:
-    <select id="fontWeightInput">
-      <option value="normal">Normal</option>
-      <option value="bold">Bold</option>
-      <option value="lighter">Light</option>
-    </select>
-  </label>
-  
+
+    <button class="manual-close-btn" onclick="closeTextMenuManually()">&times;</button>
 
 
-
-
-
-
-<!--text color option-->
-  <label>
-    Text Color:
-    <input type="color" id="colorPicker" />
-  </label>
-
-    <!-- NEW: Outline Color Option -->
-    <label>
-      Outline Color:
-      <input type="color" id="outlineColorPicker" />
-    </label>
-
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 10px; color: #0a0202;">
+  Font Styling
+</h4>
 
   <label>
     Font Family:
@@ -1561,8 +1575,6 @@
       <option value="Tahoma" style="font-family: Tahoma;">Neat</option>
       <option value="Courier New" style="font-family: 'Courier New';">Neat</option>
       <option value="Comic Sans MS" style="font-family: 'Comic Sans MS';">Neat</option>
-      
-      <!-- Additional font options -->
       <option value="Arial Black" style="font-family: 'Arial Black';">Neat</option>
       <option value="Impact" style="font-family: Impact;">Neat</option>
       <option value="Lucida Console" style="font-family: 'Lucida Console';">Neat</option>
@@ -1626,6 +1638,77 @@
   </label>
 
   <label>
+    Font Size:
+    <input type="number" id="fontSizeInput" style="width: 50px;" />
+  </label>
+  <label>
+    Font Weight:
+    <select id="fontWeightInput">
+      <option value="normal">Normal</option>
+      <option value="bold">Bold</option>
+      <option value="lighter">Light</option>
+    </select>
+  </label>
+  <br>
+  
+<!--text color option-->
+  <label>
+    Text Color:
+    <input type="color" id="colorPicker" />
+  </label>
+
+    <!-- NEW: Outline Color Option -->
+    <label>
+      Outline Color:
+      <input type="color" id="outlineColorPicker" />
+    </label>
+
+
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #000000;">
+  Text Layout
+</h4>
+
+<label>
+  Text Align:
+  <select id="textAlignInput">
+    <option value="left">Left</option>
+    <option value="center">Center</option>
+    <option value="right">Right</option>
+    <option value="justify">Justify</option>
+  </select>
+</label>
+
+<!-- Letter Spacing Option -->
+<label>
+  Letter Spacing:
+  <input type="number" id="letterSpacingInput" style="width: 50px;" value="0" />
+</label>
+
+<!-- Line Height Option -->
+<label>
+  Line Height:
+  <input type="number" id="lineHeightInput" style="width: 50px;" step="0.1" value="1.2" />
+</label>
+
+<!-- 📁 TEXT STYLING SECTION -->
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #000000;">Text Styling</h4>
+
+<label>
+  Font Style:
+  <select id="fontStyleInput">
+    <option value="normal">Normal</option>
+    <option value="italic">Italic</option>
+  </select>
+</label>
+
+
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #090202;">
+  Text Effects
+</h4>
+
+
+
+  <label>
     Shadow X:
     <input type="number" id="shadowXInput" value="2" style="width: 50px; border-radius: 10px;">
   </label>
@@ -1643,7 +1726,10 @@
   </label>
 
 
-  <!-- Text Decoration Options -->
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #000000;">
+  Text Decoration
+</h4>
+
 <label>
   Underline:
   <input type="checkbox" id="underlineInput">
@@ -1658,11 +1744,31 @@
 </label>
 
   
+<!--  TEXT LAYOUT SECTION -->
+<h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #000000;">Text Listing</h4>
+
+<label>
+  List Format:
+  <select id="listFormatInput">
+    <option value="none">None</option>
+    <option value="bullet">Bullet List</option>
+    <option value="numbered">Numbered List</option>
+  </select>
+</label>
+
+
+
   
-  <!--duplicate button-->
+ <h4 style="font-family: 'Dream Avenue', cursive; font-size: 16px; margin-top: 16px; color: #020000;">
+  Actions
+</h4>
     <i class="fas fa-copy" id="duplicateText" title="Duplicate" style="font-size: 20px; color: black; border:transparent; margin-left: 5px; margin-right:5px;"></i>
 
-    <button id="deleteText" class="fas fa-trash">Delete</button>
+<button id="deleteText" style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background-color: #000000; color: rgb(128, 128, 128); border: none; border-radius: 6px; cursor: pointer;">
+  <i class="fas fa-trash"></i>
+
+</button>
+
 </div>
 
 
@@ -1692,7 +1798,8 @@
 </div>
 
 
-  <script src="custom.min.js" defer></script>
+
+  <script src="custom.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
@@ -1833,6 +1940,18 @@ requestAnimationFrame(() => {
   document.body.style.opacity = 1;
 });
 
+</script>
+
+
+<script>
+  function closeTextForm() {
+  document.getElementById("textFormContainer").style.display = "none";
+
+  function closeTextMenuManually() {
+  textMenu.style.display = "none";
+}
+
+}
 </script>
 
 </body>
