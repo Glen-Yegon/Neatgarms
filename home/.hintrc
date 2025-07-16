@@ -8,7 +8,9 @@
       "default",
       {
         "ignore": [
-          "video[playsinline]"
+          "video[playsinline]",
+          "meta[name=theme-color]",
+          "img[fetchpriority]"
         ]
       }
     ],
@@ -31,6 +33,16 @@
       "default",
       {
         "list": "off"
+      }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "backdrop-filter",
+          "scrollbar-width",
+          "scrollbar-width: none"
+        ]
       }
     ]
   }
