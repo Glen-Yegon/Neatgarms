@@ -320,7 +320,7 @@ document.getElementById('submit-payment').addEventListener('click', async () => 
 */
 
 
-
+/*
 const cityInput = document.getElementById('delivery-city');
   const nairobiAreasDiv = document.getElementById('nairobi-areas');
   const nairobiSubareaSelect = document.getElementById('nairobi-subarea');
@@ -384,4 +384,4 @@ const cityInput = document.getElementById('delivery-city');
     updateShippingFee(fee);
 
   });
-  
+  */

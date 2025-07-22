@@ -698,3 +698,38 @@ select {
 }
 
 .pay-now-btnn { display:none; } 
+
+
+
+.size-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.size-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.size-row label {
+  font-weight: 100;
+  font-size: 1.1rem;
+  color: #333;
+  flex: 0 0 50px;
+}
+
+.size-row input {
+  flex: 1;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.size-row input:focus {
+  border-color: #222;
+}

@@ -117,42 +117,43 @@
   </div>
   
 
-  <!-- Choose Your Design Section -->
-<div class="form-section" style="margin-left: 7px; margin-right: 7px;">
-    <h3 data-aos="fade-up" data-aos-delay="400">Choose Your Design</h3>
-    <div id="design-options"></div>
-  </div>
-  
   
   
 
   <!-- Multi-Section Form -->
 <div class="multi-section-form">
 
-  <div class="form-section">
-    <h3 data-aos="fade-up" data-aos-delay="400">Size Selection</h3>
-  
-    <!-- Input for number of items -->
-<p class="pp" data-aos="fade-up" data-aos-delay="400">
-  Tick the box to pick your custom clothing sizes.<br>
-  Happy shopping and stay stylish 😊<br>
-</p>
+<div class="form-section">
+  <h3 data-aos="fade-up" data-aos-delay="400">Select Your Sizes</h3>
+  <p class="pp" data-aos="fade-up" data-aos-delay="400">
+    Choose quantities for each size below.<br>
+    Happy shopping and stay stylish 😊
+  </p>
 
-    <label for="item-count" data-aos="fade-up" data-aos-delay="400" data-aos="fade-up" data-aos-delay="400">Number of Items</label>
-    <input type="number" id="item-count" placeholder="Enter number of items" min="1" max="10" data-aos="fade-up" data-aos-delay="400">
-  
-    <!-- Radio buttons for selection -->
-
-  
-    <div class="radio-container">
-      <input type="checkbox" id="size-radio" class="radio-input">
-      <label for="size-radio" class="radio-label" data-aos="fade-up" data-aos-delay="500">Size</label>
+  <div class="size-selection">
+    <div class="size-row" data-aos="fade-up" data-aos-delay="450">
+      <label for="size-s">S</label>
+      <input type="number" id="size-s" name="size-s" min="0" placeholder="0">
     </div>
-  
-  
-    <!-- Dropdown sections -->
-    <div id="size-dropdown"></div>
+    <div class="size-row" data-aos="fade-up" data-aos-delay="500">
+      <label for="size-m">M</label>
+      <input type="number" id="size-m" name="size-m" min="0" placeholder="0">
+    </div>
+    <div class="size-row" data-aos="fade-up" data-aos-delay="550">
+      <label for="size-l">L</label>
+      <input type="number" id="size-l" name="size-l" min="0" placeholder="0">
+    </div>
+    <div class="size-row" data-aos="fade-up" data-aos-delay="600">
+      <label for="size-xl">XL</label>
+      <input type="number" id="size-xl" name="size-xl" min="0" placeholder="0">
+    </div>
+    <div class="size-row" data-aos="fade-up" data-aos-delay="650">
+      <label for="size-2xl">2XL</label>
+      <input type="number" id="size-2xl" name="size-2xl" min="0" placeholder="0">
+    </div>
   </div>
+</div>
+
 
   
     <!-- Contact Section -->
@@ -237,13 +238,15 @@
   </select>
 </div>
 
-<!-- Shipping Fee Display -->
+<!-- Shipping Info Message -->
 <div class="form-section">
-<div style="margin-top: 5px;">
-  <strong>Shipping Fee:</strong> <span id="shipping-fee">KSh 0</span>
+  <div style="margin-top: 15px;">
+    <strong>Shipping Notice:</strong>
+    <p style="margin: 5px 0; color: #444;">
+      After placing your order, our team will get in touch to arrange delivery. Please note that delivery fees apply and may vary based on your location.
+    </p>
+  </div>
 </div>
-</div>
-
 
  
 
@@ -402,13 +405,6 @@
        customAlert.remove();
      }, 5000);
 
-      // Validate item count
-      const itemCount = document.getElementById("item-count").value;
-      if (!itemCount || itemCount < 1) {
-        alert("Please enter a valid number of items.");
-        return;
-      }
-    
       // Collect Contact Info
       const userEmail = document.getElementById("email").value;
       const userPhone = document.getElementById("phone-number").value;
@@ -419,23 +415,12 @@
       }
     
 const selectedCity = document.getElementById("delivery-city").value.trim();
-const selectedArea = document.getElementById("nairobi-subarea").value;
-
-
 if (!selectedCity) {
   alert("Enter the city you live in");
   loadingMessage.style.display = "none";
   return;
 }
 
-if (selectedCity.toLowerCase() === "nairobi" && !selectedArea) {
-  alert("Please select your area in Nairobi");
-  loadingMessage.style.display = "none";
-  return;
-}
-
-
-const feeText = document.getElementById("shipping-fee").textContent;
 
 const deliveryInfo = {
   country: document.getElementById("country-region").value || "N/A",
@@ -444,10 +429,8 @@ const deliveryInfo = {
   address: document.getElementById("address").value || "N/A",
   apartment: document.getElementById("apartment-suite").value || "N/A",
   city: selectedCity || "N/A",
-  area: selectedCity.toLowerCase() === "nairobi" ? selectedArea || "N/A" : "",  // << added this
   postalCode: document.getElementById("postal-code").value || "N/A",
   phone: document.getElementById("phone").value || "N/A",
-  shippingFee: feeText || "KSh 0"
 };
 
     
@@ -470,30 +453,29 @@ const deliveryInfo = {
   
     
       // Prepare data object
-      const data = {
-        itemCount,
-        design: "", // Single design applied to all items
+      const data = { 
         sizes: [],
         contact: { email: userEmail, phone: userPhone, newsOffers },
         delivery: deliveryInfo,
         billing: billingInfo,
       };
     
-      // Collect Selected Design (radio input)
-      const selectedDesign = document.querySelector('input[name="design"]:checked');
-      if (selectedDesign) {
-        data.design = selectedDesign.value;
-      } else {
-        alert("Please select a design before proceeding.");
-        return;
-      }
-    
-      // Collect Size Inputs if selected
-      if (document.getElementById("size-radio").checked) {
-        document.querySelectorAll("#size-dropdown input").forEach((input) => {
-          data.sizes.push(input.value || "N/A");
-        });
-      }
+// Collect sizes
+const sizeInputs = [
+  { id: 'size-s', label: 'S' },
+  { id: 'size-m', label: 'M' },
+  { id: 'size-l', label: 'L' },
+  { id: 'size-xl', label: 'XL' },
+  { id: 'size-2xl', label: '2XL' }
+];
+
+sizeInputs.forEach(({ id, label }) => {
+  const input = document.getElementById(id);
+  const quantity = parseInt(input.value);
+  if (!isNaN(quantity) && quantity > 0) {
+    data.sizes.push({ size: label, quantity });
+  }
+});
     
       // --- Collect Order Summary Dropdown Information ---
       // Here, we assume that checkoutImages is an array of Base64 image strings.
@@ -554,38 +536,8 @@ document.getElementById('paystack-btn').addEventListener('click', function () {
       return;
     }
   }
-  if (val('delivery-city').toLowerCase() === 'nairobi' && !val('nairobi-subarea')) {
-    alert('Please select an area in Nairobi.');
-    document.getElementById('nairobi-subarea').focus();
-    return;
-  }
 
-  /* --------- 1. Validate Size Section --------- */
-  const sizeCheckbox = document.getElementById('size-radio');
-  const sizeDropdown = document.getElementById('size-dropdown');
-  if (!sizeCheckbox.checked) {
-    alert('Please tick the size checkbox before proceeding.');
-    sizeCheckbox.focus();
-    return;
-  }
-  const filledSizeInputs = Array.from(sizeDropdown.querySelectorAll('input'))
-                                .filter(input => input.value.trim() !== '');
-  if (filledSizeInputs.length === 0) {
-    alert('Please fill in at least one size input.');
-    sizeDropdown.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
 
-  /* --------- 2. Validate Design Selection --------- */
-  const designInputs = document.querySelectorAll(
-    '#design-options input[type="radio"], #design-options input[type="checkbox"]'
-  );
-  const designChosen = Array.from(designInputs).some(input => input.checked);
-  if (!designChosen) {
-    alert('Please select at least one design option.');
-    document.getElementById('design-options').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
 
   /* --------- 3. Read Amount --------- */
   const displayPrice = document.getElementById('display-price').textContent;

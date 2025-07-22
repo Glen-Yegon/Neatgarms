@@ -36,7 +36,7 @@ app.set("trust proxy", true);
 // ✅ Allowed domains
 const allowedOrigins = [
   "https://neatgarms-six.vercel.app",
-  "http://127.0.0.1:5505",
+  "http://127.0.0.1:5506",
   "https://www.neatgarms.com",
   "https://neatgarms.com"
 ];
@@ -714,28 +714,25 @@ if (orderSummary) {
 app.post("/pay3-now", async (req, res) => {
   try {
     const {
-      itemCount,
-      design,
       sizes,
-      colors,
       contact,
       delivery,
       billing,
-      paymentMethod,
       orderSummary
     } = req.body;
 
     // --- Build the Admin Email (Plain Text) ---
     let emailContent = `New Pay Now Submission:\n\n`;
-    emailContent += `Number of Items: ${itemCount}\n`;
-    emailContent += `Selected Design: ${design}\n\n`;
 
-    // Order Details (custom options)
-    for (let i = 0; i < itemCount; i++) {
-      emailContent += `Item ${i + 1}:\n`;
-      emailContent += `  Design: ${design}\n`;
-      emailContent += `  Size: ${sizes[i] || "N/A"}\n`;
-    }
+// Order Details (custom options)
+emailContent += `Ordered Sizes:\n`;
+if (Array.isArray(sizes) && sizes.length > 0) {
+  sizes.forEach((item, index) => {
+    emailContent += `  ${index + 1}. Size: ${item.size} - Quantity: ${item.quantity}\n`;
+  });
+} else {
+  emailContent += `  No sizes selected.\n`;
+}
 
     // Contact Information
     emailContent += `Contact Information:\n`;
@@ -753,12 +750,6 @@ app.post("/pay3-now", async (req, res) => {
     emailContent += `  City: ${delivery.city}\n`;
     emailContent += `  Postal Code: ${delivery.postalCode}\n`;
     emailContent += `  Phone: ${delivery.phone}\n`;
-  emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
-
-
-if (delivery.city.toLowerCase() === "nairobi") {
-  emailContent += `Area (Nairobi): ${delivery.area}\n`;
-}
 
 
     // Billing Information
@@ -783,7 +774,6 @@ if (delivery.city.toLowerCase() === "nairobi") {
       orderSummaryContent += `  Item Name: ${orderSummary.itemName}\n`;
       orderSummaryContent += `  Price: KShs. ${orderSummary.itemPrice}\n`;
       orderSummaryContent += `  Discount Code: ${orderSummary.discountCode || "None"}\n`;
-      orderSummaryContent += `  Shipping Cost: ${orderSummary.shippingCost}\n\n`;
       if (orderSummary.images && orderSummary.images.length > 0) {
         orderSummaryContent += `  Attached Images: ${orderSummary.images.length} file(s) attached.\n`;
       }
@@ -825,12 +815,12 @@ if (delivery.city.toLowerCase() === "nairobi") {
     console.log("Pay Now Email sent to Admin:", adminInfo.response);
 
     // --- Build the Autoresponse Email to the User (HTML Email) ---
-    const autoResponse = {
-      from: '"Neatgarms" <info@neatgarms.com>', 
-      to: contact.email,
-      subject: "🧾 Your Order is Confirmed! | Neatgarms Ltd",
-      html: `
-<div style="font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+  const autoResponse = {
+  from: '"Neatgarms" <info@neatgarms.com>',
+  to: contact.email,
+  subject: "🧾 Your Order is Confirmed! | Neatgarms Ltd",
+  html: `
+<div style="font-family: 'poppins', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
 
   <div style="text-align: center;">
     <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
@@ -840,16 +830,24 @@ if (delivery.city.toLowerCase() === "nairobi") {
   <p style="font-size: 16px;">Thank you for your order with <strong>Neatgarms Ltd</strong>! We’re excited to get your merch to you. Your order is being processed and will be shipped soon.</p>
 
   <div style="margin: 20px 0; background: #fff; border-radius: 10px; padding: 16px;">
-    <h3 style="margin-bottom: 10px;">🛒 Order Details</h3>
+    <h3 style="margin-bottom: 10px;">👕 Selected Sizes</h3>
     <ul style="line-height: 1.6;">
-      <li><strong>Number of Items:</strong> ${itemCount}</li>
-      <li><strong>Selected Design:</strong> ${design}</li>
+      ${
+        Array.isArray(sizes) && sizes.length > 0
+          ? sizes
+              .map(
+                (item) =>
+                  `<li><strong>Size ${item.size}:</strong> ${item.quantity} item(s)</li>`
+              )
+              .join("")
+          : `<li>No sizes selected.</li>`
+      }
     </ul>
 
     <h3 style="margin-top: 20px;">🚚 Delivery Address</h3>
     <p>
       ${delivery.firstName} ${delivery.lastName}<br/>
-      ${delivery.address}${delivery.apartment ? ', ' + delivery.apartment : ''}<br/>
+      ${delivery.address}${delivery.apartment ? ", " + delivery.apartment : ""}<br/>
       ${delivery.city}, ${delivery.postalCode}<br/>
       ${delivery.country}<br/>
       <strong>Phone:</strong> ${delivery.phone}
@@ -873,22 +871,22 @@ if (delivery.city.toLowerCase() === "nairobi") {
   <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
 
   <h3 style="color: #333;">🔥 This Week's Top Picks</h3>
-        <table style="width: 100%; border-spacing: 16px 10px;">
-          <tr>
-            <td align="center">
-              <a href="https://www.neatgarms.com/tops.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Work Shirt</p>
-              </a>
-            </td>
-            <td align="center">
-              <a href="https://www.neatgarms.com/pants.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
-              </a>
-            </td>
-          </tr>
-        </table>
+  <table style="width: 100%; border-spacing: 16px 10px;">
+    <tr>
+      <td align="center">
+        <a href="https://www.neatgarms.com/tops.html" target="_blank">
+          <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee" width="140" style="border-radius: 4px;" />
+          <p style="margin: 8px 0;">Work Shirt</p>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://www.neatgarms.com/pants.html" target="_blank">
+          <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+          <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
+        </a>
+      </td>
+    </tr>
+  </table>
 
   <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
 
@@ -906,7 +904,6 @@ if (delivery.city.toLowerCase() === "nairobi") {
   <p style="margin-top: 30px; font-size: 14px; color: #666;">We can’t wait to see you rock your new fit! 😎</p>
   <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
 </div>
-
 
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
@@ -934,16 +931,15 @@ if (delivery.city.toLowerCase() === "nairobi") {
     </td>
   </tr>
 </table>
+  `,
+  attachments: [
+    {
+      filename: "order_summary_images.pdf",
+      path: pdfFilePath,
+    },
+  ],
+};
 
-
-      `,
-      attachments: [
-        {
-          filename: "order_summary_images.pdf",
-          path: pdfFilePath,
-        }
-      ]
-    };
     
     
 
