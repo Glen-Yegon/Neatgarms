@@ -157,7 +157,13 @@ body.fade-out {
   margin: 0;
   width: auto;
   transition: transform 0.5s ease-in-out;
+  filter: invert(1); /* Invert normally */
 }
+
+#navbar.sticky .logo img {
+  filter: invert(0); /* Normal color on sticky */
+}
+
 
 .navbar .logo img:hover {
   transform: rotate(360deg);
@@ -848,7 +854,7 @@ body.fade-out {
   /* 📱 Mobile Version: Override background image */
 @media (max-width: 767px) {
   .promo-bg {
-    background: url('new/large\ phone\ \(1\).avif') no-repeat center center/cover;
+    background: url('shoot/corpp.avif') no-repeat center center/cover;
   }
 }
 
@@ -1008,7 +1014,7 @@ body.fade-out {
 
 @media (max-width: 767px) {
   .promo-bg2 {
-    background: url('new/DSC07574.avif') no-repeat center center/cover;
+    background: url('new/lp16m.avif') no-repeat center center/cover;
   }
 }
 

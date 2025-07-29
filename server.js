@@ -908,7 +908,7 @@ if (Array.isArray(sizes) && sizes.length > 0) {
 <table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
   <tr>
     <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;background: transparent;">
     </td>
     <td style="vertical-align: top;">
       <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
@@ -916,16 +916,16 @@ if (Array.isArray(sizes) && sizes.length > 0) {
       <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
       <div style="margin-top: 8px;">
         <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;  background: transparent;">
         </a>
         <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;  background: transparent;">
         </a>
         <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;  background: transparent;">
         </a>
         <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline; background: transparent;">
         </a>
       </div>
     </td>
