@@ -11,7 +11,7 @@
 
    <!-- Canonical URL -->
   <link rel="canonical" href="https://neatgarms.com/customization.html" />
-  <link rel="stylesheet" href="custom.css">
+  <link rel="stylesheet" href="custom.min.">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
@@ -89,7 +89,7 @@
 
   <header class="navbar">
     <div class="company-name">
-    <a href="index.html" class="heading"> <h1>NEATGARMS</h1> </a>
+    <a href="item.html" class="heading"> <h1>Neat Customs</h1> </a>
     </div>
     <a href="item.html" class="back-button">← Back</a>
   </header>
@@ -130,8 +130,6 @@
 
 <section class="button-container">
   <button id="loadDesignButton" class="ld">Load Saved Designs</button>
-
-  <button id="removeBg" class="ldd"  type="button">Remove Background</button>
   
 </section>
 
@@ -162,7 +160,7 @@
     <button id="saveDesign">Save Progress</button>
 
     <!--other buttons-->
-    <button id="downloadImageBtn">Proceed To Checkout ?</button>
+    <button id="downloadImageBtn">Proceed To Checkout</button>
     <button id="closeModalBtn">Close</button>
   </div>
 </div>
@@ -1791,7 +1789,7 @@
 
 
 
-  <script src="custom.js" defer></script>
+  <script src="custom.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
@@ -1945,6 +1943,14 @@ requestAnimationFrame(() => {
 
 }
 </script>
+
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#graphicMenu h3').classList.add('animate');
+  });
+</script>
+
 
 </body>
 </html>

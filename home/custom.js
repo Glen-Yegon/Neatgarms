@@ -1196,6 +1196,7 @@ function getActiveObject() {
   return { activeCanvas: null, activeObject: null };
 }
 
+/*
 document.getElementById("removeBg").addEventListener("click", async () => {
   const activeCanvas = canvases.find(canvas => canvas.getActiveObject());
   if (!activeCanvas) {
@@ -1248,7 +1249,7 @@ document.getElementById("removeBg").addEventListener("click", async () => {
       alert("An error occurred while processing the image.");
   }
 });
-
+*/
 
 
 //layering of objects from the main menu

@@ -105,6 +105,22 @@ body {
   transition: background-color 0.5s ease;
 }
 
+/* Initial animation state */
+.slide-down {
+  animation: slideFromTop 2.5s ease-out forwards;
+  opacity: 0;
+  transform: translate(-50%, -50px); /* Start slightly above */
+}
+
+/* Animation keyframes */
+@keyframes slideFromTop {
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0); /* End at center horizontally */
+  }
+}
+
+
 /* Background color when scrolled */
 .navbar.scrolled {
   background: linear-gradient(to top, #8A9381, white);
@@ -595,19 +611,38 @@ z-index: 1000;
 }
 
 .modal-content {
-background-image: url("mains/background.jpg");
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
-border-radius: 10px;
-padding: 20px;
-text-align: center;
-align-items: center;
-justify-content: center;
-max-width: 75%;
-width: 400px;
-height: 400px;
+  position: relative;
+  background-image: url("shoot/lp2.avif");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  max-width: 75%;
+  width: 400px;
+  height: 400px;
+  color: white;
+  overflow: hidden;
 }
+
+.modal-content::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* 40% dark overlay */
+  z-index: 0;
+  border-radius: 0px;
+}
+
+.modal-content * {
+  position: relative;
+  z-index: 1; /* Ensures text stays above the overlay */
+}
+
 
 .modal-slideshow {
 position: relative;
@@ -618,7 +653,7 @@ align-items: center;
 
 .modal-slide {
 max-width: 100%;
-border-radius: 10px;
+border-radius: 4px;
 max-height: 300px;
 }
 
@@ -652,27 +687,44 @@ font-size: 16px;
 }
 
 #customizeButton {
-  background-color: #AE866A;
-  color: black;
-  border: 1px solid black;
-}
-#customizeButton:hover{
   background-color: transparent;
-  color: #fff;
+  color: rgb(255, 255, 255);
+  border-bottom: 3px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 10px 24px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.35s ease-in-out; /* Smooth transition for all animated properties */
+}
+
+#customizeButton:hover {
+  background-color: transparent;
+  color: #ae866a;
+  border-bottom: 3px solid #ae866a;
   transform: translateY(-5px) scale(1.1);
 }
+
 
 #backButton {
   background-color: transparent;
   color: #fff;
-  border: 2px solid #8A9381;
+  border-bottom: 3px solid #fdfdfc;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.35s ease-in-out; /* Smooth transition for all properties */
 }
 
-#backButton:hover{
-  background-color: #8A9381;
-  color: #000000;
+#backButton:hover {
+  background-color: transparent;
+  color: #8a9381;
+  border-bottom: 3px solid #8A9381;
   transform: translateY(-5px) scale(1.1);
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

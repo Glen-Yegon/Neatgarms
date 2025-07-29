@@ -97,14 +97,14 @@
   
 
   <div class="order-summary-container">
-    <h2>Order Summary</h2>
+    <h2 style="font-family: 'Dream Avenue', sans-serif; font-weight: 100;">Order Summary</h2>
   
     <!-- Section to display images -->
     <div id="item-section" class="item-container"></div>
   
     <!-- Section to display item name and price -->
     <div class="item-details">
-      <h3 id="display-name"></h3>
+      <h3 id="display-name" style="font-family: 'Dream Avenue', sans-serif;"></h3>
       <p id="display-price"></p>
     </div>
           <!-- Discount Code Section -->
@@ -151,7 +151,13 @@
       <label for="size-2xl">2XL</label>
       <input type="number" id="size-2xl" name="size-2xl" min="0" placeholder="0">
     </div>
+
   </div>
+
+  <div id="total-items" style="margin-top: 20px; font-weight: bold; font-size: 18px;" data-aos="fade-up" data-aos-delay="700">
+  Total Items: <span id="itemCount">0</span>
+</div>
+
 </div>
 
 
@@ -241,7 +247,7 @@
 <!-- Shipping Info Message -->
 <div class="form-section">
   <div style="margin-top: 15px;">
-    <strong>Shipping Notice:</strong>
+    <strong style="font-family: 'Dream Avenue', sans-serif;">Shipping Notice:</strong>
     <p style="margin: 5px 0; color: #444;">
       After placing your order, our team will get in touch to arrange delivery. Please note that delivery fees apply and may vary based on your location.
     </p>
@@ -660,6 +666,27 @@ requestAnimationFrame(() => {
 });
 
 </script>
+
+
+<script>
+  const inputs = document.querySelectorAll('.size-selection input[type="number"]');
+  const itemCount = document.getElementById('itemCount');
+
+  function updateTotal() {
+    let total = 0;
+    inputs.forEach(input => {
+      const value = parseInt(input.value) || 0;
+      total += value;
+    });
+    itemCount.textContent = total;
+  }
+
+  // Update total on any input change
+  inputs.forEach(input => {
+    input.addEventListener('input', updateTotal);
+  });
+</script>
+
 
 </body>
 </html>

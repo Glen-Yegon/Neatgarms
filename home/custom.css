@@ -16,7 +16,7 @@
 body{
     margin: 0;
     align-items: center;
-    background-color: white;
+    background-color: #8a9381;
     display: flex;
     flex-direction: column;
   }
@@ -497,13 +497,11 @@ canvas {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 50px;
-  padding: 20px;
-  background-color: #8a9381;
+  gap: 55px;
+  padding: 5px 10px;
+  background: linear-gradient(to top, white, #8a9381);
   max-width: 600px;
-  border-radius: 20px;
-  border-style: solid;
-  border-right: 2px solid #ddd;
+  border-radius: 6px;
   margin-top: 10px;
   min-width: 80px;
 }
@@ -516,7 +514,7 @@ canvas {
 }
 
 #menu i:hover {
-  color: #ddd;
+  color: #ae866a;
   transform: scale(1.2);
 }
 
@@ -824,12 +822,35 @@ font-family: 'Poppins', sans-serif;
   overflow-y: auto;
 }
 
-/* Menu Header */
 #graphicMenu h3 {
-  font-size: 20px;
+  font-size: 25px;
+  font-family: 'Dream Avenue', sans-serif;
   margin-bottom: 20px;
   text-align: center;
   color: black;
+  margin-left: 20px;
+  position: relative;
+  display: inline-block; /* shrink-wraps the underline */
+  animation: fadeInUp 4s ease forwards;
+}
+
+/* Underline */
+#graphicMenu h3::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2.5px;
+  background-color: #000000; /* Brand accent color */
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* Animate underline in when the page loads */
+#graphicMenu h3.animate::after {
+  width: 100px;
 }
 
 /* Menu Items */
@@ -851,15 +872,16 @@ font-family: 'Poppins', sans-serif;
   margin: 10px;
   padding-left: 25px;
   padding-right: 25px;
-  color: #ffffff;
+  color: #000000;
   -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
   clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
   height: 40px;
   font-size: 0.7rem;
+  font-weight: 600;
   line-height: 14px;
   letter-spacing: 1.2px;
   transition: .2s .1s;
-  background-image: linear-gradient(45deg, black, slategray);
+  background-image: linear-gradient(45deg, #fafafa, #d7ccc8);
   border: 0 solid;
   overflow: hidden;
 }
@@ -1009,7 +1031,7 @@ button {
   display: none; /* Hidden by default */
   position: fixed;
   top: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Dream Avenue', sans-serif;
   left: 0;
   width: 100%;
   height: 100%;
@@ -1019,7 +1041,7 @@ button {
 }
 
 .modal-content {
-  background: linear-gradient(to right, #8a9381, slategray, #8a9381);
+  background: linear-gradient(to right, #ae866a, rgb(182, 182, 182), #ae866a);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -1040,63 +1062,101 @@ button {
   margin: 10px;
   max-width: 200px;
   height: auto;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
 
+@media (max-width: 600px) {
+  #canvasPreview img {
+    flex: 0 0 45%; /* Two images per row with space */
+    max-width: 45%;
+  }
+}
+
+
 #closeModalBtn {
-  border-radius: 10px;
-  border: 1px, solid, black;
-  background: linear-gradient(to right, slategray, rgba(0, 0, 0, 0.878));
-  padding: 10px 20px;
-  color: white;
+  border-radius: 8px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 3px solid black;
+  padding: 5px 20px;
+  font-size: 18px;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
   transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
   margin: 10px;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 #downloadImageBtn{
   border-radius: 10px;
-  border: 1px, solid, black;
-  padding: 10px 20px;
-  background: linear-gradient(to left, slategray, rgba(0, 0, 0, 0.842));
+  border: none;
+  border-bottom: 3px solid black;
+  padding: 5px 20px;
+  background: transparent;
   margin: 10px;
-  color: white;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  font-size: 20px;
   transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
 #closeModalBtn:hover{
-  background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 #downloadImageBtn:hover{
-  background: linear-gradient(120deg,slategray, rgba(0, 0, 0, 0.868)); /* Reversed gradient */
   transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 #saveDesign {
   border-radius: 10px;
-  border: 1px, solid, black;
-  background: linear-gradient(to right, slategray, rgba(0, 0, 0, 0.878));
-  padding: 10px 20px;
-  color: white;
-  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  border: none;
+  border-bottom: 3px solid black;
+  padding: 10px 24px;
+  background: transparent;
   margin: 10px;
+  color: rgb(0, 0, 0);
+  font-weight: 600;
+  font-size: 25px;
+  transition: all 0.35s ease-in-out;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
   width: 70%;
+   font-family: 'Dream Avenue', sans-serif;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
-#saveDesign:hover{
-  background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+/* Optional: subtle background and shadow on hover */
+#saveDesign:hover {
+  background: transparent; /* Branded gradient */
+  color: rgb(0, 0, 0);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
+
+/* Optional shine effect */
+#saveDesign::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  z-index: -1;
+}
+
+#saveDesign:hover::before {
+  left: 100%;
+}
+
+
 @media(max-width: 768px){
   .modal-content{
     justify-content: center;
@@ -1198,47 +1258,55 @@ button {
   margin-left: 3px;
 }
 
-.ld{
-  border: 1px, solid, black;
-  background: linear-gradient(to bottom, slategray, rgba(0, 0, 0, 0.878));
-  padding: 10px 20px;
-  color: white;
-  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+.ld {
+  border: none;
+  background: linear-gradient(to bottom, white, #8a9381);
+  padding: 10px 24px;
+  color: #000;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-  border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
-}
-.ld:hover{
-  background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
-  transform: scale(1.05);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Dream Avenue', sans-serif;
+  position: relative;
+  overflow: hidden;
 }
 
-.ldd{
-  border: 1px, solid, black;
-  background: linear-gradient(to top, slategray, rgba(0, 0, 0, 0.878));
-  padding: 10px 20px;
-  color: white;
-  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-  border-radius: 8px;
-   font-family: 'Poppins', sans-serif;
+.ld::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease;
+  pointer-events: none;
 }
-.ldd:hover{
-  background: linear-gradient(120deg, rgba(0, 0, 0, 0.874), slategray); /* Reversed gradient */
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+.ld:hover::before {
+  left: 125%;
 }
+
+
+/* Professional & smooth hover effect */
+.ld:hover {
+  transform: translateY(-5px) scale(1.03);
+  background: linear-gradient(to bottom, #f5f5f5, #ae866a);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  color: #000;
+}
+
+
 
 .button-container {
   display: flex;
   justify-content: center; /* Center buttons horizontally */
-  gap: 0px; /* Space between buttons */
   flex-wrap: wrap; /* Ensures responsiveness on small screens */
-  gap: 5px;
-  padding: 10px;
+  padding: 5px;
   margin-top: 0px;
 }
 
@@ -1255,11 +1323,7 @@ button {
       text-align: center;
       height: 30%;
   }
-  .ldd{
-    width: 90%; /* Make buttons take up most of the screen */
-    text-align: center;
-    height: 30%;
-  }
+
 }
 
 
@@ -1417,7 +1481,7 @@ button {
 .layer-control-container {
   position: relative;
   display: inline-block;
-  margin: 12px;
+  margin: 0px;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -1427,7 +1491,7 @@ button {
   color: white;
   border: none;
   border-radius: 10px;
-  padding: 10px 14px;
+  padding: 10px 4px;
   margin: 0px;
   cursor: pointer;
   font-size: 15px;
@@ -1442,9 +1506,9 @@ button {
   position: absolute;
   top: 48px;
   right: 0;
-  background: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 14px;
+  background: linear-gradient(to bottom, white, #ae866a);
+  border: 1px solid #000000;
+  border-radius: 4px;
   box-shadow: 0 12px 30px rgba(0,0,0,0.15);
   padding: 12px;
   z-index: 999;
@@ -1469,7 +1533,7 @@ button {
   padding: 10px 14px;
   cursor: pointer;
   font-size: 14px;
-  color: #333;
+  color: #000000;
   border-radius: 8px;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }

@@ -1,16 +1,17 @@
+
 document.addEventListener("DOMContentLoaded", function () {
   const itemSection = document.getElementById("item-section");
   const displayName = document.getElementById("display-name");
   const displayPrice = document.getElementById("display-price");
+  const inputs = document.querySelectorAll('.size-selection input[type="number"]');
 
-  // Retrieve images from localStorage
-  let storedImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
+  // 1. Display stored images
+  const storedImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
 
-  // Display images
   if (storedImages.length === 0) {
     itemSection.innerHTML = "<p>No items added yet.</p>";
   } else {
-    itemSection.innerHTML = ""; // Clear previous content
+    itemSection.innerHTML = "";
     storedImages.forEach((imgUrl) => {
       const imgElement = document.createElement("img");
       imgElement.src = imgUrl;
@@ -21,21 +22,44 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Retrieve and display name
+  // 2. Retrieve and display item name
   const itemName = localStorage.getItem("nameID") || "Unknown Item";
-  const itemPriceRaw = localStorage.getItem("priceID") || "0";
+  displayName.textContent = `Item: ${itemName}`;
 
-  // Convert item price to number (remove Kshs. or commas if needed)
+  // 3. Calculate single item total price (item + shipping)
+  const itemPriceRaw = localStorage.getItem("priceID") || "0";
   const itemPrice = parseFloat(itemPriceRaw.replace(/Kshs\.?|,/g, "").trim()) || 0;
 
-  // Get shipping fee from element
   const shippingFeeText = document.getElementById("shipping-fee")?.textContent || "KSh 0";
-  const shippingFee = parseFloat(shippingFeeText.replace(/KSh|,/g, '').trim()) || 0;
+  const shippingFee = parseFloat(shippingFeeText.replace(/KSh|,/g, "").trim()) || 0;
 
-  const finalTotal = itemPrice + shippingFee;
+  const basePrice = itemPrice + shippingFee;
 
-  displayName.textContent = `Item: ${itemName}`;
-  displayPrice.textContent = `Price: Kshs. ${finalTotal.toFixed(2)}`;
+  // 4. Display base price initially
+  displayPrice.textContent = `Price: Kshs. ${basePrice.toFixed(2)}`;
+
+function updateDisplayedPrice() {
+  let totalItems = 0;
+  inputs.forEach(input => {
+    totalItems += parseInt(input.value) || 0;
+  });
+
+  if (totalItems <= 1) {
+    displayPrice.textContent = `Price: Kshs. ${basePrice.toFixed(2)}`;
+  } else {
+    const totalCost = basePrice * totalItems;
+    displayPrice.textContent = `Price: Kshs. ${totalCost.toFixed(2)}`;
+  }
+}
+
+
+  // 6. Listen for changes
+  inputs.forEach(input => {
+    input.addEventListener("input", updateDisplayedPrice);
+  });
+
+  // 7. Run on load just in case
+  updateDisplayedPrice();
 });
 
 // Place this after the DOMContentLoaded logic
@@ -53,25 +77,9 @@ if (shippingElement) {
 }
 
 
-  document.getElementById('item-count').addEventListener('input', updateDropdowns);
 
-  document.querySelectorAll('.radio-input').forEach(radio => {
-    radio.addEventListener('change', updateDropdowns);
-  });
-  
-  function updateDropdowns() {
-    const count = parseInt(document.getElementById('item-count').value);
-    if (isNaN(count) || count < 1) return;
-  
-  
-    if (document.getElementById('size-radio').checked) {
-      generateFields('size-dropdown', count, 'Size');
-    } else {
-      document.getElementById('size-dropdown').innerHTML = '';
-    }
 
-  }
-  
+
   function generateFields(containerId, count, placeholder) {
     const container = document.getElementById(containerId);
     container.innerHTML = ''; // Clear previous fields
@@ -127,51 +135,8 @@ const validDiscountCodes = {
     }
   });
 
-  // Define available designs for each item
-const designs = {
-    "Black T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "White T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Aqua Blue T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Navy Blue T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Dark brown T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Jungle Green  T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Pink T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Purple T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Red T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Maroon T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    " T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-    "Black T shirt": ["Classic Fit", "Slim Fit", "V-Neck", "Round Neck"],
-  };
-  
-  // Function to generate design options
-  function generateDesignOptions(itemName) {
-    const designOptionsContainer = document.getElementById("design-options");
-    designOptionsContainer.innerHTML = ""; // Clear previous options
-  
-    if (designs[itemName]) {
-      designs[itemName].forEach((design) => {
-        const radioWrapper = document.createElement("div");
-        radioWrapper.classList.add("radio-container");
-  
-        const radio = document.createElement("input");
-        radio.type = "radio";
-        radio.name = "design";
-        radio.value = design;
-        radio.id = design;
-  
-        const label = document.createElement("label");
-        label.htmlFor = design;
-        label.textContent = design;
-  
-        radioWrapper.appendChild(radio);
-        radioWrapper.appendChild(label);
-        designOptionsContainer.appendChild(radioWrapper);
-      });
-    } else {
-      designOptionsContainer.innerHTML = "<p>No designs available for this item.</p>";
-    }
-  }
-  
+
+
   // Function to display item details and trigger design selection
   function updateDisplay() {
     const displayName = document.getElementById("display-name");
@@ -186,8 +151,6 @@ const designs = {
       displayName.textContent = itemName;
       displayPrice.textContent = `Price: Kshs. ${itemPrice.toFixed(2)}`;
   
-      // Generate design options based on the displayed item name
-      generateDesignOptions(itemName);
     } else {
       displayName.textContent = "Item not found!";
       displayPrice.textContent = "Price not available";
@@ -196,17 +159,7 @@ const designs = {
   
   // Run updateDisplay when the page loads
   window.onload = updateDisplay;
-  
-  
-  
 
-  
-  
-
-
-
-
-  
   // Handle payment method selection using images
   const paymentMethods = document.querySelectorAll('.payment-method');
   
