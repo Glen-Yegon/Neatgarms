@@ -88,8 +88,8 @@ signUp.addEventListener("click", async (event) => {
 
     showMessage("Account Created Successfully", "signUpMessage");
 
-    // Redirect to home page
-    window.location.href = "home.html";
+window.history.back();
+
 
     
   } catch (error) {
@@ -120,8 +120,8 @@ signIn.addEventListener("click", async (event) => {
     // Store the user ID in local storage
     localStorage.setItem("loggedInUserId", user.uid);
 
-    // Redirect to home page
-    window.location.href = "home.html";
+window.history.back();
+
   } catch (error) {
     const errorCode = error.code;
     if (errorCode === "auth/invalid-credential") {

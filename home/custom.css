@@ -121,6 +121,43 @@ body{
 }
 
 
+/* User Icon */
+.user-icon {
+  display: flex;
+  align-items: right;
+  margin-right: 0px;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  transition: background-color 0.3s ease;
+}
+
+.user-icon:hover {
+  background-color: #8a9381;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-icon .icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Adjust for mobile screens */
+@media (max-width: 768px) {
+  .user-icon {
+    padding-top: 0px;
+    padding: 4px;
+    margin-right: 5px;
+  }
+
+  .user-icon .icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
 /* Menu Styling */
 #graphicMenu {
   position: fixed;
@@ -1343,7 +1380,7 @@ button {
 }
 
 .load-design-modal-content {
-  background-color: #8a9381;
+background: linear-gradient(to right, #1f4037, #99f2c8); /* Emerald gradient */
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -1388,7 +1425,7 @@ button {
 
 
 .delete-design-btn {
-  background: #ae866a;
+  background: transparent;
   color: rgb(0, 0, 0);
   border: none;
   padding: 5px 8px;
