@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
 ];
 
 
+
+
 // Attach the canvases array to the window so it's globally available
 window.canvases = canvases;
 
@@ -1350,3 +1352,87 @@ function sendToMiddle() {
 
 
 
+
+
+// ======================
+// Guide lines for active canvas
+// ======================
+function showGuides() {
+  const canvas = canvases[currentSlide]; // current active canvas
+  if (!canvas) return;
+
+  const obj = canvas.getActiveObject(); // only track the active object
+  if (!obj) return;
+
+  const snapTolerance = 5; // pixels for snapping
+  const objects = canvas.getObjects().filter(o => o !== obj);
+
+  // Remove old guide lines
+  canvas.getObjects().filter(o => o.type === 'line').forEach(line => canvas.remove(line));
+
+  // Canvas center
+  const canvasCenterX = canvas.getWidth() / 2;
+  const canvasCenterY = canvas.getHeight() / 2;
+
+  const targetCenter = obj.getCenterPoint();
+
+  // Snap to canvas center
+  if (Math.abs(targetCenter.x - canvasCenterX) < snapTolerance) {
+    drawLine(canvas, { x1: canvasCenterX, y1: 0, x2: canvasCenterX, y2: canvas.getHeight() }, 'purple');
+  }
+  if (Math.abs(targetCenter.y - canvasCenterY) < snapTolerance) {
+    drawLine(canvas, { x1: 0, y1: canvasCenterY, x2: canvas.getWidth(), y2: canvasCenterY }, 'purple');
+  }
+
+  // Snap to other objects
+  objects.forEach(o => {
+    const c = o.getCenterPoint();
+    if (Math.abs(targetCenter.x - c.x) < snapTolerance) {
+      drawLine(canvas, { x1: c.x, y1: 0, x2: c.x, y2: canvas.getHeight() }, 'orange');
+    }
+    if (Math.abs(targetCenter.y - c.y) < snapTolerance) {
+      drawLine(canvas, { x1: 0, y1: c.y, x2: canvas.getWidth(), y2: c.y }, 'orange');
+    }
+  });
+
+  canvas.renderAll();
+}
+
+// ======================
+// Draw a line helper
+// ======================
+function drawLine(canvas, { x1, y1, x2, y2 }, color = 'purple') {
+  const line = new fabric.Line([x1, y1, x2, y2], {
+    stroke: color,
+    strokeWidth: 2,
+    selectable: false,
+    evented: false
+  });
+  canvas.add(line);
+  line.moveTo(0); // send behind objects
+}
+
+// ======================
+// Attach guide events to the active canvas
+// ======================
+function attachGuideEvents() {
+  const canvas = canvases[currentSlide];
+  if (!canvas) return;
+
+  // Remove old listeners
+  canvas.off('object:moving');
+  canvas.off('object:modified');
+
+  canvas.on('object:moving', () => showGuides());
+  canvas.on('object:modified', () => {
+    // Remove guide lines when object stops moving
+    canvas.getObjects().filter(o => o.type === 'line').forEach(line => canvas.remove(line));
+    canvas.renderAll();
+  });
+}
+
+// ======================
+// Example usage after changing slides
+// ======================
+// currentSlide = 1;
+// attachGuideEvents();
