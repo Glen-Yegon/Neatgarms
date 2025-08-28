@@ -9,15 +9,16 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
   }
 
-  // Initialize canvases using Fabric.js and set them to be square
-  const canvases = [
-    new fabric.Canvas('canvas-0'),
-    new fabric.Canvas('canvas-1'),
-    new fabric.Canvas('canvas-2'),
-    new fabric.Canvas('canvas-3')
+// Initialize canvases using Fabric.js
+window.canvases = [
+  new fabric.Canvas('canvas-0'),
+  new fabric.Canvas('canvas-1'),
+  new fabric.Canvas('canvas-2'),
+  new fabric.Canvas('canvas-3')
 ];
 
-
+// Now attach guides
+attachOverlayGuides();
 
 
 // Attach the canvases array to the window so it's globally available
@@ -258,7 +259,7 @@ canvases.forEach((canvas) => {
       // Load and add the image to the current canvas
       fabric.Image.fromURL(imageUrl, function(img) {
 // Set a fixed scale (e.g., 0.2 to make it 20% of its original size)
-const scale = 0.2; // Adjust this value as needed
+const scale = 0.3; // Adjust this value as needed
 
 // Scale the image to a fixed size
 img.scale(scale);
@@ -270,7 +271,7 @@ img.scale(scale);
               hasBorders: true,  // Enable resizing and interaction
               hasControls: true, // Enable editing controls
               lockScalingFlip: true, // Prevent flipping while resizing
-
+              
           });
 
           // Add the image to the canvas
@@ -347,7 +348,7 @@ function showOptionsMenu(img, canvas) {
     const objectRect = img.getBoundingRect();
 
     // Compute the centered left position below the image and a small gap (2px) from the bottom
-    let left = objectRect.left + (objectRect.width / 20) - (menu.offsetWidth / 2);
+    let left = objectRect.left + (objectRect.width / 20) - (menu.offsetWidth / 1);
     let top = objectRect.top + objectRect.height + 20; // 2px gap
 
     // Define a margin (in pixels) so that the menu does not touch the edges
@@ -419,34 +420,70 @@ graphicFillColor.addEventListener("input", function (event) {
   changeFillColor(img, event.target.value);
 });
 
-// Event listener to update the corner radius.
+
 cornerRadiusInput.addEventListener("input", function (event) {
   const radius = parseInt(event.target.value, 10);
-  updateCornerRadius(img, radius, canvas);
+  const activeObj = canvas.getActiveObject();
+
+  if (activeObj) {
+    // save radius value on the object
+    activeObj.cornerRadiusValue = radius;
+
+    // update live
+    updateCornerRadius(activeObj, radius, canvas);
+  }
+});
+
+// 🔥 Live update on slider/input
+cornerRadiusInput.addEventListener("input", function (event) {
+  const radius = parseInt(event.target.value, 10);
+
+  const activeObj = canvas.getActiveObject();
+  if (activeObj) {
+    updateCornerRadius(activeObj, radius, canvas);
+  }
 });
 
 };
 
+// Ensure stroke exists before applying changes
+function ensureStroke(img, color = "transparent") {
+  if (!img.stroke || img.stroke === "" || img.stroke === "transparent") {
+    img.set({
+      stroke: color,
+      strokeWidth: 3
+    });
+  }
+  img.setCoords();
+  canvases[currentSlide].renderAll();
+}
+
+
+// Store corner radius per object
 function updateCornerRadius(img, radius, canvas) {
-  // Create a new rounded rectangle clipPath.
+  if (!img) return;
+
+  // Save radius on the object itself so it persists
+  img.cornerRadiusValue = radius;
+
+  // Scale the radius relative to the image size (shortest side)
+  const maxRadius = Math.min(img.width, img.height) / 2;
+  const scaledRadius = (radius / 100) * maxRadius;
+
   const clipRect = new fabric.Rect({
     originX: 'center',
     originY: 'center',
     left: 0,
     top: 0,
-    width: img.width,    // use the natural image width
-    height: img.height,  // use the natural image height
-    rx: radius,          // horizontal corner radius
-    ry: radius           // vertical corner radius
+    width: img.width,
+    height: img.height,
+    rx: scaledRadius,
+    ry: scaledRadius
   });
-  
-  // Assign the clipPath to the image.
+
   img.clipPath = clipRect;
-  
-  // Re-render the canvas to reflect the changes.
   canvas.renderAll();
 }
-
 
 
 
@@ -495,18 +532,9 @@ document.addEventListener('keydown', function(e) {
 });
 
 
-// Function to add an outline to the selected image
-function addOutlineToImage(img) {
-  img.set({
-    stroke: "black", // Set default stroke color (outline color)
-    strokeWidth: 3 // Set the outline thickness
-  });
-  img.setCoords();
-  canvases[currentSlide].renderAll();
-}
-
 // Function to change the outline color
 function changeOutlineColor(img, color) {
+  ensureStroke(img, color); // if no stroke, apply with chosen color
   img.set({
     stroke: color // Change the stroke color to the selected one
   });
@@ -1354,85 +1382,99 @@ function sendToMiddle() {
 
 
 
-// ======================
-// Guide lines for active canvas
-// ======================
-function showGuides() {
-  const canvas = canvases[currentSlide]; // current active canvas
-  if (!canvas) return;
 
-  const obj = canvas.getActiveObject(); // only track the active object
-  if (!obj) return;
+const overlay = document.querySelector('.guides-overlay');
 
-  const snapTolerance = 5; // pixels for snapping
-  const objects = canvas.getObjects().filter(o => o !== obj);
+function updateOverlayPosition() {
+  const canvasEl = canvases[currentSlide].upperCanvasEl;
+  const rect = canvasEl.getBoundingClientRect();
+  overlay.style.width = rect.width + "px";
+  overlay.style.height = rect.height + "px";
+  overlay.style.top = rect.top + window.scrollY + "px";
+  overlay.style.left = rect.left + window.scrollX + "px";
+}
 
-  // Remove old guide lines
-  canvas.getObjects().filter(o => o.type === 'line').forEach(line => canvas.remove(line));
+function clearGuides() {
+  overlay.innerHTML = '';
+}
 
-  // Canvas center
-  const canvasCenterX = canvas.getWidth() / 2;
-  const canvasCenterY = canvas.getHeight() / 2;
-
-  const targetCenter = obj.getCenterPoint();
-
-  // Snap to canvas center
-  if (Math.abs(targetCenter.x - canvasCenterX) < snapTolerance) {
-    drawLine(canvas, { x1: canvasCenterX, y1: 0, x2: canvasCenterX, y2: canvas.getHeight() }, 'purple');
+function drawGuideLine(x, y, orientation, label = null) {
+  const line = document.createElement('div');
+  line.classList.add('guide-line', orientation);
+  if (orientation === 'vertical') {
+    line.style.left = x + 'px';
+    line.style.top = 0;
+  } else {
+    line.style.top = y + 'px';
+    line.style.left = 0;
   }
-  if (Math.abs(targetCenter.y - canvasCenterY) < snapTolerance) {
-    drawLine(canvas, { x1: 0, y1: canvasCenterY, x2: canvas.getWidth(), y2: canvasCenterY }, 'purple');
+  overlay.appendChild(line);
+
+  if (label) {
+    const lbl = document.createElement('div');
+    lbl.classList.add('guide-label');
+    lbl.textContent = label;
+
+    if (orientation === 'vertical') {
+      lbl.style.left = x + 'px';
+      lbl.style.top = y + 'px';
+    } else {
+      lbl.style.left = x + 'px';
+      lbl.style.top = y + 'px';
+    }
+
+    overlay.appendChild(lbl);
   }
-
-  // Snap to other objects
-  objects.forEach(o => {
-    const c = o.getCenterPoint();
-    if (Math.abs(targetCenter.x - c.x) < snapTolerance) {
-      drawLine(canvas, { x1: c.x, y1: 0, x2: c.x, y2: canvas.getHeight() }, 'orange');
-    }
-    if (Math.abs(targetCenter.y - c.y) < snapTolerance) {
-      drawLine(canvas, { x1: 0, y1: c.y, x2: canvas.getWidth(), y2: c.y }, 'orange');
-    }
-  });
-
-  canvas.renderAll();
 }
 
-// ======================
-// Draw a line helper
-// ======================
-function drawLine(canvas, { x1, y1, x2, y2 }, color = 'purple') {
-  const line = new fabric.Line([x1, y1, x2, y2], {
-    stroke: color,
-    strokeWidth: 2,
-    selectable: false,
-    evented: false
+function attachOverlayGuides() {
+  canvases.forEach((canvas, index) => {
+    canvas.on('object:moving', (e) => {
+      if (index !== currentSlide) return; // only for active canvas
+
+      clearGuides();
+      updateOverlayPosition();
+
+      const obj = e.target;
+      const rect = obj.getBoundingRect();
+
+      const canvasWidth = canvas.getWidth();
+      const canvasHeight = canvas.getHeight();
+
+      // Vertical guides (left, center, right)
+      if (Math.abs(rect.left) < 5) {
+        drawGuideLine(rect.left, rect.top, 'vertical', 'Left: 0px');
+      }
+      if (Math.abs(rect.left + rect.width / 2 - canvasWidth / 2) < 5) {
+        drawGuideLine(canvasWidth / 2, rect.top, 'vertical', 'Center X');
+      }
+      if (Math.abs(rect.left + rect.width - canvasWidth) < 5) {
+        drawGuideLine(rect.left + rect.width, rect.top, 'vertical', 'Right');
+      }
+
+      // Horizontal guides (top, center, bottom)
+      if (Math.abs(rect.top) < 5) {
+        drawGuideLine(rect.left, rect.top, 'horizontal', 'Top: 0px');
+      }
+      if (Math.abs(rect.top + rect.height / 2 - canvasHeight / 2) < 5) {
+        drawGuideLine(rect.left, canvasHeight / 2, 'horizontal', 'Center Y');
+      }
+      if (Math.abs(rect.top + rect.height - canvasHeight) < 5) {
+        drawGuideLine(rect.left, rect.top + rect.height, 'horizontal', 'Bottom');
+      }
+
+      // TODO: You can add comparisons to other objects here for Canva-like spacing
+    });
+
+    canvas.on('object:modified', () => {
+      clearGuides();
+    });
+
+    canvas.on('selection:cleared', () => {
+      clearGuides();
+    });
   });
-  canvas.add(line);
-  line.moveTo(0); // send behind objects
 }
 
-// ======================
-// Attach guide events to the active canvas
-// ======================
-function attachGuideEvents() {
-  const canvas = canvases[currentSlide];
-  if (!canvas) return;
-
-  // Remove old listeners
-  canvas.off('object:moving');
-  canvas.off('object:modified');
-
-  canvas.on('object:moving', () => showGuides());
-  canvas.on('object:modified', () => {
-    // Remove guide lines when object stops moving
-    canvas.getObjects().filter(o => o.type === 'line').forEach(line => canvas.remove(line));
-    canvas.renderAll();
-  });
-}
-
-// ======================
-// Example usage after changing slides
-// ======================
-// currentSlide = 1;
-// attachGuideEvents();
+// Call it after creating your canvases
+attachOverlayGuides();

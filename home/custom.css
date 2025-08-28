@@ -1288,7 +1288,7 @@ button {
 #graphicFillColor{
   border-radius: 4px;
   margin-top: 5px;
-
+  bottom: 20px;
 }
 
 .menu-actions i{
@@ -1603,5 +1603,42 @@ background: linear-gradient(to right, #1f4037, #99f2c8); /* Emerald gradient */
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+
+.guides-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* guides don’t block mouse */
+}
+
+.guide-line {
+  position: absolute;
+  background: rgba(255, 0, 0, 0.7);
+  z-index: 9999;
+}
+
+.guide-line.vertical {
+  width: 1px;
+  height: 100%;
+}
+
+.guide-line.horizontal {
+  height: 1px;
+  width: 100%;
+}
+
+.guide-label {
+  position: absolute;
+  background: #ae866a;
+  color: rgb(0, 0, 0);
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 1px;
+  white-space: nowrap;
+  z-index: 10000;
+  transform: translate(-50%, -50%);
 }
 
