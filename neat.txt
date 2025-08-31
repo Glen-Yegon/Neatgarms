@@ -1,0 +1,174 @@
+app.post(
+  "/submit-form",
+  upload.fields([
+    { name: "frontView", maxCount: 1 },
+    { name: "backView", maxCount: 1 },
+    { name: "rightSideView", maxCount: 1 },
+    { name: "leftSideView", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const { name, email, phone } = req.body;
+
+      // Generate PDF file
+      const pdfFilePath = path.join(__dirname, "uploaded_images.pdf");
+      const doc = new PDFDocument();
+      const writeStream = fs.createWriteStream(pdfFilePath);
+      doc.pipe(writeStream);
+
+      doc.fontSize(16).text(`Form Submission Details`, { align: "center" });
+      doc.moveDown();
+      doc.fontSize(12).text(`Name: ${name}`);
+      doc.text(`Email: ${email}`);
+      doc.text(`Phone: ${phone}`);
+      doc.moveDown();
+
+      // Add uploaded images to PDF
+      ["frontView", "backView", "rightSideView", "leftSideView"].forEach((field) => {
+        if (req.files[field]) {
+          doc.addPage().image(req.files[field][0].buffer, { fit: [500, 500] });
+        }
+      });
+
+      doc.end();
+      await new Promise((resolve) => writeStream.on("finish", resolve));
+
+      // Email Configuration to Your Inbox
+      const mailOptions = {
+        from: "info@neatgarms.com",
+        to: "info@neatgarms.com",
+        subject: "New Form Submission with PDF",
+        text: `You have received a new form submission.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nImages are attached as a PDF.`,
+        attachments: [{ filename: "uploaded_images.pdf", path: pdfFilePath }],
+      };
+
+      // Send Email to Yourself
+      const info = await transporter.sendMail(mailOptions);
+      console.log("Email sent to your inbox:", info.response);
+
+      // Autoresponder Email to the Sender
+      const autoResponseOptions = {
+        from: '"Neatgarms" <info@neatgarms.com>', 
+        to: email,
+        subject: "Thank You for Your Submission!",
+        html: 
+         `
+<div style="  font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+
+  <div style="text-align: center;">
+    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
+  </div>
+
+  <div  background-color: #f9f9f9; padding: 30px; border-radius: 10px; text-align: center; color: #333;">
+  <h2 style="color:rgb(0, 0, 0);"> Hi ${name}. </h2>
+  <p style="font-size: 16px; line-height: 1.6;">
+    We're thrilled to have you as part of the Neatgarms family.  
+    <br><br>
+    One of our team members will personally reach out to you via your phone number to ensure everything fits just right!
+    <br><br>
+    <strong>Stay stylish. Stay confident.</strong>
+  </p>
+  <p style="margin-top: 20px; font-size: 18px; color:rgb(3, 0, 0);"><em>Happy Shopping! 🛍️</em></p>
+</div>
+
+
+  <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
+    <h3 style="color: black;">🪄 A Special Thank You</h3>
+    <p style="font-size: 15px; line-height: 1.6;">
+      Thank you for your purchase! Your merch has been gently taken from our Neat shelves by gloved hands and lovingly packed by our Omashu packing specialist under candlelight. After a glorious celebration, the town of Nairobi cheered as your package departed aboard our private baby jet. You’re now officially our “Customer of the Year,” with your photo proudly on our wall. We had a magical time packing your order—and we can’t wait for your next visit. <strong>KEEPITNEAT!</strong>
+    </p>
+  </div>
+
+  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+
+    
+        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">🔥 Top Neat Picks for This Week</h3>
+        <table style="width: 100%; border-spacing: 16px 10px;">
+          <tr>
+            <td align="center">
+              <a href="https://neatgarms.com/tops.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Work Shirt</p>
+              </a>
+            </td>
+            <td align="center">
+              <a href="https://neatgarms.com/pants.html" target="_blank">
+                <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
+              </a>
+            </td>
+          </tr>
+        </table>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">💸 Special Offer Just for You</h3>
+        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next order. Offer valid for the next <strong>3 days</strong> only!</p>
+    
+        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+    
+        <h3 style="color: black;">📞 Need Help?</h3>
+        <p>Reach us any time:</p>
+        <ul style="line-height: 1.8;">
+            <li><strong>Phone:</strong> +254 758 647 031</li>
+        </ul>
+    
+        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
+    
+        <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+      </div>
+
+  
+
+<table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
+  <tr>
+    <td style="vertical-align: top; padding-right: 15px;">
+      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
+    </td>
+    <td style="vertical-align: top;">
+      <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
+      <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
+      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
+      <div style="margin-top: 8px;">
+        <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
+          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
+        </a>
+        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
+          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
+        </a>
+        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
+          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
+        </a>
+        <a href="https://pinterest.com/neatgarms" target="_blank">
+          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
+        </a>
+      </div>
+    </td>
+  </tr>
+</table>
+
+
+      `
+        ,
+      };
+
+      // Send Autoresponse
+      const autoInfo = await transporter.sendMail(autoResponseOptions);
+      console.log("Autoresponse sent to user:", autoInfo.response);
+
+      // Delete PDF after sending email
+      fs.unlinkSync(pdfFilePath);
+
+      // Send Success Response
+      res.json({ success: true, message: "Form submitted successfully!" });
+    } catch (error) {
+      console.error("Error sending email:", error);
+      res.status(500).json({ success: false, message: "Error sending email" });
+    }
+  }
+);
+
+
+
+      <!-- Pay Button -->
+      <button type="button" id="pay-now">Pay</button>

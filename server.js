@@ -14,6 +14,7 @@ import { spawn } from "child_process";
 // Webhook route to receive Paystack payment events
 import crypto from 'crypto'; // ✅ If using ES Modules
 import axios from "axios";
+import sharp from "sharp";
 
 
 dotenv.config();
@@ -23,8 +24,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
-
+require('dotenv').config();
 
 const app = express(); 
 const PORT = 5000;
@@ -71,6 +71,7 @@ app.use(bodyParser.json());
 const storage = multer.memoryStorage();
 const upload = multer({ storage  });
 
+
 // Nodemailer Configuration for Zoho
 const transporter = nodemailer.createTransport({
   host: "smtp.zoho.com",
@@ -89,15 +90,16 @@ app.post(
   "/submit-form",
   upload.fields([
     { name: "frontView", maxCount: 1 },
-    { name: "backView", maxCount: 1 },
-    { name: "rightSideView", maxCount: 1 },
-    { name: "leftSideView", maxCount: 1 },
+    { name: "backView", maxCount: 1 }
   ]),
   async (req, res) => {
     try {
-      const { name, email, phone } = req.body;
+      const { name, email, phone, quantity } = req.body;
 
-      // Generate PDF file
+      // Parse products
+      const products = req.body.products ? JSON.parse(req.body.products) : [];
+
+      // Generate PDF
       const pdfFilePath = path.join(__dirname, "uploaded_images.pdf");
       const doc = new PDFDocument();
       const writeStream = fs.createWriteStream(pdfFilePath);
@@ -108,145 +110,257 @@ app.post(
       doc.fontSize(12).text(`Name: ${name}`);
       doc.text(`Email: ${email}`);
       doc.text(`Phone: ${phone}`);
+      doc.text(`Quantity: ${quantity}`);
       doc.moveDown();
 
-      // Add uploaded images to PDF
-      ["frontView", "backView", "rightSideView", "leftSideView"].forEach((field) => {
-        if (req.files[field]) {
-          doc.addPage().image(req.files[field][0].buffer, { fit: [500, 500] });
-        }
+      // Add product details
+      let productsSummary = "";
+      products.forEach((prod, index) => {
+        const i = index + 1;
+        doc.text(`Product ${i}: Size ${prod.size}, Color ${prod.color}`);
+        productsSummary += `\nProduct ${i}: Size ${prod.size}, Color ${prod.color}`;
       });
+      doc.moveDown();
+
+      // Add images
+["frontView", "backView"].forEach((field) => {
+  if (req.files[field]) {
+    const fileBuffer = req.files[field][0].buffer;
+    doc.addPage().image(fileBuffer, { fit: [500, 500] });
+  }
+});
+
 
       doc.end();
       await new Promise((resolve) => writeStream.on("finish", resolve));
 
-      // Email Configuration to Your Inbox
+      // Email to Admin
       const mailOptions = {
         from: "info@neatgarms.com",
         to: "info@neatgarms.com",
-        subject: "New Form Submission with PDF",
-        text: `You have received a new form submission.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nImages are attached as a PDF.`,
+        subject: "New Custom Design Submission",
+        text: `New submission:
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Quantity: ${quantity}
+${productsSummary}
+
+See attached PDF for full details.`,
         attachments: [{ filename: "uploaded_images.pdf", path: pdfFilePath }],
       };
 
-      // Send Email to Yourself
-      const info = await transporter.sendMail(mailOptions);
-      console.log("Email sent to your inbox:", info.response);
+      await transporter.sendMail(mailOptions);
 
-      // Autoresponder Email to the Sender
+      // Autoresponse to user
       const autoResponseOptions = {
-        from: '"Neatgarms" <info@neatgarms.com>', 
+        from: '"Neatgarms" <info@neatgarms.com>',
         to: email,
-        subject: "Thank You for Your Submission!",
-        html: 
-         `
-<div style="  font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+        subject: "🪄 Magic in the Making: Your Neat Customs Order!",
+        html: `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Neat Customs Teaser</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      font-family: 'Century Gothic', Arial, sans-serif;
+    }
+    table { border-spacing: 0; width: 100%; }
+    img { border: 0; display: block; line-height: 0; }
+    .headline {
+      font-size: 30px;
+      letter-spacing: 2px;
+      font-weight: 100;
+      margin: 20px 0 0 0;
+      line-height: 1.2;
+      color: #ffffff;
+    }
+    .headline span {
+      display: block;
+      font-size: 28px;
+      letter-spacing: 10px;
+      margin-top: 10px;
+      color: #ae866a;
+    }
+    .content {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #ffffff;
+    }
+    .cta {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      background-color: transparent;
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: 15px;
+      font-weight: 100;
+      border-bottom: 2px solid #8a9381;
+      border-top: 2px solid #8a9381;
+      font-size: 16px;
+    }
+    @media screen and (max-width:600px) {
+      .headline { font-size:28px !important; letter-spacing:6px !important; }
+      .headline span { font-size:20px !important; letter-spacing:4px !important; }
+      .content { font-size:15px !important; padding:0 15px !important; }
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td align="center">
 
-  <div style="text-align: center;">
-    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
-  </div>
+          <!-- Hero Section -->
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:700px;">
+            <tr>
+              <td background="https://www.neatgarms.com/mains/brent.jpg"
+                  bgcolor="#000000"
+                  width="700"
+                  height="500"
+                  valign="middle"
+                  style="background-position:center center; background-size:cover; text-align:center;">
 
-  <div  background-color: #f9f9f9; padding: 30px; border-radius: 10px; text-align: center; color: #333;">
-  <h2 style="color:rgb(0, 0, 0);"> Hi ${name}. </h2>
-  <p style="font-size: 16px; line-height: 1.6;">
-    We're thrilled to have you as part of the Neatgarms family.  
-    <br><br>
-    One of our team members will personally reach out to you via your phone number to ensure everything fits just right!
-    <br><br>
-    <strong>Stay stylish. Stay confident.</strong>
+                <!--[if gte mso 9]>
+                <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:700px;height:500px;">
+                  <v:fill type="frame" src="https://www.neatgarms.com/mains/brent.jpg" color="#000000" />
+                  <v:textbox inset="0,0,0,0">
+                <![endif]-->
+
+                <table role="presentation" width="100%" height="500" cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:40px 20px; background-color:rgba(0,0,0,0.55);">
+
+                      <!-- Logo -->
+                      <img src="https://www.neatgarms.com/mains/logo2.png" 
+                           alt="Neat Customs Logo" width="120"
+                           style="margin:0 auto 20px auto; display:block;">
+
+                      <!-- Headline -->
+                      <h1 class="headline" style="  font-family: Georgia, 'Times New Roman', serif; font-weight: 100; margin:0;">
+                        Hi ${name}.
+                      </h1>
+
+<div class="content" style="margin:30px auto 0 auto; max-width:600px; font-family: 'Century Gothic', Arial, sans-serif;">
+  <p>
+    ✨ Welcome to the world of <span style="color:#ae866a; font-weight:bold;">Neat Customs</span>! ✨
   </p>
-  <p style="margin-top: 20px; font-size: 18px; color:rgb(3, 0, 0);"><em>Happy Shopping! 🛍️</em></p>
+  <p>
+    Your order has officially been sprinkled with a little magic and is now in the hands of our designers, ready to become something truly <strong>you</strong>. 🪄
+  </p>
+  <p>
+    Every stitch, every color, every detail is being carefully crafted to turn your vision into a wearable masterpiece. Think of it as a collaboration between your imagination and our craftsmanship.
+  </p>
+  <p>
+    Keep an eye on your inbox — we’ll be sending updates as your creation comes to life. And remember, you’re not just a customer, you’re a part of the Neat Customs family. 💛
+  </p>
+  <p>
+    Thank you for trusting us with your ideas. Get ready to wear your dreams. 👕
+  </p>
 </div>
 
 
-  <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
-    <h3 style="color: black;">🪄 A Special Thank You</h3>
-    <p style="font-size: 15px; line-height: 1.6;">
-      Thank you for your purchase! Your merch has been gently taken from our Neat shelves by gloved hands and lovingly packed by our Omashu packing specialist under candlelight. After a glorious celebration, the town of Nairobi cheered as your package departed aboard our private baby jet. You’re now officially our “Customer of the Year,” with your photo proudly on our wall. We had a magical time packing your order—and we can’t wait for your next visit. <strong>KEEPITNEAT!</strong>
-    </p>
-  </div>
+                        <!-- CTA -->
+                        <a href="https://www.neatgarms.com/item.html" class="cta"
+                           style="font-family: Arial, Helvetica, sans-serif;"> Another Custom Adventure?</a>
+                      </div>
 
-  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
+                    </td>
+                  </tr>
+                </table>
 
-    
-        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">🔥 Top Neat Picks for This Week</h3>
-        <table style="width: 100%; border-spacing: 16px 10px;">
-          <tr>
-            <td align="center">
-              <a href="https://neatgarms.com/tops.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Work Shirt</p>
-              </a>
-            </td>
-            <td align="center">
-              <a href="https://neatgarms.com/pants.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
-              </a>
-            </td>
-          </tr>
+                <!--[if gte mso 9]>
+                  </v:textbox>
+                </v:rect>
+                <![endif]-->
+
+              </td>
+            </tr>
+          </table>
+          <!-- End Hero Section -->
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+</html>
+<div>
+    <br>
+</div>
+<div>
+    <br>
+</div>
+<div class="zmail_signature_below">
+    <div id="Zm-_Id_-Sgn" data-zbluepencil-ignore="true" data-sigid="5358557000000043004">
+        <table style="font-family:Poppins, sans-serif; color:rgb(51, 51, 51); padding:12px 0; max-width:600px; line-height:1.4">
+            <tbody>
+                <tr>
+                    <td style="vertical-align:top">
+                        <table border="0" cellspacing="0" cellpadding="0" style="font-family:Poppins, sans-serif; color:rgb(51, 51, 51); padding:12px 0; max-width:600px; line-height:1.4">
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align:top; padding-right:15px">
+                                        <img style="border-radius:8px; display:block; background-color:transparent; border:0; outline:none" width="80" alt="Neat Garms Logo" src="https://www.neatgarms.com/mains/logo2.png">
+                                    </td>
+                                    <td style="vertical-align:top">
+                                        <div>
+                                            <b style="font-size:16px; color:rgb(174, 134, 106)">
+                                                Neatgarms
+                                            </b>
+                                            <br>
+                                        </div>
+                                        <div>
+                                            <a target="_blank" style="color:rgb(26, 115, 232); text-decoration:none; font-size:14px" href="mailto:info@neatgarms.com">
+                                                info@neatgarms.com
+                                            </a>
+                                            <br>
+                                        </div>
+                                        <div>
+                                            <a style="color:rgb(26, 115, 232); text-decoration:none; font-size:14px" target="_blank" href="https://www.neatgarms.com">
+                                                www.neatgarms.com
+                                            </a>
+                                            <br>
+                                        </div>
+                                        <div style="margin-top:8px">
+                                            <a style="margin-right:6px; text-decoration:none" target="_blank" href="https://instagram.com/neatgarms">
+                                                <img style="display:inline-block; background-color:transparent; border:0; outline:none" width="20" alt="Instagram" src="https://www.neatgarms.com/images/insta.png">
+                                            </a>
+                                            <a style="margin-right:6px; text-decoration:none" target="_blank" href="https://wa.me/254758647031">
+                                                <img style="display:inline-block; background-color:transparent; border:0; outline:none" width="20" alt="WhatsApp" src="https://www.neatgarms.com/images/whatsapp.png">
+                                            </a>
+                                            <a style="margin-right:6px; text-decoration:none" target="_blank" href="https://x.com/neatgarms">
+                                                <img style="display:inline-block; background-color:transparent; border:0; outline:none" width="20" alt="X (Twitter)" src="https://www.neatgarms.com/images/x.png">
+                                            </a>
+                                            <a style="text-decoration:none" target="_blank" href="https://pinterest.com/neatgarms">
+                                                <img style="display:inline-block; background-color:transparent; border:0; outline:none" width="20" alt="Pinterest" src="https://www.neatgarms.com/images/pins.png">
+                                            </a>
+                                            <br>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
         </table>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">💸 Special Offer Just for You</h3>
-        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next order. Offer valid for the next <strong>3 days</strong> only!</p>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: black;">📞 Need Help?</h3>
-        <p>Reach us any time:</p>
-        <ul style="line-height: 1.8;">
-            <li><strong>Phone:</strong> +254 758 647 031</li>
-        </ul>
-    
-        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
-    
-        <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
-      </div>
-
-  
-
-<table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
-  <tr>
-    <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
-    </td>
-    <td style="vertical-align: top;">
-      <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
-      <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
-      <div style="margin-top: 8px;">
-        <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
-        </a>
-        <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
-        </a>
-      </div>
-    </td>
-  </tr>
-</table>
-
-
-      `
-        ,
+        <div>
+            <br>
+        </div>
+    </div>
+</div>`,
       };
+      await transporter.sendMail(autoResponseOptions);
 
-      // Send Autoresponse
-      const autoInfo = await transporter.sendMail(autoResponseOptions);
-      console.log("Autoresponse sent to user:", autoInfo.response);
-
-      // Delete PDF after sending email
       fs.unlinkSync(pdfFilePath);
-
-      // Send Success Response
       res.json({ success: true, message: "Form submitted successfully!" });
     } catch (error) {
       console.error("Error sending email:", error);
@@ -254,6 +368,7 @@ app.post(
     }
   }
 );
+
 
 
 
@@ -818,119 +933,207 @@ if (Array.isArray(sizes) && sizes.length > 0) {
   const autoResponse = {
   from: '"Neatgarms" <info@neatgarms.com>',
   to: contact.email,
-  subject: "🧾 Your Order is Confirmed! | Neatgarms Ltd",
+  subject: "🪄 Magic in the Making: Your Neat Customs Order!",
   html: `
-<div style="font-family: 'poppins', sans-serif; color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Neat Customs Teaser</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      font-family: 'Century Gothic', Arial, sans-serif;
+    }
+    table { border-spacing: 0; width: 100%; }
+    img { border: 0; display: block; line-height: 0; }
+    .headline {
+      font-size: 30px;
+      letter-spacing: 2px;
+      font-weight: 100;
+      margin: 20px 0 0 0;
+      line-height: 1.2;
+      color: #ffffff;
+    }
+    .headline span {
+      display: block;
+      font-size: 28px;
+      letter-spacing: 10px;
+      margin-top: 10px;
+      color: #ae866a;
+    }
+    .content {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #ffffff;
+    }
+    .cta {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      background-color: transparent;
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: 15px;
+      font-weight: 100;
+      border-bottom: 2px solid #8a9381;
+      border-top: 2px solid #8a9381;
+      font-size: 16px;
+    }
+    @media screen and (max-width:600px) {
+      .headline { font-size:28px !important; letter-spacing:6px !important; }
+      .headline span { font-size:20px !important; letter-spacing:4px !important; }
+      .content { font-size:15px !important; padding:0 15px !important; }
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+      <tr>
+        <td align="center">
 
-  <div style="text-align: center;">
-    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
-  </div>
+          <!-- Hero Section -->
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:700px;">
+            <tr>
+              <td background="https://www.neatgarms.com/mains/brent.jpg"
+                  bgcolor="#000000"
+                  width="700"
+                  height="500"
+                  valign="middle"
+                  style="background-position:center center; background-size:cover; text-align:center;">
 
-  <h2 style="color: #333;">Hello ${delivery.firstName},</h2>
-  <p style="font-size: 16px;">Thank you for your order with <strong>Neatgarms Ltd</strong>! We’re excited to get your merch to you. Your order is being processed and will be shipped soon.</p>
+                <!--[if gte mso 9]>
+                <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:700px;height:500px;">
+                  <v:fill type="frame" src="https://www.neatgarms.com/mains/brent.jpg" color="#000000" />
+                  <v:textbox inset="0,0,0,0">
+                <![endif]-->
 
-  <div style="margin: 20px 0; background: #fff; border-radius: 10px; padding: 16px;">
-    <h3 style="margin-bottom: 10px;">👕 Selected Sizes</h3>
-    <ul style="line-height: 1.6;">
-      ${
-        Array.isArray(sizes) && sizes.length > 0
-          ? sizes
-              .map(
-                (item) =>
-                  `<li><strong>Size ${item.size}:</strong> ${item.quantity} item(s)</li>`
-              )
-              .join("")
-          : `<li>No sizes selected.</li>`
-      }
-    </ul>
+                <table role="presentation" width="100%" height="500" cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td align="center" valign="middle" style="padding:40px 20px; background-color:rgba(0,0,0,0.55);">
 
-    <h3 style="margin-top: 20px;">🚚 Delivery Address</h3>
-    <p>
-      ${delivery.firstName} ${delivery.lastName}<br/>
-      ${delivery.address}${delivery.apartment ? ", " + delivery.apartment : ""}<br/>
-      ${delivery.city}, ${delivery.postalCode}<br/>
-      ${delivery.country}<br/>
-      <strong>Phone:</strong> ${delivery.phone}
-    </p>
+                      <!-- Logo -->
+                      <img src="https://www.neatgarms.com/mains/logo2.png" 
+                           alt="Neat Customs Logo" width="120"
+                           style="margin:0 auto 20px auto; display:block;">
 
-    <h3 style="margin-top: 20px;">💳 Order Summary</h3>
-    <p>
-      <strong>Item Name:</strong> ${orderSummary.itemName}<br/>
-      <strong>Price:</strong> KShs. ${orderSummary.itemPrice}<br/>
-    </p>
-    <p><em>Attached below is a PDF with your order images.</em></p>
-  </div>
+                      <!-- Headline -->
+                      <h1 class="headline" style="  font-family: Georgia, 'Times New Roman', serif; font-weight: 100; margin:0;">
+                        Heyy There.
+                      </h1>
 
-  <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
-    <h3 style="color: black;">🪄 A Special Thank You</h3>
-    <p style="font-size: 15px; line-height: 1.6;">
-      Thank you for your purchase! Your merch has been gently taken from our Neat shelves by gloved hands and lovingly packed by our Omashu packing specialist under candlelight. After a glorious celebration, the town of Nairobi cheered as your package departed aboard our private baby jet. You’re now officially our “Customer of the Year,” with your photo proudly on our wall. We had a magical time packing your order—and we can’t wait for your next visit. <strong>KEEPITNEAT!</strong>
-    </p>
-  </div>
-
-  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-
-  <h3 style="color: #333;">🔥 This Week's Top Picks</h3>
-  <table style="width: 100%; border-spacing: 16px 10px;">
-    <tr>
-      <td align="center">
-        <a href="https://www.neatgarms.com/tops.html" target="_blank">
-          <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee" width="140" style="border-radius: 4px;" />
-          <p style="margin: 8px 0;">Work Shirt</p>
-        </a>
-      </td>
-      <td align="center">
-        <a href="https://www.neatgarms.com/pants.html" target="_blank">
-          <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
-          <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
-        </a>
-      </td>
-    </tr>
-  </table>
-
-  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-
-  <h3 style="color: #333;">💸 Special Offer Just for You</h3>
-  <p>Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next purchase. Valid for 3 days only!</p>
-
-  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-
-  <h3 style="color: #333;">📞 Need Help?</h3>
-  <p>We're here for you:</p>
-  <ul style="line-height: 1.8;">
-    <li><strong>Phone:</strong> +254 758 647 031</li>
-  </ul>
-
-  <p style="margin-top: 30px; font-size: 14px; color: #666;">We can’t wait to see you rock your new fit! 😎</p>
-  <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
+<div class="content" style="margin:30px auto 0 auto; max-width:600px; font-family: 'Century Gothic', Arial, sans-serif;">
+  <p>
+    ✨ Welcome to the world of <span style="color:#ae866a; font-weight:bold;">Neat Customs</span>! ✨
+  </p>
+  <p>
+    Your order has officially been sprinkled with a little magic and is now in the hands of our designers, ready to become something truly <strong>you</strong>. 🪄
+  </p>
+  <p>
+    Every stitch, every color, every detail is being carefully crafted to turn your vision into a wearable masterpiece. Think of it as a collaboration between your imagination and our craftsmanship.
+  </p>
+  <p>
+    Keep an eye on your inbox — we’ll be sending updates as your creation comes to life. And remember, you’re not just a customer, you’re a part of the Neat Customs family. 💛
+  </p>
+  <p>
+    Thank you for trusting us with your ideas. Get ready to wear your dreams. 👕
+  </p>
 </div>
 
-<table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
-  <tr>
-    <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;background: transparent;">
-    </td>
-    <td style="vertical-align: top;">
-      <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
-      <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
-      <div style="margin-top: 8px;">
-        <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;  background: transparent;">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;  background: transparent;">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;  background: transparent;">
-        </a>
-        <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline; background: transparent;">
-        </a>
-      </div>
-    </td>
-  </tr>
-</table>
+
+                        <!-- CTA -->
+                        <a href="https://www.neatgarms.com/item.html" class="cta"
+                           style="font-family: Arial, Helvetica, sans-serif;"> Another Custom Adventure?</a>
+                      </div>
+
+                    </td>
+                  </tr>
+                </table>
+
+                <!--[if gte mso 9]>
+                  </v:textbox>
+                </v:rect>
+                <![endif]-->
+
+              </td>
+            </tr>
+          </table>
+          <!-- End Hero Section -->
+
+        </td>
+      </tr>
+    </table>
+  </center>
+</body>
+</html>
+<div>
+    <br>
+</div>
+<div>
+    <br>
+</div>
+<div class="zmail_signature_below">
+    <div id="Zm-_Id_-Sgn" data-zbluepencil-ignore="true" data-sigid="5358557000000043004">
+        <table style="font-family:Poppins, sans-serif; color:rgb(51, 51, 51); padding:12px 0; max-width:600px; line-height:1.4">
+            <tbody>
+                <tr>
+                    <td style="vertical-align:top">
+                        <table border="0" cellspacing="0" cellpadding="0" style="font-family:Poppins, sans-serif; color:rgb(51, 51, 51); padding:12px 0; max-width:600px; line-height:1.4">
+                            <tbody>
+                                <tr>
+                                    <td style="vertical-align:top; padding-right:15px">
+                                        <img style="border-radius:8px; display:block; background-color:transparent; border:0; outline:none" width="80" alt="Neat Garms Logo" src="https://www.neatgarms.com/mains/logo2.png">
+                                    </td>
+                                    <td style="vertical-align:top">
+                                        <div>
+                                            <b style="font-size:16px; color:rgb(174, 134, 106)">
+                                                Neatgarms
+                                            </b>
+                                            <br>
+                                        </div>
+                                        <div>
+                                            <a target="_blank" style="color:rgb(26, 115, 232); text-decoration:none; font-size:14px" href="mailto:info@neatgarms.com">
+                                                info@neatgarms.com
+                                            </a>
+                                            <br>
+                                        </div>
+                                        <div>
+                                            <a style="color:rgb(26, 115, 232); text-decoration:none; font-size:14px" target="_blank" href="https://www.neatgarms.com">
+                                                www.neatgarms.com
+                                            </a>
+                                            <br>
+                                        </div>
+                                        <div style="margin-top:8px">
+                                            <a style="margin-right:6px; text-decoration:none" target="_blank" href="https://instagram.com/neatgarms">
+                                                <img style="display:inline-block; background-color:transparent; border:0; outline:none" width="20" alt="Instagram" src="https://www.neatgarms.com/images/insta.png">
+                                            </a>
+                                            <a style="margin-right:6px; text-decoration:none" target="_blank" href="https://wa.me/254758647031">
+                                                <img style="display:inline-block; background-color:transparent; border:0; outline:none" width="20" alt="WhatsApp" src="https://www.neatgarms.com/images/whatsapp.png">
+                                            </a>
+                                            <a style="margin-right:6px; text-decoration:none" target="_blank" href="https://x.com/neatgarms">
+                                                <img style="display:inline-block; background-color:transparent; border:0; outline:none" width="20" alt="X (Twitter)" src="https://www.neatgarms.com/images/x.png">
+                                            </a>
+                                            <a style="text-decoration:none" target="_blank" href="https://pinterest.com/neatgarms">
+                                                <img style="display:inline-block; background-color:transparent; border:0; outline:none" width="20" alt="Pinterest" src="https://www.neatgarms.com/images/pins.png">
+                                            </a>
+                                            <br>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <br>
+        </div>
+    </div>
+</div>
   `,
   attachments: [
     {
@@ -1359,9 +1562,8 @@ app.post('/api/payment-cancelled', async (req, res) => {
 
 
 
-
 // ✅ Use only in the backend
-const PAYSTACK_SECRET_KEY = 'REMOVED_SECRET';
+const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 // ✅ Verify transaction route
 app.post('/api/paystack/verify', async (req, res) => {

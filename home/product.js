@@ -491,3 +491,26 @@ document.querySelectorAll('.product-card').forEach(card => {
 
     observer.observe(mainImage, { attributes: true, attributeFilter: ['src'] });
   }
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  // Get the product id from query string (?id=ws)
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
+
+  console.log("Product ID from URL:", productId);
+
+  // Retrieve product data from localStorage
+  const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+
+  if (productData && productData.id === productId) {
+    // ✅ Render the product
+    document.getElementById("product-name").textContent = productData.name;
+    document.querySelector(".old-price").textContent = productData.oldPrice;
+    document.querySelector(".new-price").textContent = productData.newPrice;
+    document.getElementById("main-image").src = productData.images[0];
+    document.getElementById("product-status").textContent = "In Stock";
+  } else {
+    console.warn("Product not found for ID:", productId);
+  }
+});

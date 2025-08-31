@@ -112,7 +112,6 @@ document.querySelectorAll('.product-card').forEach((card) => {
 document.querySelectorAll('.product-card').forEach(card => {
   card.addEventListener('click', () => {
 
-    /* ---------- unchanged fields ---------- */
     const images    = Array.from(card.querySelectorAll('.image-wrapper img')).map(i => i.src);
     const status    = card.querySelector('.status')?.innerText ?? null;
     const name      = card.querySelector('.product-name').innerText;
@@ -121,39 +120,40 @@ document.querySelectorAll('.product-card').forEach(card => {
     const colors    = Array.from(card.querySelectorAll('.color-buttons .color-btn'))
                            .map(btn => btn.dataset.color);
 
-    /* ---------- ⭐ NEW logic for sizes ---------- */
     const rawSizes   = Array.from(card.querySelectorAll('.size-buttons .size-btn'))
-                            .map(btn => btn.dataset.size);        // e.g. ["S*", "L", "2 XL*"]
-
-    const sizes      = rawSizes.map(s => s.replace('*', '').trim());         // → ["S", "L", "2 XL"]
+                            .map(btn => btn.dataset.size);
+    const sizes      = rawSizes.map(s => s.replace('*', '').trim());
     const outOfStock = rawSizes.filter(s => s.includes('*'))
-                               .map(s => s.replace('*', '').trim());         // → ["S", "2 XL"]
+                               .map(s => s.replace('*', '').trim());
 
-    /* ---------- extra descriptive info (unchanged) ---------- */
     const description = card.dataset.description || '';
     const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
     const sizeFit     = card.dataset.sizefit || '';
 
-    /* ---------- package & ship ---------- */
+    // Generate short ID (first letters of product name)
+    const productId = name.split(" ").map(w => w[0]).join("").toLowerCase();
+
     const productData = {
+      id: productId,
       images,
       name,
       oldPrice,
       newPrice,
-      sizes,          // now “clean” sizes
-      outOfStock,     // ✖ sold‑out sizes
+      sizes,
+      outOfStock,
       colors,
       description,
       features,
       sizeFit
     };
 
-    console.log('🛈 productData about to store →', productData);
-
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
-    window.location.href = 'product.html';
+
+    // Redirect with ?id= format
+    window.location.href = `product.html?id=${productId}`;
   });
 });
+
 
 
 
@@ -229,3 +229,13 @@ function filterProducts(query) {
 
 
 
+function generateProductId(name) {
+  return name
+    .split(" ")                // split by spaces
+    .map(word => word[0])      // take first letter of each word
+    .join("")                  // join them
+    .toLowerCase();            // make lowercase
+}
+
+// "Work Shirt" → "ws"
+// "Casual Pants" → "cp"

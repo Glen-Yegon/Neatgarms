@@ -31,8 +31,8 @@
       /* 🔄 Responsive background image for phones */
 @media (max-width: 768px) {
   body {
-    background: linear-gradient(120deg, rgba(53, 53, 53, 0.4), rgba(38, 38, 38, 0.8)),
-                url('shoot/lpsecondary\(phone\).avif') no-repeat center center / cover;
+    background: linear-gradient(120deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)),
+                url('mains/gunna1.jpg') no-repeat center center / cover;
   }
 }
 
@@ -75,163 +75,235 @@
 
 
   
-      p {
-        color: white;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 20px;
-        font-size: 1.2rem;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-      }
+p {
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 100;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  line-height: 1.5;
+  padding: 0 10px; /* small padding for small screens */
+}
+
+
+.highlight {
+  color: #ae866a;      /* Bright color to stand out */
+  font-weight: 700;     /* Bold */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7); /* Optional: extra emphasis */
+}
+
+.b{
+  font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  p {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+}
+
+
   
-      /* Form Container */
-      .form-container {
-        background:linear-gradient(to right,#0000006c, #e2e2e28f,#00000057);
-        padding: 20px;
-        border-radius: 20px;
-        width: 100%;
-        max-width: 600px;
-        position: relative;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        overflow: hidden;
-      }
-  
-      /* Glow Effect */
-      .form-container::before {
-        content: '';
-        position: relative;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle, rgba(0, 0, 0, 0.4), transparent);
-        animation: rotateGlow 10s linear infinite;
-      }
-  
-      @keyframes rotateGlow {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }
-  
-      form {
-        display: flex;
-        flex-direction: column;
-      }
-  
-      .form-group {
-        margin-bottom: 15px;
-      }
-  
-      label {
-        font-size: 1rem;
-        margin-bottom: 5px;
-        display: block;
-        color: rgba(255, 255, 255, 0.566);
-      }
-  
-      input[type="text"], input[type="email"], input[type="file"], input[type="tel"]{
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 10px;
-        outline: none;
-        background-color: transparent;
-        border-bottom: 2px solid white;
-        font-size: 1rem;
-        color: rgb(255, 255, 255);
-      }
-      
-      input[type="text"]::placeholder,
-input[type="email"]::placeholder,
-input[type="file"]::placeholder,
-input[type="tel"]::placeholder {
-  color: rgba(255, 255, 255, 0.8); /* Slight transparency for subtle look */
+/* Form Container */
+.form-container {
+  background: linear-gradient(to right, #0000006c, #e2e2e28f, #00000057);
+  padding: 20px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+/* Glow Effect */
+.form-container::before {
+  content: '';
+  position: relative;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.4), transparent);
+  animation: rotateGlow 10s linear infinite;
+}
+
+@keyframes rotateGlow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  display: block;
+  color: rgba(255, 255, 255, 0.566);
+}
+
+input[type="text"], input[type="email"], input[type="file"], input[type="tel"], input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 2px solid white;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 300;
 }
 
-  
-      input[type="file"] {
-        background: rgba(255, 255, 255, 0.1);
-        color: rgb(11, 8, 8);
-        border: 2px dashed rgba(255, 255, 255, 0.625);
-        cursor: pointer;
-        transition: border 0.3s ease;
-      }
-  
-      input[type="file"]:hover {
-        border-color: #000000;
-      }
-  
-      input[type="file"]::-webkit-file-upload-button {
-        display: none;
-      }
-  
-      .upload-preview {
-        margin-top: 10px;
-        display: none;
-        animation: fadeIn 1s ease;
-      }
-  
-      img {
-        max-width: 30%;
-        margin-top: 10px;
-        max-height: 30%;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
-      }
-  
-      #submit {
-        padding: 12px 24px; 
-        border: none;
-        border-radius: 12px;
-        background-color: transparent;
-        border-bottom: 3px solid rgb(0, 0, 0);
-        margin: 0px 200px;
-        color: rgb(0, 0, 0);
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease-in-out;
-      }
-      
-      #submit:hover {
-        background: #8a9381; /* Hazel brown */
-        color: #f4f7f5; /* Light text on hover */
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-      }
-      
-      /* Mobile responsiveness */
+input[type="file"] {
+  background: rgba(255, 255, 255, 0.3);
+  color: rgb(11, 8, 8);
+  border: 1px solid rgba(0, 0, 0, 0.625);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: border 0.3s ease;
+}
+
+input[type="file"]:hover {
+  border-color: #000000;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  display: none;
+}
+
+.upload-preview {
+  margin-top: 10px;
+  display: none;
+  animation: fadeIn 1s ease;
+}
+
+.upload-preview img {
+  max-width: 30%;
+  margin-top: 10px;
+  max-height: 30%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Pay Button */
+#pay-now {
+  padding: 12px 24px; 
+  border: none;
+  border-radius: 12px;
+  background-color: transparent;
+  border-bottom: 2px solid rgb(255, 255, 255);
+  margin: 0px 200px;
+  color: rgb(255, 255, 255);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+#pay-now:hover {
+  background: #8a9381;
+  color: #f4f7f5;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+#productsContainer {
+  margin-top: 1px;
+  background: rgba(255, 255, 255, 0.1); /* Slightly translucent white */
+  backdrop-filter: blur(8px);           /* Frosted glass effect */                /* Rounded corners */
+  padding: 20px;                         /* Some spacing inside */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25); /* Soft shadow */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+}
+
+.product-item {
+  padding: 12px;
+  border-radius: 0px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.05);
+}
+.product-item h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  font-family: 'Dream Avenue', sans-serif;
+  font-weight: 300;
+  color: #fff;
+}
+.product-item label {
+  display: block;
+  margin-top: 6px;
+  font-weight: 100;
+  color: rgba(255, 255, 255, 0.8);
+}
+.product-item select {
+  width: 100%;
+  padding: 6px;
+  margin-top: 3px;
+  background: transparent;
+  color: #000000;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Mobile responsiveness */
 @media (max-width: 600px) {
-  #submit {
-    margin: 0 20px; /* smaller horizontal margins */
-    padding: 12px 16px; /* slightly smaller padding */
-    font-size: 0.9rem; /* smaller font */
-    width: calc(100% - 40px); /* full width minus margin */
-    box-sizing: border-box; /* to include padding & border in width */
+  #pay-now {
+    margin: 0 20px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
   }
 }
-  
-      /* Responsive Design */
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 2rem;
-        }
-  
-        p {
-          font-size: 1rem;
-        }
-  
-        .form-container {
-          padding: 15px;
-        }
-  
-      }
-  
-      @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: 1; }
-      }
+
+@media (max-width: 768px) {
+  .form-container {
+    padding: 15px;
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+
+#price-container {
+  margin: 20px 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+  font-size: 1.2rem;
+  font-weight: 100;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 
 #goBackButton{
   padding: 12px 24px; 
@@ -252,4 +324,31 @@ input[type="tel"]::placeholder {
   color: #f4f7f5; /* Light text on hover */
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.submit { display:none; } 
+
+.quantity-wrapper {
+  margin-bottom: 15px;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controls input {
+  width: 60px;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.quantity-controls button {
+  width: 30px;
+  background: #ae866a;
+  height: 30px;
+  border-radius: 3px;
+  margin-top: 10px;
+  font-size: 18px;
+  cursor: pointer;
 }
