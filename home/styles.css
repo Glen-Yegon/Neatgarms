@@ -790,7 +790,7 @@ body.fade-out {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('new/lp10.avif') no-repeat center center/cover;
+  background: url('mains/utility3.jpg') no-repeat center center/cover;
   transform: scale(1.2);
   transition: transform 1.2s ease;
   z-index: 0;
@@ -854,7 +854,7 @@ body.fade-out {
   /* 📱 Mobile Version: Override background image */
 @media (max-width: 767px) {
   .promo-bg {
-    background: url('shoot/corpp.avif') no-repeat center center/cover;
+    background: url('mains/utility\ 10.jpg') no-repeat center center/cover;
   }
 }
 
@@ -916,7 +916,7 @@ body.fade-out {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('new/lp8.avif') no-repeat center center/cover;
+  background: url('items/background.jpg') no-repeat center center/cover;
   transform: scale(1.2);
   transition: transform 1.2s ease;
   z-index: 0;
@@ -953,7 +953,7 @@ body.fade-out {
 }
 
 .promo-content2 p {
-  font-size: 3rem;
+  font-size: 1.7rem;
   margin-bottom: 30px;
   line-height: 1.6;
   color: white;
@@ -1014,7 +1014,7 @@ body.fade-out {
 
 @media (max-width: 767px) {
   .promo-bg2 {
-    background: url('new/lp16m.avif') no-repeat center center/cover;
+    background: url('mains/gunna3.jpg') no-repeat center center/cover;
   }
 }
 
