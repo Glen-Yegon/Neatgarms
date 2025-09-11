@@ -1049,63 +1049,42 @@ function renderSizeButtons(sizes = []) {
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const sanitize = str =>
-    str.normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/g, '').trim();
+  // Get the current product ID from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const currentProductId = urlParams.get('id');
 
-  function waitForProductName(callback) {
-    const nameEl = document.getElementById('product-name');
+  if (!currentProductId) return;
 
-    if (nameEl && nameEl.innerText.trim() !== '') {
-      callback(nameEl.innerText.trim());
-    } else {
-      // Try again after a short delay
-      setTimeout(() => waitForProductName(callback), 50);
-    }
+  // Select all product cards in the featured section
+  const allCards = Array.from(document.querySelectorAll('.featured-section .product-card'));
+
+  // Filter out the current product by ID
+  const pool = allCards.filter(card => card.id !== currentProductId);
+
+  // Shuffle pool
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
   }
 
-  waitForProductName(currentProductName => {
-    const currentKey = sanitize(currentProductName);
-
-    const allCards = Array.from(document.querySelectorAll('.featured-section .product-card'));
-
-    const pool = allCards.filter(card => {
-      const cardName = card.querySelector('.product-name')?.innerText || '';
-      return sanitize(cardName) !== currentKey;
-    });
-
-    // Shuffle
-    for (let i = pool.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [pool[i], pool[j]] = [pool[j], pool[i]];
+  // Show max 4 unique products
+  let shown = 0;
+  pool.forEach(card => {
+    if (shown < 4) {
+      card.style.display = '';
+      shown++;
+    } else {
+      card.style.display = 'none';
     }
-
-    // Show max 4 unique products
-    const seen = new Set();
-    let shown = 0;
-
-    pool.forEach(card => {
-      const name = card.querySelector('.product-name')?.innerText || '';
-      const key = sanitize(name);
-
-      if (!seen.has(key) && shown < 4) {
-        seen.add(key);
-        card.style.display = '';
-        shown++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    // Explicitly hide any cards filtered out due to same product name
-    allCards
-      .filter(card => {
-        const cardName = card.querySelector('.product-name')?.innerText || '';
-        return sanitize(cardName) === currentKey;
-      })
-      .forEach(card => card.style.display = 'none');
   });
+
+  // Hide the current product if it appears in the featured section
+  allCards
+    .filter(card => card.id === currentProductId)
+    .forEach(card => card.style.display = 'none');
 });
 </script>
+
 
 <!-- Include Lenis (CDN or npm) -->
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>

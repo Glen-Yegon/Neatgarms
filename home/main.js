@@ -130,11 +130,10 @@ document.querySelectorAll('.product-card').forEach(card => {
     const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
     const sizeFit     = card.dataset.sizefit || '';
 
-    // Generate short ID (first letters of product name)
-    const productId = name.split(" ").map(w => w[0]).join("").toLowerCase();
+        const productId = card.id; // use the card's unique ID
+
 
     const productData = {
-      id: productId,
       images,
       name,
       oldPrice,
@@ -149,7 +148,7 @@ document.querySelectorAll('.product-card').forEach(card => {
 
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
 
-    // Redirect with ?id= format
+    // Redirect with the product ID in URL
     window.location.href = `product.html?id=${productId}`;
   });
 });

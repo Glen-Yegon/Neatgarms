@@ -201,6 +201,7 @@ if (!validateSelections()) return;
   const selectedColor = document.querySelector('.color-btn.selected')?.dataset.color || null;
   const quantity = parseInt(document.getElementById('quantity').value) || 1;
 
+
   const productData = {
     image: productImage,
     brand: productBrand,
@@ -416,6 +417,8 @@ document.querySelectorAll('.product-card').forEach(card => {
     const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
     const sizeFit     = card.dataset.sizefit || '';
 
+            const productId = card.id; // use the card's unique ID
+
     /* ---------- package & ship ---------- */
     const productData = {
       images,
@@ -433,7 +436,8 @@ document.querySelectorAll('.product-card').forEach(card => {
     console.log('🛈 productData about to store →', productData);
 
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
-    window.location.href = 'product.html';
+    // Redirect with the product ID in URL
+    window.location.href = `product.html?id=${productId}`;
   });
 });
 
