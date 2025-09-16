@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const displayPrice = document.getElementById("display-price");
   const inputs = document.querySelectorAll('.size-selection input[type="number"]');
 
-  // 1. Display stored images
-  const storedImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
+  // 1. Display stored images (from sessionStorage, not localStorage)
+  const storedImages = JSON.parse(sessionStorage.getItem("checkoutImages")) || [];
 
   if (storedImages.length === 0) {
     itemSection.innerHTML = "<p>No items added yet.</p>";
