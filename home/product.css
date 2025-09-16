@@ -8,10 +8,26 @@
   font-display: swap;
 }
 
+/* Hide scrollbar but keep scrolling */
+
+/* Chrome, Safari, Edge */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none;   /* hides scrollbar */
+  -ms-overflow-style: none; /* IE & Edge legacy */
+}
+
+
 
 *{
   font-family: 'poppins', sans-serif;
 }
+
+
 body, html {
     margin: 0;
     padding: 0;
