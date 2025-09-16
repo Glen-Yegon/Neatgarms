@@ -71,22 +71,21 @@ document.getElementById("clearCanvasBtn").addEventListener("click", clearAllCanv
 
 
 document.getElementById("downloadImageBtn").addEventListener("click", function () {
-  let storedImages = JSON.parse(localStorage.getItem("checkoutImages")) || [];
+  // Always start clean — remove old images
+  sessionStorage.removeItem("checkoutImages");
+
   let newImages = [];
 
-
-  canvases.forEach((canvas, index) => {
+  canvases.forEach((canvas) => {
     const imgUrl = canvas.toDataURL("image/png"); // Convert canvas to image URL
     newImages.push(imgUrl);
   });
 
+  // Store fresh images in sessionStorage (auto-clears when tab closes)
+  sessionStorage.setItem("checkoutImages", JSON.stringify(newImages));
 
-  // Store new images in localStorage
-  localStorage.setItem("checkoutImages", JSON.stringify(newImages));
-
-  // Ask user if they want to proceed to checkout
-    window.location.href = "buy3.html"; // Redirect to checkout page
-  
+  // Redirect to checkout page
+  window.location.href = "buy3.html";
 });
 
 
