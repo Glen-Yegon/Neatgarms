@@ -24,8 +24,6 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-require('dotenv').config();
-
 const app = express(); 
 const PORT = 5000;
 
@@ -1669,16 +1667,21 @@ app.post("/api/paystack/webhook",
 
 
 
-// Clean URL routing for HTML pages
-app.get('/:page', (req, res) => {
+// Redirect clean URLs to .html files
+app.get('/:page', (req, res, next) => {
     const page = req.params.page;
     const filePath = path.join(__dirname, 'public', `${page}.html`);
-    
     res.sendFile(filePath, err => {
         if (err) {
-            res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+            next(); // go to next route if file not found
         }
     });
+});
+
+// Optional: redirect /page.html to /page (so URL looks clean)
+app.get('/:page.html', (req, res) => {
+    const page = req.params.page;
+    res.redirect(`/${page}`);
 });
 
 // Home page
@@ -1686,10 +1689,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Optional: redirect URLs with trailing slash
-app.get('/:page/', (req, res) => {
-    res.redirect(`/${req.params.page}`);
-});
 
 
 app.get("/cors-test", (req, res) => {
