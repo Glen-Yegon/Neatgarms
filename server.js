@@ -63,7 +63,8 @@ app.options("*", cors(corsOptions)); // Handle preflight for all routes
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
-
+// Serve static files (CSS, JS, images)
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
@@ -1668,12 +1669,14 @@ app.post("/api/paystack/webhook",
 
 
 
-// Clean URL handling
+// Clean URL routing for HTML pages
 app.get('/:page', (req, res) => {
     const page = req.params.page;
-    res.sendFile(path.join(__dirname, 'public', `${page}.html`), err => {
+    const filePath = path.join(__dirname, 'public', `${page}.html`);
+    
+    res.sendFile(filePath, err => {
         if (err) {
-            res.status(404).send('Page not found');
+            res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
         }
     });
 });
@@ -1683,6 +1686,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Optional: redirect URLs with trailing slash
+app.get('/:page/', (req, res) => {
+    res.redirect(`/${req.params.page}`);
+});
 
 
 app.get("/cors-test", (req, res) => {
