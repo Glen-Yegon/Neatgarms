@@ -484,10 +484,11 @@ Model Reference: 5’5’ (165cm) Size 30
 
 
 <section id="neat-promo">
-  <!-- Background Video -->
-  <video autoplay muted loop playsinline class="promo-bg">
+  <!-- Background Video with poster -->
+  <video autoplay muted loop playsinline class="promo-bg" poster="cloth/fallback-desktop.jpg">
     <source src="cloth/weekendvid.mp4" type="video/mp4">
-    Your browser does not support the video tag.
+    <!-- Absolute fallback for very old browsers -->
+    <img src="mains/utility3.jpg" alt="Neat Customs background">
   </video>
 
   <!-- Dark Overlay -->
@@ -500,6 +501,7 @@ Model Reference: 5’5’ (165cm) Size 30
     <a href="item.html" class="shop-btn">Customize Your Look →</a>
   </div>
 </section>
+
 
 
 <!--Keep It Neat Word-->
