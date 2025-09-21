@@ -11,7 +11,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <title>Neatgarms</title>
-  <link rel="stylesheet" href="styles.min.css">
+  <link rel="stylesheet" href="styles.css">
   <link
   rel="preload"
   href="fonts/DreamAvenue.woff2"
@@ -483,16 +483,24 @@ Model Reference: 5’5’ (165cm) Size 30
 
 
 
-  <!-- Neat large photo 1 -->
-  <section id="neat-promo">
-     <div class="promo-bg"></div>
-      <div class="promo-overlay"></div>
+<section id="neat-promo">
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="promo-bg">
+    <source src="cloth/weekendvid.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Dark Overlay -->
+  <div class="promo-overlay"></div>
+
+  <!-- Content -->
   <div class="promo-content" data-aos="fade-down" data-aos-delay="400">
     <h1>Neat Customs</h1>
     <p>Built to turn heads. Guaranteed to spark compliments (and maybe a little envy).</p>
     <a href="item.html" class="shop-btn">Customize Your Look →</a>
   </div>
 </section>
+
 
 <!--Keep It Neat Word-->
 <section id="moving-text-2">
