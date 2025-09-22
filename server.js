@@ -523,7 +523,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
         <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">💸 Special Offer Just for You</h3>
-        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next order. Offer valid for the next <strong>3 days</strong> only!</p>
+        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">NEAT20</strong> to get <strong>20% off</strong> your next order.</p>
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
@@ -762,7 +762,7 @@ if (orderSummary) {
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
         <h3 style="color: #333;">💸 Special Offer Just for You</h3>
-        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">WELCOME10</strong> to get <strong>10% off</strong> your next order. Offer valid for the next <strong>3 days</strong> only!</p>
+        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">NEAT20</strong> to get <strong>20% off</strong> your next order.</p>
     
         <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
