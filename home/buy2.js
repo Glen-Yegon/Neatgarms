@@ -87,40 +87,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Discount Codes (Example)
 const discountCodes = {
-  "SAVE10": 10, // 10% off
+  "NEAT20": 20, // 10% off
   "FREESHIP": 0, // Free shipping (no cost here as shipping is already free)
-  "BIGSALE": 20 // 20% off
+  "BIGSALE": 10 // 20% off
 };
+
+// Function to show futuristic toast
+function showFuturisticAlert(message, type = "success") {
+  let container = document.getElementById("toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "toast-container";
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+
+  setTimeout(() => toast.classList.add("show"), 10);
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 500);
+  }, 4000);
+}
 
 // Event Listener for Apply Button
 document.getElementById('apply-discount-btn').addEventListener('click', function () {
-const discountInput = document.getElementById('discount-code').value.trim();
-const discountValue = discountCodes[discountInput];
+  const discountInput = document.getElementById('discount-code').value.trim();
+  const discountValue = discountCodes[discountInput];
 
-// Retrieve the product data from localStorage
-const product = JSON.parse(localStorage.getItem('buyNowProduct'));
+  const product = JSON.parse(localStorage.getItem('buyNowProduct'));
 
-// Check if the product exists and if discount code is valid
-if (product && discountValue !== undefined) {
-  // Calculate the total price from the product's new price and quantity
-  const newPrice = parseFloat(product.newPrice.replace(/KSh|,/g, '')) || 0;
-  const quantity = product.quantity || 1;
-  const total = newPrice * quantity;
+  if (product && discountValue !== undefined) {
+    const newPrice = parseFloat(product.newPrice.replace(/KSh|,/g, '')) || 0;
+    const quantity = product.quantity || 1;
+    const total = newPrice * quantity;
 
-  // Calculate discounted price
-  const discountedTotal = total - (total * discountValue / 100);
+    const discountedTotal = total - (total * discountValue / 100);
 
-  // Update the total price in the Estimated Total section
-  const combinedPriceElement = document.getElementById('combined-price');
-  combinedPriceElement.textContent = discountedTotal.toFixed(2);
+    const combinedPriceElement = document.getElementById('combined-price');
+    combinedPriceElement.textContent = discountedTotal.toFixed(2);
 
-  // Notify the user
-  alert(`Discount code applied! You saved ${discountValue}%.`);
-} else {
-  // If the discount code is invalid, show an alert
-  alert('Invalid discount code. Please try again.');
-}
+    // Show success toast
+    showFuturisticAlert(`Discount code applied! You saved ${discountValue}%.`);
+  } else {
+    // Show error toast
+    showFuturisticAlert('Invalid discount code. Please try again.', "error");
+  }
 });
+
 
   
   

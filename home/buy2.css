@@ -779,3 +779,46 @@ select {
 }
 
 .pay-now-btnn { display:none; } 
+
+
+
+/* Toast container */
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+}
+
+/* Toast style */
+.toast {
+  min-width: 220px;
+  max-width: 300px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-family: 'Dream Avenue', Arial, sans-serif;
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 500;
+  background: #ae866a;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-20px) rotateX(-10deg);
+  box-shadow: 0 0 20px rgba(174, 134, 106, 0.6), 0 0 40px rgba(174, 134, 106, 0.3);
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Show animation */
+.toast.show {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
+}
+
+/* Error type */
+.toast.error {
+  background: #ff4d4f;
+  box-shadow: 0 0 20px rgba(255, 77, 79, 0.6), 0 0 40px rgba(255, 77, 79, 0.3);
+}

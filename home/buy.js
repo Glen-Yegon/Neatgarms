@@ -87,10 +87,36 @@ combinedPriceElement.textContent = finalPrice.toFixed(2);
   
 // Discount Codes (Example)
 const discountCodes = {
-  "SAVE10": 10, // 10% off
+  "NEAT20": 20, // 10% off
   "FREESHIP": 0, // Free shipping (no cost here as shipping is already free)
-  "BIGSALE": 20 // 20% off
+  "BIGSALE": 10 // 20% off
 };
+
+// Function to show futuristic toast
+function showFuturisticAlert(message, type = "success") {
+  // Create container if it doesn't exist
+  let container = document.getElementById("toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "toast-container";
+    document.body.appendChild(container);
+  }
+
+  // Create toast element
+  const toast = document.createElement("div");
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+  container.appendChild(toast);
+
+  // Animate in
+  setTimeout(() => toast.classList.add("show"), 10);
+
+  // Remove after 4 seconds
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 500);
+  }, 4000);
+}
 
 // Event Listener for Apply Button
 document.getElementById('apply-discount-btn').addEventListener('click', function () {
@@ -99,22 +125,18 @@ document.getElementById('apply-discount-btn').addEventListener('click', function
   const combinedPriceElement = document.getElementById('combined-price');
 
   if (discountValue !== undefined) {
-    // Fetch current total price
     const currentTotal = parseFloat(combinedPriceElement.textContent) || 0;
-
-    // Calculate discounted price
     const newTotal = currentTotal - (currentTotal * discountValue / 100);
-
-    // Update total price
     combinedPriceElement.textContent = newTotal.toFixed(2);
 
-    // Notify the user
-    alert(`Discount code applied! You saved ${discountValue}%.`);
+    // Show success toast
+    showFuturisticAlert(`Discount code applied! You saved ${discountValue}%.`);
   } else {
-    // Notify the user of invalid code
-    alert('Invalid discount code. Please try again.');
+    // Show error toast
+    showFuturisticAlert('Invalid discount code. Please try again.', "error");
   }
 });
+
 
 
 // Handle payment method selection using images
