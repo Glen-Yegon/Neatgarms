@@ -1807,3 +1807,17 @@ body.fade-out {
   transition: opacity 0.5s ease;
 }
 
+.sold-out-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: transparent;
+  border-bottom: 2px solid black;
+  color: rgb(0, 0, 0);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px 8px;
+  border-radius: 5px;
+  z-index: 2;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
