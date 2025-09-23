@@ -61,5 +61,29 @@
     { "source": "/tee", "destination": "/tee.html" },
     { "source": "/terms-and-conditions", "destination": "/terms-and-conditions.html" },
     { "source": "/tops", "destination": "/tops.html" }
+  ],
+  "redirects": [
+    { "source": "/about.html", "destination": "/about", "permanent": true },
+    { "source": "/main.html", "destination": "/main", "permanent": true },
+    { "source": "/buy.html", "destination": "/buy", "permanent": true },
+    { "source": "/buy2.html", "destination": "/buy2", "permanent": true },
+    { "source": "/buy3.html", "destination": "/buy3", "permanent": true },
+    { "source": "/product.html", "destination": "/product", "permanent": true },
+    { "source": "/capes.html", "destination": "/capes", "permanent": true },
+    { "source": "/cart.html", "destination": "/cart", "permanent": true },
+    { "source": "/customization.html", "destination": "/customization", "permanent": true },
+    { "source": "/flee.html", "destination": "/flee", "permanent": true },
+    { "source": "/glasses.html", "destination": "/glasses", "permanent": true },
+    { "source": "/guide.html", "destination": "/guide", "permanent": true },
+    { "source": "/item.html", "destination": "/item", "permanent": true },
+    { "source": "/our-story.html", "destination": "/our-story", "permanent": true },
+    { "source": "/pants.html", "destination": "/pants", "permanent": true },
+    { "source": "/privacy-policy.html", "destination": "/privacy-policy", "permanent": true },
+    { "source": "/request.html", "destination": "/request", "permanent": true },
+    { "source": "/shipping.html", "destination": "/shipping", "permanent": true },
+    { "source": "/sign.html", "destination": "/sign", "permanent": true },
+    { "source": "/tee.html", "destination": "/tee", "permanent": true },
+    { "source": "/terms-and-conditions.html", "destination": "/terms-and-conditions", "permanent": true },
+    { "source": "/tops.html", "destination": "/tops", "permanent": true }
   ]
 }
