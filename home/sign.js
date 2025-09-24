@@ -7,6 +7,7 @@ import {
   sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import { getFirestore, doc, getDoc, updateDoc, setDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 const signUpButton = document.getElementById("signUpButton");
@@ -155,5 +156,24 @@ document.querySelector(".recover a").addEventListener("click", async (e) => {
     } else {
       alert("Something went wrong. Try again later.");
     }
+  }
+});
+
+
+// Logout button event
+const logoutBtn = document.getElementById("logoutBtn");
+logoutBtn.addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+
+    // Clear stored user ID
+    localStorage.removeItem("loggedInUserId");
+
+    // Show success message
+    showMessage("✅ You have been logged out successfully.", "logoutMessage");
+
+  } catch (error) {
+    console.error("Logout Error:", error);
+    showMessage("⚠️ Error logging out. Please try again.", "logoutMessage");
   }
 });

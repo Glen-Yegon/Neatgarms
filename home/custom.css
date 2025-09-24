@@ -373,37 +373,41 @@ button {
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-  width: 500px;
+  width: 500px;   /* Fixed size on larger screens */
+  box-sizing: border-box;
 }
 
 .canvas-container {
   display: flex;
-  overflow: hidden;
-  width: 750px;
   justify-content: center;
   margin-bottom: 0px;
-  border-style: solid;
+  border: solid 1px #000;
   border-radius: 10px;
-
+  width: 750px;   /* Fixed size on larger screens */
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* Ensure that canvas is square */
+/* Ensure canvas scales inside container */
 canvas {
   width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
   max-width: 1000px;
   max-height: 1000px;
-  display: block;
-  margin: 0 auto; /* Centers the canvas on the page */
 }
 @media(max-width: 468px){
+  .container{
+    margin-top: 40px;
+  }
   .canvas-container{
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 430px;
+    max-height: 430px;
   }
   .canvas{
-    max-width: 500px;
-    max-height: 500px;
+    max-width: 430px;
+    max-height: 430px;
   }
 }
 
@@ -1641,4 +1645,3 @@ background: linear-gradient(to right, #1f4037, #99f2c8); /* Emerald gradient */
   z-index: 10000;
   transform: translate(-50%, -50%);
 }
-

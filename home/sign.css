@@ -242,3 +242,27 @@ button:hover{
     opacity: 1;
   }
 }
+
+
+.logout-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically if container has height */
+  margin-top: 40px;        /* Add spacing from top */
+  text-align: center;
+}
+
+.logout {
+  font-family: 'Dream Avenue', sans-serif;
+  color: rgb(0, 0, 0); 
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid #000000; 
+  padding: 10px 20px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  width: 200px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+}
