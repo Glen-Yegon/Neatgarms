@@ -1704,6 +1704,43 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
+// --- OAuth Callback ---
+app.get("/oauth/callback", async (req, res) => {
+  const authCode = req.query.code;
+  if (!authCode) {
+    return res.status(400).send("❌ No code found in callback URL");
+  }
+
+  try {
+    // Exchange the code for tokens
+    const response = await axios.post(
+      "https://accounts.zoho.com/oauth/v2/token",
+      new URLSearchParams({
+        grant_type: "authorization_code",
+        client_id: process.env.ZOHO_CLIENT_ID,
+        client_secret: process.env.ZOHO_CLIENT_SECRET,
+        redirect_uri: "https://neat.onrender.com/oauth/callback",
+        code: authCode,
+      }),
+      {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      }
+    );
+
+    // Extract tokens
+    const { access_token, refresh_token } = response.data;
+
+    console.log("✅ Access Token:", access_token);
+    console.log("✅ Refresh Token:", refresh_token);
+
+    // Send a success message to browser
+    res.send("🎉 Zoho OAuth successful! Check your backend logs for tokens.");
+  } catch (err) {
+    console.error("❌ Error exchanging code:", err.response?.data || err.message);
+    res.status(500).send("OAuth token exchange failed");
+  }
+});
+
 
 app.get("/keep-alive", (req, res) => {
   res.send("Server is awake!");
