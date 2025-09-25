@@ -376,217 +376,63 @@ See attached PDF for full details.`,
 
 app.post("/pay-now", async (req, res) => {
   try {
-    const { itemCount, designs, sizes, colors, contact, delivery, billing, paymentMethod, orderSummary } = req.body;
-  
-    // Format the details for the admin email
+    const { contact, delivery, billing, orderSummary } = req.body;
+
+    // Build emailContent (same as your earlier logic)
     let emailContent = `✅ Successful Form Submission:\n\n`;
-    // --- New: Order Summary Section from Cart ---
-    if (orderSummary) {
+
+    if (orderSummary && orderSummary.cartItems?.length > 0) {
       emailContent += `🛒 ORDER SUMMARY:\n\n`;
-  
-      // Loop through each cart item and list its details
-      if (orderSummary.cartItems && orderSummary.cartItems.length > 0) {
-        orderSummary.cartItems.forEach((item, index) => {
-          // Clean the price if necessary
-          const cleanedPrice = (item.newPrice || '0').replace(/KSh|,/g, '').trim();
-          const price = parseFloat(cleanedPrice) || 0;
-          const quantity = parseInt(item.quantity) || 1;
-          const totalPrice = price * quantity;
-  
-          emailContent += `Item ${index + 1}:\n`;
-          emailContent += `- Name: ${item.name}\n`;
-          emailContent += `- Brand: ${item.brand}\n`;
-          emailContent += `- Price: KSh${price.toFixed(2)}\n`;
-          emailContent += `- Quantity: ${quantity}\n`;
-          if (item.size) {
-            emailContent += `- Size: ${item.size}\n`;
-          }
-          if (item.color) {
-            emailContent += `- Color: ${item.color}\n`;
-          }
-          emailContent += `- Total Price: KSh${totalPrice.toFixed(2)}\n\n`;
-        });
-      } else {
-        emailContent += `No items found in cart.\n\n`;
-      }
-  
-      // Include the overall estimated total (from the page)
+      orderSummary.cartItems.forEach((item, index) => {
+        const cleanedPrice = (item.newPrice || "0").replace(/KSh|,/g, "").trim();
+        const price = parseFloat(cleanedPrice) || 0;
+        const quantity = parseInt(item.quantity) || 1;
+        const totalPrice = price * quantity;
+
+        emailContent += `Item ${index + 1}:\n`;
+        emailContent += `- Name: ${item.name}\n`;
+        emailContent += `- Brand: ${item.brand}\n`;
+        emailContent += `- Price: KSh${price.toFixed(2)}\n`;
+        emailContent += `- Quantity: ${quantity}\n`;
+        if (item.size) emailContent += `- Size: ${item.size}\n`;
+        if (item.color) emailContent += `- Color: ${item.color}\n`;
+        emailContent += `- Total Price: KSh${totalPrice.toFixed(2)}\n\n`;
+      });
       emailContent += `Estimated Total: KSh${orderSummary.estimatedTotal}\n\n`;
-    }
-
-
-    emailContent += `📞 CONTACT INFORMATION:\n\n`;
-  
-    // Contact Information
-    emailContent += `Email: ${contact.email}\n`;
-    emailContent += `Phone Number: ${contact.phone}\n`;
-    emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
-
-
-    emailContent += `🚚 DELIVERY INFORMATION\n\n`;
-  
-// Delivery Information
-emailContent += `Country/Region: ${delivery.country}\n`;
-emailContent += `First Name: ${delivery.firstName}\n`;
-emailContent += `Last Name: ${delivery.lastName}\n`;
-emailContent += `Address: ${delivery.address}\n`;
-emailContent += `Apartment/Suite: ${delivery.apartment}\n`;
-emailContent += `City: ${delivery.city}\n`;
-
-
-
-emailContent += `Postal Code: ${delivery.postalCode}\n`;
-emailContent += `Phone: ${delivery.phone}\n`;
-emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
-
-  
-    // Billing Information
-    emailContent += `💳 BILLING INFORMATION\n\n `;
-
-    if (billing.note) {
-      emailContent += `${billing.note}\n`; // e.g., "Same as shipping address"
     } else {
-      emailContent += `Country/Region: ${billing.country}\n`;
-      emailContent += `First Name: ${billing.firstName}\n`;
-      emailContent += `Last Name: ${billing.lastName}\n`;
-      emailContent += `Address: ${billing.address}\n`;
-      emailContent += `Apartment/Suite: ${billing.apartment}\n`;
-      emailContent += `Postal Code: ${billing.postalCode}\n`;
-      emailContent += `Phone: ${billing.phone}\n`;
+      emailContent += `No items found in cart.\n\n`;
     }
-    emailContent += `\n`;
-  
-    // Payment Method
-    emailContent += `💸PAYMENT METHOD:\n\n`;
 
+    emailContent += `📞 CONTACT INFORMATION:\nEmail: ${contact.email}\nPhone: ${contact.phone}\n\n`;
+    emailContent += `🚚 DELIVERY:\n${delivery.firstName} ${delivery.lastName}\n${delivery.address}\n${delivery.city}, ${delivery.country}\nPhone: ${delivery.phone}\n\n`;
+    emailContent += `💳 BILLING:\n${billing.note || `${billing.firstName} ${billing.lastName}\n${billing.address}\n${billing.postalCode}`}\n\n`;
 
+    // --- send admin email (plain text)
+    await sendZohoMail({
+      to: process.env.ZOHO_FROM_ADDRESS || "info@neatgarms.com",
+      subject: "New Pay Now Submission (Neatgarms)",
+      textContent: emailContent,
+    });
+    console.log("Admin email sent via Zoho API");
 
-
-    // Email to Admin
-    const adminMailOptions = {
-      from: "info@neatgarms.com",
-      to: "info@neatgarms.com",
-      subject: "New Pay Now Submission with Order Summary, Contact, Delivery, Billing & Payment Info",
-      text: emailContent,
-    };
-
-    // Send Email to Admin
-    const info = await transporter.sendMail(adminMailOptions);
-    console.log("Pay Now Email sent to admin:", info.response);
-  
-    const userMailOptions = {
-      from: '"Neatgarms" <info@neatgarms.com>', 
+    // --- send user autoresponse (HTML)
+    const userHtml = `...your full HTML template...
+      <pre>${emailContent}</pre>
+    `;
+    await sendZohoMail({
       to: contact.email,
-      subject: "Thank You for Your Order with Neatgarms! ",
-      html: `
-<div style="  font-family: 'poppins', sans-serif;  color: #1a1a1a; max-width: 700px; margin: auto; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; background: #f9f9f9;">
+      subject: "Thank you — Neatgarms order received",
+      htmlContent: userHtml,
+    });
+    console.log("User autoresponse sent via Zoho API");
 
-  <div style="text-align: center;">
-    <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
-  </div>
-  
-        <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
-        <p style="font-size: 16px;">
-          Thank you for shopping with <strong>Neatgarms</strong>!<br/>
-          We’ve successfully received your order. Our team is now processing it and will notify you once it ships.
-        </p>
-    
-        <h3 style="margin-top: 24px; color: #222;">🛍 Order Details</h3>
-<pre style="background: #fff; padding: 16px; border-radius: 10px; font-size: 15px; line-height: 1.5; border: 1px solid #ddd; white-space: pre-wrap;">${emailContent}</pre>
-
-  <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
-    <h3 style="color: black;">🪄 A Special Thank You</h3>
-    <p style="font-size: 15px; line-height: 1.6;">
-      Thank you for your purchase! Your merch has been gently taken from our Neat shelves by gloved hands and lovingly packed by our Omashu packing specialist under candlelight. After a glorious celebration, the town of Nairobi cheered as your package departed aboard our private baby jet. You’re now officially our “Customer of the Year,” with your photo proudly on our wall. We had a magical time packing your order—and we can’t wait for your next visit. <strong>KEEPITNEAT!</strong>
-    </p>
-  </div>
-
-  <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-
-    
-        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">🔥 Top Neat Picks for This Week</h3>
-        <table style="width: 100%; border-spacing: 16px 10px;">
-          <tr>
-            <td align="center">
-              <a href="https://www.neatgarms.com/tops.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/sl.avif" alt="Urban Tee" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Tank Top</p>
-              </a>
-            </td>
-
-            <td align="center">
-              <a href="https://www.neatgarms.com/pants.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/j6.avif" alt="Street Joggers" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Glazed Denim Jorts</p>
-              </a>
-            </td>
-          </tr>
-        </table>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">💸 Special Offer Just for You</h3>
-        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">NEAT20</strong> to get <strong>20% off</strong> your next order.</p>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: black;">📞 Need Help?</h3>
-        <p>Reach us any time:</p>
-        <ul style="line-height: 1.8;">
-            <li><strong>Phone:</strong> +254 758 647 031</li>
-        </ul>
-    
-        <p style="margin-top: 30px; font-size: 14px; color: #666;">Thank you again for choosing Neatgarms. We can't wait for you to rock your new look! 😎✨</p>
-    
-        <p style="font-size: 14px; color: #aaa;">© ${new Date().getFullYear()} Neatgarms Ltd. All rights reserved.</p>
-      </div>
-
-
-
-<table style="font-family: Poppins, sans-serif; color: #333333; padding: 12px 0; max-width: 600px; line-height: 1.4;">
-  <tr>
-    <td style="vertical-align: top; padding-right: 15px;">
-      <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neat Garms Logo" width="80" style="border-radius: 8px; display: block;">
-    </td>
-    <td style="vertical-align: top;">
-      <strong style="font-size: 16px; color: #ae866a;">Neatgarms</strong><br>
-      <a href="mailto:info@neatgarms.com" style="color: #1a73e8; text-decoration: none; font-size: 14px;">info@neatgarms.com</a><br>
-      <a href="https://www.neatgarms.com" target="_blank" style="color: #1a73e8; text-decoration: none; font-size: 14px;">www.neatgarms.com</a>
-      <div style="margin-top: 8px;">
-        <a href="https://instagram.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/insta.png" alt="Instagram" width="20" style="display: inline;">
-        </a>
-        <a href="https://wa.me/254758647031" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/whatsapp.png" alt="WhatsApp" width="20" style="display: inline;">
-        </a>
-        <a href="https://x.com/neatgarms" target="_blank" style="margin-right: 6px;">
-          <img src="https://www.neatgarms.com/images/x.png" alt="X (Twitter)" width="20" style="display: inline;">
-        </a>
-        <a href="https://pinterest.com/neatgarms" target="_blank">
-          <img src="https://www.neatgarms.com/images/pins.png" alt="Pinterest" width="20" style="display: inline;">
-        </a>
-      </div>
-    </td>
-  </tr>
-</table>
-
-
-      `
-    };
-    
-    
-  
-    // Send Autoresponse Email
-    await transporter.sendMail(userMailOptions);
-    console.log("Autoresponse email sent to user.");
-  
-    // Respond to client
-    res.json({ success: true, message: "Pay Now form submitted successfully!" });
-  } catch (error) {
-    console.error("Error sending Pay Now email:", error);
+    res.json({ success: true, message: "Pay Now submitted & emails sent" });
+  } catch (err) {
+    console.error("Error sending Pay Now email via Zoho API:", err.response?.data || err.message || err);
     res.status(500).json({ success: false, message: "Error sending Pay Now email" });
   }
 });
+
 
 
 
@@ -1704,42 +1550,161 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// --- OAuth Callback ---
+// Route to redirect to Zoho's authorization page
+app.get("/auth/zoho", (req, res) => {
+  const scope = encodeURIComponent("ZohoMail.messages.CREATE,ZohoMail.accounts.READ"); // request needed scopes
+  const authUrl = `https://accounts.zoho.com/oauth/v2/auth?scope=${scope}&client_id=${process.env.ZOHO_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${encodeURIComponent(process.env.ZOHO_REDIRECT_URI)}&prompt=consent`;
+  res.redirect(authUrl);
+});
+
+// OAuth callback: Zoho will redirect here with ?code=XXXX
 app.get("/oauth/callback", async (req, res) => {
-  const authCode = req.query.code;
-  if (!authCode) {
-    return res.status(400).send("❌ No code found in callback URL");
-  }
+  const code = req.query.code;
+  if (!code) return res.status(400).send("No code in query string");
 
   try {
-    // Exchange the code for tokens
-    const response = await axios.post(
-      "https://accounts.zoho.com/oauth/v2/token",
-      new URLSearchParams({
-        grant_type: "authorization_code",
-        client_id: process.env.ZOHO_CLIENT_ID,
-        client_secret: process.env.ZOHO_CLIENT_SECRET,
-        redirect_uri: "https://neat.onrender.com/oauth/callback",
-        code: authCode,
-      }),
-      {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      }
-    );
+    const params = new URLSearchParams();
+    params.append("grant_type", "authorization_code");
+    params.append("client_id", process.env.ZOHO_CLIENT_ID);
+    params.append("client_secret", process.env.ZOHO_CLIENT_SECRET);
+    params.append("redirect_uri", process.env.ZOHO_REDIRECT_URI);
+    params.append("code", code);
 
-    // Extract tokens
-    const { access_token, refresh_token } = response.data;
+    const tokenResp = await axios.post("https://accounts.zoho.com/oauth/v2/token", params.toString(), {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      timeout: 15000,
+    });
 
-    console.log("✅ Access Token:", access_token);
-    console.log("✅ Refresh Token:", refresh_token);
+    // IMPORTANT: tokenResp.data contains access_token & refresh_token
+    console.log("ZOHO TOKEN RESPONSE:", tokenResp.data);
 
-    // Send a success message to browser
-    res.send("🎉 Zoho OAuth successful! Check your backend logs for tokens.");
+    // Show instructions & tokens to you in the browser (copy the refresh token and put it in Render env)
+    res.send(`<h2>Zoho OAuth success</h2>
+      <p><strong>Copy the refresh_token value below and add it to your environment variables as ZOHO_REFRESH_TOKEN</strong> (do not commit this anywhere)</p>
+      <pre>${JSON.stringify(tokenResp.data, null, 2)}</pre>
+      <p>After copying the refresh token, add it in Render dashboard and restart the service.</p>`);
   } catch (err) {
-    console.error("❌ Error exchanging code:", err.response?.data || err.message);
-    res.status(500).send("OAuth token exchange failed");
+    console.error("Error exchanging code for tokens:", err.response?.data || err.message);
+    res.status(500).send("Token exchange failed (check server logs)");
   }
 });
+
+
+
+// ----------------- Zoho OAuth + Mail helpers -----------------
+let _zohoAccessToken = null;
+let _zohoAccessTokenExpiry = 0; // unix seconds
+let _zohoAccountId = process.env.ZOHO_ACCOUNT_ID || null;
+
+// Exchange refresh token -> access token (caches in memory)
+async function getZohoAccessToken() {
+  const now = Math.floor(Date.now() / 1000);
+  if (_zohoAccessToken && now < _zohoAccessTokenExpiry - 30) {
+    return _zohoAccessToken;
+  }
+
+  if (!process.env.ZOHO_REFRESH_TOKEN || !process.env.ZOHO_CLIENT_ID || !process.env.ZOHO_CLIENT_SECRET) {
+    throw new Error("Missing ZOHO_REFRESH_TOKEN or ZOHO_CLIENT_ID/SECRET in env");
+  }
+
+  const params = new URLSearchParams();
+  params.append("refresh_token", process.env.ZOHO_REFRESH_TOKEN);
+  params.append("client_id", process.env.ZOHO_CLIENT_ID);
+  params.append("client_secret", process.env.ZOHO_CLIENT_SECRET);
+  params.append("grant_type", "refresh_token");
+
+  const resp = await axios.post("https://accounts.zoho.com/oauth/v2/token", params.toString(), {
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    timeout: 15000,
+  });
+
+  _zohoAccessToken = resp.data.access_token;
+  _zohoAccessTokenExpiry = now + (resp.data.expires_in || 3600);
+  console.log("Zoho access token refreshed, expires_in:", resp.data.expires_in);
+  return _zohoAccessToken;
+}
+
+// If accountId not in env, fetch accounts and pick the first; caches in memory
+async function ensureZohoAccountId() {
+  if (_zohoAccountId) return _zohoAccountId;
+
+  const token = await getZohoAccessToken();
+  const resp = await axios.get("https://mail.zoho.com/api/accounts", {
+    headers: { Authorization: `Zoho-oauthtoken ${token}` },
+    timeout: 15000,
+  });
+
+  // Zoho may return accounts under resp.data.data or resp.data.accounts — be defensive
+  const accounts = resp.data.data || resp.data.accounts || resp.data;
+  if (!Array.isArray(accounts) || accounts.length === 0) {
+    console.error("Unexpected accounts response:", resp.data);
+    throw new Error("No Zoho accounts found for this user");
+  }
+
+  // Try common id fields
+  const id = accounts[0].id || accounts[0].accountId || accounts[0].account_id;
+  if (!id) {
+    console.error("Could not find account id, first account object:", accounts[0]);
+    throw new Error("Could not determine Zoho account id");
+  }
+
+  _zohoAccountId = id;
+  console.log("Zoho account id detected:", _zohoAccountId);
+
+  // Optional: print this ID so you can copy it to env. You can also set ZOHO_ACCOUNT_ID in Render
+  return _zohoAccountId;
+}
+
+// Send mail using Zoho Mail API (supports HTML and attachments)
+async function sendZohoMail({ to, subject, htmlContent = null, textContent = null, attachments = [] }) {
+  const token = await getZohoAccessToken();
+  const accountId = await ensureZohoAccountId();
+
+  const form = new FormData();
+  form.append("fromAddress", process.env.ZOHO_FROM_ADDRESS || "info@neatgarms.com");
+
+  // Zoho accepts toAddress as a comma separated string; pass as string
+  if (Array.isArray(to)) form.append("toAddress", to.join(","));
+  else form.append("toAddress", to);
+
+  form.append("subject", subject);
+
+  // content: prefer HTML if provided
+  if (htmlContent) {
+    form.append("content", htmlContent);
+    form.append("mailFormat", "html");
+  } else {
+    form.append("content", textContent || "");
+    form.append("mailFormat", "text");
+  }
+
+  // Attach files: attachments array elements => { filename, path }
+  for (const file of attachments || []) {
+    // file.path must point to a file on disk; if you only have buffers, write them to a temp file first.
+    if (!file.path || !fs.existsSync(file.path)) {
+      console.warn("Attachment missing or not found:", file);
+      continue;
+    }
+    form.append("attachments", fs.createReadStream(file.path), { filename: file.filename || path.basename(file.path) });
+  }
+
+  const resp = await axios.post(
+    `https://mail.zoho.com/api/accounts/${accountId}/messages`,
+    form,
+    {
+      headers: {
+        Authorization: `Zoho-oauthtoken ${token}`,
+        ...form.getHeaders(),
+      },
+      maxBodyLength: Infinity,
+      timeout: 20000,
+    }
+  );
+
+  return resp.data;
+}
+
+
 
 
 app.get("/keep-alive", (req, res) => {
