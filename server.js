@@ -1516,40 +1516,6 @@ app.post("/api/paystack/webhook",
 
 
 
-// Redirect clean URLs to .html files
-app.get('/:page', (req, res, next) => {
-    const page = req.params.page;
-    const filePath = path.join(__dirname, 'public', `${page}.html`);
-    res.sendFile(filePath, err => {
-        if (err) {
-            next(); // go to next route if file not found
-        }
-    });
-});
-
-// Optional: redirect /page.html to /page (so URL looks clean)
-app.get('/:page.html', (req, res) => {
-    const page = req.params.page;
-    res.redirect(`/${page}`);
-});
-
-// Home page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-
-
-app.get("/cors-test", (req, res) => {
-  res.json({ message: "CORS is working properly." });
-});
-
-
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
-
 // Route to redirect to Zoho's authorization page
 app.get("/auth/zoho", (req, res) => {
   const scope = encodeURIComponent("ZohoMail.messages.CREATE,ZohoMail.accounts.READ"); // request needed scopes
@@ -1710,3 +1676,29 @@ async function sendZohoMail({ to, subject, htmlContent = null, textContent = nul
 app.get("/keep-alive", (req, res) => {
   res.send("Server is awake!");
 });
+
+
+
+// Optional: redirect /page.html to /page (so URL looks clean)
+app.get('/:page.html', (req, res) => {
+    const page = req.params.page;
+    res.redirect(`/${page}`);
+});
+
+// Home page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
+
+app.get("/cors-test", (req, res) => {
+  res.json({ message: "CORS is working properly." });
+});
+
+
+// Start Server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+
