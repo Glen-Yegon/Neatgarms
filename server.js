@@ -61,10 +61,6 @@ app.options("*", cors(corsOptions)); // Handle preflight for all routes
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
-// Serve static files (CSS, JS, images)
-app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 // Configure Multer for File Uploads (memory storage)
 const storage = multer.memoryStorage();
