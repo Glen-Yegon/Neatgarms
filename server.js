@@ -62,11 +62,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, 'home')));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "home", "index.html"));
-});
 
 
 // Configure Multer for File Uploads (memory storage)
@@ -1696,6 +1691,8 @@ app.get("/cors-test", (req, res) => {
   res.json({ message: "CORS is working properly." });
 });
 
+
+app.use(express.static(path.join(__dirname, 'home')));
 
 // Start Server
 app.listen(PORT, () => {
