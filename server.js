@@ -62,6 +62,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ limit: "50mb" }));
 app.use(bodyParser.json());
 
+app.use(express.static(path.join(__dirname, 'home')));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "home", "index.html"));
+});
+
+
 // Configure Multer for File Uploads (memory storage)
 const storage = multer.memoryStorage();
 const upload = multer({ storage  });
@@ -70,8 +77,8 @@ const upload = multer({ storage  });
 // Nodemailer Configuration for Zoho
 const transporter = nodemailer.createTransport({
   host: "smtp.zoho.com",
-  port: 465, // SSL port
-  secure: true,
+  port: 587, // SSL port
+  secure: false,
   auth: {
     user: "info@neatgarms.com", // Your Zoho email
     pass: "nE3hNVPdhsK6", // Your Zoho app password
