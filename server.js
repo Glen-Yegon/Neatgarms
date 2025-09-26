@@ -69,19 +69,163 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage  });
 
 
-// Nodemailer Configuration for Zoho
-const transporter = nodemailer.createTransport({
-  host: "smtp.zoho.com",
-  port: 587, // SSL port
-  secure: false,
-  auth: {
-    user: "info@neatgarms.com", // Your Zoho email
-    pass: "nE3hNVPdhsK6", // Your Zoho app password
-  },
-  tls: {
-    rejectUnauthorized: false, // Ignore self-signed certificate errors
-  },
+// Route to redirect to Zoho's authorization page
+app.get("/auth/zoho", (req, res) => {
+  const scope = encodeURIComponent("ZohoMail.messages.CREATE,ZohoMail.accounts.READ"); // request needed scopes
+  const authUrl = `https://accounts.zoho.com/oauth/v2/auth?scope=${scope}&client_id=${process.env.ZOHO_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${encodeURIComponent(process.env.ZOHO_REDIRECT_URI)}&prompt=consent`;
+  res.redirect(authUrl);
 });
+
+// OAuth callback: Zoho will redirect here with ?code=XXXX
+app.get("/oauth/callback", async (req, res) => {
+  const code = req.query.code;
+  if (!code) return res.status(400).send("No code in query string");
+
+  try {
+    const params = new URLSearchParams();
+    params.append("grant_type", "authorization_code");
+    params.append("client_id", process.env.ZOHO_CLIENT_ID);
+    params.append("client_secret", process.env.ZOHO_CLIENT_SECRET);
+    params.append("redirect_uri", process.env.ZOHO_REDIRECT_URI);
+    params.append("code", code);
+
+    const tokenResp = await axios.post("https://accounts.zoho.com/oauth/v2/token", params.toString(), {
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      timeout: 15000,
+    });
+
+    // IMPORTANT: tokenResp.data contains access_token & refresh_token
+    console.log("ZOHO TOKEN RESPONSE:", tokenResp.data);
+
+    // Show instructions & tokens to you in the browser (copy the refresh token and put it in Render env)
+    res.send(`<h2>Zoho OAuth success</h2>
+      <p><strong>Copy the refresh_token value below and add it to your environment variables as ZOHO_REFRESH_TOKEN</strong> (do not commit this anywhere)</p>
+      <pre>${JSON.stringify(tokenResp.data, null, 2)}</pre>
+      <p>After copying the refresh token, add it in Render dashboard and restart the service.</p>`);
+  } catch (err) {
+    console.error("Error exchanging code for tokens:", err.response?.data || err.message);
+    res.status(500).send("Token exchange failed (check server logs)");
+  }
+});
+
+
+
+// ----------------- Zoho OAuth + Mail helpers -----------------
+let _zohoAccessToken = null;
+let _zohoAccessTokenExpiry = 0; // unix seconds
+let _zohoAccountId = process.env.ZOHO_ACCOUNT_ID || null;
+
+// Exchange refresh token -> access token (caches in memory)
+async function getZohoAccessToken() {
+  const now = Math.floor(Date.now() / 1000);
+  if (_zohoAccessToken && now < _zohoAccessTokenExpiry - 30) {
+    return _zohoAccessToken;
+  }
+
+  if (!process.env.ZOHO_REFRESH_TOKEN || !process.env.ZOHO_CLIENT_ID || !process.env.ZOHO_CLIENT_SECRET) {
+    throw new Error("Missing ZOHO_REFRESH_TOKEN or ZOHO_CLIENT_ID/SECRET in env");
+  }
+
+  const params = new URLSearchParams();
+  params.append("refresh_token", process.env.ZOHO_REFRESH_TOKEN);
+  params.append("client_id", process.env.ZOHO_CLIENT_ID);
+  params.append("client_secret", process.env.ZOHO_CLIENT_SECRET);
+  params.append("grant_type", "refresh_token");
+
+  const resp = await axios.post("https://accounts.zoho.com/oauth/v2/token", params.toString(), {
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    timeout: 15000,
+  });
+
+  _zohoAccessToken = resp.data.access_token;
+  _zohoAccessTokenExpiry = now + (resp.data.expires_in || 3600);
+  console.log("Zoho access token refreshed, expires_in:", resp.data.expires_in);
+  return _zohoAccessToken;
+}
+
+// If accountId not in env, fetch accounts and pick the first; caches in memory
+async function ensureZohoAccountId() {
+  if (_zohoAccountId) return _zohoAccountId;
+
+  const token = await getZohoAccessToken();
+  const resp = await axios.get("https://mail.zoho.com/api/accounts", {
+    headers: { Authorization: `Zoho-oauthtoken ${token}` },
+    timeout: 15000,
+  });
+
+  // Zoho may return accounts under resp.data.data or resp.data.accounts — be defensive
+  const accounts = resp.data.data || resp.data.accounts || resp.data;
+  if (!Array.isArray(accounts) || accounts.length === 0) {
+    console.error("Unexpected accounts response:", resp.data);
+    throw new Error("No Zoho accounts found for this user");
+  }
+
+  // Try common id fields
+  const id = accounts[0].id || accounts[0].accountId || accounts[0].account_id;
+  if (!id) {
+    console.error("Could not find account id, first account object:", accounts[0]);
+    throw new Error("Could not determine Zoho account id");
+  }
+
+  _zohoAccountId = id;
+  console.log("Zoho account id detected:", _zohoAccountId);
+
+  // Optional: print this ID so you can copy it to env. You can also set ZOHO_ACCOUNT_ID in Render
+  return _zohoAccountId;
+}
+
+// Send mail using Zoho Mail API (supports HTML and attachments)
+async function sendZohoMail({ to, subject, htmlContent = null, textContent = null, attachments = [] }) {
+  const token = await getZohoAccessToken();
+  const accountId = await ensureZohoAccountId();
+
+  const form = new FormData();
+  form.append("fromAddress", process.env.ZOHO_FROM_ADDRESS || "info@neatgarms.com");
+
+  // Zoho accepts toAddress as a comma separated string; pass as string
+  if (Array.isArray(to)) form.append("toAddress", to.join(","));
+  else form.append("toAddress", to);
+
+  form.append("subject", subject);
+
+  // content: prefer HTML if provided
+  if (htmlContent) {
+    form.append("content", htmlContent);
+    form.append("mailFormat", "html");
+  } else {
+    form.append("content", textContent || "");
+    form.append("mailFormat", "text");
+  }
+
+  // Attach files: attachments array elements => { filename, path }
+  for (const file of attachments || []) {
+    // file.path must point to a file on disk; if you only have buffers, write them to a temp file first.
+    if (!file.path || !fs.existsSync(file.path)) {
+      console.warn("Attachment missing or not found:", file);
+      continue;
+    }
+    form.append("attachments", fs.createReadStream(file.path), { filename: file.filename || path.basename(file.path) });
+  }
+
+  const resp = await axios.post(
+    `https://mail.zoho.com/api/accounts/${accountId}/messages`,
+    form,
+    {
+      headers: {
+        Authorization: `Zoho-oauthtoken ${token}`,
+        ...form.getHeaders(),
+      },
+      maxBodyLength: Infinity,
+      timeout: 20000,
+    }
+  );
+
+  return resp.data;
+}
+
+
+
+
 
 app.post(
   "/submit-form",
@@ -373,7 +517,7 @@ app.post("/pay-now", async (req, res) => {
   try {
     const { contact, delivery, billing, orderSummary } = req.body;
 
-    // Build emailContent (same as your earlier logic)
+    // ---------------- Build email content ----------------
     let emailContent = `✅ Successful Form Submission:\n\n`;
 
     if (orderSummary && orderSummary.cartItems?.length > 0) {
@@ -402,31 +546,39 @@ app.post("/pay-now", async (req, res) => {
     emailContent += `🚚 DELIVERY:\n${delivery.firstName} ${delivery.lastName}\n${delivery.address}\n${delivery.city}, ${delivery.country}\nPhone: ${delivery.phone}\n\n`;
     emailContent += `💳 BILLING:\n${billing.note || `${billing.firstName} ${billing.lastName}\n${billing.address}\n${billing.postalCode}`}\n\n`;
 
-    // --- send admin email (plain text)
+    // ---------------- Send Admin Email ----------------
     await sendZohoMail({
-      to: process.env.ZOHO_FROM_ADDRESS || "info@neatgarms.com",
+      to: process.env.ZOHO_FROM_ADDRESS, // sends to your admin email
       subject: "New Pay Now Submission (Neatgarms)",
       textContent: emailContent,
     });
-    console.log("Admin email sent via Zoho API");
+    console.log("✅ Admin email sent via Zoho API");
 
-    // --- send user autoresponse (HTML)
-    const userHtml = `...your full HTML template...
-      <pre>${emailContent}</pre>
+    // ---------------- Send User Auto-response ----------------
+    const userHtml = `
+      <div style="font-family:sans-serif;padding:20px;">
+        <h2>Thank you for your order with Neatgarms!</h2>
+        <p>We have received your details. Below is your order summary:</p>
+        <pre>${emailContent}</pre>
+        <p>We’ll be in touch soon with shipping updates.</p>
+      </div>
     `;
+
     await sendZohoMail({
       to: contact.email,
       subject: "Thank you — Neatgarms order received",
       htmlContent: userHtml,
     });
-    console.log("User autoresponse sent via Zoho API");
+    console.log("✅ User autoresponse sent via Zoho API");
 
     res.json({ success: true, message: "Pay Now submitted & emails sent" });
+
   } catch (err) {
-    console.error("Error sending Pay Now email via Zoho API:", err.response?.data || err.message || err);
+    console.error("❌ Error sending Pay Now email via Zoho API:", err.response?.data || err.message || err);
     res.status(500).json({ success: false, message: "Error sending Pay Now email" });
   }
 });
+
 
 
 
@@ -1511,162 +1663,6 @@ app.post("/api/paystack/webhook",
 
 
 
-// Route to redirect to Zoho's authorization page
-app.get("/auth/zoho", (req, res) => {
-  const scope = encodeURIComponent("ZohoMail.messages.CREATE,ZohoMail.accounts.READ"); // request needed scopes
-  const authUrl = `https://accounts.zoho.com/oauth/v2/auth?scope=${scope}&client_id=${process.env.ZOHO_CLIENT_ID}&response_type=code&access_type=offline&redirect_uri=${encodeURIComponent(process.env.ZOHO_REDIRECT_URI)}&prompt=consent`;
-  res.redirect(authUrl);
-});
-
-// OAuth callback: Zoho will redirect here with ?code=XXXX
-app.get("/oauth/callback", async (req, res) => {
-  const code = req.query.code;
-  if (!code) return res.status(400).send("No code in query string");
-
-  try {
-    const params = new URLSearchParams();
-    params.append("grant_type", "authorization_code");
-    params.append("client_id", process.env.ZOHO_CLIENT_ID);
-    params.append("client_secret", process.env.ZOHO_CLIENT_SECRET);
-    params.append("redirect_uri", process.env.ZOHO_REDIRECT_URI);
-    params.append("code", code);
-
-    const tokenResp = await axios.post("https://accounts.zoho.com/oauth/v2/token", params.toString(), {
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      timeout: 15000,
-    });
-
-    // IMPORTANT: tokenResp.data contains access_token & refresh_token
-    console.log("ZOHO TOKEN RESPONSE:", tokenResp.data);
-
-    // Show instructions & tokens to you in the browser (copy the refresh token and put it in Render env)
-    res.send(`<h2>Zoho OAuth success</h2>
-      <p><strong>Copy the refresh_token value below and add it to your environment variables as ZOHO_REFRESH_TOKEN</strong> (do not commit this anywhere)</p>
-      <pre>${JSON.stringify(tokenResp.data, null, 2)}</pre>
-      <p>After copying the refresh token, add it in Render dashboard and restart the service.</p>`);
-  } catch (err) {
-    console.error("Error exchanging code for tokens:", err.response?.data || err.message);
-    res.status(500).send("Token exchange failed (check server logs)");
-  }
-});
-
-
-
-// ----------------- Zoho OAuth + Mail helpers -----------------
-let _zohoAccessToken = null;
-let _zohoAccessTokenExpiry = 0; // unix seconds
-let _zohoAccountId = process.env.ZOHO_ACCOUNT_ID || null;
-
-// Exchange refresh token -> access token (caches in memory)
-async function getZohoAccessToken() {
-  const now = Math.floor(Date.now() / 1000);
-  if (_zohoAccessToken && now < _zohoAccessTokenExpiry - 30) {
-    return _zohoAccessToken;
-  }
-
-  if (!process.env.ZOHO_REFRESH_TOKEN || !process.env.ZOHO_CLIENT_ID || !process.env.ZOHO_CLIENT_SECRET) {
-    throw new Error("Missing ZOHO_REFRESH_TOKEN or ZOHO_CLIENT_ID/SECRET in env");
-  }
-
-  const params = new URLSearchParams();
-  params.append("refresh_token", process.env.ZOHO_REFRESH_TOKEN);
-  params.append("client_id", process.env.ZOHO_CLIENT_ID);
-  params.append("client_secret", process.env.ZOHO_CLIENT_SECRET);
-  params.append("grant_type", "refresh_token");
-
-  const resp = await axios.post("https://accounts.zoho.com/oauth/v2/token", params.toString(), {
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    timeout: 15000,
-  });
-
-  _zohoAccessToken = resp.data.access_token;
-  _zohoAccessTokenExpiry = now + (resp.data.expires_in || 3600);
-  console.log("Zoho access token refreshed, expires_in:", resp.data.expires_in);
-  return _zohoAccessToken;
-}
-
-// If accountId not in env, fetch accounts and pick the first; caches in memory
-async function ensureZohoAccountId() {
-  if (_zohoAccountId) return _zohoAccountId;
-
-  const token = await getZohoAccessToken();
-  const resp = await axios.get("https://mail.zoho.com/api/accounts", {
-    headers: { Authorization: `Zoho-oauthtoken ${token}` },
-    timeout: 15000,
-  });
-
-  // Zoho may return accounts under resp.data.data or resp.data.accounts — be defensive
-  const accounts = resp.data.data || resp.data.accounts || resp.data;
-  if (!Array.isArray(accounts) || accounts.length === 0) {
-    console.error("Unexpected accounts response:", resp.data);
-    throw new Error("No Zoho accounts found for this user");
-  }
-
-  // Try common id fields
-  const id = accounts[0].id || accounts[0].accountId || accounts[0].account_id;
-  if (!id) {
-    console.error("Could not find account id, first account object:", accounts[0]);
-    throw new Error("Could not determine Zoho account id");
-  }
-
-  _zohoAccountId = id;
-  console.log("Zoho account id detected:", _zohoAccountId);
-
-  // Optional: print this ID so you can copy it to env. You can also set ZOHO_ACCOUNT_ID in Render
-  return _zohoAccountId;
-}
-
-// Send mail using Zoho Mail API (supports HTML and attachments)
-async function sendZohoMail({ to, subject, htmlContent = null, textContent = null, attachments = [] }) {
-  const token = await getZohoAccessToken();
-  const accountId = await ensureZohoAccountId();
-
-  const form = new FormData();
-  form.append("fromAddress", process.env.ZOHO_FROM_ADDRESS || "info@neatgarms.com");
-
-  // Zoho accepts toAddress as a comma separated string; pass as string
-  if (Array.isArray(to)) form.append("toAddress", to.join(","));
-  else form.append("toAddress", to);
-
-  form.append("subject", subject);
-
-  // content: prefer HTML if provided
-  if (htmlContent) {
-    form.append("content", htmlContent);
-    form.append("mailFormat", "html");
-  } else {
-    form.append("content", textContent || "");
-    form.append("mailFormat", "text");
-  }
-
-  // Attach files: attachments array elements => { filename, path }
-  for (const file of attachments || []) {
-    // file.path must point to a file on disk; if you only have buffers, write them to a temp file first.
-    if (!file.path || !fs.existsSync(file.path)) {
-      console.warn("Attachment missing or not found:", file);
-      continue;
-    }
-    form.append("attachments", fs.createReadStream(file.path), { filename: file.filename || path.basename(file.path) });
-  }
-
-  const resp = await axios.post(
-    `https://mail.zoho.com/api/accounts/${accountId}/messages`,
-    form,
-    {
-      headers: {
-        Authorization: `Zoho-oauthtoken ${token}`,
-        ...form.getHeaders(),
-      },
-      maxBodyLength: Infinity,
-      timeout: 20000,
-    }
-  );
-
-  return resp.data;
-}
-
-
-
 
 app.get("/keep-alive", (req, res) => {
   res.send("Server is awake!");
@@ -1693,6 +1689,7 @@ app.get("/cors-test", (req, res) => {
 
 
 app.use(express.static(path.join(__dirname, 'home')));
+
 
 // Start Server
 app.listen(PORT, () => {
