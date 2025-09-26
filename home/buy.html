@@ -447,7 +447,7 @@ document.querySelectorAll("#fields-container input").forEach((input) => {
     
       // Send data to /pay-now
       try {
-        const response = await fetch("https://neat.onrender.com/pay-now", {
+        const response = await fetch("http://localhost:5000/pay-now", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
