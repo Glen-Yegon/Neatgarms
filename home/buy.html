@@ -447,7 +447,7 @@ document.querySelectorAll("#fields-container input").forEach((input) => {
     
       // Send data to /pay-now
       try {
-        const response = await fetch("https://neatgarms-risi.onrender.com/pay-now", {
+        const response = await fetch("https://neat.onrender.com/pay-now", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -530,7 +530,7 @@ document.querySelectorAll("#fields-container input").forEach((input) => {
         async function verifyPayment(reference, attempts = 3, delay = 3000) {
           for (let i = 0; i < attempts; i++) {
             try {
-              const res = await fetch('https://neatgarms-risi.onrender.com/api/paystack/verify', {
+              const res = await fetch('https://neat.onrender.com/api/paystack/verify', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ reference })
@@ -567,7 +567,7 @@ document.querySelectorAll("#fields-container input").forEach((input) => {
       onClose() {
         const email = val('email');
         if (email) {
-          fetch('https://neatgarms-risi.onrender.com/api/payment-cancelled', {
+          fetch('https://neat.onrender.com/api/payment-cancelled', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })

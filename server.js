@@ -15,6 +15,7 @@ import { spawn } from "child_process";
 import crypto from 'crypto'; // ✅ If using ES Modules
 import axios from "axios";
 import sharp from "sharp";
+import FormData from "form-data";   // if using ES modules
 
 
 dotenv.config();
