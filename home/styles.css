@@ -364,51 +364,141 @@ body.fade-out {
     height: 17px;
   }
 }
-
-.hero-text {
-  font-family: 'Dream Avenue', sans-serif;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ae866a;
-  font-size: clamp(5rem, 20vw, 300px);
-  font-weight: 400;
-  text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+/* Hero Section Floating on Top */
+#hero-texts {
+  width: 100%;
+  position: absolute; /* floats above existing content */
+  top: 50%; /* center vertically */
+  left: 50%; /* center horizontally */
+  transform: translate(-50%, -50%); /* exact centering */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 0 1rem;
-  z-index: 2;
+  /* pointer-events removed */
+}
+
+/* Hero Content */
+.hero-texts-content {
+  pointer-events: auto; /* enable clicks on buttons and links */
+}
+
+.hero-texts-content h2 {
+  font-family: 'Dream Avenue', sans-serif;
+  font-size: 5rem;
+  font-weight: 200;
+  color: #ffffff;
+  margin: 0 0 2rem 0;
+}
+
+.hero-texts-content h2 span {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Buttons Container */
+.hero-buttons {
+  display: flex;
+  justify-content: center; /* center buttons horizontally */
+  align-items: center;
+  width: 100%; /* ensures centering */
+  gap: 0px; /* space between buttons */
+  margin-top: 20px; /* optional spacing from headline */
+}
+
+/* Buttons Styling */
+.hero-buttons .btns {
+  font-family: 'Dream Avenue', sans-serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+  padding: 1rem 2.5rem;
+  text-decoration: none;
+  width: 180px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Left Button */
+.btn-left {
+  background-color: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+}
+
+/* Right Button */
+.btn-right {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+
+/* Hover Effects - Enhanced */
+.hero-buttons .btns:hover {
+  transform: translateY(-3px) scale(1.05); /* slightly lift and grow */
+  opacity: 1; /* full opacity */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* soft shadow for depth */
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  ); /* subtle light streak */
+  background-size: 200% 100%;
+  background-position: -100%;
   transition: all 0.5s ease;
-  pointer-events: none;
+}
+
+/* Animate the gradient streak on hover */
+.hero-buttons .btns:hover {
+  background-position: 100%;
 }
 
 
-/* Large devices: make shrink relative and push content */
-@media (min-width: 1024px) {
-  .hero-text {
-    position: relative; /* key: change from fixed to relative */
-    top: 50%;
-    left: auto;
-    transform: none;
-    margin: 0 auto 1rem auto; /* center with margin bottom for spacing */
-    max-width: 800px; /* optional max width */
-    pointer-events: auto;
-  }
-}
+/* Responsive */
 
-/* Optional: Small screens keep fixed */
-@media (max-width: 468px) {
-    .hero-text {
-    font-size: clamp(7rem, 30vw, 350px);
-    top: 70%;
-  }
-}
+/* Tablet */
 @media (max-width: 768px) {
-      .hero-text {
-    font-size: clamp(7rem, 30vw, 350px);
+  .hero-texts-content h2 {
+    font-size: 3.5rem;
+  }
+  .hero-buttons .btns {
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
   }
 }
 
+/* Mobile */
+@media (max-width: 480px) {
+  #hero-texts {
+    padding: 0 10px;
+  }
+  
+  /* Hero Text Scaling */
+  .hero-texts-content h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+    word-break: break-word; /* ensures no overflow */
+  }
+
+  /* Buttons Responsive */
+  .hero-buttons {
+ 
+    width: 80%; /* container width */
+    gap: 0px;
+    border-radius: 0;
+    margin: 20px auto 0 auto; /* center container */
+  }
+  
+  .hero-buttons .btns {
+    width: 100%; /* full width buttons */
+    font-size: 1rem;
+    padding: 0.8rem 0;
+  }
+}
 
 
 .side-menu {
@@ -588,6 +678,8 @@ body.fade-out {
       transform: translateX(-50vw);
     }
   }
+
+  
 /* Static Hero Text Section */
 #hero-text {
   width: 100%;
@@ -1821,3 +1913,4 @@ body.fade-out {
   z-index: 2;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
+
