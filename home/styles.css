@@ -720,11 +720,11 @@ body.fade-out {
  /* Product Grid */
   .product-grid {
     display: grid; 
-    gap: 10px;
+    gap: 3px;
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    padding: 10px;
+    padding: 3px;
   }
   @media (max-width: 768px) {
     .product-grid {
@@ -876,245 +876,215 @@ body.fade-out {
     padding: 0px 5px;
   }
 }
-  
-/* NEAT Promo Section */
-#neat-promo {
-  position: relative;
+/* Combined Layout: Products Left, Promo Right */
+#neat-promo-products1 {
+  display: flex;
   width: 100%;
   min-height: 90vh;
+  overflow: hidden;
+  align-items: stretch; /* Make both sides equal height */
+  gap: 0px; /* Optional spacing between sides */
+}
+
+/* Left Products Side */
+.products-side1 {
+  width: 50%;
+  padding: 3px;
+  display: flex;
+  align-items: stretch; /* Ensures the grid stretches full height */
+}
+
+.product-grid1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  width: 100%;
+}
+
+/* Right Promo Side */
+.promo-side1 {
+  position: relative;
+  width: 50%;
   display: flex;
   align-items: center;
-  padding: 60px 10%;
-  color: black;
-  overflow: hidden;
-}
-
-/* Background Video */
-.promo-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* keeps video filling without stretching */
-  z-index: 0;
-}
-
-
-.promo-bg.in-view {
-  transform: scale(1);
-}
-
-
-/* Dark Overlay */
-.promo-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1;
-}
-
-/* Promo Content */
-.promo-content {
-  max-width: 600px;
-  z-index: 2;
-  position: relative;
-}
-
-.promo-content h1 {
-  font-size: 6rem;
-  font-family: 'Dream Avenue', sans-serif;
-  margin-bottom: 20px;
-  color: #ae866a;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-}
-
-.promo-content p {
-  font-size: 1.25rem;
-  margin-bottom: 30px;
-  line-height: 1.6;
-  color: white;
-}
-
-.shop-btn {
-  padding: 15px 30px;
-  background-color: transparent;
-  color: white;
-  border-bottom: 2px solid white;
-  font-size: 1rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-}
-
-.shop-btn:hover {
-  background-color: transparent;
-  font-size: 1.5rem;
-  transform: scale(1.08);
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  #neat-promo {
-    padding: 40px 5%;
-    text-align: center;
-    justify-content: center;
-  }
-
-  .promo-content {
-    max-width: 100%;
-  }
-
-  .promo-content h1 {
-    font-size: 8rem;
-  }
-
-  .promo-content p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .promo-content h1 {
-    font-size: 5rem;
-  }
-
-  .promo-content p {
-    font-size: 0.95rem;
-  }
-
-  .shop-btn {
-    font-size: 0.9rem;
-    padding: 12px 24px;
-  }
-}
-
-
-
-#neat-promo2 {
-  position: relative;
-  width: 100%;
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
-  padding: 60px 10%;
-  color: black;
-  overflow: hidden;
   justify-content: center;
   text-align: center;
+  overflow: hidden;
+  height: 1270px; /* desktop height */
+  margin-top: 3px;
 }
 
-/* Background Image with Zoom Effect */
-.promo-bg2 {
+/* Promo Background & Overlay */
+.promo-bg21 {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url('items/background.jpg') no-repeat center center/cover;
+  background: url('images/lp15m.webp') no-repeat center center/cover;
   transform: scale(1.2);
   transition: transform 1.2s ease;
   z-index: 0;
 }
 
-.promo-bg2.in-view {
+.promo-bg21.in-view {
   transform: scale(1);
 }
 
-/* Overlay */
-.promo-overlay2 {
+.promo-overlay21 {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0,0,0,0.2);
   z-index: 1;
 }
 
-/* Content */
-.promo-content2 {
+.promo-content21 {
   max-width: 600px;
-  z-index: 1;
-  text-align: center;
-}
-
-.promo-content2 h1 {
-  font-size: 6rem;
-  font-family: 'Dream Avenue', sans-serif;
-  margin-bottom: 20px;
-  color: #8a9381;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-}
-
-.promo-content2 p {
-  font-size: 1.7rem;
-  margin-bottom: 30px;
-  line-height: 1.6;
+  z-index: 2;
   color: white;
 }
 
-.shop-btn2 {
-  padding: 15px 30px;
-  background-color: transparent;
-  color: white;
-  border-bottom: 2px solid white;
-  font-size: 1rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: transform 0.3s ease, color 0.3s ease, font-size 0.3s ease;
-}
-
-.shop-btn2:hover {
-  background-color: transparent;
-  font-size: 1.5rem;
-  transform: scale(1.08);
-}
-
-/* Responsive */
+/* Responsive: stack vertically on mobile */
 @media (max-width: 768px) {
-  #neat-promo2 {
-    padding: 40px 5%;
-    justify-content: center;
+  #neat-promo-products1 {
+    flex-direction: column;
+    min-height: auto;
   }
 
-  .promo-content2 {
-    max-width: 100%;
+  .promo-side1, .products-side1 {
+    width: 100%;
   }
 
-  .promo-content2 h1 {
-    font-size: 8rem;
+  /* Reduce promo image height for mobile */
+  .promo-side1 {
+    height: 400px; /* adjust as needed */
+    margin-top: 0;
   }
 
-  .promo-content2 p {
-    font-size: 2.3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .promo-content2 h1 {
-    font-size: 5rem;
+  .promo-bg21 {
+    transform: scale(1); /* remove zoom for mobile */
   }
 
-  .promo-content2 p {
-    font-size: 1.5rem;
+  /* Adjust text size for mobile */
+  .promo-content21 h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .promo-content21 p {
+    font-size: 1.2rem;
   }
 
   .shop-btn2 {
     font-size: 0.9rem;
-    padding: 12px 24px;
+    padding: 10px 20px;
   }
+
+
 }
 
 
-@media (max-width: 767px) {
-  .promo-bg2 {
-    background: url('mains/gunna3.jpg') no-repeat center center/cover;
+
+/* Combined Layout */
+#neat-promo-products12 {
+  display: flex;
+  width: 100%;
+  min-height: 90vh;
+  overflow: hidden;
+}
+
+/* Left Promo Side */
+.promo-side12 {
+  position: relative;
+  width: 50%;
+  display: flex;
+  margin-top: 3px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  height: 1280px; /* desktop height */
+}
+
+/* Promo Background & Overlay */
+.promo-bg212 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('images/lp12(main).webp') no-repeat center center/cover;
+  transform: scale(1.2);
+  transition: transform 1.2s ease;
+  z-index: 0;
+}
+
+.promo-bg212.in-view {
+  transform: scale(1);
+}
+
+.promo-overlay212 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Right Products Side */
+.products-side12 {
+  width: 50%;
+  padding: 3px;
+}
+
+.product-grid12 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+}
+
+/* Responsive: stack on mobile */
+@media (max-width: 768px) {
+  #neat-promo-products12 {
+    flex-direction: column;
+    min-height: auto;
   }
+
+  .promo-side12, .products-side12 {
+    width: 100%;
+  }
+
+  /* Reduce image height for mobile */
+  .promo-side12 {
+    height: 400px; /* smaller height for mobile */
+    margin-top: 0;
+  }
+
+  /* Optional: scale down background image slightly */
+  .promo-bg212 {
+    transform: scale(1);
+  }
+
+  /* Make text fit nicely on smaller screens */
+  .promo-content212 h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  .promo-content212 p {
+    font-size: 1.2rem;
+  }
+
+  .shop-btn2 {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
 }
 
 
