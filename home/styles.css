@@ -92,6 +92,7 @@ body.fade-out {
   height: 100%;
   object-fit: cover;
   z-index: -1;
+  position: fixed;
   filter: brightness(0.5);
   /* ⬇️ Start zoomed in */
   transform: scale(1.15);
@@ -721,6 +722,7 @@ body.fade-out {
   .product-grid {
     display: grid; 
     gap: 3px;
+    background-color: white;
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));

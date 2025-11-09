@@ -79,82 +79,93 @@ document.addEventListener('click', (event) => {
 });
 
 
-document.querySelectorAll('.product-card').forEach((card) => {
-  const images = card.querySelectorAll('.image-wrapper img');
+window.initializeProductBehaviors = function() {
 
-  // Show only the first image by default
-  images.forEach((img, index) => {
-    img.style.opacity = index === 0 ? '1' : '0';
-    img.style.zIndex = index === 0 ? '1' : '0';
+  /* ----------------------------------------
+     IMAGE HOVER SWAP FOR .product-card
+  ---------------------------------------- */
+  document.querySelectorAll('.product-card').forEach((card) => {
+    const images = card.querySelectorAll('.image-wrapper img');
+
+    // Show only the first image by default
+    images.forEach((img, index) => {
+      img.style.opacity = index === 0 ? '1' : '0';
+      img.style.zIndex = index === 0 ? '1' : '0';
+    });
+
+    card.addEventListener('mouseenter', () => {
+      if (images.length > 1) {
+        images[0].style.opacity = '0';
+        images[1].style.opacity = '1';
+        images[0].style.zIndex = '0';
+        images[1].style.zIndex = '1';
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (images.length > 1) {
+        images[0].style.opacity = '1';
+        images[1].style.opacity = '0';
+        images[0].style.zIndex = '1';
+        images[1].style.zIndex = '0';
+      }
+    });
   });
 
-  card.addEventListener('mouseenter', () => {
-    if (images.length > 1) {
-      images[0].style.opacity = '0';
-      images[1].style.opacity = '1';
-      images[0].style.zIndex = '0';
-      images[1].style.zIndex = '1';
-    }
+
+  /* ----------------------------------------
+     PRODUCT CLICK → OPEN PRODUCT PAGE
+  ---------------------------------------- */
+  document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', () => {
+
+      const images      = Array.from(card.querySelectorAll('.image-wrapper img')).map(i => i.src);
+      const status      = card.querySelector('.status')?.innerText ?? null;
+      const name        = card.querySelector('.product-name').innerText;
+      const oldPrice    = card.querySelector('.old-price')?.innerText ?? null;
+      const newPrice    = card.querySelector('.new-price')?.innerText ?? null;
+      const colors      = Array.from(card.querySelectorAll('.color-buttons .color-btn'))
+                               .map(btn => btn.dataset.color);
+
+      const rawSizes    = Array.from(card.querySelectorAll('.size-buttons .size-btn'))
+                               .map(btn => btn.dataset.size);
+
+      const sizes       = rawSizes.map(s => s.replace('*', '').trim());
+      const outOfStock  = rawSizes.filter(s => s.includes('*')).map(s => s.replace('*', '').trim());
+
+      const description = card.dataset.description || '';
+      const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
+      const sizeFit     = card.dataset.sizefit || '';
+
+      const productId   = card.id;
+
+      const productData = {
+        images,
+        name,
+        oldPrice,
+        newPrice,
+        sizes,
+        outOfStock,
+        colors,
+        description,
+        features,
+        sizeFit
+      };
+
+      localStorage.setItem('selectedProduct', JSON.stringify(productData));
+      window.location.href = `product.html?id=${productId}`;
+    });
   });
 
-  card.addEventListener('mouseleave', () => {
-    if (images.length > 1) {
-      images[0].style.opacity = '1';
-      images[1].style.opacity = '0';
-      images[0].style.zIndex = '1';
-      images[1].style.zIndex = '0';
-    }
-  });
+}; // END initializeProductBehaviors()
+
+
+/* ----------------------------------------
+   RUN ON PAGE LOAD
+---------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  window.initializeProductBehaviors();
 });
-
-
-
-document.querySelectorAll('.product-card').forEach(card => {
-  card.addEventListener('click', () => {
-
-    const images    = Array.from(card.querySelectorAll('.image-wrapper img')).map(i => i.src);
-    const status    = card.querySelector('.status')?.innerText ?? null;
-    const name      = card.querySelector('.product-name').innerText;
-    const oldPrice  = card.querySelector('.old-price')?.innerText ?? null;
-    const newPrice  = card.querySelector('.new-price')?.innerText ?? null;
-    const colors    = Array.from(card.querySelectorAll('.color-buttons .color-btn'))
-                           .map(btn => btn.dataset.color);
-
-    const rawSizes   = Array.from(card.querySelectorAll('.size-buttons .size-btn'))
-                            .map(btn => btn.dataset.size);
-    const sizes      = rawSizes.map(s => s.replace('*', '').trim());
-    const outOfStock = rawSizes.filter(s => s.includes('*'))
-                               .map(s => s.replace('*', '').trim());
-
-    const description = card.dataset.description || '';
-    const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
-    const sizeFit     = card.dataset.sizefit || '';
-
-        const productId = card.id; // use the card's unique ID
-
-
-    const productData = {
-      images,
-      name,
-      oldPrice,
-      newPrice,
-      sizes,
-      outOfStock,
-      colors,
-      description,
-      features,
-      sizeFit
-    };
-
-    localStorage.setItem('selectedProduct', JSON.stringify(productData));
-
-    // Redirect with the product ID in URL
-    window.location.href = `product.html?id=${productId}`;
-  });
-});
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
   // Get the URL fragment (e.g., #product-1)
@@ -178,6 +189,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 });
+
+
 
 
 
