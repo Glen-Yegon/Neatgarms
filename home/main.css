@@ -467,6 +467,7 @@ html{
   border: transparent;
   max-width: 400px;
   overflow: hidden;
+  position: relative;
   text-align: left;
   transition: transform 0.3s ease;
 }
