@@ -1,7 +1,7 @@
 // js/import-products.js
 async function loadProducts() {
   try {
-    const response = await fetch('/partials/products.html');
+    const response = await fetch('./partials/products.html');
     const html = await response.text();
 
     const temp = document.createElement('div');
