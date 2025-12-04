@@ -456,7 +456,17 @@ document.querySelectorAll('.product-card').forEach(card => {
 
 
 
- const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get("id");
+
+  if (!productId || !productsData[productId]) {
+    console.error("Product not found:", productId);
+    return;
+  }
+
+  const productData = productsData[productId]; // ✅ use productsData, not localStorage
+
   const mainImage = document.getElementById('main-image');
   const thumbnailList = document.getElementById('thumbnail-list');
   const prevButton = document.getElementById('prev-image');
@@ -469,12 +479,11 @@ document.querySelectorAll('.product-card').forEach(card => {
     if (!productData.images || !productData.images[index]) return;
     mainImage.src = productData.images[index];
     thumbnails.forEach(img => img.classList.remove('active'));
-    if (thumbnails[index]) {
-      thumbnails[index].classList.add('active');
-    }
+    if (thumbnails[index]) thumbnails[index].classList.add('active');
   }
 
-  if (productData && productData.images.length > 0) {
+  // Create thumbnails
+  if (productData.images && productData.images.length > 0) {
     thumbnails = productData.images.map((src, index) => {
       const thumb = document.createElement('img');
       thumb.src = src;
@@ -485,7 +494,6 @@ document.querySelectorAll('.product-card').forEach(card => {
       thumbnailList.appendChild(thumb);
       return thumb;
     });
-
     updateMainImage(0);
 
     prevButton.addEventListener('click', () => {
@@ -497,43 +505,18 @@ document.querySelectorAll('.product-card').forEach(card => {
       currentImageIndex = (currentImageIndex + 1) % productData.images.length;
       updateMainImage(currentImageIndex);
     });
-
-    const observer = new MutationObserver(() => {
-      const newIndex = productData.images.indexOf(mainImage.src);
-      if (newIndex !== -1 && newIndex !== currentImageIndex) {
-        currentImageIndex = newIndex;
-        updateMainImage(currentImageIndex);
-      }
-    });
-
-    observer.observe(mainImage, { attributes: true, attributeFilter: ['src'] });
   }
-
-
-window.addEventListener("DOMContentLoaded", () => {
-  // Get the product ID from the URL (?id=productId)
-  const params = new URLSearchParams(window.location.search);
-  const productId = params.get("id");
-
-  if (!productId || !productsData[productId]) {
-    console.error("Product not found:", productId);
-    return;
-  }
-
-  const productData = productsData[productId];
 
   // Populate product details
   document.getElementById("product-name").textContent = productData.name;
   document.querySelector(".old-price").textContent = productData.oldPrice || "";
   document.querySelector(".new-price").textContent = productData.newPrice || "";
-  document.getElementById("main-image").src = productData.images[0];
+  mainImage.src = productData.images[0];
   document.getElementById("product-status").textContent = "In Stock";
 
-  // Populate description
   document.getElementById("product-description").textContent = productData.description;
   document.getElementById("size-fit").textContent = productData.sizeFit;
 
-  // Populate features
   const featuresList = document.querySelector("#key-features ul");
   featuresList.innerHTML = "";
   productData.features.forEach(feature => {
@@ -542,23 +525,16 @@ window.addEventListener("DOMContentLoaded", () => {
     featuresList.appendChild(li);
   });
 
-  // Populate sizes dynamically
   const sizeSelection = document.querySelector(".size-selection");
   if (productData.sizes?.length) {
     sizeSelection.innerHTML =
       `<h4>Available Sizes:</h4>` +
       productData.sizes.map(size => {
         const soldOut = productData.outOfStock?.includes(size);
-        return `
-          <button class="size-btn${soldOut ? ' unavailable' : ''}"
-                  data-size="${size}"
-                  ${soldOut ? 'aria-disabled="true" data-soldout="true"' : ''}>
-            ${size}
-          </button>`;
+        return `<button class="size-btn${soldOut ? ' unavailable' : ''}" data-size="${size}" ${soldOut ? 'aria-disabled="true"' : ''}>${size}</button>`;
       }).join('');
   }
 
-  // Populate colors dynamically
   const colorSelection = document.querySelector(".color-selection");
   if (productData.colors?.length) {
     colorSelection.innerHTML =
