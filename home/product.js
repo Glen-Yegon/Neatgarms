@@ -1,3 +1,6 @@
+// product.js
+import { productsData } from './partials/productsData.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const productData = JSON.parse(localStorage.getItem('selectedProduct'));
   
@@ -498,23 +501,60 @@ document.querySelectorAll('.product-card').forEach(card => {
 
 
 window.addEventListener("DOMContentLoaded", () => {
-  // Get the product id from query string (?id=ws)
+  // Get the product ID from the URL (?id=productId)
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("id");
 
-  console.log("Product ID from URL:", productId);
+  if (!productId || !productsData[productId]) {
+    console.error("Product not found:", productId);
+    return;
+  }
 
-  // Retrieve product data from localStorage
-  const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+  const productData = productsData[productId];
 
-  if (productData && productData.id === productId) {
-    // ✅ Render the product
-    document.getElementById("product-name").textContent = productData.name;
-    document.querySelector(".old-price").textContent = productData.oldPrice;
-    document.querySelector(".new-price").textContent = productData.newPrice;
-    document.getElementById("main-image").src = productData.images[0];
-    document.getElementById("product-status").textContent = "In Stock";
-  } else {
-    console.warn("Product not found for ID:", productId);
+  // Populate product details
+  document.getElementById("product-name").textContent = productData.name;
+  document.querySelector(".old-price").textContent = productData.oldPrice || "";
+  document.querySelector(".new-price").textContent = productData.newPrice || "";
+  document.getElementById("main-image").src = productData.images[0];
+  document.getElementById("product-status").textContent = "In Stock";
+
+  // Populate description
+  document.getElementById("product-description").textContent = productData.description;
+  document.getElementById("size-fit").textContent = productData.sizeFit;
+
+  // Populate features
+  const featuresList = document.querySelector("#key-features ul");
+  featuresList.innerHTML = "";
+  productData.features.forEach(feature => {
+    const li = document.createElement("li");
+    li.textContent = feature;
+    featuresList.appendChild(li);
+  });
+
+  // Populate sizes dynamically
+  const sizeSelection = document.querySelector(".size-selection");
+  if (productData.sizes?.length) {
+    sizeSelection.innerHTML =
+      `<h4>Available Sizes:</h4>` +
+      productData.sizes.map(size => {
+        const soldOut = productData.outOfStock?.includes(size);
+        return `
+          <button class="size-btn${soldOut ? ' unavailable' : ''}"
+                  data-size="${size}"
+                  ${soldOut ? 'aria-disabled="true" data-soldout="true"' : ''}>
+            ${size}
+          </button>`;
+      }).join('');
+  }
+
+  // Populate colors dynamically
+  const colorSelection = document.querySelector(".color-selection");
+  if (productData.colors?.length) {
+    colorSelection.innerHTML =
+      `<h4>Available Colors:</h4>` +
+      productData.colors.map(color =>
+        `<button class="color-btn" data-color="${color}" style="background-color:${color.toLowerCase()}">${color}</button>`
+      ).join('');
   }
 });
