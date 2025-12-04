@@ -1,9 +1,19 @@
 // product.js
 import { productsData } from './partials/productsData.js';
 
+
 document.addEventListener('DOMContentLoaded', () => {
-  const productData = JSON.parse(localStorage.getItem('selectedProduct'));
-  
+
+const params = new URLSearchParams(window.location.search);
+const productId = params.get("id");
+
+if (!productId || !productsData[productId]) {
+  console.error("Product not found:", productId);
+  return;
+}
+
+const productData = productsData[productId];
+
   if (productData) {
     const mainImage = document.getElementById('main-image');
     let currentImageIndex = 0;

@@ -14,10 +14,9 @@ export const productsData = {
       "Elastic waistband with an adjustable drawstring for a secure fit",
       "Versatile Grey tone that matches a wide range of tops and footwear"
     ],
-    sizes: ["S", "L", "2 XL*", "XL", "M"],
-    outOfStock: ["2 XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["2 XL"],
     sizeFit: "Relaxed, comfortable fit suitable for both men and women. Female model is 5’7” wearing size S. True to size; size up for an oversized or lounge-style fit.",
-    colors: ["Blue"]
   },
 
   "soft-hours": {
@@ -39,8 +38,8 @@ export const productsData = {
       "Fit: Relaxed fit for all-day ease",
       "Subtle premium detailing for a refined streetwear finish"
     ],
-    sizes: ["S", "L", "2 XL*", "XL*", "M"],
-    outOfStock: ["S", "2 XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "2 XL"],
     sizeFit: "Models are 5’11 and wears size M",
     colors: []
   },
@@ -61,10 +60,10 @@ export const productsData = {
       "Cropped fit that complements relaxed or layered looks",
       "Rich orange check pattern for a warm, vintage tone"
     ],
-    sizes: ["S*", "L", "2 XL*", "XL*", "M"],
-    outOfStock: ["S*","2 XL*"],
+    sizes: ["S*", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S","2 XL"],
     sizeFit: "Model 5’8 wearing L",
-    colors: ["Orange"]
+    
   },
 
   "beige-tank-top": {
@@ -82,10 +81,9 @@ export const productsData = {
       "Perfect for layering or standalone summer wear",
       "Available in Cement Brown and Beige tones"
     ],
-    sizes: ["S", "L", "2 XL*", "XL", "M"],
-    outOfStock: ["2 XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["2 XL"],
     sizeFit: "Slim, body-hugging fit for both men and women. Male model is 6’0” wearing size L. Female model is 5’7” wearing size S. True to size for a fitted look; size up for a relaxed feel.",
-    colors: ["Beige", "Cement Brown"]
   },
 
   "cement-brown-tank-top": {
@@ -103,10 +101,10 @@ export const productsData = {
       "Perfect for layering or standalone summer wear",
       "Available in Cement Brown and Beige tones"
     ],
-    sizes: ["S", "L", "2 XL*", "XL", "M"],
-    outOfStock: ["2 XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["2 XL"],
     sizeFit: "Slim, body-hugging fit for both men and women. Male model is 5'8” wearing size L. True to size for a fitted look; size up for a relaxed feel.",
-    colors: ["Beige", "Cement Brown"]
+   
   },
 
   "craftsman-workshirt": {
@@ -126,10 +124,10 @@ export const productsData = {
       "Cropped, boxy silhouette for street-ready proportions",
       "Coffee-brown checks that channel vintage energy"
     ],
-    sizes: ["S*", "L", "2 XL*", "XL", "M"],
-    outOfStock: ["S*", "2 XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "2 XL"],
     sizeFit: "Relaxed cropped fit. Model is 6’0” wearing size L. Fits true to size; size up for added drop and room.",
-    colors: ["Coffee Brown"]
+
   },
 
   "craftsman-long-workshirt": {
@@ -148,10 +146,10 @@ export const productsData = {
       "Cropped fit that complements relaxed or layered looks",
       "Rich coffee-brown check pattern for a warm, vintage tone"
     ],
-    sizes: ["S*", "L*", "2 XL*", "XL", "M*"],
-    outOfStock: ["S*", "2 XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "2 XL"],
     sizeFit: "Model is 5’9 and wears size M",
-    colors: ["Coffee Brown"]
+    
   },
 
  "track-top": {
@@ -171,8 +169,8 @@ export const productsData = {
       "Fit: Relaxed fit for all-day ease",
       "Subtle premium detailing for a refined streetwear finish"
     ],
-    sizes: ["S*", "L", "2 XL*", "XL*", "M"],
-    outOfStock: ["S*", "2 XL*", "XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "2 XL", "XL"],
     sizeFit: "Model is 5’9 and wears size M",
     colors: []
   },
@@ -194,10 +192,10 @@ export const productsData = {
       "Cropped fit that pairs perfectly with high-waist bottoms",
       "Soft baby pink tone that radiates warmth and ease"
     ],
-    sizes: ["S", "L", "2 XL*", "XL*", "M"],
-    outOfStock: ["2 XL*", "XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["2 XL", "XL"],
     sizeFit: "Size S : fits 4-6, Size M : fits 6-8, Size L : fits 8-10",
-    colors: ["Pink"]
+  
   },
 
   "track-pants": {
@@ -216,8 +214,8 @@ export const productsData = {
       "Fit: Relaxed fit for all-day ease",
       "Subtle premium detailing for a refined streetwear finish"
     ],
-    sizes: ["S*", "L", "2 XL*", "XL", "M"],
-    outOfStock: ["S*", "2 XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "2 XL"],
     sizeFit: "Model is 5’11 and wears size M",
     colors: []
   },
@@ -239,10 +237,10 @@ export const productsData = {
       "Signature Neat Garms logo seamlessly integrated into the design",
       "Relaxed long-sleeve fit for year-round comfort and layering"
     ],
-    sizes: ["S*", "L", "2 XL*", "XL", "M"],
-    outOfStock: ["S*", "2 XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "2 XL"],
     sizeFit: "Model is 5’9 and wears size M",
-    colors: ["Tan"]
+    colors: []
   },
 
   "iconic-tee": {
@@ -262,7 +260,7 @@ export const productsData = {
     sizes: ["S", "L", "2 XL", "XL", "M"],
     outOfStock: [],
     sizeFit: "Unisex-Friendly: Designed to suit multiple body types. Model Reference: Model is 5’9' (175cm) wearing size L",
-    colors: ["White"]
+  
   },
 
   "breezy-tee": {
@@ -285,7 +283,7 @@ export const productsData = {
     sizes: ["S", "L", "2 XL", "XL", "M"],
     outOfStock: [],
     sizeFit: "Fit: Relaxed fit – slightly loose for a laid-back vibe. True to Size: Order your usual size for intended drape. Unisex Sizing: Designed to flatter all body types. Model Reference: Model is 5’11” (180 cm) wearing size L",
-    colors: ["White"]
+    colors: []
   },
 
   "tank-top": {
@@ -304,10 +302,10 @@ export const productsData = {
       "Fit: Slim fit for a sharp, modern silhouette",
       "Style Use: Ideal for standalone wear or layered streetwear looks"
     ],
-    sizes: ["S*", "L*", "2 XL*", "XL", "M*"],
-    outOfStock: ["S*", "L*", "2 XL*", "M*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "L", "2 XL", "M"],
     sizeFit: "Fit: Slim fit – hugs the body with natural stretch. True to Size: Order your usual size for a close, intended fit. Unisex Sizing: Designed to suit all body types. Model Reference: Model is 5’9” (175 cm) wearing size M",
-    colors: ["Black"]
+    
   },
 
   "marble-pants": {
@@ -326,10 +324,10 @@ export const productsData = {
       "Fit: Flowing Wide-leg silhouette",
       "Style Use: A statement piece that can be paired with both basics and bolder pieces"
     ],
-    sizes: ["30", "32", "34*", "36*", "38*"],
-    outOfStock: ["34*", "36*", "38*"],
+    sizes: ["30", "32", "34", "36", "38"],
+    outOfStock: ["34", "36", "38"],
     sizeFit: "Fit: Wide-Leg, flows across the body with ease. Unisex sizing: Designed to suit all body types. Model Reference: 5’5’ (165cm) Size 30",
-    colors: ["Marble"]
+   
   },
 
 
@@ -350,10 +348,10 @@ export const productsData = {
       "Fit: Regular fit for balanced comfort and style",
       "Style Use: Suitable for everyday utility or layered streetwear looks"
     ],
-    sizes: ["S*", "L*", "2 XL*", "XL*", "M*"],
-    outOfStock: ["S*", "L*", "2 XL*", "XL*", "M*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "L", "2 XL", "XL", "M"],
     sizeFit: "Fit: Regular fit – slightly relaxed for ease of movement. True to Size: Order your usual size for the intended fit. Unisex Sizing: Designed to suit all body types. Model Reference: Model is 5'9' (175 cm) wearing size M",
-    colors: ["Baby Blue"]
+ 
   },
 
   "jorts": {
@@ -373,10 +371,10 @@ export const productsData = {
       "Fit: Baggy fit with relaxed leg opening",
       "Style Use: Perfect for casual streetwear or summer layering"
     ],
-    sizes: ["30", "32*", "34*", "36*", "38*"],
-    outOfStock: ["32*", "34*", "36*", "38*"],
+    sizes: ["30", "32", "34", "36", "38"],
+    outOfStock: ["32", "34", "36", "38"],
     sizeFit: "Fit: Baggy fit – roomy through the thighs. True to Size: Order your usual waist size for a relaxed look. Unisex Sizing: Designed to suit all genders. Model Reference: Model is 5'9' (175 cm) wearing size M",
-    colors: ["Cyan Denim"]
+    
   },
 
   "green-angel": {
@@ -400,7 +398,6 @@ export const productsData = {
     sizes: ["S", "M"],
     outOfStock: ["S", "M"],
     sizeFit: "Fit: Body-hugging, cropped fit. True to Size: Fits snug; size up for a slightly relaxed fit. Stretch: High stretch for flexible wear. Model Reference: Model is 5'5' (165 cm) wearing size S",
-    colors: ["Green"]
   },
 
   "black-crop-tee": {
@@ -419,10 +416,10 @@ export const productsData = {
       "Fit: Cropped, boxy silhouette",
       "Neckline: Ribbed crew neck"
     ],
-    sizes: ["M*", "S*", "L*", "2 XL*", "XL*"],
-    outOfStock: ["M*", "S*", "L*", "2 XL*", "XL*"],
+    sizes: ["M", "S", "L", "2 XL", "XL"],
+    outOfStock: ["M", "S", "L", "2 XL", "XL"],
     sizeFit: "Fit: Boxy cropped fit – relaxed through the body. True to Size: Order your usual size for a comfortable cropped look. Unisex-Friendly: Designed to suit multiple body types. Model Reference: Model is 5'5' (165 cm) wearing size S",
-    colors: ["Black"]
+
   },
 
   "white-crop-tee": {
@@ -441,10 +438,10 @@ export const productsData = {
       "Fit: Cropped, boxy silhouette",
       "Neckline: Ribbed crew neck"
     ],
-    sizes: ["S*", "L*", "2 XL*", "XL*", "M"],
-    outOfStock: ["S*", "L*", "2 XL*", "XL*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "L", "2 XL", "XL"],
     sizeFit: "Fit: Boxy cropped fit – relaxed through the body. True to Size: Order your usual size for a comfortable cropped look. Unisex-Friendly: Designed to suit multiple body types. Model Reference: Model is 5'5' (165 cm) wearing size S",
-    colors: ["White"]
+ 
   },
 
     "frank-ocean": {
@@ -463,10 +460,10 @@ export const productsData = {
       "Fit: Relaxed fit for all-day ease",
       "Style Use: Great for casual days, summer energy, or layered urban looks"
     ],
-    sizes: ["S*", "L", "2 XL", "XL*", "M*"],
-    outOfStock: ["S*", "XL*", "M*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "XL", "M"],
     sizeFit: "Fit: Relaxed fit – slightly loose for a laid-back vibe. True to Size: Order your usual size for intended drape. Unisex Sizing: Designed to flatter all body types. Model Reference: Model is 5’11” (180 cm) wearing size L",
-    colors: ["White"]
+  
   },
 
   "solana": {
@@ -485,10 +482,10 @@ export const productsData = {
       "Fit: Relaxed fit for all-day ease",
       "Style Use: Great for casual days, summer energy, or layered urban looks"
     ],
-    sizes: ["S*", "L", "2 XL*", "XL", "M*"],
-    outOfStock: ["S*", "2 XL*", "M*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "2 XL", "M"],
     sizeFit: "Fit: Relaxed fit – slightly loose for a laid-back vibe. True to Size: Order your usual size for intended drape. Unisex Sizing: Designed to flatter all body types. Model Reference: Model is 5’11” (180 cm) wearing size L",
-    colors: ["Brown"]
+   
   },
 
   "k-dot": {
@@ -507,10 +504,10 @@ export const productsData = {
       "Fit: Relaxed fit for all-day ease",
       "Style Use: Great for casual days, summer energy, or layered urban looks"
     ],
-    sizes: ["S*", "L", "2 XL*", "XL", "M*"],
-    outOfStock: ["S*", "2 XL*", "M*"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S", "2 XL", "M"],
     sizeFit: "Fit: Relaxed fit – slightly loose for a laid-back vibe. True to Size: Order your usual size for intended drape. Unisex Sizing: Designed to flatter all body types. Model Reference: Model is 5’11” (180 cm) wearing size L",
-    colors: ["Black/Green"]
+ 
   },
 
   "fleece": {
@@ -531,8 +528,8 @@ export const productsData = {
       "Improved structure",
       "Signature silhouette"
     ],
-    sizes: ["2 XL*"],
-    outOfStock: ["2 XL*"],
+    sizes: ["2 XL"],
+    outOfStock: ["2 XL"],
     sizeFit: "Relaxed fit with structured drape. Fits true to size.",
     colors: ["Grey"]
   }
