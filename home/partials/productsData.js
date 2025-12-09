@@ -4,8 +4,8 @@ export const productsData = {
     oldPrice: "", // No old price provided
     newPrice: "3000",
     images: [
-      "future/optimized/f1 (76).webp",
-      "future/optimized/f1 (39).webp"
+      "future/optimized/sh (1).webp",
+      "future/optimized/sh (2).webp"
     ],
     description: "The Form Shorts are designed for comfort, mobility, and refined everyday wear. Crafted from a soft, breathable cotton-blend fabric, they provide a smooth and relaxed fit that moves naturally with the body. Minimal in aesthetic, they feature a clean silhouette complemented by a subtle Neat logo on the left side. Ideal for workouts, casual outings, or lounging in style, these shorts are offered in a versatile Blue tone that pairs effortlessly with any wardrobe.",
     features: [
@@ -71,8 +71,8 @@ export const productsData = {
     oldPrice: "",
     newPrice: "2000",
     images: [
-      "future/optimized/f1 (13).webp",
-      "future/optimized/f1 (18).webp"
+      "future/optimized/f1 (18).webp",
+      "future/optimized/f1 (13).webp"
     ],
     description: "The Form Tank Top is built for movement, comfort, and effortless style. Designed with a body-hugging fit that flatters every frame, it’s crafted from a smooth stretch fabric that feels light and breathable. Whether worn solo in the summer or layered under shirts and jackets, it’s a timeless staple in modern neutrals, Cement Brown.",
     features: [
@@ -157,9 +157,9 @@ export const productsData = {
     oldPrice: "",
     newPrice: "4500",
     images: [
-      "future/optimized/f1 (50).webp",
-      "future/optimized/f1 (47).webp",
-      "future/optimized/f1 (58).webp"
+      "future/optimized/f1 (58).webp",
+      "future/optimized/f1 (64).webp",
+      "future/optimized/f1 (50).webp"
     ],
     description: "The Soft Hours Top blends laid-back comfort with a touch of quiet luxury. Crafted from ultra–soft silk corduroy, it delivers that smooth, premium feel while keeping an effortless street look. Designed for the everyday look this is comfort you’ll want to live in.",
     features: [
@@ -225,8 +225,8 @@ export const productsData = {
     oldPrice: "",
     newPrice: "2750",
     images: [
-      "future/optimized/f1 (10).webp",
       "future/optimized/f1 (11).webp",
+      "future/optimized/ls.webp",
       "future/optimized/f1 (40).webp",
       "future/optimized/f1 (38).webp"
     ],
