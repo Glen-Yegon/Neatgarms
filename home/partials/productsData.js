@@ -39,7 +39,7 @@ export const productsData = {
       "Subtle premium detailing for a refined streetwear finish"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL"],
+    outOfStock: ["S", "L", "2 XL", "XL", ],
     sizeFit: "Models are 5’11 and wears size M",
     colors: []
   },
@@ -60,8 +60,8 @@ export const productsData = {
       "Cropped fit that complements relaxed or layered looks",
       "Rich orange check pattern for a warm, vintage tone"
     ],
-    sizes: ["S*", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S","2 XL"],
+    sizes: ["S", "L", "2 XL", "XL", "M"],
+    outOfStock: ["S","2 XL", "L", "XL", "M"],
     sizeFit: "Model 5’8 wearing L",
     
   },
@@ -82,7 +82,7 @@ export const productsData = {
       "Available in Cement Brown and Beige tones"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["2 XL"],
+    outOfStock: ["2 XL", "XL"],
     sizeFit: "Slim, body-hugging fit for both men and women. Male model is 6’0” wearing size L. Female model is 5’7” wearing size S. True to size for a fitted look; size up for a relaxed feel.",
   },
 
@@ -102,7 +102,7 @@ export const productsData = {
       "Available in Cement Brown and Beige tones"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["2 XL"],
+    outOfStock: ["2 XL", "M"],
     sizeFit: "Slim, body-hugging fit for both men and women. Male model is 5'8” wearing size L. True to size for a fitted look; size up for a relaxed feel.",
    
   },
@@ -125,7 +125,7 @@ export const productsData = {
       "Coffee-brown checks that channel vintage energy"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL"],
+    outOfStock: ["S", "L", "2 XL", "XL", "M"],
     sizeFit: "Relaxed cropped fit. Model is 6’0” wearing size L. Fits true to size; size up for added drop and room.",
 
   },
@@ -147,7 +147,7 @@ export const productsData = {
       "Rich coffee-brown check pattern for a warm, vintage tone"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL"],
+    outOfStock: ["S", "L", "2 XL", "XL", "M"],
     sizeFit: "Model is 5’9 and wears size M",
     
   },
@@ -170,7 +170,7 @@ export const productsData = {
       "Subtle premium detailing for a refined streetwear finish"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL", "XL"],
+    outOfStock: ["S", "L", "2 XL", "XL"],
     sizeFit: "Model is 5’9 and wears size M",
     colors: []
   },
@@ -215,7 +215,7 @@ export const productsData = {
       "Subtle premium detailing for a refined streetwear finish"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL"],
+    outOfStock: ["S", "2 XL", "XL"],
     sizeFit: "Model is 5’11 and wears size M",
     colors: []
   },
@@ -238,7 +238,7 @@ export const productsData = {
       "Relaxed long-sleeve fit for year-round comfort and layering"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL"],
+    outOfStock: ["S", "L", "2 XL", "XL"],
     sizeFit: "Model is 5’9 and wears size M",
     colors: []
   },
