@@ -60,13 +60,13 @@ export const productsData = {
       "Cropped fit that complements relaxed or layered looks",
       "Rich orange check pattern for a warm, vintage tone"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S","2 XL", "L", "XL", "M"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Model 5’8 wearing L",
     
   },
 
-  "beige-tank-top": {
+  "cement-brown-tank-top": {
     name: "Cement Brown Tank Top",
     oldPrice: "",
     newPrice: "2000",
@@ -86,7 +86,7 @@ export const productsData = {
     sizeFit: "Slim, body-hugging fit for both men and women. Male model is 6’0” wearing size L. Female model is 5’7” wearing size S. True to size for a fitted look; size up for a relaxed feel.",
   },
 
-  "cement-brown-tank-top": {
+  "beige-tank-top": {
     name: "Beige Tank Top",
     oldPrice: "",
     newPrice: "2000",
@@ -124,8 +124,8 @@ export const productsData = {
       "Cropped, boxy silhouette for street-ready proportions",
       "Coffee-brown checks that channel vintage energy"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "L", "2 XL", "XL", "M"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Relaxed cropped fit. Model is 6’0” wearing size L. Fits true to size; size up for added drop and room.",
 
   },
@@ -146,8 +146,8 @@ export const productsData = {
       "Cropped fit that complements relaxed or layered looks",
       "Rich coffee-brown check pattern for a warm, vintage tone"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "L", "2 XL", "XL", "M"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Model is 5’9 and wears size M",
     
   },
@@ -348,8 +348,8 @@ export const productsData = {
       "Fit: Regular fit for balanced comfort and style",
       "Style Use: Suitable for everyday utility or layered streetwear looks"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "L", "2 XL", "XL", "M"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Fit: Regular fit – slightly relaxed for ease of movement. True to Size: Order your usual size for the intended fit. Unisex Sizing: Designed to suit all body types. Model Reference: Model is 5'9' (175 cm) wearing size M",
  
   },
