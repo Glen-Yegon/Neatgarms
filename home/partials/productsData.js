@@ -325,7 +325,7 @@ export const productsData = {
       "Style Use: A statement piece that can be paired with both basics and bolder pieces"
     ],
     sizes: ["30", "32", "34", "36", "38"],
-    outOfStock: ["34", "36", "38"],
+    outOfStock: ["30", "32", "34", "36", "38"],
     sizeFit: "Fit: Wide-Leg, flows across the body with ease. Unisex sizing: Designed to suit all body types. Model Reference: 5’5’ (165cm) Size 30",
    
   },
