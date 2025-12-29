@@ -75,10 +75,10 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <!-- Left: Home Button -->
+    <!--  Left: Home Button -->
     <div class="nav-left">
       <button class="home-btn" id="back" onclick="goBack()" >Back</button>
-    </div>
+    </div> 
   
     <!-- Center: Logo -->
     <div class="nav-center">
@@ -88,7 +88,7 @@
     <!-- Right: Cart Icon -->
     <div class="nav-right">
       <a href="cart.html" class="cart-btn">
-        <i class="fas fa-shopping-cart cart-icon"></i> 
+<i class="fas fa-shopping-bag cart-icon"></i>
 <!-- Add the cart badge with an empty span initially -->
 
 
@@ -131,14 +131,15 @@
     <!-- Contact Section -->
     <div class="form-section">
       <h3>Contact Information</h3>
+      <!-- Full Name -->
+<label for="full-name">Full Name</label>
+<input type="text" id="full-name" placeholder="Enter your full name">
+
       <label for="email">Email</label>
       <input type="email" id="email" placeholder="Enter your email">
       <label for="phone-number">Phone Number</label>
       <input type="tel" id="phone-number" placeholder="Enter your phone number">
-      <div class="checkbox-container">
-        <input type="checkbox" id="news-offers">
-        <label for="news-offers">Email me with news and offers</label>
-      </div>
+
     </div>
   
 <!-- Delivery Section -->
@@ -156,24 +157,8 @@
       <option value="canada">Canada</option>
       <!-- Add more countries as needed -->
     </select>
-  
-    <!-- First Name -->
-    <label for="first-name">First Name</label>
-    <input type="text" id="first-name" placeholder="Enter your first name">
-    
-    <!-- Last Name -->
-    <label for="last-name">Last Name</label>
-    <input type="text" id="last-name" placeholder="Enter your last name">
-    
-    <!-- Address -->
-    <label for="address">Address</label>
-    <input type="text" id="address" placeholder="Enter your address">
-    
-    <!-- Apartment/Suite (Optional) -->
-    <label for="apartment-suite">Apartment, Suite, Building etc </label>
-    <input type="text" id="apartment-suite" placeholder="Enter apartment or suite details" required>
-    
-<!-- City -->
+
+    <!-- City -->
 <label for="delivery-city">City</label>
 <select id="delivery-city" required>
   <option value="" disabled selected>Select your city</option>
@@ -192,15 +177,19 @@
   <option value="Kitale">Kitale</option>
   <option value="Meru">Meru</option>
 </select>
+  
 
+    <!-- Address -->
+    <label for="address">Address</label>
+    <input type="text" id="address" placeholder="Enter your address">
     
-    <!-- Postal Code (Optional) -->
-    <label for="postal-code">Postal Code (Optional)</label>
-    <input type="text" id="postal-code" placeholder="Enter your postal code">
+    <!-- Apartment/Suite (Optional) -->
+    <label for="apartment-suite">Apartment, Suite, Building etc </label>
+    <input type="text" id="apartment-suite" placeholder="Enter apartment or suite details" required>
     
-    <!-- Phone (Optional) -->
-    <label for="phone">Phone</label>
-    <input type="tel" id="phone" placeholder="Enter your phone number" required>
+
+
+
   </div>
   
   
@@ -209,7 +198,7 @@
 <div class="form-section">
   <div style="margin-top: 15px;">
     <strong>Shipping Notice:</strong>
-    <p style="margin: 5px 0; color: #444;">
+    <p style="margin: 5px 0; color: #ffffff; margin-top: -75px;">
       After placing your order, our team will get in touch to arrange delivery. Please note that delivery fees apply and may vary based on your location.
     </p>
   </div>
@@ -218,59 +207,7 @@
   
 
 
-  
-<!-- Billing Address -->
-<div class="form-section">
-    <h3>Billing Address</h3>
-    
-    <!-- Billing Address Options -->
-    <div class="billing-address-options">
-      <input type="radio" id="same-as-shipping" name="billing-option" value="same" checked>
-      <label for="same-as-shipping">Use same as shipping address</label>
-  
-      <input type="radio" id="different-billing" name="billing-option" value="different">
-      <label for="different-billing">Use different billing address</label>
-    </div>
-  
-    <!-- Form for Same Address (hidden by default) -->
-    <div id="same-address-container">
-      <p>Your billing address will be the same as your shipping address.</p>
-    </div>
-  
-    <!-- Form for Different Billing Address (hidden by default) -->
-    <div id="different-address-container" style="display: none;">
-      <label for="billing-country">Country/Region</label>
-      <select id="billing-country">
-        <option value="">Select your country/region</option>
-        <option value="kenya">Kenya</option>
-        <option value="usa">United States</option>
-        <option value="uk">United Kingdom</option>
-        <option value="india">India</option>
-        <option value="canada">Canada</option>
-        <!-- Add more countries as needed -->
-      </select>
-    
-  
-      <label for="billing-first-name">First Name</label>
-      <input type="text" id="billing-first-name" placeholder="Enter your first name">
-  
-      <label for="billing-last-name">Last Name</label>
-      <input type="text" id="billing-last-name" placeholder="Enter your last name">
-  
-      <label for="billing-address">Address</label>
-      <input type="text" id="billing-address" placeholder="Enter your billing address">
-  
-      <label for="billing-apartment">Apartment, Suite, etc. (optional)</label>
-      <input type="text" id="billing-apartment" placeholder="Enter apartment, suite, etc.">
-  
-      <label for="billing-postal">Postal Code (optional)</label>
-      <input type="text" id="billing-postal" placeholder="Enter your postal code">
-  
-      <label for="billing-phone">Phone (optional)</label>
-      <input type="text" id="billing-phone" placeholder="Enter your phone number">
-    </div>
-  </div>
-
+ 
 
   <!-- Payment Details Modal (hidden by default) -->
 <div id="payment-modal" class="modal" style="display:none;">
@@ -366,15 +303,16 @@
        customAlert.remove();
      }, 5000);
     
-      // Collect Contact Info
-      const userEmail = document.getElementById("email").value;
-      const userPhone = document.getElementById("phone-number").value;
-      const newsOffers = document.getElementById("news-offers").checked ? "Yes" : "No";
-    
-      if (!userEmail || !userPhone) {
-        alert("Please fill in your email and phone number.");
-        return;
-      }
+// Collect Contact Info
+const fullName = document.getElementById("full-name").value;
+const userEmail = document.getElementById("email").value;
+const userPhone = document.getElementById("phone-number").value;
+
+if (!fullName || !userEmail || !userPhone) {
+  alert("Please fill in your full name, email, and phone number.");
+  return;
+}
+
     
       //Collect Delivery info
 const selectedCity = document.getElementById("delivery-city").value.trim();
@@ -389,48 +327,26 @@ if (!selectedCity) {
 
 const deliveryInfo = {
   country: document.getElementById("country-region").value || "N/A",
-  firstName: document.getElementById("first-name").value || "N/A",
-  lastName: document.getElementById("last-name").value || "N/A",
   address: document.getElementById("address").value || "N/A",
   apartment: document.getElementById("apartment-suite").value || "N/A",
   city: selectedCity || "N/A",
-  postalCode: document.getElementById("postal-code").value || "N/A",
-  phone: document.getElementById("phone").value || "N/A",
 };
 
-    
-      // Collect Billing Info
-      let billingInfo = {};
-      const sameAsShipping = document.getElementById("same-as-shipping").checked;
-    
-      if (sameAsShipping) {
-        billingInfo = { ...deliveryInfo, note: "Same as shipping address" };
-      } else {
-        billingInfo = {
-          country: document.getElementById("billing-country").value || "N/A",
-          firstName: document.getElementById("billing-first-name").value || "N/A",
-          lastName: document.getElementById("billing-last-name").value || "N/A",
-          address: document.getElementById("billing-address").value || "N/A",
-          apartment: document.getElementById("billing-apartment").value || "N/A",
-          postalCode: document.getElementById("billing-postal").value || "N/A",
-          phone: document.getElementById("billing-phone").value || "N/A",
-        };
-      }
     
       // Get selected payment method
       const selectedPayment = document.querySelector('.payment-method.selected');
 
 
-      // Prepare data object
-      const data = {
-        contact: {
-          email: userEmail,
-          phone: userPhone,
-          newsOffers: newsOffers,
-        },
-        delivery: deliveryInfo,
-        billing: billingInfo,
-      };
+// Prepare data object
+const data = {
+  contact: {
+    fullName: fullName,
+    email: userEmail,
+    phone: userPhone,
+  },
+  delivery: deliveryInfo,
+};
+
       
       
 // Retrieve order summary details from localStorage (if available)
@@ -537,8 +453,6 @@ if (storedProduct) {
       ['email',         'Email'],
       ['phone-number',  'Phone Number'],
       ['country-region','Country/Region'],
-      ['first-name',    'First Name'],
-      ['last-name',     'Last Name'],
       ['address',       'Address'],
       ['delivery-city', 'City'],
     ];

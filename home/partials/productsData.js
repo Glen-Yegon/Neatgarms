@@ -177,7 +177,7 @@ export const productsData = {
 
   "girls-pink-top": {
     name: "Pretty Little Ting Top",
-    oldPrice: "1799",
+
     newPrice: "1500",
     images: [
       "future/optimized/f1 (24).webp",

@@ -414,7 +414,7 @@ body.fade-out {
   font-weight: 700;
   letter-spacing: 2px;
   font-size: 1.2rem;
-  padding: 1rem 2.5rem;
+  padding: 0.75rem 1.5rem;
   text-decoration: none;
   width: 180px;
   text-align: center;
@@ -424,8 +424,8 @@ body.fade-out {
 
 /* Left Button */
 .btn-left {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: transparent;
+  color: #ffffff;
   border: 2px solid #ffffff;
 }
 
@@ -938,6 +938,8 @@ body.fade-out {
     padding: 0px 5px;
   }
 }
+
+
 /* Combined Layout: Products Left, Promo Right */
 #neat-promo-products1 {
   display: flex;
@@ -1007,6 +1009,27 @@ body.fade-out {
   max-width: 600px;
   z-index: 2;
   color: white;
+}
+
+.promo-btn21 {
+  display: inline-block;
+  padding: 16px 40px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(6px);
+  transition: all 0.35s ease;
+}
+
+.promo-btn21:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
 }
 
 /* Responsive: stack vertically on mobile */
