@@ -417,43 +417,25 @@ app.post("/pay-now", async (req, res) => {
 
     emailContent += `📞 CONTACT INFORMATION:\n\n`;
   
-    // Contact Information
-    emailContent += `Email: ${contact.email}\n`;
-    emailContent += `Phone Number: ${contact.phone}\n`;
-    emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
+// Contact Information
+emailContent += `Full Name: ${contact.fullName}\n`;
+emailContent += `Email: ${contact.email}\n`;
+emailContent += `Phone Number: ${contact.phone}\n`;
+
 
 
     emailContent += `🚚 DELIVERY INFORMATION\n\n`;
   
 // Delivery Information
 emailContent += `Country/Region: ${delivery.country}\n`;
-emailContent += `First Name: ${delivery.firstName}\n`;
-emailContent += `Last Name: ${delivery.lastName}\n`;
 emailContent += `Address: ${delivery.address}\n`;
 emailContent += `Apartment/Suite: ${delivery.apartment}\n`;
 emailContent += `City: ${delivery.city}\n`;
 
 
-
-emailContent += `Postal Code: ${delivery.postalCode}\n`;
-emailContent += `Phone: ${delivery.phone}\n`;
 emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
 
-  
-    // Billing Information
-    emailContent += `💳 BILLING INFORMATION\n\n `;
 
-    if (billing.note) {
-      emailContent += `${billing.note}\n`; // e.g., "Same as shipping address"
-    } else {
-      emailContent += `Country/Region: ${billing.country}\n`;
-      emailContent += `First Name: ${billing.firstName}\n`;
-      emailContent += `Last Name: ${billing.lastName}\n`;
-      emailContent += `Address: ${billing.address}\n`;
-      emailContent += `Apartment/Suite: ${billing.apartment}\n`;
-      emailContent += `Postal Code: ${billing.postalCode}\n`;
-      emailContent += `Phone: ${billing.phone}\n`;
-    }
     emailContent += `\n`;
   
     // Payment Method
@@ -485,7 +467,7 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
     <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
   
-        <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
+        <h2 style="color: #333;">👋 Hi ${contact.fullName},</h2>
         <p style="font-size: 16px;">
           Thank you for shopping with <strong>Neatgarms</strong>!<br/>
           We’ve successfully received your order. Our team is now processing it and will notify you once it ships.
@@ -509,15 +491,14 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
           <tr>
             <td align="center">
               <a href="https://www.neatgarms.com/tops.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/sl.avif" alt="Urban Tee" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Tank Top</p>
+                <img src="https://www.neatgarms.com/future/optimized/ls.webp" alt="Urban Tee"width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Tan heritage Long Sleeve Tee</p>
               </a>
             </td>
-
             <td align="center">
               <a href="https://www.neatgarms.com/pants.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/j6.avif" alt="Street Joggers" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Glazed Denim Jorts</p>
+                <img src="https://www.neatgarms.com/future/optimized/sh%20(1).webp" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Solid Blue Neat Shorts</p>
               </a>
             </td>
           </tr>
@@ -599,7 +580,6 @@ app.post("/pay2-now", async (req, res) => {
       colors,
       contact,
       delivery,
-      billing,
       paymentMethod,
       orderSummary  // New field from the client
     } = req.body;
@@ -632,37 +612,22 @@ if (orderSummary) {
 }
 
 
-    // --- Contact Information ---
-    emailContent += `📞 CONTACT INFORMATION:\n`;
-    emailContent += `Email: ${contact.email}\n`;
-    emailContent += `Phone Number: ${contact.phone}\n`;
-    emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
+// --- Contact Information ---
+emailContent += `📞 CONTACT INFORMATION:\n`;
+emailContent += `Full Name: ${contact.fullName}\n`;
+emailContent += `Email: ${contact.email}\n`;
+emailContent += `Phone Number: ${contact.phone}\n`;
+emailContent += `Wants News & Offers: ${contact.newsOffers}\n\n`;
+
 
     // --- Delivery Information ---
     emailContent += `🚚 DELIVERY INFORMATION:\n`;
     emailContent += `Country/Region: ${delivery.country}\n`;
-    emailContent += `First Name: ${delivery.firstName}\n`;
-    emailContent += `Last Name: ${delivery.lastName}\n`;
     emailContent += `Address: ${delivery.address}\n`;
     emailContent += `Apartment/Suite: ${delivery.apartment}\n`;
     emailContent += `City: ${delivery.city}\n`;
-    emailContent += `Postal Code: ${delivery.postalCode}\n`;
-    emailContent += `Phone: ${delivery.phone}\n`;
 
 
-    // --- Billing Information ---
-    emailContent += `💳 BILLING INFORMATION:\n`;
-    if (billing.note) {
-      emailContent += `${billing.note}\n`; // e.g., "Same as shipping address"
-    } else {
-      emailContent += `Country/Region: ${billing.country}\n`;
-      emailContent += `First Name: ${billing.firstName}\n`;
-      emailContent += `Last Name: ${billing.lastName}\n`;
-      emailContent += `Address: ${billing.address}\n`;
-      emailContent += `Apartment/Suite: ${billing.apartment}\n`;
-      emailContent += `Postal Code: ${billing.postalCode}\n`;
-      emailContent += `Phone: ${billing.phone}\n`;
-    }
     emailContent += `\n`;
 
     let userOrderDetails = '';
@@ -714,7 +679,8 @@ if (orderSummary) {
     <img src="https://www.neatgarms.com/mains/logo2.png" alt="Neatgarms Logo" style="height: 60px; margin-bottom: 10px;" />
   </div>
     
-        <h2 style="color: #333;">👋 Hi ${delivery.firstName},</h2>
+       <h2 style="color: #333;">👋 Hi ${contact.fullName},</h2>
+
         <p style="font-size: 15px;">
           Thanks for shopping with <strong>Neatgarms</strong>! <br/>
           Your order was received and is being processed. We’ll notify you once it ships.
@@ -726,10 +692,9 @@ if (orderSummary) {
     
         <h3 style="margin-top: 20px; color: #222;">🚚 Delivery Address</h3>
         <p style="background: #fff; padding: 16px; border-radius: 10px; font-size: 14px; line-height: 1.6; border: 1px solid #ddd;">
-          ${delivery.firstName} ${delivery.lastName}<br/>
+          ${contact.fullName}<br/>
           ${delivery.address}, ${delivery.city}, ${delivery.country}<br/>
-          ${delivery.postalCode}<br/>
-          <strong>Phone:</strong> ${delivery.phone}
+          <strong>Phone:</strong> ${contact.phone}
         </p>
 
           <div style="margin: 30px 0; padding: 20px; background: #8a9381; border: 1px solid black; border-radius: 10px;">
@@ -749,14 +714,14 @@ if (orderSummary) {
           <tr>
             <td align="center">
               <a href="https://www.neatgarms.com/tops.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/c.avif" alt="Urban Tee"width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Work Shirt</p>
+                <img src="https://www.neatgarms.com/future/optimized/ls.webp" alt="Urban Tee"width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Tan heritage Long Sleeve Tee</p>
               </a>
             </td>
             <td align="center">
               <a href="https://www.neatgarms.com/pants.html" target="_blank">
-                <img src="https://www.neatgarms.com/shoot/whitep2.avif" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Marble Wide Leg Pants</p>
+                <img src="https://www.neatgarms.com/future/optimized/sh%20(1).webp" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Solid Blue Neat Shorts</p>
               </a>
             </td>
           </tr>
