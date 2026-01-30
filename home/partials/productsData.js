@@ -302,8 +302,8 @@ export const productsData = {
       "Fit: Slim fit for a sharp, modern silhouette",
       "Style Use: Ideal for standalone wear or layered streetwear looks"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "L", "2 XL", "M"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Fit: Slim fit – hugs the body with natural stretch. True to Size: Order your usual size for a close, intended fit. Unisex Sizing: Designed to suit all body types. Model Reference: Model is 5’9” (175 cm) wearing size M",
     
   },
@@ -444,72 +444,6 @@ export const productsData = {
  
   },
 
-    "frank-ocean": {
-    name: "Frank Ocean",
-    oldPrice: "",
-    newPrice: "2000",
-    images: [
-      "new/DSC07380.avif",
-      "new/DSC07382.avif"
-    ],
-    description: "Crafted from durable cotton jersey with a soft, breathable feel. Designed in a clean white finish, it features a minimal front and a bold back typographic print. The relaxed fit makes it an easy staple for off-duty days or layered streetwear moments.",
-    features: [
-      "Material: Durable cotton jersey",
-      "Feel: Soft and breathable",
-      "Color: Crisp white finish",
-      "Fit: Relaxed fit for all-day ease",
-      "Style Use: Great for casual days, summer energy, or layered urban looks"
-    ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "XL", "M"],
-    sizeFit: "Fit: Relaxed fit – slightly loose for a laid-back vibe. True to Size: Order your usual size for intended drape. Unisex Sizing: Designed to flatter all body types. Model Reference: Model is 5’11” (180 cm) wearing size L",
-  
-  },
-
-  "solana": {
-    name: "SOLANA",
-    oldPrice: "",
-    newPrice: "2000",
-    images: [
-      "new/DSC07390 (1).avif",
-      "new/DSC07392.avif"
-    ],
-    description: "Crafted from durable cotton jersey with a soft, breathable feel. Designed in a clean brown finish, it features a minimal front and a bold back typographic print. The relaxed fit makes it an easy staple for off-duty days or layered streetwear moments.",
-    features: [
-      "Material: Durable cotton jersey",
-      "Feel: Soft and breathable",
-      "Color: Crisp white finish",
-      "Fit: Relaxed fit for all-day ease",
-      "Style Use: Great for casual days, summer energy, or layered urban looks"
-    ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL", "M"],
-    sizeFit: "Fit: Relaxed fit – slightly loose for a laid-back vibe. True to Size: Order your usual size for intended drape. Unisex Sizing: Designed to flatter all body types. Model Reference: Model is 5’11” (180 cm) wearing size L",
-   
-  },
-
-  "k-dot": {
-    name: "KDot",
-    oldPrice: "",
-    newPrice: "2000",
-    images: [
-      "shoot/kgreen (2).webp",
-      "shoot/kgreen.webp"
-    ],
-    description: "Crafted from durable cotton jersey with a soft, breathable feel. Designed in a clean black/green finish, it features a minimal front and a bold back typographic print. The relaxed fit makes it an easy staple for off-duty days or layered streetwear moments.",
-    features: [
-      "Material: Durable cotton jersey",
-      "Feel: Soft and breathable",
-      "Color: Crisp white finish",
-      "Fit: Relaxed fit for all-day ease",
-      "Style Use: Great for casual days, summer energy, or layered urban looks"
-    ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL", "M"],
-    sizeFit: "Fit: Relaxed fit – slightly loose for a laid-back vibe. True to Size: Order your usual size for intended drape. Unisex Sizing: Designed to flatter all body types. Model Reference: Model is 5’11” (180 cm) wearing size L",
- 
-  },
-
   "fleece": {
     name: "Fleece",
     oldPrice: "",
@@ -528,8 +462,8 @@ export const productsData = {
       "Improved structure",
       "Signature silhouette"
     ],
-    sizes: ["2 XL"],
-    outOfStock: ["2 XL"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Relaxed fit with structured drape. Fits true to size.",
     colors: ["Grey"]
   }
