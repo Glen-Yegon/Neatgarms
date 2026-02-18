@@ -4,8 +4,8 @@ export const productsData = {
     oldPrice: "", // No old price provided
     newPrice: "3000",
     images: [
-      "future/optimized/sh (1).webp",
-      "future/optimized/sh (2).webp"
+      "future/optimized/sh (2).webp",
+      "future/optimized/sh (1).webp"
     ],
     description: "The Form Shorts are designed for comfort, mobility, and refined everyday wear. Crafted from a soft, breathable cotton-blend fabric, they provide a smooth and relaxed fit that moves naturally with the body. Minimal in aesthetic, they feature a clean silhouette complemented by a subtle Neat logo on the left side. Ideal for workouts, casual outings, or lounging in style, these shorts are offered in a versatile Blue tone that pairs effortlessly with any wardrobe.",
     features: [
@@ -39,7 +39,7 @@ export const productsData = {
       "Subtle premium detailing for a refined streetwear finish"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "L", "2 XL", "XL", ],
+    outOfStock: ["S", "L", "2 XL", "XL", "M" ],
     sizeFit: "Models are 5’11 and wears size M",
     colors: []
   },
@@ -82,7 +82,7 @@ export const productsData = {
       "Available in Cement Brown and Beige tones"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["2 XL", "XL"],
+    outOfStock: ["2 XL", "M"],
     sizeFit: "Slim, body-hugging fit for both men and women. Male model is 6’0” wearing size L. Female model is 5’7” wearing size S. True to size for a fitted look; size up for a relaxed feel.",
   },
 
@@ -102,7 +102,7 @@ export const productsData = {
       "Available in Cement Brown and Beige tones"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["2 XL", "M"],
+    outOfStock: ["S", "L", "2 XL", "XL", "M"],
     sizeFit: "Slim, body-hugging fit for both men and women. Male model is 5'8” wearing size L. True to size for a fitted look; size up for a relaxed feel.",
    
   },
@@ -157,9 +157,9 @@ export const productsData = {
     oldPrice: "",
     newPrice: "4500",
     images: [
-      "future/optimized/f1 (58).webp",
+      "future/optimized/f1 (31).webp",
       "future/optimized/f1 (64).webp",
-      "future/optimized/f1 (50).webp"
+      "future/optimized/f1 (58).webp"
     ],
     description: "The Soft Hours Top blends laid-back comfort with a touch of quiet luxury. Crafted from ultra–soft silk corduroy, it delivers that smooth, premium feel while keeping an effortless street look. Designed for the everyday look this is comfort you’ll want to live in.",
     features: [
@@ -215,7 +215,7 @@ export const productsData = {
       "Subtle premium detailing for a refined streetwear finish"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "2 XL", "XL"],
+    outOfStock: ["S", "L", "2 XL", "XL", "M"],
     sizeFit: "Model is 5’11 and wears size M",
     colors: []
   },
@@ -238,7 +238,7 @@ export const productsData = {
       "Relaxed long-sleeve fit for year-round comfort and layering"
     ],
     sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "L", "2 XL", "XL"],
+    outOfStock: ["S", "L", "2 XL", "XL", "M"],
     sizeFit: "Model is 5’9 and wears size M",
     colors: []
   },
@@ -396,7 +396,6 @@ export const productsData = {
       "Style Use: Ideal for layering, nightlife, and elevated streetwear looks"
     ],
     sizes: ["S", "M"],
-    outOfStock: ["S", "M"],
     sizeFit: "Fit: Body-hugging, cropped fit. True to Size: Fits snug; size up for a slightly relaxed fit. Stretch: High stretch for flexible wear. Model Reference: Model is 5'5' (165 cm) wearing size S",
   },
 
