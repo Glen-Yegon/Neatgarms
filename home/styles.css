@@ -368,7 +368,7 @@ body.fade-out {
 #hero-texts {
   width: 100%;
   position: absolute; /* floats above existing content */
-  top: 50%; /* center vertically */
+  top: 80%; /* center vertically */
   left: 50%; /* center horizontally */
   transform: translate(-50%, -50%); /* exact centering */
   display: flex;
@@ -1915,4 +1915,240 @@ body.fade-out {
   border-radius: 5px;
   z-index: 2;
   box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* =========================
+   ARRIVAL MAIN
+   ========================= */
+
+.arrival-main {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+}
+
+/* =========================
+   EACH SECTION
+   ========================= */
+
+.arrival-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: clip;
+  isolation: isolate;
+  background: #000;
+}
+
+/* =========================
+   BACKGROUND
+   ========================= */
+
+.arrival-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.arrival-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--section-bg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transform: scale(1.18);
+  will-change: transform;
+  transition: transform 2s ease;
+}
+
+.arrival-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+}
+
+/* play zoom-out whenever section is in view */
+.arrival-section.is-inview:not(.arrival-section--split) .arrival-bg::before {
+  transform: scale(1.02);
+}
+
+/* =========================
+   CONTENT
+   ========================= */
+
+.arrival-content {
+  position: absolute;
+  left: 7.5vw;
+  bottom: 7.5vh;
+  z-index: 3;
+  width: min(460px, 34vw);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  will-change: transform, opacity;
+  pointer-events: auto;
+}
+
+.arrival-title {
+  margin: 0;
+  font-family: "Dream Avenue", cursive;
+  font-size: clamp(3rem, 4.8vw, 5.6rem);
+  line-height: 0.9;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0;
+  max-width: 11ch;
+}
+
+.arrival-subtitle {
+  margin: 12px 0 0;
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(0.92rem, 1vw, 1.02rem);
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.arrival-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 22px;
+  min-width: 150px;
+  height: 50px;
+  padding: 0 24px;
+  border: 1px solid #fff;
+  background: transparent;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.arrival-btn:hover {
+  transform: translateY(-2px);
+  background: #f4f4f4;
+  color: #000;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 991px) {
+  .arrival-content {
+    left: 50%;
+    bottom: 8vh;
+    width: min(88vw, 360px);
+    align-items: center;
+    text-align: center;
+  }
+
+  .arrival-title {
+    max-width: 12ch;
+    font-size: clamp(2.25rem, 10vw, 3.25rem);
+  }
+
+  .arrival-subtitle {
+    margin-top: 10px;
+    font-size: 0.92rem;
+    letter-spacing: 0.07em;
+  }
+
+  .arrival-btn {
+    min-width: 142px;
+    height: 48px;
+    margin-top: 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+   ========================= */
+
+@media (max-width: 480px) {
+  .arrival-content {
+    width: 90vw;
+    bottom: 7vh;
+  }
+
+  .arrival-title {
+    font-size: clamp(2rem, 10vw, 2.8rem);
+  }
+
+  .arrival-subtitle {
+    font-size: 0.88rem;
+  }
+
+  .arrival-btn {
+    min-width: 136px;
+    height: 46px;
+  }
+}
+
+/* =========================
+   SPECIAL SPLIT SECTION
+   ========================= */
+
+.arrival-section--split .arrival-bg {
+  display: block;
+}
+
+.arrival-section--split .arrival-split-bg {
+  display: none;
+}
+
+.arrival-split-half {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  backface-visibility: hidden;
+  transform: translateZ(0) scale(1);
+  will-change: opacity;
+}
+
+@media (min-width: 992px) {
+  .arrival-section--split .arrival-bg {
+    display: none;
+  }
+
+  .arrival-section--split .arrival-split-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  .arrival-section--split .arrival-split-half {
+    width: 50%;
+    height: 100%;
+    transform: scale(1);
+  }
+}
+
+/* optional slight darkening for split images only */
+.arrival-section--split .arrival-split-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+  z-index: 2;
 }

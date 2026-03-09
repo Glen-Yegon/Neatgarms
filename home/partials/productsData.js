@@ -1,4 +1,108 @@
 export const productsData = {
+
+  "black-stone-washed-tee": {
+    name: "Black Stone Washed Tee",
+    oldPrice: "",
+    newPrice: "3,500",
+    images: [
+      "chapter/optimized/black (1).webp",
+      "chapter/optimized/black (2).webp",
+      "chapter/optimized/black (3).webp"
+    ],
+    description: "",
+    features: [
+      "Stone washed",
+      "Heavy Cotton 280GSM",
+      "Boxy Fit"
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    outOfStock: [],
+    sizeFit: "Model is 5’9 wearing size Small.",
+  },
+
+  "brown-stone-washed-tee": {
+    name: "Brown Stone Washed Tee",
+    oldPrice: "",
+    newPrice: "3,500",
+    images: [
+      "chapter/optimized/brown (1).webp",
+      "chapter/optimized/brown (2).webp",
+      "chapter/optimized/brown (3).webp",
+      "chapter/optimized/brown (4).webp",
+      "chapter/optimized/brown (5).webp"
+    ],
+    description: "",
+    features: [
+      "Stone washed",
+      "Heavy Cotton 280GSM",
+      "Boxy Fit"
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    outOfStock: [],
+    sizeFit: "Model is 5’10 wearing size Large.",
+  },
+
+  "ash-gray-washed-tee": {
+    name: "Ash Gray Washed Tee",
+    oldPrice: "",
+    newPrice: "3,500",
+    images: [
+      "chapter/optimized/green (1).webp",
+      "chapter/optimized/green (3).webp",
+      "chapter/optimized/green (2).webp"
+    ],
+    description: "",
+    features: [
+      "Stone washed",
+      "Heavy Cotton 280GSM",
+      "Boxy Fit"
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    outOfStock: [],
+    sizeFit: "Model is 5’8 wearing size Large.",
+  },
+
+  "army-green-washed-tee": {
+    name: "Army Green Washed Tee",
+    oldPrice: "",
+    newPrice: "3,500",
+    images: [
+      "chapter/optimized/white (1).webp",
+      "chapter/optimized/white (6).webp",
+      "chapter/optimized/white (4).webp",
+      "chapter/optimized/white (5).webp"
+    ],
+    description: "",
+    features: [
+      "Stone washed",
+      "Heavy Cotton 280GSM",
+      "Boxy Fit"
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    outOfStock: [],
+    sizeFit: "Model is 5’5 wearing size Small.",
+  },
+
+  "beige-washed-tee": {
+    name: "Beige Washed Tee",
+    oldPrice: "",
+    newPrice: "3,500",
+    images: [
+      "chapter/optimized/grey (2).webp",
+      "chapter/optimized/grey (1).webp",
+      "chapter/optimized/grey (3).webp"
+    ],
+    description: "",
+    features: [
+      "Stone washed",
+      "Heavy Cotton 280GSM",
+      "Boxy Fit"
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    outOfStock: [],
+    sizeFit: "Model is 5’10 wearing size Medium.",
+  },
+
   "solid-blue-neat-shorts": {
     name: "Solid Blue Neat Shorts",
     oldPrice: "", // No old price provided
