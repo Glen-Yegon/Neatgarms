@@ -1532,58 +1532,70 @@ app.post('/api/payment-cancelled', async (req, res) => {
 // ✅ Use only in the backend
 const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
-// ✅ Verify transaction route
+app.use(express.json());
+
 app.post('/api/paystack/verify', async (req, res) => {
-  const { reference } = req.body;
-
-  // 🛑 Validate input
-  if (!reference) {
-    return res.status(400).json({
-      status: false,
-      message: '❌ Transaction reference is required.',
-    });
-  }
-
   try {
-    // 🔍 Request to Paystack
-    const response = await axios.get(`https://api.paystack.co/transaction/verify/${reference}`, {
-      headers: {
-        Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
-        'Content-Type': 'application/json',
-      },
-    });
+    const reference = req.body?.reference;
+
+    console.log("Incoming body:", req.body);
+    console.log("Reference:", reference);
+    console.log("Has secret key:", !!PAYSTACK_SECRET_KEY);
+
+    if (!PAYSTACK_SECRET_KEY) {
+      return res.status(500).json({
+        status: false,
+        message: 'PAYSTACK_SECRET_KEY is missing on the server.',
+      });
+    }
+
+    if (!reference) {
+      return res.status(400).json({
+        status: false,
+        message: 'Transaction reference is required.',
+      });
+    }
+
+    const response = await axios.get(
+      `https://api.paystack.co/transaction/verify/${reference}`,
+      {
+        headers: {
+          Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     const data = response.data;
+    console.log("Paystack response:", data);
 
-    // ✅ Payment successful
-    if (data.status && data.data.status === 'success') {
+    if (data.status && data.data?.status === 'success') {
       return res.status(200).json({
         status: true,
-        message: '✅ Payment verified successfully.',
+        message: 'Payment verified successfully.',
         transaction: data.data,
       });
     }
 
-    // ❌ Payment was not successful
     return res.status(400).json({
       status: false,
-      message: '❌ Payment not successful or pending.',
+      message: 'Payment not successful or pending.',
       transaction: data.data,
     });
 
   } catch (error) {
-    const errData = error.response?.data || error.message;
-    console.error('🚫 Error verifying payment:', errData);
+    console.error('Error verifying payment:');
+    console.error('Message:', error.message);
+    console.error('Response data:', error.response?.data);
+    console.error('Status:', error.response?.status);
 
-    return res.status(500).json({
+    return res.status(error.response?.status || 500).json({
       status: false,
-      message: '🚫 Server error while verifying payment.',
-      error: errData,
+      message: error.response?.data?.message || 'Server error while verifying payment.',
+      error: error.response?.data || error.message,
     });
   }
 });
-
-
 
 
 
