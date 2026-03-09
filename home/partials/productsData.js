@@ -106,7 +106,7 @@ export const productsData = {
   "solid-blue-neat-shorts": {
     name: "Solid Blue Neat Shorts",
     oldPrice: "", // No old price provided
-    newPrice: "3",
+    newPrice: "3000",
     images: [
       "future/optimized/sh (2).webp",
       "future/optimized/sh (1).webp"
