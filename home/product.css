@@ -118,7 +118,7 @@ body, html {
     justify-content: center;
     text-align: center;
     align-items: center;
-    background: linear-gradient(to bottom, #333, #8a9381);
+    background:linear-gradient(to bottom, #8a9381, white);
     color: #ae866a;
     padding: 10px 20px;
   }
@@ -134,7 +134,6 @@ body, html {
   .navbar .logo {
     max-height: 50px;
     border-radius: 20px;
-    border: 1px solid #ae866a;
     transition: transform 0.5s ease-in-out;
   }
 
@@ -158,7 +157,6 @@ body, html {
   }
   .cart-btn:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
     padding: 4px;
     border-radius: 5px;
   }
@@ -444,6 +442,7 @@ body, html {
 .button-group {
     display: flex;
     flex-direction: column;
+        font-family: "Dream Avenue", sans-serif;
     gap: 15px;
     margin-top: 20px;
   }
@@ -451,7 +450,6 @@ body, html {
   .button-group button {
     padding: 15px 20px;
     border: none;
-    border-radius: 20px;
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
@@ -459,32 +457,30 @@ body, html {
   }
   
   #add-to-cart {
-    background-color: #ae866a;
-    color: #000;
-    border: solid 1px black;
+    color: rgb(0, 0, 0);
+    border-radius: 0px;
+    border: 1px solid black;
   }
   
   #add-to-cart:hover {
     background-color: transparent;
-    color: black;
-    transform: translateY(-5px) scale(1.1);
-    border-style: dotted;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    transform: translateY(-2px) scale(1.01);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
   
   #buy-now {
-    background-color: #ae866a;
-    border: 1px solid black;
-    border-color: #000;
-    color: #000;
+    color: #000000;
+    border-radius: 0px;
     font-weight: bold;
   }
   
   #buy-now:hover {
     background-color: transparent;
-    transform: translateY(-5px) scale(1.1);
-    border: solid 1px #ae866a;
-    color: #000;
+    transform: translateY(-2px) scale(1.01);
+    color: #000000;
+    background-color: white;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
   
@@ -579,6 +575,9 @@ body, html {
 .btn-53:before {
   border: 0 solid;
   box-sizing: border-box;
+      font-family: "Dream Avenue", sans-serif;
+      font-weight: 800;
+      letter-spacing: 1px;
 }
 
 .btn-53 {
@@ -590,9 +589,7 @@ body, html {
   background-image: none;
   color: black;
   cursor: pointer;
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
-    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-family: "Dream Avenue", sans-serif;
   font-size: 100%;
   line-height: 1.5;
   margin: 5px;
@@ -630,9 +627,8 @@ body, html {
 }
 
 .btn-53 .original {
-  background: #ae866a;
+  background: rgb(255, 255, 255);
   border-style: solid;
-  border-color: #000;
   display: grid;
   inset: 0;
   place-content: center;
@@ -1177,7 +1173,7 @@ body, html {
 
 /* From Uiverse.io by nikk7007 */ 
 .back-btn {
-  --color: #ae866a;
+  --color: #000000;
   padding: 0.8em 1.7em;
   background-color: transparent;
   border-radius: .3em;
@@ -1223,7 +1219,7 @@ body, html {
  }
  
  .back-btn:hover {
-  color: rgb(10, 25, 30);
+  color: #ae866a;
  }
  
  .back-btn:active {
