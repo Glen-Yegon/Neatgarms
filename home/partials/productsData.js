@@ -47,9 +47,9 @@ export const productsData = {
     oldPrice: "",
     newPrice: "3,500",
     images: [
-      "chapter/optimized/green (1).webp",
-      "chapter/optimized/green (3).webp",
-      "chapter/optimized/green (2).webp"
+      "chapter/optimized/grey (2).webp",
+      "chapter/optimized/grey (1).webp",
+      "chapter/optimized/grey (3).webp"
     ],
     description: "",
     features: [
@@ -67,10 +67,9 @@ export const productsData = {
     oldPrice: "",
     newPrice: "3,500",
     images: [
-      "chapter/optimized/white (1).webp",
-      "chapter/optimized/white (6).webp",
-      "chapter/optimized/white (4).webp",
-      "chapter/optimized/white (5).webp"
+            "chapter/optimized/green (1).webp",
+      "chapter/optimized/green (3).webp",
+      "chapter/optimized/green (2).webp"
     ],
     description: "",
     features: [
@@ -88,9 +87,10 @@ export const productsData = {
     oldPrice: "",
     newPrice: "3,500",
     images: [
-      "chapter/optimized/grey (2).webp",
-      "chapter/optimized/grey (1).webp",
-      "chapter/optimized/grey (3).webp"
+            "chapter/optimized/white (1).webp",
+      "chapter/optimized/white (6).webp",
+      "chapter/optimized/white (4).webp",
+      "chapter/optimized/white (5).webp"
     ],
     description: "",
     features: [
