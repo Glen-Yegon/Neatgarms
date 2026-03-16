@@ -87,7 +87,7 @@ combinedPriceElement.textContent = finalPrice.toFixed(2);
   
 // Discount Codes (Example)
 const discountCodes = {
-  "NEAT20": 20, // 10% off
+  "GARMS15": 15, // 10% off
   "FREESHIP": 0, // Free shipping (no cost here as shipping is already free)
   "BIGSALE": 10 // 20% off
 };
