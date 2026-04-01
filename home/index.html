@@ -56,6 +56,10 @@
   <meta name="twitter:description" content="Explore our modern streetwear collections and elevate your look.">
   <meta name="twitter:image" content="https://neatgarms.com/future/f1 (76).jpg">
 
+
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.110.0/three.min.js" defer></script>
   
 
   <!-- Organization structured data -->
@@ -84,10 +88,6 @@
 </script>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
-    integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
@@ -114,7 +114,7 @@
 
     <div class="glass-overlay"></div>
 
-
+<!--
     <div class="loading-page">
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path
@@ -126,7 +126,7 @@
             <div class="logo-name">Neatgarms</div>
         </div>
     </div>
-
+-->
 
     <!-- Transition overlay -->
 <div id="page-transition">
@@ -136,7 +136,7 @@
 </div>
 
 
-<div class="main-site" style="display: none;">
+<div class="main-site">
 
 
 
@@ -470,7 +470,21 @@ Explore pants crafted for function, form, and flexibility — made to fit your l
 Subscription Popup -->
 
 <script type="module" src="js/import-products.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const main = document.querySelector(".main-site");
 
+  if (main) {
+    gsap.from(main, {
+      opacity: 0,
+      duration: 0.4,
+      ease: "power2.out"
+    });
+  }
+});
+</script>
+
+<!--
 <script>
   // Animate the loader text
 gsap.fromTo(".logo-name", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 3, delay: 0.5 });
@@ -515,8 +529,9 @@ setTimeout(function () {
 });
 
 </script>
+-->
 
-
+<!--
 <script>
 window.addEventListener('load', () => {
   const popup     = document.getElementById('subscriptionPopup');
@@ -545,9 +560,9 @@ window.addEventListener('load', () => {
   });
 });
 </script>
+-->
 
-
-<!-- subscribe firebase code -->
+<!-- subscribe firebase code
 <script type="module" defer>
   import {
     initializeApp
@@ -623,7 +638,7 @@ window.addEventListener('load', () => {
     }
   });
 </script>
-
+ -->
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -636,14 +651,6 @@ window.addEventListener('load', () => {
 
 
   <script src="scripts.min.js" defer></script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"
-    integrity="sha512-gmwBmiTVER57N3jYS3LinA9eb8aHrJua5iQD7yqYCKa5x6Jjc7VDVaEA0je0Lu0bP9j7tEjV3+1qUm6loO99Kw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 
 
     <script>
@@ -926,33 +933,6 @@ window.initializeProductBehaviors = function() {
 document.addEventListener('DOMContentLoaded', () => {
   window.initializeProductBehaviors();
 });
-</script>
-
-
-
-<script>
-  function setupObserver(sectionId, bgClass) {
-    const bgElement = document.querySelector(bgClass);
-    const section = document.querySelector(sectionId);
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-          bgElement.classList.add('in-view');
-        } else {
-          bgElement.classList.remove('in-view');
-        }
-      });
-    }, {
-      threshold: [0.6]
-    });
-
-    observer.observe(section);
-  }
-
-  // Apply to both sections
-  setupObserver('#neat-promo', '.promo-bg');
-  setupObserver('#neat-promo2', '.promo-bg2');
 </script>
 
 
