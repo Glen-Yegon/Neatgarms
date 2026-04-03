@@ -79,6 +79,7 @@ body.fade-out {
 .hero {
   position: relative;
   height: 100vh;
+
   width: 100%;
   overflow: hidden;
 }
@@ -121,6 +122,7 @@ body.fade-out {
 
 #navbar {
   position: fixed !important;
+  padding-top: 15px;
   top: 0 !important;
   left: 0 !important;
   font-family: 'Poppins', sans-serif;
@@ -147,6 +149,7 @@ body.fade-out {
     animation: none;
     transform: translateY(0);
     opacity: 1;
+
   }
 }
 
@@ -348,6 +351,7 @@ body.fade-out {
   .mobile-menu {
     width: 175px;
   }
+
 }
 
 @media (max-width: 468px){
@@ -2151,4 +2155,51 @@ body.fade-out {
   background: rgba(0, 0, 0, 0.22);
   pointer-events: none;
   z-index: 2;
+}
+
+/* ANNOUNCEMENT BAR */
+.announcement-bar {
+  width: 100%;
+    z-index: 1;
+    position: relative;
+  text-align: center;
+  background: rgb(76, 76, 76);
+  color: white;
+  overflow: hidden;
+  font-family: 'Dream Avenue', sans-serif !important;
+  padding: 3px 0px;
+  margin-bottom: 20px !important; /* <-- adds space below */
+}
+
+/* TRACK */
+.announcement-track {
+  display: flex;
+  justify-content: center; /* <-- centers content */
+  width: 100%;
+}
+
+/* CONTENT */
+.announcement-content {
+  display: flex;
+  justify-content: center; 
+  font-family: 'Dream Avenue', sans-serif;
+}
+
+/* TEXT STYLE */
+.announcement-content span {
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+  padding-right: 0; /* remove this so it doesn't shift */
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+  .announcement-content span {
+    font-size: 12px;
+  }
+
+  .announcement-bar {
+    margin-bottom: 15px; /* slightly smaller space on mobile */
+  }
 }

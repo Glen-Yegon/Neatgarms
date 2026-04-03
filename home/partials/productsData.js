@@ -3,7 +3,7 @@ export const productsData = {
   "black-stone-washed-tee": {
     name: "Black Stone Washed Tee",
     oldPrice: "",
-    newPrice: "3,500",
+    newPrice: "2,500",
     images: [
       "chapter/optimized/black (1).webp",
       "chapter/optimized/black (2).webp",
@@ -23,7 +23,7 @@ export const productsData = {
   "brown-stone-washed-tee": {
     name: "Brown Stone Washed Tee",
     oldPrice: "",
-    newPrice: "3,500",
+    newPrice: "2,500",
     images: [
       "chapter/optimized/brown (1).webp",
       "chapter/optimized/brown (2).webp",
@@ -45,7 +45,7 @@ export const productsData = {
   "ash-gray-washed-tee": {
     name: "Ash Gray Washed Tee",
     oldPrice: "",
-    newPrice: "3,500",
+    newPrice: "2,500",
     images: [
       "chapter/optimized/grey (2).webp",
       "chapter/optimized/grey (1).webp",
@@ -65,7 +65,7 @@ export const productsData = {
   "army-green-washed-tee": {
     name: "Army Green Washed Tee",
     oldPrice: "",
-    newPrice: "3,500",
+    newPrice: "2,500",
     images: [
             "chapter/optimized/green (1).webp",
       "chapter/optimized/green (3).webp",
@@ -85,7 +85,7 @@ export const productsData = {
   "beige-washed-tee": {
     name: "Beige Washed Tee",
     oldPrice: "",
-    newPrice: "3,500",
+    newPrice: "2,500",
     images: [
             "chapter/optimized/white (1).webp",
       "chapter/optimized/white (6).webp",
