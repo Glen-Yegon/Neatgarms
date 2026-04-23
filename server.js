@@ -486,30 +486,23 @@ emailContent += `Shipping Fee: ${delivery.shippingFee}\n\n`;
   <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
 
     
-        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">🔥 Top Neat Picks for This Week</h3>
+        <h3 style="color: #333;">🔥 Top Neat Picks for This Week</h3>
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://www.neatgarms.com/tops.html" target="_blank">
-                <img src="https://www.neatgarms.com/future/optimized/ls.webp" alt="Urban Tee"width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Tan heritage Long Sleeve Tee</p>
+              <a href="https://www.neatgarms.com/product?id=ash-gray-washed-tee" target="_blank">
+                <img src="https://www.neatgarms.com/chapter/optimized/grey%20(2).webp" alt="Urban Tee"width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Ash Gray Washed Tee</p>
               </a>
             </td>
             <td align="center">
-              <a href="https://www.neatgarms.com/pants.html" target="_blank">
-                <img src="https://www.neatgarms.com/future/optimized/sh%20(1).webp" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Solid Blue Neat Shorts</p>
+              <a href="https://www.neatgarms.com/product?id=brown-stone-washed-tee" target="_blank">
+                <img src="https://www.neatgarms.com/chapter/optimized/brown%20(1).webp" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Brown Stone Washed Tee</p>
               </a>
             </td>
           </tr>
         </table>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: #333; font-family: 'Dream Avenue', sans-serif;">💸 Special Offer Just for You</h3>
-        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">NEAT20</strong> to get <strong>20% off</strong> your next order.</p>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
         <h3 style="color: black;">📞 Need Help?</h3>
         <p>Reach us any time:</p>
@@ -707,32 +700,23 @@ if (orderSummary) {
   <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
 
     
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
         <h3 style="color: #333;">🔥 Top Neat Picks for This Week</h3>
         <table style="width: 100%; border-spacing: 16px 10px;">
           <tr>
             <td align="center">
-              <a href="https://www.neatgarms.com/tops.html" target="_blank">
-                <img src="https://www.neatgarms.com/future/optimized/ls.webp" alt="Urban Tee"width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Tan heritage Long Sleeve Tee</p>
+              <a href="https://www.neatgarms.com/product?id=ash-gray-washed-tee" target="_blank">
+                <img src="https://www.neatgarms.com/chapter/optimized/grey%20(2).webp" alt="Urban Tee"width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Ash Gray Washed Tee</p>
               </a>
             </td>
             <td align="center">
-              <a href="https://www.neatgarms.com/pants.html" target="_blank">
-                <img src="https://www.neatgarms.com/future/optimized/sh%20(1).webp" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
-                <p style="margin: 8px 0;">Solid Blue Neat Shorts</p>
+              <a href="https://www.neatgarms.com/product?id=brown-stone-washed-tee" target="_blank">
+                <img src="https://www.neatgarms.com/chapter/optimized/brown%20(1).webp" alt="Classic Hoodie" width="140" style="border-radius: 4px;" />
+                <p style="margin: 8px 0;">Brown Stone Washed Tee</p>
               </a>
             </td>
           </tr>
         </table>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
-    
-        <h3 style="color: #333;">💸 Special Offer Just for You</h3>
-        <p style="font-size: 14px;">Use code <strong style="color: #e63946;">NEAT20</strong> to get <strong>20% off</strong> your next order.</p>
-    
-        <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;" />
     
         <h3 style="color: black;">📞 Need Help?</h3>
         <p style="font-size: 14px;">Contact us anytime:</p>
