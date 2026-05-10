@@ -175,14 +175,14 @@ body, html {
   }
 
     #prev-image{
-    background-color: #8a9381;
+    background-color: white;
     color: #000;
-    border: 1px dotted black;
+    border: 1px solid black;
     border-radius: 8px;
   }
 
   #next-image{
-    background-color: #8a9381;
+    background-color: white;
     color: #000;
     border: 1px solid black;
     border-radius: 8px;
@@ -424,8 +424,8 @@ body, html {
   
   .quantity-selector button {
     padding: 5px 10px;
-    background: #ae866a;
-    border: 1px solid #ccc;
+    background: white;
+    border: 1px solid #969696;
     cursor: pointer;
     border-radius: 20px;
   }
@@ -508,13 +508,13 @@ body, html {
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    background: #8a9381;
+    background: white;
     color: #000;
     padding: 0.7em 1em;
     padding-left: 0.9em;
     align-items: center;
     border: none;
-    border-radius: 16px;
+    border: 1px solid black;
     overflow: hidden;
     transition: all 0.2s;
     cursor: pointer;
