@@ -16,7 +16,7 @@ export const productsData = {
       "Boxy Fit"
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: [],
+    outOfStock: ["M", "XL", "2XL"],
     sizeFit: "Model is 5’9 wearing size Small.",
   },
 
@@ -38,7 +38,7 @@ export const productsData = {
       "Boxy Fit"
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: [],
+    outOfStock: ["S","XL", "2XL"],
     sizeFit: "Model is 5’10 wearing size Large.",
   },
 
@@ -58,7 +58,7 @@ export const productsData = {
       "Boxy Fit"
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: [],
+    outOfStock: [ "XL"],
     sizeFit: "Model is 5’8 wearing size Large.",
   },
 
@@ -78,7 +78,7 @@ export const productsData = {
       "Boxy Fit"
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: [],
+    outOfStock: ["M", "L", "XL", "2XL"],
     sizeFit: "Model is 5’5 wearing size Small.",
   },
 
@@ -99,7 +99,7 @@ export const productsData = {
       "Boxy Fit"
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: [],
+    outOfStock: ["XL", "2XL"],
     sizeFit: "Model is 5’10 wearing size Medium.",
   },
 
