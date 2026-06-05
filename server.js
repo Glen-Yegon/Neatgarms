@@ -55,7 +55,7 @@ const corsOptions = {
 
 // ✅ Apply CORS globally
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // Handle preflight for all routes
+app.use(cors(corsOptions));
 
 // ✅ Body parsers
 app.use(express.urlencoded({ extended: true }));
