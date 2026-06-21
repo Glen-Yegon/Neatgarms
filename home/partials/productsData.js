@@ -499,7 +499,8 @@ export const productsData = {
       "Print Style: All-over renaissance-inspired angel graphic",
       "Style Use: Ideal for layering, nightlife, and elevated streetwear looks"
     ],
-    sizes: ["S", "M"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Fit: Body-hugging, cropped fit. True to Size: Fits snug; size up for a slightly relaxed fit. Stretch: High stretch for flexible wear. Model Reference: Model is 5'5' (165 cm) wearing size S",
   },
 
