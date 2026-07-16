@@ -107,7 +107,7 @@ body.fade-out {
 }
 
 /* Show/hide based on screen size */
-.desktop-only { display: block; }
+.desktop-only { display: block; filter:brightness(0.7) }
 .mobile-only  { display: none; }
 
 @media (max-width: 768px) {
@@ -430,6 +430,7 @@ body.fade-out {
 .btn-left {
   background-color: transparent;
   color: #ffffff;
+  border-radius: 50px;
   border: 2px solid #ffffff;
 }
 
@@ -2019,6 +2020,7 @@ body.fade-out {
   font-size: clamp(0.92rem, 1vw, 1.02rem);
   line-height: 1.3;
   font-weight: 500;
+  margin-left: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #fff;
@@ -2033,13 +2035,14 @@ body.fade-out {
   height: 50px;
   padding: 0 24px;
   border: 1px solid #fff;
+  border-radius: 50px;
   background: transparent;
   color: #ffffff;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
   font-size: 0.94rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-weight: 100;
+  letter-spacing: 0.01em;
   transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 

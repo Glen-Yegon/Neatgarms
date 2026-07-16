@@ -1,5 +1,25 @@
 export const productsData = {
 
+  "beige-stone-washed-tee": {
+    name: "Beige Stone Washed Tee",
+    oldPrice: "",
+    newPrice: "3,000",
+    images: [
+      "new/bsw8.jpeg",
+      "new/bsw9.jpeg",
+
+    ],
+    description: "",
+    features: [
+      "Stone washed",
+      "Heavy Cotton 280GSM",
+      "Boxy Fit"
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    outOfStock: ["S", "XL", "2XL"],
+    sizeFit: "Model is 5’9 wearing size Small.",
+  },
+
   "black-stone-washed-tee": {
     name: "Black Stone Washed Tee",
     oldPrice: "",
@@ -37,8 +57,8 @@ export const productsData = {
       "Heavy Cotton 280GSM",
       "Boxy Fit"
     ],
-    sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: ["S","XL", "2XL"],
+    sizes: ["SOLD OUT"],
+    outOfStock: ["SOLD OUT"],
     sizeFit: "Model is 5’10 wearing size Large.",
   },
 
@@ -58,7 +78,7 @@ export const productsData = {
       "Boxy Fit"
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: [ "XL"],
+    outOfStock: [ "XL", "S", "M"],
     sizeFit: "Model is 5’8 wearing size Large.",
   },
 
@@ -77,8 +97,8 @@ export const productsData = {
       "Heavy Cotton 280GSM",
       "Boxy Fit"
     ],
-    sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: ["M", "L", "XL", "2XL"],
+    sizes: ["SOLD OUT"],
+    outOfStock: ["SOLD OUT"],
     sizeFit: "Model is 5’5 wearing size Small.",
   },
 
@@ -99,7 +119,7 @@ export const productsData = {
       "Boxy Fit"
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: ["XL", "2XL"],
+    outOfStock: ["XL", "2XL", "M"],
     sizeFit: "Model is 5’10 wearing size Medium.",
   },
 
