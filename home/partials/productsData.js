@@ -7,7 +7,9 @@ export const productsData = {
     images: [
       "new/bsw8.jpeg",
       "new/bsw9.jpeg",
-
+      "new/bsw5.jpg",
+      "new/bsw6.jpg",
+      "new/bsw7.jpg"
     ],
     description: "",
     features: [
