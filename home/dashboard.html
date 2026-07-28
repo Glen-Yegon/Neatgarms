@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Neatgarms</title>
+<link rel="stylesheet" href="dash.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Loader -->
+<div id="loader">
+  <div class="weave"></div>
+  <img src="mains/logo2.png" alt="Neatgarms" class="loader-logo">
+  <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+  <p class="loader-text" id="loaderText">Gathering your rewards…</p>
+</div>
+
+<!-- App -->
+<div class="dash" id="dashApp">
+
+  <header class="topbar">
+    <img src="mains/logo2.png" alt="Neatgarms" class="topbar-logo">
+    <div class="topbar-right">
+      <span class="greeting" id="greeting">Welcome back</span>
+      <a href="main.html" class="topbar-link">Shop</a>
+      <button id="logoutBtn" class="topbar-logout">Log Out</button>
+    </div>
+  </header>
+
+  <main class="dash-grid">
+
+    <!-- HERO -->
+    <section class="card hero-card">
+      <div class="weave hero-weave"></div>
+
+      <div class="ring-wrap">
+        <svg viewBox="0 0 200 200" class="ring-svg">
+          <circle cx="100" cy="100" r="86" class="ring-track"></circle>
+          <circle cx="100" cy="100" r="86" class="ring-progress" id="ringProgress"
+                  stroke-dasharray="540.3" stroke-dashoffset="540.3"></circle>
+        </svg>
+        <div class="ring-center">
+          <span class="ring-balance" id="balanceText">0</span>
+          <span class="ring-label">points</span>
+        </div>
+      </div>
+
+      <div class="hero-info">
+        <span class="tier-badge" id="tierBadge">Bronze</span>
+        <h1 class="hero-name" id="userName">—</h1>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-value" id="lifetimePoints">0</span>
+            <span class="hero-stat-label">Lifetime Points</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value" id="nextTierGap">—</span>
+            <span class="hero-stat-label" id="nextTierLabel">To Next Tier</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-value" id="memberSince">—</span>
+            <span class="hero-stat-label">Member Since</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WAYS TO EARN -->
+    <section class="card">
+      <h2 class="card-title">Ways to Earn</h2>
+      <ul class="earn-list">
+<li class="earn-item">
+  <i class="fas fa-user-plus"></i>
+  <div><strong>Join Neatgarms</strong><span>Welcome bonus on sign up</span></div>
+  <span class="earn-pts">+100</span>
+</li>
+<li class="earn-item">
+  <i class="fas fa-bag-shopping"></i>
+  <div><strong>Shop a Drop</strong><span>Earn 1 point for every Ksh 20 spent</span></div>
+  <span class="earn-pts">1 / Ksh 20</span>
+</li>
+        <li class="earn-item">
+          <i class="fas fa-user-friends"></i>
+          <div><strong>Refer a Friend</strong><span>When they complete their first order</span></div>
+          <span class="earn-pts">+100</span>
+        </li>
+<li class="earn-item">
+  <i class="fas fa-cake-candles"></i>
+  <div><strong>Your Birthday</strong><span>A gift, once a year, on us</span></div>
+  <span class="earn-pts">+500</span>
+</li>
+        <li class="earn-item">
+          <i class="fab fa-instagram"></i>
+          <div><strong>Follow & Tag Us</strong><span>Show us how you wear it</span></div>
+          <span class="earn-pts">+25</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- REWARDS -->
+    <section class="card">
+      <h2 class="card-title">Redeem Rewards</h2>
+<!-- REWARDS -->
+<section class="card">
+  <h2 class="card-title">Redeem Rewards</h2>
+  <div class="rewards-grid" id="rewardsGrid">
+    <div class="reward-card" data-cost="100">
+      <span class="reward-cost">100 pts</span>
+      <strong>5% Off</strong>
+      <span>Your next order</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+    <div class="reward-card" data-cost="500">
+      <span class="reward-cost">500 pts</span>
+      <strong>10% Off</strong>
+      <span>Your next order</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+    <div class="reward-card" data-cost="750">
+      <span class="reward-cost">750 pts</span>
+      <strong>Free Shipping</strong>
+      <span>On your next order</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+    <div class="reward-card" data-cost="1000">
+      <span class="reward-cost">1000 pts</span>
+      <strong>Ksh 500 Off</strong>
+      <span>Your next order</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+    <div class="reward-card" data-cost="2000">
+      <span class="reward-cost">2000 pts</span>
+      <strong>Ksh 1,000 Off</strong>
+      <span>Your next order</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+    <div class="reward-card" data-cost="2500">
+      <span class="reward-cost">2500 pts</span>
+      <strong>Early Access</strong>
+      <span>48h before the next drop</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+    <div class="reward-card" data-cost="3000">
+      <span class="reward-cost">3000 pts</span>
+      <strong>Exclusive Drop</strong>
+      <span>Member-only release access</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+    <div class="reward-card" data-cost="5000">
+      <span class="reward-cost">5000 pts</span>
+      <strong>Free Merch</strong>
+      <span>A piece, on the house</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+    <div class="reward-card" data-cost="7000">
+      <span class="reward-cost">7000 pts</span>
+      <strong>VIP Black Status</strong>
+      <span>Our highest tier of access</span>
+      <button class="reward-btn">Redeem</button>
+    </div>
+  </div>
+</section>
+    </section>
+
+    <!-- ACCOUNT -->
+    <section class="card">
+      <h2 class="card-title">Account</h2>
+      <div class="account-row"><span>Name</span><strong id="accName">—</strong></div>
+      <div class="account-row"><span>Email</span><strong id="accEmail">—</strong></div>
+      <div class="account-row">
+        <span>Birthday</span>
+        <div class="birthday-field">
+          <input type="date" id="birthdayInput">
+          <button id="birthdaySave" class="birthday-save">Save</button>
+        </div>
+      </div>
+      <p class="birthday-note" id="birthdayNote"></p>
+    </section>
+
+    <!-- ACTIVITY -->
+    <section class="card">
+      <h2 class="card-title">Activity</h2>
+      <div class="account-row"><span>Last Points Earned</span><strong id="lastEarned">—</strong></div>
+      <div class="account-row"><span>Last Redemption</span><strong id="lastRedeemed">—</strong></div>
+      <div class="account-row"><span>Birthday Reward</span><strong id="birthdayStatus">—</strong></div>
+    </section>
+
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="dash.js" defer type="module"></script>
+</body>
+</html>

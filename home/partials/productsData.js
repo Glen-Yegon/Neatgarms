@@ -1,5 +1,22 @@
 export const productsData = {
 
+  "neat-whiskey-flask": {
+    name: "Neat Whiskey Flask",
+    oldPrice: "",
+    newPrice: "2,000",
+    images: [
+      "new/whiskey1.jpeg",
+      "new/whiskey.jpeg"
+    ],
+    description: "Stainless Steel Hip Flask",
+    features: [
+      "5 Oz, 150ml"
+    ],
+    sizes: ["150ml"],
+    outOfStock: [],
+    sizeFit: "",
+  },
+
   "beige-stone-washed-tee": {
     name: "Beige Stone Washed Tee",
     oldPrice: "",

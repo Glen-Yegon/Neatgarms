@@ -3,34 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register & Login</title>
-    <link rel="stylesheet" href="sign.min.css">
+    <title>Register & Login — Neatgarms</title>
+    <link rel="stylesheet" href="sign.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Inter:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BNKKRW0J0N');
+    </script>
 
-  gtag('config', 'G-BNKKRW0J0N');
-</script>
-
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "s843wgkqd0");
-</script>
-
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "s843wgkqd0");
+    </script>
 </head>
+<body>
+
 <!-- Transition overlay -->
 <div id="page-transition">
   <div class="logo-wrapper">
@@ -38,94 +37,110 @@
   </div>
 </div>
 
+<div class="page">
 
-<body>
-   <a href="javascript:history.back()" class="aa">← Go Back</a>
-
-    <div class="container" id="signup" style="display:none;">
-      <h1 class="form-title">Register</h1>
-      <form method="post" action="">
-        <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
-        <div class="input-group">
-           <i class="fas fa-user"></i>
-           <input type="text"  id="fName" placeholder="First Name" required style="margin-top: 5px;">
-           <label for="fname">First Name</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input type="text"  id="lName" placeholder="Last Name" required>
-            <label for="lName">Last Name</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-envelope"></i>
-            <input type="email"  id="rEmail" placeholder="Email" required>
-            <label for="rEmail">Email</label>
-        </div>
-        <div class="input-group">
-            <i class="fas fa-lock"></i>
-            <input type="password" id="rPassword"  placeholder="Password" required>
-            <label for="rPassword">Password</label>
-        </div>
-       <button class="btn" id="submitSignUp" >Sign Up</button>
-      </form>
-
-      <div class="links">
-        <p>Already Have Account ?</p>
-        <button id="signInButton">Sign In</button>
-      </div>
+  <!-- Brand panel -->
+  <div class="brand-panel">
+    <a href="javascript:history.back()" class="back-link">← Back</a>
+    <div class="weave"></div>
+    <div class="brand-content">
+      <img src="mains/logo2.png" alt="Neatgarms" class="brand-logo">
+      <p class="brand-script">Keep It Neat</p>
+      <p class="brand-copy">Bold, limited streetwear for those who don't settle for average. Join the collective and earn rewards on every drop.</p>
     </div>
+    <p class="brand-vertical">NEATGARMS&nbsp;&nbsp;·&nbsp;&nbsp;LOYAL TO THE VISION&nbsp;&nbsp;·&nbsp;&nbsp;EST. NEATGARMS&nbsp;&nbsp;·&nbsp;&nbsp;</p>
+  </div>
 
-  <div class="container" id="signIn">
-        <h1 class="form-title">Sign In</h1>
+  <!-- Form panel -->
+  <div class="form-panel">
+    <div class="form-card">
+
+      <img src="mains/logo2.png" alt="Neatgarms" class="mobile-logo">
+
+      <div class="tabs">
+        <button type="button" id="signInButton" class="tab-btn">Sign In</button>
+        <button type="button" id="signUpButton" class="tab-btn">Register</button>
+      </div>
+
+      <!-- Sign Up -->
+      <div class="container" id="signup" style="display:none;">
+        <h1 class="form-title">Create Account</h1>
+        <form method="post" action="">
+          <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
+
+          <div class="input-row">
+            <div class="input-group">
+               <i class="fas fa-user"></i>
+               <input type="text" id="fName" placeholder=" " required>
+               <label for="fName">First Name</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="lName" placeholder=" " required>
+                <label for="lName">Last Name</label>
+            </div>
+          </div>
+
+          <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="rEmail" placeholder=" " required>
+              <label for="rEmail">Email</label>
+          </div>
+          <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="rPassword" placeholder=" " required>
+              <label for="rPassword">Password</label>
+          </div>
+
+          <button class="btn" id="submitSignUp">Sign Up</button>
+        </form>
+      </div>
+
+      <!-- Sign In -->
+      <div class="container" id="signIn">
+        <h1 class="form-title">Welcome Back</h1>
         <form method="post" action="">
           <div id="signInMessage" class="messageDiv" style="display:none;"></div>
 
           <div class="input-group">
               <i class="fas fa-envelope"></i>
-              <input type="email"  id="email" placeholder="Email" required>
+              <input type="email" id="email" placeholder=" " required>
               <label for="email">Email</label>
           </div>
           <div class="input-group">
               <i class="fas fa-lock"></i>
-            <input type="password" id="password"  placeholder="Password" required>
+              <input type="password" id="password" placeholder=" " required>
               <label for="password">Password</label>
           </div>
-          <p class="recover">
-            <a href="#">Recover Password</a>
-          </p>
-         <button  class="btn"  id="submitSignIn">Sign In</button>
+
+          <p class="recover"><a href="#">Recover Password</a></p>
+
+          <button class="btn" id="submitSignIn">Sign In</button>
         </form>
-
-        <div class="links">
-          <p>Don't have account yet?</p>
-          <button id="signUpButton">Sign Up</button>
-        </div>
-
-<div class="logout-container">
-  <button id="logoutBtn" class="logout">Log Out</button>
-</div>
-
-
       </div>
 
+      <div class="dashboard-link">
+        <button onclick="window.location.href='dashboard.html'" class="btn-ghost">Go to Dashboard →</button>
+      </div>
 
+      <div class="logout-container">
+        <button id="logoutBtn" class="logout">Log Out</button>
+      </div>
+      <div id="logoutMessage" style="display:none;"></div>
 
-      <div id="logoutMessage" style="display:none; margin-top:10px; color: green; font-weight: bold;"></div>
+    </div>
+  </div>
 
+</div>
 
-      <script src="sign.min.js" defer type="module"></script>
-
-
+<script src="sign.js" defer type="module"></script>
 
 <script>
-  // Fade in effect when page loads
-document.body.style.opacity = 0;
-requestAnimationFrame(() => {
-  document.body.style.opacity = 1;
-});
-
+  document.body.style.opacity = 0;
+  requestAnimationFrame(() => {
+    document.body.style.opacity = 1;
+  });
 </script>
 
 </body>
-
 </html>

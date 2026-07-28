@@ -1,268 +1,388 @@
 @font-face {
   font-family: 'Dream Avenue';
-  src: url('fonts/DreamAvenue.woff') format('woff2'),
-       url('fonts/DreamAvenue.woff2') format('woff');
+  src: url('fonts/DreamAvenue.woff2') format('woff2'),
+       url('fonts/DreamAvenue.woff') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-
+:root{
+  --sage: #8a9381;
+  --sage-dark: #5f6a58;
+  --bronze: #ae866a;
+  --bronze-light: #d3b393;
+  --ink: #201f1c;
+  --cream: #faf8f5;
+  --white: #ffffff;
+}
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Poppins', sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
 }
+
 body{
-    background-color: #c9d6ff;
-    background:linear-gradient(to right,#e2e2e2,#8a9381e3);
-    overflow-x: hidden;
+  background: var(--cream);
+  overflow-x:hidden;
+  transition:opacity .6s ease;
 }
-.container{
-    background:linear-gradient(to right,#e2e2e2,#8a9381);
-    width:450px;
-    padding:1.5rem;
-    margin:50px auto;
-    margin-top: 150px;
-    border-radius:10px;
-    box-shadow:0 20px 35px rgba(0,0,1,0.9);
+
+/* ── Layout ─────────────────────── */
+.page{
+  display:flex;
+  min-height:100vh;
 }
-form{
-    margin:0 2rem;
+
+/* ── Brand panel ────────────────── */
+.brand-panel{
+  position:relative;
+  flex:0 0 42%;
+  min-height:100vh;
+  background:linear-gradient(155deg, var(--sage-dark) 0%, var(--sage) 55%, #757f6c 100%);
+  color:var(--white);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:3rem;
 }
+
+.weave{
+  position:absolute;
+  inset:0;
+  opacity:.14;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 8px, rgba(255,255,255,.5) 8px 9px, transparent 9px 18px),
+    repeating-linear-gradient(-45deg, transparent 0 8px, rgba(0,0,0,.35) 8px 9px, transparent 9px 18px);
+  pointer-events:none;
+}
+
+.back-link{
+  position:relative;
+  z-index:2;
+  align-self:flex-start;
+  color:var(--white);
+  text-decoration:none;
+  font-size:.85rem;
+  font-weight:600;
+  letter-spacing:.03em;
+  opacity:.85;
+  margin-bottom:2rem;
+  transition:opacity .25s ease;
+}
+.back-link:hover{ opacity:1; }
+
+.brand-content{
+  position:relative;
+  z-index:2;
+  max-width:340px;
+}
+
+.brand-logo{
+  width:120px;
+  filter:brightness(0) invert(1);
+  margin-bottom:1.5rem;
+}
+
+.brand-script{
+  font-family:'Dream Avenue', 'Cinzel', serif;
+  font-size:2rem;
+  font-weight:400;
+  letter-spacing:.02em;
+  margin-bottom:1rem;
+  text-shadow:0 0 24px rgba(255,255,255,.35);
+}
+
+.brand-copy{
+  font-size:.95rem;
+  line-height:1.6;
+  color:rgba(255,255,255,.88);
+}
+
+.brand-vertical{
+  position:absolute;
+  right:1.4rem;
+  bottom:2rem;
+  top:2rem;
+  writing-mode:vertical-rl;
+  transform:rotate(180deg);
+  font-size:.72rem;
+  letter-spacing:.25em;
+  font-weight:600;
+  color:rgba(255,255,255,.45);
+  white-space:nowrap;
+  overflow:hidden;
+  z-index:2;
+}
+
+/* ── Form panel ─────────────────── */
+.form-panel{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2.5rem 1.5rem;
+  position:relative;
+}
+
+.form-panel::before{
+  content:"";
+  position:absolute;
+  width:480px;
+  height:480px;
+  background:radial-gradient(circle, rgba(174,134,106,.16) 0%, transparent 70%);
+  filter:blur(10px);
+  z-index:0;
+}
+
+.form-card{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:400px;
+  background:var(--white);
+  border-radius:18px;
+  padding:2.5rem 2.25rem;
+  box-shadow:
+    0 1px 2px rgba(32,31,28,.04),
+    0 24px 48px -12px rgba(32,31,28,.18),
+    0 0 0 1px rgba(138,147,129,.08);
+}
+
+.mobile-logo{
+  display:none;
+  width:64px;
+  margin:0 auto 1.25rem;
+}
+
+/* ── Tabs ───────────────────────── */
+.tabs{
+  display:flex;
+  background:var(--cream);
+  border-radius:12px;
+  padding:4px;
+  margin-bottom:1.75rem;
+}
+.tab-btn{
+  flex:1;
+  border:none;
+  background:transparent;
+  padding:.65rem 0;
+  font-family:'Cinzel', serif;
+  font-size:.85rem;
+  font-weight:600;
+  letter-spacing:.04em;
+  color:var(--ink);
+  opacity:.5;
+  border-radius:9px;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.tab-btn:hover{ opacity:.8; }
+.tab-btn[aria-selected="true"]{
+  background:var(--white);
+  opacity:1;
+  box-shadow:0 2px 8px rgba(32,31,28,.1);
+}
+
+/* ── Form ───────────────────────── */
 .form-title{
-    font-size:1.5rem;
-    font-family: 'Dream Avenue', sans-serif;
-    font-weight: 100;
-    text-align: center;
-    padding: 1.3rem;
-    margin-bottom: 0.4rem;
+  font-family:'Cinzel', serif;
+  font-weight:500;
+  font-size:1.35rem;
+  color:var(--ink);
+  text-align:center;
+  margin-bottom:1.5rem;
 }
-input{
-    color:inherit;
-    width:100%;
-    background-color:transparent;
-    border:none;
-    border-bottom:1px solid #757575;
-    padding-left:1.5rem;
-    font-size:15px;
+
+.input-row{
+  display:flex;
+  gap:.75rem;
 }
+.input-row .input-group{ flex:1; }
+
 .input-group{
-    padding:1% 0;
-    position:relative;
-
+  position:relative;
+  margin-bottom:1.4rem;
 }
+
 .input-group i{
-    position:absolute;
-    color:black;
+  position:absolute;
+  left:0;
+  top:.7rem;
+  color:var(--sage);
+  font-size:.9rem;
 }
-input:focus{
-    background-color: transparent;
-    outline:transparent;
-    border-bottom:2px solid #ae866a(143, 90%, 28%);
-}
-input::placeholder{
-    color:transparent;
-}
-label{
-    color:#757575;
-    position:relative;
-    left:1.2em;
-    top:-1.3em;
-    cursor:auto;
-    transition:0.3s ease all;
-}
-input:focus~label,input:not(:placeholder-shown)~label{
-    top:-3em;
-    color:#ae866a(327,90%,28%);
-    font-size:15px;
-}
-.recover{
-    text-align:right;
-    font-size:1rem;
-    margin-bottom:1rem;
 
+.input-group input{
+  width:100%;
+  background:transparent;
+  border:none;
+  border-bottom:1.5px solid #d8d5cf;
+  padding:.55rem 0 .55rem 1.6rem;
+  font-size:.95rem;
+  color:var(--ink);
+  transition:border-color .25s ease, box-shadow .25s ease;
+}
+
+.input-group input:focus{
+  outline:none;
+  border-bottom-color:var(--bronze);
+  box-shadow:0 8px 12px -10px rgba(174,134,106,.6);
+}
+
+.input-group label{
+  position:absolute;
+  left:1.6rem;
+  top:.6rem;
+  color:#8a8778;
+  font-size:.95rem;
+  pointer-events:none;
+  transition:all .2s ease;
+}
+
+.input-group input:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label{
+  top:-1.05rem;
+  left:0;
+  font-size:.72rem;
+  color:var(--bronze);
+  font-weight:600;
+  letter-spacing:.02em;
+}
+
+.recover{
+  text-align:right;
+  font-size:.82rem;
+  margin:-.5rem 0 1.25rem;
 }
 .recover a{
-    text-decoration:none;
-    color:rgb(0, 0, 0);
+  color:#8a8778;
+  text-decoration:none;
+  transition:color .2s ease;
 }
-.recover a:hover{
-    color: #ae866a;
-    text-decoration:underline;
+.recover a:hover{ color:var(--bronze); }
+
+/* ── Buttons ────────────────────── */
+.btn{
+  width:100%;
+  border:none;
+  border-radius:10px;
+  padding:.9rem 0;
+  font-family:'Cinzel', serif;
+  font-size:.95rem;
+  font-weight:600;
+  letter-spacing:.05em;
+  color:var(--white);
+  background:linear-gradient(135deg, var(--bronze) 0%, #96694f 100%);
+  cursor:pointer;
+  box-shadow:0 8px 20px -6px rgba(174,134,106,.55);
+  transition:transform .2s ease, box-shadow .2s ease;
 }
-button{
-    font-size:1.1rem;
-    padding:8px 0;
-    border-radius:10px;
-    outline:none;
-    border:none;
-    border: #07001f 1px solid;
-    width:100%;
-    background: #ae866a2d;
-    color:rgb(0, 0, 0);
-    cursor:pointer;
-    transition:0.9s;
+.btn:hover{
+  transform:translateY(-1px);
+  box-shadow:0 12px 28px -6px rgba(174,134,106,.7);
 }
-button:hover{
-    background: #8a9381;
+.btn:active{ transform:translateY(0); }
+
+.dashboard-link{
+  text-align:center;
+  margin-top:1.5rem;
 }
-.or{
-    font-size:1.1rem;
-    margin-top:0.5rem;
-    text-align:center;
+.btn-ghost{
+  border:none;
+  background:transparent;
+  color:var(--sage-dark);
+  font-size:.85rem;
+  font-weight:600;
+  letter-spacing:.02em;
+  cursor:pointer;
+  padding:.4rem .6rem;
+  transition:color .2s ease;
 }
-.icons{
-    text-align:center;
+.btn-ghost:hover{ color:var(--bronze); }
+
+.logout-container{
+  text-align:center;
+  margin-top:.75rem;
 }
-.icons i{
-    color: #ae866a;
-    padding:0.8rem 1.5rem;
-    border-radius:10px;
-    font-size:1.5rem;
-    cursor:pointer;
-    border:2px solid #dfe9f5;
-    margin:0 15px;
-    transition:1s;
+.logout{
+  border:none;
+  background:transparent;
+  color:#b0aca0;
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.05em;
+  cursor:pointer;
+  padding:.3rem;
+  transition:color .2s ease;
 }
-.icons i:hover{
-    background:#07001f;
-    font-size:1.6rem;
-    border:2px solid rgb(125,125,235);
+.logout:hover{ color:var(--ink); }
+
+#logoutMessage{
+  text-align:center;
+  font-size:.8rem;
+  color:var(--sage-dark);
+  font-weight:600;
+  margin-top:.5rem;
 }
-.links{
-    display:flex;
-    justify-content:space-around;
-    padding:0 4rem;
-    margin-top:0.9rem;
-    font-weight:bold;
-}
- #signUpButton, #signInButton{
-    color: #ae866a;
-    border:none;
-    text-decoration: solid;
-    font-family: 'Dream Avenue', sans-serif;
-    background-color:transparent;
-    font-size:1.5rem;
-    font-weight:bold;
-}
-#signUpButton:hover, #signInButton:hover {
-    text-decoration:underline;
-    color:black;
-} 
+
+/* ── Message toast ──────────────── */
 .messageDiv{
-    background-color: #000000;
-    color:white;
-    padding:10px 20px;
-    margin:10px;
-    border-radius: 10px;
-    font-size:1rem;
-    opacity:0;
-    animation:fadeOut 7s forwards;
-
+  background:var(--ink);
+  color:var(--white);
+  padding:.65rem 1rem;
+  margin-bottom:1rem;
+  border-radius:8px;
+  font-size:.85rem;
+  opacity:0;
+  animation:fadeOut 5s forwards;
 }
-.aa {
-    padding: 10px;
-    margin-bottom: 0px;
-    margin-left: 10px;
-    margin-right: 10px;
-    display: block;
-    justify-content: center;
-    text-decoration: none;
-    font-weight: bolder;
-    align-items: center;
-    text-align: center;
-    border-bottom: 2px solid black;
-    border-radius: 10px;
-    color: #000000;
-    margin-top: 20px;
-    max-width: 200px;
-    transition: all 0.3s ease;
+@keyframes fadeOut{
+  0%{opacity:1;}
+  80%{opacity:1;}
+  100%{opacity:0;}
 }
 
-.aa:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-    cursor: pointer;
+/* ── Page transition overlay ────── */
+#page-transition{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,.15);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  transform:translateY(-100%);
+  opacity:0;
+  transition:transform .8s ease, opacity .8s ease;
+  pointer-events:none;
+}
+#page-transition.active{ transform:translateY(0); opacity:1; }
+#page-transition.fade-up{ transform:translateY(-100%); opacity:0; }
+
+.logo-wrapper img{
+  width:220px;
+  opacity:0;
+  animation:fadeIn 1s ease forwards;
+  animation-delay:.3s;
+}
+@keyframes fadeIn{ to{ opacity:1; } }
+
+/* ── Responsive ─────────────────── */
+@media (max-width: 900px){
+  .brand-panel{ display:none; }
+  .mobile-logo{ display:block; }
+  .form-panel{ padding:2rem 1.25rem; }
+  .form-card{ padding:2rem 1.5rem; }
 }
 
-@media (max-width: 768px){
-    .container{
-        max-width: 370px;
-    }
-  }
-
-
-  #page-transition {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* Glassmorphism style */
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-
-  /* Start off-screen above */
-  transform: translateY(-100%);
-  opacity: 0;
-  transition: transform 0.8s ease, opacity 0.8s ease;
-}
-
-#page-transition.active {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-#page-transition.fade-up {
-  /* Slide up to hide */
-  transform: translateY(-100%);
-  opacity: 0;
-  transition: transform 0.8s ease, opacity 0.8s ease;
-}
-
-.logo-wrapper img {
-  width: 340px;
-  opacity: 0;
-  animation: fadeIn 1s ease forwards;
-  animation-delay: 0.3s;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-
-.logout-container {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically if container has height */
-  margin-top: 40px;        /* Add spacing from top */
-  text-align: center;
-}
-
-.logout {
-  font-family: 'Dream Avenue', sans-serif;
-  color: rgb(0, 0, 0); 
-  background: transparent;
-  border: none;
-  border-bottom: 3px solid #000000; 
-  padding: 10px 20px; 
-  border-radius: 8px; 
-  cursor: pointer; 
-  width: 200px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-align: center;
+@media (max-width: 420px){
+  .input-row{ flex-direction:column; gap:0; }
 }

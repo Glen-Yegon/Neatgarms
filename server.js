@@ -24,6 +24,52 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+import { initializeApp, cert } from "firebase-admin/app";
+import { getFirestore, FieldValue } from "firebase-admin/firestore";
+
+// ✅ Firebase Admin — lets the backend securely credit/redeem loyalty points
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+initializeApp({
+  credential: cert(serviceAccount),
+});
+const firestore = getFirestore();
+
+// Tier thresholds — keep in sync with dash.js TIERS
+function computeTier(lifetimePoints) {
+  if (lifetimePoints >= 3000) return "Gold";
+  if (lifetimePoints >= 1000) return "Silver";
+  return "Bronze";
+}
+
+// Credits points to a user's points doc. Safe no-op if the doc doesn't exist.
+async function creditPoints(uid, amount, reason = "") {
+  if (!uid || !amount || amount <= 0) return;
+
+  const pointsRef = firestore.collection("points").doc(uid);
+
+  await firestore.runTransaction(async (t) => {
+    const snap = await t.get(pointsRef);
+    if (!snap.exists) {
+      console.warn(`No points doc for uid ${uid} — skipping credit.`);
+      return;
+    }
+
+    const current = snap.data();
+    const newBalance = (current.balance || 0) + amount;
+    const newLifetime = (current.lifetimePoints || 0) + amount;
+
+    t.update(pointsRef, {
+      balance: newBalance,
+      lifetimePoints: newLifetime,
+      tier: computeTier(newLifetime),
+      lastPointsEarnedAt: FieldValue.serverTimestamp(),
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+  });
+
+  console.log(`✅ Credited ${amount} points to ${uid} (${reason})`);
+}
+
 const app = express(); 
 const PORT = 5000;
 
@@ -1521,6 +1567,7 @@ app.use(express.json());
 app.post('/api/paystack/verify', async (req, res) => {
   try {
     const reference = req.body?.reference;
+    const uid = req.body?.uid || null;
 
     console.log("Incoming body:", req.body);
     console.log("Reference:", reference);
@@ -1554,6 +1601,21 @@ app.post('/api/paystack/verify', async (req, res) => {
     console.log("Paystack response:", data);
 
     if (data.status && data.data?.status === 'success') {
+
+      // ✅ Award loyalty points based on the verified payment amount
+      if (uid) {
+        const amountKES = data.data.amount / 100; // Paystack returns amounts in subunits
+        const pointsEarned = Math.floor(amountKES / 20); // 1 point per Ksh 20
+        try {
+          await creditPoints(uid, pointsEarned, `purchase (ref: ${reference})`);
+        } catch (creditErr) {
+          console.error("Error crediting points:", creditErr);
+          // Don't fail the payment response over a points error — the payment already succeeded
+        }
+      } else {
+        console.log("No uid provided — skipping points credit (guest checkout).");
+      }
+
       return res.status(200).json({
         status: true,
         message: 'Payment verified successfully.',

@@ -10,6 +10,7 @@
     "express": "^4.21.2",
     "fabric": "^6.6.1",
     "firebase": "^11.2.0",
+    "firebase-admin": "^14.2.0",
     "form-data": "^4.0.4",
     "fs": "^0.0.1-security",
     "multer": "^1.4.5-lts.1",

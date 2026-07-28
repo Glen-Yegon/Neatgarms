@@ -381,7 +381,7 @@ if (storedProduct) {
     
       // Send data to /pay2-now
       try {
-        const response = await fetch("https://neat.onrender.com/pay2-now", {
+        const response = await fetch("http://localhost:5000/pay2-now", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -409,10 +409,10 @@ if (storedProduct) {
   async function verifyPayment(reference, attempts = 3, delay = 3000) {
     for (let i = 0; i < attempts; i++) {
       try {
-        const res = await fetch('https://neat.onrender.com/api/paystack/verify', {
+        const res = await fetch('http://localhost:5000/api/paystack/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ reference })
+          body: JSON.stringify({ reference, uid: localStorage.getItem('loggedInUserId') || null })
         });
 
         const data = await res.json();
@@ -479,7 +479,7 @@ if (storedProduct) {
     const amountInKobo = Math.round(amount * 100);
 
     const handler = PaystackPop.setup({
-      key: 'pk_live_ebc463d4a263695caa52983243908de4c27ab205',
+      key: 'pk_test_9a29ec4d0e7944ac94fe2ad542aa1427d7469bbf',
       email: val('email'),
       amount: amountInKobo,
       currency: 'KES',
@@ -492,7 +492,7 @@ if (storedProduct) {
       onClose() {
         const email = val('email');
         if (email) {
-          fetch('https://neat.onrender.com/api/payment-cancelled', {
+          fetch('http://localhost:5000/api/payment-cancelled', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
