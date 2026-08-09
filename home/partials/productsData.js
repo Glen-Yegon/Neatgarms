@@ -145,7 +145,7 @@ export const productsData = {
   "solid-blue-neat-shorts": {
     name: "Solid Blue Neat Shorts",
     oldPrice: "", // No old price provided
-    newPrice: "3000",
+    newPrice: "2000",
     images: [
       "future/optimized/sh (2).webp",
       "future/optimized/sh (1).webp"
@@ -312,8 +312,8 @@ export const productsData = {
       "Fit: Relaxed fit for all-day ease",
       "Subtle premium detailing for a refined streetwear finish"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["S", "L", "2 XL", "XL"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Model is 5’9 and wears size M",
     colors: []
   },
@@ -400,8 +400,8 @@ export const productsData = {
       "Color: White with black lettering",
       "Fit: Boxed fit"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: [],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Unisex-Friendly: Designed to suit multiple body types. Model Reference: Model is 5’9' (175cm) wearing size L",
   
   },
@@ -423,8 +423,8 @@ export const productsData = {
       "Fit: Relaxed fit for all-day ease",
       "Style Use: Great for casual days, summer energy, or layered urban looks"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: [],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Fit: Relaxed fit – slightly loose for a laid-back vibe. True to Size: Order your usual size for intended drape. Unisex Sizing: Designed to flatter all body types. Model Reference: Model is 5’11” (180 cm) wearing size L",
     colors: []
   },
