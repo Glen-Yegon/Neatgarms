@@ -34,8 +34,8 @@ export const productsData = {
       "Heavy Cotton 280GSM",
       "Boxy Fit"
     ],
-    sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: ["S", "XL", "2XL"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Model is 5’9 wearing size Small.",
   },
 
@@ -54,8 +54,8 @@ export const productsData = {
       "Heavy Cotton 280GSM",
       "Boxy Fit"
     ],
-    sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: ["M", "XL", "2XL"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Model is 5’9 wearing size Small.",
   },
 
@@ -96,8 +96,8 @@ export const productsData = {
       "Heavy Cotton 280GSM",
       "Boxy Fit"
     ],
-    sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: [ "XL", "S", "M"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Model is 5’8 wearing size Large.",
   },
 
@@ -138,7 +138,7 @@ export const productsData = {
       "Boxy Fit"
     ],
     sizes: ["S", "M", "L", "XL", "2XL"],
-    outOfStock: ["XL", "2XL", "M"],
+    outOfStock: ["M", "L", "XL", "2XL"],
     sizeFit: "Model is 5’10 wearing size Medium.",
   },
 
@@ -224,8 +224,8 @@ export const productsData = {
       "Perfect for layering or standalone summer wear",
       "Available in Cement Brown and Beige tones"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["2 XL", "M"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Slim, body-hugging fit for both men and women. Male model is 6’0” wearing size L. Female model is 5’7” wearing size S. True to size for a fitted look; size up for a relaxed feel.",
   },
 
@@ -335,8 +335,8 @@ export const productsData = {
       "Cropped fit that pairs perfectly with high-waist bottoms",
       "Soft baby pink tone that radiates warmth and ease"
     ],
-    sizes: ["S", "L", "2 XL", "XL", "M"],
-    outOfStock: ["2 XL", "XL"],
+    sizes: ["Sold Out"],
+    outOfStock: ["Sold Out"],
     sizeFit: "Size S : fits 4-6, Size M : fits 6-8, Size L : fits 8-10",
   
   },
