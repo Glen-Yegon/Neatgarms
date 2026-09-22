@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#8a9381" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-  <link rel="stylesheet" href="product.min.css">
+  <link rel="stylesheet" href="product.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -55,292 +55,583 @@
 </div>
 
 
-    <!-- Navbar -->
-    <header class="navbar">
-      <div class="nav-left">
-      <button id="back-button" class="back-btn">Back</button>
-      </div>
-      <div class="nav-center">
-      <a href="home.html"><img src="mains/logo2.png" alt="Company Logo" class="logo" data-aos="fade-up" data-aos-delay="400"></a>
-      </div>
-      <div class="nav-right">
-        <a href="cart.html" class="icon-btn cart-btn"> <i class="fas fa-shopping-cart cart-icon"></i> </a>
-      </div>
-    </header>
-  
-    <!-- Main Content -->
-    <main class="product-page">
-      <div class="product-container" data-aos="fade-up" data-aos-delay="400">
-        <!-- Images -->
-         <div class="thumbnail-list" id="thumbnail-list"></div>
-        <div class="product-images">
-          <div class="image-slider">
-            <img id="main-image" src="" alt="Product Image">
-             <div class="image-nav">
-              <button id="prev-image" >&lt;</button>
-              <button id="next-image" >&gt;</button>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Product Details -->
-        <div class="product-details">
-          <h1 id="product-brand" style="font-family: 'Dream Avenue', sans-serif; font-weight:100;">NEAT</h1>
-          <h2 id="product-name"></h2>
-          <p id="product-prices">
-            <p>Price in Kshs.</p>
-            <span class="old-price" ></span>
-            <span class="new-price" ></span>
-          </p>
-              <!-- Size Selection -->
-    <div class="size-selection"></div> <br>
+    <!-- =========================================================
+     PRODUCT NAVBAR
+========================================================= -->
 
+<header class="product-nav" id="product-nav">
 
-    <!--color selection-->
-    <div class="color-selection"></div>
+  <!-- LEFT -->
+  <div class="product-nav__left">
 
-
-    
-          <p data-aos="fade-up" data-aos-delay="400">Quantity</p>
-  
-          <!-- Quantity Selector -->
-          <div class="quantity-selector" data-aos="fade-up" data-aos-delay="400">
-            <button id="decrease-quantity" >-</button>
-            <input id="quantity" type="number" value="1" readonly>
-            <button id="increase-quantity">+</button>
-          </div>
-
-
-
-          <!-- Product Info Dropdown Sections -->
-<div class="product-info-sections" data-aos="fade-up" data-aos-delay="400">
-
-  <div class="info-section">
-    <button class="toggle-btn">Product Description</button>
-    <div class="info-content" id="product-description"></div>
-  </div>
-
-  <div class="info-section">
-    <button class="toggle-btn">Key Features</button>
-    <div class="info-content" id="key-features">
-      <ul></ul>
-    </div>
-  </div>
-
-  <div class="info-section">
-    <button class="toggle-btn">Size & Fit</button>
-    <div class="info-content" id="size-fit"></div>
-  </div>
-
-</div>
-
-
-
-<a href="shipping.html" data-aos="fade-up" data-aos-delay="400" class="link">
-          <div class="loader" data-aos="fade-up" data-aos-delay="400">
-            <div class="truckWrapper">
-              <div class="truckBody">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 198 93"
-                  class="trucksvg"
-                >
-                  <path
-                    stroke-width="3"
-                    stroke="#282828"
-                    fill="#ae866a"
-                    d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z"
-                  ></path>
-                  <path
-                    stroke-width="3"
-                    stroke="#282828"
-                    fill="#7D7C7C"
-                    d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"
-                  ></path>
-                  <path
-                    stroke-width="2"
-                    stroke="#282828"
-                    fill="#282828"
-                    d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"
-                  ></path>
-                  <rect
-                    stroke-width="2"
-                    stroke="#282828"
-                    fill="#FFFCAB"
-                    rx="1"
-                    height="7"
-                    width="5"
-                    y="63"
-                    x="187"
-                  ></rect>
-                  <rect
-                    stroke-width="2"
-                    stroke="#282828"
-                    fill="#282828"
-                    rx="1"
-                    height="11"
-                    width="4"
-                    y="81"
-                    x="193"
-                  ></rect>
-                  <rect
-                    stroke-width="3"
-                    stroke="#282828"
-                    fill="#DFDFDF"
-                    rx="2.5"
-                    height="90"
-                    width="121"
-                    y="1.5"
-                    x="6.5"
-                  ></rect>
-                  <rect
-                    stroke-width="2"
-                    stroke="#282828"
-                    fill="#DFDFDF"
-                    rx="2"
-                    height="4"
-                    width="6"
-                    y="84"
-                    x="1"
-                  ></rect>
-                </svg>
-              </div>
-              <div class="truckTires">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 30 30"
-                  class="tiresvg"
-                >
-                  <circle
-                    stroke-width="3"
-                    stroke="#282828"
-                    fill="#282828"
-                    r="13.5"
-                    cy="15"
-                    cx="15"
-                  ></circle>
-                  <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 30 30"
-                  class="tiresvg"
-                >
-                  <circle
-                    stroke-width="3"
-                    stroke="#282828"
-                    fill="#282828"
-                    r="13.5"
-                    cy="15"
-                    cx="15"
-                  ></circle>
-                  <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
-                </svg>
-              </div>
-              <div class="road"></div>
-          
-              <svg
-                xml:space="preserve"
-                viewBox="0 0 453.459 453.459"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
-                xmlns="http://www.w3.org/2000/svg"
-                id="Capa_1"
-                version="1.1"
-                fill="#000000"
-                class="lampPost"
-              >
-                <path
-                  d="M252.882,0c-37.781,0-68.686,29.953-70.245,67.358h-6.917v8.954c-26.109,2.163-45.463,10.011-45.463,19.366h9.993
-          c-1.65,5.146-2.507,10.54-2.507,16.017c0,28.956,23.558,52.514,52.514,52.514c28.956,0,52.514-23.558,52.514-52.514
-          c0-5.478-0.856-10.872-2.506-16.017h9.992c0-9.354-19.352-17.204-45.463-19.366v-8.954h-6.149C200.189,38.779,223.924,16,252.882,16
-          c29.952,0,54.32,24.368,54.32,54.32c0,28.774-11.078,37.009-25.105,47.437c-17.444,12.968-37.216,27.667-37.216,78.884v113.914
-          h-0.797c-5.068,0-9.174,4.108-9.174,9.177c0,2.844,1.293,5.383,3.321,7.066c-3.432,27.933-26.851,95.744-8.226,115.459v11.202h45.75
-          v-11.202c18.625-19.715-4.794-87.527-8.227-115.459c2.029-1.683,3.322-4.223,3.322-7.066c0-5.068-4.107-9.177-9.176-9.177h-0.795
-          V196.641c0-43.174,14.942-54.283,30.762-66.043c14.793-10.997,31.559-23.461,31.559-60.277C323.202,31.545,291.656,0,252.882,0z
-          M232.77,111.694c0,23.442-19.071,42.514-42.514,42.514c-23.442,0-42.514-19.072-42.514-42.514c0-5.531,1.078-10.957,3.141-16.017
-          h78.747C231.693,100.736,232.77,106.162,232.77,111.694z"
-                ></path>
-              </svg>
-            </div>
-          </div>
-
-         <p style="color: black; text-decoration: underline; ">shipping policy-calculated at checkout</p>
-        </a>
-
-
-        <!-- Share Button -->
- <div class="share-btns">
-<button class="share" id="share-btn">
-  <div class="svg-wrapper-1">
-    <div class="svg-wrapper">
+    <button
+      id="back-button"
+      class="product-nav__back"
+      type="button"
+      aria-label="Go back"
+    >
       <svg
-        xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        width="24"
-        height="24"
+        aria-hidden="true"
       >
-        <path fill="none" d="M0 0h24v24H0z"></path>
-        <path
-          fill="currentColor"
-          d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-        ></path>
+        <path d="M20 12H4"></path>
+        <path d="M10 6L4 12L10 18"></path>
       </svg>
-    </div>
-  </div>
-  <i><span>Share</span></i>
-</button>
 
-</div>
-          
-                <!--add to cart, buy and share-->
+      <span>BACK</span>
+    </button>
+
+
+    <div class="product-nav__context">
+      <span>OBJECT</span>
+      <i>/</i>
+      <span>CURRENT RELEASE</span>
+    </div>
+
+  </div>
+
+
+  <!-- CENTER LOGO -->
+  <a
+    href="home.html"
+    class="product-nav__brand"
+    aria-label="Neatgarms home"
+  >
+    <img
+      src="mains/logo2.png"
+      alt="Neatgarms"
+      class="product-nav__logo"
+    >
+  </a>
+
+
+  <!-- RIGHT -->
+  <div class="product-nav__right">
+
+    <span class="product-nav__location">
+      NAIROBI / KE
+    </span>
+
+    <a
+      href="cart.html"
+      class="product-nav__bag"
+      aria-label="Shopping bag"
+    >
+      <span>BAG</span>
+
+      <span class="product-nav__bag-count">
+        0
+      </span>
+    </a>
+
+  </div>
+
+</header>
+
+  
+<!-- =========================================================
+     PRODUCT EXPERIENCE — THE OBJECT
+========================================================= -->
+
+<main class="product-page">
+
+  <section class="object-product">
+
+    <!-- =====================================================
+         LEFT — PRODUCT VISUAL
+    ====================================================== -->
+
+    <div class="object-gallery">
+
+      <!-- Gallery metadata -->
+      <div class="object-gallery__top">
+
+        <div class="object-gallery__figure">
+          <span>FIG.</span>
+          <span id="image-counter">01</span>
+        </div>
+
+        <span class="object-gallery__type">
+          PRODUCT STUDY / CURRENT RELEASE
+        </span>
+
+      </div>
+
+
+      <!-- Main image -->
+      <div class="product-images">
+
+        <div class="image-slider">
+
+          <img
+            id="main-image"
+            src=""
+            alt="Product Image"
+          >
+
+
+          <!-- Desktop image navigation -->
+
+          <div class="image-nav">
+
+            <button
+              id="prev-image"
+              type="button"
+              aria-label="Previous product image"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 12H4"></path>
+                <path d="M10 6L4 12L10 18"></path>
+              </svg>
+            </button>
+
+
+            <button
+              id="next-image"
+              type="button"
+              aria-label="Next product image"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12H20"></path>
+                <path d="M14 6L20 12L14 18"></path>
+              </svg>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Bottom gallery controls -->
+
+      <div class="object-gallery__bottom">
+
+        <div
+          class="thumbnail-list"
+          id="thumbnail-list"
+          aria-label="Product images"
+        ></div>
+
+
+        <div class="object-gallery__caption">
+
+          <span>
+            NEATGARMS®
+          </span>
+
+          <span>
+            NAIROBI / KE
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         RIGHT — PRODUCT CONSOLE
+    ====================================================== -->
+
+    <aside class="product-details">
+
+      <!-- archive header -->
+
+      <div class="object-meta">
+
+        <div>
+          <span>OBJECT</span>
+          <strong id="object-code">NG—001</strong>
+        </div>
+
+        <div>
+          <span>STATE</span>
+          <strong id="product-status">IN STOCK</strong>
+        </div>
+
+      </div>
+
+
+      <!-- identity -->
+
+      <div class="object-identity">
+
+        <span class="object-identity__release">
+          KIN / CURRENT RELEASE
+        </span>
+
+
+        <h1 id="product-brand">
+          NEAT
+        </h1>
+
+
+        <div class="object-identity__line"></div>
+
+
+        <h2 id="product-name"></h2>
+
+
+        <div
+          id="product-prices"
+          class="object-price"
+        >
+
+          <span class="object-price__currency">
+            KES
+          </span>
+
+          <span class="old-price"></span>
+
+          <span class="new-price"></span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ===================================================
+           PRODUCT OPTIONS
+      ==================================================== -->
+
+      <div class="object-options">
+
+
+        <!-- SIZE -->
+
+        <div class="object-option">
+
+          <div class="object-option__head">
+
+            <span>01 / SIZE</span>
+
+            <span>SELECT ONE</span>
+
+          </div>
+
+          <div class="size-selection"></div>
+
+        </div>
+
+
+
+        <!-- COLOR -->
+
+        <div class="object-option object-option--color">
+
+          <div class="object-option__head">
+
+            <span>02 / COLOUR</span>
+
+            <span>AVAILABLE</span>
+
+          </div>
+
+          <div class="color-selection"></div>
+
+        </div>
+
+
+
+        <!-- QUANTITY -->
+
+        <div class="object-option">
+
+          <div class="object-option__head">
+
+            <span>03 / QUANTITY</span>
+
+            <span>UNITS</span>
+
+          </div>
+
+
+          <div class="quantity-selector">
+
+            <button
+              id="decrease-quantity"
+              type="button"
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+
+            <input
+              id="quantity"
+              type="number"
+              value="1"
+              readonly
+              aria-label="Quantity"
+            >
+
+            <button
+              id="increase-quantity"
+              type="button"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ===================================================
+           ACTIONS
+      ==================================================== -->
+
       <div class="button-group">
 
-        <button class="btn-53" id="add-to-cart">
-          <div class="original" >ADD TO CART</div>
-          <div class="letters">
-            
-            <span>N</span>
-            <span>E</span>
-            <span>A</span>
-            <span>T</span>
 
-            <span>G</span>
-            <span>A</span>
-            <span>R</span>
-            <span>M</span>
-            <span>S</span>
-          </div>
-          </div>
+        <button
+          id="add-to-cart"
+          class="object-action object-action--primary"
+          type="button"
+        >
+
+          <span>ADD TO BAG</span>
+
+          <span aria-hidden="true">→</span>
+
         </button>
 
-        <button class="btn-53" id="buy-now">
-          <div class="original">BUY NOW</div>
-          <div class="letters">
-            
-            <span>W</span>
-            <span>I</span>
-            <span>S</span>
-            <span>E</span>
-            <span>-</span>
-            <span>C</span>
-            <span>H</span>
-            <span>O</span>
-            <span>I</span>
-            <span>C</span>
-            <span>E</span>
+
+        <button
+          id="buy-now"
+          class="object-action object-action--secondary"
+          type="button"
+        >
+
+          <span>BUY NOW</span>
+
+          <span aria-hidden="true">↗</span>
+
+        </button>
+
+
+      </div>
+
+
+
+      <!-- ===================================================
+           PRODUCT INFORMATION
+      ==================================================== -->
+
+      <div class="product-info-sections">
+
+
+        <div class="info-section">
+
+          <button
+            class="toggle-btn"
+            type="button"
+          >
+            <span>
+              01 / DESCRIPTION
+            </span>
+
+            <span class="toggle-symbol">
+              +
+            </span>
+          </button>
+
+          <div
+            class="info-content"
+            id="product-description"
+          ></div>
+
+        </div>
+
+
+
+        <div class="info-section">
+
+          <button
+            class="toggle-btn"
+            type="button"
+          >
+            <span>
+              02 / SPECIFICATION
+            </span>
+
+            <span class="toggle-symbol">
+              +
+            </span>
+          </button>
+
+          <div
+            class="info-content"
+            id="key-features"
+          >
+            <ul></ul>
           </div>
-          </div>
-        </button>   
+
+        </div>
 
 
-</div>
 
-<!-- Featured Section -->
-<div class="featured-section">
-    <h2 class="section-title">Frequently Bought With</h2>
+        <div class="info-section">
+
+          <button
+            class="toggle-btn"
+            type="button"
+          >
+            <span>
+              03 / SIZE + FIT
+            </span>
+
+            <span class="toggle-symbol">
+              +
+            </span>
+          </button>
+
+          <div
+            class="info-content"
+            id="size-fit"
+          ></div>
+
+        </div>
+
+
+        <!-- SHIPPING -->
+
+        <div class="info-section">
+
+          <a
+            href="shipping.html"
+            class="object-shipping"
+          >
+
+            <span>
+              04 / DELIVERY
+            </span>
+
+            <span>
+              VIEW ↗
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ===================================================
+           SHARE
+      ==================================================== -->
+
+      <div class="object-share">
+
+        <button
+          id="share-btn"
+          class="share"
+          type="button"
+        >
+
+          <span>
+            SHARE OBJECT
+          </span>
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle cx="18" cy="5" r="2.5"></circle>
+            <circle cx="6" cy="12" r="2.5"></circle>
+            <circle cx="18" cy="19" r="2.5"></circle>
+
+            <path d="M8.2 10.8L15.7 6.3"></path>
+            <path d="M8.2 13.2L15.7 17.7"></path>
+          </svg>
+
+        </button>
+
+      </div>
+
+
+      <!-- bottom identification -->
+
+      <div class="object-console__footer">
+
+        <span>
+          NEATGARMS® / 2026
+        </span>
+
+        <span>
+          KEEP IT NEAT.
+        </span>
+
+      </div>
+
+    </aside>
+
+  </section>
+
+</main>
+
+
+<!-- =========================================================
+     RELATED OBJECTS
+========================================================= -->
+
+<section class="featured-section">
+
+  <div class="featured-head">
+
+    <div class="featured-head__left">
+
+      <span class="featured-head__index">
+        02 / RELATED
+      </span>
+
+      <h2 class="section-title">
+        YOU MAY ALSO
+        <em>NEED.</em>
+      </h2>
+
+    </div>
+
+
+    <div class="featured-head__right">
+
+      <p>
+        SELECTED PIECES FROM<br>
+        THE CURRENT RELEASE.
+      </p>
+
+      <span>
+        NEATGARMS® / KIN
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="featured-meta">
+
+    <span>
+      RELATED OBJECTS
+    </span>
+
+    <span>
+      CURRENT RELEASE / 2026
+    </span>
+
+  </div>
+
+
   <div class="featured-cards-wrapper">
 
     <!-- Black Stone Washed Tee -->
@@ -533,138 +824,288 @@ Wearing a size Medium
 </section>
 
     </main>
-
-
-
-    <section id="review-section" style="padding: 20px;">
-      <h2 style="font-family: 'Dream Avenue', sans-serif;">Customer Reviews</h2>
-    
-      <!-- Star Rating -->
-      <div class="rating">
-        <input type="radio" id="star5" name="rating" value="5" />
-        <label for="star5"></label>
-        <input type="radio" id="star4" name="rating" value="4" />
-        <label for="star4"></label>
-        <input type="radio" id="star3" name="rating" value="3" />
-        <label for="star3"></label>
-        <input type="radio" id="star2" name="rating" value="2" />
-        <label for="star2"></label>
-        <input type="radio" id="star1" name="rating" value="1" />
-        <label for="star1"></label>
-      </div>
-      
-
-
-      <p>Be the First to Write a Review</p>
-    
-      <!-- Review Button -->
-       <div class="reviews">
-      <button class="review-btn" id="review-btn">
-        Review
-      </button>
-    </div>
-      <div class="review-form-container" id="review-form-container" style="display: none;">
-        <form id="review-form" enctype="multipart/form-data" method="POST" action="/submit-review">
-          <input type="hidden" name="access_key" value="9d0d7b57-d26f-4c56-9e0d-7a94137b28c7">
-          <h2>Write a Review</h2>
-          
-          <!-- Review Title -->
-          <label for="review-title">Review Title</label>
-          <input type="text" id="review-title" name="review-title" required placeholder="Enter the title of your review">
-          
-          <!-- Review Content -->
-          <label for="review-content">Your Review</label>
-          <textarea id="review-content" name="review-content" rows="4" required placeholder="Write your review here"></textarea>
-          
-          <!-- Upload Picture or Video -->
-          <label for="review-media">Attach a Picture/Video (Optional)</label>
-          <input type="file" id="review-media" name="review-media" accept="image/*,video/*">
-          
-          <!-- Name of Reviewer -->
-          <label for="reviewer-name">Your Name (Publicly Visible)</label>
-          <input type="text" id="reviewer-name" name="reviewer-name" required placeholder="Enter your name">
-          
-          <!-- Email -->
-          <label for="reviewer-email">Your Email (Required for Verification)</label>
-          <input type="email" id="reviewer-email" name="reviewer-email" required placeholder="Enter your email">
-          
-<!-- Star Rating -->
-<div class="rating" id="review-stars">
-  <input type="radio" id="star5" name="rating" value="5" />
-  <label for="star5" title="5 stars"></label>
-  <input type="radio" id="star4" name="rating" value="4" />
-  <label for="star4" title="4 stars"></label>
-  <input type="radio" id="star3" name="rating" value="3" />
-  <label for="star3" title="3 stars"></label>
-  <input type="radio" id="star2" name="rating" value="2" />
-  <label for="star2" title="2 stars"></label>
-  <input type="radio" id="star1" name="rating" value="1" />
-  <label for="star1" title="1 star"></label>
-</div>
-<p id="selected-rating">Selected Rating: 0 Stars</p>
-
-          
-          <!-- Data Usage Disclaimer -->
-          <p class="data-usage">
-            How we use your data: We’ll only contact you about the review you left, and only if necessary. By submitting your review, you agree to Judge.me’s <a href="terms-and-conditions.html">terms</a>, <a href="privacy-policy.html">privacy</a> and <a href="https://judge.me/content-policy">content</a> policies.
-          </p>
-          
-          <!-- Buttons -->
-          <button type="button" id="cancel-btn" class="back-btn">Cancel</button>
-          <button type="submit" id="submit-btn" class="back-btn">Submit Review</button>
-        </form>
-      </div>
-      
-
-
-    </section>
-    
-
-
     
     
   
 
-<!-- Footer -->
-<footer class="neat-footer">
-  <div class="footer-top-text">
-    <h2>Become a <span class="highlight">Neatgarms</span> member to get the latest news and updates:</h2>
-    <ul class="benefits-list">
-      <li>✔ Early access to new drops</li>
-      <li>✔ Invites to exclusive events</li>
-      <li>✔ Members-only sales</li>
-    </ul>
-    <p class="agreement-text">
-      By signing up you agree with our 
-      <a href="terms-and-conditions.html">Terms & Conditions</a> and 
-      <a href="privacy-policy.html">Privacy Policy</a>.
-    </p>
+<!-- =========================================================
+     NEATGARMS — PRODUCT END FRAME
+========================================================= -->
+
+<footer class="product-footer" id="product-footer">
+
+  <!-- subtle background texture -->
+  <div
+    class="product-footer__grain"
+    aria-hidden="true"
+  ></div>
+
+
+
+
+
+
+  <!-- =====================================================
+       PRIVATE ACCESS / NEWSLETTER
+  ====================================================== -->
+
+  <section class="product-footer__access">
+
+    <div class="product-footer__access-index">
+
+      <span>
+        05
+      </span>
+
+      <span>
+        PRIVATE ACCESS
+      </span>
+
+    </div>
+
+
+    <div class="product-footer__access-copy">
+
+      <span class="product-footer__eyebrow">
+        DON'T MISS THE RELEASE
+      </span>
+
+      <h3>
+        THE NEXT DROP
+        <em>WON'T WAIT.</em>
+      </h3>
+
+    </div>
+
+
+    <div class="product-footer__newsletter">
+
+      <form
+        class="product-footer__form"
+        onsubmit="return false;"
+      >
+
+        <label
+          for="footer-email"
+          class="sr-only"
+        >
+          Email address
+        </label>
+
+
+        <input
+          type="email"
+          id="footer-email"
+          placeholder="EMAIL ADDRESS"
+          autocomplete="email"
+          required
+        >
+
+
+        <button
+          type="button"
+          id="subscribe-btn"
+          aria-label="Join Neatgarms mailing list"
+        >
+
+          <span>
+            JOIN
+          </span>
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M4 12H20"></path>
+            <path d="M14 6L20 12L14 18"></path>
+          </svg>
+
+        </button>
+
+      </form>
+
+
+      <p>
+        PRIVATE ACCESS TO DROPS, RELEASES &amp; NEAT BUSINESS.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =====================================================
+       DIRECTORY
+  ====================================================== -->
+
+  <section class="product-footer__directory">
+
+
+    <!-- identity -->
+
+    <div class="product-footer__identity">
+
+      <span class="product-footer__label">
+        06 / IDENTITY
+      </span>
+
+
+      <div class="product-footer__identity-copy">
+
+        <img
+          src="mains/logo2.png"
+          alt="Neatgarms"
+          class="product-footer__logo"
+        >
+
+
+        <p>
+          INDEPENDENT CLOTHING<br>
+          FROM NAIROBI.
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- shop -->
+
+    <nav class="product-footer__column">
+
+      <span class="product-footer__label">
+        SHOP
+      </span>
+
+
+      <a href="main.html">
+        <span>ALL PIECES</span>
+        <span>↗</span>
+      </a>
+
+
+      <a href="main.html">
+        <span>CURRENT RELEASE</span>
+        <span>↗</span>
+      </a>
+
+
+      <a href="lookbook.html">
+        <span>LOOKBOOK</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+
+
+    <!-- information -->
+
+    <nav class="product-footer__column">
+
+      <span class="product-footer__label">
+        INFORMATION
+      </span>
+
+
+      <a href="shipping.html">
+        <span>SHIPPING</span>
+        <span>↗</span>
+      </a>
+
+
+      <a href="#">
+        <span>CONTACT</span>
+        <span>↗</span>
+      </a>
+
+
+      <a href="sign.html">
+        <span>ACCOUNT</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+
+
+    <!-- follow -->
+
+    <nav class="product-footer__column">
+
+      <span class="product-footer__label">
+        FOLLOW
+      </span>
+
+
+      <a
+        href="#"
+        target="_blank"
+        rel="noopener"
+      >
+        <span>INSTAGRAM</span>
+        <span>↗</span>
+      </a>
+
+
+      <a
+        href="#"
+        target="_blank"
+        rel="noopener"
+      >
+        <span>TIKTOK</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+  </section>
+
+
+
+
+  <!-- =====================================================
+       BOTTOM
+  ====================================================== -->
+
+  <div class="product-footer__bottom">
+
+    <span>
+      © 2026 NEATGARMS®
+    </span>
+
+
+    <span class="product-footer__bottom-center">
+      KEEP IT NEAT.
+    </span>
+
+
+    <button
+      type="button"
+      id="product-back-top"
+      class="product-footer__top"
+    >
+
+      <span>
+        BACK TO TOP
+      </span>
+
+      <span aria-hidden="true">
+        ↑
+      </span>
+
+    </button>
+
   </div>
 
-<!-- Footer Subscription Section -->
-<div class="footer-subscribe">
-  <div class="input-container">
-    <input type="text" id="footer-email" required />
-    <label for="footer-email" class="label">Enter Your Email</label>
-    <div class="underline"></div>
-  </div>
-  <button id="subscribe-btn" class="subscribe-btn">Join Now</button>
-</div>
-
-  <!-- Footer Logo -->
-  <div class="footer-logo">
-    <img src="mains/logo2.png" alt="NeatGarms Logo" class="footer-logo-img" />
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2026 NeatGarms. All rights reserved.</p>
-  </div>
 </footer>
 
     
       
-
-  <script src="product.min.js" type="module" defer></script>
+<script src="bag-count.js"></script>
+  <script src="product.js" type="module" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
     AOS.init({
@@ -831,7 +1272,6 @@ const lenis = new Lenis({
   </script>
 
     <script type="module" src="firebase/footer-firebase.js"></script>
-
 
 
 </body>

@@ -1,125 +1,647 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart</title>
-  <meta name="robots" content="noindex, nofollow" />
-  <meta name="theme-color" content="#8a9381" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-  <link rel="stylesheet" href="cart.min.css"> <!-- Make sure to link your CSS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
-    <!-- Favicons -->
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-   <!-- Web Manifest -->
-  <link rel="manifest" href="/site.webmanifest?v=1" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <title>Bag — Neatgarms</title>
 
-  gtag('config', 'G-BNKKRW0J0N');
-</script>
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
 
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "s843wgkqd0");
-</script>
+  <meta
+    name="theme-color"
+    content="#f1f1ed"
+  >
 
-</head>
-<body>
-  <!-- Transition overlay -->
-<div id="page-transition">
-  <div class="logo-wrapper">
-    <img src="mains/logo2.png" alt="Logo">
-  </div>
-</div>
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+  >
 
 
-  <!-- Cart Modal or Section -->
-  <div id="cart-modal">
-    <div class="modal-content">
-      <span class="close-btn" id="close-btn">BACK</span>
-      <h2>Your Cart </h2>
-      <div id="cart-items"></div> <!-- Product cards will be loaded here -->
-      <!--combined price section-->
-      <div id="combined-price-container">
-        <h3>Estimated Total: KSh<span id="combined-price">0.00</span></h3>
-      </div>      
-      <button id="buy-now-btn">BUY NOW</button>
-    </div>
-  </div>
+  <!-- =====================================================
+       FONTS
+  ====================================================== -->
 
-  <script src="cart.min.js" defer></script>
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Instrument+Serif:ital@0;1&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- =====================================================
+       CSS
+  ====================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="cart.css"
+  >
+
+
+  <!-- =====================================================
+       FAVICONS
+  ====================================================== -->
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="/favicon-96x96.png"
+    sizes="96x96"
+  >
+
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/favicon.svg"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="/favicon-32x32.png"
+  >
+
+  <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/favicon-16x16.png"
+  >
+
+  <link
+    rel="shortcut icon"
+    href="/favicon.ico"
+  >
+
+  <link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="/apple-touch-icon.png"
+  >
+
+  <link
+    rel="manifest"
+    href="/site.webmanifest?v=1"
+  >
+
+
+  <!-- =====================================================
+       GOOGLE ANALYTICS
+  ====================================================== -->
+
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"
+  ></script>
 
   <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const links = document.querySelectorAll("a");
-    const transition = document.getElementById("page-transition");
+    window.dataLayer = window.dataLayer || [];
 
-    // Function to disable transition when user uses back/forward
-    window.addEventListener("pageshow", (event) => {
-      const comingFromHistory =
-        event.persisted ||
-        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+    function gtag() {
+      dataLayer.push(arguments);
+    }
 
-      if (comingFromHistory) {
-        transition.classList.remove("active"); // No transition on back/forward
-        sessionStorage.removeItem("transitioning");
-      } else {
-        // Normal link-based navigation
-        if (sessionStorage.getItem("transitioning") === "true") {
-          sessionStorage.setItem("transitioning", "false");
-          transition.classList.remove("active"); // Fade in after animation
-        } else {
-          transition.classList.remove("active"); // Initial page load
-        }
-      }
-    });
+    gtag('js', new Date());
 
-    links.forEach(link => {
-      const href = link.getAttribute("href");
-      if (href && !href.startsWith("#") && !href.startsWith("http")) {
-        link.addEventListener("click", e => {
-          e.preventDefault();
-          sessionStorage.setItem("transitioning", "true");
-          transition.classList.add("active");
+    gtag(
+      'config',
+      'G-BNKKRW0J0N'
+    );
+  </script>
 
-          setTimeout(() => {
-            window.location.href = href;
-          }, 1500); // Match your CSS animation duration
+
+  <!-- =====================================================
+       MICROSOFT CLARITY
+  ====================================================== -->
+
+  <script type="text/javascript">
+
+    (function(c,l,a,r,i,t,y){
+
+      c[a] =
+        c[a] ||
+        function(){
+          (c[a].q = c[a].q || []).push(arguments)
+        };
+
+      t = l.createElement(r);
+
+      t.async = 1;
+
+      t.src =
+        "https://www.clarity.ms/tag/" + i;
+
+      y =
+        l.getElementsByTagName(r)[0];
+
+      y.parentNode.insertBefore(t,y);
+
+    })(
+      window,
+      document,
+      "clarity",
+      "script",
+      "s843wgkqd0"
+    );
+
+  </script>
+
+</head>
+
+
+
+<body>
+
+
+  <!-- =====================================================
+       PAGE TRANSITION
+  ====================================================== -->
+
+  <div
+    id="page-transition"
+    aria-hidden="true"
+  >
+
+    <div class="transition-mark">
+
+      <img
+        src="mains/logo2.png"
+        alt=""
+      >
+
+      <span>
+        NEATGARMS®
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+
+  <header class="cart-nav">
+
+    <div class="cart-nav__left">
+
+      <button
+        type="button"
+        id="close-btn"
+        class="cart-nav__back"
+        aria-label="Go back"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M20 12H4"></path>
+          <path d="M10 6L4 12L10 18"></path>
+        </svg>
+
+        <span>
+          BACK
+        </span>
+
+      </button>
+
+
+      <span class="cart-nav__context">
+        BAG / OBJECTS
+      </span>
+
+    </div>
+
+
+
+    <a
+      href="home.html"
+      class="cart-nav__brand"
+      aria-label="Neatgarms home"
+    >
+
+      <img
+        src="mains/logo2.png"
+        alt="Neatgarms"
+        class="cart-nav__logo"
+      >
+
+    </a>
+
+
+
+    <div class="cart-nav__right">
+
+      <span class="cart-nav__location">
+        NAIROBI / KE
+      </span>
+
+
+      <div
+        class="cart-nav__bag"
+        aria-label="Items in bag"
+      >
+
+        <span>
+          BAG
+        </span>
+
+        <span
+          class="cart-nav__bag-count"
+          id="cart-nav-count"
+        >
+          0
+        </span>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =====================================================
+       BAG
+  ====================================================== -->
+
+  <main class="cart-page">
+
+
+
+    <!-- ===================================================
+         CART WORKSPACE
+    ==================================================== -->
+
+    <section class="cart-workspace">
+
+
+      <!-- ===============================================
+           ITEMS
+      ================================================ -->
+
+      <section class="cart-list">
+
+        <div class="cart-list__header">
+
+          <span>
+            02 / OBJECTS
+          </span>
+
+
+          <span>
+            YOUR BAG
+          </span>
+
+        </div>
+
+
+        <div id="cart-items">
+
+          <!--
+            cart.js generates the products here.
+          -->
+
+        </div>
+
+      </section>
+
+
+
+      <!-- ===============================================
+           SUMMARY
+      ================================================ -->
+
+      <aside class="cart-summary">
+
+
+        <div class="cart-summary__top">
+
+          <span>
+            03 / SUMMARY
+          </span>
+
+          <span>
+            KIN / 2026
+          </span>
+
+        </div>
+
+
+        <div class="cart-summary__title">
+
+          <span>
+            ORDER
+          </span>
+
+          <h2>
+            SUMMARY.
+          </h2>
+
+        </div>
+
+
+
+        <div class="cart-summary__rows">
+
+          <div class="cart-summary__row">
+
+            <span>
+              OBJECTS
+            </span>
+
+            <span id="summary-item-count">
+              0
+            </span>
+
+          </div>
+
+
+          <div class="cart-summary__row">
+
+            <span>
+              SHIPPING
+            </span>
+
+            <span>
+              CALCULATED AT CHECKOUT
+            </span>
+
+          </div>
+
+
+          <div class="cart-summary__row cart-summary__row--total">
+
+            <span>
+              ESTIMATED TOTAL
+            </span>
+
+
+            <div class="cart-total">
+
+              <small>
+                KES
+              </small>
+
+              <strong id="combined-price">
+                0.00
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+
+        <button
+          type="button"
+          id="buy-now-btn"
+          class="checkout-button"
+        >
+
+          <span>
+            PROCEED TO CHECKOUT
+          </span>
+
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path d="M4 12H20"></path>
+            <path d="M14 6L20 12L14 18"></path>
+          </svg>
+
+        </button>
+
+
+
+        <div class="cart-summary__notice">
+
+          <span>
+            SECURE CHECKOUT
+          </span>
+
+
+          <p>
+            SHIPPING AND FINAL ORDER DETAILS
+            ARE CONFIRMED AT CHECKOUT.
+          </p>
+
+        </div>
+
+
+        <a
+          href="main.html"
+          class="continue-shopping"
+        >
+
+          <span>
+            CONTINUE SHOPPING
+          </span>
+
+          <span>
+            ↗
+          </span>
+
+        </a>
+
+      </aside>
+
+    </section>
+
+
+
+    <!-- ===================================================
+         BOTTOM STATEMENT
+    ==================================================== -->
+
+    <section class="cart-end">
+
+      <div class="cart-end__meta">
+
+        <span>
+          NEATGARMS®
+        </span>
+
+        <span>
+          NAIROBI / KE
+        </span>
+
+      </div>
+
+
+      <div class="cart-end__statement">
+
+        <span>
+          KEEP IT
+        </span>
+
+        <em>
+          NEAT.
+        </em>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script
+    src="cart.js"
+    defer
+  ></script>
+
+
+  <!-- =====================================================
+       PAGE TRANSITION
+  ====================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        const links =
+          document.querySelectorAll("a");
+
+        const transition =
+          document.getElementById(
+            "page-transition"
+          );
+
+
+        window.addEventListener(
+          "pageshow",
+          event => {
+
+            const navigation =
+              window.performance
+                .getEntriesByType("navigation")[0];
+
+
+            const comingFromHistory =
+              event.persisted ||
+              navigation?.type ===
+                "back_forward";
+
+
+            if (comingFromHistory) {
+
+              transition?.classList.remove(
+                "active"
+              );
+
+              sessionStorage.removeItem(
+                "transitioning"
+              );
+
+              return;
+
+            }
+
+
+            transition?.classList.remove(
+              "active"
+            );
+
+            sessionStorage.setItem(
+              "transitioning",
+              "false"
+            );
+
+          }
+        );
+
+
+        links.forEach(link => {
+
+          const href =
+            link.getAttribute("href");
+
+
+          if (
+            !href ||
+            href.startsWith("#") ||
+            href.startsWith("http") ||
+            link.target === "_blank"
+          ) {
+            return;
+          }
+
+
+          link.addEventListener(
+            "click",
+            event => {
+
+              event.preventDefault();
+
+
+              sessionStorage.setItem(
+                "transitioning",
+                "true"
+              );
+
+
+              transition?.classList.add(
+                "active"
+              );
+
+
+              setTimeout(
+                () => {
+
+                  window.location.href =
+                    href;
+
+                },
+                800
+              );
+
+            }
+          );
+
         });
+
       }
-    });
-  });
-</script>
+    );
 
-
-
-
-
-<script>
-  // Fade in effect when page loads
-document.body.style.opacity = 0;
-requestAnimationFrame(() => {
-  document.body.style.opacity = 1;
-});
-
-</script>
+  </script>
 
 </body>
+
 </html>

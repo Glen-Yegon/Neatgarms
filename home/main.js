@@ -1,253 +1,749 @@
+/* =========================================================
+   NEATGARMS — SHOP PAGE
+========================================================= */
 
-// Filter and sort
-const filterBtn = document.getElementById('filter-btn');
-const filterMenu = document.getElementById('filter-menu');
-const closeMenu = document.getElementById('close-menu');
-const menuOverlay = document.getElementById('menu-overlay');
-const filterOptions = document.querySelectorAll('.filter-option');
-const productCards = document.querySelectorAll('.product-card');
 
-// Open Filter Menu
-filterBtn.addEventListener('click', () => {
-  filterMenu.classList.add('open');
-  menuOverlay.classList.remove('hidden');
-});
+/* =========================================================
+   01. NAVIGATION MENU
+========================================================= */
 
-// Close Filter Menu
-function closeFilterMenu() {
-  filterMenu.classList.remove('open');
-  menuOverlay.classList.add('hidden');
-}
-closeMenu.addEventListener('click', closeFilterMenu);
-menuOverlay.addEventListener('click', closeFilterMenu);
-
-  const highToLowBtn = document.querySelectorAll('.prev-btn')[0];
-  const lowToHighBtn = document.querySelectorAll('.prev-btn')[1];
-  const productContainer = document.querySelector('.product-grid') || document.querySelector('#products'); // replace with your actual container
-
-  // Convert NodeList to Array
-  const getSortedCards = (descending = false) => {
-    const cardsArray = Array.from(document.querySelectorAll('.product-card'));
-
-    return cardsArray.sort((a, b) => {
-      const priceA = parseInt(a.querySelector('.new-price').textContent.trim());
-      const priceB = parseInt(b.querySelector('.new-price').textContent.trim());
-
-      return descending ? priceB - priceA : priceA - priceB;
-    });
-  };
-
-  // Function to reorder DOM elements
-  const reorderCards = (sortedCards) => {
-    sortedCards.forEach(card => productContainer.appendChild(card));
-  };
-
-  // Event listeners for buttons
-  highToLowBtn.addEventListener('click', () => {
-    const sorted = getSortedCards(true); // Descending
-    reorderCards(sorted);
-    closeFilterMenu();
-  });
-
-  lowToHighBtn.addEventListener('click', () => {
-    const sorted = getSortedCards(false); // Ascending
-    reorderCards(sorted);
-    closeFilterMenu();
-  });
-
-// Get the menu button, menu, and close button
 const menuBtn = document.getElementById('menu-btn');
 const menu = document.getElementById('menu');
 const closeBtn = document.getElementById('close-btn');
 
-// Toggle the menu visibility when the menu button is clicked
-menuBtn.addEventListener('click', () => {
-  menu.style.display = 'block'; // Show the menu
-});
 
-// Close the menu when the close button is clicked
-closeBtn.addEventListener('click', () => {
-  menu.style.display = 'none'; // Hide the menu
-});
+function openNavMenu() {
+  if (!menu || !menuBtn) return;
 
+  menu.classList.add('is-open');
 
-// Close the menu if the user clicks anywhere outside of it
-document.addEventListener('click', (event) => {
-  if (!menu.contains(event.target) && event.target !== menuBtn) {
-    menu.style.display = 'none'; // Hide the menu if click is outside
+  menu.setAttribute('aria-hidden', 'false');
+  menuBtn.setAttribute('aria-expanded', 'true');
+
+  document.body.style.overflow = 'hidden';
+
+  if (typeof lenis !== 'undefined') {
+    lenis.stop();
   }
-});
+}
 
 
-window.initializeProductBehaviors = function() {
+function closeNavMenu() {
+  if (!menu || !menuBtn) return;
 
-  /* ----------------------------------------
-     IMAGE HOVER SWAP FOR .product-card
-  ---------------------------------------- */
-  document.querySelectorAll('.product-card').forEach((card) => {
-    const images = card.querySelectorAll('.image-wrapper img');
+  menu.classList.remove('is-open');
 
-    // Show only the first image by default
-    images.forEach((img, index) => {
-      img.style.opacity = index === 0 ? '1' : '0';
-      img.style.zIndex = index === 0 ? '1' : '0';
-    });
+  menu.setAttribute('aria-hidden', 'true');
+  menuBtn.setAttribute('aria-expanded', 'false');
 
-    card.addEventListener('mouseenter', () => {
-      if (images.length > 1) {
-        images[0].style.opacity = '0';
-        images[1].style.opacity = '1';
-        images[0].style.zIndex = '0';
-        images[1].style.zIndex = '1';
-      }
-    });
+  document.body.style.overflow = '';
 
-    card.addEventListener('mouseleave', () => {
-      if (images.length > 1) {
-        images[0].style.opacity = '1';
-        images[1].style.opacity = '0';
-        images[0].style.zIndex = '1';
-        images[1].style.zIndex = '0';
-      }
-    });
-  });
-
-
-  /* ----------------------------------------
-     PRODUCT CLICK → OPEN PRODUCT PAGE
-  ---------------------------------------- */
-  document.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('click', () => {
-
-      const images      = Array.from(card.querySelectorAll('.image-wrapper img')).map(i => i.src);
-      const status      = card.querySelector('.status')?.innerText ?? null;
-      const name        = card.querySelector('.product-name').innerText;
-      const oldPrice    = card.querySelector('.old-price')?.innerText ?? null;
-      const newPrice    = card.querySelector('.new-price')?.innerText ?? null;
-      const colors      = Array.from(card.querySelectorAll('.color-buttons .color-btn'))
-                               .map(btn => btn.dataset.color);
-
-      const rawSizes    = Array.from(card.querySelectorAll('.size-buttons .size-btn'))
-                               .map(btn => btn.dataset.size);
-
-      const sizes       = rawSizes.map(s => s.replace('*', '').trim());
-      const outOfStock  = rawSizes.filter(s => s.includes('*')).map(s => s.replace('*', '').trim());
-
-      const description = card.dataset.description || '';
-      const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
-      const sizeFit     = card.dataset.sizefit || '';
-
-      const productId   = card.id;
-
-      const productData = {
-        images,
-        name,
-        oldPrice,
-        newPrice,
-        sizes,
-        outOfStock,
-        colors,
-        description,
-        features,
-        sizeFit
-      };
-
-      localStorage.setItem('selectedProduct', JSON.stringify(productData));
-      window.location.href = `product.html?id=${productId}`;
-    });
-  });
-
-}; // END initializeProductBehaviors()
-
-
-/* ----------------------------------------
-   RUN ON PAGE LOAD
----------------------------------------- */
-document.addEventListener('DOMContentLoaded', () => {
-  window.initializeProductBehaviors();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Get the URL fragment (e.g., #product-1)
-  const urlHash = window.location.hash;
-
-  if (urlHash) {
-    // Remove the "#" and find the element with the matching ID
-    const targetProduct = document.querySelector(urlHash);
-
-    if (targetProduct) {
-      // Highlight the product card
-      targetProduct.classList.add("highlight");
-
-      // Scroll to the product card
-      targetProduct.scrollIntoView({ behavior: "smooth", block: "center" });
-
-      // Remove highlight after 3 seconds
-      setTimeout(() => {
-        targetProduct.classList.remove("highlight");
-      }, 3000);
-    }
+  if (typeof lenis !== 'undefined') {
+    lenis.start();
   }
+}
+
+
+menuBtn?.addEventListener('click', openNavMenu);
+closeBtn?.addEventListener('click', closeNavMenu);
+
+
+document.addEventListener('keydown', (event) => {
+
+  if (
+    event.key === 'Escape' &&
+    menu?.classList.contains('is-open')
+  ) {
+    closeNavMenu();
+  }
+
 });
 
 
+/* =========================================================
+   02. PRODUCT DATA
+========================================================= */
+
+/*
+  Reads all product information from the dynamically
+  imported .product-card.
+
+  This keeps the same structure your product.html
+  already expects.
+*/
+
+function getProductData(card) {
+
+  const images = Array
+    .from(card.querySelectorAll('.image-wrapper img'))
+    .map(img => img.src);
 
 
-
-// DOM Elements
-const searchBtn = document.querySelector('.search-btn');
-const searchContainer = document.getElementById('ui-input-container');
-const searchInput = document.getElementById('ui-input');
-const closeSearchBtn = document.getElementById('close-search');
+  const status =
+    card.querySelector('.status')?.innerText.trim() ||
+    card.querySelector('.sold-out-badge')?.innerText.trim() ||
+    null;
 
 
-// Open the search bar
-searchBtn.addEventListener('click', () => {
-  searchContainer.classList.remove('hidden');
-  searchInput.focus(); // Focus the input field for easy typing
-});
+  const name =
+    card.querySelector('.product-name')?.innerText.trim() || '';
 
-// Close the search bar
-closeSearchBtn.addEventListener('click', () => {
-  searchContainer.classList.add('hidden');
-  searchInput.value = ''; // Clear the search field
-  filterProducts(''); // Reset the filter to show all products
-});
 
-// Search functionality (filter based on product name)
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase().trim(); // Get the search term (case-insensitive)
+  const oldPrice =
+    card.querySelector('.old-price')?.innerText.trim() || null;
 
-  filterProducts(query);
-});
 
-// Function to filter product cards by name
-function filterProducts(query) {
-  productCards.forEach((card) => {
-    const productName = card.querySelector('.product-name').textContent.toLowerCase();
+  const newPrice =
+    card.querySelector('.new-price')?.innerText.trim() || null;
 
-    // If the product name includes the query, show it; otherwise, hide it
-    if (productName.includes(query)) {
-      card.classList.remove('hidden');
-    } else {
-      card.classList.add('hidden');
+
+  const colors = Array
+    .from(card.querySelectorAll('.color-buttons .color-btn'))
+    .map(btn => btn.dataset.color)
+    .filter(Boolean);
+
+
+  const rawSizes = Array
+    .from(card.querySelectorAll('.size-buttons .size-btn'))
+    .map(btn => btn.dataset.size)
+    .filter(Boolean);
+
+
+  const sizes = rawSizes.map(size =>
+    size.replace('*', '').trim()
+  );
+
+
+  const outOfStock = rawSizes
+    .filter(size => size.includes('*'))
+    .map(size => size.replace('*', '').trim());
+
+
+  const description =
+    card.dataset.description || '';
+
+
+  let features = [];
+
+  if (card.dataset.features) {
+
+    try {
+      features = JSON.parse(card.dataset.features);
     }
+
+    catch (error) {
+      console.warn(
+        'Could not parse product features:',
+        error
+      );
+    }
+
+  }
+
+
+  const sizeFit =
+    card.dataset.sizefit || '';
+
+
+  /*
+    IMPORTANT:
+
+    Your old system used card.id.
+
+    We preserve that so product.html?id=...
+    continues working exactly the same way.
+  */
+
+  const productId =
+    card.id ||
+    card.dataset.productId ||
+    '';
+
+
+  return {
+    productId,
+    productData: {
+      images,
+      status,
+      name,
+      oldPrice,
+      newPrice,
+      sizes,
+      outOfStock,
+      colors,
+      description,
+      features,
+      sizeFit
+    }
+  };
+
+}
+
+
+/* =========================================================
+   03. OPEN PRODUCT
+========================================================= */
+
+function openProduct(card) {
+
+  if (!card) return;
+
+
+  const {
+    productId,
+    productData
+  } = getProductData(card);
+
+
+  if (!productId) {
+
+    console.error(
+      'Product card has no ID:',
+      card
+    );
+
+    return;
+  }
+
+
+  /*
+    Save product exactly as product.html expects.
+  */
+
+  localStorage.setItem(
+    'selectedProduct',
+    JSON.stringify(productData)
+  );
+
+
+  /*
+    Open product page.
+  */
+
+  window.location.href =
+    `product.html?id=${encodeURIComponent(productId)}`;
+}
+
+
+/* =========================================================
+   04. PRODUCT IMAGE HOVER
+========================================================= */
+
+function initializeImageHover(card) {
+
+  /*
+    Prevent duplicate initialization if your importer
+    calls initializeProductBehaviors more than once.
+  */
+
+  if (card.dataset.hoverInitialized === 'true') {
+    return;
+  }
+
+
+  card.dataset.hoverInitialized = 'true';
+
+
+  const images =
+    card.querySelectorAll('.image-wrapper img');
+
+
+  if (!images.length) return;
+
+
+  /*
+    First image visible by default.
+  */
+
+  images.forEach((img, index) => {
+
+    img.style.opacity =
+      index === 0 ? '1' : '0';
+
+    img.style.zIndex =
+      index === 0 ? '1' : '0';
+
   });
+
+
+  /*
+    Only create hover swapping when there
+    is actually another image.
+  */
+
+  if (images.length < 2) return;
+
+
+  card.addEventListener('mouseenter', () => {
+
+    images[0].style.opacity = '0';
+    images[0].style.zIndex = '0';
+
+    images[1].style.opacity = '1';
+    images[1].style.zIndex = '1';
+
+  });
+
+
+  card.addEventListener('mouseleave', () => {
+
+    images[0].style.opacity = '1';
+    images[0].style.zIndex = '1';
+
+    images[1].style.opacity = '0';
+    images[1].style.zIndex = '0';
+
+  });
+
 }
 
 
 
 
+/* =========================================================
+   06. INITIALIZE PRODUCT CARDS
+========================================================= */
+
+window.initializeProductBehaviors = function () {
+
+  const cards =
+    document.querySelectorAll('.product-card');
 
 
+  cards.forEach(card => {
+
+    /*
+      Image swapping
+    */
+
+    initializeImageHover(card);
+
+
+
+    /*
+      Avoid registering the card click twice.
+    */
+
+    if (
+      card.dataset.clickInitialized === 'true'
+    ) {
+      return;
+    }
+
+
+    card.dataset.clickInitialized = 'true';
+
+
+    /*
+      Entire product card opens product.
+    */
+
+    card.addEventListener('click', (event) => {
+
+      /*
+        Ignore interactive elements if you add
+        other buttons/links later.
+      */
+
+      if (
+        event.target.closest(
+          'button, a, input, select, textarea'
+        )
+      ) {
+        return;
+      }
+
+
+      openProduct(card);
+
+    });
+
+
+    /*
+      Keyboard accessibility.
+    */
+
+    if (!card.hasAttribute('tabindex')) {
+      card.setAttribute('tabindex', '0');
+    }
+
+
+    card.addEventListener('keydown', (event) => {
+
+      if (
+        event.key === 'Enter' ||
+        event.key === ' '
+      ) {
+
+        event.preventDefault();
+
+        openProduct(card);
+
+      }
+
+    });
+
+  });
+
+};
+
+
+/* =========================================================
+   07. INITIAL PAGE LOAD
+========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+
+    window.initializeProductBehaviors();
+
+  }
+);
+
+
+/* =========================================================
+   08. HANDLE DYNAMIC PRODUCT IMPORT
+========================================================= */
+
+/*
+  Your product cards are inserted into .product-slot
+  AFTER the page HTML loads.
+
+  MutationObserver watches the collection and initializes
+  any new cards as soon as import-products.js inserts them.
+*/
+
+const productArea =
+  document.querySelector('.kin-collection');
+
+
+if (productArea) {
+
+  const productObserver =
+    new MutationObserver((mutations) => {
+
+      let productAdded = false;
+
+
+      mutations.forEach(mutation => {
+
+        mutation.addedNodes.forEach(node => {
+
+          if (!(node instanceof HTMLElement)) {
+            return;
+          }
+
+
+          if (
+            node.matches?.('.product-card') ||
+            node.querySelector?.('.product-card')
+          ) {
+            productAdded = true;
+          }
+
+        });
+
+      });
+
+
+      if (productAdded) {
+
+        window.initializeProductBehaviors();
+
+      }
+
+    });
+
+
+  productObserver.observe(
+    productArea,
+    {
+      childList: true,
+      subtree: true
+    }
+  );
+
+}
+
+
+/* =========================================================
+   09. URL HASH / PRODUCT HIGHLIGHT
+========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+
+    const urlHash =
+      window.location.hash;
+
+
+    if (!urlHash) return;
+
+
+    /*
+      Because products are dynamically loaded,
+      give the importer time to create them.
+    */
+
+    const findProduct = () => {
+
+      const targetProduct =
+        document.querySelector(urlHash);
+
+
+      if (!targetProduct) {
+        return false;
+      }
+
+
+      targetProduct.classList.add('highlight');
+
+
+      targetProduct.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
+      });
+
+
+      setTimeout(() => {
+
+        targetProduct.classList.remove(
+          'highlight'
+        );
+
+      }, 3000);
+
+
+      return true;
+
+    };
+
+
+    if (findProduct()) return;
+
+
+    /*
+      Watch for imported product.
+    */
+
+    const hashObserver =
+      new MutationObserver(() => {
+
+        if (findProduct()) {
+
+          hashObserver.disconnect();
+
+        }
+
+      });
+
+
+    const collection =
+      document.querySelector('.kin-collection');
+
+
+    if (collection) {
+
+      hashObserver.observe(
+        collection,
+        {
+          childList: true,
+          subtree: true
+        }
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   10. SEARCH
+========================================================= */
+
+const searchBtn =
+  document.querySelector('.search-btn');
+
+const searchContainer =
+  document.getElementById('ui-input-container');
+
+const searchInput =
+  document.getElementById('ui-input');
+
+const closeSearchBtn =
+  document.getElementById('close-search');
+
+
+searchBtn?.addEventListener(
+  'click',
+  () => {
+
+    if (!searchContainer) return;
+
+
+    searchContainer.classList.remove(
+      'hidden'
+    );
+
+
+    searchInput?.focus();
+
+  }
+);
+
+
+closeSearchBtn?.addEventListener(
+  'click',
+  () => {
+
+    if (!searchContainer) return;
+
+
+    searchContainer.classList.add(
+      'hidden'
+    );
+
+
+    if (searchInput) {
+      searchInput.value = '';
+    }
+
+
+    filterProducts('');
+
+  }
+);
+
+
+searchInput?.addEventListener(
+  'input',
+  () => {
+
+    const query =
+      searchInput.value
+        .toLowerCase()
+        .trim();
+
+
+    filterProducts(query);
+
+  }
+);
+
+
+/* =========================================================
+   11. SEARCH PRODUCTS
+========================================================= */
+
+function filterProducts(query) {
+
+  /*
+    Don't store productCards globally.
+
+    Products don't exist when main.js initially runs
+    because import-products.js creates them later.
+
+    Always query the CURRENT cards.
+  */
+
+  const cards =
+    document.querySelectorAll('.product-card');
+
+
+  cards.forEach(card => {
+
+    const productName =
+      card
+        .querySelector('.product-name')
+        ?.textContent
+        .toLowerCase() || '';
+
+
+    /*
+      Hide the entire editorial piece,
+      not only the inner card.
+    */
+
+    const piece =
+      card.closest('.kin-piece');
+
+
+    if (productName.includes(query)) {
+
+      if (piece) {
+        piece.style.display = '';
+      }
+
+      else {
+        card.style.display = '';
+      }
+
+    }
+
+    else {
+
+      if (piece) {
+        piece.style.display = 'none';
+      }
+
+      else {
+        card.style.display = 'none';
+      }
+
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   12. PRODUCT ID GENERATOR
+========================================================= */
 
 function generateProductId(name) {
+
   return name
-    .split(" ")                // split by spaces
-    .map(word => word[0])      // take first letter of each word
-    .join("")                  // join them
-    .toLowerCase();            // make lowercase
+    .split(' ')
+    .filter(Boolean)
+    .map(word => word[0])
+    .join('')
+    .toLowerCase();
+
 }
 
-// "Work Shirt" → "ws"
-// "Casual Pants" → "cp"
+/* =========================================================
+   KIN END — CINEMATIC LIGHT
+========================================================= */
+
+const kinEnd = document.querySelector('.kin-end');
+
+if (kinEnd && window.matchMedia('(hover: hover)').matches) {
+
+  kinEnd.addEventListener('mousemove', (event) => {
+
+    const rect = kinEnd.getBoundingClientRect();
+
+    const x =
+      ((event.clientX - rect.left) / rect.width) * 100;
+
+    const y =
+      ((event.clientY - rect.top) / rect.height) * 100;
+
+    kinEnd.style.setProperty('--mx', `${x}%`);
+    kinEnd.style.setProperty('--my', `${y}%`);
+
+  });
+
+
+  kinEnd.addEventListener('mouseleave', () => {
+
+    kinEnd.style.setProperty('--mx', '50%');
+    kinEnd.style.setProperty('--my', '50%');
+
+  });
+
+}

@@ -2,48 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:site_name" content="Neatgarms">
-<meta name="description" content="Neatgarms is your plug for exclusive, bold, and limited merch. Designed to impress — worn by those who don’t settle for average. Ships worldwide.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<meta name="theme-color" content="#8a9381">
-<meta name="robots" content="index, follow">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta property="og:site_name" content="Neatgarms">
+  <meta name="description" content="Neatgarms is your plug for exclusive, bold, and limited merch. Designed to impress — worn by those who don’t settle for average. Ships worldwide.">
+  <meta name="theme-color" content="#050505">
+  <meta name="robots" content="index, follow">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <title>Neatgarms</title>
+
   <link rel="stylesheet" href="styles.css">
-  <link
-  rel="preload"
-  href="fonts/DreamAvenue.woff2"
-  as="font"
-  type="font/woff2"
-  crossorigin
-/>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <!-- Lenis smooth scrolling -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/lenis@1.3.26/dist/lenis.css"
+>
+  <link rel="prefetch" href="main.html">
+  <link rel="canonical" href="https://neatgarms.com/">
+  <link rel="manifest" href="/site.webmanifest?v=1">
 
-<link rel="prefetch" href="main.html">
-<link rel="prefetch" href="item.html">
-
-
-   <link rel="canonical" href="https://neatgarms.com/" />
-   <link rel="manifest" href="/site.webmanifest?v=1">
-
-   
- <!-- Favicon / icons -->
+  <!-- Favicon / icons -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
   <!-- Open Graph -->
-  <meta property="og:site_name" content="Neatgarms">
   <meta property="og:title" content="Neatgarms">
   <meta property="og:description" content="Elevate your wardrobe with bold, stylish, and timeless streetwear designed to stand out.">
   <meta property="og:image" content="https://neatgarms.com/future/f1 (76).jpg">
@@ -56,1094 +43,454 @@
   <meta name="twitter:description" content="Explore our modern streetwear collections and elevate your look.">
   <meta name="twitter:image" content="https://neatgarms.com/future/f1 (76).jpg">
 
+  <!-- Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
-<link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.110.0/three.min.js" defer></script>
-  
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+<!-- Three.js import map -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+  }
+}
+</script>
 
   <!-- Organization structured data -->
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Neatgarms",
-  "url": "https://neatgarms.com",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://neatgarms.com/logo.png"
-  },
-  "description": "Neatgarms is a premium clothing brand delivering timeless style, modern comfort and authentic expression.",
-  "sameAs": [
-    "https://www.instagram.com/neatgarms"
-  ]
-}
-
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Neatgarms",
+    "url": "https://neatgarms.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://neatgarms.com/logo.png"
+    },
+    "description": "Neatgarms is a premium clothing brand delivering timeless style, modern comfort and authentic expression.",
+    "sameAs": [
+      "https://www.instagram.com/neatgarms"
+    ]
+  }
   </script>
 
+  <!-- Preserve your existing first-visit state -->
   <script>
-  if (sessionStorage.getItem("hasVisited")) {
-    document.documentElement.classList.add("visited");
-  }
-</script>
+    if (sessionStorage.getItem("hasVisited")) {
+      document.documentElement.classList.add("visited");
+    }
+  </script>
 
+  <!-- Google tag (preserved) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BNKKRW0J0N');
+  </script>
 
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-BNKKRW0J0N');
-</script>
-
-<script type="text/javascript">
+  <!-- Microsoft Clarity (preserved) -->
+  <script>
     (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "s843wgkqd0");
-</script>
-
+  </script>
 </head>
 
 <body>
+<!-- =======================================================
+     NEATGARMS CUSTOM CURSOR
+     ======================================================= -->
+
+<div
+  class="neat-cursor"
+  id="neatCursor"
+  aria-hidden="true"
+>
+  ★
+</div>
+
+<!-- =========================================================
+     FIRST-VISIT INTRO
+     NEATGARMS / CAMPAIGN SYSTEM
+     ========================================================= -->
+
+<div class="neat-loader" id="neatLoader" aria-hidden="true">
+
+  <div class="noise-layer noise-layer--loader"></div>
 
 
-    <div class="glass-overlay"></div>
+  <!-- TOP META -->
 
-<!--
-    <div class="loading-page">
-        <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path
-                d="M415.44 512h-95.11L212.12 357.46v91.1L125.69 512H28V29.82L68.47 0h108.05l123.74 176.13V63.45L386.69 0h97.69v461.5zM38.77 35.27V496l72-52.88V194l215.5 307.64h84.79l52.35-38.17h-78.27L69 13zm82.54 466.61l80-58.78v-101l-79.76-114.4v220.94L49 501.89h72.34zM80.63 10.77l310.6 442.57h82.37V10.77h-79.75v317.56L170.91 10.77zM311 191.65l72 102.81V15.93l-72 53v122.72z" />
-        </svg>
+  <div class="loader-meta loader-meta--top">
+    <span>NEAT®</span>
+    <span>001 / KIN</span>
+  </div>
 
-        
-        <div class="name-container">
-            <div class="logo-name">Neatgarms</div>
+
+  <!-- CENTER SYSTEM -->
+
+  <div class="loader-system">
+
+    <div class="loader-counter-wrap">
+
+      <span
+        class="loader-counter"
+        id="loaderCounter"
+      >
+        00
+      </span>
+
+    </div>
+
+
+    <div class="loader-system-meta">
+
+      <span
+        class="loader-status"
+        id="loaderStatus"
+      >
+        INITIALISING
+      </span>
+
+      <span>CAMPAIGN / 001</span>
+
+    </div>
+
+
+    <div
+      class="loader-track"
+      id="loaderTrack"
+      aria-hidden="true"
+    >
+      <span class="loader-track__line"></span>
+      <span class="loader-track__scanner"></span>
+    </div>
+
+  </div>
+
+
+  <!-- FINAL REVEAL LINE -->
+
+  <div
+    class="loader-reveal-line"
+    id="loaderRevealLine"
+    aria-hidden="true"
+  ></div>
+
+
+  <!-- BOTTOM META -->
+
+  <div class="loader-meta loader-meta--bottom">
+    <span>KEEP IT NEAT.</span>
+    <span>NAIROBI — KE</span>
+  </div>
+
+</div>
+
+
+  <!-- =========================================================
+       INTERNAL PAGE TRANSITION
+       Preserves the transition behavior from your old homepage,
+       but visually matches the new art direction.
+       ========================================================= -->
+  <div class="page-transition" id="pageTransition" aria-hidden="true">
+    <div class="page-transition__noise"></div>
+    <img src="mains/logo2.png" alt="" class="page-transition__logo">
+    <span class="page-transition__label">NEAT®</span>
+  </div>
+
+
+  <div class="site-shell" id="siteShell">
+
+    <!-- =======================================================
+         HERO — THE HOMEPAGE IS THE CAMPAIGN
+         ======================================================= -->
+    <main>
+      <section class="hero" id="home">
+
+        <picture class="hero-media" aria-hidden="true">
+          <source media="(max-width: 767px)" srcset="images//DSC00384.jpg">
+          <img
+            src="images/DSC00437.jpg"
+            alt="Neatgarms campaign"
+            class="hero-image"
+            id="heroImage"
+            fetchpriority="high"
+            decoding="async"
+          >
+        </picture>
+
+        <div class="hero-vignette"></div>
+        <div class="hero-light"></div>
+        <div class="noise-layer"></div>
+
+
+
+        <!-- ===================================================
+             NAV
+             =================================================== -->
+        <header class="site-header" id="siteHeader">
+          <a href="#home" class="brand" aria-label="Neatgarms home">
+            <img src="mains/logo2.png" alt="Neatgarms">
+          </a>
+
+          <nav class="desktop-nav" aria-label="Primary navigation">
+            <a href="main.html" class="nav-link" data-transition-link>SHOP</a>
+            <a href="lookbook.html" class="nav-link" data-transition-link>LOOKBOOK</a>
+          </nav>
+
+          <div class="header-actions">
+            <a href="dashboard.html" class="account-link" data-transition-link>DASHBOARD</a>
+
+<a
+  href="cart.html"
+  class="bag-link"
+  data-transition-link
+  aria-label="Shopping bag"
+>
+  <svg
+    class="bag-icon"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path
+      d="M5.5 8.5h13l-1 12h-11l-1-12Z"
+    />
+    <path
+      d="M9 9V6.5a3 3 0 0 1 6 0V9"
+    />
+  </svg>
+
+  <span class="bag-count">(0)</span>
+</a>
+
+            <button
+              class="menu-trigger"
+              id="menuTrigger"
+              type="button"
+              aria-label="Open menu"
+              aria-controls="mobileMenu"
+              aria-expanded="false"
+            >
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </header>
+
+
+<!-- ===================================================
+     REAL 3D NEAT OBJECT
+     SVG -> Three.js -> ExtrudeGeometry -> glass material
+     =================================================== -->
+<!-- Full hero WebGL scene -->
+<div
+  class="three-canvas-host"
+  id="threeCanvasHost"
+  aria-hidden="true"
+></div>
+
+
+<!-- Interaction zone for the 3D logo -->
+<div
+  class="object-zone"
+  id="objectZone"
+  role="img"
+  aria-label="Neatgarms transparent three-dimensional logo"
+>
+  <span
+    class="drag-label"
+    id="dragLabel"
+    aria-hidden="true"
+  >
+    DRAG
+  </span>
+</div>
+
+
+        <!-- Editorial micro-information -->
+        <div class="hero-meta hero-meta--left">
+          <span class="hero-meta__muted">KIN / 001</span>
+          <span>KEEP IT NEAT.</span>
         </div>
-    </div>
--->
 
-    <!-- Transition overlay -->
-<div id="page-transition">
-  <div class="logo-wrapper">
-    <img src="mains/logo2.png" alt="Neatgarms Logo">
+        <div class="hero-meta hero-meta--right">
+          <span class="hero-meta__muted">NAIROBI, KE</span>
+          <a href="main.html" class="enter-shop" >
+            ENTER SHOP <span>↗</span>
+          </a>
+        </div>
+
+<!-- Bottom-center campaign CTA -->
+<div class="hero-kin-cta">
+
+  <div class="hero-kin-word">
+    KIN
   </div>
+
+  <a
+    href="main.html"
+    class="hero-shop-button"
+    data-transition-link
+  >
+    <span>SHOP</span>
+    <span class="hero-shop-button__arrow">↗</span>
+  </a>
+
 </div>
 
+        <div class="hero-coordinate hero-coordinate--left" aria-hidden="true">
+          01°17′S
+        </div>
 
-<div class="main-site">
-
-<section class="hero">
-
-<!-- Desktop Image -->
-<img src="new/bsw1.jpg" alt="Hero Background" class="hero-image desktop-only">
-
-<!-- Mobile Image -->
-<img src="new/bsw6.jpg" alt="Hero Background" class="hero-image mobile-only">
+        <div class="hero-coordinate hero-coordinate--right" aria-hidden="true">
+          36°49′E
+        </div>
+      </section>
+    </main>
 
 
-  <nav class="navbar" id="navbar">
+    <!-- =======================================================
+         FOOTER — SECOND CAMPAIGN MOMENT
+         Keeps the existing membership/email functionality in the
+         footer instead of deleting it.
+         ======================================================= -->
+    <footer class="footer" id="footer">
 
-    
-    <div class="logo">
-     <a href="#neat-promo"> <img src="mains/logo2.png" alt="Company Logo" loading="eager" fetchpriority="high" /></a>
-    </div>
+      <div class="footer-noise noise-layer"></div>
 
-<div class="navbar-links" style="font-family: 'Poppins', sans-serif;">
+      <div class="footer-top">
+        <div class="footer-identity">
+          <span>NEATGARMS</span>
+          <span>NAIROBI, KENYA</span>
+        </div>
 
-    <div class="nav-item">
-<!-- Example for TOPS -->
-<a href="lookbook.html" class="nav-link">Lookbook</a>
+        <div class="footer-newsletter">
+          <p>
+            PRIVATE ACCESS TO DROPS,<br>
+            RELEASES &amp; NEAT BUSINESS.
+          </p>
 
-  </div>
+          <!-- IDs preserved for firebase/footer-firebase.js -->
+          <div class="footer-signup">
+            <label for="footer-email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="footer-email"
+              autocomplete="email"
+              placeholder="EMAIL ADDRESS"
+              required
+            >
+            <button id="subscribe-btn" type="button">
+              JOIN ↗
+            </button>
+          </div>
 
-  <!-- TOPS -->
+          <p class="footer-legal">
+            By joining you agree to our
+            <a href="terms-and-conditions.html" data-transition-link>Terms</a>
+            and
+            <a href="privacy-policy.html" data-transition-link>Privacy Policy</a>.
+          </p>
+        </div>
 
-  <div class="nav-item">
-<!-- Example for TOPS -->
-<a href="" class="nav-link" data-menu="tops-menu">TOPS</a>
+        <div class="footer-links">
+          <div>
+            <span class="footer-label">SOCIAL</span>
+            <a href="https://www.instagram.com/neatgarms" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗</a>
+            <a href="#" aria-label="Neatgarms TikTok">TIKTOK ↗</a>
+          </div>
 
-    <div class="side-menu" id="tops-menu">
-      <button class="close-btn">&times;</button>
-      <h2 class="menu-title">TOPS</h2>
-<p class="menu-desc">
-Elevate your streetwear game with our latest Top's drops — sharp cuts, bold prints, and all-day comfort designed for everyday moves.
-</p>
-
-      <div class="dropdown-card">
-        <img src="chapter/optimized/black (2).webp" alt="Top 1" loading="lazy" fetchpriority="low">
-        <p>Black Stone Washed Tee</p>
-      <a href="tops.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
+          <div>
+            <span class="footer-label">INFO</span>
+            <a href="terms-and-conditions.html" data-transition-link>TERMS</a>
+            <a href="privacy-policy.html" data-transition-link>PRIVACY</a>
+            <a href="mailto:info@neatgarms.com">CONTACT ↗</a>
+          </div>
+        </div>
       </div>
 
-    </div>
+
+<div
+  class="footer-statement"
+  id="footerStatement"
+  aria-label="KIN"
+>
+  <div class="footer-statement__line footer-statement__line--kin">
+    <span class="footer-star" aria-hidden="true">★</span>
+
+    <span class="footer-kin">KIN</span>
+
+    <span class="footer-star" aria-hidden="true">★</span>
   </div>
+</div>
 
 
-  <!-- BOTTOMS -->
-  <div class="nav-item">
-<a href="#bottoms" class="nav-link" data-menu="bottoms-menu">BOTTOMS</a>
-    <div class="side-menu" id="bottoms-menu">
-      <button class="close-btn">&times;</button>
-      <h2 class="menu-title">BOTTOMS</h2>
-<p class="menu-desc">
-Explore pants crafted for function, form, and flexibility — made to fit your lifestyle and move with purpose.
-</p>
-      <!-- Add cards here -->
-       <div class="dropdown-card">
-        <img src="future/optimized/f1 (36).webp" alt="Top 1" loading="lazy" fetchpriority="low">
-        <p>Soft Hours Track Jacket</p>
-      <a href="pants.html"> <button style="border-bottom: 1px solid white;">Shop Now →</button> </a>
+      <div class="footer-bottom">
+        <span>© 2026 NEATGARMS</span>
+        <span class="footer-bottom__kin">KIN®</span>
+        <button class="back-top" id="backTop" type="button">BACK TO TOP ↑</button>
       </div>
-
-    </div>
+    </footer>
   </div>
 
-  <!-- NEW -->
-<div class="nav-item">
-  <a href="#hero-text" class="nav-link">NEW</a>
-    <div class="side-menu" id="new-menu">
-      <button class="close-btn">&times;</button>
-      <h2 class="menu-title">NEW</h2>
-      <p class="menu-desc">Check out the latest arrivals fresh off the line. Stay ahead of trends with our new collection.</p>
-    </div>
-  </div>
 
-</div>
+  <!-- =========================================================
+       MOBILE MENU
+       ========================================================= -->
+  <aside class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu__noise noise-layer"></div>
 
-
-    <div class="auth-menu">
-      <a href="sign.html"><button class="dropbtn">
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user" viewBox="0 0 24 24">
-  <path d="M20 21v-2a4 4 0 0 0-3-3.87" />
-  <path d="M4 21v-2a4 4 0 0 1 3-3.87" />
-  <circle cx="12" cy="7" r="4" />
-</svg>
-
-
-
-      </button></a>
-
-      <!-- Hamburger Menu Button for Mobile -->
-      <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menu-toggle">
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-      </button>
-
+    <div class="mobile-menu__top">
+      <span>NEAT®</span>
+      <button type="button" id="menuClose">CLOSE</button>
     </div>
 
-    <!-- Mobile Dropdown Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-      <button class="mobile-menu-close" id="mobile-menu-close">&times;</button>
-            <a href="lookbook.html" class="mobile-nav-link">Lookbook</a>
-      <a href="tops.html" class="mobile-nav-link">TOPS</a>
-      <a href="pants.html" class="mobile-nav-link">BOTTOMS</a>
-      <a href="#hero-text" class="mobile-nav-link">NEW</a>
-
-    </div>
-  </nav>
-
-<section id="hero-texts">
-  <div class="hero-texts-content">
-    <h2 style="font-weight: 500;">Just Dropped</h2>
-        <!--     -->
-    <div class="hero-buttons">
-      <a href="main.html" class="btns btn-left">Explore</a>
-   
-    </div>
-  
-  </div>
-</section>
-
-</section>
-
-<!-- Static Hero Text Section -->
-<section id="hero-text" style="background-color: white;">
-  <div class="hero-text-content">
-    <h2>LOYAL TO THE VISION !</h2>
-  </div>
-</section>
-
-
-<main class="arrival-main">
-
-      <!-- SECTION 3 -->
-  <section
-    class="arrival-section arrival-section--split"
-    data-scroll-section
-    data-bg-mobile="new/bsw7.jpg"
-    data-split-left="new/bsw6.jpg"
-    data-split-right="new/bsw7.jpg"
-    fetchpriority="low"
-  >
-    <div class="arrival-bg" aria-hidden="true"></div>
-
-    <div class="arrival-split-bg" aria-hidden="true">
-      <div class="arrival-split-half arrival-split-half--left"></div>
-      <div class="arrival-split-half arrival-split-half--right"></div>
-    </div>
-
-    <div class="arrival-content" data-scroll-content>
-<h2 class="arrival-title" data-text="Beige Stone Washed Tee">
-  Beige Stone Washed Tee
-</h2>
-
-<p class="arrival-subtitle" data-text="Keep It Neat">
-  KIN
-</p>
-      <a href="product.html?id=beige-stone-washed-tee" class="arrival-btn">
-        Shop Now
+    <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+      <a href="main.html" data-transition-link>
+        <span>01</span>
+        <strong>SHOP</strong>
       </a>
-    </div>
-  </section>
 
-  
-    <!-- SECTION 2 -->
-  <section
-    class="arrival-section arrival-section--split"
-    data-scroll-section
-    data-bg-mobile="chapter/DSC03890.avif"
-    data-split-left="chapter/optimized/gr (1).webp"
-    data-split-right="chapter/optimized/gr (2).webp"
-    fetchpriority="low"
-  >
-    <div class="arrival-bg" aria-hidden="true"></div>
-
-    <div class="arrival-split-bg" aria-hidden="true">
-      <div class="arrival-split-half arrival-split-half--left"></div>
-      <div class="arrival-split-half arrival-split-half--right"></div>
-    </div>
-
-    <div class="arrival-content" data-scroll-content>
-      <h2 class="arrival-title">Ash Gray Washed Tee</h2>
-      <p class="arrival-subtitle">KIN</p>
-      <a href="product.html?id=ash-gray-washed-tee" class="arrival-btn">
-        Shop Now
+      <a href="lookbook.html" data-transition-link>
+        <span>02</span>
+        <strong>LOOKBOOK</strong>
       </a>
-    </div>
-  </section>
 
-    <!-- SECTION 1 -->
-  <section
-    class="arrival-section is-first"
-    data-scroll-section
-    data-bg-desktop="chapter/optimized/DSC03953.webp"
-    data-bg-mobile="chapter/optimized/DSC03943.webp"
-    fetchpriority="high"
-  >
-    <div class="arrival-bg" aria-hidden="true"></div>
-
-    <div class="arrival-content" data-scroll-content>
-      <h2 class="arrival-title">Black Stone Washed Tee</h2>
-      <p class="arrival-subtitle">KIN</p>
-      <a href="product.html?id=black-stone-washed-tee" class="arrival-btn">
-        Shop Now
+      <a href="dashboard.html" data-transition-link>
+        <span>03</span>
+        <strong>DASHBOARD</strong>
       </a>
-    </div>
-  </section>
 
-    <!-- SECTION 5 -->
-  <section
-    class="arrival-section arrival-section--split"
-    data-scroll-section
-    data-bg-mobile="chapter/bei.jpg"
-    data-split-left="chapter/optimized/bei.webp"
-    data-split-right="chapter/DSC03823.jpg"
-    fetchpriority="low"
-  >
-    <div class="arrival-bg" aria-hidden="true"></div>
-
-    <div class="arrival-split-bg" aria-hidden="true">
-      <div class="arrival-split-half arrival-split-half--left"></div>
-      <div class="arrival-split-half arrival-split-half--right"></div>
-    </div>
-
-    <div class="arrival-content" data-scroll-content>
-      <h2 class="arrival-title">Beige Washed Tee</h2>
-      <p class="arrival-subtitle">KIN</p>
-      <a href="product.html?id=beige-washed-tee" class="arrival-btn">
-        Shop Now
+      <a href="cart.html" data-transition-link>
+        <span>04</span>
+        <strong>BAG</strong>
       </a>
+    </nav>
+
+    <div class="mobile-menu__bottom">
+      <span>KEEP IT NEAT.</span>
+      <span>NAIROBI — KE</span>
     </div>
-  </section>
+  </aside>
 
 
-
-
-
-</main>
-
-
-<!-- Footer -->
-<footer class="neat-footer">
-  <div class="footer-top-text" data-aos="fade-up">
-    <h2>Become a <span class="highlight">Neatgarms</span> member to get the latest news and updates:</h2>
-    <ul class="benefits-list">
-      <li>✔ Early access to new drops</li>
-      <li>✔ Invites to exclusive events</li>
-      <li>✔ Members-only sales</li>
-    </ul>
-    <p class="agreement-text">
-      By signing up you agree with our 
-      <a href="terms-and-conditions.html">Terms & Conditions</a> and 
-      <a href="privacy-policy.html">Privacy Policy</a>.
-    </p>
-  </div>
-
-<!-- Footer Subscription Section -->
-<div class="footer-subscribe" data-aos="fade-up" data-aos-delay="200">
-  <div class="input-container">
-    <input type="text" id="footer-email" required />
-    <label for="footer-email" class="label">Enter Your Email</label>
-    <div class="underline"></div>
-  </div>
-  <button id="subscribe-btn" class="subscribe-btn">Join Now</button>
-</div>
-
-  <!-- Footer Logo -->
-  <div class="footer-logo">
-    <img src="mains/logo2.png" alt="NeatGarms Logo" class="footer-logo-img" />
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2026 NeatGarms. All rights reserved.</p>
-  </div>
-</footer>
-
-
-
-
-
-
-<div class="overlay" id="subscriptionPopup" hidden>
-  <div class="popup-card">
-    <img data-src="mains/logo2.png"
-         alt="NeatGarms Logo"
-         class="popup-logo"
-         width="120" height="120" />
-
-    <button class="close-btn" id="closePopup">&times;</button>
-
-   <h2>Snooze you lose</h2>
-
-   
-    <p>NEAT VIP</p>
-    <form id="subscribeForm">
-      <div class="input-group">
-        <input type="email" id="email" name="email" required placeholder=" " />
-        <label for="email">Your Email</label>
-      </div>
-      <button type="submit" class="subscribe-btn">Keep It Neat</button>
-    </form>
-  </div>
-  <div class="thank-you-message" id="thankYouMsg">
-    <h2>Welcome to the Neat Collective </h2>
-    <p>Exciting Things Ahead</p>
-  </div>
-
-</div>
-
-<div class="custom-alert" id="customAlert">Please wait, saving your details...</div>
-
-</div>
-Subscription Popup 
-
-<script type="module" src="js/import-products.js"></script>
-
-
-<!--
-<script>
-  // Animate the loader text
-gsap.fromTo(".logo-name", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 3, delay: 0.5 });
-
-window.addEventListener("load", function () {
-  const hasVisited = sessionStorage.getItem("hasVisited");
-
-  if (!hasVisited) {
-    // First visit — show loader
-    sessionStorage.setItem("hasVisited", "true");
-
-setTimeout(function () {
-  // Prepare main-site
-  document.querySelector(".main-site").style.display = "block";
-  gsap.set(".main-site", { opacity: 0 });
-
-  // Start timeline to cross-fade
-  const tl = gsap.timeline();
-
-  tl.to(".loading-page", {
-    opacity: 0,
-    duration: 2.2, // smoother fade-out
-    ease: "power2.inOut"
-  })
-  .to(".main-site", {
-    opacity: 1,
-    duration: 0,
-    ease: "power2.inOut"
-  }, "<") // "<" means: start at the same time as previous
-
-  .add(() => {
-    document.querySelector(".loading-page").style.display = "none";
-  });
-}, 3000);
-
-  } else {
-    // Already visited — skip loader
-    document.querySelector(".loading-page").style.display = "none";
-    document.querySelector(".main-site").style.display = "block";
-    gsap.from(".main-site", { opacity: 0, duration: 1.2 });
-  }
-});
-
-</script>
--->
-
-
-<script>
-window.addEventListener('load', () => {
-  const popup     = document.getElementById('subscriptionPopup');
-  const logo      = popup.querySelector('.popup-logo');
-  const closeBtn  = document.getElementById('closePopup');
-
-  if (sessionStorage.getItem('popupSeen')) return;
-
-  /* kick off image download after load */
-  if (logo && logo.dataset.src) logo.src = logo.dataset.src;
-
-  /* show popup smoothly 2 s later */
-  setTimeout(() => {
-    popup.hidden = false;                 // re‑insert in render tree
-    requestAnimationFrame(() => popup.classList.add('show'));
-    sessionStorage.setItem('popupSeen','true');
-  }, 7000);
-
-  /* hide smoothly when the X is clicked */
-  closeBtn.addEventListener('click', () => {
-    popup.classList.add('hiding');
-    popup.addEventListener('transitionend', () => {
-      popup.hidden = true;                // fully remove from flow
-      popup.classList.remove('show','hiding');
-    }, { once:true });
-  });
-});
-</script>
-
-
-
-<script type="module" defer>
-  import {
-    initializeApp
-  }                             from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-  import {
-    getFirestore,
-    doc, getDoc,          // NEW
-    setDoc,               // NEW  (replaces addDoc)
-    serverTimestamp
-  }                             from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
-
-  /* ---------- 1.  Firebase config ---------- */
-  const firebaseConfig = {
-    apiKey:            "AIzaSyCLC4Dz-qxNOPtRFhybiBA5SqCDJgvKqMY",
-    authDomain:        "neat-53fa9.firebaseapp.com",
-    projectId:         "neat-53fa9",
-    storageBucket:     "neat-53fa9.appspot.com",
-    messagingSenderId: "857317417173",
-    appId:             "1:857317417173:web:6b84a45c96ebe56fce425c"
-  };
-
-  /* ---------- 2.  Init Firebase ---------- */
-  const app = initializeApp(firebaseConfig);
-  const db  = getFirestore(app);
-
-  /* ---------- 3.  DOM references ---------- */
-  const form       = document.querySelector("#subscribeForm");
-  const emailInput = document.querySelector("#email");
-  const alertBox   = document.querySelector("#customAlert");   // “Please wait …” div
-
-  /* ---------- 4.  Helper: toggle mini alert ---------- */
-  function showAlert(msg, ms = 2500) {
-    if (!alertBox) return;
-    alertBox.textContent = msg;
-    alertBox.classList.add("show");
-    setTimeout(() => alertBox.classList.remove("show"), ms);
-  }
-
-  /* ---------- 5.  Firestore logic ---------- */
-  async function saveEmailIfNew(email) {
-    const docRef  = doc(db, "email", email);   // use email as doc ID
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      // Duplicate – don’t write again
-      return { already: true };
-    }
-
-    await setDoc(docRef, { email, timestamp: serverTimestamp() });
-    return { already: false };
-  }
-
-  /* ---------- 6.  Hook into the existing form ---------- */
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const email = emailInput.value.trim().toLowerCase();
-    if (!email) { alert("Please enter a valid email address."); return; }
-
-    try {
-      showAlert("Please wait, saving your details…");
-      const { already } = await saveEmailIfNew(email);
-
-      if (already) {
-        showAlert("Confirmed: You're Part of the Vision.", 3500);
-      } else {
-        showAlert("NEAT VIP UNLOCKED", 3500);
-        // here you can fire any additional “new‑subscriber” animations/UI
-      }
-    } catch (err) {
-      console.error("Firestore error →", err);
-      alert("Sorry — couldn’t save your email. Please try again.");
-    }
-  });
-</script>
- 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script defer>
-  AOS.init({
-    duration: 1200, // Animation duration
-    once: false,    // Animation will run every time you scroll
-  });
-</script>
-
-
-  <script src="scripts.js" defer></script>
-
-
-    <script>
-      window.addEventListener('load', function () {
-        document.body.classList.add('loaded');
-      });
-    </script>
-
-    
-
-<script defer>
-window.addEventListener('DOMContentLoaded', () => {
-
-  const popup      = document.getElementById('subscriptionPopup');
-  const closeBtn   = document.getElementById('closePopup');
-  const form       = document.getElementById('subscribeForm');
-  const thankYou   = document.getElementById('thankYouMsg');
-  const popupCard  = document.querySelector('.popup-card');
-  const logoImg    = popup.querySelector('.popup-logo'); // may be null if not present
-  const alertBox   = document.getElementById('customAlert');
-
-  /* 1.  Bail early if user has already handled it this session */
-  if (sessionStorage.getItem('popupHandled')) {
-    popup.style.display = 'none';
-    return;
-  }
-
-  /* 2.  Wait until EVERYTHING (images, CSS, fonts) is finished */
-  window.addEventListener('load', () => {
-
-    /* 2a.  (Optional) Start downloading the logo only now */
-    if (logoImg && logoImg.dataset && logoImg.dataset.src) {
-      logoImg.src = logoImg.dataset.src;
-    }
-
-    /* 2b.  Now schedule the popup for 2 s later */
-    setTimeout(() => {
-      popup.style.display  = 'flex';
-      popupCard.style.display = 'block';
-      thankYou.style.display = 'none';
-    }, 2000);
-  });
-
-  /* 3.  Close button logic */
-  closeBtn.addEventListener('click', () => {
-    popup.style.display = 'none';
-    sessionStorage.setItem('popupHandled', 'true');
-  });
-
-  /* 4.  Form submission */
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    /* Tiny custom alert animation */
-    alertBox.classList.add('show');
-    setTimeout(() => alertBox.classList.remove('show'), 4000);
-
-    const email = document.getElementById('email').value.trim();
-    if (!email) {
-      alert('Please enter a valid email.');
-      return;
-    }
-
-    try {
-      const response = await fetch('https://neatgarms-risi.onrender.com/subscribe', {
-        method : 'POST',
-        headers: { 'Content-Type':'application/json' },
-        body   : JSON.stringify({ email })
-      });
-
-      if (response.ok) {
-        /* Success state */
-        popupCard.style.display = 'none';
-        thankYou.style.display  = 'block';
-        sessionStorage.setItem('popupHandled', 'true');
-
-        setTimeout(() => {
-          popup.style.display = 'none';
-          thankYou.style.display = 'none';
-          form.reset();
-          popupCard.style.display = 'block';
-        }, 4000);
-      } else {
-        alert('Oops! Something went wrong. Please try again.');
-      }
-    } catch (err) {
-      console.error('Subscription error:', err);
-      alert('Network error. Please check your connection.');
-    }
-  });
-});
-</script>
-
-
- <script >
- const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-
-  // Toggle mobile menu
-  menuToggle.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevent event bubbling
-    const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-    menuToggle.setAttribute('aria-expanded', !expanded);
-    mobileMenu.classList.toggle('active');
-  });
-
-  // Close mobile menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (mobileMenu.classList.contains('active') && !mobileMenu.contains(e.target) && e.target !== menuToggle) {
-      mobileMenu.classList.remove('active');
-      menuToggle.setAttribute('aria-expanded', false);
-    }
-  });
-
-window.addEventListener('scroll', () => {
-  const navbar = document.getElementById('navbar');
-  const halfScreen = window.innerHeight / 10;
-
-  if (window.scrollY > halfScreen) {
-    navbar.classList.add('sticky');
-  } else {
-    navbar.classList.remove('sticky');
-  }
-});
-
-
-</script>
-    
-<script defer>
-const links = document.querySelectorAll('.nav-link');
-
-links.forEach(link => {
-  const menuId = link.dataset.menu;
-  const menu = document.getElementById(menuId);
-  if (!menu) return;
-
-  link.addEventListener('click', (e) => {
-    const isMobile = window.innerWidth < 768;
-
-    if (isMobile) {
-      // On mobile, let the link behave normally (navigate)
-      return;
-    }
-
-    // On desktop, prevent navigation and open side menu
-    e.preventDefault();
-    document.querySelectorAll('.side-menu').forEach(m => m.classList.remove('show'));
-    menu.classList.add('show');
-  });
-
-  // Close when clicking outside
-  window.addEventListener('click', (e) => {
-    if (!menu.contains(e.target) && !link.contains(e.target)) {
-      menu.classList.remove('show');
-    }
-  });
-
-  // Close button inside menu
-  const closeBtn = menu.querySelector('.close-btn');
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      menu.classList.remove('show');
-    });
-  }
-});
-
-</script>
-
-<script defer>
-  const closeBtn = document.getElementById('mobile-menu-close');
-
-  menuToggle.addEventListener('click', () => {
-    mobileMenu.style.display = 'flex';
-  });
-
-  closeBtn.addEventListener('click', () => {
-    mobileMenu.style.display = 'none';
-  });
-</script>
-
-<script>
-window.initializeProductBehaviors = function() {
-
-  /* ----------------------------------------
-     IMAGE HOVER SWAP FOR .product-card
-  ---------------------------------------- */
-  document.querySelectorAll('.product-card').forEach((card) => {
-    const images = card.querySelectorAll('.image-wrapper img');
-
-    images.forEach((img, index) => {
-      img.style.opacity = index === 0 ? '1' : '0';
-      img.style.zIndex = index === 0 ? '1' : '0';
-    });
-
-    card.addEventListener('mouseenter', () => {
-      if (images.length > 1) {
-        images[0].style.opacity = '0';
-        images[1].style.opacity = '1';
-        images[0].style.zIndex = '0';
-        images[1].style.zIndex = '1';
-      }
-    });
-
-    card.addEventListener('mouseleave', () => {
-      if (images.length > 1) {
-        images[0].style.opacity = '1';
-        images[1].style.opacity = '0';
-        images[0].style.zIndex = '1';
-        images[1].style.zIndex = '0';
-      }
-    });
-  });
-
-
-  /* ----------------------------------------
-     PRODUCT CLICK → OPEN PRODUCT PAGE
-  ---------------------------------------- */
-  document.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('click', () => {
-
-      const images      = Array.from(card.querySelectorAll('.image-wrapper img')).map(i => i.src);
-      const status      = card.querySelector('.status')?.innerText ?? null;
-      const name        = card.querySelector('.product-name').innerText;
-      const oldPrice    = card.querySelector('.old-price')?.innerText ?? null;
-      const newPrice    = card.querySelector('.new-price')?.innerText ?? null;
-      const colors      = Array.from(card.querySelectorAll('.color-buttons .color-btn'))
-                               .map(btn => btn.dataset.color);
-
-      const rawSizes    = Array.from(card.querySelectorAll('.size-buttons .size-btn'))
-                               .map(btn => btn.dataset.size);
-
-      const sizes       = rawSizes.map(s => s.replace('*', '').trim());
-      const outOfStock  = rawSizes.filter(s => s.includes('*')).map(s => s.replace('*', '').trim());
-
-      const description = card.dataset.description || '';
-      const features    = card.dataset.features ? JSON.parse(card.dataset.features) : [];
-      const sizeFit     = card.dataset.sizefit || '';
-
-      const productId   = card.id;
-
-      const productData = {
-        images,
-        name,
-        oldPrice,
-        newPrice,
-        sizes,
-        outOfStock,
-        colors,
-        description,
-        features,
-        sizeFit
-      };
-
-      localStorage.setItem('selectedProduct', JSON.stringify(productData));
-      window.location.href = `product.html?id=${productId}`;
-    });
-  });
-
-
-  /* ----------------------------------------
-     INTERSECTION OBSERVER FADE-IN
-  ---------------------------------------- */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('fade-in');
-        observer.unobserve(entry.target);
-      }
-    });
-  });
-
-  document.querySelectorAll('.product-card').forEach(card => {
-    observer.observe(card);
-  });
-
-}; // END initializeProductBehaviors()
-
-
-// ✅ Run behaviors once on initial page load too
-document.addEventListener('DOMContentLoaded', () => {
-  window.initializeProductBehaviors();
-});
-</script>
-
-
-<script defer>
-  document.addEventListener("DOMContentLoaded", () => {
-    const links = document.querySelectorAll("a");
-    const transition = document.getElementById("page-transition");
-
-    // Function to disable transition when user uses back/forward
-    window.addEventListener("pageshow", (event) => {
-      const comingFromHistory =
-        event.persisted ||
-        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
-
-      if (comingFromHistory) {
-        transition.classList.remove("active"); // No transition on back/forward
-        sessionStorage.removeItem("transitioning");
-      } else {
-        // Normal link-based navigation
-        if (sessionStorage.getItem("transitioning") === "true") {
-          sessionStorage.setItem("transitioning", "false");
-          transition.classList.remove("active"); // Fade in after animation
-        } else {
-          transition.classList.remove("active"); // Initial page load
-        }
-      }
-    });
-
-    links.forEach(link => {
-      const href = link.getAttribute("href");
-      if (href && !href.startsWith("#") && !href.startsWith("http")) {
-        link.addEventListener("click", e => {
-          e.preventDefault();
-          sessionStorage.setItem("transitioning", "true");
-          transition.classList.add("active");
-
-          setTimeout(() => {
-            window.location.href = href;
-          }, 1500); // Match your CSS animation duration
-        });
-      }
-    });
-  });
-</script>
-
-
-
-
-
-<script>
-  // Fade in effect when page loads
-document.body.style.opacity = 0;
-requestAnimationFrame(() => {
-  document.body.style.opacity = 1;
-});
-
-</script>
-
-
-
-<!-- Include Lenis (CDN or npm) -->
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
-
- <script>
-const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-const lenis = new Lenis({
-  duration: isTouch ? 2.8 : 1.6, // smoother on phones, faster on desktop
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smooth: true,
-  smoothTouch: true
-});
-
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-  </script>
-
-
+  <!-- Existing footer Firebase module preserved -->
   <script type="module" src="firebase/footer-firebase.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const sections = document.querySelectorAll("[data-scroll-section]");
-  const mobileBreakpoint = 991;
-
-  function isMobile() {
-    return window.innerWidth <= mobileBreakpoint;
-  }
-
-  function clamp(value, min, max) {
-    return Math.max(min, Math.min(value, max));
-  }
-
-  function applySectionImages(section, forceReload = false) {
-    if (section.dataset.loaded === "true" && !forceReload) return;
-
-    const bg = section.querySelector(".arrival-bg");
-    const splitLeft = section.querySelector(".arrival-split-half--left");
-    const splitRight = section.querySelector(".arrival-split-half--right");
-
-    if (isMobile()) {
-      const mobileBg = section.dataset.bgMobile;
-
-      if (bg && mobileBg) {
-        bg.style.setProperty("--section-bg", `url("${mobileBg}")`);
-      }
-
-      if (splitLeft) splitLeft.style.backgroundImage = "";
-      if (splitRight) splitRight.style.backgroundImage = "";
-    } else {
-      if (section.classList.contains("arrival-section--split")) {
-        const left = section.dataset.splitLeft;
-        const right = section.dataset.splitRight;
-
-        if (bg) {
-          bg.style.removeProperty("--section-bg");
-        }
-
-        if (splitLeft && left) {
-          splitLeft.style.backgroundImage = `url("${left}")`;
-        }
-
-        if (splitRight && right) {
-          splitRight.style.backgroundImage = `url("${right}")`;
-        }
-      } else {
-        const desktopBg = section.dataset.bgDesktop;
-
-        if (bg && desktopBg) {
-          bg.style.setProperty("--section-bg", `url("${desktopBg}")`);
-        }
-      }
-    }
-
-    section.dataset.loaded = "true";
-  }
-
-  function updateArrivalMotion() {
-    const viewportH = window.innerHeight;
-    const mobile = isMobile();
-
-    sections.forEach((section) => {
-      const content = section.querySelector("[data-scroll-content]");
-      if (!content) return;
-
-      const rect = section.getBoundingClientRect();
-
-      const progress = clamp(
-        (viewportH - rect.top) / (viewportH + rect.height),
-        0,
-        1
-      );
-
-      const moveRange = mobile ? 90 : 120;
-      const startOffset = moveRange * 0.55;
-      const endOffset = -moveRange * 0.45;
-      const y = startOffset + (endOffset - startOffset) * progress;
-
-      if (mobile) {
-        content.style.transform = `translate3d(-50%, ${y}px, 0)`;
-      } else {
-        content.style.transform = `translate3d(0, ${y}px, 0)`;
-      }
-
-      const opacity = clamp(0.72 + progress * 0.45, 0, 1);
-      content.style.opacity = opacity;
-    });
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          applySectionImages(entry.target);
-          entry.target.classList.add("is-inview");
-        } else {
-          entry.target.classList.remove("is-inview");
-        }
-      });
-    },
-    {
-      rootMargin: "300px 0px",
-      threshold: 0.35
-    }
-  );
-
-  sections.forEach((section) => observer.observe(section));
-
-  const firstSection = document.querySelector(".arrival-section.is-first");
-  if (firstSection) {
-    applySectionImages(firstSection);
-  }
-
-  let lastMobileState = isMobile();
-
-  window.addEventListener("scroll", updateArrivalMotion, { passive: true });
-
-  window.addEventListener("resize", () => {
-    updateArrivalMotion();
-
-    const currentMobileState = isMobile();
-
-    if (currentMobileState !== lastMobileState) {
-      sections.forEach((section) => {
-        section.dataset.loaded = "false";
-
-        const bg = section.querySelector(".arrival-bg");
-        const splitLeft = section.querySelector(".arrival-split-half--left");
-        const splitRight = section.querySelector(".arrival-split-half--right");
-
-        if (bg) {
-          bg.style.removeProperty("--section-bg");
-        }
-
-        if (splitLeft) {
-          splitLeft.style.backgroundImage = "";
-        }
-
-        if (splitRight) {
-          splitRight.style.backgroundImage = "";
-        }
-
-        applySectionImages(section, true);
-      });
-
-      lastMobileState = currentMobileState;
-    }
-  });
-
-  updateArrivalMotion();
-});
-</script>
-
-
+<script
+  src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"
+></script>
+  <!-- New homepage interactions -->
+     <script src="bag-count.js"></script>
+  <script type="module" src="scripts.js" defer></script>
 
 </body>
 </html>

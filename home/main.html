@@ -9,13 +9,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="description" content="Browse all Neatgarms products — from trendy tops and cozy fleece to bold bottoms and stylish accessories. Designed for comfort and expression." />
 
-  <link rel="stylesheet" href="main.min.css">
+  <link rel="stylesheet" href="main.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
 
@@ -94,68 +93,122 @@
   </div>
 </div>
 
+<!-- =========================
+     NEATGARMS SHOP NAVBAR
+========================= -->
+<header class="shop-nav" id="shop-nav">
 
-    <!-- Navbar -->
-  <header class="navbar">
-    <div class="nav-left">
-      <button id="menu-btn" class="icon-btn">&#9776;</button>
-    </div>
-    <div class="nav-center">
-      <a href="index.html"><img src="mains/logo.jpg" alt="Company Logo" class="logo" data-aos="fade-up" data-aos-delay="400"></a>
-    </div>
-    <div class="nav-right">
-      <button class="icon-btn search-btn">
-        <i class="fas fa-search search-icon"></i>
+  <div class="shop-nav__left">
+    <button
+      class="shop-nav__menu"
+      id="menu-btn"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="menu"
+    >
+      <span></span>
+      <span></span>
+    </button>
 
-      </button>
-      <a href="cart.html" class="icon-btn cart-btn"> <i class="fas fa-shopping-cart cart-icon"></i> </a>
-    </div>
-
-
-
-<!-- Menu (Initially hidden) -->
-<!-- Menu (Initially hidden) -->
-<nav id="menu" class="menu">
-  <button id="close-btn" class="close-btn">X</button> <!-- Close button -->
-  <ul>
-      <li><a href="lookbook.html">Lookbook</a></li>
-    <li><a href="tops.html">Tops</a></li>
-    <li><a href="pants.html">Bottoms</a></li>
-    <li><a href="flee.html">Fleece</a></li>
-  </ul>
-</nav>
-
-  </header>
-
-  <!-- Hidden Search Bar -->
-  <div class="ui-input-container hidden" id="ui-input-container">
-    <input
-      required=""
-      placeholder="Type something..."
-      class="ui-input"
-      type="text"
-      id="ui-input"
-    />
-
-
-    <div class="ui-input-underline"></div>
-    <div class="ui-input-highlight"></div>
-    <div class="ui-input-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-        <path
-          stroke-linejoin="round"
-          stroke-linecap="round"
-          stroke-width="2"
-          stroke="black"
-          d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
-        ></path>
-
-      </svg>
-
-
-    </div>
-    <button id="close-search" class="close-search-btn">Close Search</button>
+    <span class="shop-nav__page">SHOP</span>
   </div>
+
+
+<a href="index.html" class="shop-nav__brand" aria-label="Neatgarms home">
+  <img
+    src="mains/logo2.png"
+    alt="Neatgarms"
+    class="shop-nav__logo"
+  >
+</a>
+
+
+  <div class="shop-nav__right">
+
+    <button
+      class="shop-nav__search search-btn"
+      type="button"
+      aria-label="Search"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="6.5"></circle>
+        <path d="M16 16L21 21"></path>
+      </svg>
+    </button>
+
+    <a
+      href="cart.html"
+      class="shop-nav__bag"
+      aria-label="Shopping bag"
+    >
+      <span class="shop-nav__bag-label">BAG</span>
+      <span class="shop-nav__bag-count">0</span>
+    </a>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     FULLSCREEN MENU
+========================= -->
+<div class="shop-menu" id="menu" aria-hidden="true">
+
+  <div class="shop-menu__top">
+
+    <span class="shop-menu__label">
+      MENU
+    </span>
+
+    <button
+      class="shop-menu__close"
+      id="close-btn"
+      type="button"
+      aria-label="Close menu"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+
+  <nav class="shop-menu__nav">
+
+    <a href="index.html" class="shop-menu__link">
+      <span class="shop-menu__number">01</span>
+      <span>HOME</span>
+    </a>
+
+    <a href="lookbook.html" class="shop-menu__link">
+      <span class="shop-menu__number">02</span>
+      <span>LOOKBOOK</span>
+    </a>
+
+    <a href="dashboard.html" class="shop-menu__link">
+      <span class="shop-menu__number">03</span>
+      <span>DASHBOARD</span>
+    </a>
+
+  </nav>
+
+
+  <div class="shop-menu__footer">
+
+    <span>NEATGARMS®</span>
+
+    <span>NAIROBI, KENYA</span>
+
+    <span>KEEP IT NEAT.</span>
+
+  </div>
+
+</div>
 
 
   <!-- Filter Menu -->
@@ -172,99 +225,473 @@
   <!-- Overlay for background dim effect -->
   <div id="menu-overlay" class="menu-overlay hidden"></div>
 
-<section class="collection-intro">
-  <h2>Neatgarms</h2>
-  <p>Clean cuts. Loud presence. That’s Neat</p>
-</section>
+<!-- =========================================================
+     NEATGARMS — KIN COLLECTION
+========================================================= -->
 
-  <!-- Filter and Sort Section -->
-  <section class="filter-sort">
-    <button id="filter-btn" class="icon-btn" data-aos="fade-up" data-aos-delay="400">
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 64 64" fill="none" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Top line -->
-  <line x1="8" y1="16" x2="56" y2="16"/>
-  <circle cx="48" cy="16" r="6" fill="#8E735B"/>
+<main class="kin-shop">
 
-  <!-- Middle line -->
-  <line x1="8" y1="32" x2="56" y2="32"/>
-  <circle cx="20" cy="32" r="6" fill="#8E735B"/>
+  <!-- =========================
+       COLLECTION MASTHEAD
+  ========================== -->
+  <section class="kin-head">
 
-  <!-- Bottom line -->
-  <line x1="8" y1="48" x2="56" y2="48"/>
-  <circle cx="36" cy="48" r="6" fill="#8E735B"/>
-</svg>
-      Filter & Sort</button>
+    <div class="kin-head__bar">
+      <span>CURRENT RELEASE</span>
+      <span>006 PIECES</span>
+      <span>NAIROBI / KE</span>
+    </div>
+
+    <div class="kin-head__main">
+
+      <div class="kin-head__identity">
+        <h1>KIN</h1>
+
+        <p>
+          KEEP IT NEAT
+          <span>®2026</span>
+        </p>
+      </div>
+
+      <div class="kin-head__description">
+        <p>
+          A study in everyday uniform.
+          <br>
+          Six pieces from the current release.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="kin-head__controls">
+
+      <span class="kin-head__count">
+        COLLECTION / 001—006
+      </span>
+
+      <div class="kin-view">
+        <button
+          class="kin-view__button is-active"
+          type="button"
+          data-view="grid"
+        >
+          GRID
+        </button>
+
+        <span>/</span>
+
+        <button
+          class="kin-view__button"
+          type="button"
+          data-view="index"
+        >
+          INDEX
+        </button>
+      </div>
+
+    </div>
+
   </section>
 
-  <!-- Product Grid -->
-  <main class="product-grid" data-aos="fade-up" data-aos-delay="400">
 
-<div class="product-slot" data-product-id="neat-whiskey-flask"></div>
+  <!-- =========================
+       SIX PIECE COLLECTION
+  ========================== -->
+  <section class="kin-collection">
 
-<div class="product-slot" data-product-id="beige-washed-tee"></div>
-
-<div class="product-slot" data-product-id="solid-blue-neat-shorts"></div>
-
-<div class="product-slot" data-product-id="jorts"></div>
-
-<div class="product-slot" data-product-id="beige-stone-washed-tee"></div>
-
-<div class="product-slot" data-product-id="black-stone-washed-tee"></div>
-
-<div class="product-slot" data-product-id="ash-gray-washed-tee"></div>
-
-<div class="product-slot" data-product-id="army-green-washed-tee"></div>
+    <div class="kin-grid">
 
 
-<div class="product-slot" data-product-id="brown-stone-washed-tee"></div>
+      <!-- 001 -->
+      <article class="kin-piece kin-piece--01">
 
-  </main>
+        <div class="kin-piece__top">
+          <span>001</span>
+          <span>NG—001</span>
+        </div>
 
-  <!-- Pagination -->
-  <nav class="pagination">
-    <a href="index.html"><button class="prev-btn">
-      Home Page
-  </button></a>
-    </a>
-  </nav>
+        <div class="kin-piece__visual">
+          <div
+            class="product-slot"
+            data-product-id="neat-whiskey-flask">
+          </div>
+        </div>
+
+      </article>
 
 
-<!-- Footer -->
+      <!-- 002 -->
+      <article class="kin-piece kin-piece--02">
+
+        <div class="kin-piece__top">
+          <span>002</span>
+          <span>NG—002</span>
+        </div>
+
+        <div class="kin-piece__visual">
+          <div
+            class="product-slot"
+            data-product-id="beige-washed-tee">
+          </div>
+        </div>
+
+      </article>
+
+
+      <!-- 003 -->
+      <article class="kin-piece kin-piece--03">
+
+        <div class="kin-piece__top">
+          <span>003</span>
+          <span>NG—003</span>
+        </div>
+
+        <div class="kin-piece__visual">
+          <div
+            class="product-slot"
+            data-product-id="solid-blue-neat-shorts">
+          </div>
+        </div>
+
+      </article>
+
+
+      <!-- 004 -->
+      <article class="kin-piece kin-piece--04">
+
+        <div class="kin-piece__top">
+          <span>004</span>
+          <span>NG—004</span>
+        </div>
+
+        <div class="kin-piece__visual">
+          <div
+            class="product-slot"
+            data-product-id="jorts">
+          </div>
+        </div>
+
+      </article>
+
+
+      <!-- 005 — TEMP -->
+      <article class="kin-piece kin-piece--05">
+
+        <div class="kin-piece__top">
+          <span>005</span>
+          <span>NG—005</span>
+        </div>
+
+        <div class="kin-piece__visual">
+          <div
+            class="product-slot"
+            data-product-id="beige-washed-tee">
+          </div>
+        </div>
+
+      </article>
+
+
+      <!-- 006 — TEMP -->
+      <article class="kin-piece kin-piece--06">
+
+        <div class="kin-piece__top">
+          <span>006</span>
+          <span>NG—006</span>
+        </div>
+
+        <div class="kin-piece__visual">
+          <div
+            class="product-slot"
+            data-product-id="jorts">
+          </div>
+        </div>
+
+      </article>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       COLLECTION END
+  ========================== -->
+  <section class="kin-end">
+<div class="kin-end__grain" aria-hidden="true"></div>
+<div class="kin-end__lines" aria-hidden="true"></div>
+    <div class="kin-end__top">
+      <span>006 / 006</span>
+      <span>END OF CURRENT RELEASE</span>
+    </div>
+
+    <h2>
+      KEEP IT
+      <em>NEAT.</em>
+    </h2>
+
+    <div class="kin-end__bottom">
+      <span>NEATGARMS®</span>
+      <span>NAIROBI, KENYA</span>
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =========================================================
+     NEATGARMS — FOOTER
+========================================================= -->
+
 <footer class="neat-footer">
-  <div class="footer-top-text" data-aos="fade-up">
-    <h2>Become a <span class="highlight">Neatgarms</span> member to get the latest news and updates:</h2>
-    <ul class="benefits-list">
-      <li>✔ Early access to new drops</li>
-      <li>✔ Invites to exclusive events</li>
-      <li>✔ Members-only sales</li>
-    </ul>
-    <p class="agreement-text">
-      By signing up you agree with our 
-      <a href="terms-and-conditions.html">Terms & Conditions</a> and 
-      <a href="privacy-policy.html">Privacy Policy</a>.
-    </p>
+
+  <!-- MOVING TICKER -->
+  <div class="neat-footer__ticker" aria-hidden="true">
+
+    <div class="neat-footer__ticker-track">
+
+      <span>KEEP IT NEAT.</span>
+      <i>✦</i>
+
+      <span>NAIROBI, KENYA</span>
+      <i>✦</i>
+
+      <span>NEATGARMS®</span>
+      <i>✦</i>
+
+      <span>KIN / 2026</span>
+      <i>✦</i>
+
+      <span>KEEP IT NEAT.</span>
+      <i>✦</i>
+
+      <span>NAIROBI, KENYA</span>
+      <i>✦</i>
+
+      <span>NEATGARMS®</span>
+      <i>✦</i>
+
+      <span>KIN / 2026</span>
+      <i>✦</i>
+
+    </div>
+
   </div>
 
-<!-- Footer Subscription Section -->
-<div class="footer-subscribe" data-aos="fade-up" data-aos-delay="200">
-  <div class="input-container">
-    <input type="text" id="footer-email" required />
-    <label for="footer-email" class="label">Enter Your Email</label>
-    <div class="underline"></div>
-  </div>
-  <button id="subscribe-btn" class="subscribe-btn">Join Now</button>
-</div>
 
-  <!-- Footer Logo -->
-  <div class="footer-logo">
-    <img src="mains/logo2.png" alt="NeatGarms Logo" class="footer-logo-img" />
+  <!-- =========================
+       NEWSLETTER
+  ========================== -->
+
+  <section class="neat-footer__newsletter">
+
+    <div class="neat-footer__newsletter-number">
+      <span>01</span>
+      <span>PRIVATE ACCESS</span>
+    </div>
+
+
+    <div class="neat-footer__newsletter-main">
+
+      <p class="neat-footer__eyebrow">
+        JOIN THE INNER CIRCLE
+      </p>
+
+      <h2>
+        DON'T MISS
+        <em>THE NEXT DROP.</em>
+      </h2>
+
+
+      <form
+        class="neat-footer__form"
+        onsubmit="return false;"
+      >
+
+        <label
+          for="footer-email"
+          class="sr-only"
+        >
+          Email address
+        </label>
+
+        <div class="neat-footer__input-wrap">
+
+          <input
+            type="email"
+            id="footer-email"
+            autocomplete="email"
+            placeholder="ENTER YOUR EMAIL"
+            required
+          >
+
+          <button
+            type="button"
+            id="subscribe-btn"
+            aria-label="Subscribe to Neatgarms"
+          >
+            <span>JOIN</span>
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M5 12H19"></path>
+              <path d="M14 7L19 12L14 17"></path>
+            </svg>
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <p class="neat-footer__newsletter-note">
+        PRIVATE ACCESS TO DROPS, RELEASES &amp; NEAT BUSINESS.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       NAVIGATION / INFORMATION
+  ========================== -->
+
+  <section class="neat-footer__directory">
+
+    <!-- BRAND -->
+    <div class="neat-footer__identity">
+
+      <span class="neat-footer__index">
+        02 / IDENTITY
+      </span>
+
+      <div>
+        <p>
+          INDEPENDENT CLOTHING<br>
+          FROM NAIROBI.
+        </p>
+
+        <span class="neat-footer__location">
+          NAIROBI, KENYA<br>
+          01°17′S / 36°49′E
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- SHOP -->
+    <nav class="neat-footer__column">
+
+      <span class="neat-footer__index">
+        SHOP
+      </span>
+
+      <a href="main.html">
+        <span>ALL PIECES</span>
+        <span>↗</span>
+      </a>
+
+      <a href="main.html">
+        <span>CURRENT RELEASE</span>
+        <span>↗</span>
+      </a>
+
+      <a href="lookbook.html">
+        <span>LOOKBOOK</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+
+    <!-- INFO -->
+    <nav class="neat-footer__column">
+
+      <span class="neat-footer__index">
+        INFORMATION
+      </span>
+
+      <a href="sign.html">
+        <span>ACCOUNT</span>
+        <span>↗</span>
+      </a>
+
+      <a href="#">
+        <span>SHIPPING</span>
+        <span>↗</span>
+      </a>
+
+      <a href="#">
+        <span>CONTACT</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+
+    <!-- SOCIAL -->
+    <nav class="neat-footer__column">
+
+      <span class="neat-footer__index">
+        FOLLOW
+      </span>
+
+      <a href="#" target="_blank" rel="noopener">
+        <span>INSTAGRAM</span>
+        <span>↗</span>
+      </a>
+
+      <a href="#" target="_blank" rel="noopener">
+        <span>TIKTOK</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+  </section>
+
+
+  <!-- =========================
+       MASSIVE WORDMARK
+  ========================== -->
+
+  <div class="neat-footer__wordmark" aria-hidden="true">
+    KIN
   </div>
 
-  <div class="footer-bottom">
-    <p>&copy; 2026 NeatGarms. All rights reserved.</p>
+
+  <!-- =========================
+       FINAL LINE
+  ========================== -->
+
+  <div class="neat-footer__bottom">
+
+    <span>
+      © 2026 NEATGARMS®
+    </span>
+
+    <span class="neat-footer__bottom-center">
+      KEEP IT NEAT.
+    </span>
+
+    <button
+      class="neat-footer__top"
+      type="button"
+      id="back-to-top"
+    >
+      BACK TO TOP
+      <span>↑</span>
+    </button>
+
   </div>
+
 </footer>
-
 
 
 <script type="module" src="js/import-products.js"></script>
@@ -320,9 +747,9 @@ requestAnimationFrame(() => {
   });
 </script>
 
+<script src="bag-count.js"></script>
 
-
-    <script src="main.min.js" defer></script>
+    <script src="main.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
     AOS.init({

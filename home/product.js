@@ -229,6 +229,9 @@ if (!validateSelections()) return;
   const cart = JSON.parse(localStorage.getItem('cart')) || [];
   cart.push(productData);
   localStorage.setItem('cart', JSON.stringify(cart));
+  if (window.updateNeatBagCount) {
+  window.updateNeatBagCount();
+}
 
   window.location.href = 'cart.html';
 });
@@ -475,12 +478,36 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentImageIndex = 0;
   let thumbnails = [];
 
-  function updateMainImage(index) {
-    if (!productData.images || !productData.images[index]) return;
-    mainImage.src = productData.images[index];
-    thumbnails.forEach(img => img.classList.remove('active'));
-    if (thumbnails[index]) thumbnails[index].classList.add('active');
+function updateMainImage(index) {
+
+  if (!productData.images || !productData.images[index]) return;
+
+
+  mainImage.src = productData.images[index];
+
+
+  thumbnails.forEach(img =>
+    img.classList.remove('active')
+  );
+
+
+  if (thumbnails[index]) {
+    thumbnails[index].classList.add('active');
   }
+
+
+  const imageCounter =
+    document.getElementById('image-counter');
+
+
+  if (imageCounter) {
+
+    imageCounter.textContent =
+      String(index + 1).padStart(2, '0');
+
+  }
+
+}
 
   // Create thumbnails
   if (productData.images && productData.images.length > 0) {
@@ -525,15 +552,82 @@ document.addEventListener("DOMContentLoaded", () => {
     featuresList.appendChild(li);
   });
 
-  const sizeSelection = document.querySelector(".size-selection");
-  if (productData.sizes?.length) {
-    sizeSelection.innerHTML =
-      `<h4>Available Sizes:</h4>` +
-      productData.sizes.map(size => {
-        const soldOut = productData.outOfStock?.includes(size);
-        return `<button class="size-btn${soldOut ? ' unavailable' : ''}" data-size="${size}" ${soldOut ? 'aria-disabled="true"' : ''}>${size}</button>`;
-      }).join('');
-  }
+const sizeSelection =
+  document.querySelector(".size-selection");
+
+if (productData.sizes?.length && sizeSelection) {
+
+  sizeSelection.innerHTML =
+    productData.sizes.map(size => {
+
+      const soldOut =
+        productData.outOfStock?.includes(size);
+
+      return `
+        <button
+          type="button"
+          class="size-btn${soldOut ? ' unavailable' : ''}"
+          data-size="${size}"
+          ${soldOut
+            ? 'aria-disabled="true" data-soldout="true"'
+            : ''
+          }
+        >
+          ${size}
+        </button>
+      `;
+
+    }).join('');
+
+
+  /* =========================================
+     SIZE SELECTION
+  ========================================== */
+
+  sizeSelection
+    .querySelectorAll('.size-btn:not(.unavailable)')
+    .forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        sizeSelection
+          .querySelectorAll('.size-btn')
+          .forEach(btn =>
+            btn.classList.remove('selected')
+          );
+
+
+        button.classList.add('selected');
+
+        console.log(
+          'Selected Size:',
+          button.dataset.size
+        );
+
+      });
+
+    });
+
+
+  /* =========================================
+     SOLD OUT SIZES
+  ========================================== */
+
+  sizeSelection
+    .querySelectorAll('.size-btn.unavailable')
+    .forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        alert(
+          'Sorry, that size is currently sold out.'
+        );
+
+      });
+
+    });
+
+}
 
   const colorSelection = document.querySelector(".color-selection");
   if (productData.colors?.length) {
@@ -543,4 +637,31 @@ document.addEventListener("DOMContentLoaded", () => {
         `<button class="color-btn" data-color="${color}" style="background-color:${color.toLowerCase()}">${color}</button>`
       ).join('');
   }
+});
+
+/* =========================================================
+   PRODUCT FOOTER — BACK TO TOP
+========================================================= */
+
+const productBackToTop =
+  document.getElementById('product-back-top');
+
+
+productBackToTop?.addEventListener('click', () => {
+
+  if (typeof lenis !== 'undefined') {
+
+    lenis.scrollTo(0, {
+      duration: 1.2
+    });
+
+  } else {
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
+  }
+
 });
