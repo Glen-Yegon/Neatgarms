@@ -737,7 +737,7 @@ html.visited .neat-loader {
   position: relative;
   display: inline-flex;
   align-items: center;
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 650;
   line-height: 1;
   letter-spacing: .18em;
@@ -983,6 +983,7 @@ html.visited .neat-loader {
 
 .hero-meta--left {
   left: var(--page-pad);
+  color: white;
 }
 
 .hero-meta--right {
@@ -2290,4 +2291,854 @@ html.lenis body {
     display: none !important;
   }
 
+}
+
+/* =========================================================
+   NEATGARMS — CURRENCY GATE
+========================================================= */
+
+.currency-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: clamp(10px, 2vw, 24px);
+
+  visibility: hidden;
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity 500ms ease,
+    visibility 500ms ease;
+}
+
+.currency-gate.is-active {
+  visibility: visible;
+  opacity: 1;
+
+  pointer-events: auto;
+}
+
+
+/* =========================================================
+   BACKDROP
+========================================================= */
+
+.currency-gate__backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, .78);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.currency-gate__panel {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  width: min(100%, 1180px);
+  max-height: min(900px, calc(100svh - 40px));
+
+  overflow: hidden;
+
+  background: #f5f5f0;
+  color: #0a0a0a;
+
+  border: 1px solid rgba(255, 255, 255, .22);
+
+  transform:
+    translateY(30px)
+    scale(.985);
+
+  opacity: 0;
+
+  transition:
+    transform 750ms cubic-bezier(.16, 1, .3, 1),
+    opacity 500ms ease;
+}
+
+.currency-gate.is-active .currency-gate__panel {
+  transform:
+    translateY(0)
+    scale(1);
+
+  opacity: 1;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.currency-gate__top {
+  flex: 0 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    16px
+    clamp(18px, 2.5vw, 34px);
+
+  border-bottom: 1px solid rgba(10, 10, 10, .16);
+
+  font-family: "Anybody", sans-serif;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: .13em;
+
+  text-transform: uppercase;
+}
+
+.currency-gate__step {
+  color: rgba(10, 10, 10, .4);
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.currency-gate__intro {
+  flex: 0 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.25fr)
+    minmax(280px, .75fr);
+
+  gap: clamp(40px, 7vw, 110px);
+
+  padding:
+    clamp(34px, 5vw, 70px)
+    clamp(18px, 4vw, 54px)
+    clamp(30px, 4vw, 55px);
+}
+
+.currency-gate__intro-left {
+  display: flex;
+
+  align-items: flex-end;
+}
+
+.currency-gate__intro h2 {
+  margin: 0;
+
+  color: #0a0a0a;
+
+  font-family: "Instrument Serif", serif;
+
+  font-size: clamp(56px, 7.5vw, 110px);
+  font-weight: 400;
+
+  line-height: .78;
+
+  letter-spacing: -.055em;
+}
+
+.currency-gate__intro h2 em {
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   INTRO RIGHT
+========================================================= */
+
+.currency-gate__intro-right {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-end;
+
+  padding-bottom: 2px;
+}
+
+.currency-gate__intro-right > p {
+  max-width: 390px;
+
+  margin: 0 0 27px;
+
+  color: rgba(10, 10, 10, .57);
+
+  font-family: "Anybody", sans-serif;
+
+  font-size: 10px;
+  font-weight: 450;
+
+  line-height: 1.65;
+
+  letter-spacing: .035em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.currency-search-wrap {
+  position: relative;
+
+  width: 100%;
+}
+
+.currency-search {
+  width: 100%;
+  height: 49px;
+
+  margin: 0;
+
+  padding:
+    0
+    15px
+    0
+    35px;
+
+  background: transparent;
+  color: #0a0a0a;
+
+  border: 0;
+  border-bottom: 1px solid #0a0a0a;
+
+  border-radius: 0;
+
+  font-family: "Anybody", sans-serif;
+
+  font-size: 9px;
+  font-weight: 550;
+
+  letter-spacing: .1em;
+
+  outline: none;
+
+  text-transform: uppercase;
+}
+
+.currency-search::placeholder {
+  color: rgba(10, 10, 10, .36);
+
+  opacity: 1;
+}
+
+.currency-search:focus {
+  outline: none;
+
+  border-color: #0a0a0a;
+}
+
+.currency-search-icon {
+  position: absolute;
+
+  top: 50%;
+  left: 2px;
+
+  width: 17px;
+  height: 17px;
+
+  transform: translateY(-50%);
+
+  fill: none;
+  stroke: #0a0a0a;
+
+  stroke-width: 1.5;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   LIST HEADER
+========================================================= */
+
+.currency-list-head {
+  flex: 0 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    300px;
+
+  gap: 20px;
+
+  padding:
+    12px
+    clamp(18px, 4vw, 54px);
+
+  background: #0a0a0a;
+  color: rgba(255, 255, 255, .55);
+
+  font-family: "Anybody", sans-serif;
+
+  font-size: 7px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: .14em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.currency-list {
+  flex: 1 1 auto;
+
+  width: 100%;
+
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background: #f5f5f0;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(10, 10, 10, .45)
+    transparent;
+}
+
+.currency-list::-webkit-scrollbar {
+  width: 3px;
+}
+
+.currency-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.currency-list::-webkit-scrollbar-thumb {
+  background: rgba(10, 10, 10, .45);
+}
+
+
+/* =========================================================
+   OPTION
+========================================================= */
+
+.currency-option {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    46px
+    minmax(0, 1fr)
+    300px
+    28px;
+
+  align-items: center;
+
+  gap: 15px;
+
+  width: 100%;
+
+  min-height: 67px;
+
+  padding:
+    0
+    clamp(18px, 4vw, 54px);
+
+  background: transparent;
+  color: #0a0a0a;
+
+  border: 0;
+  border-bottom: 1px solid rgba(10, 10, 10, .14);
+
+  border-radius: 0;
+
+  font-family: "Anybody", sans-serif;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 350ms cubic-bezier(.16, 1, .3, 1),
+    color 250ms ease,
+    padding-left 500ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.currency-option:hover {
+  padding-left:
+    calc(clamp(18px, 4vw, 54px) + 8px);
+
+  background: #0a0a0a;
+  color: #fff;
+}
+
+
+/* INDEX */
+
+.currency-option__index {
+  color: rgba(10, 10, 10, .32);
+
+  font-size: 7px;
+  font-weight: 600;
+
+  letter-spacing: .08em;
+
+  transition: color 250ms ease;
+}
+
+.currency-option:hover .currency-option__index {
+  color: rgba(255, 255, 255, .42);
+}
+
+
+/* COUNTRY */
+
+.currency-option__country {
+  font-family: "Instrument Serif", serif;
+
+  font-size: clamp(20px, 2vw, 27px);
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -.02em;
+}
+
+
+/* CURRENCY */
+
+.currency-option__currency {
+  display: grid;
+
+  grid-template-columns:
+    55px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.currency-option__currency > span {
+  font-size: 9px;
+  font-weight: 650;
+
+  letter-spacing: .1em;
+}
+
+.currency-option__currency small {
+  color: rgba(10, 10, 10, .46);
+
+  font-size: 8px;
+  font-weight: 500;
+
+  letter-spacing: .06em;
+
+  text-transform: uppercase;
+
+  transition: color 250ms ease;
+}
+
+.currency-option:hover .currency-option__currency small {
+  color: rgba(255, 255, 255, .55);
+}
+
+
+/* ARROW */
+
+.currency-option__arrow {
+  justify-self: end;
+
+  font-size: 15px;
+  font-weight: 300;
+
+  transform: translate(0, 0);
+
+  transition:
+    transform 400ms cubic-bezier(.16, 1, .3, 1);
+}
+
+.currency-option:hover .currency-option__arrow {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   NO RESULTS
+========================================================= */
+
+.currency-no-results {
+  display: none;
+
+  padding: 45px 20px;
+
+  color: rgba(10, 10, 10, .45);
+
+  background: #f5f5f0;
+
+  font-family: "Anybody", sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: .13em;
+
+  text-align: center;
+
+  text-transform: uppercase;
+}
+
+.currency-no-results.is-visible {
+  display: block;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.currency-gate__footer {
+  flex: 0 0 auto;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    13px
+    clamp(18px, 2.5vw, 34px);
+
+  background: #0a0a0a;
+  color: rgba(255, 255, 255, .55);
+
+  font-family: "Anybody", sans-serif;
+
+  font-size: 7px;
+  font-weight: 550;
+
+  line-height: 1;
+
+  letter-spacing: .11em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .currency-gate {
+    padding: 12px;
+  }
+
+  .currency-gate__panel {
+    max-height: calc(100svh - 24px);
+  }
+
+  .currency-gate__intro {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+
+    padding:
+      40px
+      25px
+      35px;
+  }
+
+  .currency-gate__intro h2 {
+    font-size: clamp(60px, 12vw, 90px);
+  }
+
+  .currency-gate__intro-right {
+    width: min(100%, 500px);
+  }
+
+  .currency-gate__intro-right > p {
+    margin-bottom: 18px;
+  }
+
+  .currency-list-head {
+    grid-template-columns:
+      minmax(0, 1fr)
+      180px;
+  }
+
+  .currency-option {
+    grid-template-columns:
+      35px
+      minmax(0, 1fr)
+      180px
+      22px;
+  }
+
+  .currency-option__currency {
+    grid-template-columns: 45px 1fr;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .currency-gate {
+    padding: 0;
+  }
+
+  .currency-gate__backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .currency-gate__panel {
+    width: 100%;
+    height: 100svh;
+    max-height: none;
+
+    border: 0;
+  }
+
+
+  /* TOP */
+
+  .currency-gate__top {
+    min-height: 50px;
+
+    padding:
+      0
+      15px;
+
+    font-size: 7px;
+  }
+
+
+  /* INTRO */
+
+  .currency-gate__intro {
+    gap: 27px;
+
+    padding:
+      31px
+      15px
+      28px;
+  }
+
+  .currency-gate__intro h2 {
+    font-size: clamp(49px, 16vw, 70px);
+
+    line-height: .82;
+  }
+
+  .currency-gate__intro-right > p {
+    max-width: 320px;
+
+    margin-bottom: 16px;
+
+    font-size: 8px;
+
+    line-height: 1.6;
+  }
+
+
+  /* SEARCH */
+
+  .currency-search {
+    height: 43px;
+
+    padding-left: 30px;
+
+    font-size: 8px;
+  }
+
+  .currency-search-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+
+  /* HEADER */
+
+  .currency-list-head {
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+
+    padding:
+      11px
+      15px;
+
+    font-size: 6px;
+  }
+
+
+  /* OPTION */
+
+  .currency-option {
+    grid-template-columns:
+      24px
+      minmax(0, 1fr)
+      auto
+      16px;
+
+    gap: 9px;
+
+    min-height: 61px;
+
+    padding:
+      0
+      15px;
+  }
+
+  .currency-option:hover {
+    padding-left: 15px;
+  }
+
+  .currency-option__index {
+    font-size: 6px;
+  }
+
+  .currency-option__country {
+    font-size: 19px;
+  }
+
+  .currency-option__currency {
+    display: flex;
+
+    align-items: center;
+
+    gap: 0;
+  }
+
+  .currency-option__currency > span {
+    font-size: 8px;
+  }
+
+  .currency-option__currency small {
+    display: none;
+  }
+
+  .currency-option__arrow {
+    font-size: 12px;
+  }
+
+
+  /* FOOTER */
+
+  .currency-gate__footer {
+    padding:
+      12px
+      15px;
+
+    font-size: 6px;
+  }
+
+  .currency-gate__footer span:first-child {
+    max-width: 220px;
+
+    line-height: 1.35;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .currency-gate__intro {
+    gap: 21px;
+
+    padding-top: 25px;
+    padding-bottom: 22px;
+  }
+
+  .currency-gate__intro h2 {
+    font-size: 47px;
+  }
+
+  .currency-option {
+    min-height: 56px;
+  }
+
+  .currency-option__country {
+    font-size: 17px;
+  }
+
+  .currency-gate__footer span:first-child {
+    max-width: 180px;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .currency-gate,
+  .currency-gate__panel,
+  .currency-option,
+  .currency-option__arrow {
+    transition-duration: .01ms !important;
+  }
+
+}
+
+/* =========================================================
+   CURRENCY MODAL — CURSOR
+========================================================= */
+
+.currency-gate,
+.currency-gate * {
+  cursor: default !important;
+}
+
+/* Interactive elements */
+.currency-option,
+.currency-option *,
+.currency-gate button,
+.currency-gate button * {
+  cursor: pointer !important;
+}
+
+/* Search field */
+.currency-search {
+  cursor: text !important;
 }

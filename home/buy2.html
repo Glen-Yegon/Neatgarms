@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#8a9381" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-  <link rel="stylesheet" href="buy2.min.css">
+  <link rel="stylesheet" href="buy2.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -281,129 +281,1257 @@
   </div>
 
 
-    <script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
+/* =========================================================
+   NEATGARMS BUY NOW CHECKOUT
+   buy2.html
+
+   FLOW:
+   1. Validate checkout
+   2. Save order temporarily
+   3. Initialize Paystack through server
+   4. Redirect customer to Paystack
+   5. Paystack returns customer to buy2.html
+   6. Verify transaction through server
+   7. Send order to /pay2-now
+========================================================= */
+
+
+/* =========================================================
+   API BASE URL
+
+   LOCAL:
+   http://localhost:5000
+
+   PRODUCTION:
+   Uses the same Neatgarms domain.
+
+   If your Node backend is hosted on a separate Render URL,
+   replace the production value below with that Render URL.
+========================================================= */
+
+const IS_LOCAL =
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1';
+
+
+const API_BASE =
+  IS_LOCAL
+    ? 'http://localhost:5000'
+    : window.location.origin;
 
 
 
+/* =========================================================
+   SESSION STORAGE KEYS
+========================================================= */
 
-    document.getElementById("pay-now-btn").addEventListener("click", async () => {
-           // Create a custom alert element
-     const customAlert = document.createElement('div');
-     customAlert.className = 'custom-alert';
-     customAlert.innerText = 'Please Wait While We Retrieve Your Information';
- 
-     // Append the alert to the body
-     document.body.appendChild(customAlert);
- 
-     // Remove the alert after 5 seconds (5000 milliseconds)
-     setTimeout(() => {
-       customAlert.remove();
-     }, 5000);
-    
-// Collect Contact Info
-const fullName = document.getElementById("full-name").value;
-const userEmail = document.getElementById("email").value;
-const userPhone = document.getElementById("phone-number").value;
+const BUY_NOW_CHECKOUT_KEY =
+  'neatPendingBuyNowCheckout';
 
-if (!fullName || !userEmail || !userPhone) {
-  alert("Please fill in your full name, email, and phone number.");
-  return;
+const BUY_NOW_REFERENCE_KEY =
+  'neatBuyNowPaystackReference';
+
+const BUY_NOW_PROCESSED_KEY =
+  'neatBuyNowProcessedPayment';
+
+
+
+/* =========================================================
+   SIMPLE INPUT HELPER
+========================================================= */
+
+function getValue(id) {
+
+  return (
+    document
+      .getElementById(id)
+      ?.value || ''
+  ).trim();
+
 }
 
-    
-      //Collect Delivery info
-const selectedCity = document.getElementById("delivery-city").value.trim();
 
-if (!selectedCity) {
-  alert("Enter the city you live in");
-  loadingMessage.style.display = "none";
-  return;
+
+/* =========================================================
+   GET BUY NOW PRODUCT
+========================================================= */
+
+function getBuyNowProduct() {
+
+  const storedProduct =
+    localStorage.getItem(
+      'buyNowProduct'
+    );
+
+
+  if (!storedProduct) {
+
+    return null;
+
+  }
+
+
+  try {
+
+    return JSON.parse(
+      storedProduct
+    );
+
+  } catch (error) {
+
+    console.error(
+      'Could not parse buyNowProduct:',
+      error
+    );
+
+    return null;
+
+  }
+
 }
 
 
 
-const deliveryInfo = {
-  country: document.getElementById("country-region").value || "N/A",
-  address: document.getElementById("address").value || "N/A",
-  apartment: document.getElementById("apartment-suite").value || "N/A",
-  city: selectedCity || "N/A",
-};
+/* =========================================================
+   GET ORIGINAL PRODUCT PRICE IN KES
+========================================================= */
 
-    
-      // Get selected payment method
-      const selectedPayment = document.querySelector('.payment-method.selected');
+function getProductPriceKES(product) {
+
+  if (!product) {
+
+    return 0;
+
+  }
 
 
-// Prepare data object
-const data = {
-  contact: {
-    fullName: fullName,
-    email: userEmail,
-    phone: userPhone,
-  },
-  delivery: deliveryInfo,
-};
+  const rawPrice =
+    String(
+      product.newPrice || '0'
+    );
 
-      
-      
-// Retrieve order summary details from localStorage (if available)
-const storedProduct = localStorage.getItem('buyNowProduct');
-if (storedProduct) {
-  const product = JSON.parse(storedProduct);
-  
-  // Calculate total
-  const newPriceNumber = parseFloat(product.newPrice.replace(/KSh|,/g, '')) || 0;
-  const quantity = product.quantity || 1;
-  const total = newPriceNumber * quantity;
-  
-  // Retrieve the displayed estimated total from the DOM
-  const estimatedTotalElement = document.getElementById('combined-price');
-  const displayedEstimatedTotal = estimatedTotalElement ? estimatedTotalElement.innerText : "N/A";
 
-  // Append order summary details to the data object
-  data.orderSummary = {
-    image: product.image,
-    name: product.name,
-    brand: product.brand,
-    oldPrice: product.oldPrice || 'N/A',
-    newPrice: product.newPrice || 'N/A',
-    quantity: quantity,
-    total: total.toFixed(2),
-    estimatedTotal: displayedEstimatedTotal,
-    // Include size and color if available
-    ...(product.size && { size: product.size }),
-    ...(product.color && { color: product.color }),
+  const cleanedPrice =
+    rawPrice
+      .replace(/KShs?\.?/gi, '')
+      .replace(/KES/gi, '')
+      .replace(/,/g, '')
+      .trim();
+
+
+  const price =
+    Number.parseFloat(
+      cleanedPrice
+    );
+
+
+  return Number.isFinite(price)
+    ? price
+    : 0;
+
+}
+
+
+
+/* =========================================================
+   VALIDATE CHECKOUT FORM
+========================================================= */
+
+function validateCheckoutDetails() {
+
+  const required = [
+
+    [
+      'full-name',
+      'Full Name'
+    ],
+
+    [
+      'email',
+      'Email'
+    ],
+
+    [
+      'phone-number',
+      'Phone Number'
+    ],
+
+    [
+      'country-region',
+      'Country/Region'
+    ],
+
+    [
+      'address',
+      'Address'
+    ],
+
+    [
+      'delivery-city',
+      'City'
+    ]
+
+  ];
+
+
+  for (
+    const [id, label]
+    of required
+  ) {
+
+    if (!getValue(id)) {
+
+      alert(
+        `Please enter your ${label}.`
+      );
+
+
+      document
+        .getElementById(id)
+        ?.focus();
+
+
+      return false;
+
+    }
+
+  }
+
+
+  return true;
+
+}
+
+
+
+/* =========================================================
+   BUILD ORDER DATA
+
+   This keeps the existing /pay2-now structure.
+========================================================= */
+
+function buildBuyNowOrderData() {
+
+  const product =
+    getBuyNowProduct();
+
+
+  if (!product) {
+
+    throw new Error(
+      'Your product information could not be found.'
+    );
+
+  }
+
+
+  const quantity =
+    Number(product.quantity) || 1;
+
+
+  const productPriceKES =
+    getProductPriceKES(
+      product
+    );
+
+
+  const productTotalKES =
+    productPriceKES *
+    quantity;
+
+
+  /*
+    This is the authoritative KES checkout
+    amount already calculated by buy2.js.
+
+    Do NOT use #combined-price for Paystack
+    because that can currently contain TZS,
+    USD, GBP, etc.
+  */
+
+  const checkoutKES =
+    Number(
+      window.neatCheckoutKES
+    );
+
+
+  const paymentTotalKES =
+    Number.isFinite(checkoutKES) &&
+    checkoutKES > 0
+      ? checkoutKES
+      : productTotalKES;
+
+
+
+  /* =========================================
+     DISPLAY-ONLY TOTAL
+  ========================================= */
+
+  const estimatedTotalElement =
+    document.getElementById(
+      'combined-price'
+    );
+
+
+  const displayedEstimatedTotal =
+    estimatedTotalElement
+      ? estimatedTotalElement.innerText
+      : 'N/A';
+
+
+
+  const displayCurrency =
+    window.NeatCurrency
+      ?.getCurrency?.() ||
+    'KES';
+
+
+
+  /* =========================================
+     CONTACT
+  ========================================= */
+
+  const contact = {
+
+    fullName:
+      getValue('full-name'),
+
+    email:
+      getValue('email'),
+
+    phone:
+      getValue('phone-number'),
+
+    newsOffers:
+      false
+
   };
+
+
+
+  /* =========================================
+     DELIVERY
+  ========================================= */
+
+  const delivery = {
+
+    country:
+      getValue(
+        'country-region'
+      ) || 'N/A',
+
+    address:
+      getValue(
+        'address'
+      ) || 'N/A',
+
+    apartment:
+      getValue(
+        'apartment-suite'
+      ) || 'N/A',
+
+    city:
+      getValue(
+        'delivery-city'
+      ) || 'N/A'
+
+  };
+
+
+
+  /* =========================================
+     ORDER SUMMARY
+
+     total + estimatedTotal are intentionally
+     kept because your existing /pay2-now
+     endpoint currently reads those fields.
+  ========================================= */
+
+  const orderSummary = {
+
+    image:
+      product.image,
+
+    name:
+      product.name,
+
+    brand:
+      product.brand,
+
+    oldPrice:
+      product.oldPrice || 'N/A',
+
+    newPrice:
+      product.newPrice || 'N/A',
+
+    quantity:
+      quantity,
+
+
+    total:
+      productTotalKES.toFixed(2),
+
+
+    estimatedTotal:
+      paymentTotalKES.toFixed(2),
+
+
+    totalKES:
+      productTotalKES.toFixed(2),
+
+
+    paymentTotalKES:
+      paymentTotalKES.toFixed(2),
+
+
+    paymentCurrency:
+      'KES',
+
+
+    displayCurrency:
+      displayCurrency,
+
+
+    displayedEstimatedTotal:
+      displayedEstimatedTotal,
+
+
+    ...(product.size && {
+
+      size:
+        product.size
+
+    }),
+
+
+    ...(product.color && {
+
+      color:
+        product.color
+
+    })
+
+  };
+
+
+
+  return {
+
+    itemCount:
+      quantity,
+
+
+    designs:
+      [],
+
+
+    sizes:
+      product.size
+        ? [product.size]
+        : [],
+
+
+    colors:
+      product.color
+        ? [product.color]
+        : [],
+
+
+    contact:
+      contact,
+
+
+    delivery:
+      delivery,
+
+
+    paymentMethod:
+      'Paystack',
+
+
+    orderSummary:
+      orderSummary
+
+  };
+
 }
 
 
-    
-      // Send data to /pay2-now
-      try {
-        const response = await fetch("http://localhost:5000/pay2-now", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
-    
-        const result = await response.json();
-        if (result.success) {
-         alert("Order confirmed. An email with the details is on its way to your inbox.");
 
-        } else {
-          alert("We’re sorry, something went wrong. Please try again or reach out to our support team for assistance.");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        alert("An error occurred while submitting the form.");
+/* =========================================================
+   SEND VERIFIED ORDER TO /pay2-now
+========================================================= */
+
+async function sendVerifiedBuyNowOrder(
+  orderData
+) {
+
+  const response =
+    await fetch(
+      `${API_BASE}/pay2-now`,
+      {
+
+        method:
+          'POST',
+
+        headers: {
+
+          'Content-Type':
+            'application/json'
+
+        },
+
+        body:
+          JSON.stringify(
+            orderData
+          )
+
       }
-    });
-    
-    
-  </script>
+    );
+
+
+  let result;
+
+
+  try {
+
+    result =
+      await response.json();
+
+  } catch (error) {
+
+    throw new Error(
+      'The server returned an invalid order response.'
+    );
+
+  }
+
+
+  console.log(
+    'Order confirmation response:',
+    result
+  );
+
+
+  if (
+    !response.ok ||
+    !result.success
+  ) {
+
+    throw new Error(
+      result.message ||
+      'Could not confirm the order.'
+    );
+
+  }
+
+
+  return result;
+
+}
+
+
+
+/* =========================================================
+   VERIFY PAYSTACK PAYMENT
+========================================================= */
+
+async function verifyBuyNowPayment(
+  reference
+) {
+
+  const response =
+    await fetch(
+      `${API_BASE}/api/paystack/verify`,
+      {
+
+        method:
+          'POST',
+
+        headers: {
+
+          'Content-Type':
+            'application/json'
+
+        },
+
+        body:
+          JSON.stringify({
+
+            reference:
+              reference,
+
+            uid:
+              localStorage.getItem(
+                'loggedInUserId'
+              ) || null
+
+          })
+
+      }
+    );
+
+
+  let result;
+
+
+  try {
+
+    result =
+      await response.json();
+
+  } catch (error) {
+
+    throw new Error(
+      'The server returned an invalid verification response.'
+    );
+
+  }
+
+
+  console.log(
+    'Verification response:',
+    result
+  );
+
+
+  if (
+    !response.ok ||
+    !result.status
+  ) {
+
+    throw new Error(
+      result.message ||
+      'Payment could not be verified.'
+    );
+
+  }
+
+
+  return result;
+
+}
+
+
+
+/* =========================================================
+   HANDLE RETURN FROM PAYSTACK
+========================================================= */
+
+async function handleBuyNowPaystackReturn() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const reference =
+    params.get('reference') ||
+    params.get('trxref');
+
+
+  /*
+    Normal page visit.
+
+    No Paystack callback in URL,
+    therefore do nothing.
+  */
+
+  if (!reference) {
+
+    return;
+
+  }
+
+
+  console.log(
+    'Returned from Paystack with reference:',
+    reference
+  );
+
+
+
+  /* =========================================
+     PREVENT FRONTEND DUPLICATE PROCESSING
+  ========================================= */
+
+  const processedReference =
+    sessionStorage.getItem(
+      BUY_NOW_PROCESSED_KEY
+    );
+
+
+  if (
+    processedReference ===
+    reference
+  ) {
+
+    console.log(
+      'This payment has already been processed in this session.'
+    );
+
+
+    window.history.replaceState(
+      {},
+      document.title,
+      window.location.pathname
+    );
+
+
+    return;
+
+  }
+
+
+
+  /* =========================================
+     GET SAVED ORDER
+  ========================================= */
+
+  const storedOrder =
+    sessionStorage.getItem(
+      BUY_NOW_CHECKOUT_KEY
+    );
+
+
+  if (!storedOrder) {
+
+    console.error(
+      'Pending Buy Now checkout data was not found.'
+    );
+
+
+    alert(
+      'Your payment returned successfully, but your pending order details could not be found. Please contact support with your payment reference: ' +
+      reference
+    );
+
+
+    return;
+
+  }
+
+
+
+  let orderData;
+
+
+  try {
+
+    orderData =
+      JSON.parse(
+        storedOrder
+      );
+
+  } catch (error) {
+
+    console.error(
+      'Could not parse pending checkout:',
+      error
+    );
+
+
+    alert(
+      'Your saved checkout information could not be read. Please contact support with payment reference: ' +
+      reference
+    );
+
+
+    return;
+
+  }
+
+
+
+  try {
+
+    /* =========================================
+       SHOW PROCESSING MESSAGE
+    ========================================= */
+
+    const customAlert =
+      document.createElement(
+        'div'
+      );
+
+
+    customAlert.className =
+      'custom-alert';
+
+
+    customAlert.innerText =
+      'Verifying your payment...';
+
+
+    document.body.appendChild(
+      customAlert
+    );
+
+
+
+    /* =========================================
+       VERIFY ON SERVER
+    ========================================= */
+
+    console.log(
+      'Verifying Paystack reference:',
+      reference
+    );
+
+
+    const verification =
+      await verifyBuyNowPayment(
+        reference
+      );
+
+
+
+    const transaction =
+      verification.transaction;
+
+
+
+    /* =========================================
+       BASIC TRANSACTION CHECK
+    ========================================= */
+
+    if (
+      transaction &&
+      transaction.status &&
+      transaction.status !== 'success'
+    ) {
+
+      throw new Error(
+        'Paystack did not return a successful transaction.'
+      );
+
+    }
+
+
+    if (
+      transaction &&
+      transaction.currency &&
+      transaction.currency !== 'KES'
+    ) {
+
+      throw new Error(
+        'Unexpected payment currency returned by Paystack.'
+      );
+
+    }
+
+
+
+    console.log(
+      'Payment verified. Sending order confirmation...'
+    );
+
+
+
+    /* =========================================
+       SEND ORDER EMAILS
+    ========================================= */
+
+    await sendVerifiedBuyNowOrder(
+      orderData
+    );
+
+
+
+    /* =========================================
+       MARK AS PROCESSED
+    ========================================= */
+
+    sessionStorage.setItem(
+      BUY_NOW_PROCESSED_KEY,
+      reference
+    );
+
+
+    sessionStorage.removeItem(
+      BUY_NOW_CHECKOUT_KEY
+    );
+
+
+    sessionStorage.removeItem(
+      BUY_NOW_REFERENCE_KEY
+    );
+
+
+    localStorage.removeItem(
+      'buyNowProduct'
+    );
+
+
+
+    /* =========================================
+       REMOVE PAYSTACK QUERY PARAMETERS
+    ========================================= */
+
+    window.history.replaceState(
+      {},
+      document.title,
+      window.location.pathname
+    );
+
+
+
+    customAlert.remove();
+
+
+
+    alert(
+      'Payment successful! Your order has been confirmed. An email with the details is on its way to your inbox.'
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      'Buy Now payment completion error:',
+      error
+    );
+
+
+    document
+      .querySelectorAll(
+        '.custom-alert'
+      )
+      .forEach(
+        element =>
+          element.remove()
+      );
+
+
+    /*
+      IMPORTANT:
+
+      We deliberately DO NOT remove the
+      pending checkout information here.
+
+      That way a temporary email/server
+      failure does not destroy the order.
+    */
+
+    alert(
+      error.message ||
+      'We could not finish processing your order. Please contact support with your payment reference: ' +
+      reference
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   START PAYSTACK PAYMENT
+========================================================= */
+
+document
+  .getElementById(
+    'paystack-btn'
+  )
+  .addEventListener(
+    'click',
+    async function () {
+
+
+      /* =========================================
+         VALIDATE CHECKOUT
+      ========================================= */
+
+      if (
+        !validateCheckoutDetails()
+      ) {
+
+        return;
+
+      }
+
+
+
+      /* =========================================
+         GET ORIGINAL KES PAYMENT AMOUNT
+      ========================================= */
+
+      const amountKES =
+        Number(
+          window.neatCheckoutKES
+        );
+
+
+      if (
+        !Number.isFinite(
+          amountKES
+        ) ||
+        amountKES <= 0
+      ) {
+
+        console.error(
+          'Invalid KES checkout amount:',
+          window.neatCheckoutKES
+        );
+
+
+        alert(
+          'Invalid checkout amount. Please refresh the page and try again.'
+        );
+
+
+        return;
+
+      }
+
+
+
+      console.log(
+        'Display currency:',
+        window.NeatCurrency
+          ?.getCurrency?.() ||
+        'KES'
+      );
+
+
+      console.log(
+        'Paystack KES amount:',
+        amountKES
+      );
+
+
+
+      try {
+
+        /* =========================================
+           BUILD COMPLETE ORDER
+        ========================================= */
+
+        const orderData =
+          buildBuyNowOrderData();
+
+
+
+        /* =========================================
+           SAVE ORDER BEFORE LEAVING SITE
+        ========================================= */
+
+        sessionStorage.setItem(
+          BUY_NOW_CHECKOUT_KEY,
+          JSON.stringify(
+            orderData
+          )
+        );
+
+
+        sessionStorage.removeItem(
+          BUY_NOW_PROCESSED_KEY
+        );
+
+
+
+        /* =========================================
+           DISABLE BUTTON
+        ========================================= */
+
+        const payButton =
+          document.getElementById(
+            'paystack-btn'
+          );
+
+
+        const originalButtonText =
+          payButton.textContent;
+
+
+        payButton.disabled =
+          true;
+
+
+        payButton.textContent =
+          'Please wait...';
+
+
+
+        /* =========================================
+           INITIALIZE PAYSTACK THROUGH SERVER
+        ========================================= */
+
+        const response =
+          await fetch(
+            `${API_BASE}/api/paystack/initialize`,
+            {
+
+              method:
+                'POST',
+
+              headers: {
+
+                'Content-Type':
+                  'application/json'
+
+              },
+
+              body:
+                JSON.stringify({
+
+                  email:
+                    getValue(
+                      'email'
+                    ),
+
+                  amountKES:
+                    amountKES,
+
+                  checkoutType:
+                    'buy2'
+
+                })
+
+            }
+          );
+
+
+
+        let result;
+
+
+        try {
+
+          result =
+            await response.json();
+
+        } catch (error) {
+
+          throw new Error(
+            'The payment server returned an invalid response.'
+          );
+
+        }
+
+
+
+        console.log(
+          'Paystack initialize response:',
+          result
+        );
+
+
+
+        if (
+          !response.ok ||
+          !result.status ||
+          !result.authorization_url
+        ) {
+
+          throw new Error(
+            result.message ||
+            'Could not initialize payment.'
+          );
+
+        }
+
+
+
+        /* =========================================
+           SAVE PAYSTACK REFERENCE
+        ========================================= */
+
+        sessionStorage.setItem(
+          BUY_NOW_REFERENCE_KEY,
+          result.reference
+        );
+
+
+
+        /* =========================================
+           REDIRECT TO PAYSTACK
+
+           No PaystackPop.
+           No iframe.
+           No InlineJS.
+        ========================================= */
+
+        window.location.href =
+          result.authorization_url;
+
+
+
+      } catch (error) {
+
+        console.error(
+          'Unable to initialize payment:',
+          error
+        );
+
+
+        const payButton =
+          document.getElementById(
+            'paystack-btn'
+          );
+
+
+        payButton.disabled =
+          false;
+
+
+        payButton.textContent =
+          'Pay';
+
+
+        alert(
+          error.message ||
+          'Unable to start payment. Please try again.'
+        );
+
+      }
+
+    }
+  );
+
+
+
+/* =========================================================
+   HANDLE PAYSTACK CALLBACK ON PAGE LOAD
+========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  () => {
+
+    handleBuyNowPaystackReturn();
+
+  }
+);
+
+
+
+/* =========================================================
+   OLD SUBMIT DETAILS BUTTON
+
+   Orders must only be submitted after the
+   Paystack transaction has been verified.
+
+   Keep the existing element in the HTML so
+   nothing else in the page structure breaks,
+   but do not allow it to submit an unpaid order.
+========================================================= */
+
+const oldSubmitButton =
+  document.getElementById(
+    'pay-now-btn'
+  );
+
+
+if (oldSubmitButton) {
+
+  oldSubmitButton.style.display =
+    'none';
+
+}
+</script>
   
 <script>
   async function verifyPayment(reference, attempts = 3, delay = 3000) {
@@ -443,69 +1571,241 @@ if (storedProduct) {
 
 
 <script>
-  document.getElementById('paystack-btn').addEventListener('click', function () {
+document
+  .getElementById('paystack-btn')
+  .addEventListener('click', function () {
 
-    const val = id => (document.getElementById(id)?.value || '').trim();
+    /* =========================================
+       1. VALIDATE CHECKOUT DETAILS
+    ========================================= */
+
+    const val = id =>
+      (
+        document.getElementById(id)?.value || ''
+      ).trim();
+
 
     const required = [
-      ['email',         'Email'],
-      ['phone-number',  'Phone Number'],
-      ['country-region','Country/Region'],
-      ['address',       'Address'],
-      ['delivery-city', 'City'],
+      ['email', 'Email'],
+      ['phone-number', 'Phone Number'],
+      ['country-region', 'Country/Region'],
+      ['address', 'Address'],
+      ['delivery-city', 'City']
     ];
 
+
     for (const [id, label] of required) {
+
       if (!val(id)) {
-        alert(`Please enter your ${label}.`);
-        document.getElementById(id).focus();
+
+        alert(
+          `Please enter your ${label}.`
+        );
+
+        document
+          .getElementById(id)
+          ?.focus();
+
         return;
       }
+
     }
 
-    const combinedPriceElement = document.getElementById('combined-price');
-    if (!combinedPriceElement) {
-      alert('Estimated total not found.');
+
+    /* =========================================
+       2. GET ORIGINAL KES TOTAL
+
+       IMPORTANT:
+       Never read #combined-price here because
+       it may currently be GBP/USD/EUR/etc.
+    ========================================= */
+
+    const amountKES =
+      Number(
+        window.neatCheckoutKES
+      );
+
+
+    if (
+      !Number.isFinite(amountKES) ||
+      amountKES <= 0
+    ) {
+
+      console.error(
+        'Invalid KES checkout amount:',
+        window.neatCheckoutKES
+      );
+
+      alert(
+        'Invalid checkout amount. Please refresh the page and try again.'
+      );
+
       return;
     }
 
-    const amountString = combinedPriceElement.textContent.trim();
-    const amount = parseFloat(amountString);
-    if (!amount || amount <= 0) {
-      alert('Invalid estimated total amount');
-      return;
-    }
 
-    const amountInKobo = Math.round(amount * 100);
+    /* =========================================
+       3. PAYSTACK SUBUNIT
+    ========================================= */
 
-    const handler = PaystackPop.setup({
-      key: 'pk_live_ebc463d4a263695caa52983243908de4c27ab205',
-      email: val('email'),
-      amount: amountInKobo,
-      currency: 'KES',
-      ref: '' + (Math.floor(Math.random() * 1_000_000_000) + 1),
+    const amountInSubunit =
+      Math.round(
+        amountKES * 100
+      );
 
-      callback({ reference }) {
-        verifyPayment(reference); // ✅ Use global function
+
+    console.log(
+      'Display currency:',
+      window.NeatCurrency?.getCurrency?.() || 'KES'
+    );
+
+    console.log(
+      'Paystack KES amount:',
+      amountKES
+    );
+
+    console.log(
+      'Paystack subunit:',
+      amountInSubunit
+    );
+
+
+    /* =========================================
+       4. PAYSTACK V2
+    ========================================= */
+
+    const paystack =
+      new PaystackPop();
+
+
+    paystack.newTransaction({
+
+      key:
+        'pk_test_9a29ec4d0e7944ac94fe2ad542aa1427d7469bbf',
+
+      email:
+        val('email'),
+
+      amount:
+        amountInSubunit,
+
+      currency:
+        'KES',
+
+      ref:
+        'NEAT-' +
+        Date.now() +
+        '-' +
+        Math.floor(
+          Math.random() * 1000000
+        ),
+
+
+      /* =====================================
+         SUCCESS
+      ===================================== */
+
+      onSuccess: transaction => {
+
+        console.log(
+          'Paystack transaction:',
+          transaction
+        );
+
+
+        if (
+          !transaction ||
+          !transaction.reference
+        ) {
+
+          console.error(
+            'Paystack returned no reference.'
+          );
+
+          alert(
+            'Payment completed but the transaction reference could not be retrieved. Please contact support.'
+          );
+
+          return;
+        }
+
+
+        verifyPayment(
+          transaction.reference
+        );
+
       },
 
-      onClose() {
-        const email = val('email');
+
+      /* =====================================
+         CANCEL
+      ===================================== */
+
+      onCancel: () => {
+
+        const email =
+          val('email');
+
+
         if (email) {
-          fetch('http://localhost:5000/api/payment-cancelled', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email })
+
+          fetch(
+            'http://localhost:5000/api/payment-cancelled',
+            {
+              method:
+                'POST',
+
+              headers: {
+                'Content-Type':
+                  'application/json'
+              },
+
+              body:
+                JSON.stringify({
+                  email
+                })
+            }
+          ).catch(error => {
+
+            console.error(
+              'Could not record cancelled payment:',
+              error
+            );
+
           });
+
         }
-        alert('⛔ Payment cancelled');
+
+
+        alert(
+          'Payment cancelled'
+        );
+
+      },
+
+
+      /* =====================================
+         ERROR
+      ===================================== */
+
+      onError: error => {
+
+        console.error(
+          'Paystack error:',
+          error
+        );
+
+
+        alert(
+          'Unable to start payment. Please try again.'
+        );
+
       }
+
     });
 
-    handler.openIframe();
   });
 </script>
-
 
 
 
@@ -586,7 +1886,7 @@ requestAnimationFrame(() => {
 
 </script>
   
-
-  <script src="buy2.min.js" defer></script>
+  <script src="currency.js"></script>
+  <script src="buy2.js" defer></script>
 </body>
 </html>

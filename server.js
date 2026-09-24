@@ -110,9 +110,6 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'home')));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "home", "index.html"));
-});
 
 
 // Configure Multer for File Uploads (memory storage)
@@ -1564,6 +1561,288 @@ const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 app.use(express.json());
 
+/* =========================================================
+   INITIALIZE PAYSTACK TRANSACTION
+========================================================= */
+
+app.post('/api/paystack/initialize', async (req, res) => {
+
+  try {
+
+    const {
+      email,
+      amountKES,
+      checkoutType
+    } = req.body;
+
+
+    console.log(
+      "Initializing Paystack payment:",
+      {
+        email,
+        amountKES,
+        checkoutType: checkoutType || 'buy'
+      }
+    );
+
+
+    /* ==============================
+       CHECK SECRET KEY
+    ============================== */
+
+    if (!PAYSTACK_SECRET_KEY) {
+
+      return res.status(500).json({
+        status: false,
+        message:
+          "PAYSTACK_SECRET_KEY is missing on the server."
+      });
+
+    }
+
+
+    /* ==============================
+       VALIDATE EMAIL
+    ============================== */
+
+    if (!email) {
+
+      return res.status(400).json({
+        status: false,
+        message:
+          "Email is required."
+      });
+
+    }
+
+
+    /* ==============================
+       VALIDATE AMOUNT
+    ============================== */
+
+    const amount =
+      Number(amountKES);
+
+
+    if (
+      !Number.isFinite(amount) ||
+      amount <= 0
+    ) {
+
+      return res.status(400).json({
+        status: false,
+        message:
+          "Invalid payment amount."
+      });
+
+    }
+
+
+    /*
+      Paystack expects the amount
+      in the smallest currency unit.
+    */
+
+    const amountInSubunit =
+      Math.round(
+        amount * 100
+      );
+
+
+    /* ==============================
+       GENERATE REFERENCE
+    ============================== */
+
+    const reference =
+      `NEAT-${Date.now()}-${Math.floor(
+        Math.random() * 1000000
+      )}`;
+
+
+    /* ==============================
+       CHOOSE CHECKOUT PAGE
+    ============================== */
+
+    const checkoutPage =
+      checkoutType === 'buy2'
+        ? 'buy2.html'
+        : 'buy.html';
+
+
+    /* ==============================
+       CHOOSE LOCAL OR LIVE CALLBACK
+    ============================== */
+
+    const origin =
+      req.headers.origin || '';
+
+
+    const isLocal =
+      origin.includes('127.0.0.1') ||
+      origin.includes('localhost');
+
+
+    const callbackUrl =
+      isLocal
+        ? `http://127.0.0.1:5506/home/${checkoutPage}`
+        : `https://www.neatgarms.com/${checkoutPage}`;
+
+
+    console.log(
+      "Paystack callback URL:",
+      callbackUrl
+    );
+
+
+    /* ==============================
+       INITIALIZE PAYSTACK
+    ============================== */
+
+    const response =
+      await axios.post(
+
+        'https://api.paystack.co/transaction/initialize',
+
+        {
+
+          email:
+            email,
+
+          amount:
+            amountInSubunit,
+
+          currency:
+            'KES',
+
+          reference:
+            reference,
+
+          callback_url:
+            callbackUrl
+
+        },
+
+        {
+
+          headers: {
+
+            Authorization:
+              `Bearer ${PAYSTACK_SECRET_KEY}`,
+
+            'Content-Type':
+              'application/json'
+
+          }
+
+        }
+
+      );
+
+
+    const data =
+      response.data;
+
+
+    console.log(
+      "Paystack initialization response:",
+      data
+    );
+
+
+    /* ==============================
+       CHECK RESPONSE
+    ============================== */
+
+    if (
+      !data.status ||
+      !data.data?.access_code
+    ) {
+
+      return res.status(400).json({
+
+        status:
+          false,
+
+        message:
+          data.message ||
+          "Unable to initialize Paystack payment."
+
+      });
+
+    }
+
+
+    /* ==============================
+       SEND PAYMENT DATA TO FRONTEND
+    ============================== */
+
+    return res.status(200).json({
+
+      status:
+        true,
+
+      access_code:
+        data.data.access_code,
+
+      authorization_url:
+        data.data.authorization_url,
+
+      reference:
+        data.data.reference
+
+    });
+
+
+  } catch (error) {
+
+
+    console.error(
+      "Paystack initialization error:"
+    );
+
+
+    console.error(
+      "Message:",
+      error.message
+    );
+
+
+    console.error(
+      "Response:",
+      error.response?.data
+    );
+
+
+    console.error(
+      "Status:",
+      error.response?.status
+    );
+
+
+    return res
+      .status(
+        error.response?.status || 500
+      )
+      .json({
+
+        status:
+          false,
+
+        message:
+          error.response?.data?.message ||
+          "Unable to initialize payment.",
+
+        error:
+          error.response?.data ||
+          error.message
+
+      });
+
+  }
+
+});
+
+
 app.post('/api/paystack/verify', async (req, res) => {
   try {
     const reference = req.body?.reference;
@@ -1655,7 +1934,7 @@ app.post("/api/paystack/webhook",
     const paystackSignature = req.headers['x-paystack-signature'];
 
     // ✅ Always use the SECRET key (same as in dashboard) — not the PUBLIC one
-    const secret = 'REMOVED_SECRET'; // Ideally use process.env
+    const secret = PAYSTACK_SECRET_KEY;
 
     const hash = crypto
       .createHmac('sha512', secret)

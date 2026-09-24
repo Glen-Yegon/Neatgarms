@@ -267,10 +267,10 @@ document.addEventListener(
        PRODUCT TEMPLATE
     ====================================================== */
 
-    const createProductCard = (
-      item,
-      index
-    ) => {
+const createProductCard = async (
+  item,
+  index
+) => {
 
 
       const quantity =
@@ -291,6 +291,23 @@ document.addEventListener(
 
       const totalPrice =
         unitPrice * quantity;
+
+        const convertedUnitPrice =
+  await window.NeatCurrency.formatKES(
+    unitPrice,
+    {
+      codeOnly: true
+    }
+  );
+
+
+const convertedTotalPrice =
+  await window.NeatCurrency.formatKES(
+    totalPrice,
+    {
+      codeOnly: true
+    }
+  );
 
 
       const brand =
@@ -501,23 +518,23 @@ document.addEventListener(
               <span class="cart-product__price-label">
                 ${
                   quantity > 1
-                    ? `${quantity} × ${formatPrice(unitPrice)}`
+                    ? `${quantity} × ${convertedUnitPrice.amount}`
                     : 'PRICE'
                 }
               </span>
 
 
-              <div class="cart-product__price-value">
+<div class="cart-product__price-value">
 
-                <small>
-                  KES
-                </small>
+  <small>
+    ${convertedTotalPrice.currency}
+  </small>
 
-                <strong>
-                  ${formatPrice(totalPrice)}
-                </strong>
+  <strong>
+    ${convertedTotalPrice.amount}
+  </strong>
 
-              </div>
+</div>
 
             </div>
 
@@ -541,7 +558,7 @@ document.addEventListener(
        RENDER CART
     ====================================================== */
 
-    const renderCart = () => {
+const renderCart = async () => {
 
 
       cartItemsContainer.innerHTML =
@@ -569,34 +586,63 @@ document.addEventListener(
       let combinedPrice = 0;
 
 
-      cart.forEach(
-        (item, index) => {
+for (
+  let index = 0;
+  index < cart.length;
+  index++
+) {
 
-          const {
-            card,
-            totalPrice
-          } =
-            createProductCard(
-              item,
-              index
-            );
+  const item =
+    cart[index];
 
 
-          combinedPrice +=
-            totalPrice;
+  const {
+    card,
+    totalPrice
+  } =
+    await createProductCard(
+      item,
+      index
+    );
 
 
-          cartItemsContainer
-            .appendChild(card);
-
-        }
-      );
+  combinedPrice +=
+    totalPrice;
 
 
-      combinedPriceElement.textContent =
-        formatPrice(
-          combinedPrice
-        );
+  cartItemsContainer
+    .appendChild(card);
+
+}
+
+
+const convertedCombinedPrice =
+  await window.NeatCurrency.formatKES(
+    combinedPrice,
+    {
+      codeOnly: true
+    }
+  );
+
+
+combinedPriceElement.textContent =
+  convertedCombinedPrice.amount;
+
+
+const currencyLabels =
+  document.querySelectorAll(
+    "[data-currency-code]"
+  );
+
+
+currencyLabels.forEach(
+  label => {
+
+    label.textContent =
+      convertedCombinedPrice.currency;
+
+  }
+);
 
     };
 

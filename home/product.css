@@ -637,15 +637,15 @@ body, html {
   display: flex;
 
   width: 100%;
-
   min-width: 0;
 
   margin: 0;
 
+  /* less empty space around the product */
   padding:
-    clamp(25px, 3vw, 50px)
+    clamp(8px, 1vw, 18px)
     0
-    clamp(25px, 3vw, 45px);
+    clamp(8px, 1vw, 18px);
 }
 
 
@@ -659,7 +659,6 @@ body, html {
   justify-content: center;
 
   width: 100%;
-
   min-height: 0;
 
   overflow: hidden;
@@ -671,14 +670,18 @@ body, html {
 .image-slider #main-image {
   display: block;
 
-  width: 112%;
-  height: 112%;
+  width: 125%;
+  height: 125%;
 
   max-width: none;
-  max-height: calc(100svh - 145px);
+
+  /* allow image to occupy much more vertical space */
+  max-height: calc(100svh - 90px);
 
   object-fit: contain;
   object-position: center;
+
+  transform: scale(1.12);
 
   user-select: none;
 
@@ -687,12 +690,13 @@ body, html {
     transform 900ms cubic-bezier(.22, 1, .36, 1);
 }
 
+
 /* subtle hover */
 
 @media (hover: hover) {
 
   .image-slider:hover #main-image {
-    transform: scale(1.015);
+    transform: scale(1.14);
   }
 
 }
@@ -943,7 +947,7 @@ body, html {
 
 
 .object-meta span {
-  color: var(--object-muted);
+  color: black;
 }
 
 
@@ -1055,12 +1059,12 @@ body, html {
 .object-price__currency {
   margin-right: 2px;
 
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 550;
 
   letter-spacing: 0.13em;
 
-  color: var(--object-muted);
+  color: black;
 }
 
 
@@ -1106,12 +1110,12 @@ body, html {
 
   margin-bottom: 17px;
 
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 520;
 
   letter-spacing: 0.14em;
 
-  color: var(--object-muted);
+  color: black;
 }
 
 
@@ -1718,6 +1722,7 @@ body, html {
     text-overflow: ellipsis;
 
     white-space: nowrap;
+    color: black;
   }
 
 
@@ -3840,15 +3845,17 @@ body, html {
 
   display: grid;
 
+  /* 4 products together on desktop */
   grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+    repeat(4, minmax(0, 1fr));
 
   align-items: start;
 
-  gap: clamp(12px, 2.3vw, 38px);
+  /* very tight spacing */
+  gap: clamp(3px, 0.45vw, 8px);
 
   width: 100%;
-  max-width: 1500px;
+  max-width: 1600px;
 
   margin: 0 auto;
 
@@ -4017,7 +4024,7 @@ body, html {
 
   font-family: "Anybody", sans-serif;
 
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 480;
 
   line-height: 1.2;
@@ -4036,9 +4043,9 @@ body, html {
 .featured-section .product-price::before {
   content: "KES";
 
-  color: var(--related-muted);
+  color: black;
 
-  font-size: 6px;
+  font-size: 10px;
 
   letter-spacing: 0.13em;
 }
@@ -4053,6 +4060,7 @@ body, html {
 
 .featured-section .new-price {
   color: var(--related-ink);
+  font-size: 12px;
 }
 
 
@@ -4081,9 +4089,9 @@ body, html {
 
   width: fit-content;
 
-  margin-top: 16px;
+  margin-top: 20px;
 
-  padding-bottom: 4px;
+  padding-bottom: 5px;
 
   border-bottom:
     1px solid rgba(11, 11, 11, 0.45);
@@ -4092,7 +4100,7 @@ body, html {
 
   font-family: "Anybody", sans-serif;
 
-  font-size: 7px;
+  font-size: 10px;
   font-weight: 560;
 
   line-height: 1;

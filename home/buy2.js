@@ -1,235 +1,869 @@
-// Dropdown toggle functionality
-const toggleDropdown = document.getElementById('toggle-dropdown');
-const orderSummaryDropdown = document.getElementById('order-summary-dropdown');
+/* =========================================================
+   NEATGARMS — BUY NOW CHECKOUT
+   DISPLAY CURRENCY + KES PAYMENT BASE
+========================================================= */
 
-toggleDropdown.addEventListener('click', () => {
-  orderSummaryDropdown.style.display =
-    orderSummaryDropdown.style.display === 'block' ? 'none' : 'block';
-});
+const toggleDropdown =
+  document.getElementById(
+    'toggle-dropdown'
+  );
 
-function renderProductWithShipping() {
-  const productCardSection = document.getElementById('product-card-section');
-  const product = JSON.parse(localStorage.getItem('buyNowProduct'));
+const orderSummaryDropdown =
+  document.getElementById(
+    'order-summary-dropdown'
+  );
 
-  if (product) {
-    const newPrice = parseFloat(product.newPrice.replace(/KSh|,/g, '')) || 0;
-    const quantity = product.quantity || 1;
-    const productTotal = newPrice * quantity;
 
-    // Get shipping fee text from the element with ID 'shipping-fee'
-    const shippingFeeText = document.getElementById("shipping-fee")?.textContent || "KSh 0";
-    const shippingFee = parseInt(shippingFeeText.replace(/KSh|,/g, '').trim()) || 0;
+toggleDropdown?.addEventListener(
+  'click',
+  () => {
 
-    // Calculate final total including shipping fee
-    const finalTotal = productTotal + shippingFee;
+    orderSummaryDropdown.style.display =
+      orderSummaryDropdown.style.display ===
+      'block'
+        ? 'none'
+        : 'block';
 
-    // Clear previous content before appending
-    productCardSection.innerHTML = '';
+  }
+);
 
-    // Create the size and color lines only if available
-    const sizeLine = product.size ? `<p><strong>Size:</strong> ${product.size}</p>` : '';
-    const colorLine = product.color ? `<p><strong>Color:</strong> ${product.color}</p>` : '';
 
-    // Create the product card
-    const productCard = document.createElement('div');
-    productCard.classList.add('product-card');
+/* =========================================================
+   CHECKOUT STATE
+========================================================= */
 
-    productCard.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-        <img src="${product.image}" alt="${product.name}" style="width: 80px; height: auto; border-radius: 5px;">
-        <div>
-          <h4>${product.name}</h4>
-          <p>Brand: ${product.brand}</p>
-          <p><del>KSh${product.oldPrice || 'N/A'}</del> <strong>KSh${product.newPrice}</strong></p>
-          <p><strong>Quantity:</strong> ${quantity}</p>
-          ${sizeLine}
-          ${colorLine}
-          <p><strong>Total (without shipping):</strong> KSh${productTotal.toFixed(2)}</p>
-        </div>
-      </div>
+let buyNowBaseTotalKES = 0;
+let buyNowDiscountPercent = 0;
+
+
+/* =========================================================
+   GET PRODUCT
+========================================================= */
+
+function getBuyNowProduct() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        'buyNowProduct'
+      )
+    );
+
+  } catch (error) {
+
+    console.error(
+      'Could not read buyNowProduct:',
+      error
+    );
+
+    return null;
+
+  }
+
+}
+
+
+/* =========================================================
+   GET ORIGINAL KES PRICE
+========================================================= */
+
+function getKESPrice(value) {
+
+  if (
+    window.NeatCurrency &&
+    window.NeatCurrency.parseKESPrice
+  ) {
+
+    return window.NeatCurrency
+      .parseKESPrice(value);
+
+  }
+
+
+  return (
+    parseFloat(
+      String(value || 0)
+        .replace(
+          /KShs?|KES|,/gi,
+          ''
+        )
+        .trim()
+    ) || 0
+  );
+
+}
+
+
+/* =========================================================
+   SHIPPING
+
+   IMPORTANT:
+   Shipping is still interpreted as KES.
+========================================================= */
+
+function getShippingKES() {
+
+  const shippingFeeElement =
+    document.getElementById(
+      'shipping-fee'
+    );
+
+
+  if (!shippingFeeElement) {
+    return 0;
+  }
+
+
+  return getKESPrice(
+    shippingFeeElement.textContent
+  );
+
+}
+
+
+/* =========================================================
+   FORMAT DISPLAY CURRENCY
+========================================================= */
+
+async function formatDisplayPrice(
+  kesAmount
+) {
+
+  if (
+    !window.NeatCurrency
+  ) {
+
+    return {
+      currency: 'KES',
+      symbol: 'KSh',
+      amount:
+        Number(kesAmount)
+          .toLocaleString(
+            'en-KE',
+            {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            }
+          ),
+      formatted:
+        `KSh ${Number(kesAmount).toLocaleString()}`
+    };
+
+  }
+
+
+  return await window.NeatCurrency
+    .formatKES(kesAmount);
+
+}
+
+
+/* =========================================================
+   CALCULATE CURRENT KES TOTAL
+========================================================= */
+
+function calculateBuyNowTotalKES() {
+
+  const product =
+    getBuyNowProduct();
+
+
+  if (!product) {
+    return 0;
+  }
+
+
+  const unitPriceKES =
+    getKESPrice(
+      product.newPrice
+    );
+
+
+  const quantity =
+    parseInt(
+      product.quantity
+    ) || 1;
+
+
+  const subtotalKES =
+    unitPriceKES *
+    quantity;
+
+
+  const discountAmount =
+    subtotalKES *
+    (
+      buyNowDiscountPercent /
+      100
+    );
+
+
+  const shippingKES =
+    getShippingKES();
+
+
+  return (
+    subtotalKES -
+    discountAmount +
+    shippingKES
+  );
+
+}
+
+
+/* =========================================================
+   RENDER PRODUCT
+========================================================= */
+
+async function renderProductWithShipping() {
+
+  const productCardSection =
+    document.getElementById(
+      'product-card-section'
+    );
+
+
+  if (!productCardSection) {
+    return;
+  }
+
+
+  const product =
+    getBuyNowProduct();
+
+
+  if (!product) {
+
+    productCardSection.innerHTML =
+      `
+        <p>
+          No product found.
+          Please go back and select a product.
+        </p>
+      `;
+
+    return;
+
+  }
+
+
+  /* -----------------------------------------
+     ORIGINAL KES VALUES
+  ----------------------------------------- */
+
+  const unitPriceKES =
+    getKESPrice(
+      product.newPrice
+    );
+
+
+  const quantity =
+    parseInt(
+      product.quantity
+    ) || 1;
+
+
+  const subtotalKES =
+    unitPriceKES *
+    quantity;
+
+
+  const shippingKES =
+    getShippingKES();
+
+
+  const discountKES =
+    subtotalKES *
+    (
+      buyNowDiscountPercent /
+      100
+    );
+
+
+  buyNowBaseTotalKES =
+    subtotalKES -
+    discountKES +
+    shippingKES;
+
+
+  /*
+    Save payment total separately.
+
+    This is ALWAYS KES.
+  */
+
+  window.neatCheckoutKES =
+    buyNowBaseTotalKES;
+
+
+  /* -----------------------------------------
+     CONVERT FOR DISPLAY ONLY
+  ----------------------------------------- */
+
+  const displayUnitPrice =
+    await formatDisplayPrice(
+      unitPriceKES
+    );
+
+
+  const displaySubtotal =
+    await formatDisplayPrice(
+      subtotalKES
+    );
+
+
+  const displayFinalTotal =
+    await formatDisplayPrice(
+      buyNowBaseTotalKES
+    );
+
+
+  /* -----------------------------------------
+     SIZE / COLOR
+  ----------------------------------------- */
+
+  const sizeLine =
+    product.size
+      ? `
+          <p>
+            <strong>Size</strong>
+            <span>
+              ${product.size}
+            </span>
+          </p>
+        `
+      : '';
+
+
+  const colorLine =
+    product.color
+      ? `
+          <p>
+            <strong>Color</strong>
+            <span>
+              ${product.color}
+            </span>
+          </p>
+        `
+      : '';
+
+
+  /* -----------------------------------------
+     PRODUCT CARD
+  ----------------------------------------- */
+
+  productCardSection.innerHTML =
+    '';
+
+
+  const productCard =
+    document.createElement(
+      'div'
+    );
+
+
+  productCard.classList.add(
+    'product-card'
+  );
+
+
+  productCard.innerHTML = `
+
+    <div class="product-image">
+
+      <img
+        src="${product.image}"
+        alt="${product.name}"
+      >
+
+    </div>
+
+
+    <div class="product-details">
+
+      <h4 class="summary-product-name">
+        ${product.name}
+      </h4>
+
+
+      ${
+        product.brand
+          ? `
+              <p>
+                <strong>
+                  Brand
+                </strong>
+
+                <span>
+                  ${product.brand}
+                </span>
+              </p>
+            `
+          : ''
+      }
+
+
+      <p>
+
+        <strong>
+          Price
+        </strong>
+
+        <span>
+          ${displayUnitPrice.formatted}
+        </span>
+
+      </p>
+
+
+      <p>
+
+        <strong>
+          Quantity
+        </strong>
+
+        <span>
+          ${quantity}
+        </span>
+
+      </p>
+
+
+      ${sizeLine}
+
+      ${colorLine}
+
+
+      <p class="summary-product-total">
+
+        <strong>
+          Subtotal
+        </strong>
+
+        <span>
+          ${displaySubtotal.formatted}
+        </span>
+
+      </p>
+
+    </div>
+  `;
+
+
+  productCardSection.appendChild(
+    productCard
+  );
+
+
+  /* =====================================================
+     ESTIMATED TOTAL
+  ===================================================== */
+
+  const estimatedTotalSection =
+    document.querySelector(
+      '.estimated-total'
+    );
+
+
+  if (estimatedTotalSection) {
+
+    estimatedTotalSection.innerHTML = `
+
+      <h3>
+
+        Estimated Total:
+
+        <span
+          id="combined-price"
+          data-kes-total="${buyNowBaseTotalKES}"
+        >
+          ${displayFinalTotal.formatted}
+        </span>
+
+      </h3>
+
+      ${
+        displayFinalTotal.currency !==
+        'KES'
+          ? `
+              <small
+                class="checkout-kes-note"
+              >
+                Payment processed as
+                KSh ${buyNowBaseTotalKES.toLocaleString()}
+                KES.
+              </small>
+            `
+          : ''
+      }
+
     `;
 
-    productCardSection.appendChild(productCard);
-
-    // Update Estimated Total section to include shipping fee
-    const estimatedTotalSection = document.querySelector('.estimated-total');
-    if (estimatedTotalSection) {
-      estimatedTotalSection.innerHTML = `
-        <h3>Estimated Total: KSh<span id="combined-price">${finalTotal.toFixed(2)}</span></h3>
-      `;
-    }
-  } else {
-    productCardSection.innerHTML = '<p>No product found. Please go back and select a product.</p>';
   }
+
 }
 
 
-// Run once when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  renderProductWithShipping();
+/* =========================================================
+   INITIALIZE
+========================================================= */
 
-  // Set up MutationObserver to watch shipping fee changes
-  const shippingFeeElement = document.getElementById('shipping-fee');
-  if (shippingFeeElement) {
-    const observer = new MutationObserver(() => {
-      renderProductWithShipping();
-    });
+document.addEventListener(
+  'DOMContentLoaded',
+  async () => {
 
-    observer.observe(shippingFeeElement, {
-      characterData: true,
-      childList: true,
-      subtree: true
-    });
+    await renderProductWithShipping();
+
+
+    const shippingFeeElement =
+      document.getElementById(
+        'shipping-fee'
+      );
+
+
+    if (shippingFeeElement) {
+
+      const observer =
+        new MutationObserver(
+          async () => {
+
+            await renderProductWithShipping();
+
+          }
+        );
+
+
+      observer.observe(
+        shippingFeeElement,
+        {
+          characterData: true,
+          childList: true,
+          subtree: true
+        }
+      );
+
+    }
+
   }
-});
+);
 
 
+/* =========================================================
+   DISCOUNT CODES
+========================================================= */
 
-// Discount Codes (Example)
 const discountCodes = {
-  "GARMS15": 15, // 10% off
-  "FREESHIP": 0, // Free shipping (no cost here as shipping is already free)
-  "BIGSALE": 10 // 20% off
+
+  GARMS15: 15,
+
+  FREESHIP: 0,
+
+  BIGSALE: 10
+
 };
 
-// Function to show futuristic toast
-function showFuturisticAlert(message, type = "success") {
-  let container = document.getElementById("toast-container");
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showFuturisticAlert(
+  message,
+  type = 'success'
+) {
+
+  let container =
+    document.getElementById(
+      'toast-container'
+    );
+
+
   if (!container) {
-    container = document.createElement("div");
-    container.id = "toast-container";
-    document.body.appendChild(container);
-  }
 
-  const toast = document.createElement("div");
-  toast.className = `toast ${type}`;
-  toast.textContent = message;
-  container.appendChild(toast);
+    container =
+      document.createElement(
+        'div'
+      );
 
-  setTimeout(() => toast.classList.add("show"), 10);
+    container.id =
+      'toast-container';
 
-  setTimeout(() => {
-    toast.classList.remove("show");
-    setTimeout(() => toast.remove(), 500);
-  }, 4000);
-}
+    document.body.appendChild(
+      container
+    );
 
-// Event Listener for Apply Button
-document.getElementById('apply-discount-btn').addEventListener('click', function () {
-  const discountInput = document.getElementById('discount-code').value.trim();
-  const discountValue = discountCodes[discountInput];
-
-  const product = JSON.parse(localStorage.getItem('buyNowProduct'));
-
-  if (product && discountValue !== undefined) {
-    const newPrice = parseFloat(product.newPrice.replace(/KSh|,/g, '')) || 0;
-    const quantity = product.quantity || 1;
-    const total = newPrice * quantity;
-
-    const discountedTotal = total - (total * discountValue / 100);
-
-    const combinedPriceElement = document.getElementById('combined-price');
-    combinedPriceElement.textContent = discountedTotal.toFixed(2);
-
-    // Show success toast
-    showFuturisticAlert(`Discount code applied! You saved ${discountValue}%.`);
-  } else {
-    // Show error toast
-    showFuturisticAlert('Invalid discount code. Please try again.', "error");
-  }
-});
-
-
-  
-  
-  // Handle payment method selection using images
-  const paymentMethods = document.querySelectorAll('.payment-method');
-  
-  paymentMethods.forEach(method => {
-    method.addEventListener('click', function() {
-      // Remove selected class from all payment methods
-      paymentMethods.forEach(m => m.classList.remove('selected'));
-  
-      // Add selected class to the clicked method
-      method.classList.add('selected');
-    });
-  });
-  
-  
-  // Select the radio buttons and address containers
-  const sameAsShippingRadio = document.getElementById('same-as-shipping');
-  const differentBillingRadio = document.getElementById('different-billing');
-  const sameAddressContainer = document.getElementById('same-address-container');
-  const differentAddressContainer = document.getElementById('different-address-container');
-  
-  // Add event listeners to toggle the visibility of address forms
-  sameAsShippingRadio.addEventListener('change', function() {
-    if (this.checked) {
-      sameAddressContainer.style.display = 'block';
-      differentAddressContainer.style.display = 'none';
-    }
-  });
-  
-  differentBillingRadio.addEventListener('change', function() {
-    if (this.checked) {
-      sameAddressContainer.style.display = 'none';
-      differentAddressContainer.style.display = 'block';
-    }
-  });
-  
-  // Initial check for default behavior (Same as shipping address)
-  if (sameAsShippingRadio.checked) {
-    sameAddressContainer.style.display = 'block';
-    differentAddressContainer.style.display = 'none';
   }
 
 
-function generateInterleavedFields(fields) {
-  const container = document.getElementById('fields-container');
-  container.innerHTML = ''; // Clear the container
+  const toast =
+    document.createElement(
+      'div'
+    );
 
-  let currentItem = 0;
-  let itemGroup;
 
-  fields.forEach((field, index) => {
-    // If it's a new item, create a new section
-    if (field.index !== currentItem) {
-      currentItem = field.index;
+  toast.className =
+    `toast ${type}`;
 
-      // Create and append a heading label for the item
-      const itemLabel = document.createElement('h4');
-      itemLabel.textContent = `Item ${currentItem}`;
-      itemLabel.style.marginTop = '15px';
-      itemLabel.style.color = '#222';
-      container.appendChild(itemLabel);
+
+  toast.textContent =
+    message;
+
+
+  container.appendChild(
+    toast
+  );
+
+
+  setTimeout(
+    () => {
+
+      toast.classList.add(
+        'show'
+      );
+
+    },
+    10
+  );
+
+
+  setTimeout(
+    () => {
+
+      toast.classList.remove(
+        'show'
+      );
+
+
+      setTimeout(
+        () => toast.remove(),
+        500
+      );
+
+    },
+    4000
+  );
+
+}
+
+
+/* =========================================================
+   APPLY DISCOUNT
+========================================================= */
+
+document
+  .getElementById(
+    'apply-discount-btn'
+  )
+  ?.addEventListener(
+    'click',
+    async () => {
+
+      const discountInput =
+        document
+          .getElementById(
+            'discount-code'
+          )
+          ?.value
+          .trim()
+          .toUpperCase() || '';
+
+
+      const discountValue =
+        discountCodes[
+          discountInput
+        ];
+
+
+      if (
+        discountValue ===
+        undefined
+      ) {
+
+        showFuturisticAlert(
+          'Invalid discount code. Please try again.',
+          'error'
+        );
+
+        return;
+
+      }
+
+
+      buyNowDiscountPercent =
+        discountValue;
+
+
+      await renderProductWithShipping();
+
+
+      showFuturisticAlert(
+        `Discount code applied! You saved ${discountValue}%.`
+      );
+
     }
+  );
 
-    // Create the input field
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.placeholder = `${capitalizeFirstLetter(field.type)} ${field.index}`;
-    input.name = `${field.type}-${field.index}`; // Optional: useful if you're submitting this in a form
 
-    // Append input field below the item label
-    container.appendChild(input);
-  });
+/* =========================================================
+   PAYMENT METHOD SELECTION
+========================================================= */
+
+const paymentMethods =
+  document.querySelectorAll(
+    '.payment-method'
+  );
+
+
+paymentMethods.forEach(
+  method => {
+
+    method.addEventListener(
+      'click',
+      () => {
+
+        paymentMethods.forEach(
+          item => {
+
+            item.classList.remove(
+              'selected'
+            );
+
+          }
+        );
+
+
+        method.classList.add(
+          'selected'
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   BILLING ADDRESS
+========================================================= */
+
+const sameAsShippingRadio =
+  document.getElementById(
+    'same-as-shipping'
+  );
+
+const differentBillingRadio =
+  document.getElementById(
+    'different-billing'
+  );
+
+const sameAddressContainer =
+  document.getElementById(
+    'same-address-container'
+  );
+
+const differentAddressContainer =
+  document.getElementById(
+    'different-address-container'
+  );
+
+
+sameAsShippingRadio
+  ?.addEventListener(
+    'change',
+    function () {
+
+      if (!this.checked) {
+        return;
+      }
+
+
+      if (
+        sameAddressContainer
+      ) {
+
+        sameAddressContainer
+          .style.display =
+          'block';
+
+      }
+
+
+      if (
+        differentAddressContainer
+      ) {
+
+        differentAddressContainer
+          .style.display =
+          'none';
+
+      }
+
+    }
+  );
+
+
+differentBillingRadio
+  ?.addEventListener(
+    'change',
+    function () {
+
+      if (!this.checked) {
+        return;
+      }
+
+
+      if (
+        sameAddressContainer
+      ) {
+
+        sameAddressContainer
+          .style.display =
+          'none';
+
+      }
+
+
+      if (
+        differentAddressContainer
+      ) {
+
+        differentAddressContainer
+          .style.display =
+          'block';
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   UTILITY
+========================================================= */
+
+function capitalizeFirstLetter(
+  string
+) {
+
+  return (
+    string
+      .charAt(0)
+      .toUpperCase() +
+    string.slice(1)
+  );
+
 }
-
-
-// Utility function to capitalize the first letter of a string
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-
-  document.getElementById("pay-now-btn").innerText = "Processing...";
-// After form submission
-document.getElementById("pay-now-btn").innerText = "Submit Details";
 
 
 function goBack() {
+
   history.back();
+
 }
 
 
-
+/* Make available to inline HTML onclick */
+window.goBack =
+  goBack;

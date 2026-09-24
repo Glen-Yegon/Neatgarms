@@ -1,197 +1,888 @@
-// Dropdown toggle functionality
-const toggleDropdown = document.getElementById('toggle-dropdown');
-const orderSummaryDropdown = document.getElementById('order-summary-dropdown');
-
-toggleDropdown.addEventListener('click', () => {
-  orderSummaryDropdown.style.display =
-    orderSummaryDropdown.style.display === 'block' ? 'none' : 'block';
-});
+/* =========================================================
+   NEATGARMS — CART CHECKOUT
+   DISPLAY CURRENCY + KES PAYMENT BASE
+========================================================= */
 
 
+/* =========================================================
+   STATE
+========================================================= */
+
+let cartBaseTotalKES = 0;
+let cartDiscountPercent = 0;
 
 
+/* =========================================================
+   DROPDOWN
+========================================================= */
 
-const renderCartFromLocalStorage = () => {
-  const cartItemsContainer = document.getElementById('cart-items-container');
-  const combinedPriceElement = document.getElementById("combined-price");
+const toggleDropdown =
+  document.getElementById(
+    'toggle-dropdown'
+  );
 
-  // Retrieve cart items from localStorage
-  const cart = JSON.parse(localStorage.getItem('cartItems')) || [];
-
-  if (cart.length === 0) {
-    cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
-    combinedPriceElement.textContent = "0.00"; // Reset combined price
-  } else {
-    cartItemsContainer.innerHTML = ''; // Clear previous content
-    let combinedPrice = 0; // Initialize combined price
-
-    cart.forEach((item) => {
-      const productCard = document.createElement('div');
-      productCard.classList.add('cart-item');
-
-      // Clean and parse the newPrice
-      const cleanedPrice = (item.newPrice || '0').replace(/KSh|,/g, '').trim();
-      const newPrice = parseFloat(cleanedPrice) || 0; // Convert to a valid number
-      const quantity = parseInt(item.quantity) || 1;  // Ensure quantity is an integer
-
-      // Calculate total price for this item 
-      const totalPrice = newPrice * quantity;
-
-      // Add to combined price (items only)
-      combinedPrice += totalPrice;
-
-      // Create the product card
-      productCard.innerHTML = `
-        <div style="display: grid;">
-          <!-- Product Image -->
-          <img src="${item.image}" alt="${item.name}" style="width:70px; height:auto;">
-          
-          <!-- Product Details -->
-          <h4>${item.name}</h4>
-          <p>Brand: ${item.brand}</p>
-          <p>Price: KSh${newPrice.toFixed(2)}</p>
-          <p>Qty: ${quantity}</p>
-          
-          <!-- Display Size if available -->
-          ${item.size ? `<p>Size: ${item.size}</p>` : ''}
-
-          <!-- Display Color if available -->
-          ${item.color ? `
-            <p>Color: 
-              <span style="background-color:${item.color}; padding:5px; border-radius:50%;">&nbsp;</span>
-            </p>` : ''}
-
-          <p>Total Price: KSh${totalPrice.toFixed(2)}</p>
-        </div>
-      `;
-
-      // Append the product card to the container
-      cartItemsContainer.appendChild(productCard);
-    });
-  
+const orderSummaryDropdown =
+  document.getElementById(
+    'order-summary-dropdown'
+  );
 
 
-// No longer including shipping fee in final price
-const finalPrice = combinedPrice;
+toggleDropdown?.addEventListener(
+  'click',
+  () => {
 
-// Show the total in combinedPriceElement
-combinedPriceElement.textContent = finalPrice.toFixed(2);
-  }}
-  
+    orderSummaryDropdown.style.display =
+      orderSummaryDropdown.style.display ===
+      'block'
+        ? 'none'
+        : 'block';
+
+  }
+);
 
 
-  // Call renderCartFromLocalStorage on page load to render the items from localStorage
-  window.onload = renderCartFromLocalStorage;
+/* =========================================================
+   PRICE PARSER
+========================================================= */
 
-  
-  
-// Discount Codes (Example)
+function getKESPrice(value) {
+
+  if (
+    window.NeatCurrency &&
+    window.NeatCurrency.parseKESPrice
+  ) {
+
+    return window.NeatCurrency
+      .parseKESPrice(value);
+
+  }
+
+
+  return (
+    parseFloat(
+      String(value || 0)
+        .replace(
+          /KShs?|KES|,/gi,
+          ''
+        )
+        .trim()
+    ) || 0
+  );
+
+}
+
+
+/* =========================================================
+   DISPLAY FORMATTER
+========================================================= */
+
+async function formatDisplayPrice(
+  kesAmount
+) {
+
+  if (
+    window.NeatCurrency
+  ) {
+
+    return await window.NeatCurrency
+      .formatKES(
+        kesAmount
+      );
+
+  }
+
+
+  return {
+
+    currency:
+      'KES',
+
+    symbol:
+      'KSh',
+
+    amount:
+      Number(
+        kesAmount
+      ).toLocaleString(
+        'en-KE',
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }
+      ),
+
+    formatted:
+      `KSh ${Number(kesAmount).toLocaleString()}`
+
+  };
+
+}
+
+
+/* =========================================================
+   CART
+========================================================= */
+
+function getCart() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        'cartItems'
+      )
+    ) || [];
+
+  } catch (error) {
+
+    console.error(
+      'Could not read cart:',
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+/* =========================================================
+   CALCULATE ORIGINAL KES TOTAL
+========================================================= */
+
+function calculateCartKES() {
+
+  const cart =
+    getCart();
+
+
+  return cart.reduce(
+    (
+      total,
+      item
+    ) => {
+
+      const unitPrice =
+        getKESPrice(
+          item.newPrice
+        );
+
+
+      const quantity =
+        parseInt(
+          item.quantity
+        ) || 1;
+
+
+      return (
+        total +
+        unitPrice *
+        quantity
+      );
+
+    },
+    0
+  );
+
+}
+
+
+/* =========================================================
+   RENDER CART
+========================================================= */
+
+async function renderCartFromLocalStorage() {
+
+  const cartItemsContainer =
+    document.getElementById(
+      'cart-items-container'
+    );
+
+  const combinedPriceElement =
+    document.getElementById(
+      'combined-price'
+    );
+
+  const currencyElement =
+    document.getElementById(
+      'checkout-currency'
+    );
+
+  const kesNote =
+    document.getElementById(
+      'checkout-kes-note'
+    );
+
+
+  if (
+    !cartItemsContainer ||
+    !combinedPriceElement
+  ) {
+    return;
+  }
+
+
+  const cart =
+    getCart();
+
+
+  /* =====================================================
+     EMPTY CART
+  ===================================================== */
+
+  if (
+    cart.length === 0
+  ) {
+
+    cartItemsContainer.innerHTML = `
+
+      <p class="empty-order-message">
+        Your cart is empty.
+      </p>
+
+    `;
+
+
+    combinedPriceElement.textContent =
+      '0.00';
+
+
+    window.neatCheckoutKES =
+      0;
+
+
+    return;
+
+  }
+
+
+  cartItemsContainer.innerHTML =
+    '';
+
+
+  let combinedKES = 0;
+
+
+  /* =====================================================
+     ITEMS
+  ===================================================== */
+
+  for (
+    const item of cart
+  ) {
+
+    const unitPriceKES =
+      getKESPrice(
+        item.newPrice
+      );
+
+
+    const quantity =
+      parseInt(
+        item.quantity
+      ) || 1;
+
+
+    const subtotalKES =
+      unitPriceKES *
+      quantity;
+
+
+    combinedKES +=
+      subtotalKES;
+
+
+    /* -----------------------------------------
+       DISPLAY CURRENCY
+    ----------------------------------------- */
+
+    const displayUnit =
+      await formatDisplayPrice(
+        unitPriceKES
+      );
+
+
+    const displaySubtotal =
+      await formatDisplayPrice(
+        subtotalKES
+      );
+
+
+    /* -----------------------------------------
+       OPTIONAL DETAILS
+    ----------------------------------------- */
+
+    const sizeLine =
+      item.size
+        ? `
+            <p>
+              <strong>
+                Size
+              </strong>
+
+              <span>
+                ${item.size}
+              </span>
+            </p>
+          `
+        : '';
+
+
+    const colorLine =
+      item.color
+        ? `
+            <p>
+
+              <strong>
+                Color
+              </strong>
+
+              <span
+                class="summary-color-value"
+              >
+
+                <i
+                  class="summary-color-swatch"
+                  style="background-color:${item.color};"
+                ></i>
+
+                ${item.color}
+
+              </span>
+
+            </p>
+          `
+        : '';
+
+
+    /* -----------------------------------------
+       CARD
+    ----------------------------------------- */
+
+    const productCard =
+      document.createElement(
+        'div'
+      );
+
+
+    productCard.classList.add(
+      'cart-item'
+    );
+
+
+    productCard.innerHTML = `
+
+      <div class="cart-product-image">
+
+        <img
+          src="${item.image}"
+          alt="${item.name}"
+        >
+
+      </div>
+
+
+      <div class="cart-product-details">
+
+        <h4 class="summary-product-name">
+          ${item.name}
+        </h4>
+
+
+        ${
+          item.brand
+            ? `
+                <p>
+
+                  <strong>
+                    Brand
+                  </strong>
+
+                  <span>
+                    ${item.brand}
+                  </span>
+
+                </p>
+              `
+            : ''
+        }
+
+
+        <p>
+
+          <strong>
+            Price
+          </strong>
+
+          <span>
+            ${displayUnit.formatted}
+          </span>
+
+        </p>
+
+
+        <p>
+
+          <strong>
+            Quantity
+          </strong>
+
+          <span>
+            ${quantity}
+          </span>
+
+        </p>
+
+
+        ${sizeLine}
+
+        ${colorLine}
+
+
+        <p
+          class="summary-product-total"
+        >
+
+          <strong>
+            Subtotal
+          </strong>
+
+          <span>
+            ${displaySubtotal.formatted}
+          </span>
+
+        </p>
+
+      </div>
+
+    `;
+
+
+    cartItemsContainer
+      .appendChild(
+        productCard
+      );
+
+  }
+
+
+  /* =====================================================
+     DISCOUNT — CALCULATED IN KES
+  ===================================================== */
+
+  const discountAmountKES =
+    combinedKES *
+    (
+      cartDiscountPercent /
+      100
+    );
+
+
+  cartBaseTotalKES =
+    combinedKES -
+    discountAmountKES;
+
+
+  /*
+    This variable is the ONLY total Paystack
+    should use.
+  */
+
+  window.neatCheckoutKES =
+    cartBaseTotalKES;
+
+
+  /* =====================================================
+     DISPLAY TOTAL
+  ===================================================== */
+
+  const displayTotal =
+    await formatDisplayPrice(
+      cartBaseTotalKES
+    );
+
+
+  if (currencyElement) {
+
+    currencyElement.textContent =
+      displayTotal.currency;
+
+  }
+
+
+  combinedPriceElement.textContent =
+    displayTotal.amount;
+
+
+  combinedPriceElement.dataset.kesTotal =
+    String(
+      cartBaseTotalKES
+    );
+
+
+  /* =====================================================
+     KES PAYMENT NOTICE
+  ===================================================== */
+
+  if (kesNote) {
+
+    if (
+      displayTotal.currency !==
+      'KES'
+    ) {
+
+      kesNote.style.display =
+        'block';
+
+
+      kesNote.textContent =
+        `Payment processed as KSh ${cartBaseTotalKES.toLocaleString()} KES. Your bank/card provider may determine the final conversion rate.`;
+
+    } else {
+
+      kesNote.style.display =
+        'none';
+
+      kesNote.textContent =
+        '';
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  async () => {
+
+    await renderCartFromLocalStorage();
+
+  }
+);
+
+
+/* =========================================================
+   DISCOUNTS
+========================================================= */
+
 const discountCodes = {
-  "GARMS15": 15, // 10% off
-  "FREESHIP": 0, // Free shipping (no cost here as shipping is already free)
-  "BIGSALE": 10 // 20% off
+
+  GARMS15: 15,
+
+  FREESHIP: 0,
+
+  BIGSALE: 10
+
 };
 
-// Function to show futuristic toast
-function showFuturisticAlert(message, type = "success") {
-  // Create container if it doesn't exist
-  let container = document.getElementById("toast-container");
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showFuturisticAlert(
+  message,
+  type = 'success'
+) {
+
+  let container =
+    document.getElementById(
+      'toast-container'
+    );
+
+
   if (!container) {
-    container = document.createElement("div");
-    container.id = "toast-container";
-    document.body.appendChild(container);
+
+    container =
+      document.createElement(
+        'div'
+      );
+
+    container.id =
+      'toast-container';
+
+
+    document.body.appendChild(
+      container
+    );
+
   }
 
-  // Create toast element
-  const toast = document.createElement("div");
-  toast.className = `toast ${type}`;
-  toast.textContent = message;
-  container.appendChild(toast);
 
-  // Animate in
-  setTimeout(() => toast.classList.add("show"), 10);
-
-  // Remove after 4 seconds
-  setTimeout(() => {
-    toast.classList.remove("show");
-    setTimeout(() => toast.remove(), 500);
-  }, 4000);
-}
-
-// Event Listener for Apply Button
-document.getElementById('apply-discount-btn').addEventListener('click', function () {
-  const discountInput = document.getElementById('discount-code').value.trim();
-  const discountValue = discountCodes[discountInput];
-  const combinedPriceElement = document.getElementById('combined-price');
-
-  if (discountValue !== undefined) {
-    const currentTotal = parseFloat(combinedPriceElement.textContent) || 0;
-    const newTotal = currentTotal - (currentTotal * discountValue / 100);
-    combinedPriceElement.textContent = newTotal.toFixed(2);
-
-    // Show success toast
-    showFuturisticAlert(`Discount code applied! You saved ${discountValue}%.`);
-  } else {
-    // Show error toast
-    showFuturisticAlert('Invalid discount code. Please try again.', "error");
-  }
-});
+  const toast =
+    document.createElement(
+      'div'
+    );
 
 
-
-// Handle payment method selection using images
-const paymentMethods = document.querySelectorAll('.payment-method');
-
-paymentMethods.forEach(method => {
-  method.addEventListener('click', function() {
-    // Remove selected class from all payment methods
-    paymentMethods.forEach(m => m.classList.remove('selected'));
-
-    // Add selected class to the clicked method
-    method.classList.add('selected');
-  });
-});
+  toast.className =
+    `toast ${type}`;
 
 
-// Select the radio buttons and address containers
-const sameAsShippingRadio = document.getElementById('same-as-shipping');
-const differentBillingRadio = document.getElementById('different-billing');
-const sameAddressContainer = document.getElementById('same-address-container');
-const differentAddressContainer = document.getElementById('different-address-container');
+  toast.textContent =
+    message;
 
-// Add event listeners to toggle the visibility of address forms
-sameAsShippingRadio.addEventListener('change', function() {
-  if (this.checked) {
-    sameAddressContainer.style.display = 'block';
-    differentAddressContainer.style.display = 'none';
-  }
-});
 
-differentBillingRadio.addEventListener('change', function() {
-  if (this.checked) {
-    sameAddressContainer.style.display = 'none';
-    differentAddressContainer.style.display = 'block';
-  }
-});
+  container.appendChild(
+    toast
+  );
 
-// Initial check for default behavior (Same as shipping address)
-if (sameAsShippingRadio.checked) {
-  sameAddressContainer.style.display = 'block';
-  differentAddressContainer.style.display = 'none';
+
+  setTimeout(
+    () => {
+
+      toast.classList.add(
+        'show'
+      );
+
+    },
+    10
+  );
+
+
+  setTimeout(
+    () => {
+
+      toast.classList.remove(
+        'show'
+      );
+
+
+      setTimeout(
+        () => toast.remove(),
+        500
+      );
+
+    },
+    4000
+  );
+
 }
 
 
+/* =========================================================
+   APPLY DISCOUNT
+========================================================= */
+
+document
+  .getElementById(
+    'apply-discount-btn'
+  )
+  ?.addEventListener(
+    'click',
+    async () => {
+
+      const discountInput =
+        document
+          .getElementById(
+            'discount-code'
+          )
+          ?.value
+          .trim()
+          .toUpperCase() || '';
 
 
-// Utility function to capitalize the first letter of a string
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+      const discountValue =
+        discountCodes[
+          discountInput
+        ];
+
+
+      if (
+        discountValue ===
+        undefined
+      ) {
+
+        showFuturisticAlert(
+          'Invalid discount code. Please try again.',
+          'error'
+        );
+
+        return;
+
+      }
+
+
+      cartDiscountPercent =
+        discountValue;
+
+
+      await renderCartFromLocalStorage();
+
+
+      showFuturisticAlert(
+        `Discount code applied! You saved ${discountValue}%.`
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   PAYMENT METHOD
+========================================================= */
+
+const paymentMethods =
+  document.querySelectorAll(
+    '.payment-method'
+  );
+
+
+paymentMethods.forEach(
+  method => {
+
+    method.addEventListener(
+      'click',
+      () => {
+
+        paymentMethods.forEach(
+          item => {
+
+            item.classList.remove(
+              'selected'
+            );
+
+          }
+        );
+
+
+        method.classList.add(
+          'selected'
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* =========================================================
+   BILLING ADDRESS
+========================================================= */
+
+const sameAsShippingRadio =
+  document.getElementById(
+    'same-as-shipping'
+  );
+
+const differentBillingRadio =
+  document.getElementById(
+    'different-billing'
+  );
+
+const sameAddressContainer =
+  document.getElementById(
+    'same-address-container'
+  );
+
+const differentAddressContainer =
+  document.getElementById(
+    'different-address-container'
+  );
+
+
+sameAsShippingRadio
+  ?.addEventListener(
+    'change',
+    function () {
+
+      if (!this.checked) {
+        return;
+      }
+
+
+      if (
+        sameAddressContainer
+      ) {
+
+        sameAddressContainer
+          .style.display =
+          'block';
+
+      }
+
+
+      if (
+        differentAddressContainer
+      ) {
+
+        differentAddressContainer
+          .style.display =
+          'none';
+
+      }
+
+    }
+  );
+
+
+differentBillingRadio
+  ?.addEventListener(
+    'change',
+    function () {
+
+      if (!this.checked) {
+        return;
+      }
+
+
+      if (
+        sameAddressContainer
+      ) {
+
+        sameAddressContainer
+          .style.display =
+          'none';
+
+      }
+
+
+      if (
+        differentAddressContainer
+      ) {
+
+        differentAddressContainer
+          .style.display =
+          'block';
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   UTILITY
+========================================================= */
+
+function capitalizeFirstLetter(
+  string
+) {
+
+  return (
+    string
+      .charAt(0)
+      .toUpperCase() +
+    string.slice(1)
+  );
+
 }
-
-
 
 
 function goBack() {
+
   history.back();
+
 }
 
+
+window.goBack =
+  goBack;

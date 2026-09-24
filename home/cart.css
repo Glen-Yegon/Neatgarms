@@ -860,24 +860,18 @@ button {
 .remove-btn {
   flex: 0 0 auto;
 
-  padding:
-    0
-    0
-    4px;
+  padding: 6px 0 5px;
 
   border: 0;
-  border-bottom:
-    1px solid rgba(11,11,11,.4);
+  border-bottom: 1px solid rgba(11, 11, 11, .4);
 
   background: transparent;
 
-  color: var(--muted);
+  color: black;
 
-  font-family:
-    "Anybody",
-    sans-serif;
+  font-family: "Anybody", sans-serif;
 
-  font-size: 6px;
+  font-size: 10px;
   font-weight: 550;
 
   letter-spacing: .14em;
@@ -889,12 +883,11 @@ button {
     border-color 200ms ease;
 }
 
-
 .remove-btn:hover {
-  color: var(--ink);
-
-  border-color: var(--ink);
+  color: #0b0b0b;
+  border-color: #0b0b0b;
 }
+
 
 
 /* =========================================================
