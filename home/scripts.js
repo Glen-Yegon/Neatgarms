@@ -3877,10 +3877,9 @@ animationFrame =
   requestAnimationFrame(
     render
   );
-
-
-  /* =========================================================
-   NEATGARMS / STAR CURSOR
+  
+/* =========================================================
+   NEATGARMS / PURPLE SHOOTING STAR CURSOR
    ========================================================= */
 
 const neatCursor =
@@ -3895,7 +3894,7 @@ if (
 ) {
 
   /* -------------------------------------------------------
-     POSITION STATE
+     POSITION
      ------------------------------------------------------- */
 
   let cursorX =
@@ -3912,42 +3911,123 @@ if (
     cursorY;
 
 
-  let cursorScale =
-    1;
+  /* -------------------------------------------------------
+     SCALE
+     ------------------------------------------------------- */
 
-  let targetCursorScale =
-    1;
+  let cursorScale = 1;
 
-
-  let cursorRotation =
-    0;
-
-  let targetCursorRotation =
-    0;
-
-
-  let cursorVisible =
-    false;
+  let targetCursorScale = 1;
 
 
   /* -------------------------------------------------------
-     POINTER
+     DIRECTION / ROTATION
+     ------------------------------------------------------- */
+
+  let cursorRotation = 0;
+
+  let targetCursorRotation = 0;
+
+
+  /* -------------------------------------------------------
+     SPEED / TAIL
+     ------------------------------------------------------- */
+
+  let tailScale = 0.65;
+
+  let targetTailScale = 0.65;
+
+
+  let lastPointerX = cursorX;
+  let lastPointerY = cursorY;
+
+
+  let cursorVisible = false;
+
+
+  /* -------------------------------------------------------
+     POINTER MOVEMENT
      ------------------------------------------------------- */
 
   window.addEventListener(
     "pointermove",
     event => {
 
-      targetCursorX =
+      const newX =
         event.clientX;
 
-      targetCursorY =
+      const newY =
         event.clientY;
 
 
       /*
-        Don't show it until the user actually
-        moves their mouse.
+        Calculate direction of travel.
+      */
+
+      const deltaX =
+        newX - lastPointerX;
+
+      const deltaY =
+        newY - lastPointerY;
+
+
+      /*
+        Calculate mouse speed.
+      */
+
+      const speed =
+        Math.sqrt(
+          deltaX * deltaX +
+          deltaY * deltaY
+        );
+
+
+      /*
+        Only update direction when there
+        is meaningful movement.
+
+        This prevents tiny mouse movements
+        from making the star jitter.
+      */
+
+      if (speed > 1.5) {
+
+        targetCursorRotation =
+          Math.atan2(
+            deltaY,
+            deltaX
+          ) *
+          (180 / Math.PI);
+
+      }
+
+
+      /*
+        Tail grows as mouse moves faster.
+      */
+
+      targetTailScale =
+        Math.min(
+          1.65,
+          Math.max(
+            0.55,
+            0.55 + speed * 0.035
+          )
+        );
+
+
+      targetCursorX = newX;
+      targetCursorY = newY;
+
+
+      lastPointerX = newX;
+      lastPointerY = newY;
+
+
+      /*
+        First movement:
+        immediately position cursor so it
+        doesn't fly in from the centre.
       */
 
       if (!cursorVisible) {
@@ -3958,8 +4038,7 @@ if (
         cursorY =
           targetCursorY;
 
-        cursorVisible =
-          true;
+        cursorVisible = true;
 
         neatCursor.style.opacity =
           "1";
@@ -4012,6 +4091,7 @@ if (
       "a",
       "button",
       "input",
+      "label",
       ".object-zone",
       "[role='button']"
     ].join(",");
@@ -4037,12 +4117,23 @@ if (
       );
 
 
+      /*
+        Slight enlargement over links/buttons.
+      */
+
       targetCursorScale =
-        1.5;
+        1.18;
 
 
-      targetCursorRotation +=
-        45;
+      /*
+        Slightly longer tail.
+      */
+
+      targetTailScale =
+        Math.max(
+          targetTailScale,
+          1
+        );
 
     }
   );
@@ -4064,11 +4155,12 @@ if (
 
 
       /*
-        Don't trigger when moving between children
-        of the same link/button.
+        Don't trigger when moving between
+        children of the same element.
       */
 
       if (
+        event.relatedTarget &&
         interactive.contains(
           event.relatedTarget
         )
@@ -4087,10 +4179,6 @@ if (
       targetCursorScale =
         1;
 
-
-      targetCursorRotation +=
-        45;
-
     }
   );
 
@@ -4106,8 +4194,8 @@ if (
       targetCursorScale =
         0.72;
 
-      targetCursorRotation +=
-        35;
+      targetTailScale =
+        0.45;
 
     }
   );
@@ -4125,39 +4213,44 @@ if (
 
       targetCursorScale =
         interactive
-          ? 1.5
+          ? 1.18
           : 1;
+
+
+      targetTailScale =
+        0.7;
 
     }
   );
 
 
   /* -------------------------------------------------------
-     SMOOTH FOLLOW LOOP
+     ANIMATION LOOP
      ------------------------------------------------------- */
 
   function updateNeatCursor() {
 
     /*
-      Small amount of inertia.
-
-      High enough to feel responsive.
-      Low enough to make the movement visibly smooth.
+      Smooth follow.
     */
 
     cursorX +=
       (
         targetCursorX -
         cursorX
-      ) * 0.22;
+      ) * 0.28;
 
 
     cursorY +=
       (
         targetCursorY -
         cursorY
-      ) * 0.22;
+      ) * 0.28;
 
+
+    /*
+      Smooth scale.
+    */
 
     cursorScale +=
       (
@@ -4166,12 +4259,55 @@ if (
       ) * 0.16;
 
 
-    cursorRotation +=
-      (
-        targetCursorRotation -
-        cursorRotation
-      ) * 0.12;
+    /*
+      Smooth rotation.
 
+      This calculation uses the shortest
+      rotational path so the star doesn't
+      randomly spin 300+ degrees.
+    */
+
+    let rotationDifference =
+      targetCursorRotation -
+      cursorRotation;
+
+
+    rotationDifference =
+      (
+        (
+          rotationDifference + 180
+        ) % 360 +
+        360
+      ) % 360 -
+      180;
+
+
+    cursorRotation +=
+      rotationDifference * 0.18;
+
+
+    /*
+      Tail gradually returns to normal
+      even after mouse movement stops.
+    */
+
+    targetTailScale +=
+      (
+        0.62 -
+        targetTailScale
+      ) * 0.035;
+
+
+    tailScale +=
+      (
+        targetTailScale -
+        tailScale
+      ) * 0.18;
+
+
+    /*
+      Position + direction.
+    */
 
     neatCursor.style.left =
       `${cursorX}px`;
@@ -4191,6 +4327,16 @@ if (
         rotate(${cursorRotation}deg)
         scale(${cursorScale})
       `;
+
+
+    /*
+      Send tail length to CSS.
+    */
+
+    neatCursor.style.setProperty(
+      "--tail-scale",
+      tailScale
+    );
 
 
     requestAnimationFrame(
