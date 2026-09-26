@@ -529,14 +529,41 @@
 
 
 
-  <!-- =====================================================
-       JAVASCRIPT
-  ====================================================== -->
+<!-- =====================================================
+     CURRENCY — KES ONLY ON CART PAGE
+====================================================== -->
+
+<script>
+  /*
+    Force this page to use KES only.
+
+    currency.js reads the "neatCurrency" key,
+    so this MUST be set before currency.js loads.
+  */
+
+  localStorage.setItem("neatCurrency", "KES");
+
+  /*
+    Keep these synchronized as well in case
+    other pages/scripts use the older keys.
+  */
+
+  localStorage.setItem("selectedCurrency", "KES");
+  localStorage.setItem("selectedCurrencySymbol", "KSh");
+  localStorage.setItem("selectedCurrencyCountry", "Kenya");
+</script>
+
+
+<!-- Keep this because cart.js uses NeatCurrency.formatKES() -->
 <script src="currency.js"></script>
-  <script
-    src="cart.js"
-    defer
-  ></script>
+
+
+<!-- Currency selector disabled -->
+<!-- <script src="currency-modal.js"></script> -->
+
+
+<!-- CART -->
+<script src="cart.js" defer></script>
 
 
   <!-- =====================================================

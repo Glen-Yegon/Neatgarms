@@ -1,5 +1,82 @@
 export const productsData = {
 
+  "men-long-sleeve": {
+    name: "Men Long Sleeve",
+    oldPrice: "",
+    newPrice: "2,500",
+    images: [
+      "images/DSC00349.jpg",
+      "images/DSC00355.jpg"
+    ],
+    description: "A relaxed boxy fit with long sleeves, built for effortless everyday wear.",
+    features: [
+      "Relaxed boxy silhouettes",
+      "Premium feel",
+      "Extended sleeve proportions"
+    ],
+    sizes: ["M", "L", "XL"],
+    outOfStock: [],
+    sizeFit: "Songo is 5'10 wearing a size L.",
+  },
+
+  "men-short-sleeve": {
+    name: "Men Short Sleeve",
+    oldPrice: "",
+    newPrice: "2,500",
+    images: [
+      "images/DSC00412.jpg",
+      "images/DSC00410.jpg"
+    ],
+    description: "Signature boxy silhouette, cut, extra extended short-sleeved for a lighter, easy-going feel.",
+    features: [
+      "Relaxed boxy silhouettes",
+      "Premium feel",
+      "Extended sleeve proportions"
+    ],
+    sizes: ["M", "L", "XL"],
+    outOfStock: [],
+    sizeFit: "Raj is 6'2 wearing a size M.",
+  },
+
+  "ladies-long-sleeve": {
+    name: "Ladies Long Sleeve",
+    oldPrice: "",
+    newPrice: "2,500",
+    images: [
+      "images/DSC00372.jpg",
+      "images/DSC00380.jpg"
+    ],
+    description: "A cropped, relaxed silhouette designed to be worn your way — effortless, structured and easy to style.",
+    features: [
+      "Relaxed cropped silhouettes",
+      "Premium feel",
+      "Extended sleeve proportions"
+    ],
+    sizes: ["M", "L", "XL"],
+    outOfStock: [],
+    sizeFit: "Munjiru is 5'4 wearing a size M.",
+  },
+
+  "ladies-short-sleeve": {
+    name: "Ladies Short Sleeve",
+    oldPrice: "",
+    newPrice: "2,500",
+    images: [
+      "images/DSC00328.jpg",
+      "images/DSC00339.jpg"
+    ],
+    description: "A relaxed short-sleeve take on The Workshirt — clean, comfortable and made for everyday steeze.",
+    features: [
+      "Relaxed cropped silhouettes",
+      "Premium feel",
+      "Extended sleeve proportions"
+    ],
+    sizes: ["M", "L", "XL"],
+    outOfStock: [],
+    sizeFit: "Munjiru is 5'4 wearing a size M.",
+  },
+
+
   "neat-whiskey-flask": {
     name: "Neat Whiskey Flask",
     oldPrice: "",
