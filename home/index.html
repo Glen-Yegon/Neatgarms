@@ -218,7 +218,7 @@
       <section class="hero" id="home">
 
         <picture class="hero-media" aria-hidden="true">
-          <source media="(max-width: 767px)" srcset="images//DSC00384.jpg">
+          <source media="(max-width: 767px)" srcset="images//DSC00449.jpg">
           <img
             src="images/DSC00437.jpg"
             alt="Neatgarms campaign"
@@ -1421,6 +1421,28 @@
     );
 
   })();
+</script>
+
+<script>
+  if (sessionStorage.getItem("hasVisited")) {
+    document.documentElement.classList.add("visited");
+  }
+
+  // Emergency loader release.
+  // This works even if the Three.js module fails completely.
+  window.__neatLoaderFailsafe = setTimeout(function () {
+    const loader = document.getElementById("neatLoader");
+
+    if (!loader) return;
+
+    loader.style.transition = "opacity .45s ease";
+    loader.style.opacity = "0";
+    loader.style.pointerEvents = "none";
+
+    setTimeout(function () {
+      loader.style.display = "none";
+    }, 500);
+  }, 7000);
 </script>
 
 </body>

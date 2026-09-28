@@ -3865,18 +3865,74 @@ window.addEventListener(
   }
 );
 
-
 /* =========================================================
    START
+   THREE.JS = DESKTOP ONLY
    ========================================================= */
 
-initialise3D();
+const shouldRunThree =
+  window.matchMedia(
+    "(min-width: 768px)"
+  ).matches &&
+  !prefersReducedMotion;
 
 
-animationFrame =
-  requestAnimationFrame(
-    render
+/*
+ * DESKTOP
+ * Run the complete Three.js experience.
+ */
+if (shouldRunThree) {
+
+  initialise3D();
+
+  animationFrame =
+    requestAnimationFrame(
+      render
+    );
+
+} else {
+
+  /*
+   * MOBILE
+   *
+   * Do NOT:
+   * - create WebGL renderer
+   * - load SVG model
+   * - load WebGL hero texture
+   * - run Three animation loop
+   *
+   * Normal scripts.js functionality continues
+   * below this block.
+   */
+
+  document.documentElement.classList.add(
+    "no-three"
   );
+
+
+  /*
+   * Hide/remove Three-only interaction elements.
+   */
+
+  if (heroHost) {
+    heroHost.style.display = "none";
+  }
+
+  if (objectZone) {
+    objectZone.style.display = "none";
+  }
+
+
+  /*
+   * The normal HTML <picture> hero remains visible.
+   *
+   * Three.js normally calls startIntro() after the
+   * model has loaded. Because mobile doesn't create
+   * the model, we start the intro ourselves.
+   */
+
+  startIntro();
+}
   
 /* =========================================================
    NEATGARMS / PURPLE SHOOTING STAR CURSOR
