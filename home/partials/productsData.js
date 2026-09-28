@@ -93,9 +93,9 @@ export const productsData = {
     ],
     description: "Stainless Steel Hip Flask",
     features: [
-      "5 Oz, 150ml"
+      "5 Oz, 230ml"
     ],
-    sizes: ["150ml"],
+    sizes: ["230ml"],
     outOfStock: [],
     sizeFit: "",
   },
