@@ -6,7 +6,10 @@ export const productsData = {
     newPrice: "2,500",
     images: [
       "images/DSC00349.jpg",
-      "images/DSC00355.jpg"
+      "images/DSC00355.jpg",
+            "images/DSC00360.jpg",
+      "images/DSC00363.jpg",
+            "images/DSC00365.jpg"
     ],
     description: "A relaxed boxy fit with long sleeves, built for effortless everyday wear.",
     features: [
@@ -44,7 +47,9 @@ export const productsData = {
     newPrice: "2,500",
     images: [
       "images/DSC00372.jpg",
-      "images/DSC00380.jpg"
+      "images/DSC00380.jpg",
+            "images/DSC00386.jpg",
+      "images/DSC00387.jpg"
     ],
     description: "A cropped, relaxed silhouette designed to be worn your way — effortless, structured and easy to style.",
     features: [
@@ -63,7 +68,8 @@ export const productsData = {
     newPrice: "2,500",
     images: [
       "images/DSC00328.jpg",
-      "images/DSC00339.jpg"
+      "images/DSC00339.jpg",
+      "images/DSC00387.jpg"
     ],
     description: "A relaxed short-sleeve take on The Workshirt — clean, comfortable and made for everyday steeze.",
     features: [

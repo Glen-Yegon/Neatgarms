@@ -12,7 +12,7 @@
 
   <title>Neatgarms</title>
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.min.css">
   <!-- Lenis smooth scrolling -->
 <link
   rel="stylesheet"
@@ -967,87 +967,463 @@
 </div>
 
 
+<!-- =========================================================
+     NEATGARMS — EMAIL SIGNUP POPUP
+========================================================= -->
+
+<div
+  class="neat-signup-popup"
+  id="neatSignupPopup"
+  aria-hidden="true"
+>
+  <div
+    class="neat-signup-popup__backdrop"
+    data-signup-close
+  ></div>
+
+  <section
+    class="neat-signup-popup__card"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="neatSignupTitle"
+  >
+
+    <!-- CLOSE -->
+    <button
+      class="neat-signup-popup__close"
+      id="neatSignupClose"
+      type="button"
+      aria-label="Close email signup"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+
+    <!-- LOGO -->
+    <div class="neat-signup-popup__logo">
+      <img
+        src="mains/logo2.png"
+        alt="Neatgarms"
+      >
+    </div>
+
+
+    <!-- COPY -->
+    <div class="neat-signup-popup__content">
+
+      <span class="neat-signup-popup__eyebrow">
+        PRIVATE ACCESS / NEAT®
+      </span>
+
+      <h2 id="neatSignupTitle">
+        Stay in the<br>
+        <em>know.</em>
+      </h2>
+
+      <p>
+        Get first access to drops, releases
+        and everything Neatgarms.
+      </p>
+
+    </div>
+
+
+    <!-- FORM -->
+    <form
+      class="neat-signup-popup__form"
+      id="neatSignupForm"
+      novalidate
+    >
+
+      <div class="neat-signup-popup__field">
+
+        <input
+          type="email"
+          id="neatSignupEmail"
+          placeholder="EMAIL ADDRESS"
+          autocomplete="email"
+          required
+          aria-label="Email address"
+        >
+
+        <button type="submit">
+          JOIN
+          <span>↗</span>
+        </button>
+
+      </div>
+
+      <p
+        class="neat-signup-popup__message"
+        id="neatSignupMessage"
+        aria-live="polite"
+      ></p>
+
+    </form>
+
+
+    <!-- BOTTOM -->
+    <div class="neat-signup-popup__bottom">
+
+      <span>
+        KIN®
+      </span>
+
+      <span>
+        NAIROBI — KE
+      </span>
+
+    </div>
+
+  </section>
+</div>
+
+
+
   <!-- Existing footer Firebase module preserved -->
   <script type="module" src="firebase/footer-firebase.js"></script>
 <script
   src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"
 ></script>
 <!-- Currency selector temporarily disabled -->
- <script>
-  /* =========================================================
-     NEATGARMS — TEMPORARY KES-ONLY MODE
-     Multi-currency is disabled for now.
-     ========================================================= */
+<!-- =========================================================
+     NEATGARMS — KES ONLY
+     Currency selector completely disabled
+========================================================= -->
 
+<script>
   (() => {
+    /* Force the currency key used across the store */
+    localStorage.setItem("neatCurrency", "KES");
 
-    const KES_CURRENCY = {
-      country: "Kenya",
-      currency: "KES",
-      symbol: "KSh"
-    };
+    /* Keep older currency keys synchronized */
+    localStorage.setItem("selectedCurrency", "KES");
+    localStorage.setItem("selectedCurrencySymbol", "KSh");
+    localStorage.setItem("selectedCurrencyCountry", "Kenya");
 
-
-    /* Always force KES */
-
-    localStorage.setItem(
-      "selectedCurrency",
-      KES_CURRENCY.currency
-    );
-
-    localStorage.setItem(
-      "selectedCurrencySymbol",
-      KES_CURRENCY.symbol
-    );
-
-    localStorage.setItem(
-      "selectedCurrencyCountry",
-      KES_CURRENCY.country
-    );
-
-
-    /* Hide currency modal if it exists */
-
-    const currencyGate =
-      document.getElementById("currencyGate");
-
+    /* Completely disable the currency gate */
+    const currencyGate = document.getElementById("currencyGate");
 
     if (currencyGate) {
+      currencyGate.style.setProperty("display", "none", "important");
+      currencyGate.style.setProperty("visibility", "hidden", "important");
+      currencyGate.style.setProperty("pointer-events", "none", "important");
+      currencyGate.setAttribute("aria-hidden", "true");
+      currencyGate.inert = true;
+    }
+  })();
+</script>
 
-      currencyGate.style.display = "none";
+<!-- DO NOT ENABLE THIS -->
+<!-- <script src="currency-modal.js"></script> -->
+     <script src="bag-count.min.js"></script>
+  <script type="module" src="scripts.min.js" defer></script>
+  
+<script>
+  (() => {
 
-      currencyGate.setAttribute(
+    const popup =
+      document.getElementById("neatSignupPopup");
+
+    const closeButton =
+      document.getElementById("neatSignupClose");
+
+    const backdrop =
+      popup?.querySelector("[data-signup-close]");
+
+    const form =
+      document.getElementById("neatSignupForm");
+
+    const emailInput =
+      document.getElementById("neatSignupEmail");
+
+    const message =
+      document.getElementById("neatSignupMessage");
+
+
+    if (!popup) return;
+
+
+    /* =====================================================
+       STATE
+
+       This is intentionally NOT stored in localStorage.
+
+       Result:
+       - close it = stays closed for current page
+       - refresh/reopen website = can appear again
+    ===================================================== */
+
+    let hasBeenClosed = false;
+
+    let popupTimer = null;
+
+
+    /* =====================================================
+       OPEN
+    ===================================================== */
+
+    function openSignupPopup() {
+
+      if (hasBeenClosed) {
+        return;
+      }
+
+      popup.classList.add("is-open");
+
+      popup.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+    }
+
+
+    /* =====================================================
+       CLOSE
+    ===================================================== */
+
+    function closeSignupPopup() {
+
+      hasBeenClosed = true;
+
+      popup.classList.remove("is-open");
+
+      popup.setAttribute(
         "aria-hidden",
         "true"
+      );
+
+      if (popupTimer) {
+        clearTimeout(popupTimer);
+      }
+    }
+
+
+    /* =====================================================
+       SHOW 7 SECONDS AFTER FULL PAGE LOAD
+    ===================================================== */
+
+    function startPopupTimer() {
+
+      popupTimer = setTimeout(() => {
+
+        openSignupPopup();
+
+      }, 7000);
+    }
+
+
+    if (document.readyState === "complete") {
+
+      startPopupTimer();
+
+    } else {
+
+      window.addEventListener(
+        "load",
+        startPopupTimer,
+        { once: true }
       );
 
     }
 
 
-    /*
-      Tell other currency-aware scripts/pages
-      that KES is currently selected.
-    */
+    /* =====================================================
+       CLOSE EVENTS
+    ===================================================== */
 
-    window.dispatchEvent(
-      new CustomEvent(
-        "currencyChanged",
-        {
-          detail: KES_CURRENCY
+    closeButton?.addEventListener(
+      "click",
+      closeSignupPopup
+    );
+
+
+    backdrop?.addEventListener(
+      "click",
+      closeSignupPopup
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape" &&
+          popup.classList.contains("is-open")
+        ) {
+
+          closeSignupPopup();
+
         }
-      )
+
+      }
+    );
+
+
+    /* =====================================================
+       SUBSCRIPTION
+
+       Reuses your EXISTING footer subscription system.
+
+       Popup email
+             ↓
+       #footer-email
+             ↓
+       click #subscribe-btn
+
+       This means we don't create a second Firebase
+       subscription implementation.
+    ===================================================== */
+
+    form?.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+
+        const email =
+          emailInput.value.trim();
+
+
+        /* -------------------------------
+           VALIDATE
+        -------------------------------- */
+
+        if (!email) {
+
+          message.textContent =
+            "ENTER YOUR EMAIL ADDRESS.";
+
+          emailInput.focus();
+
+          return;
+        }
+
+
+        if (!emailInput.checkValidity()) {
+
+          message.textContent =
+            "ENTER A VALID EMAIL ADDRESS.";
+
+          emailInput.focus();
+
+          return;
+        }
+
+
+        /* -------------------------------
+           FIND EXISTING FOOTER SIGNUP
+        -------------------------------- */
+
+        const footerEmail =
+          document.getElementById(
+            "footer-email"
+          );
+
+        const footerButton =
+          document.getElementById(
+            "subscribe-btn"
+          );
+
+
+        if (
+          !footerEmail ||
+          !footerButton
+        ) {
+
+          console.error(
+            "Neatgarms footer subscription elements not found."
+          );
+
+          message.textContent =
+            "SOMETHING WENT WRONG. TRY AGAIN.";
+
+          return;
+        }
+
+
+        /* -------------------------------
+           PASS EMAIL TO EXISTING SYSTEM
+        -------------------------------- */
+
+        footerEmail.value =
+          email;
+
+
+        footerEmail.dispatchEvent(
+          new Event(
+            "input",
+            {
+              bubbles: true
+            }
+          )
+        );
+
+
+        footerEmail.dispatchEvent(
+          new Event(
+            "change",
+            {
+              bubbles: true
+            }
+          )
+        );
+
+
+        /* -------------------------------
+           TRIGGER EXISTING SUBSCRIPTION
+        -------------------------------- */
+
+        footerButton.click();
+
+
+        /* -------------------------------
+           UI FEEDBACK
+        -------------------------------- */
+
+        message.textContent =
+          "WELCOME TO NEATGARMS.";
+
+
+        const submitButton =
+          form.querySelector(
+            'button[type="submit"]'
+          );
+
+
+        if (submitButton) {
+
+          submitButton.innerHTML =
+            "JOINED <span>✓</span>";
+
+          submitButton.disabled =
+            true;
+
+        }
+
+
+        emailInput.disabled =
+          true;
+
+
+        /* -------------------------------
+           CLOSE AFTER SUCCESS
+        -------------------------------- */
+
+        setTimeout(() => {
+
+          closeSignupPopup();
+
+        }, 1400);
+
+      }
     );
 
   })();
 </script>
-
-
-<!-- Currency selector temporarily disabled -->
-<!-- <script src="currency-modal.js"></script> -->
-<!-- <script src="currency-modal.js"></script> -->
-     <script src="bag-count.js"></script>
-  <script type="module" src="scripts.js" defer></script>
-  
 
 </body>
 </html>

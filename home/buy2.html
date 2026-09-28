@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#8a9381" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-  <link rel="stylesheet" href="buy2.css">
+  <link rel="stylesheet" href="buy2.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -271,18 +271,12 @@
       <img src="mains/Ruby Red.jpeg" alt="Credit Card" class="payment-img">
       <span>Credit Card</span>
     </label>
-    <label class="payment-method" data-method="paypal">
-      <img src="mains/Graphic Designer Replaces Wordmarks In Famous Logos With The Fonts They Use.jpeg" alt="PayPal" class="payment-img">
-      <span>PayPal</span>
-    </label>
+
     <label class="payment-method" data-method="paypal">
         <img src="mains/Mastercard Logo Redesign.jpeg" alt="PayPal" class="payment-img">
         <span>Master Card</span>
       </label>
-    <label class="payment-method" data-method="other">
-      <img src="mains/Free Payment Method & Credit Card Icon Set.jpeg" alt="Other" class="payment-img">
-      <span>Other</span>
-    </label>
+
   </div>
 
     <!-- Disclaimer -->
@@ -331,7 +325,7 @@ const IS_LOCAL =
 const API_BASE =
   IS_LOCAL
     ? 'http://localhost:5000'
-    : window.location.origin;
+    : 'https://neat.onrender.com';
 
 
 
@@ -1546,283 +1540,6 @@ if (oldSubmitButton) {
 }
 </script>
   
-<script>
-  async function verifyPayment(reference, attempts = 3, delay = 3000) {
-    for (let i = 0; i < attempts; i++) {
-      try {
-        const res = await fetch('http://localhost:5000/api/paystack/verify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ reference, uid: localStorage.getItem('loggedInUserId') || null })
-        });
-
-        const data = await res.json();
-
-        if (data.status) {
-          alert('✅ Payment verified!');
-
-          const hiddenBtn = document.getElementById('pay-now-btn');
-          if (hiddenBtn) hiddenBtn.click();
-          else console.warn('Hidden submit button not found.');
-          return;
-        } else {
-          console.log(`Attempt ${i + 1} failed:`, data.message);
-        }
-
-      } catch (error) {
-        console.error(`Attempt ${i + 1} error:`, error);
-      }
-
-      if (i < attempts - 1) {
-        await new Promise(resolve => setTimeout(resolve, delay));
-      }
-    }
-
-    alert('⚠️ We could not verify your payment yet. Please wait or contact support.');
-  }
-</script>
-
-
-<script>
-document
-  .getElementById('paystack-btn')
-  .addEventListener('click', function () {
-
-    /* =========================================
-       1. VALIDATE CHECKOUT DETAILS
-    ========================================= */
-
-    const val = id =>
-      (
-        document.getElementById(id)?.value || ''
-      ).trim();
-
-
-    const required = [
-      ['email', 'Email'],
-      ['phone-number', 'Phone Number'],
-      ['country-region', 'Country/Region'],
-      ['address', 'Address'],
-      ['delivery-city', 'City']
-    ];
-
-
-    for (const [id, label] of required) {
-
-      if (!val(id)) {
-
-        alert(
-          `Please enter your ${label}.`
-        );
-
-        document
-          .getElementById(id)
-          ?.focus();
-
-        return;
-      }
-
-    }
-
-
-    /* =========================================
-       2. GET ORIGINAL KES TOTAL
-
-       IMPORTANT:
-       Never read #combined-price here because
-       it may currently be GBP/USD/EUR/etc.
-    ========================================= */
-
-    const amountKES =
-      Number(
-        window.neatCheckoutKES
-      );
-
-
-    if (
-      !Number.isFinite(amountKES) ||
-      amountKES <= 0
-    ) {
-
-      console.error(
-        'Invalid KES checkout amount:',
-        window.neatCheckoutKES
-      );
-
-      alert(
-        'Invalid checkout amount. Please refresh the page and try again.'
-      );
-
-      return;
-    }
-
-
-    /* =========================================
-       3. PAYSTACK SUBUNIT
-    ========================================= */
-
-    const amountInSubunit =
-      Math.round(
-        amountKES * 100
-      );
-
-
-    console.log(
-      'Display currency:',
-      window.NeatCurrency?.getCurrency?.() || 'KES'
-    );
-
-    console.log(
-      'Paystack KES amount:',
-      amountKES
-    );
-
-    console.log(
-      'Paystack subunit:',
-      amountInSubunit
-    );
-
-
-    /* =========================================
-       4. PAYSTACK V2
-    ========================================= */
-
-    const paystack =
-      new PaystackPop();
-
-
-    paystack.newTransaction({
-
-      key:
-        'pk_test_9a29ec4d0e7944ac94fe2ad542aa1427d7469bbf',
-
-      email:
-        val('email'),
-
-      amount:
-        amountInSubunit,
-
-      currency:
-        'KES',
-
-      ref:
-        'NEAT-' +
-        Date.now() +
-        '-' +
-        Math.floor(
-          Math.random() * 1000000
-        ),
-
-
-      /* =====================================
-         SUCCESS
-      ===================================== */
-
-      onSuccess: transaction => {
-
-        console.log(
-          'Paystack transaction:',
-          transaction
-        );
-
-
-        if (
-          !transaction ||
-          !transaction.reference
-        ) {
-
-          console.error(
-            'Paystack returned no reference.'
-          );
-
-          alert(
-            'Payment completed but the transaction reference could not be retrieved. Please contact support.'
-          );
-
-          return;
-        }
-
-
-        verifyPayment(
-          transaction.reference
-        );
-
-      },
-
-
-      /* =====================================
-         CANCEL
-      ===================================== */
-
-      onCancel: () => {
-
-        const email =
-          val('email');
-
-
-        if (email) {
-
-          fetch(
-            'http://localhost:5000/api/payment-cancelled',
-            {
-              method:
-                'POST',
-
-              headers: {
-                'Content-Type':
-                  'application/json'
-              },
-
-              body:
-                JSON.stringify({
-                  email
-                })
-            }
-          ).catch(error => {
-
-            console.error(
-              'Could not record cancelled payment:',
-              error
-            );
-
-          });
-
-        }
-
-
-        alert(
-          'Payment cancelled'
-        );
-
-      },
-
-
-      /* =====================================
-         ERROR
-      ===================================== */
-
-      onError: error => {
-
-        console.error(
-          'Paystack error:',
-          error
-        );
-
-
-        alert(
-          'Unable to start payment. Please try again.'
-        );
-
-      }
-
-    });
-
-  });
-</script>
-
-
-
-
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
@@ -1971,6 +1688,6 @@ requestAnimationFrame(() => {
 
 <!-- Currency selector temporarily disabled -->
 <!-- <script src="currency-modal.js"></script> -->
-  <script src="buy2.js" defer></script>
+  <script src="buy2.min.js" defer></script>
 </body>
 </html>
