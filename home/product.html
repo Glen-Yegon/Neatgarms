@@ -646,27 +646,55 @@
 
   <div class="featured-cards-wrapper">
 
-    <!-- Black Stone Washed Tee -->
-<div class="product-card" id="neat-whiskey-flask"
-     data-description="Stainless Steel Hip Flask"
-     data-features='["5 Oz, 230ml"]'
-     data-sizefit="
-Model is 5’9
-Wearing a size Small
-     ">
+<!-- Neat Whiskey Flask -->
+<div
+  class="product-card"
+  id="neat-whiskey-flask"
+  data-description="Stainless Steel Hip Flask"
+  data-features='["5 Oz, 230ml"]'
+  data-sizefit="
+    Model is 5’9
+    Wearing a size Small
+  "
+  role="link"
+  tabindex="0"
+  aria-label="View Neat Whiskey Flask"
+  onclick="window.location.href='product.html?id=neat-whiskey-flask'"
+  onkeydown="if(event.key === 'Enter' || event.key === ' '){ event.preventDefault(); window.location.href='product.html?id=neat-whiskey-flask'; }"
+>
 
   <div class="image-wrapper">
-    <img src="new/whiskey.jpeg" alt="Black Stone Washed Tee" loading="eager" fetchpriority="high">
+    <img
+      src="new/whiskey.jpeg"
+      alt="Neat Whiskey Flask"
+      loading="eager"
+      fetchpriority="high"
+    >
   </div>
 
-  <h3 class="product-name">Neat Whiskey Flask</h3>
-  <p class="product-price">Price in Kshs. <br>
+  <h3 class="product-name">
+    Neat Whiskey Flask
+  </h3>
+
+  <p class="product-price">
+    Price in Kshs. <br>
     <span class="new-price">2,000</span>
   </p>
 
-  <div class="hidden-buttons size-buttons" style="border-radius: 10px;">
-    <button class="size-btn" data-size="230ml" style="border-radius: 10px;">230ml</button>
+  <div
+    class="hidden-buttons size-buttons"
+    style="border-radius: 10px;"
+  >
+    <button
+      class="size-btn"
+      data-size="230ml"
+      style="border-radius: 10px;"
+      onclick="event.stopPropagation();"
+    >
+      230ml
+    </button>
   </div>
+
 </div>
 
 

@@ -162,39 +162,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  /* =======================================================
-     SPEED
-     ======================================================= */
+function getSpeed() {
 
-  function getSpeed() {
+  /*
+    Pixels per second.
 
-    /*
-      Pixels per second.
+    Desktop: 30px/s
+    Tablet: 25px/s
+    Mobile: 20px/s
 
-      Desktop:
-      24px/s
+    LOWER = slower
+    HIGHER = faster
+  */
 
-      Tablet:
-      20px/s
-
-      Mobile:
-      16px/s
-
-      LOWER = slower
-      HIGHER = faster
-    */
-
-    if (window.innerWidth <= 600) {
-      return 16;
-    }
-
-    if (window.innerWidth <= 900) {
-      return 20;
-    }
-
-    return 24;
-
+  if (window.innerWidth <= 600) {
+    return 20;
   }
+
+  if (window.innerWidth <= 900) {
+    return 25;
+  }
+
+  return 30;
+}
 
 
 

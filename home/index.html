@@ -78,13 +78,6 @@
   }
   </script>
 
-  <!-- Preserve your existing first-visit state -->
-  <script>
-    if (sessionStorage.getItem("hasVisited")) {
-      document.documentElement.classList.add("visited");
-    }
-  </script>
-
   <!-- Google tag (preserved) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
   <script>
@@ -117,85 +110,6 @@
 
   <span class="neat-cursor__star">✦</span>
 </div>
-
-<!-- =========================================================
-     FIRST-VISIT INTRO
-     NEATGARMS / CAMPAIGN SYSTEM
-     ========================================================= -->
-
-<div class="neat-loader" id="neatLoader" aria-hidden="true">
-
-  <div class="noise-layer noise-layer--loader"></div>
-
-
-  <!-- TOP META -->
-
-  <div class="loader-meta loader-meta--top">
-    <span>NEAT®</span>
-    <span>001 / KIN</span>
-  </div>
-
-
-  <!-- CENTER SYSTEM -->
-
-  <div class="loader-system">
-
-    <div class="loader-counter-wrap">
-
-      <span
-        class="loader-counter"
-        id="loaderCounter"
-      >
-        00
-      </span>
-
-    </div>
-
-
-    <div class="loader-system-meta">
-
-      <span
-        class="loader-status"
-        id="loaderStatus"
-      >
-        INITIALISING
-      </span>
-
-      <span>CAMPAIGN / 001</span>
-
-    </div>
-
-
-    <div
-      class="loader-track"
-      id="loaderTrack"
-      aria-hidden="true"
-    >
-      <span class="loader-track__line"></span>
-      <span class="loader-track__scanner"></span>
-    </div>
-
-  </div>
-
-
-  <!-- FINAL REVEAL LINE -->
-
-  <div
-    class="loader-reveal-line"
-    id="loaderRevealLine"
-    aria-hidden="true"
-  ></div>
-
-
-  <!-- BOTTOM META -->
-
-  <div class="loader-meta loader-meta--bottom">
-    <span>KEEP IT NEAT.</span>
-    <span>NAIROBI — KE</span>
-  </div>
-
-</div>
-
 
   <!-- =========================================================
        INTERNAL PAGE TRANSITION

@@ -60,40 +60,6 @@ if (
 }
 
 
-/* =========================================================
-   DOM
-   ========================================================= */
-
-const loader =
-  document.getElementById(
-    "neatLoader"
-  );
-
-const loaderCounter =
-  document.getElementById(
-    "loaderCounter"
-  );
-
-const loaderStatus =
-  document.getElementById(
-    "loaderStatus"
-  );
-
-const loaderTrack =
-  document.getElementById(
-    "loaderTrack"
-  );
-
-const loaderScanner =
-  document.querySelector(
-    ".loader-track__scanner"
-  );
-
-const loaderRevealLine =
-  document.getElementById(
-    "loaderRevealLine"
-  );
-
 const hero =
   document.querySelector(
     ".hero"
@@ -3865,6 +3831,7 @@ window.addEventListener(
   }
 );
 
+
 /* =========================================================
    START
    THREE.JS = DESKTOP ONLY
@@ -3933,8 +3900,6 @@ if (shouldRunThree) {
 
   startIntro();
 }
-
-
   
 /* =========================================================
    NEATGARMS / PURPLE SHOOTING STAR CURSOR
