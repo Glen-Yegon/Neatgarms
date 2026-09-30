@@ -18,6 +18,14 @@
 
 }
 
+/* =========================================================
+   NO-LOADER HOMEPAGE SAFETY
+   ========================================================= */
+
+.site-header {
+  opacity: 1;
+  visibility: visible;
+}
 
 /* =========================================================
    RESET / BASE
@@ -2965,3 +2973,4 @@ html.no-three .object-zone {
   visibility: hidden !important;
   pointer-events: none !important;
 }
+
