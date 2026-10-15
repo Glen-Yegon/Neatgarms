@@ -18,7 +18,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
 
    <!-- Canonical (updated dynamically) -->
-  <link rel="canonical" href="https://neatgarms.com/product.html" />
+<link
+  rel="canonical"
+  id="product-canonical"
+  href="https://www.neatgarms.com/product"
+/>
+
+<script>
+  (() => {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+    const canonical = document.getElementById("product-canonical");
+
+    if (productId && canonical) {
+      const url = new URL(
+        "https://www.neatgarms.com/product"
+      );
+
+      url.searchParams.set("id", productId);
+      canonical.href = url.toString();
+    }
+  })();
+</script>
+
   <link rel="manifest" href="/site.webmanifest?v=1" />
 
   <!-- Favicon / Icons -->

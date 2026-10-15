@@ -1117,60 +1117,79 @@ document.addEventListener(
   () => {
 
     const shareButton =
-      document.getElementById(
-        'share-btn'
-      );
-
+      document.getElementById('share-btn');
 
     shareButton?.addEventListener(
       'click',
       async () => {
 
+        /* -----------------------------------------
+           PRODUCT INFORMATION
+        ----------------------------------------- */
+
         const productBrand =
-          document.getElementById(
-            'product-brand'
-          )?.textContent ||
+          document.getElementById('product-brand')
+            ?.textContent?.trim() ||
           'Unknown Brand';
 
-
         const productName =
-          document.getElementById(
-            'product-name'
-          )?.textContent ||
+          document.getElementById('product-name')
+            ?.textContent?.trim() ||
           'Unnamed Product';
 
-
         const oldPrice =
-          document.querySelector(
-            '.old-price'
-          )?.textContent ||
+          document.querySelector('.old-price')
+            ?.textContent?.trim() ||
           'No Old Price';
 
-
         const newPrice =
-          document.querySelector(
-            '.new-price'
-          )?.textContent ||
+          document.querySelector('.new-price')
+            ?.textContent?.trim() ||
           'No New Price';
 
-
         const productStatus =
-          document.getElementById(
-            'product-status'
-          )?.textContent ||
+          document.getElementById('product-status')
+            ?.textContent?.trim() ||
           'Status not available';
 
-
         const currentImageSrc =
-          document.getElementById(
-            'main-image'
-          )?.src ||
-          'No Image Available';
+          document.getElementById('main-image')?.src ||
+          '';
 
+        /* -----------------------------------------
+           CREATE THE CORRECT PRODUCT URL
+        ----------------------------------------- */
 
-        const shareUrl =
-          window.location.href;
+        if (
+          !currentProductId ||
+          !productsData[currentProductId]
+        ) {
+          console.error(
+            'Cannot share: valid product ID is missing.'
+          );
 
+          alert(
+            'Unable to share this product. Please reload the page.'
+          );
+
+          return;
+        }
+
+        const shareUrl = new URL(
+          'https://www.neatgarms.com/product'
+        );
+
+        shareUrl.searchParams.set(
+          'id',
+          currentProductId
+        );
+
+        const finalShareUrl =
+          shareUrl.toString();
+
+        /* -----------------------------------------
+           SHARE MESSAGE
+        ----------------------------------------- */
 
         const shareText = `
 Check out this product!
@@ -1182,54 +1201,105 @@ Status: ${productStatus}
 Image: ${currentImageSrc}
         `.trim();
 
+        /* -----------------------------------------
+           NATIVE SHARING
+        ----------------------------------------- */
 
         if (navigator.share) {
 
           try {
 
             await navigator.share({
-              title:
-                `${productBrand} - ${productName}`,
-              text:
-                shareText,
-              url:
-                shareUrl
+              title: `${productBrand} - ${productName}`,
+              text: shareText,
+              url: finalShareUrl
             });
 
           } catch (error) {
 
-            console.error(
-              'Sharing failed',
-              error
-            );
+            if (error.name !== 'AbortError') {
+              console.error(
+                'Sharing failed:',
+                error
+              );
+            }
 
           }
 
-        } else {
+          return;
+        }
 
-          const clipboardText =
-            `${shareText}\nProduct URL: ${shareUrl}`;
+        /* -----------------------------------------
+           COPY TO CLIPBOARD
+        ----------------------------------------- */
 
+        const clipboardText =
+          `${shareText}\nProduct URL: ${finalShareUrl}`;
 
-          navigator.clipboard
-            .writeText(
+        try {
+
+          if (
+            navigator.clipboard &&
+            window.isSecureContext
+          ) {
+
+            await navigator.clipboard.writeText(
               clipboardText
-            )
-            .then(() => {
+            );
+
+            alert(
+              'Product details copied to clipboard!'
+            );
+
+          } else {
+
+            /* Fallback for unsupported browsers */
+
+            const textArea =
+              document.createElement('textarea');
+
+            textArea.value = clipboardText;
+
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-9999px';
+
+            document.body.appendChild(textArea);
+
+            textArea.select();
+
+            const copied =
+              document.execCommand('copy');
+
+            textArea.remove();
+
+            if (copied) {
 
               alert(
                 'Product details copied to clipboard!'
               );
 
-            })
-            .catch(err => {
+            } else {
 
-              console.error(
-                'Failed to copy to clipboard',
-                err
+              window.prompt(
+                'Copy the product details below:',
+                clipboardText
               );
 
-            });
+            }
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            'Failed to copy product details:',
+            error
+          );
+
+          window.prompt(
+            'Copy the product details below:',
+            clipboardText
+          );
 
         }
 
@@ -1238,6 +1308,7 @@ Image: ${currentImageSrc}
 
   }
 );
+
 
 
 /* =========================================================
