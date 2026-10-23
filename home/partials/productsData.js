@@ -17,7 +17,7 @@ export const productsData = {
       "Premium feel",
       "Extended sleeve proportions"
     ],
-    sizes: ["M", "L", "XL"],
+    sizes: ["XL"],
     outOfStock: [],
     sizeFit: "Songo is 5'10 wearing a size L.",
   },
@@ -36,7 +36,7 @@ export const productsData = {
       "Premium feel",
       "Extended sleeve proportions"
     ],
-    sizes: ["M", "L", "XL"],
+    sizes: ["SOLD OUT"],
     outOfStock: [],
     sizeFit: "Raj is 6'2 wearing a size M.",
   },
