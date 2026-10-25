@@ -10,4 +10,4 @@
       ) drop-shadow(
         0 0 11px
         rgba(152, 84, 232, .42)
-      )}.neat-cursor.is-interactive .neat-cursor__tail-line{background:linear-gradient(90deg,transparent 0,rgba(152,84,232,.12) 20%,rgba(152,84,232,.48) 60%,#9854e8 100%)}}@media (hover:none),(pointer:coarse){.neat-cursor{display:none!important}}
+      )}.neat-cursor.is-interactive .neat-cursor__tail-line{background:linear-gradient(90deg,transparent 0,rgba(152,84,232,.12) 20%,rgba(152,84,232,.48) 60%,#9854e8 100%)}}@media (hover:none),(pointer:coarse){.neat-cursor{display:none!important}}#neatCursor,.neat-cursor,.neat-cursor *{display:none!important}body,body *,html,html *{cursor:auto!important}

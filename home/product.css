@@ -4778,3 +4778,20 @@ background:
   }
 
 }
+
+/* =========================================================
+   NEATGARMS — RESTORE DEFAULT CURSOR
+========================================================= */
+
+#neatCursor,
+.neat-cursor,
+.neat-cursor * {
+  display: none !important;
+}
+
+html,
+body,
+html *,
+body * {
+  cursor: auto !important;
+}

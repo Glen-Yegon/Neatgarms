@@ -18,6 +18,8 @@
 
 }
 
+
+
 /* =========================================================
    NO-LOADER HOMEPAGE SAFETY
    ========================================================= */
@@ -2974,3 +2976,21 @@ html.no-three .object-zone {
   pointer-events: none !important;
 }
 
+
+
+/* =========================================================
+   NEATGARMS — RESTORE DEFAULT CURSOR
+========================================================= */
+
+#neatCursor,
+.neat-cursor,
+.neat-cursor * {
+  display: none !important;
+}
+
+html,
+body,
+html *,
+body * {
+  cursor: auto !important;
+}
