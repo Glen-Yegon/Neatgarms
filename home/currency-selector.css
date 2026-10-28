@@ -1,0 +1,236 @@
+/* =========================================================
+   NEATGARMS — MINIMAL CURRENCY SELECTOR
+========================================================= */
+
+.currency-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+
+  display: grid;
+  place-items: center;
+
+  padding: 24px;
+
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.currency-gate.is-active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.currency-gate__backdrop {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.currency-gate__modal {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 410px;
+
+  padding: 38px 32px 28px;
+
+  background: #fff;
+  color: #171717;
+
+  border: 1px solid rgba(0, 0, 0, 0.07);
+
+  opacity: 0;
+  transform: translateY(12px);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.currency-gate.is-active .currency-gate__modal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.currency-gate__logo {
+  display: block;
+
+  width: auto;
+  max-width: 145px;
+  max-height: 42px;
+
+  object-fit: contain;
+  object-position: center;
+
+  margin: 0 auto 30px;
+}
+
+.currency-gate__eyebrow {
+  margin: 0 0 12px;
+
+  text-align: center;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+
+  color: #777;
+}
+
+.currency-gate__modal h2 {
+  margin: 0;
+
+  font-family: inherit;
+  font-size: clamp(24px, 5vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 1.2;
+
+  text-align: center;
+}
+
+.currency-gate__description {
+  margin: 12px 0 27px;
+
+  color: #777;
+
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.currency-gate__options {
+  display: grid;
+  gap: 10px;
+}
+
+.currency-gate__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  width: 100%;
+  min-height: 72px;
+
+  padding: 15px 17px;
+
+  color: #171717;
+  background: #fff;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 0;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    padding 0.2s ease;
+}
+
+.currency-gate__option:hover,
+.currency-gate__option:focus-visible {
+  background: #f7f7f7;
+  border-color: #171717;
+  padding-left: 21px;
+}
+
+.currency-gate__option:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 3px;
+}
+
+.currency-gate__option-main {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.currency-gate__code {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.currency-gate__name {
+  color: #777;
+  font-size: 11px;
+}
+
+.currency-gate__arrow {
+  font-size: 20px;
+  font-weight: 400;
+
+  transition: transform 0.2s ease;
+}
+
+.currency-gate__option:hover .currency-gate__arrow {
+  transform: translate(2px, -2px);
+}
+
+.currency-gate__note {
+  margin: 23px 0 0;
+
+  color: #999;
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Lock scrolling while the modal is open */
+
+html.currency-gate-open,
+body.currency-gate-open {
+  overflow: hidden;
+}
+
+/* Respect reduced motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .currency-gate,
+  .currency-gate__modal,
+  .currency-gate__option,
+  .currency-gate__arrow {
+    transition: none;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .currency-gate {
+    padding: 20px;
+  }
+
+  .currency-gate__modal {
+    padding: 32px 23px 24px;
+  }
+
+  .currency-gate__logo {
+    max-width: 125px;
+    margin-bottom: 27px;
+  }
+
+  .currency-gate__option {
+    min-height: 68px;
+    padding: 14px;
+  }
+
+  .currency-gate__option:hover,
+  .currency-gate__option:focus-visible {
+    padding-left: 17px;
+  }
+}

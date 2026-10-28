@@ -133,11 +133,9 @@
 
     Estimated Total:
 
-    <span
-      id="checkout-currency"
-    >
-      KES
-    </span>
+<span id="checkout-currency" data-currency-code>
+  KES
+</span>
 
     <span
       id="combined-price"
@@ -313,78 +311,6 @@
 
     <script src="https://js.paystack.co/v2/inline.js"></script>
 
-<!-- Currency selector temporarily disabled -->
- <script>
-  /* =========================================================
-     NEATGARMS — TEMPORARY KES-ONLY MODE
-     Multi-currency is disabled for now.
-     ========================================================= */
-
-  (() => {
-
-    const KES_CURRENCY = {
-      country: "Kenya",
-      currency: "KES",
-      symbol: "KSh"
-    };
-
-
-    /* Always force KES */
-
-    localStorage.setItem(
-      "selectedCurrency",
-      KES_CURRENCY.currency
-    );
-
-    localStorage.setItem(
-      "selectedCurrencySymbol",
-      KES_CURRENCY.symbol
-    );
-
-    localStorage.setItem(
-      "selectedCurrencyCountry",
-      KES_CURRENCY.country
-    );
-
-
-    /* Hide currency modal if it exists */
-
-    const currencyGate =
-      document.getElementById("currencyGate");
-
-
-    if (currencyGate) {
-
-      currencyGate.style.display = "none";
-
-      currencyGate.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-    }
-
-
-    /*
-      Tell other currency-aware scripts/pages
-      that KES is currently selected.
-    */
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "currencyChanged",
-        {
-          detail: KES_CURRENCY
-        }
-      )
-    );
-
-  })();
-</script>
-
- <!-- Currency selector temporarily disabled -->
-  
-<!-- <script src="currency-modal.js"></script> -->
 
 <script>
   const IS_LOCAL =
@@ -398,7 +324,30 @@
   const CHECKOUT_STORAGE_KEY = 'neatPendingCheckout';
 </script>
 
-<script src="buy.min.js" defer></script>
+<script src="currency.min.js" defer></script>
+<script src="buy.min.min.js" defer></script>
+
+<script>
+  function updateCheckoutCurrency() {
+    const currencyLabel = document.getElementById('checkout-currency');
+
+    if (!currencyLabel || !window.NeatCurrency) return;
+
+    const currency = window.NeatCurrency.getCurrency();
+
+    currencyLabel.textContent = currency;
+  }
+
+  document.addEventListener('DOMContentLoaded', updateCheckoutCurrency);
+
+  window.addEventListener('neatcurrencyready', updateCheckoutCurrency);
+
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'neatCurrency') {
+      updateCheckoutCurrency();
+    }
+  });
+</script>
 
   <script>
     document.getElementById("pay-now-btn").addEventListener("click", async () => {
@@ -654,8 +603,8 @@ function buildCheckoutOrderData() {
           ?.innerText ||
         '0.00',
 
-      paymentCurrency:
-        'KES',
+paymentCurrency:
+  window.NeatCurrency?.getCurrency?.() || 'KES',
 
       paymentTotalKES:
         Number(
@@ -855,16 +804,13 @@ const response =
 
               },
 
-              body:
-                JSON.stringify({
-
-                  email:
-                    val('email'),
-
-                  amountKES:
-                    amountKES
-
-                })
+body: JSON.stringify({
+  email: val('email'),
+  amountKES: amountKES,
+  paymentCurrency:
+    window.NeatCurrency?.getCurrency?.() || 'KES',
+  checkoutType: 'buy'
+})
 
             }
           );

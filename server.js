@@ -1561,363 +1561,347 @@ const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
 
 app.use(express.json());
 
+
 /* =========================================================
-   INITIALIZE PAYSTACK TRANSACTION
+   NEATGARMS — INITIALIZE PAYSTACK TRANSACTION
+   Supports KES and USD
 ========================================================= */
 
 app.post('/api/paystack/initialize', async (req, res) => {
-
   try {
-
     const {
       email,
       amountKES,
+      paymentCurrency = 'KES',
       checkoutType
     } = req.body;
 
-
-    console.log(
-      "Initializing Paystack payment:",
-      {
-        email,
-        amountKES,
-        checkoutType: checkoutType || 'buy'
-      }
-    );
-
-
-    /* ==============================
-       CHECK SECRET KEY
-    ============================== */
-
     if (!PAYSTACK_SECRET_KEY) {
-
       return res.status(500).json({
         status: false,
-        message:
-          "PAYSTACK_SECRET_KEY is missing on the server."
+        message: 'PAYSTACK_SECRET_KEY is missing on the server.'
       });
-
     }
-
-
-    /* ==============================
-       VALIDATE EMAIL
-    ============================== */
-
-    if (!email) {
-
-      return res.status(400).json({
-        status: false,
-        message:
-          "Email is required."
-      });
-
-    }
-
-
-    /* ==============================
-       VALIDATE AMOUNT
-    ============================== */
-
-    const amount =
-      Number(amountKES);
-
 
     if (
-      !Number.isFinite(amount) ||
-      amount <= 0
+      typeof email !== 'string' ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
     ) {
-
       return res.status(400).json({
         status: false,
-        message:
-          "Invalid payment amount."
+        message: 'A valid email address is required.'
       });
-
     }
 
+    const currency = String(paymentCurrency).toUpperCase();
+    const kesAmount = Number(amountKES);
 
-    /*
-      Paystack expects the amount
-      in the smallest currency unit.
-    */
+    if (!['KES', 'USD'].includes(currency)) {
+      return res.status(400).json({
+        status: false,
+        message: 'Unsupported payment currency.'
+      });
+    }
 
-    const amountInSubunit =
-      Math.round(
-        amount * 100
+    if (
+      !Number.isFinite(kesAmount) ||
+      kesAmount <= 0
+    ) {
+      return res.status(400).json({
+        status: false,
+        message: 'Invalid payment amount.'
+      });
+    }
+
+    let paymentAmount = kesAmount;
+    let exchangeRate = null;
+
+    /* -----------------------------------------
+       CONVERT KES BASE TOTAL TO USD IF SELECTED
+    ----------------------------------------- */
+
+    if (currency === 'USD') {
+      const rateResponse = await axios.get(
+        'https://open.er-api.com/v6/latest/KES',
+        { timeout: 10000 }
       );
 
+      const rateData = rateResponse.data;
+      const usdRate = Number(rateData?.rates?.USD);
 
-    /* ==============================
-       GENERATE REFERENCE
-    ============================== */
+      if (
+        rateData?.result !== 'success' ||
+        !Number.isFinite(usdRate) ||
+        usdRate <= 0
+      ) {
+        throw new Error(
+          'Unable to retrieve a valid KES to USD exchange rate.'
+        );
+      }
+
+      exchangeRate = usdRate;
+
+      paymentAmount = Math.round(
+        kesAmount * usdRate * 100
+      ) / 100;
+
+      // Paystack USD minimum is $2.00.
+      if (paymentAmount < 2) {
+        return res.status(400).json({
+          status: false,
+          message: 'The minimum USD payment is $2.00.'
+        });
+      }
+    }
+
+    // Both KES and USD use two decimal places.
+    const amountInSubunit = Math.round(
+      paymentAmount * 100
+    );
 
     const reference =
       `NEAT-${Date.now()}-${Math.floor(
         Math.random() * 1000000
       )}`;
 
-
-    /* ==============================
-       CHOOSE CHECKOUT PAGE
-    ============================== */
-
     const checkoutPage =
       checkoutType === 'buy2'
         ? 'buy2.html'
         : 'buy.html';
 
-
-    /* ==============================
-       CHOOSE LOCAL OR LIVE CALLBACK
-    ============================== */
-
-    const origin =
-      req.headers.origin || '';
-
+    const origin = req.headers.origin || '';
 
     const isLocal =
       origin.includes('127.0.0.1') ||
       origin.includes('localhost');
 
+    const callbackUrl = isLocal
+      ? `http://127.0.0.1:5506/home/${checkoutPage}`
+      : `https://www.neatgarms.com/${checkoutPage}`;
 
-    const callbackUrl =
-      isLocal
-        ? `http://127.0.0.1:5506/home/${checkoutPage}`
-        : `https://www.neatgarms.com/${checkoutPage}`;
+    console.log('Initializing Paystack payment:', {
+      email,
+      currency,
+      kesAmount,
+      paymentAmount,
+      amountInSubunit,
+      checkoutType: checkoutType || 'buy'
+    });
 
+    const response = await axios.post(
+      'https://api.paystack.co/transaction/initialize',
+      {
+        email,
+        amount: amountInSubunit,
+        currency,
+        reference,
+        callback_url: callbackUrl,
 
-    console.log(
-      "Paystack callback URL:",
-      callbackUrl
-    );
-
-
-    /* ==============================
-       INITIALIZE PAYSTACK
-    ============================== */
-
-    const response =
-      await axios.post(
-
-        'https://api.paystack.co/transaction/initialize',
-
-        {
-
-          email:
-            email,
-
-          amount:
-            amountInSubunit,
-
-          currency:
-            'KES',
-
-          reference:
-            reference,
-
-          callback_url:
-            callbackUrl
-
-        },
-
-        {
-
-          headers: {
-
-            Authorization:
-              `Bearer ${PAYSTACK_SECRET_KEY}`,
-
-            'Content-Type':
-              'application/json'
-
-          }
-
+        // These values let verification compare the
+        // completed transaction with this initialization.
+        metadata: {
+          checkout_type: checkoutType || 'buy',
+          payment_currency: currency,
+          expected_amount_subunits: amountInSubunit,
+          original_amount_kes: kesAmount,
+          exchange_rate_kes_to_usd: exchangeRate
         }
-
-      );
-
-
-    const data =
-      response.data;
-
-
-    console.log(
-      "Paystack initialization response:",
-      data
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
     );
 
-
-    /* ==============================
-       CHECK RESPONSE
-    ============================== */
+    const data = response.data;
 
     if (
       !data.status ||
-      !data.data?.access_code
+      !data.data?.access_code ||
+      !data.data?.reference
     ) {
-
       return res.status(400).json({
-
-        status:
-          false,
-
+        status: false,
         message:
           data.message ||
-          "Unable to initialize Paystack payment."
-
+          'Unable to initialize Paystack payment.'
       });
-
     }
 
-
-    /* ==============================
-       SEND PAYMENT DATA TO FRONTEND
-    ============================== */
-
     return res.status(200).json({
-
-      status:
-        true,
-
-      access_code:
-        data.data.access_code,
-
-      authorization_url:
-        data.data.authorization_url,
-
-      reference:
-        data.data.reference
-
+      status: true,
+      access_code: data.data.access_code,
+      authorization_url: data.data.authorization_url,
+      reference: data.data.reference,
+      currency,
+      amount: amountInSubunit,
+      amountKES: kesAmount,
+      paymentAmount
     });
 
-
   } catch (error) {
-
-
     console.error(
-      "Paystack initialization error:"
+      'Paystack initialization error:',
+      error.response?.data || error.message
     );
 
-
-    console.error(
-      "Message:",
-      error.message
-    );
-
-
-    console.error(
-      "Response:",
-      error.response?.data
-    );
-
-
-    console.error(
-      "Status:",
-      error.response?.status
-    );
-
-
-    return res
-      .status(
-        error.response?.status || 500
-      )
-      .json({
-
-        status:
-          false,
-
-        message:
-          error.response?.data?.message ||
-          "Unable to initialize payment.",
-
-        error:
-          error.response?.data ||
-          error.message
-
-      });
-
+    return res.status(500).json({
+      status: false,
+      message:
+        error.response?.data?.message ||
+        error.message ||
+        'Unable to initialize payment.'
+    });
   }
-
 });
 
+
+
+
+/* =========================================================
+   NEATGARMS — VERIFY PAYSTACK TRANSACTION
+   Supports KES and USD
+========================================================= */
 
 app.post('/api/paystack/verify', async (req, res) => {
   try {
     const reference = req.body?.reference;
     const uid = req.body?.uid || null;
 
-    console.log("Incoming body:", req.body);
-    console.log("Reference:", reference);
-    console.log("Has secret key:", !!PAYSTACK_SECRET_KEY);
-
     if (!PAYSTACK_SECRET_KEY) {
       return res.status(500).json({
         status: false,
-        message: 'PAYSTACK_SECRET_KEY is missing on the server.',
+        message: 'PAYSTACK_SECRET_KEY is missing on the server.'
       });
     }
 
-    if (!reference) {
+    if (
+      typeof reference !== 'string' ||
+      !reference.trim()
+    ) {
       return res.status(400).json({
         status: false,
-        message: 'Transaction reference is required.',
+        message: 'Transaction reference is required.'
       });
     }
 
     const response = await axios.get(
-      `https://api.paystack.co/transaction/verify/${reference}`,
+      `https://api.paystack.co/transaction/verify/${encodeURIComponent(reference)}`,
       {
         headers: {
           Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-          'Content-Type': 'application/json',
-        },
+          'Content-Type': 'application/json'
+        }
       }
     );
 
-    const data = response.data;
-    console.log("Paystack response:", data);
+    const result = response.data;
+    const transaction = result?.data;
 
-    if (data.status && data.data?.status === 'success') {
-
-      // ✅ Award loyalty points based on the verified payment amount
-      if (uid) {
-        const amountKES = data.data.amount / 100; // Paystack returns amounts in subunits
-        const pointsEarned = Math.floor(amountKES / 20); // 1 point per Ksh 20
-        try {
-          await creditPoints(uid, pointsEarned, `purchase (ref: ${reference})`);
-        } catch (creditErr) {
-          console.error("Error crediting points:", creditErr);
-          // Don't fail the payment response over a points error — the payment already succeeded
-        }
-      } else {
-        console.log("No uid provided — skipping points credit (guest checkout).");
-      }
-
-      return res.status(200).json({
-        status: true,
-        message: 'Payment verified successfully.',
-        transaction: data.data,
+    if (
+      !result?.status ||
+      transaction?.status !== 'success'
+    ) {
+      return res.status(400).json({
+        status: false,
+        message: 'Payment was not successful or is still pending.'
       });
     }
 
-    return res.status(400).json({
-      status: false,
-      message: 'Payment not successful or pending.',
-      transaction: data.data,
+    const actualCurrency =
+      String(transaction.currency || '').toUpperCase();
+
+    const metadata = transaction.metadata || {};
+
+    const expectedCurrency =
+      String(metadata.payment_currency || '').toUpperCase();
+
+    const expectedAmount =
+      Number(metadata.expected_amount_subunits);
+
+    const actualAmount =
+      Number(transaction.amount);
+
+    // Reject unsupported currencies.
+    if (!['KES', 'USD'].includes(actualCurrency)) {
+      return res.status(400).json({
+        status: false,
+        message: 'Unexpected transaction currency.'
+      });
+    }
+
+    // Confirm the transaction matches the initialized payment.
+    if (
+      actualCurrency !== expectedCurrency ||
+      !Number.isFinite(expectedAmount) ||
+      actualAmount !== expectedAmount
+    ) {
+      console.error('Payment verification mismatch:', {
+        reference,
+        actualCurrency,
+        expectedCurrency,
+        actualAmount,
+        expectedAmount
+      });
+
+      return res.status(400).json({
+        status: false,
+        message: 'Payment amount or currency does not match.'
+      });
+    }
+
+    /* -----------------------------------------
+       LOYALTY POINTS
+       Use original KES amount from initialization
+    ----------------------------------------- */
+
+    if (uid) {
+      const originalKES =
+        Number(metadata.original_amount_kes);
+
+      if (
+        Number.isFinite(originalKES) &&
+        originalKES > 0
+      ) {
+        const pointsEarned =
+          Math.floor(originalKES / 20);
+
+        try {
+          await creditPoints(
+            uid,
+            pointsEarned,
+            `purchase (ref: ${reference})`
+          );
+        } catch (creditErr) {
+          console.error(
+            'Error crediting loyalty points:',
+            creditErr
+          );
+        }
+      }
+    }
+
+    return res.status(200).json({
+      status: true,
+      message: 'Payment verified successfully.',
+      transaction
     });
 
   } catch (error) {
-    console.error('Error verifying payment:');
-    console.error('Message:', error.message);
-    console.error('Response data:', error.response?.data);
-    console.error('Status:', error.response?.status);
+    console.error(
+      'Paystack verification error:',
+      error.response?.data || error.message
+    );
 
-    return res.status(error.response?.status || 500).json({
+    return res.status(
+      error.response?.status || 500
+    ).json({
       status: false,
-      message: error.response?.data?.message || 'Server error while verifying payment.',
-      error: error.response?.data || error.message,
+      message:
+        error.response?.data?.message ||
+        'Server error while verifying payment.'
     });
   }
 });

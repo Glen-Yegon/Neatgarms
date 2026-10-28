@@ -127,9 +127,15 @@
         <button id="apply-discount-btn">Apply</button>
       </div>
   
-  <!-- Estimated Total -->
+<!-- Estimated Total -->
 <div class="estimated-total">
-  
+  <h3>
+    Estimated Total:
+    <span id="checkout-currency" data-currency-code>KES</span>
+    <span id="combined-price">0.00</span>
+  </h3>
+
+  <small id="checkout-kes-note" style="display: none;"></small>
 </div>
 
     </div>
@@ -692,8 +698,8 @@ function buildBuyNowOrderData() {
       paymentTotalKES.toFixed(2),
 
 
-    paymentCurrency:
-      'KES',
+paymentCurrency:
+  displayCurrency,
 
 
     displayCurrency:
@@ -1117,17 +1123,17 @@ async function handleBuyNowPaystackReturn() {
     }
 
 
-    if (
-      transaction &&
-      transaction.currency &&
-      transaction.currency !== 'KES'
-    ) {
+const expectedCurrency =
+  orderData.orderSummary?.paymentCurrency || 'KES';
 
-      throw new Error(
-        'Unexpected payment currency returned by Paystack.'
-      );
-
-    }
+if (
+  !transaction ||
+  transaction.currency !== expectedCurrency
+) {
+  throw new Error(
+    `Unexpected payment currency. Expected ${expectedCurrency}, received ${transaction?.currency || 'unknown'}.`
+  );
+}
 
 
 
@@ -1381,21 +1387,15 @@ document
 
               },
 
-              body:
-                JSON.stringify({
+body: JSON.stringify({
+  email: getValue('email'),
+  amountKES: amountKES,
 
-                  email:
-                    getValue(
-                      'email'
-                    ),
+  paymentCurrency:
+    window.NeatCurrency?.getCurrency?.() || 'KES',
 
-                  amountKES:
-                    amountKES,
-
-                  checkoutType:
-                    'buy2'
-
-                })
+  checkoutType: 'buy2'
+})
 
             }
           );
@@ -1615,79 +1615,23 @@ requestAnimationFrame(() => {
 });
 
 </script>
-  
-<!-- Currency selector temporarily disabled -->
- <script>
-  /* =========================================================
-     NEATGARMS — TEMPORARY KES-ONLY MODE
-     Multi-currency is disabled for now.
-     ========================================================= */
+  <script src="currency.min.js" defer></script>
+  <script src="buy2.min.js" defer></script>
 
-  (() => {
+  <script>
+  function updateBuyNowCurrencyLabel() {
+    const label = document.getElementById('checkout-currency');
+    const currency = window.NeatCurrency?.getCurrency?.();
 
-    const KES_CURRENCY = {
-      country: "Kenya",
-      currency: "KES",
-      symbol: "KSh"
-    };
-
-
-    /* Always force KES */
-
-    localStorage.setItem(
-      "selectedCurrency",
-      KES_CURRENCY.currency
-    );
-
-    localStorage.setItem(
-      "selectedCurrencySymbol",
-      KES_CURRENCY.symbol
-    );
-
-    localStorage.setItem(
-      "selectedCurrencyCountry",
-      KES_CURRENCY.country
-    );
-
-
-    /* Hide currency modal if it exists */
-
-    const currencyGate =
-      document.getElementById("currencyGate");
-
-
-    if (currencyGate) {
-
-      currencyGate.style.display = "none";
-
-      currencyGate.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
+    if (label && currency) {
+      label.textContent = currency;
     }
+  }
 
-
-    /*
-      Tell other currency-aware scripts/pages
-      that KES is currently selected.
-    */
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "currencyChanged",
-        {
-          detail: KES_CURRENCY
-        }
-      )
-    );
-
-  })();
+  document.addEventListener('DOMContentLoaded', updateBuyNowCurrencyLabel);
+  window.addEventListener('neatcurrencyready', updateBuyNowCurrencyLabel);
 </script>
 
 
-<!-- Currency selector temporarily disabled -->
-<!-- <script src="currency-modal.js"></script> -->
-  <script src="buy2.min.js" defer></script>
 </body>
 </html>

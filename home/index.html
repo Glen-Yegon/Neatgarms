@@ -13,7 +13,10 @@
   <title>Neatgarms</title>
 
   <link rel="stylesheet" href="styles.min.css">
-  <!-- Lenis smooth scrolling -->
+   <link
+  rel="stylesheet"
+  href="currency-selector.css"
+>
 <link
   rel="stylesheet"
   href="https://unpkg.com/lenis@1.3.26/dist/lenis.css"
@@ -186,6 +189,17 @@
 
   <span class="bag-count">(0)</span>
 </a>
+
+<button
+  class="nav-currency"
+  id="navCurrency"
+  type="button"
+  aria-label="Change currency"
+  aria-haspopup="dialog"
+>
+  <span id="navCurrencyCode">KES</span>
+  <span class="nav-currency__arrow" aria-hidden="true">↗</span>
+</button>
 
             <button
               class="menu-trigger"
@@ -392,16 +406,32 @@
       </a>
     </nav>
 
+    
+<button
+  class="mobile-menu__currency"
+  id="mobileMenuCurrency"
+  type="button"
+  aria-label="Change currency"
+  aria-haspopup="dialog"
+>
+  <span class="mobile-menu__currency-label">
+    CURRENCY
+  </span>
+
+  <span class="mobile-menu__currency-current">
+    <span id="mobileCurrencyCode">KES</span>
+    <span aria-hidden="true">↗</span>
+  </span>
+</button>
+
+
     <div class="mobile-menu__bottom">
       <span>KEEP IT NEAT.</span>
       <span>NAIROBI — KE</span>
     </div>
   </aside>
 
-  <!-- =========================================================
-     NEATGARMS — CURRENCY SELECTOR
-========================================================= -->
-
+<!-- NEATGARMS — CURRENCY SELECTION -->
 <div
   class="currency-gate"
   id="currencyGate"
@@ -410,513 +440,87 @@
   <div class="currency-gate__backdrop"></div>
 
   <section
-    class="currency-gate__panel"
+    class="currency-gate__modal"
     role="dialog"
     aria-modal="true"
     aria-labelledby="currencyGateTitle"
+    aria-describedby="currencyGateDescription"
   >
-
-    <!-- TOP -->
-    <div class="currency-gate__top">
-
-      <span class="currency-gate__eyebrow">
-        NEATGARMS / CURRENCY
-      </span>
-
-      <span class="currency-gate__step">
-        01 — SELECT
-      </span>
-
-    </div>
-
-
-    <!-- INTRO -->
-    <div class="currency-gate__intro">
-
-      <div class="currency-gate__intro-left">
-
-        <h2 id="currencyGateTitle">
-          Choose your<br>
-          <em>currency.</em>
-        </h2>
-
-      </div>
-
-      <div class="currency-gate__intro-right">
-
-        <p>
-          Select the currency you'd like prices
-          displayed in while shopping Neatgarms.
-        </p>
-
-        <div class="currency-search-wrap">
-
-          <svg
-            class="currency-search-icon"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <circle cx="11" cy="11" r="6"></circle>
-            <path d="M16 16L21 21"></path>
-          </svg>
-
-          <input
-            type="text"
-            id="currencySearch"
-            class="currency-search"
-            placeholder="SEARCH COUNTRY OR CURRENCY"
-            autocomplete="off"
-            spellcheck="false"
-            aria-label="Search currency"
-          >
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- LIST HEADER -->
-    <div class="currency-list-head">
-
-      <span>Country / Region</span>
-
-      <span>Currency</span>
-
-    </div>
-
-
-    <!-- CURRENCY LIST -->
-    <div
-      class="currency-list"
-      id="currencyList"
+    <img
+      class="currency-gate__logo"
+      src="images/logo2.png"
+      alt="Neatgarms"
     >
 
-      <!-- KENYA -->
+    <p class="currency-gate__eyebrow">
+      A BETTER WAY TO SHOP
+    </p>
+
+    <h2 id="currencyGateTitle">
+      Choose your currency.
+    </h2>
+
+    <p
+      class="currency-gate__description"
+      id="currencyGateDescription"
+    >
+      Select how you'd like to view prices.
+    </p>
+
+    <div class="currency-gate__options">
       <button
-        class="currency-option"
+        class="currency-gate__option"
         type="button"
-        data-country="Kenya"
         data-currency="KES"
-        data-symbol="KSh"
-        data-search="kenya kes ksh kenyan shilling"
+        aria-label="Choose Kenyan Shillings"
       >
-        <span class="currency-option__index">01</span>
-
-        <span class="currency-option__country">
-          Kenya
+        <span class="currency-gate__option-main">
+          <span class="currency-gate__code">KES</span>
+          <span class="currency-gate__name">
+            Kenyan Shilling
+          </span>
         </span>
 
-        <span class="currency-option__currency">
-          <span>KES</span>
-          <small>Kenyan Shilling</small>
+        <span class="currency-gate__arrow" aria-hidden="true">
+          ↗
         </span>
-
-        <span class="currency-option__arrow">↗</span>
       </button>
 
-
-      <!-- UGANDA -->
       <button
-        class="currency-option"
+        class="currency-gate__option"
         type="button"
-        data-country="Uganda"
-        data-currency="UGX"
-        data-symbol="USh"
-        data-search="uganda ugx ush ugandan shilling"
-      >
-        <span class="currency-option__index">02</span>
-
-        <span class="currency-option__country">
-          Uganda
-        </span>
-
-        <span class="currency-option__currency">
-          <span>UGX</span>
-          <small>Ugandan Shilling</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- TANZANIA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="Tanzania"
-        data-currency="TZS"
-        data-symbol="TSh"
-        data-search="tanzania tzs tsh tanzanian shilling"
-      >
-        <span class="currency-option__index">03</span>
-
-        <span class="currency-option__country">
-          Tanzania
-        </span>
-
-        <span class="currency-option__currency">
-          <span>TZS</span>
-          <small>Tanzanian Shilling</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- RWANDA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="Rwanda"
-        data-currency="RWF"
-        data-symbol="FRw"
-        data-search="rwanda rwf rwandan franc"
-      >
-        <span class="currency-option__index">04</span>
-
-        <span class="currency-option__country">
-          Rwanda
-        </span>
-
-        <span class="currency-option__currency">
-          <span>RWF</span>
-          <small>Rwandan Franc</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- NIGERIA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="Nigeria"
-        data-currency="NGN"
-        data-symbol="₦"
-        data-search="nigeria ngn naira"
-      >
-        <span class="currency-option__index">05</span>
-
-        <span class="currency-option__country">
-          Nigeria
-        </span>
-
-        <span class="currency-option__currency">
-          <span>NGN</span>
-          <small>Nigerian Naira</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- GHANA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="Ghana"
-        data-currency="GHS"
-        data-symbol="GH₵"
-        data-search="ghana ghs cedi ghanaian cedi"
-      >
-        <span class="currency-option__index">06</span>
-
-        <span class="currency-option__country">
-          Ghana
-        </span>
-
-        <span class="currency-option__currency">
-          <span>GHS</span>
-          <small>Ghanaian Cedi</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- SOUTH AFRICA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="South Africa"
-        data-currency="ZAR"
-        data-symbol="R"
-        data-search="south africa zar rand"
-      >
-        <span class="currency-option__index">07</span>
-
-        <span class="currency-option__country">
-          South Africa
-        </span>
-
-        <span class="currency-option__currency">
-          <span>ZAR</span>
-          <small>South African Rand</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- ZAMBIA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="Zambia"
-        data-currency="ZMW"
-        data-symbol="ZK"
-        data-search="zambia zmw zambian kwacha"
-      >
-        <span class="currency-option__index">08</span>
-
-        <span class="currency-option__country">
-          Zambia
-        </span>
-
-        <span class="currency-option__currency">
-          <span>ZMW</span>
-          <small>Zambian Kwacha</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- ETHIOPIA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="Ethiopia"
-        data-currency="ETB"
-        data-symbol="Br"
-        data-search="ethiopia etb birr ethiopian birr"
-      >
-        <span class="currency-option__index">09</span>
-
-        <span class="currency-option__country">
-          Ethiopia
-        </span>
-
-        <span class="currency-option__currency">
-          <span>ETB</span>
-          <small>Ethiopian Birr</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- USA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="United States"
         data-currency="USD"
-        data-symbol="$"
-        data-search="united states usa america usd dollar us dollar"
+        aria-label="Choose US Dollars"
       >
-        <span class="currency-option__index">10</span>
-
-        <span class="currency-option__country">
-          United States
+        <span class="currency-gate__option-main">
+          <span class="currency-gate__code">USD</span>
+          <span class="currency-gate__name">
+            US Dollar
+          </span>
         </span>
 
-        <span class="currency-option__currency">
-          <span>USD</span>
-          <small>US Dollar</small>
+        <span class="currency-gate__arrow" aria-hidden="true">
+          ↗
         </span>
-
-        <span class="currency-option__arrow">↗</span>
       </button>
-
-
-      <!-- UK -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="United Kingdom"
-        data-currency="GBP"
-        data-symbol="£"
-        data-search="united kingdom uk britain england gbp pound sterling"
-      >
-        <span class="currency-option__index">11</span>
-
-        <span class="currency-option__country">
-          United Kingdom
-        </span>
-
-        <span class="currency-option__currency">
-          <span>GBP</span>
-          <small>Pound Sterling</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- EURO -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="European Union"
-        data-currency="EUR"
-        data-symbol="€"
-        data-search="europe european union euro eur"
-      >
-        <span class="currency-option__index">12</span>
-
-        <span class="currency-option__country">
-          European Union
-        </span>
-
-        <span class="currency-option__currency">
-          <span>EUR</span>
-          <small>Euro</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- CANADA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="Canada"
-        data-currency="CAD"
-        data-symbol="C$"
-        data-search="canada cad canadian dollar"
-      >
-        <span class="currency-option__index">13</span>
-
-        <span class="currency-option__country">
-          Canada
-        </span>
-
-        <span class="currency-option__currency">
-          <span>CAD</span>
-          <small>Canadian Dollar</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- AUSTRALIA -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="Australia"
-        data-currency="AUD"
-        data-symbol="A$"
-        data-search="australia aud australian dollar"
-      >
-        <span class="currency-option__index">14</span>
-
-        <span class="currency-option__country">
-          Australia
-        </span>
-
-        <span class="currency-option__currency">
-          <span>AUD</span>
-          <small>Australian Dollar</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
-
-      <!-- UAE -->
-      <button
-        class="currency-option"
-        type="button"
-        data-country="United Arab Emirates"
-        data-currency="AED"
-        data-symbol="AED"
-        data-search="united arab emirates uae dubai aed dirham"
-      >
-        <span class="currency-option__index">15</span>
-
-        <span class="currency-option__country">
-          United Arab Emirates
-        </span>
-
-        <span class="currency-option__currency">
-          <span>AED</span>
-          <small>UAE Dirham</small>
-        </span>
-
-        <span class="currency-option__arrow">↗</span>
-      </button>
-
     </div>
 
-
-    <!-- NO RESULTS -->
-    <div
-      class="currency-no-results"
-      id="currencyNoResults"
-    >
-      NO CURRENCY FOUND.
-    </div>
-
-
-    <!-- FOOTER -->
-    <div class="currency-gate__footer">
-
-      <span>
-        PRICES WILL BE DISPLAYED IN YOUR SELECTED CURRENCY
-      </span>
-
-      <span>
-        KEEP IT NEAT®
-      </span>
-
-    </div>
-
+    <p class="currency-gate__note">
+      You can change this anytime.
+    </p>
   </section>
 </div>
-
 
   <!-- Existing footer Firebase module preserved -->
   <script type="module" src="firebase/footer-firebase.js"></script>
 <script
   src="https://unpkg.com/lenis@1.3.26/dist/lenis.min.js"
 ></script>
-<!-- Currency selector temporarily disabled -->
-<!-- =========================================================
-     NEATGARMS — KES ONLY
-     Currency selector completely disabled
-========================================================= -->
 
-<script>
-  (() => {
-    /* Force the currency key used across the store */
-    localStorage.setItem("neatCurrency", "KES");
+<script src="currency.min.js" defer></script>
+<script src="currency-selector.min.js" defer></script>
 
-    /* Keep older currency keys synchronized */
-    localStorage.setItem("selectedCurrency", "KES");
-    localStorage.setItem("selectedCurrencySymbol", "KSh");
-    localStorage.setItem("selectedCurrencyCountry", "Kenya");
 
-    /* Completely disable the currency gate */
-    const currencyGate = document.getElementById("currencyGate");
-
-    if (currencyGate) {
-      currencyGate.style.setProperty("display", "none", "important");
-      currencyGate.style.setProperty("visibility", "hidden", "important");
-      currencyGate.style.setProperty("pointer-events", "none", "important");
-      currencyGate.setAttribute("aria-hidden", "true");
-      currencyGate.inert = true;
-    }
-  })();
-</script>
-
-<!-- DO NOT ENABLE THIS -->
-<!-- <script src="currency-modal.js"></script> -->
      <script src="bag-count.min.js"></script>
   <script type="module" src="scripts.min.js" defer></script>
   

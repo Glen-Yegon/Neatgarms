@@ -315,14 +315,13 @@
           class="object-price"
         >
 
-          <span class="object-price__currency">
-            KES
-          </span>
+<span class="object-price__currency" data-currency-symbol>
+  KSh
+</span>
 
-          <span class="old-price"></span>
+<span class="old-price"></span>
 
-          <span class="new-price"></span>
-
+<span class="new-price"></span>
         </div>
 
       </div>
@@ -698,10 +697,11 @@
     Neat Whiskey Flask
   </h3>
 
-  <p class="product-price">
-    Price in Kshs. <br>
-    <span class="new-price">2,000</span>
-  </p>
+<p class="product-price">
+  <span class="product-price__label">Price in KSh</span>
+  <br>
+  <span class="new-price" data-kes-price="2000">2,000</span>
+</p>
 
   <div
     class="hidden-buttons size-buttons"
@@ -998,78 +998,8 @@
     
       
 <script src="bag-count.min.js"></script>
-<!-- Currency selector temporarily disabled -->
- <script>
-  /* =========================================================
-     NEATGARMS — TEMPORARY KES-ONLY MODE
-     Multi-currency is disabled for now.
-     ========================================================= */
+<script src="currency.min.js" defer></script>
 
-  (() => {
-
-    const KES_CURRENCY = {
-      country: "Kenya",
-      currency: "KES",
-      symbol: "KSh"
-    };
-
-
-    /* Always force KES */
-
-    localStorage.setItem(
-      "selectedCurrency",
-      KES_CURRENCY.currency
-    );
-
-    localStorage.setItem(
-      "selectedCurrencySymbol",
-      KES_CURRENCY.symbol
-    );
-
-    localStorage.setItem(
-      "selectedCurrencyCountry",
-      KES_CURRENCY.country
-    );
-
-
-    /* Hide currency modal if it exists */
-
-    const currencyGate =
-      document.getElementById("currencyGate");
-
-
-    if (currencyGate) {
-
-      currencyGate.style.display = "none";
-
-      currencyGate.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-    }
-
-
-    /*
-      Tell other currency-aware scripts/pages
-      that KES is currently selected.
-    */
-
-    window.dispatchEvent(
-      new CustomEvent(
-        "currencyChanged",
-        {
-          detail: KES_CURRENCY
-        }
-      )
-    );
-
-  })();
-</script>
-
-
-<!-- Currency selector temporarily disabled -->
-<!-- <script src="currency-modal.js"></script> -->
   <script src="product.min.js" type="module" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>

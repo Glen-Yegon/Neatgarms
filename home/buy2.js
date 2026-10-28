@@ -456,54 +456,49 @@ async function renderProductWithShipping() {
   );
 
 
-  /* =====================================================
-     ESTIMATED TOTAL
-  ===================================================== */
+/* =====================================================
+   ESTIMATED TOTAL — DISPLAY CURRENCY
+===================================================== */
 
-  const estimatedTotalSection =
-    document.querySelector(
-      '.estimated-total'
-    );
+const estimatedTotalSection =
+  document.querySelector('.estimated-total');
 
+if (estimatedTotalSection) {
+  const displayCurrency =
+    displayFinalTotal.currency || 'KES';
 
-  if (estimatedTotalSection) {
+  estimatedTotalSection.innerHTML = `
+    <h3>
+      Estimated Total:
+      <span id="checkout-currency">
+        ${displayCurrency}
+      </span>
 
-    estimatedTotalSection.innerHTML = `
+      <span
+        id="combined-price"
+        data-kes-total="${buyNowBaseTotalKES}"
+      >
+        ${displayFinalTotal.formatted}
+      </span>
+    </h3>
 
-      <h3>
-
-        Estimated Total:
-
-        <span
-          id="combined-price"
-          data-kes-total="${buyNowBaseTotalKES}"
-        >
-          ${displayFinalTotal.formatted}
-        </span>
-
-      </h3>
-
-      ${
-        displayFinalTotal.currency !==
-        'KES'
-          ? `
-              <small
-                class="checkout-kes-note"
-              >
-                Payment processed as
-                KSh ${buyNowBaseTotalKES.toLocaleString()}
-                KES.
-              </small>
-            `
-          : ''
-      }
-
-    `;
-
-  }
-
+    ${
+      displayCurrency === 'USD'
+        ? `
+          <small
+            id="checkout-kes-note"
+            class="checkout-kes-note"
+          >
+            Displayed in USD. Payment currency
+            will be confirmed at checkout.
+          </small>
+        `
+        : ''
+    }
+  `;
 }
 
+}
 
 /* =========================================================
    INITIALIZE
@@ -515,24 +510,23 @@ document.addEventListener(
 
     await renderProductWithShipping();
 
+    /* -----------------------------------------
+       SHIPPING FEE OBSERVER
+    ----------------------------------------- */
 
     const shippingFeeElement =
       document.getElementById(
         'shipping-fee'
       );
 
-
     if (shippingFeeElement) {
 
       const observer =
         new MutationObserver(
           async () => {
-
             await renderProductWithShipping();
-
           }
         );
-
 
       observer.observe(
         shippingFeeElement,
@@ -547,6 +541,22 @@ document.addEventListener(
 
   }
 );
+
+
+/* =========================================================
+   REFRESH CHECKOUT WHEN CURRENCY IS UPDATED
+========================================================= */
+
+window.addEventListener(
+  'neatcurrencyready',
+  async () => {
+
+    await renderProductWithShipping();
+
+  }
+);
+
+
 
 
 /* =========================================================

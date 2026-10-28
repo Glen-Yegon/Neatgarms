@@ -2920,38 +2920,110 @@ background:
 
 }
 
-/* =========================================================
-   CURRENCY MODAL — CURSOR
-========================================================= */
-
-.currency-gate,
-.currency-gate * {
-  cursor: default !important;
-}
-
-/* Interactive elements */
-.currency-option,
-.currency-option *,
-.currency-gate button,
-.currency-gate button * {
-  cursor: pointer !important;
-}
-
-/* Search field */
-.currency-search {
-  cursor: text !important;
-}
 
 /* =========================================================
-   CURRENCY SELECTOR — DISABLED
+   NEATGARMS — NAVIGATION CURRENCY SWITCHER
 ========================================================= */
 
-#currencyGate,
-.currency-gate {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
+.nav-currency {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+
+  color: inherit;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  line-height: 1;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition: opacity 0.25s ease;
+}
+
+.nav-currency:hover {
+  opacity: 0.6;
+}
+
+.nav-currency__arrow {
+  font-size: 12px;
+  font-weight: 400;
+  transition: transform 0.25s ease;
+}
+
+.nav-currency:hover .nav-currency__arrow {
+  transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   MOBILE MENU — CURRENCY OPTION
+========================================================= */
+
+.mobile-menu__currency {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding: 18px 0;
+
+  border: 0;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+
+  background: transparent;
+  color: inherit;
+
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-menu__currency-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.mobile-menu__currency-current {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.mobile-menu__currency-current span:last-child {
+  font-size: 14px;
+  font-weight: 400;
+  transition: transform 0.25s ease;
+}
+
+.mobile-menu__currency:hover
+.mobile-menu__currency-current span:last-child {
+  transform: translate(2px, -2px);
+}
+
+
+/* Keep the switcher compact on smaller screens */
+
+@media (max-width: 767px) {
+  .nav-currency {
+    display: none;
+  }
 }
 
 
