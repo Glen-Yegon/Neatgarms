@@ -736,6 +736,44 @@ async function createNeatModel() {
     });
 
 
+      /* =======================================================
+     PINK EDGE RIM
+     ======================================================= */
+
+  glassMaterial.onBeforeCompile = shader => {
+
+    shader.fragmentShader =
+      shader.fragmentShader.replace(
+
+        "#include <opaque_fragment>",
+
+        `
+        float rim =
+          1.0 - abs(
+            dot(
+              normalize( normal ),
+              normalize( vViewPosition )
+            )
+          );
+
+        rim = smoothstep( 0.55, 1.0, rim );
+
+        outgoingLight = mix(
+          outgoingLight,
+          vec3( 0.988, 0.459, 0.706 ),
+          rim * 0.9
+        );
+
+        #include <opaque_fragment>
+        `
+
+      );
+
+  };
+
+  glassMaterial.needsUpdate = true;
+  
+
   /* =======================================================
      SVG -> EXTRUDED GEOMETRY
      ======================================================= */
