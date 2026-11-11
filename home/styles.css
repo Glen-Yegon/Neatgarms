@@ -739,7 +739,7 @@ img {
   background:
     rgba(0,0,0,.08);
 
-  color: var(--white);
+  color: #fc75b4;
 
   backdrop-filter:
     blur(3px);
