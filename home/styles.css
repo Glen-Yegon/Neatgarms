@@ -351,8 +351,9 @@ img {
   display: block;
   width: clamp(50px, 4.7vw, 74px);
   height: auto;
-  filter: invert(1);
+  filter: brightness(0) saturate(100%) invert(64%) sepia(45%) saturate(1121%) hue-rotate(282deg) brightness(102%) contrast(97%);
   transition: transform .8s var(--ease-out);
+
 }
 
 .brand:hover img {
@@ -696,7 +697,7 @@ img {
 
   font-weight: 100;
   font-stretch: 125%;
-
+  color: #fc75b4;
   line-height: .82;
 
   letter-spacing: -.055em;
@@ -865,9 +866,12 @@ img {
 }
 
 
+
 /* =========================================================
-   FOOTER
-   ========================================================= */
+   ROHENI — LUXURY EARTH-TONE FOOTER
+========================================================= */
+
+
 .footer {
   position: relative;
   isolation: isolate;
@@ -880,18 +884,10 @@ img {
     var(--page-pad)
     24px;
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgb(255, 255, 255) 30%,
-      rgba(255, 255, 255, 0.883) 60%,
-      rgba(255, 255, 255, .32) 82%,
-      rgba(255, 255, 255, 0) 100%
-    );
-
-  color: #050505;
+  background: #f0e5db;
 }
+
+
 
 .footer-noise {
   opacity: .022;
@@ -913,11 +909,13 @@ img {
   gap: 7px;
   font-size: 9px;
   font-weight: 650;
+  color: rgba(0, 0, 0, 0.82);
   letter-spacing: .16em;
 }
 
 .footer-newsletter {
   max-width: 520px;
+  color: #474329;
 }
 
 .footer-newsletter > p:first-child {
@@ -999,6 +997,7 @@ img {
   position: relative;
   font-size: 9px;
   font-weight: 620;
+  color: black;
   letter-spacing: .14em;
 }
 
@@ -1105,7 +1104,7 @@ img {
   font-family: "Instrument Serif", serif;
   font-weight: 400;
   font-style: normal;
-
+  color: #fc75b4;
   letter-spacing: -.065em;
 }
 
@@ -1130,6 +1129,7 @@ img {
 
   transform:
     translateY(.03em);
+       color: #474329;
 
   opacity: .9;
 }
@@ -1147,6 +1147,7 @@ img {
   padding-top: 18px;
 border-top: 1px solid rgba(5,5,5,.18);
   font-size: 7px;
+  color: black;
   font-weight: 650;
   letter-spacing: .18em;
 }

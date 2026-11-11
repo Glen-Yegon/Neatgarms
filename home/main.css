@@ -36,6 +36,7 @@ body, html{
 body {
   opacity: 1;
   transition: opacity 0.5s ease;
+  background-color: #f0e5db;
 }
 
 /* Fade out class for step 1 */
@@ -75,7 +76,7 @@ html{
 
   padding: 0 var(--nav-pad);
 
-  background: #fff;
+  background: #f0e5db;
   color: var(--ink);
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -160,12 +161,10 @@ html{
 
 .shop-nav__logo {
   display: block;
-
   width: auto;
   height: 34px;
-
   object-fit: contain;
-
+  filter: brightness(0) saturate(100%) invert(64%) sepia(45%) saturate(1121%) hue-rotate(282deg) brightness(102%) contrast(97%);
   transition: opacity 250ms ease;
 }
 
@@ -837,7 +836,7 @@ html{
 
   width: 100%;
 
-  background: var(--kin-white);
+  background-color: #f0e5db;
   color: var(--kin-black);
 
   font-family: "Anybody", sans-serif;
@@ -857,6 +856,7 @@ html{
     24px;
 
   border-bottom: 1px solid var(--kin-line);
+  background-color: #f0e5db;
 }
 
 
@@ -1088,7 +1088,7 @@ html{
      fashion-store presentation.
   */
   gap: 2px;
-
+  background-color: #f0e5db;
   padding: 2px;
 }
 
@@ -1105,7 +1105,7 @@ html{
   margin: 0;
   padding: 0;
 
-  background: #fff;
+  background: #f0e5db;
 }
 
 
@@ -1138,6 +1138,7 @@ html{
   overflow: hidden;
 
   color: var(--kin-black);
+  background: #f0e5db;
 
   text-align: left;
 
@@ -2784,7 +2785,7 @@ background:
 ========================================================= */
 
 .neat-footer {
-  --footer-bg: #efefeb;
+  --footer-bg: #f0e5db;
   --footer-ink: #0a0a0a;
   --footer-line: rgba(10, 10, 10, 0.18);
   --footer-muted: rgba(10, 10, 10, 0.48);
@@ -2936,7 +2937,7 @@ background:
   line-height: 0.78;
 
   letter-spacing: -0.07em;
-
+  color: #474329;
   text-transform: uppercase;
 }
 
@@ -3130,6 +3131,7 @@ background:
   line-height: 0.95;
 
   letter-spacing: -0.02em;
+  color: #fc75b4;
 }
 
 

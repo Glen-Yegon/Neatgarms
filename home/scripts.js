@@ -426,8 +426,8 @@ async function createHeroBackground(
 
   const imageURL =
     isMobile
-      ? "images/DSC00449.jpg"
-      : "images/DSC00437.jpg";
+      ? "BB/DSC02976.jpg"
+      : "BB/DSC03027.jpg";
 
 
   const textureLoader =
