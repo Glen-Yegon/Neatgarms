@@ -98,21 +98,447 @@
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "s843wgkqd0");
   </script>
+
+
+<style>
+/* =========================================
+   NEATGARMS — BEAUTIFUL BASTARDS ACCESS
+========================================= */
+
+/* =========================================
+   NEATGARMS — BEAUTIFUL BASTARDS ACCESS
+========================================= */
+
+#drop-gate,
+#drop-gate * {
+  box-sizing: border-box;
+}
+
+#drop-gate {
+  --gate-pink: #fc75b4;
+
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #080808;
+  color: #fff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 28px 22px;
+  overflow-y: auto;
+
+  font-family: 'Anybody', sans-serif;
+
+  opacity: 1;
+  visibility: visible;
+
+  transition: opacity 700ms ease, visibility 700ms ease;
+}
+
+#drop-gate.gate-exit {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.gate-inner {
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+  margin: auto;
+
+  animation: gateAppear 900ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* LOGO */
+
+.gate-brand {
+  margin-bottom: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gate-brand img {
+  width: 115px;
+  height: auto;
+  max-height: 55px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+/* EDITION */
+
+.gate-edition {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 23px;
+}
+
+/* HEADLINE */
+
+.gate-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(48px, 10vw, 76px);
+  font-weight: 400;
+  line-height: .92;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.gate-title span {
+  display: block;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.2px #fc75b4;
+  paint-order: stroke fill;
+  margin-top: 5px;
+}
+
+/* DESCRIPTION */
+
+.gate-description {
+  font-size: 11px;
+  line-height: 1.8;
+  letter-spacing: 1.3px;
+  color: #999;
+  margin: 30px auto 43px;
+  max-width: 300px;
+}
+
+/* FORM */
+
+.gate-form {
+  width: 100%;
+}
+
+.gate-input-wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #555;
+  transition: border-color 250ms ease;
+}
+
+.gate-input-wrap:focus-within {
+  border-color: #fc75b4;
+}
+
+.gate-input {
+  width: 100%;
+  height: 56px;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  color: #fff;
+
+  font-family: inherit;
+  font-size: 13px;
+  letter-spacing: 2px;
+
+  padding: 0 5px;
+  border-radius: 0;
+}
+
+.gate-input::placeholder {
+  color: #666;
+  letter-spacing: 2px;
+  font-size: 10px;
+}
+
+/* BUTTON */
+
+.gate-submit {
+  width: 100%;
+  height: 56px;
+  margin-top: 22px;
+
+  border: 1px solid #fc75b4;
+  background: #fc75b4;
+  color: #080808;
+
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 250ms ease,
+    color 250ms ease,
+    border-color 250ms ease;
+}
+
+.gate-submit:hover {
+  background: transparent;
+  color: #fc75b4;
+}
+
+.gate-submit:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* ERROR */
+
+.gate-error {
+  min-height: 18px;
+  margin-top: 17px;
+
+  color: #fc75b4;
+  font-size: 10px;
+  letter-spacing: 1px;
+
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.gate-error.visible {
+  opacity: 1;
+}
+
+/* FOOTER */
+
+.gate-footer {
+  margin-top: 65px;
+
+  color: #555;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* INITIALIZATION */
+
+.gate-loading {
+  display: none;
+  width: 100%;
+  text-align: center;
+}
+
+.gate-loading.active {
+  display: block;
+  animation: gateAppear 500ms ease both;
+}
+
+.gate-loading-label {
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: #888;
+  margin-bottom: 25px;
+}
+
+.gate-loading-title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(38px, 9vw, 58px);
+  font-weight: 400;
+  letter-spacing: -1px;
+}
+
+.gate-loading-line {
+  width: 150px;
+  height: 1px;
+  background: #333;
+  margin: 30px auto 0;
+  overflow: hidden;
+}
+
+.gate-loading-line::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: #fc75b4;
+  animation: gateProgress 1.5s ease-in-out infinite;
+}
+
+.gate-loading-sub {
+  margin-top: 18px;
+  color: #666;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+/* ANIMATIONS */
+
+@keyframes gateAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gateProgress {
+  from { transform: translateX(-150%); }
+  to { transform: translateX(350%); }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  #drop-gate {
+    padding: 25px;
+  }
+
+  .gate-brand {
+    margin-bottom: 75px;
+  }
+
+  .gate-brand img {
+    width: 100px;
+  }
+
+  .gate-title {
+    font-size: clamp(48px, 13vw, 68px);
+  }
+
+  .gate-description {
+    margin: 25px auto 38px;
+    font-size: 10px;
+  }
+
+  .gate-footer {
+    margin-top: 75px;
+  }
+}
+
+@media (max-height: 650px) {
+  .gate-brand {
+    margin-bottom: 30px;
+  }
+
+  .gate-footer {
+    margin-top: 30px;
+  }
+
+  .gate-description {
+    margin: 20px auto 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #drop-gate,
+  .gate-inner,
+  .gate-loading.active,
+  .gate-loading-line::after {
+    animation: none;
+    transition: none;
+  }
+}
+
+</style>
+
+
 </head>
 
 <body>
 
-<div
-  class="neat-cursor"
-  id="neatCursor"
-  aria-hidden="true"
->
-  <span class="neat-cursor__tail">
-    <span class="neat-cursor__tail-line"></span>
-  </span>
 
-  <span class="neat-cursor__star">✦</span>
+
+<!-- BEAUTIFUL BASTARDS — PRIVATE DROP ACCESS -->
+
+<div id="drop-gate">
+
+  <div class="gate-inner" id="gate-access">
+
+    <div class="gate-brand">
+      <img src="images/logo2.png" alt="Neatgarms">
+    </div>
+
+    <div class="gate-edition">A PRIVATE RELEASE · 001</div>
+
+    <h1 class="gate-title">
+      BEAUTIFUL
+      <span>BASTARDS.</span>
+    </h1>
+
+    <p class="gate-description">
+      Not everyone gets in.
+      Enter your access password to experience
+      the first release.
+    </p>
+
+    <form class="gate-form" id="gate-form">
+
+      <div class="gate-input-wrap">
+        <input
+          type="text"
+          id="gate-password"
+          class="gate-input"
+          placeholder="ENTER ACCESS PASSWORD"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-label="Drop access password"
+          required
+        >
+      </div>
+
+      <button type="submit" class="gate-submit">
+        ENTER THE DROP →
+      </button>
+
+      <div
+        class="gate-error"
+        id="gate-error"
+        role="alert"
+        aria-live="polite"
+      >
+        INCORRECT PASSWORD. TRY AGAIN.
+      </div>
+
+    </form>
+
+    <div class="gate-footer">
+      Keep It Neat
+    </div>
+
+  </div>
+
+  <div class="gate-loading" id="gate-loading">
+
+    <div class="gate-loading-label">
+      NEATGARMS® · PRIVATE ACCESS
+    </div>
+
+    <div class="gate-loading-title">
+      Initializing drop.
+    </div>
+
+    <div class="gate-loading-line"></div>
+
+    <div class="gate-loading-sub">
+      PREPARING YOUR EXPERIENCE...
+    </div>
+
+  </div>
+
 </div>
+
+
+
+  <!-- YOUR EXISTING WEBSITE -->
+  <div id="site-content" hidden>
+
 
   <!-- =========================================================
        INTERNAL PAGE TRANSITION
@@ -511,6 +937,110 @@
   </section>
 </div>
 
+  </div>
+
+
+<script>
+/* =========================================
+   NEATGARMS — BEAUTIFUL BASTARDS ACCESS
+   SESSION-BASED ACCESS
+========================================= */
+
+(() => {
+  const CORRECT_PASSWORD = "KeepItNeat";
+  const SESSION_KEY = "neatgarms_drop_access";
+
+  const gate = document.getElementById("drop-gate");
+  const form = document.getElementById("gate-form");
+  const input = document.getElementById("gate-password");
+  const error = document.getElementById("gate-error");
+  const access = document.getElementById("gate-access");
+  const loading = document.getElementById("gate-loading");
+  const site = document.getElementById("site-content");
+
+  if (!gate || !form || !site) return;
+
+  // Check whether the visitor has already unlocked the drop
+  if (sessionStorage.getItem(SESSION_KEY) === "true") {
+    gate.remove();
+    site.hidden = false;
+    document.body.style.overflow = "";
+    return;
+  }
+
+  document.body.style.overflow = "hidden";
+
+  const submit = form.querySelector(".gate-submit");
+
+  input.focus();
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (input.value === CORRECT_PASSWORD) {
+
+      // Prevent multiple submissions
+      submit.disabled = true;
+
+      // Hide access form
+      access.style.display = "none";
+
+      // Show initialization screen
+      loading.classList.add("active");
+
+      setTimeout(() => {
+
+        // Save successful access for this browser tab session
+        sessionStorage.setItem(SESSION_KEY, "true");
+
+        // Reveal website
+        site.hidden = false;
+
+        // Fade out access screen
+        gate.classList.add("gate-exit");
+
+        // Restore scrolling
+        document.body.style.overflow = "";
+
+        // Remove gate after transition
+        setTimeout(() => {
+          gate.remove();
+        }, 750);
+
+      }, 2000);
+
+    } else {
+
+      // Incorrect password
+      error.classList.add("visible");
+
+      input.value = "";
+      input.focus();
+
+      input.animate(
+        [
+          { transform: "translateX(0)" },
+          { transform: "translateX(-5px)" },
+          { transform: "translateX(5px)" },
+          { transform: "translateX(0)" }
+        ],
+        {
+          duration: 250,
+          easing: "ease-in-out"
+        }
+      );
+    }
+  });
+
+  input.addEventListener("input", () => {
+    error.classList.remove("visible");
+  });
+
+})();
+</script>
+
+
+  
   <!-- Existing footer Firebase module preserved -->
   <script type="module" src="firebase/footer-firebase.js"></script>
 <script
