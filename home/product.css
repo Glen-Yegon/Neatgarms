@@ -131,11 +131,8 @@ body, html {
   box-sizing: border-box;
 
   background:
-    linear-gradient(
-      180deg,
-      rgba(248, 248, 245, 0.88) 0%,
-      rgba(248, 248, 245, 0.72) 100%
-    );
+#f3f3ef
+    ;
 
   -webkit-backdrop-filter:
     blur(20px)
@@ -262,7 +259,7 @@ body, html {
   justify-content: center;
 
   line-height: 0;
-
+  filter: brightness(0) saturate(100%) invert(64%) sepia(45%) saturate(1121%) hue-rotate(282deg) brightness(102%) contrast(97%);
   text-decoration: none;
 }
 
@@ -521,8 +518,8 @@ body, html {
 
 }
 
-  /* =========================================================
-   PRODUCT EXPERIENCE — THE OBJECT
+/* =========================================================
+ PRODUCT EXPERIENCE — THE OBJECT
 ========================================================= */
 
 .product-page {
@@ -1407,9 +1404,9 @@ body, html {
   border:
     1px solid var(--object-ink);
 
-  background: var(--object-ink);
+  background: #fc75b4;
 
-  color: #fff;
+  color: #000000;
 }
 
 
@@ -2778,15 +2775,7 @@ body, html {
 
   object-fit: contain;
 
-  /*
-    If logo2.png is already white,
-    remove this filter.
-  */
-
-  filter:
-    grayscale(1)
-    brightness(0)
-    invert(1);
+  filter: brightness(0) saturate(100%) invert(64%) sepia(45%) saturate(1121%) hue-rotate(282deg) brightness(102%) contrast(97%);
 }
 
 
@@ -2804,7 +2793,7 @@ body, html {
 
   letter-spacing: -.02em;
 
-  color: var(--pf-ink);
+  color: #fc75b4;
 }
 
 

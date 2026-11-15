@@ -154,7 +154,7 @@ button {
   width: clamp(42px, 4vw, 56px);
   height: auto;
 
-  filter: none;
+  filter: brightness(0) saturate(100%) invert(64%) sepia(45%) saturate(1121%) hue-rotate(282deg) brightness(102%) contrast(97%);
 
   transition: transform 600ms cubic-bezier(.22, 1, .36, 1);
 }
@@ -1134,8 +1134,8 @@ select option {
   border: 1px solid #0b0b0b;
   border-radius: 0;
 
-  background: #0b0b0b;
-  color: #fff;
+  background: #fc75b4;
+  color: black;
 
   font-family: "Anybody", sans-serif;
 

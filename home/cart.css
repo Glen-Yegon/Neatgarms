@@ -271,7 +271,7 @@ button {
   height: 32px;
 
   max-width: 150px;
-
+  filter: brightness(0) saturate(100%) invert(64%) sepia(45%) saturate(1121%) hue-rotate(282deg) brightness(102%) contrast(97%);
   object-fit: contain;
 }
 
@@ -571,7 +571,6 @@ button {
   align-items: end;
 
   gap: 50px;
-
   margin-top:
     clamp(80px, 10vw, 155px);
 }
@@ -1277,7 +1276,7 @@ button {
     clamp(55px, 5.5vw, 88px);
 
   font-weight: 400;
-
+  color: #fc75b4;
   line-height: .75;
 
   letter-spacing: -.05em;
@@ -1589,6 +1588,7 @@ span:last-child {
     clamp(90px, 14vw, 220px);
 
   line-height: .67;
+  color: #fc75b4;
 
   letter-spacing: -.07em;
 }
