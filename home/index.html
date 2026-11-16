@@ -472,9 +472,8 @@
     </h1>
 
     <p class="gate-description">
-      Not everyone gets in.
-      Enter your access password to experience
-      the first release.
+     Join Neat's Naughty List 
+
     </p>
 
     <form class="gate-form" id="gate-form">
@@ -494,7 +493,7 @@
       </div>
 
       <button type="submit" class="gate-submit">
-        ENTER THE DROP →
+        ENJOY EARLY ACCESS →
       </button>
 
       <div
@@ -940,15 +939,18 @@
   </div>
 
 
+
 <script>
 /* =========================================
    NEATGARMS — BEAUTIFUL BASTARDS ACCESS
-   SESSION-BASED ACCESS
+   SESSION-BASED ACCESS + ONE-TIME RELOAD
 ========================================= */
 
 (() => {
-  const CORRECT_PASSWORD = "KeepItNeat";
+  const CORRECT_PASSWORD = "Yegon625";
+
   const SESSION_KEY = "neatgarms_drop_access";
+  const RELOAD_KEY = "neatgarms_drop_initialized";
 
   const gate = document.getElementById("drop-gate");
   const form = document.getElementById("gate-form");
@@ -960,11 +962,23 @@
 
   if (!gate || !form || !site) return;
 
-  // Check whether the visitor has already unlocked the drop
+  // Check whether access was already granted
   if (sessionStorage.getItem(SESSION_KEY) === "true") {
+
+    // Reload automatically only once after unlocking
+    if (sessionStorage.getItem(RELOAD_KEY) !== "true") {
+
+      sessionStorage.setItem(RELOAD_KEY, "true");
+
+      window.location.reload();
+      return;
+    }
+
+    // Access already initialized — reveal homepage
     gate.remove();
     site.hidden = false;
     document.body.style.overflow = "";
+
     return;
   }
 
@@ -979,39 +993,27 @@
 
     if (input.value === CORRECT_PASSWORD) {
 
-      // Prevent multiple submissions
       submit.disabled = true;
 
-      // Hide access form
       access.style.display = "none";
 
-      // Show initialization screen
       loading.classList.add("active");
 
       setTimeout(() => {
 
-        // Save successful access for this browser tab session
+        // Grant access
         sessionStorage.setItem(SESSION_KEY, "true");
 
-        // Reveal website
-        site.hidden = false;
+        // Mark automatic reload as not yet completed
+        sessionStorage.removeItem(RELOAD_KEY);
 
-        // Fade out access screen
-        gate.classList.add("gate-exit");
-
-        // Restore scrolling
-        document.body.style.overflow = "";
-
-        // Remove gate after transition
-        setTimeout(() => {
-          gate.remove();
-        }, 750);
+        // Reload once to initialize the entire drop
+        window.location.reload();
 
       }, 2000);
 
     } else {
 
-      // Incorrect password
       error.classList.add("visible");
 
       input.value = "";
