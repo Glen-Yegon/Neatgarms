@@ -4367,3 +4367,180 @@ html *,
 body * {
   cursor: auto !important;
 }
+
+
+/* =========================================
+   NEATGARMS — DENIM FEATURE
+========================================= */
+
+.denim-feature {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  height: 80svh;
+  min-height: 560px;
+  overflow: hidden;
+  background: #111;
+}
+
+/* IMAGE */
+
+.denim-feature__media {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.denim-feature__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* IMAGE OVERLAY */
+
+.denim-feature::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.48) 0%,
+    rgba(0, 0, 0, 0.12) 30%,
+    transparent 65%
+  );
+}
+
+/* CONTENT */
+
+.denim-feature__content {
+  position: absolute;
+  z-index: 2;
+  right: clamp(24px, 5vw, 80px);
+  bottom: clamp(28px, 5vw, 72px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+
+  color: #fff;
+  text-align: right;
+}
+
+.denim-feature__content h2 {
+  margin: 0;
+  font-family: var(--font-heading, inherit);
+  font-size: clamp(25px, 3.2vw, 46px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+/* SHOP NOW BUTTON */
+
+.denim-feature__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  min-width: 155px;
+  padding: 15px 20px;
+
+  background: #fc75b4;
+  color: #111;
+
+  font-family: var(--font-body, inherit);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  border: 1px solid #000000;
+  transition:
+    background 250ms ease,
+    color 250ms ease,
+    border-color 250ms ease;
+}
+
+.denim-feature__button span {
+  font-size: 15px;
+  line-height: 1;
+  transition: transform 250ms ease;
+}
+
+.denim-feature__button:hover {
+  background: transparent;
+  color: #fff;
+  border-color: #fff;
+}
+
+.denim-feature__button:hover span {
+  transform: translate(3px, -3px);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+
+  .denim-feature {
+    height: 80svh;
+    min-height: 480px;
+    max-height: 760px;
+  }
+
+  .denim-feature__image {
+    object-position: center;
+  }
+
+  .denim-feature::after {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.15) 38%,
+      transparent 70%
+    );
+  }
+
+  .denim-feature__content {
+    right: 22px;
+    bottom: 30px;
+    gap: 16px;
+  }
+
+  .denim-feature__content h2 {
+    font-size: 27px;
+    letter-spacing: 0.035em;
+  }
+
+  .denim-feature__button {
+    min-width: 145px;
+    padding: 14px 17px;
+    font-size: 10px;
+  }
+
+}
+
+@media (max-width: 380px) {
+
+  .denim-feature__content {
+    right: 18px;
+    bottom: 24px;
+  }
+
+  .denim-feature__content h2 {
+    font-size: 23px;
+  }
+
+}

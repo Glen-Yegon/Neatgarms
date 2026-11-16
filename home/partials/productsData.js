@@ -1,5 +1,330 @@
 export const productsData = {
 
+  // =========================================
+  // SCARLET DICE TEE
+  // =========================================
+  "scarlet-dice-tee": {
+    name: "Scarlet Dice Tee",
+    oldPrice: "2,500",
+    newPrice: "2,000",
+    images: [
+      "BB/DSC02997.jpg",
+      "BB/DSC03001.jpg",
+      "BB/scar.JPEG"
+    ],
+    description: "Make an entrance in this black oversized tee from the Beautiful Bastards collection. The back features a large red chrome dice graphic and the NEATGARMS wordmark, with 'Take the risk' and 'Or lose the chance' in script. The front carries a small Neat script mark and a line of cultural pride sits on the front.",
+    features: [
+      "Oversized silhouette",
+      "Large red chrome dice graphic with NEATGARMS wordmark on the back",
+      "Tip: Size up if you prefer a baggy fit"
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    outOfStock: [],
+    sizeFit: "Ariell is 6’0 wearing a size XL.",
+  },
+
+
+  // =========================================
+  // THE SIREN
+  // =========================================
+  "the-siren": {
+    name: "The Siren",
+    oldPrice: "",
+    newPrice: "2,700",
+    images: [
+      "BB/thesiren.PNG",
+      "BB/DSC03201.jpg",
+      "BB/DSC03204.jpg",
+      "BB/DSC03207.jpg",
+      "BB/sizec1.png"
+    ],
+    description: "This sleeveless tank from the Beautiful Bastards collection is covered in a pale olive and black halftone print, with a Neat script mark and a silver chain-and-pendant graphic at the chest. A vertical NEATGARMS script runs down the side. The back is a full halftone print.",
+    features: [
+      "Full halftone print on front and back",
+      "Neat script chest graphic with chain-and-pendant detail",
+      "Vertical NEATGARMS script on the side",
+      "Sleeveless cut"
+    ],
+    sizes: ["S", "M", "L"],
+    outOfStock: [],
+    sizeFit: "Samali is 6’0 wearing a size M.",
+  },
+
+
+  // =========================================
+  // DELILAH
+  // =========================================
+  "delilah": {
+    name: "Delilah",
+    oldPrice: "",
+    newPrice: "2,700",
+    images: [
+      "BB/delilah.PNG",
+      "BB/DSC03095.jpg",
+      "BB/DSC03124.jpg",
+      "BB/DSC03096.jpg",
+      "BB/sizec1.png"
+    ],
+    description: "Turn up the heat with this sleeveless tank from the Beautiful Bastards collection, printed in a candy red and black halftone. A 'Neat' script mark and a silver chain-and-pendant graphic sit at the chest, and a vertical NEATGARMS script runs down the side. The back carries a full halftone print, so the piece makes a statement from every angle.",
+    features: [
+      "Full halftone print on front and back",
+      "Neat script chest graphic with chain-and-pendant detail",
+      "Vertical NEATGARMS script on the side",
+      "Sleeveless cut",
+      "Red colourway of the Beautiful Bastards halftone tank"
+    ],
+    sizes: ["S", "M", "L"],
+    outOfStock: [],
+    sizeFit: "Lora is 5’5 wearing a size S.",
+  },
+
+
+  // =========================================
+  // BEAUTIFUL BASTARDS TUBE TOP — TEAL
+  // =========================================
+  "tube-top-teal": {
+    name: "Teal Tube Top",
+    oldPrice: "",
+    newPrice: "1,700",
+    images: [
+      "BB/DSC03154.jpg",
+      "BB/DSC03159.jpg",
+      "BB/DSC03161.jpg",
+      "BB/DSC03171.jpg",
+      "BB/sizec1.png"
+    ],
+    description: "A strapless cropped tube top from the Beautiful Bastards collection. It features a full halftone hand graphic across the bust in a lighter tone than the base colour, with a reduced Neat logo at the front top centre and detailing at the back. Finished in a muted teal colourway.",
+    features: [
+      "Strapless tube top with cropped length",
+      "Full halftone hand graphic across the bust",
+      "Reduced Neat logo at the front top centre",
+      "Back logo detailing",
+      "Muted teal base with a white halftone graphic"
+    ],
+    sizes: ["S", "M", "L"],
+    outOfStock: [],
+    sizeFit: "Marley is 5’7 wearing a size S.",
+  },
+
+
+  // =========================================
+  // BEAUTIFUL BASTARDS TUBE TOP — ROSE
+  // =========================================
+  "tube-top-rose": {
+    name: "Bubble Gun Tube Top",
+    oldPrice: "",
+    newPrice: "1,700",
+    images: [
+      "BB/DSC03195.jpg",
+      "BB/DSC03180.jpg",
+      "BB/DSC03188.jpg",
+      "BB/DSC03183.jpg",
+      "BB/sizec1.png"
+    ],
+    description: "A strapless cropped tube top from the Beautiful Bastards collection. It features a full halftone hand graphic across the bust in a lighter tone than the base colour, with a reduced Neat logo at the front top centre and detailing at the back. Finished in a rose-pink colourway.",
+    features: [
+      "Strapless tube top with cropped length",
+      "Full halftone hand graphic across the bust",
+      "Reduced Neat logo at the front top centre",
+      "Back logo detailing",
+      "Rose-pink base with a white halftone graphic"
+    ],
+    sizes: ["S", "M", "L"],
+    outOfStock: [],
+    sizeFit: "Rosanna is 5’7 wearing a size S",
+  },
+
+
+  // =========================================
+  // BEAUTIFUL BASTARDS TUBE TOP — PLUM
+  // =========================================
+  "tube-top-plum": {
+    name: "Violet Tube Top",
+    oldPrice: "",
+    newPrice: "1,700",
+    images: [
+      "BB/DSC03127.jpg",
+      "BB/DSC03135.jpg",
+      "BB/DSC03141.jpg",
+      "BB/DSC03144.jpg",
+      "BB/sizec1.png"
+    ],
+    description: "A strapless cropped tube top from the Beautiful Bastards collection. It features a full halftone hand graphic across the bust in a lighter tone than the base colour, with a reduced Neat logo at the front top centre and detailing at the back. Finished in a deep plum or wine colourway.",
+    features: [
+      "Strapless tube top with cropped length",
+      "Full halftone hand graphic across the bust",
+      "Reduced Neat logo at the front top centre",
+      "Back logo detailing",
+      "Deep plum or wine base with a white halftone graphic"
+    ],
+    sizes: ["S", "M", "L"],
+    outOfStock: [],
+    sizeFit: "Rashan is 5’6 wearing a size S",
+  },
+
+
+  // =========================================
+  // BEAUTIFUL BASTARDS TUBE TOP — B&W
+  // =========================================
+  "tube-top-bw": {
+    name: "Beautiful Bastards Tube Top - B&W",
+    oldPrice: "",
+    newPrice: "1,700",
+    images: [
+      "BB/DSC03079.jpg",
+      "BB/DSC03082.jpg",
+      "BB/DSC03062.jpg",
+      "BB/DSC03068.jpg",
+      "BB/sizec1.png"
+    ],
+    description: "A strapless cropped tube top from the Beautiful Bastards collection. It features a full halftone hand graphic across the bust in a lighter tone than the base colour, with a reduced Neat logo at the front top centre and detailing at the back. Finished in a black-and-white greyscale colourway.",
+    features: [
+      "Strapless tube top with cropped length",
+      "Full halftone hand graphic across the bust",
+      "Reduced Neat logo at the front top centre",
+      "Back logo detailing",
+      "Greyscale halftone version of the graphic"
+    ],
+    sizes: ["S", "M", "L"],
+    outOfStock: [],
+    sizeFit: "Samali is 6'0 wearing a size M",
+  },
+
+
+  // =========================================
+  // KIN DENIM JACKET
+  // =========================================
+  "kin-denim-jacket": {
+    name: "KIN Denim Jacket",
+    oldPrice: "5,000",
+    newPrice: "4,000",
+    images: [
+      "BB/DSC03005.jpg",
+      "BB/DSC03017.jpg",
+      "BB/DSC03020.jpg",
+      "BB/DSC03024.jpg",
+      "BB/DSC03027.jpg"
+    ],
+    description: "Keep It Neat in this black denim jacket from the Beautiful Bastards collection. It has a classic collar, a gold-tone zip front, and a non-functional chest pocket with a flap. The 'NEATGARMS' wordmark is embroidered on the chest, and the Neat logo sits on the opposite side. The back carries a tonal neatgarms script with 'keep it neat' in white beneath it.",
+    features: [
+      "Black denim-style twill",
+      "Collar and full-length gold-tone zip front",
+      "Embroidered NEATGARMS and Neat logo on the front",
+      "Eyelet detailing on the lower front panels",
+      "Back embroidery: tonal neatgarms script with white keep it neat tagline"
+    ],
+    sizes: ["S", "M", "L", "XL", "2XL"],
+    outOfStock: [],
+    sizeFit: "Joe is 6’3 wearing a size L.",
+  },
+
+
+  // =========================================
+// NEATGARMS DENIM SET
+// =========================================
+"denim-set": {
+  name: "Denim Set",
+  oldPrice: "7,700",
+  newPrice: "7,000",
+  images: [
+    "BB/DSC02814.jpg",
+    "BB/DSC02822.jpg"
+  ],
+  description: "Keep It Neat in the Neatgarms Denim Set from the Beautiful Bastards collection. A coordinated denim look designed with a clean silhouette and distinctive Neatgarms detailing.",
+  features: [
+    "Coordinated denim two-piece set",
+    "Distinctive Neatgarms branding",
+    "Designed for a clean, effortless look",
+    "Part of the Beautiful Bastards collection"
+  ],
+  sizes: ["S", "M", "L", "XL", "2XL"],
+  outOfStock: [],
+  sizeFit: "Joe is 6’3 wearing a size L.",
+},
+
+
+  // =========================================
+  // THE OUTLAW DENIM VEST
+  // =========================================
+  "outlaw-denim-vest": {
+    name: "The Outlaw Denim Vest",
+    oldPrice: "3,500",
+    newPrice: "2,800",
+    images: [
+      "BB/DSC02971.jpg",
+      "BB/DSC02986.jpg",
+      "BB/DSC02976.jpg"
+    ],
+    description: "A breathable and sturdy onyx denim vest featuring white abstract highlights. The back carries a bold vertical NEAT in white block letters.",
+    features: [
+      "Black denim-style twill",
+      "Sleeveless half coat silhouette",
+      "Full front zip",
+      "Two front patch pockets",
+      "Barbed-wire Neat, keep it neat graphic on the left front pocket",
+      "White splatter print on the right chest",
+      "Vertical white NEAT print across the back"
+    ],
+    sizes: ["S", "M", "L", "XL"],
+    outOfStock: [],
+    sizeFit: "Ariell is 5’10 wearing a size L",
+  },
+
+
+  // =========================================
+  // THE ONYX DENIM TROUSERS
+  // =========================================
+  "onyx-denim-trousers": {
+    name: "The Onyx Denim Trousers",
+    oldPrice: "",
+    newPrice: "",
+    images: [
+      "BB/DSC03032.jpg",
+      "BB/DSC03036.jpg",
+      "BB/DSC03056.jpg",
+      "BB/DSC03042.jpg",
+      "BB/DSC03039.jpg",
+      "BB/sizec2.jpeg"
+    ],
+    description: "A statement piece built from breathable and durable onyx denim. Features charcoal-black embroidered lettering on the side, double buttons on the front and double pockets on the back. Jay is 6’0 wearing size 36.",
+    features: [
+      "Black denim-style twill",
+      "Wide, straight-leg silhouette",
+      "Five-pocket construction with back patch pockets",
+      "Tonal neatgarms script embroidery down the outer left leg",
+      "Matches the Beautiful Bastards KIN denim jacket"
+    ],
+    sizes: ["M", "L", "XL"],
+    outOfStock: [],
+    sizeFit: ["Joe is 6’3 wearing a size L."],
+  },
+
+
+  // =========================================
+  // THE SKORT
+  // =========================================
+  "the-skort": {
+    name: "The Skort",
+    oldPrice: "3,500",
+    newPrice: "3,000",
+    images: [
+      "BB/theskort.PNG",
+      "BB/DSC03075.jpg",
+      "BB/DSC03083.jpg",
+      "BB/DSC03084.jpg",
+      "BB/sizec3.jpeg"
+    ],
+    description: "The skort. This black Beautiful Bastards piece is a short with a front flap that closes to create the look of a skirt. Silver buckle and eyelet straps run down the right side, and a small white 'Neat' script sits on the front flap.",
+    features: [
+      "Black denim fabric with a structured finish",
+      "Front flap that closes to create a skirt-like look",
+      "Silver buckle and eyelet strap detailing on the right side"
+    ],
+    sizes: ["S", "M", "L"],
+    outOfStock: [],
+    sizeFit: ["Samali is 6’0 wearing a size M"]
+  },
+
   "men-long-sleeve": {
     name: "Men Long Sleeve",
     oldPrice: "",
