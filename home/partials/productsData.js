@@ -35,7 +35,8 @@ export const productsData = {
       "BB/thesiren.PNG",
       "BB/DSC03201.jpg",
       "BB/DSC03204.jpg",
-      "BB/DSC03207.jpg"
+      "BB/DSC03207.jpg",
+      "BB/sizec1.PNG"
     ],
     description: "This sleeveless tank from the Beautiful Bastards collection is covered in a pale olive and black halftone print, with a Neat script mark and a silver chain-and-pendant graphic at the chest. A vertical NEATGARMS script runs down the side. The back is a full halftone print.",
     features: [
@@ -61,7 +62,8 @@ export const productsData = {
       "BB/delilah.PNG",
       "BB/DSC03095.jpg",
       "BB/DSC03124.jpg",
-      "BB/DSC03096.jpg"
+      "BB/DSC03096.jpg",
+      "BB/sizec1.PNG"
     ],
     description: "Turn up the heat with this sleeveless tank from the Beautiful Bastards collection, printed in a candy red and black halftone. A 'Neat' script mark and a silver chain-and-pendant graphic sit at the chest, and a vertical NEATGARMS script runs down the side. The back carries a full halftone print, so the piece makes a statement from every angle.",
     features: [
@@ -88,7 +90,8 @@ export const productsData = {
       "BB/DSC03154.jpg",
       "BB/DSC03159.jpg",
       "BB/DSC03161.jpg",
-      "BB/DSC03171.jpg"
+      "BB/DSC03171.jpg",
+      "BB/sizec1.PNG"
     ],
     description: "A strapless cropped tube top from the Beautiful Bastards collection. It features a full halftone hand graphic across the bust in a lighter tone than the base colour, with a reduced Neat logo at the front top centre and detailing at the back. Finished in a muted teal colourway.",
     features: [
@@ -115,7 +118,8 @@ export const productsData = {
       "BB/DSC03195.jpg",
       "BB/DSC03180.jpg",
       "BB/DSC03188.jpg",
-      "BB/DSC03183.jpg"
+      "BB/DSC03183.jpg",
+      "BB/sizec1.PNG"
     ],
     description: "A strapless cropped tube top from the Beautiful Bastards collection. It features a full halftone hand graphic across the bust in a lighter tone than the base colour, with a reduced Neat logo at the front top centre and detailing at the back. Finished in a rose-pink colourway.",
     features: [
@@ -142,7 +146,8 @@ export const productsData = {
       "BB/DSC03127.jpg",
       "BB/DSC03135.jpg",
       "BB/DSC03141.jpg",
-      "BB/DSC03144.jpg"
+      "BB/DSC03144.jpg",
+      "BB/sizec1.PNG"
     ],
     description: "A strapless cropped tube top from the Beautiful Bastards collection. It features a full halftone hand graphic across the bust in a lighter tone than the base colour, with a reduced Neat logo at the front top centre and detailing at the back. Finished in a deep plum or wine colourway.",
     features: [
@@ -169,7 +174,8 @@ export const productsData = {
       "BB/DSC03079.jpg",
       "BB/DSC03082.jpg",
       "BB/DSC03062.jpg",
-      "BB/DSC03068.jpg"
+      "BB/DSC03068.jpg",
+      "BB/sizec1.PNG"
     ],
     description: "A strapless cropped tube top from the Beautiful Bastards collection. It features a full halftone hand graphic across the bust in a lighter tone than the base colour, with a reduced Neat logo at the front top centre and detailing at the back. Finished in a black-and-white greyscale colourway.",
     features: [
@@ -277,7 +283,8 @@ export const productsData = {
       "BB/DSC03036.jpg",
       "BB/DSC03056.jpg",
       "BB/DSC03042.jpg",
-      "BB/DSC03039.jpg"
+      "BB/DSC03039.jpg",
+      "BB/sizec2.jpeg"
     ],
     description: "A statement piece built from breathable and durable onyx denim. Features charcoal-black embroidered lettering on the side, double buttons on the front and double pockets on the back. Jay is 6’0 wearing size 36.",
     features: [
@@ -304,7 +311,8 @@ export const productsData = {
       "BB/theskort.PNG",
       "BB/DSC03075.jpg",
       "BB/DSC03083.jpg",
-      "BB/DSC03084.jpg"
+      "BB/DSC03084.jpg",
+      "BB/sizec3.jpeg"
     ],
     description: "The skort. This black Beautiful Bastards piece is a short with a front flap that closes to create the look of a skirt. Silver buckle and eyelet straps run down the right side, and a small white 'Neat' script sits on the front flap.",
     features: [
