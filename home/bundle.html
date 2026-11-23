@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neat Shop</title>
+    <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#8a9381" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Browse all Neatgarms products — from trendy tops and cozy fleece to bold bottoms and stylish accessories. Designed for comfort and expression." />
+
+  <link rel="stylesheet" href="main.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Pacifico&display=swap" rel="stylesheet">
+
+   <!-- Canonical URL -->
+  <link rel="canonical" href="https://neatgarms.com/main.html" />
+  <link rel="manifest" href="/site.webmanifest?v=1" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+  <meta property="og:site_name" content="Neatgarms" />
+  <meta property="og:title" content="All Products | Neatgarms" />
+  <meta property="og:description" content="Explore the full collection of Neatgarms apparel and accessories, curated for modern streetwear lovers." />
+  <meta property="og:image" content="https://neatgarms.com/shoot/lp13m.webp" />
+  <meta property="og:url" content="https://neatgarms.com/main.html" />
+  <meta property="og:type" content="website" />
+
+  <!-- Twitter Meta -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="All Neatgarms Products" />
+  <meta name="twitter:description" content="View all Neatgarms drops and categories — bold, expressive streetwear built for comfort." />
+  <meta name="twitter:image" content="https://neatgarms.com/shoot/lp13m.webp" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "All Products",
+    "description": "Full collection of Neatgarms products: tops, bottoms, fleece, gifts, and more.",
+    "url": "https://neatgarms.com/main.html",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Work Shirt" },
+        { "@type": "ListItem", "position": 2, "name": "Tank Top" },
+        { "@type": "ListItem", "position": 3, "name": "Marble Wide Leg Pants" },
+        { "@type": "ListItem", "position": 4, "name": "Glazed Denim Jorts" }
+      ]
+    }
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BNKKRW0J0N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BNKKRW0J0N');
+</script>
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "s843wgkqd0");
+</script>
+
+</head>
+<body >
+  
+<div
+  class="neat-cursor"
+  id="neatCursor"
+  aria-hidden="true"
+>
+  <span class="neat-cursor__tail">
+    <span class="neat-cursor__tail-line"></span>
+  </span>
+
+  <span class="neat-cursor__star">✦</span>
+</div>
+
+  <!-- Transition overlay -->
+<div id="page-transition">
+ <div class="logo-wrapper">
+    <img src="mains/logo2.png" alt="Logo">
+  </div>
+</div>
+
+<!-- =========================
+     NEATGARMS SHOP NAVBAR
+========================= -->
+<header class="shop-nav" id="shop-nav">
+
+  <div class="shop-nav__left">
+    <button
+      class="shop-nav__menu"
+      id="menu-btn"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="menu"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+    <span class="shop-nav__page">SHOP</span>
+  </div>
+
+
+<a href="index.html" class="shop-nav__brand" aria-label="Neatgarms home">
+  <img
+    src="mains/logo2.png"
+    alt="Neatgarms"
+    class="shop-nav__logo"
+  >
+</a>
+
+
+  <div class="shop-nav__right">
+
+    <button
+      class="shop-nav__search search-btn"
+      type="button"
+      aria-label="Search"
+    >
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="6.5"></circle>
+        <path d="M16 16L21 21"></path>
+      </svg>
+    </button>
+
+    <a
+      href="cart.html"
+      class="shop-nav__bag"
+      aria-label="Shopping bag"
+    >
+      <span class="shop-nav__bag-label">BAG</span>
+      <span class="shop-nav__bag-count">0</span>
+    </a>
+
+  </div>
+
+</header>
+
+
+<!-- =========================
+     FULLSCREEN MENU
+========================= -->
+<div class="shop-menu" id="menu" aria-hidden="true">
+
+  <div class="shop-menu__top">
+
+    <span class="shop-menu__label">
+      MENU
+    </span>
+
+    <button
+      class="shop-menu__close"
+      id="close-btn"
+      type="button"
+      aria-label="Close menu"
+    >
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+
+  <nav class="shop-menu__nav">
+
+    <a href="index.html" class="shop-menu__link">
+      <span class="shop-menu__number">01</span>
+      <span>HOME</span>
+    </a>
+
+    <a href="lookbook.html" class="shop-menu__link">
+      <span class="shop-menu__number">02</span>
+      <span>LOOKBOOK</span>
+    </a>
+
+    <a href="dashboard.html" class="shop-menu__link">
+      <span class="shop-menu__number">03</span>
+      <span>DASHBOARD</span>
+    </a>
+
+  </nav>
+
+
+  <div class="shop-menu__footer">
+
+    <span>NEATGARMS®</span>
+
+    <span>NAIROBI, KENYA</span>
+
+    <span>KEEP IT NEAT.</span>
+
+  </div>
+
+</div>
+
+
+  <!-- Filter Menu -->
+  <div id="filter-menu" class="filter-menu">
+    <button id="close-menu" class="close-btn">✖</button>
+    <h3>Filter Options</h3>
+    <div class="filter-section">
+      <h4>Filter by Price</h4>
+     <button class="prev-btn">Highest To Lowest</button>
+      <button class="prev-btn">Lowest To Highest</button>
+    </div>
+  </div>
+
+  <!-- Overlay for background dim effect -->
+  <div id="menu-overlay" class="menu-overlay hidden"></div>
+
+<!-- =========================================================
+     NEATGARMS — KIN COLLECTION
+========================================================= -->
+
+<main class="kin-shop">
+
+  <!-- =========================
+       COLLECTION MASTHEAD
+  ========================== -->
+  <section class="kin-head">
+
+    <div class="kin-head__bar">
+      <span>CURRENT RELEASE</span>
+      <span>006 PIECES</span>
+      <span>NAIROBI / KE</span>
+    </div>
+  </section>
+
+
+<!-- =========================================================
+     KIN — PRODUCT COLLECTION
+========================================================= -->
+
+<section class="kin-collection">
+
+
+<!-- DENIM SET FEATURE SECTION -->
+<section class="denim-feature">
+
+  <picture class="denim-feature__media">
+    <!-- Desktop image -->
+    <source
+      media="(min-width: 768px)"
+      srcset="BB/DSC02828.webp"
+    >
+
+    <!-- Mobile image -->
+    <img
+      src="BB/DSC02828.jpg"
+      alt="Neatgarms Denim Set"
+      class="denim-feature__image"
+    >
+  </picture>
+
+  <div class="denim-feature__content">
+
+    <h2>THE DENIM SET</h2>
+
+    <a href="product.html?id=denim-set" class="denim-feature__button">
+      SHOP NOW
+      <span aria-hidden="true">↗</span>
+    </a>
+
+  </div>
+
+</section>
+
+
+
+<!-- DENIM SET FEATURE SECTION -->
+<section class="denim-feature">
+
+  <picture class="denim-feature__media">
+    <!-- Desktop image -->
+    <source
+      media="(min-width: 768px)"
+      srcset="BB/DSC02828.webp"
+    >
+
+    <!-- Mobile image -->
+    <img
+      src="BB/DSC02828.jpg"
+      alt="Neatgarms Denim Set"
+      class="denim-feature__image"
+    >
+  </picture>
+
+  <div class="denim-feature__content">
+
+    <h2>THE DENIM SET</h2>
+
+    <a href="product.html?id=denim-set" class="denim-feature__button">
+      SHOP NOW
+      <span aria-hidden="true">↗</span>
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- DENIM SET FEATURE SECTION -->
+<section class="denim-feature">
+
+  <picture class="denim-feature__media">
+    <!-- Desktop image -->
+    <source
+      media="(min-width: 768px)"
+      srcset="BB/DSC02828.webp"
+    >
+
+    <!-- Mobile image -->
+    <img
+      src="BB/DSC02828.jpg"
+      alt="Neatgarms Denim Set"
+      class="denim-feature__image"
+    >
+  </picture>
+
+  <div class="denim-feature__content">
+
+    <h2>THE DENIM SET</h2>
+
+    <a href="product.html?id=denim-set" class="denim-feature__button">
+      SHOP NOW
+      <span aria-hidden="true">↗</span>
+    </a>
+
+  </div>
+
+</section>
+
+
+
+
+</main>
+
+
+<!-- =========================================================
+     NEATGARMS — FOOTER
+========================================================= -->
+
+<footer class="neat-footer">
+
+  <!-- MOVING TICKER -->
+  <div class="neat-footer__ticker" aria-hidden="true">
+
+    <div class="neat-footer__ticker-track">
+
+      <span>KEEP IT NEAT.</span>
+      <i>✦</i>
+
+      <span>NAIROBI, KENYA</span>
+      <i>✦</i>
+
+      <span>NEATGARMS®</span>
+      <i>✦</i>
+
+      <span>KIN / 2026</span>
+      <i>✦</i>
+
+      <span>KEEP IT NEAT.</span>
+      <i>✦</i>
+
+      <span>NAIROBI, KENYA</span>
+      <i>✦</i>
+
+      <span>NEATGARMS®</span>
+      <i>✦</i>
+
+      <span>KIN / 2026</span>
+      <i>✦</i>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       NEWSLETTER
+  ========================== -->
+
+  <section class="neat-footer__newsletter">
+
+    <div class="neat-footer__newsletter-number">
+      <span>01</span>
+      <span>PRIVATE ACCESS</span>
+    </div>
+
+
+    <div class="neat-footer__newsletter-main">
+
+      <p class="neat-footer__eyebrow">
+        JOIN THE INNER CIRCLE
+      </p>
+
+      <h2>
+        DON'T MISS
+        <em>THE NEXT DROP.</em>
+      </h2>
+
+
+      <form
+        class="neat-footer__form"
+        onsubmit="return false;"
+      >
+
+        <label
+          for="footer-email"
+          class="sr-only"
+        >
+          Email address
+        </label>
+
+        <div class="neat-footer__input-wrap">
+
+          <input
+            type="email"
+            id="footer-email"
+            autocomplete="email"
+            placeholder="ENTER YOUR EMAIL"
+            required
+          >
+
+          <button
+            type="button"
+            id="subscribe-btn"
+            aria-label="Subscribe to Neatgarms"
+          >
+            <span>JOIN</span>
+
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M5 12H19"></path>
+              <path d="M14 7L19 12L14 17"></path>
+            </svg>
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <p class="neat-footer__newsletter-note">
+        PRIVATE ACCESS TO DROPS, RELEASES &amp; NEAT BUSINESS.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       NAVIGATION / INFORMATION
+  ========================== -->
+
+  <section class="neat-footer__directory">
+
+    <!-- BRAND -->
+    <div class="neat-footer__identity">
+
+      <span class="neat-footer__index">
+        02 / IDENTITY
+      </span>
+
+      <div>
+        <p>
+         FROM KENYA<br>
+         TO THE WORLD
+        </p>
+
+        <span class="neat-footer__location">
+          NAIROBI, KENYA<br>
+          01°17′S / 36°49′E
+        </span>
+      </div>
+
+    </div>
+
+
+    <!-- SHOP -->
+    <nav class="neat-footer__column">
+
+      <span class="neat-footer__index">
+        SHOP
+      </span>
+
+      <a href="main.html">
+        <span>ALL PIECES</span>
+        <span>↗</span>
+      </a>
+
+      <a href="dashboard.html">
+        <span>DASHBOARD</span>
+        <span>↗</span>
+      </a>
+
+      <a href="lookbook.html">
+        <span>LOOKBOOK</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+
+    <!-- INFO -->
+    <nav class="neat-footer__column">
+
+      <span class="neat-footer__index">
+        INFORMATION
+      </span>
+
+      <a href="terms-and-conditions.html">
+        <span>TERMS & CONDITIONS</span>
+        <span>↗</span>
+      </a>
+
+      <a href="shipping.html">
+        <span>SHIPPING</span>
+        <span>↗</span>
+      </a>
+
+      <a href="privacy-policy.html">
+        <span>PRIVACY POLICY</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+
+    <!-- SOCIAL -->
+    <nav class="neat-footer__column">
+
+      <span class="neat-footer__index">
+        FOLLOW
+      </span>
+
+      <a href="https://www.instagram.com/neatgarms?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">
+        <span>INSTAGRAM</span>
+        <span>↗</span>
+      </a>
+
+      <a href="https://www.tiktok.com/@neatgarms?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener">
+        <span>TIKTOK</span>
+        <span>↗</span>
+      </a>
+      
+      <a href="https://youtube.com/@neatgarms?si=POjlv6z34YthGIRq" target="_blank" rel="noopener">
+        <span>YOUTUBE</span>
+        <span>↗</span>
+      </a>
+
+    </nav>
+
+  </section>
+
+  <!-- =========================
+       FINAL LINE
+  ========================== -->
+
+  <div class="neat-footer__bottom">
+
+    <span>
+      © 2026 NEATGARMS®
+    </span>
+
+    <span class="neat-footer__bottom-center">
+      KEEP IT NEAT.
+    </span>
+
+    <button
+      class="neat-footer__top"
+      type="button"
+      id="back-to-top"
+    >
+      BACK TO TOP
+      <span>↑</span>
+    </button>
+
+  </div>
+
+</footer>
+
+<script src="currency.min.js" defer></script>
+<script type="module" src="js/import-products.js"></script>
+<script>
+  // Fade in effect when page loads
+document.body.style.opacity = 0;
+requestAnimationFrame(() => {
+  document.body.style.opacity = 1;
+});
+
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll("a");
+    const transition = document.getElementById("page-transition");
+
+    // Function to disable transition when user uses back/forward
+    window.addEventListener("pageshow", (event) => {
+      const comingFromHistory =
+        event.persisted ||
+        window.performance.getEntriesByType("navigation")[0]?.type === "back_forward";
+
+      if (comingFromHistory) {
+        transition.classList.remove("active"); // No transition on back/forward
+        sessionStorage.removeItem("transitioning");
+      } else {
+        // Normal link-based navigation
+        if (sessionStorage.getItem("transitioning") === "true") {
+          sessionStorage.setItem("transitioning", "false");
+          transition.classList.remove("active"); // Fade in after animation
+        } else {
+          transition.classList.remove("active"); // Initial page load
+        }
+      }
+    });
+
+    links.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !href.startsWith("http")) {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          sessionStorage.setItem("transitioning", "true");
+          transition.classList.add("active");
+
+          setTimeout(() => {
+            window.location.href = href;
+          }, 1500); // Match your CSS animation duration
+        });
+      }
+    });
+  });
+</script>
+
+<script src="bag-count.min.js"></script>
+
+    <script src="main.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1200, // Animation duration
+      once: false,    // Animation will run every time you scroll
+    });
+  </script>
+
+<!-- Include Lenis (CDN or npm) -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+
+ <script>
+const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+const lenis = new Lenis({
+  duration: isTouch ? 2.8 : 1.6, // smoother on phones, faster on desktop
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smooth: true,
+  smoothTouch: true
+});
+
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+  </script>
+
+</body>

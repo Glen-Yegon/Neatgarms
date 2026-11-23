@@ -5,8 +5,7 @@ export const productsData = {
   // =========================================
   "scarlet-dice-tee": {
     name: "Scarlet Dice Tee",
-    oldPrice: "2,500",
-    newPrice: "2,000",
+    newPrice: "2,500",
     images: [
       "BB/DSC02997.jpg",
       "BB/DSC03001.jpg",
@@ -196,8 +195,8 @@ export const productsData = {
   // =========================================
   "kin-denim-jacket": {
     name: "KIN Denim Jacket",
-    oldPrice: "5,000",
-    newPrice: "4,000",
+    oldPrice: "",
+    newPrice: "5,000",
     images: [
       "BB/DSC03005.jpg",
       "BB/DSC03017.jpg",
@@ -224,8 +223,8 @@ export const productsData = {
 // =========================================
 "denim-set": {
   name: "Denim Set",
-  oldPrice: "7,700",
-  newPrice: "7,000",
+  oldPrice: "",
+  newPrice: "7,700",
   images: [
     "BB/DSC02814.jpg",
     "BB/DSC02822.jpg"
@@ -248,8 +247,8 @@ export const productsData = {
   // =========================================
   "outlaw-denim-vest": {
     name: "The Outlaw Denim Vest",
-    oldPrice: "3,500",
-    newPrice: "2,800",
+    oldPrice: "",
+    newPrice: "3,500",
     images: [
       "BB/DSC02971.jpg",
       "BB/DSC02986.jpg",
@@ -277,7 +276,7 @@ export const productsData = {
   "onyx-denim-trousers": {
     name: "The Onyx Denim Trousers",
     oldPrice: "",
-    newPrice: "",
+    newPrice: "4,000",
     images: [
       "BB/DSC03032.jpg",
       "BB/DSC03036.jpg",
@@ -305,8 +304,8 @@ export const productsData = {
   // =========================================
   "the-skort": {
     name: "The Skort",
-    oldPrice: "3,500",
-    newPrice: "3,000",
+    oldPrice: "",
+    newPrice: "3,500",
     images: [
       "BB/theskort.PNG",
       "BB/DSC03075.jpg",
