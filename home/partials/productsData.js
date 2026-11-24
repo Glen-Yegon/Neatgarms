@@ -1,5 +1,106 @@
 export const productsData = {
 
+
+
+  // =========================================
+  // DENIM SET + TEE
+  // =========================================
+  "denim-set-tee": {
+    name: "Denim Set + Tee",
+    oldPrice: "10,200",
+    newPrice: "9,500",
+    images: ["BB/denimshirt.jpeg"],
+    description: "A full denim set and a matching tee, so you get a complete outfit in one purchase.",
+    features: [],
+    sizes: [],
+    outOfStock: [],
+    sizeFit: "",
+  },
+
+  // =========================================
+  // CLASSIC DUO
+  // =========================================
+  "classic-duo": {
+    name: "Classic Duo",
+    oldPrice: "5,400",
+    newPrice: "4,900",
+    images: [
+     "BB/rgtop2.jpg",
+     "BB/rgtop.jpg",
+     "BB/rgtop3.jpeg",
+    ],
+    description: "Two long tops in red and lemon green, giving you two distinct looks for the price of one bundle.",
+    features: [],
+    sizes: [],
+    outOfStock: [],
+    sizeFit: "",
+  },
+
+  // =========================================
+  // TUBE TOP PACK - BUBBLE GUM + GREYSCALE
+  // =========================================
+  "tube-top-pack-bubble-gum-greyscale": {
+    name: "Tube Top Pack (Bubble gum + Greyscale)",
+    oldPrice: "3,400",
+    newPrice: "3,000",
+    images: ["BB/pinkbtop.jpg",
+      "BB/pbtop.jpeg"
+    ],
+    description: "A pink tube top and a greyscale tube top, two easy layering or everyday options in one pack.",
+    features: [],
+    sizes: [],
+    outOfStock: [],
+    sizeFit: "",
+  },
+
+  // =========================================
+  // TUBE TOP PACK - TEAL + VIOLET
+  // =========================================
+  "tube-top-pack-teal-violet": {
+    name: "Tube Top Pack (Teal + Violet)",
+    oldPrice: "3,400",
+    newPrice: "3,000",
+    images: ["BB/purpbtop.jpg",
+      "BB/purpb2top.jpeg"
+    ],
+    description: "A blue tube top and a violet tube top, two versatile pieces that pair with denim, skirts/skorts or shorts/jorts.",
+    features: [],
+    sizes: [],
+    outOfStock: [],
+    sizeFit: "",
+  },
+
+  // =========================================
+  // THE SIREN + SKORT SET - LEMON GREEN
+  // =========================================
+  "siren-skort-set-lemon-green": {
+    name: "The Siren + Skort Set (Lemon Green)",
+    oldPrice: "6,200",
+    newPrice: "5,600",
+    images: ["BB/scottg.jpeg"],
+    description: "The Siren in lemon green and a matching skort, a coordinated two-piece set ready to wear.",
+    features: [],
+    sizes: [],
+    outOfStock: [],
+    sizeFit: "",
+  },
+
+  // =========================================
+  // SKORT + DELILAH SET - RED
+  // =========================================
+  "skort-delilah-set-red": {
+    name: "Skort + Delilah Set (Red)",
+    oldPrice: "6,200",
+    newPrice: "5,600",
+    images: ["BB/scottr.jpeg"],
+    description: "A skort and the Delilah top in red, a coordinated two-piece set that works for any occasion.",
+    features: [],
+    sizes: [],
+    outOfStock: [],
+    sizeFit: "",
+  },
+
+
   // =========================================
   // SCARLET DICE TEE
   // =========================================

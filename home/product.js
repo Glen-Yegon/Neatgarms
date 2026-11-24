@@ -245,66 +245,83 @@ document.addEventListener(
     }
 
 
-    /* =====================================================
-       PRODUCT PRICES
-       ORIGINAL VALUE ALWAYS STORED AS KES
-    ===================================================== */
+/* =====================================================
+   PRODUCT PRICES
+   ORIGINAL VALUE ALWAYS STORED AS KES
+===================================================== */
 
-    const oldPriceElement =
-      document.querySelector(
-        '.old-price'
-      );
+const oldPriceElement =
+  document.querySelector('.old-price');
 
-    const newPriceElement =
-      document.querySelector(
-        '.new-price'
-      );
+const newPriceElement =
+  document.querySelector('.new-price');
 
 
-    if (oldPriceElement) {
+/* OLD PRICE */
 
-      oldPriceElement.dataset.kesPrice =
-        window.NeatCurrency
-          ? window.NeatCurrency
-              .parseKESPrice(
-                productData.oldPrice
-              )
-          : productData.oldPrice || "";
+if (oldPriceElement) {
 
+  const oldPrice =
+    productData.oldPrice ?? "";
 
-      oldPriceElement.innerText =
-        productData.oldPrice || "";
+  const cleanOldPrice =
+    String(oldPrice).replace(/,/g, '').trim();
 
-    }
-
-
-    if (newPriceElement) {
-
-      newPriceElement.dataset.kesPrice =
-        window.NeatCurrency
-          ? window.NeatCurrency
-              .parseKESPrice(
-                productData.newPrice
-              )
-          : productData.newPrice || "";
+  const hasOldPrice =
+    cleanOldPrice !== "" &&
+    Number.isFinite(Number(cleanOldPrice)) &&
+    Number(cleanOldPrice) > 0;
 
 
-      newPriceElement.innerText =
-        productData.newPrice || "";
+  if (hasOldPrice) {
 
-    }
+    oldPriceElement.style.display = "";
+
+    oldPriceElement.dataset.kesPrice =
+      window.NeatCurrency
+        ? window.NeatCurrency.parseKESPrice(oldPrice)
+        : oldPrice;
+
+    oldPriceElement.innerText =
+      oldPrice;
+
+  } else {
+
+    oldPriceElement.style.display = "none";
+
+    oldPriceElement.innerText = "";
+
+    delete oldPriceElement.dataset.kesPrice;
+
+  }
+
+}
 
 
-    /*
-      Now visually convert the KES prices
-      into the customer's selected currency.
-    */
+/* NEW PRICE */
 
-    if (window.NeatCurrency) {
+if (newPriceElement) {
 
-      window.NeatCurrency.refresh();
+  newPriceElement.dataset.kesPrice =
+    window.NeatCurrency
+      ? window.NeatCurrency.parseKESPrice(
+          productData.newPrice
+        )
+      : productData.newPrice || "";
 
-    }
+  newPriceElement.innerText =
+    productData.newPrice || "";
+
+}
+
+
+/* CONVERT SELECTED CURRENCY */
+
+if (window.NeatCurrency) {
+
+  window.NeatCurrency.refresh();
+
+}
 
 
     /* =====================================================
